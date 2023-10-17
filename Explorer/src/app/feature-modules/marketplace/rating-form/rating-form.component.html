@@ -1,0 +1,19 @@
+<form [formGroup]="ratingForm">
+    <h2>Rate our app</h2>
+    <h3>Your oppinion is important to us</h3>
+    <div>
+        <mat-form-field>
+            <mat-label>Grade</mat-label>
+            <input matInput formControlName="grade" min="1" max="5" type="number"/>
+        </mat-form-field>
+        <mat-form-field>
+          <mat-label>Comment</mat-label>
+          <textarea matInput
+          cdkTextareaAutosize
+          cdkAutosizeMinRows="1"
+          formControlName="comment"
+          cdkAutosizeMaxRows="5"></textarea>
+        </mat-form-field>
+    <button  color="primary" type="submit" (click)="addRating()" mat-raised-button>Rate</button>
+    </div>
+</form>
