@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatInputModule } from '@angular/material/input';
 import { AppRoutingModule } from './infrastructure/routing/app-routing.module';
 import { AppComponent } from './app.component';
 import { LayoutModule } from './feature-modules/layout/layout.module';
@@ -23,6 +24,8 @@ import { JwtInterceptor } from './infrastructure/auth/jwt/jwt.interceptor';
     BrowserModule,
     AppRoutingModule,
     LayoutModule,
+    MatFormFieldModule,
+    MatInputModule,
     BrowserAnimationsModule,
     MaterialModule,
     AdministrationModule,

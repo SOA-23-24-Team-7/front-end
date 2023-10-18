@@ -1,0 +1,29 @@
+<form [formGroup]="tourPreferenceForm">
+    <div>
+        <mat-form-field>
+            <mat-label>Difficulty level</mat-label>
+            <input matInput formControlName="difficultyLevel" type="number"/>
+        </mat-form-field>
+        <mat-form-field>
+            <mat-label>Walking rating</mat-label>
+            <input matInput formControlName="walkingRating" type="number"/>
+        </mat-form-field>
+        <mat-form-field>
+            <mat-label>Cycling rating</mat-label>
+            <input matInput formControlName="cyclingRating" type="number"/>
+        </mat-form-field>
+        <mat-form-field>
+            <mat-label>Car rating</mat-label>
+            <input matInput formControlName="carRating" type="number"/>
+        </mat-form-field>
+        <mat-form-field>
+            <mat-label>Boat rating</mat-label>
+            <input matInput formControlName="boatRating" type="number"/>
+        </mat-form-field>
+        <mat-form-field>
+            <mat-label>Selected tags</mat-label>
+            <input matInput formControlName="selectedTags" type="text"/>
+        </mat-form-field>
+        <button mat-raised-button type="submit" color="primary" (click)="createPreference()">Create</button>
+    </div>
+</form>

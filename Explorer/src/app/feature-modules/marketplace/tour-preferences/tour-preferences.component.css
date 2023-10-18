@@ -1,0 +1,26 @@
+.card-container {
+    display: flex;
+    flex-direction: column;
+    gap: 20px; /* Adjust the gap between cards as per your preference */
+  }
+  
+  .card {
+    width: 250px; /* Set the fixed width */
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    padding: 10px;
+  }
+  
+  .card-content {
+    margin: 10px 0;
+  }
+  
+  .card-content div {
+    margin-bottom: 5px;
+  }
+  
+  .card-content div strong {
+    font-weight: bold;
+  }
+  
