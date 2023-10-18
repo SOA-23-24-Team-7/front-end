@@ -1,0 +1,47 @@
+<mat-card class="profile-card">
+  <img
+    *ngIf="!editing"
+    mat-card-image
+    [src]="person.profilePicture"
+    alt="Profile Picture"
+  />
+  <mat-card-content>
+    <h2 *ngIf="!editing">{{ person.name }} {{ person.surname }}</h2>
+    <p *ngIf="!editing">{{ person.email }}</p>
+    <p *ngIf="!editing">{{ person.bio }}</p>
+    <p *ngIf="!editing">{{ person.moto }}</p>
+
+    <ng-container *ngIf="editing; else viewMode">
+      <mat-form-field>
+        <input matInput [(ngModel)]="person.name" placeholder="Name" />
+      </mat-form-field>
+      <mat-form-field>
+        <input matInput [(ngModel)]="person.surname" placeholder="Surname" />
+      </mat-form-field>
+      <mat-form-field>
+        <input matInput [(ngModel)]="person.email" placeholder="Email" />
+      </mat-form-field>
+      <mat-form-field>
+        <input
+          matInput
+          [(ngModel)]="person.profilePicture"
+          placeholder="Profile picture"
+        />
+      </mat-form-field>
+      <mat-form-field>
+        <input matInput [(ngModel)]="person.bio" placeholder="Bio" />
+      </mat-form-field>
+      <mat-form-field>
+        <input matInput [(ngModel)]="person.moto" placeholder="Moto" />
+      </mat-form-field>
+    </ng-container>
+
+    <div class="actions">
+      <button mat-button (click)="toggleEditing()">
+        {{ editing ? "Cancel" : "Edit" }}
+      </button>
+      <button mat-button *ngIf="editing" (click)="saveProfile()">Save</button>
+    </div>
+  </mat-card-content>
+</mat-card>
+<ng-template #viewMode></ng-template>
