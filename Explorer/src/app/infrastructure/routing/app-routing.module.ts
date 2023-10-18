@@ -5,12 +5,15 @@ import { LoginComponent } from '../auth/login/login.component';
 import { EquipmentComponent } from 'src/app/feature-modules/administration/equipment/equipment.component';
 import { AuthGuard } from '../auth/auth.guard';
 import { RegistrationComponent } from '../auth/registration/registration.component';
-
+import { OwnerClubsComponent } from 'src/app/feature-modules/marketplace/owner-clubs/owner-clubs.component';
+import { ClubsComponent } from 'src/app/feature-modules/marketplace/clubs/clubs.component';
 const routes: Routes = [
   {path: 'home', component: HomeComponent},
   {path: 'login', component: LoginComponent},
   {path: 'register', component: RegistrationComponent},
-  {path: 'equipment', component: EquipmentComponent, canActivate: [AuthGuard],}
+  {path: 'equipment', component: EquipmentComponent, canActivate: [AuthGuard],},
+  {path: 'ownerclubs', component: OwnerClubsComponent, canActivate: [AuthGuard]},
+  {path: 'clubs', component: ClubsComponent, canActivate: [AuthGuard]},
 ];
 
 @NgModule({
