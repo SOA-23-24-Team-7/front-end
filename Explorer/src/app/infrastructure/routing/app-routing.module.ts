@@ -7,6 +7,7 @@ import { AuthGuard } from '../auth/auth.guard';
 import { RegistrationComponent } from '../auth/registration/registration.component';
 import { OwnerClubsComponent } from 'src/app/feature-modules/marketplace/owner-clubs/owner-clubs.component';
 import { ClubsComponent } from 'src/app/feature-modules/marketplace/clubs/clubs.component';
+import { MyClubJoinRequestsComponent } from 'src/app/feature-modules/marketplace/my-club-join-requests/my-club-join-my-club-join-requests.component';
 const routes: Routes = [
   {path: 'home', component: HomeComponent},
   {path: 'login', component: LoginComponent},
@@ -14,6 +15,8 @@ const routes: Routes = [
   {path: 'equipment', component: EquipmentComponent, canActivate: [AuthGuard],},
   {path: 'ownerclubs', component: OwnerClubsComponent, canActivate: [AuthGuard]},
   {path: 'clubs', component: ClubsComponent, canActivate: [AuthGuard]},
+  {path: 'clubs', component: ClubsComponent, canActivate: [AuthGuard]},
+  {path: 'my-club-join-requests', component: MyClubJoinRequestsComponent, canActivate: [AuthGuard]},
 ];
 
 @NgModule({
