@@ -14,6 +14,19 @@
           formControlName="comment"
           cdkAutosizeMaxRows="5"></textarea>
         </mat-form-field>
-    <button  color="primary" type="submit" (click)="addRating()" mat-raised-button>Rate</button>
+        <div style="display: inline-block; text-align: center;">
+            <button *ngIf="canAdd" color="primary" type="submit" (click)="addRating()" mat-icon-button>
+                <mat-icon>add</mat-icon>
+            </button>
+            <button *ngIf="canEdit && !isEditing" color="accent" (click)="onUpdateClicked()" mat-icon-button>
+                <mat-icon>edit</mat-icon>
+            </button>
+            <button *ngIf="isEditing" color="accent" (click)="updateRating()" mat-icon-button>
+                <mat-icon>save</mat-icon>
+            </button>
+            <button *ngIf="canDelete && !isEditing" color="accent" (click)="deleteRating(this.rating.id || 0)" mat-icon-button>
+                <mat-icon>delete</mat-icon>
+            </button>
+        </div>
     </div>
 </form>
