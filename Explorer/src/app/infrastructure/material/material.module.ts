@@ -27,6 +27,7 @@ import {MatCardModule} from '@angular/material/card';
     MatTableModule,
     MatIconModule,
     MatCardModule,
+    MatFormFieldModule,
   ],
   exports: [
     MatToolbar,
@@ -38,7 +39,8 @@ import {MatCardModule} from '@angular/material/card';
     MatIconButton,
     MatIcon,
     MatCardModule,
-    MatTableModule
+    MatTableModule,
+    MatFormFieldModule,
   ],
 })
 export class MaterialModule {}
