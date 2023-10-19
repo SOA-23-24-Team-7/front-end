@@ -1,3 +1,5 @@
+import { Time } from "@angular/common";
+
 export interface Problem {
     id?: number;
     category: string;

@@ -4,30 +4,32 @@ import { MarketplaceService } from '../marketplace.service';
 import { PagedResults } from 'src/app/shared/model/paged-results.model';
 import { AuthService } from 'src/app/infrastructure/auth/auth.service';
 import { User } from 'src/app/infrastructure/auth/model/user.model';
-
+import { AdministrationService } from '../../administration/administration.service';
 @Component({
   selector: 'xp-problem',
   templateUrl: './problem.component.html',
   styleUrls: ['./problem.component.css']
 })
 export class ProblemComponent implements OnInit{
-  problem: Problem[]=[]
+  problems: Problem[]=[]
+  filtrirana: Problem[]=[]
   selectedProblem: Problem;
   shouldEdit: boolean;
   shouldRenderProblemForm: boolean = false;
   touristId: number;
   user: User;
-  constructor(private service: MarketplaceService,private authService: AuthService){}
+  constructor(private service: MarketplaceService,private authService: AuthService,private administrationService: AdministrationService){}
   ngOnInit(): void {
     this.getProblem();
     this.authService.user$.subscribe(user=>{
       this.user=user;
     })
+    
   }
   getProblem(): void {
     this.service.getProblem().subscribe({
       next: (result: PagedResults<Problem>) => {
-        this.problem=result.results
+        this.problems=result.results.filter(p=>p.touristId===this.user.id)
       },
       error: (err:any) => {
         console.log(err);
