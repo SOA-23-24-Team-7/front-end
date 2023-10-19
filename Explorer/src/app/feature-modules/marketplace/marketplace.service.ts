@@ -12,14 +12,14 @@ export class MarketplaceService {
 
   constructor(private http: HttpClient) { }
 
-  getReviews(): Observable<PagedResults<Review>> {
-    return this.http.get<PagedResults<Review>>(environment.apiHost + 'review');
+  getReviews(tourId: number): Observable<PagedResults<Review>> {
+    return this.http.get<PagedResults<Review>>(environment.apiHost + 'review/' + tourId);
   }
   addReview(review: Review): Observable<Review> {
     return this.http.post<Review>(environment.apiHost + 'review', review);
   }
   updateReview(review: Review): Observable<Review> {
-    return this.http.put<Review>(environment.apiHost + 'review/'+ review.id,review);
+    return this.http.put<Review>(environment.apiHost + 'review/'+ review.id, review);
   }
   deleteReview(review: Review): Observable<Review> {
     return this.http.delete<Review>(environment.apiHost + 'review/'+ review.id);

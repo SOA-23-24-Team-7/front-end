@@ -11,8 +11,9 @@ import { Review } from '../model/review.model';
 })
 export class ReviewFormComponent implements OnChanges{
   @Output() reviewsUpdated = new EventEmitter<null>(); 
-  @Input() review:Review;
-  @Input() shouldEdit:boolean=false;
+  @Input() review: Review;
+  @Input() shouldEdit: boolean = false;
+  @Input() tourIdHelper: number;
   constructor(private service: MarketplaceService) {}
 
   ngOnChanges(changes: SimpleChanges): void {
@@ -20,10 +21,9 @@ export class ReviewFormComponent implements OnChanges{
     if(this.shouldEdit){
       this.reviewForm.patchValue(this.review);
     }
-
   }
-  imagesList: Array<string> = Array<string>();
 
+  imagesList: Array<string> = Array<string>();
   imagesForm = new FormGroup({
     image: new FormControl('', [Validators.required])
   })
@@ -32,7 +32,6 @@ export class ReviewFormComponent implements OnChanges{
     rating: new FormControl(0, [Validators.required]),
     comment: new FormControl('', [Validators.required]),
     tourVisitDate: new FormControl(new Date(), [Validators.required]),
-    tourId: new FormControl(0, [Validators.required]),
     images: new FormControl(Array<string>(), [Validators.required])
   });
 
@@ -43,42 +42,52 @@ export class ReviewFormComponent implements OnChanges{
   }
 
   addReview(): void {
-    console.log(this.reviewForm.value)
+    console.log(this.reviewForm.value);
 
     const review: Review = {
       rating: this.reviewForm.value.rating || 0,
       comment: this.reviewForm.value.comment || "",
       tourVisitDate: this.reviewForm.value.tourVisitDate || new Date(),
-      tourId: this.reviewForm.value.tourId || 0,
+      tourId: this.tourIdHelper || 0,
       images: this.imagesList || Array<string>()
     }
+
     this.service.addReview(review).subscribe({
-      next: (_) => { this.reviewsUpdated.emit() }
+      next: (_) => {
+        this.reviewsUpdated.emit() 
+      }
     });
     
     this.reviewForm.reset();
     this.imagesList = Array<string>();
   }
 
+  private isValid(review: Review): boolean {
+    return (review.rating>=1 && review.rating<=5 && review.comment!=='' && review.tourVisitDate && review.images.length>0);
+  }
 
   updateReview(): void {
     const review: Review = {
       rating: this.reviewForm.value.rating || 0,
       comment: this.reviewForm.value.comment || "",
       tourVisitDate: this.reviewForm.value.tourVisitDate || new Date(),
-      tourId: this.reviewForm.value.tourId || 0,
+      tourId: this.review.tourId || 0,
       images: this.review.images
     }
-    review.id = this.review.id;
-    review.touristId = this.review.touristId;
-    review.commentDate = this.review.commentDate;
-    this.service.updateReview(review).subscribe({
-      next: () => { 
-        this.reviewsUpdated.emit();
-      }
-    });
-    this.reviewForm.reset();
+
+    if(this.isValid(review)){
+      review.id = this.review.id;
+      review.touristId = this.review.touristId;
+      review.commentDate = this.review.commentDate;
+      this.service.updateReview(review).subscribe({
+        next: () => { 
+          this.reviewsUpdated.emit();
+        }
+      });
+      this.reviewForm.reset();
+    }
+    else
+      alert("Invalid input data.");
 
     }
-
   }

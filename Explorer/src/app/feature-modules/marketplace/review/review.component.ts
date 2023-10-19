@@ -18,28 +18,26 @@ export class ReviewComponent implements OnInit {
   selectedReview: Review;
   shouldEdit: boolean;
   shouldRenderReviewForm: boolean = false;
+  tourId: number;
+  tourIdHelper: number;
 
   constructor(private service: MarketplaceService, private authService: AuthService) {}
 
   ngOnInit(): void {
-    this.service.getReviews().subscribe({
-      next: (result: PagedResults<Review>) => {
-        this.reviews = result.results;
-      },
-      error: (err: any) => {
-        console.log(err)
-      }
-    })
-
     this.authService.user$.subscribe(user => {
       this.user = user;
     });
   }
 
   getReviews(): void{
-    this.service.getReviews().subscribe({
+    this.tourIdHelper = this.tourId;
+    this.getReviewsByTourId();
+  }
+
+  getReviewsByTourId(): void{
+    this.service.getReviews(this.tourIdHelper).subscribe({
       next: (result: PagedResults<Review>) => {
-        this.reviews=result.results
+        this.reviews = result.results;
       },
       error: (err:any) => {
         console.log(err);
@@ -48,6 +46,7 @@ export class ReviewComponent implements OnInit {
   }
 
   onEditClicked(review: Review): void {
+    this.shouldRenderReviewForm = true;
     this.selectedReview = review;
     this.shouldEdit = true;
   }
@@ -60,7 +59,7 @@ export class ReviewComponent implements OnInit {
   deleteReview(review: Review): void {
     this.service.deleteReview(review).subscribe({
       next: () => { 
-        this.getReviews();
+        this.getReviewsByTourId();
       }
     });
   }
