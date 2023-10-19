@@ -2,13 +2,15 @@
     <p>Reviews</p>
     <hr>
     <div id="equipment-details">
-        <mat-form-field>
-            <mat-label>TOUR ID:</mat-label>
-            <input matInput [(ngModel)]="tourId"  type="number"/>
-        </mat-form-field>
-        <button color="accent" (click)="getReviews()" mat-icon-button>
-            <mat-icon>search</mat-icon>
-        </button>
+        <div>
+            <mat-form-field>
+                <mat-label>TOUR ID:</mat-label>
+                <input matInput [(ngModel)]="tourId"  type="number"/>
+            </mat-form-field>
+            <button color="accent" (click)="getReviews()" mat-icon-button>
+                <mat-icon>search</mat-icon>
+            </button>
+        </div>
         <div>
             <table>
                 <thead>
@@ -31,8 +33,10 @@
                         <td>{{rev.commentDate}}</td>
                         <td>{{rev.tourId}}</td>
                         <td>
-                            <div *ngFor="let img of rev.images">
-                                <img [src]="img" alt="Image" width="100" height="80">
+                            <div class="image-container">
+                                <div *ngFor="let img of rev.images">
+                                    <img [src]="img" alt="Image" class="vertical-image">
+                                </div>
                             </div>
                         </td>
                         <td>

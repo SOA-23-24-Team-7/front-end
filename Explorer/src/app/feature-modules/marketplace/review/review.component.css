@@ -48,3 +48,20 @@ tbody tr.active-row {
     font-weight: bold;
     color: #3f51b5;
 }
+
+.image-container {
+    height: 120px; /* Postavite željenu visinu kontejnera */
+    width: 180px;
+    overflow-y: scroll; /* Omogućava vertikalno skrolovanje ako je sadržaj prevelik */
+    overflow-x: hidden;
+  }
+  
+  .vertical-image {
+    display: block;
+  }
+
+  img {
+    height: 118px;
+    width: 178px;
+    margin: 2px;
+  }

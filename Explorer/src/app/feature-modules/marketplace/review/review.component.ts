@@ -30,8 +30,10 @@ export class ReviewComponent implements OnInit {
   }
 
   getReviews(): void{
-    this.tourIdHelper = this.tourId;
-    this.getReviewsByTourId();
+    if(this.tourId>0){
+      this.tourIdHelper = this.tourId;
+      this.getReviewsByTourId();
+    }   
   }
 
   getReviewsByTourId(): void{
@@ -52,8 +54,10 @@ export class ReviewComponent implements OnInit {
   }
 
   onAddClicked(): void {
-    this.shouldRenderReviewForm = true;
-    this.shouldEdit = false;
+    if(this.tourIdHelper>0){
+      this.shouldRenderReviewForm = true;
+      this.shouldEdit = false;
+    }
   }
 
   deleteReview(review: Review): void {
