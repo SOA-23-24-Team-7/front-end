@@ -47,8 +47,8 @@ export class MapComponent implements AfterViewInit {
 
   setRoute(): void {
     const routeControl = L.Routing.control({
-      waypoints: [L.latLng(57.74, 11.94), L.latLng(57.6792, 11.949)],
-      router: L.routing.mapbox('TVOJ_MAPBOX_API_KEY', {profile: 'mapbox/walking'})
+      waypoints: [L.latLng(45.267136, 19.833549), L.latLng(45.229732, 19.234345)],
+      router: L.routing.mapbox('pk.eyJ1IjoiY2Vrc29uIiwiYSI6ImNsbnl2YTAwdzAxNnoya2xxcG8wMm56ZjAifQ.23pAV3nrCN0BBo-1F8j8gg', {profile: 'mapbox/walking'})
     }).addTo(this.map);
 
     routeControl.on('routesfound', function(e) {
