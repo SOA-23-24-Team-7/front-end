@@ -10,6 +10,7 @@
                     <th>Description</th>
                     <th>Image</th>
                     <th></th>
+                    <th></th>
                 </tr>
             </thead>
             <tbody>
@@ -24,6 +25,11 @@
                     <td>
                         <button color="primary" (click)="onEditClicked(club)">
                             <mat-icon>edit</mat-icon>
+                        </button>
+                    </td>
+                    <td>
+                        <button color="primary" mat-button [routerLink]="['/club-join-request-management', club.id]">
+                            Manage join requests 
                         </button>
                     </td>
                 </tr>

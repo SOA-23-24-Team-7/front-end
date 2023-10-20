@@ -21,6 +21,11 @@
                             <mat-icon>image</mat-icon>
                         </button>
                     </td>
+                    <td>
+                        <button *ngIf="user.id != club.ownerId" color="primary" mat-button (click)="sendJoinRequest(club.id !== undefined ? club.id : 0)">
+                            Send join request 
+                        </button>
+                    </td>
                 </tr>
             </tbody>
         </table>
