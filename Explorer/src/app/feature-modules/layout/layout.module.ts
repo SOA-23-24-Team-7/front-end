@@ -6,18 +6,8 @@ import { MaterialModule } from 'src/app/infrastructure/material/material.module'
 import { RouterModule } from '@angular/router';
 
 @NgModule({
-  declarations: [
-    HomeComponent,
-    NavbarComponent
-  ],
-  imports: [
-    CommonModule,
-    MaterialModule,
-    RouterModule
-  ],
-  exports: [
-    NavbarComponent,
-    HomeComponent
-  ]
+  declarations: [HomeComponent, NavbarComponent],
+  imports: [CommonModule, MaterialModule, RouterModule],
+  exports: [NavbarComponent, HomeComponent],
 })
-export class LayoutModule { }
+export class LayoutModule {}
