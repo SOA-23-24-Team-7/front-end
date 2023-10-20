@@ -55,10 +55,11 @@ export class ReviewFormComponent implements OnChanges{
     this.service.addReview(review).subscribe({
       next: (_) => {
         this.reviewsUpdated.emit();
+        console.log(this.reviewForm.value);
         this.reviewForm.reset();
         this.imagesList = Array<string>();
         this.reviewAdded.emit(true);
-        console.log(this.reviewForm.value);
+        
       }
     });
     

@@ -23,11 +23,11 @@
                     <mat-label>Images</mat-label>
                     <input matInput formControlName="image" type="text"/>
                 </mat-form-field>
-                <button mat-raised-button type="submit" color="accent" (click)="addImage()">Add image</button>
+                <button mat-raised-button type="submit" color="accent" [disabled]="reviewExists" (click)="addImage()">Add image</button>
            </div>
         </form>
 
-        <button *ngIf = "!shouldEdit" mat-raised-button type="submit" color="primary" (click)="addReview()">Create</button>
+        <button *ngIf = "!shouldEdit" mat-raised-button type="submit" color="primary" [disabled]="reviewExists" (click)="addReview()">Create</button>
         <button *ngIf = "shouldEdit" mat-raised-button type="submit" color="primary" (click)="updateReview()">Update</button>
     </div>
 </form>

@@ -59,7 +59,7 @@
             </table>
         </div>
         <div>
-            <xp-review-form *ngIf="shouldRenderReviewForm" (reviewAdded)="onReviewAdded($event)" (reviewsUpdated)="getReviewsByTourId()" [review]="selectedReview" [shouldEdit]="shouldEdit" [tourIdHelper]="tourIdHelper"></xp-review-form>
+            <xp-review-form *ngIf="shouldRenderReviewForm" (reviewAdded)="onReviewAdded($event)" (reviewsUpdated)="getReviewsByTourId()" [review]="selectedReview" [shouldEdit]="shouldEdit" [tourIdHelper]="tourIdHelper" [reviewExists]="reviewExists"></xp-review-form>
         </div>
     </div>
 </div>
