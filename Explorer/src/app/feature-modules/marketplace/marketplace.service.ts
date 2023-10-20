@@ -15,6 +15,9 @@ export class MarketplaceService {
   getReviews(tourId: number): Observable<PagedResults<Review>> {
     return this.http.get<PagedResults<Review>>(environment.apiHost + 'review/' + tourId);
   }
+  reviewExists(touristId: number, tourId: number): Observable<boolean> {
+    return this.http.get<boolean>(environment.apiHost + 'review/' + touristId + '/' + tourId);
+  }
   addReview(review: Review): Observable<Review> {
     return this.http.post<Review>(environment.apiHost + 'review', review);
   }

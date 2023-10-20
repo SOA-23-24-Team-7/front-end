@@ -10,10 +10,12 @@ import { Review } from '../model/review.model';
   styleUrls: ['./review-form.component.css']
 })
 export class ReviewFormComponent implements OnChanges{
-  @Output() reviewsUpdated = new EventEmitter<null>(); 
+  @Output() reviewsUpdated = new EventEmitter<null>();
+  @Output() reviewAdded = new EventEmitter<boolean>(); 
   @Input() review: Review;
   @Input() shouldEdit: boolean = false;
   @Input() tourIdHelper: number;
+  @Input() reviewExists: boolean;
   constructor(private service: MarketplaceService) {}
 
   ngOnChanges(changes: SimpleChanges): void {
@@ -42,8 +44,6 @@ export class ReviewFormComponent implements OnChanges{
   }
 
   addReview(): void {
-    console.log(this.reviewForm.value);
-
     const review: Review = {
       rating: this.reviewForm.value.rating || 0,
       comment: this.reviewForm.value.comment || "",
@@ -54,16 +54,15 @@ export class ReviewFormComponent implements OnChanges{
 
     this.service.addReview(review).subscribe({
       next: (_) => {
-        this.reviewsUpdated.emit() 
+        this.reviewsUpdated.emit();
+        this.reviewForm.reset();
+        this.imagesList = Array<string>();
+        this.reviewAdded.emit(true);
+        console.log(this.reviewForm.value);
       }
     });
     
-    this.reviewForm.reset();
-    this.imagesList = Array<string>();
-  }
-
-  private isValid(review: Review): boolean {
-    return (review.rating>=1 && review.rating<=5 && review.comment!=='' && review.tourVisitDate && review.images.length>0);
+    
   }
 
   updateReview(): void {
@@ -74,20 +73,16 @@ export class ReviewFormComponent implements OnChanges{
       tourId: this.review.tourId || 0,
       images: this.review.images
     }
-
-    if(this.isValid(review)){
       review.id = this.review.id;
       review.touristId = this.review.touristId;
       review.commentDate = this.review.commentDate;
       this.service.updateReview(review).subscribe({
         next: () => { 
           this.reviewsUpdated.emit();
+          this.reviewForm.reset();
+          
         }
       });
-      this.reviewForm.reset();
-    }
-    else
-      alert("Invalid input data.");
 
     }
   }

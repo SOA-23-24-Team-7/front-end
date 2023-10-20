@@ -20,6 +20,7 @@ export class ReviewComponent implements OnInit {
   shouldRenderReviewForm: boolean = false;
   tourId: number;
   tourIdHelper: number;
+  reviewExists: boolean = false;
 
   constructor(private service: MarketplaceService, private authService: AuthService) {}
 
@@ -33,6 +34,11 @@ export class ReviewComponent implements OnInit {
     if(this.tourId>0){
       this.tourIdHelper = this.tourId;
       this.getReviewsByTourId();
+      this.service.reviewExists(this.user.id, this.tourIdHelper).subscribe({
+        next: (result: boolean) => {
+          this.reviewExists = result;
+        }
+      });
     }   
   }
 
@@ -64,8 +70,13 @@ export class ReviewComponent implements OnInit {
     this.service.deleteReview(review).subscribe({
       next: () => { 
         this.getReviewsByTourId();
+        this.reviewExists = false;
       }
     });
+  }
+
+  onReviewAdded(isAdded: boolean) {
+    this.reviewExists = isAdded;
   }
 
 }

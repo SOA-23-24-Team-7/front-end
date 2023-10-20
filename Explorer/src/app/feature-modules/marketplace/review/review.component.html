@@ -51,7 +51,7 @@
                         </td>
                     </tr>
                     <tr>
-                        <button (click)="onAddClicked()" color="primary" mat-icon-button>
+                        <button (click)="onAddClicked()" [disabled]="reviewExists" color="primary" mat-icon-button>
                             <mat-icon>add</mat-icon>
                         </button>
                     </tr>
@@ -59,7 +59,7 @@
             </table>
         </div>
         <div>
-            <xp-review-form *ngIf="shouldRenderReviewForm" (reviewsUpdated)="getReviewsByTourId()" [review]="selectedReview" [shouldEdit]="shouldEdit" [tourIdHelper]="tourIdHelper"></xp-review-form>
+            <xp-review-form *ngIf="shouldRenderReviewForm" (reviewAdded)="onReviewAdded($event)" (reviewsUpdated)="getReviewsByTourId()" [review]="selectedReview" [shouldEdit]="shouldEdit" [tourIdHelper]="tourIdHelper"></xp-review-form>
         </div>
     </div>
 </div>
