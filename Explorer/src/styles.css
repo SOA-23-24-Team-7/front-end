@@ -1,4 +1,41 @@
-/* You can add global styles to this file, and also import other style files */
+:root {
+  --clr-primary-300: 124, 157, 240;
+  --clr-primary-500: 79, 126, 249;
+  --clr-primary-700: 35, 73, 168;
 
-html, body { height: 100%; }
-body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+  --clr-accent-300: 230, 207, 149;
+  --clr-accent-500: 250, 201, 80;
+  --clr-accent-700: 202, 154, 34;
+
+  --clr-error-500: 255, 0, 0;
+  --clr-success-500: 6, 227, 6;
+
+  --clr-text: 0, 0, 0;
+
+  --clr-neutral-100: 255, 255, 255;
+  --clr-neutral-300: 243, 243, 243;
+  --clr-neutral-700: 64, 64, 64;
+  --clr-neutral-900: 52, 52, 52;
+
+  --clr-background: var(--clr-neutral-100);
+  --clr-background-secondary: var(--clr-neutral-300);
+  --clr-text-contrast: var(--clr-neutral-100);
+
+  --fnt-body: "Source sans 3", sans-serif;
+  --fnt-header: "Playfair Display", sans-serif;
+
+  font-family: var(--fnt-body);
+  background-color: rgb(var(--clr-background));
+  color: var(--clr-text);
+}
+
+::selection {
+  background-color: rgb(var(--clr-primary-300));
+}
+
+.dark-theme {
+  --clr-background: var(--clr-neutral-900);
+  --clr-background-secondary: var(--clr-neutral-700);
+  --clr-text: var(--clr-neutral-100);
+  --clr-text-contrast: var(--clr-neutral-900);
+}
