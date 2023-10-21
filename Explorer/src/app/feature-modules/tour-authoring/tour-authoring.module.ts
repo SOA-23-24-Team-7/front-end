@@ -2,24 +2,28 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { TourComponent } from './tour/tour.component';
 import { TourFormComponent } from './tour-form/tour-form.component';
+import { KeyPointsComponent } from './key-points/key-points.component';
 import { MaterialModule } from 'src/app/infrastructure/material/material.module';
 import { ReactiveFormsModule } from '@angular/forms';
-
-
+import { KeyPointFormComponent } from './key-point-form/key-point-form.component';
+import { MatButtonModule } from '@angular/material/button';
+import { MatCardModule } from '@angular/material/card';
 
 @NgModule({
   declarations: [
     TourComponent,
-    TourFormComponent
+    TourFormComponent,
+    KeyPointsComponent,
+    KeyPointFormComponent,
   ],
-  imports: [
-    CommonModule,
-    MaterialModule,
-    ReactiveFormsModule,
-  ],
+  imports: [CommonModule, MaterialModule, ReactiveFormsModule],
   exports: [
     TourComponent,
-    TourFormComponent
-  ]
+    TourFormComponent,
+    MatCardModule,
+    MatButtonModule,
+    KeyPointsComponent,
+    KeyPointFormComponent,
+  ],
 })
-export class TourAuthoringModule { }
+export class TourAuthoringModule {}
