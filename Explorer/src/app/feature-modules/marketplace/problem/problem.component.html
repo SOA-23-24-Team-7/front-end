@@ -38,7 +38,7 @@
         </table>
     </div>
     <div>
-        <xp-problem-form *ngIf="shouldRenderProblemForm" (problemUpdated)="getProblem()" [problem]="selectedProblem" [shouldEdit]="shouldEdit"></xp-problem-form>
+        <xp-problem-form *ngIf="shouldRenderProblemForm" (problemUpdated)="getProblemByUserId(user.id)" [problem]="selectedProblem" [shouldEdit]="shouldEdit"></xp-problem-form>
     </div>
     </div>
 </div>

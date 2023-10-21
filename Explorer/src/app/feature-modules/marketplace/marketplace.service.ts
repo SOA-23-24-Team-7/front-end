@@ -22,5 +22,7 @@ export class MarketplaceService {
   deleteProblem(id: number): Observable<Problem> {
     return this.http.delete<Problem>(environment.apiHost + 'problem/' + id);
   }
-
+  getProblemByUserId(id: number): Observable<PagedResults<Problem>> {
+    return this.http.get<PagedResults<Problem>>(environment.apiHost + 'problem/' + id);
+  }
 }

@@ -20,16 +20,16 @@ export class ProblemComponent implements OnInit{
   user: User;
   constructor(private service: MarketplaceService,private authService: AuthService,private administrationService: AdministrationService){}
   ngOnInit(): void {
-    this.getProblem();
+    
     this.authService.user$.subscribe(user=>{
       this.user=user;
     })
-    
+    this.getProblemByUserId(this.user.id);
   }
-  getProblem(): void {
-    this.service.getProblem().subscribe({
+  getProblemByUserId(id:number): void {
+    this.service.getProblemByUserId(id).subscribe({
       next: (result: PagedResults<Problem>) => {
-        this.problems=result.results.filter(p=>p.touristId===this.user.id)
+        this.problems=result.results
       },
       error: (err:any) => {
         console.log(err);
@@ -44,7 +44,7 @@ export class ProblemComponent implements OnInit{
   deleteProblem(id: number): void {
     this.service.deleteProblem(id).subscribe({
       next: () => {
-        this.getProblem();
+        this.getProblemByUserId(this.user.id);
       },
     })
   }
