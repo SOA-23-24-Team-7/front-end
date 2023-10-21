@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Input, OnChanges, Output } from '@angular/core';
+import { Component, EventEmitter, Input, OnChanges, Output} from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { TourAuthoringService } from '../tour-authoring.service';
 import { Facilities } from '../model/facilities.model';
@@ -34,10 +34,13 @@ export class FacilitiesFormComponent implements OnChanges {
   ngOnChanges(): void {
     this.facilitiesForm.reset();
     if(this.shouldEdit){
-      this.facilitiesForm.patchValue({
-        ...this.facility,
-        category: this.facility.category.toString() 
-      });
+      const patchedFacility = {
+        name: this.facility.name || null,
+        description: this.facility.description || null,
+        imageUrl: this.facility.imageUrl || null,
+        category: this.facility.category.toString() || null
+      };
+      this.facilitiesForm.patchValue(patchedFacility);
     }
   }
 
@@ -45,7 +48,7 @@ export class FacilitiesFormComponent implements OnChanges {
     name: new FormControl('', [Validators.required]),
     description: new FormControl('', [Validators.required]),
     imageUrl: new FormControl('', [Validators.required]),
-    category: new FormControl('', [Validators.required]),
+    category: new FormControl('', [Validators.required])
   });
 
   addFacility(): void{
@@ -53,7 +56,7 @@ export class FacilitiesFormComponent implements OnChanges {
       name: this.facilitiesForm.value.name || "",
       description: this.facilitiesForm.value.description || "",
       imageUrl: this.facilitiesForm.value.imageUrl || "",
-      category: this.selectedOption ? parseInt(this.selectedOption, 10) : 0 || 0
+      category: this.selectedOption ? parseInt(this.selectedOption, 10) : 0
     };
 
     this.service.addFacility(facility).subscribe({
@@ -68,7 +71,7 @@ export class FacilitiesFormComponent implements OnChanges {
       name: this.facilitiesForm.value.name || "",
       description: this.facilitiesForm.value.description || "",
       imageUrl: this.facilitiesForm.value.imageUrl || "",
-      category: this.selectedOption ? parseInt(this.selectedOption, 10) : 0 || 0
+      category: this.selectedOption ? parseInt(this.selectedOption, 10) : 0
     };
     
     if(this.selectedOption == null){

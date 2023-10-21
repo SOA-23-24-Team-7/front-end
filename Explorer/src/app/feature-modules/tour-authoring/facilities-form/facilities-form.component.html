@@ -24,7 +24,7 @@
         </mat-option>
       </mat-select>
     </mat-form-field>    
-    <button *ngIf="!shouldEdit" mat-raised-button type="submit" color="primary" (click)="addFacility()">Submit</button>
-    <button *ngIf="shouldEdit" mat-raised-button type="submit" color="primary" (click)="updateFacility()">Submit</button>
+    <button *ngIf="!shouldEdit" type="submit" color="primary" (click)="addFacility()" mat-raised-button>Done</button>
+    <button *ngIf="shouldEdit" type="submit" color="primary" (click)="updateFacility()" mat-raised-button>Done</button>
   </div>
 </form>

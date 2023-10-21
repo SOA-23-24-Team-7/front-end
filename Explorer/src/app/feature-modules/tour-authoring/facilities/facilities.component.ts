@@ -22,7 +22,7 @@ export class FacilitiesComponent implements OnInit {
   }
 
   getFacilities(): void {
-    this.service.getFacilities().subscribe({
+    this.service.getAuthorsFacilities().subscribe({
       next: (result: PagedResults<Facilities>) => {
         this.facilities = result.results;
       },
