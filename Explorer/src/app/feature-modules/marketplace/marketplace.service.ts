@@ -24,4 +24,7 @@ export class MarketplaceService {
   updateEquipment(club: Club): Observable<Club> {
     return this.http.put<Club>(environment.apiHost + 'tourist/club/', club);
   }
+  deleteClub(id: number): any {
+    return this.http.delete<any>(environment.apiHost + 'tourist/club/' + id);
+  }
 }
