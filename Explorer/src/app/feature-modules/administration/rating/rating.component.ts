@@ -3,6 +3,7 @@ import { Rating } from '../model/rating.model';
 import { PagedResults } from 'src/app/shared/model/paged-results.model';
 import { AdministrationService } from '../administration.service';
 import { AuthService } from 'src/app/infrastructure/auth/auth.service';
+import { RatingUsername } from '../model/ratingWithUsername';
 
 @Component({
   selector: 'xp-rating',
@@ -11,7 +12,7 @@ import { AuthService } from 'src/app/infrastructure/auth/auth.service';
 })
 export class RatingComponent implements OnInit {
 
-  ratings: Rating[] = [];
+  ratings: RatingUsername[] = [];
 
   constructor(private service: AdministrationService) { }
 
@@ -21,11 +22,8 @@ export class RatingComponent implements OnInit {
 
   getRatings(): void {
     this.service.getRatings().subscribe({
-      next: (result: PagedResults<Rating>) => {
+      next: (result: PagedResults<RatingUsername>) => {
         this.ratings = result.results;
-        for(var r of this.ratings){
-          //r.userId = 4
-        }
       },
       error: () => {
       }
