@@ -24,6 +24,6 @@ export class MarketplaceService {
   }
 
   updatePreference(preference: TourPreference): Observable<TourPreference> {
-    return this.http.put<TourPreference>(environment.apiHost + 'tourist/tour-preferences/' + preference.id, preference);
+    return this.http.put<TourPreference>(environment.apiHost + 'tourist/tour-preferences', preference);
   }
 }
