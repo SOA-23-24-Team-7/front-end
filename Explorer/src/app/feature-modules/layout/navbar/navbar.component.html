@@ -1,11 +1,116 @@
-<mat-toolbar color="primary">
-    <div>
-        <p>Explorer</p>
-        <div id="buttons">
-            <button *ngIf="user && user.username === ''" color="accent" mat-raised-button [routerLink]="['login']">Login</button>
-            <button *ngIf="user && user.username !== ''" color="accent" mat-raised-button (click)="onLogout()">Logout</button>
-            <button color="primary" mat-raised-button [routerLink]="['home']">Home</button>
-            <button *ngIf="user && user.role === 'administrator'"color="primary" mat-raised-button [routerLink]="['equipment']">Manage equipment</button>
+<div class="navbar">
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600;700;800;900&family=Inter:wght@400;500;700&family=Montserrat:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+    <div class="navbar-logo" [routerLink]="['home']">
+        <img class="navbar-logo-icon" src="/assets/icons/logo.svg" />
+        <div class="navbar-logo-text">
+            Explorer
         </div>
     </div>
-</mat-toolbar>
+    <div class="navbar-right">
+        <div class="navbar-menu">
+
+            <!-- HELP MENU -->
+            <div class="navbar-menu-item">
+                <div class="navbar-menu-item-content">
+                    <img class="navbar-menu-item-content-icon" [src]="'/assets/icons/help-' + getTheme() + '.svg'"/>
+                    <div class="navbar-menu-item-content-text">
+                        Help
+                    </div>
+                    <img class="navbar-menu-item-content-arrow" [src]="'/assets/icons/arrow-down-' + getTheme() + '.svg'"/>
+                </div>
+                <div class="navbar-submenu">
+                    <div class="navbar-submenu-item navbar-submenu-item-border-radius-top">
+                        <img class="navbar-submenu-item-icon" [src]="'/assets/icons/contact-' + getTheme() + '.svg'">
+                        <div class="navbar-submenu-item-text">
+                            Contact us
+                        </div>
+                    </div>
+                    <div class="navbar-submenu-item navbar-submenu-item-border-radius-bottom no-border">
+                        <img class="navbar-submenu-item-icon" [src]="'/assets/icons/help-' + getTheme() + '.svg'"/>
+                        <div class="navbar-submenu-item-text">
+                            FAQ (Frequently asked questions)
+                        </div>
+                    </div>
+                </div> 
+                <div class="navbar-menu-item-selected-indicator"></div>
+            </div>
+
+            <!-- SETTINGS MENU -->
+            <div class="navbar-menu-item">
+                <div class="navbar-menu-item-content">
+                    <img class="navbar-menu-item-content-icon" [src]="'/assets/icons/settings-' + getTheme() + '.svg'"/>
+                    <div class="navbar-menu-item-content-text">
+                        Settings
+                    </div>
+                    <img class="navbar-menu-item-content-arrow" [src]="'/assets/icons/arrow-down-' + getTheme() + '.svg'"/>
+                </div>
+                <div class="navbar-submenu">
+                    <div class="navbar-submenu-item navbar-submenu-item-border-radius-top">
+                        <img class="navbar-submenu-item-icon" [src]="'/assets/icons/currency-' + getTheme() + '.svg'"/>
+                        <div class="navbar-submenu-item-text">
+                            Currency
+                        </div>
+                    </div>
+                    <div class="navbar-submenu-item navbar-submenu-item-border-radius-top">
+                        <img class="navbar-submenu-item-icon" [src]="'/assets/icons/language-' + getTheme() + '.svg'"/>
+                        <div class="navbar-submenu-item-text">
+                            Language
+                        </div>
+                    </div>
+                    <div class="navbar-submenu-item navbar-submenu-item-border-radius-bottom no-border">
+                        <img class="navbar-submenu-item-icon" [src]="'/assets/icons/sun-' + getTheme() + '.svg'"/>
+                        <div class="navbar-submenu-item-text">
+                            Appearance:
+                        </div>
+                        <div class="navbar-theme" (click)="toggleTheme()">
+                            <div class="navbar-theme-switch" [class.navbar-theme-switch-left]="getTheme() === 'light'" [class.navbar-theme-switch-right]="getTheme() === 'dark'"></div>
+                            <img class="navbar-theme-sun" [src]="'/assets/icons/sun-dark.svg'"/>
+                            <img class="navbar-theme-moon" [src]="'/assets/icons/moon-dark.svg'"/>
+                        </div>
+                    </div>
+                </div> 
+                <div class="navbar-menu-item-selected-indicator"></div>
+            </div>
+
+            <!-- USER MENU -->
+            <div class="navbar-menu-item" *ngIf="user && user.username !==''">
+                <div class="navbar-menu-item-content">
+                    <img class="navbar-menu-item-content-icon" [src]="'/assets/icons/user-' + getTheme() + '.svg'"/>
+                    <div class="navbar-menu-item-content-text">
+                        {{user.username}}
+                    </div>
+                    <img class="navbar-menu-item-content-arrow" [src]="'/assets/icons/arrow-down-' + getTheme() + '.svg'"/>
+                </div>
+                <div class="navbar-submenu">
+                    <div class="navbar-submenu-item navbar-submenu-item-border-radius-top">
+                        <img class="navbar-submenu-item-icon" [src]="'/assets/icons/user-' + getTheme() + '.svg'">
+                        <div class="navbar-submenu-item-text">
+                            Account
+                        </div>
+                    </div>
+                    <div class="navbar-submenu-item navbar-submenu-item-border-radius-bottom no-border" (click)="onLogout()">
+                        <img class="navbar-submenu-item-icon" [src]="'/assets/icons/log-out-' + getTheme() + '.svg'">
+                        <div class="navbar-submenu-item-text">
+                            Log out
+                        </div>
+                    </div>
+                </div> 
+                <div class="navbar-menu-item-selected-indicator"></div>
+            </div>
+
+        </div>
+        <div class="navbar-button-panel" *ngIf="user && user.username === ''">
+            <div class="navbar-log-in-button" [routerLink]="['login']">
+                <div class="navbar-log-in-button-text">
+                    Log in
+                </div>
+            </div>
+            <div class="navbar-register-button" [routerLink]="['register']">
+                <div class="navbar-register-button-text">
+                    Register
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
