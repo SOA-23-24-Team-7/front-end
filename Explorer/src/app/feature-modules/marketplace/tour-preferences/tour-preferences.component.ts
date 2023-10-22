@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { TourPreference } from '../model/tour-preference.model'
 import { MarketplaceService } from '../marketplace.service';
-import { PagedResults } from 'src/app/shared/model/paged-results.model';
+import { AuthService } from 'src/app/infrastructure/auth/auth.service';
 
 @Component({
   selector: 'xp-tour-preferences',
@@ -10,30 +10,58 @@ import { PagedResults } from 'src/app/shared/model/paged-results.model';
 })
 export class TourPreferencesComponent implements OnInit {
 
-  tourPreference: TourPreference[] = []
+  isEditing: Boolean = false
 
-  constructor(private service: MarketplaceService) { }
+  preference: TourPreference = {
+        id: -1,
+        userId: -1,
+        difficultyLevel: -1,
+        walkingRating: 0,
+        cyclingRating: 0,
+        carRating: 0,
+        boatRating: 0,
+        selectedTags: []}
+
+  constructor(private service: MarketplaceService, private authService: AuthService) { }
 
   ngOnInit(): void {
-    this.service.getTourPreference().subscribe({
-      next: (result: PagedResults<TourPreference>) => {
-        this.tourPreference = result.results;
+      this.service.getTourPreference().subscribe({
+        next: (result: TourPreference) => {
+          this.preference = result;
+          console.log(this.preference)
+        },
+        error: (err: any) => {
+          console.log(err)
+        }
+      })
+  }
+
+  deleteEquipment(id: number): void {
+    this.service.deletePreference(id).subscribe({
+      next: () => {
+        this.getPreference();
       },
-      error: (err: any) => {
-        console.log(err)
+    })
+  }
+
+  getPreference(): void {
+    this.service.getTourPreference().subscribe({
+      next: (result: TourPreference) => {
+        console.log(result)
+        this.preference = result;
+      },
+      error: (error) => {
+          this.preference.id = -1;
       }
     })
   }
 
-  // tourPreference: TourPreference[] = [
-  //   {
-  //     userId: 0,
-  //     difficultyLevel: 3,
-  //     walkingRating: 3,
-  //     cyclingRating: 3,
-  //     carRating: 2,
-  //     boatRating: 2,
-  //     selectedTags: ["prvi", "drugi"]
-  //   }
-  // ];
+  onEditClicked(preference: TourPreference): void {
+    this.preference = preference;
+  }
+
+  onEditChange(shouldEdit: boolean): void {
+    this.isEditing = shouldEdit;
+  }
+  
 }

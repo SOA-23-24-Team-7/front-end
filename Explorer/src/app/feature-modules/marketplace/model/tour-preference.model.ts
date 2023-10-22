@@ -1,5 +1,6 @@
 export interface TourPreference {
-    userId: number;
+    id?: number;
+    userId?: number;
     difficultyLevel: number;
     walkingRating: number;
     cyclingRating: number;
