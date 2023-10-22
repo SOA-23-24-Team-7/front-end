@@ -6,3 +6,8 @@ export interface Comment {
   updatedAt?: string;
   text: string;
 }
+
+export interface CreateComment {
+  blogId: number;
+  text: string;
+}

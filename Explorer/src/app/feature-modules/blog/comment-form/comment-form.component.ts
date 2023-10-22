@@ -1,7 +1,7 @@
 import { Component, EventEmitter, Inject, Output } from '@angular/core';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { BlogService } from '../blog.service';
-import { Comment } from '../model/comment.model';
+import { Comment, CreateComment } from '../model/comment.model';
 import { User } from 'src/app/infrastructure/auth/model/user.model';
 
 export interface ModalData {
@@ -28,11 +28,9 @@ export class CommentFormComponent {
   }
 
   onCommentClick(): void {
-    const comment: Comment = {
-      authorId: this.data.user.id,
+    const comment: CreateComment = {
       blogId: this.data.blogId,
-      text: this.commentText,
-      createdAt: "2023-10-22T14:29:20.989Z"
+      text: this.commentText
     }
 
     this.service.addComment(comment).subscribe({

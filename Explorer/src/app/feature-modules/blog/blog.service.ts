@@ -4,7 +4,7 @@ import { Observable } from 'rxjs';
 import { PagedResults } from 'src/app/shared/model/paged-results.model';
 import { environment } from 'src/env/environment';
 import { Blog } from './model/blog.model';
-import { Comment } from './model/comment.model';
+import { Comment, CreateComment } from './model/comment.model';
 
 @Injectable({
   providedIn: 'root'
@@ -25,7 +25,7 @@ export class BlogService {
     return this.http.get<PagedResults<Comment>>(environment.apiHost + 'tourist/comment/' + blogId);
   }
 
-  addComment(comment: Comment): Observable<Comment> {
+  addComment(comment: CreateComment): Observable<Comment> {
     return this.http.post<Comment>(environment.apiHost + 'tourist/comment', comment);
   }
 }
