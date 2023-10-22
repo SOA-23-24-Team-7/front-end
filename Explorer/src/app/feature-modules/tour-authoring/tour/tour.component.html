@@ -23,7 +23,7 @@
                     <td>{{to.difficulty}}</td>
                     <td>{{to.tags}}</td>
                     <td>{{to.price}}</td>
-                    <td>{{to.status}}</td>
+                    <td>{{getTourStatusText(to.status)}}</td>
                     <td>
                         <button color="accent" (click)="deleteTour(to.id || 0)" mat-icon-button>
                             <mat-icon>delete</mat-icon>

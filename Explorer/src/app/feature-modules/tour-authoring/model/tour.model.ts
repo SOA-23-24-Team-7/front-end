@@ -5,7 +5,12 @@ export interface Tour{
     description: string,
     difficulty: number,
     tags:string[],
-    status?: number,
+    status?: TourStatus,
     price?:number,
     isDeleted?:boolean
+}
+
+export enum TourStatus {
+    Draft = 0,
+    Published = 1,
 }
