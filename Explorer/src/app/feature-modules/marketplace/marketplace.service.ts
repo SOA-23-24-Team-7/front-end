@@ -6,6 +6,7 @@ import { PagedResults } from 'src/app/shared/model/paged-results.model';
 import { Club } from './model/club.model';
 import { MyClubJoinRequest } from './model/my-club-join-request.model';
 import { ClubJoinRequest } from './model/club-join-request.model copy';
+import { ClubMember } from './model/club-member.model';
 
 @Injectable({
   providedIn: 'root'
@@ -46,5 +47,8 @@ export class MarketplaceService {
     const route = `${environment.apiHost}tourist/club-join-request`
     const body = { TouristId: touristId, ClubId: clubId }
     return this.http.post<PagedResults<ClubJoinRequest>>(route, body, { observe: 'response' })
+  }
+  getClubMembers(clubId: number): Observable<PagedResults<ClubMember>> {
+    return this.http.get<PagedResults<ClubMember>>(environment.apiHost + `tourist/club/members/${clubId}`)
   }
 }

@@ -8,6 +8,7 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { ClubsComponent } from './clubs/clubs.component';
 import { MyClubJoinRequestsComponent } from './my-club-join-requests/my-club-join-my-club-join-requests.component';
 import { ClubJoinRequestManagementComponent } from './club-join-request-management/club-join-request-management.component';
+import { ClubMembersManagementComponent } from './club-members-management/club-members-management.component';
 
 @NgModule({
   declarations: [
@@ -15,7 +16,8 @@ import { ClubJoinRequestManagementComponent } from './club-join-request-manageme
     ClubFormComponent,
     ClubsComponent,
     MyClubJoinRequestsComponent,
-    ClubJoinRequestManagementComponent
+    ClubJoinRequestManagementComponent,
+    ClubMembersManagementComponent
   ],
   imports: [
     CommonModule,

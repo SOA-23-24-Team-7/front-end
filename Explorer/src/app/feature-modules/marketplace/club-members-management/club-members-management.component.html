@@ -1,0 +1,20 @@
+<div id="members">
+    <p>Members</p>
+    <hr>
+    <div id="member-details">
+        <table>
+            <thead>
+                <th>First name</th>
+                <th>Last name</th>
+                <th>Username</th>
+            </thead>
+            <tbody>
+                <tr *ngFor="let member of members">
+                    <td>{{member.firstName}}</td>
+                    <td>{{member.lastName}}</td>
+                    <td>{{member.username}}</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>

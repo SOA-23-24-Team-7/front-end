@@ -9,6 +9,7 @@ import { OwnerClubsComponent } from 'src/app/feature-modules/marketplace/owner-c
 import { ClubsComponent } from 'src/app/feature-modules/marketplace/clubs/clubs.component';
 import { MyClubJoinRequestsComponent } from 'src/app/feature-modules/marketplace/my-club-join-requests/my-club-join-my-club-join-requests.component';
 import { ClubJoinRequestManagementComponent } from 'src/app/feature-modules/marketplace/club-join-request-management/club-join-request-management.component';
+import { ClubMembersManagementComponent } from 'src/app/feature-modules/marketplace/club-members-management/club-members-management.component';
 
 const routes: Routes = [
   {path: 'home', component: HomeComponent},
@@ -20,6 +21,7 @@ const routes: Routes = [
   {path: 'clubs', component: ClubsComponent, canActivate: [AuthGuard]},
   {path: 'my-club-join-requests', component: MyClubJoinRequestsComponent, canActivate: [AuthGuard]},
   {path: 'club-join-request-management/:clubId', component: ClubJoinRequestManagementComponent, canActivate: [AuthGuard]},
+  {path: 'club-members-management/:clubId', component: ClubMembersManagementComponent, canActivate: [AuthGuard]},
 ];
 
 @NgModule({

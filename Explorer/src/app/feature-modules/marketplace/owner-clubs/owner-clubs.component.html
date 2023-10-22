@@ -11,6 +11,7 @@
                     <th>Image</th>
                     <th></th>
                     <th></th>
+                    <th></th>
                 </tr>
             </thead>
             <tbody>
@@ -30,6 +31,11 @@
                     <td>
                         <button color="primary" mat-button [routerLink]="['/club-join-request-management', club.id]">
                             Manage join requests 
+                        </button>
+                    </td>
+                    <td>
+                        <button color="primary" mat-button [routerLink]="['/club-members-management', club.id]">
+                            Manage members
                         </button>
                     </td>
                 </tr>
