@@ -1,1 +1,5 @@
-<p>comment-form works!</p>
+<div class="comment-form">
+  <textarea cols="30" rows="10" placeholder="Comment text..." [(ngModel)]="commentText"></textarea>
+  <button color="primary" (click)="onCommentClick()" mat-raised-button>Comment</button>
+  <button color="primary" (click)="onCancelClick()" mat-raised-button>Cancel</button>
+</div>

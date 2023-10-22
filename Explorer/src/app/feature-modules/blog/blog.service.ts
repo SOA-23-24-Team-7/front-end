@@ -24,4 +24,8 @@ export class BlogService {
   getComments(blogId: number): Observable<PagedResults<Comment>> {
     return this.http.get<PagedResults<Comment>>(environment.apiHost + 'tourist/comment/' + blogId);
   }
+
+  addComment(comment: Comment): Observable<Comment> {
+    return this.http.post<Comment>(environment.apiHost + 'tourist/comment', comment);
+  }
 }

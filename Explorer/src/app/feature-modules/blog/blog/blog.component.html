@@ -1,6 +1,19 @@
-<div>{{blog.title}}</div>
-<div>{{blog.description}}</div>
+<div class="blog">
 
-<div class="comment" *ngFor="let comment of comments">
-  {{comment.text}}
+  <h1 class="blog-title">{{blog.title}}</h1>
+  <p class="blog-description">{{blog.description}}</p>
+
+  <div class="comments">
+    <div class="comments-header">
+      <h2>Comments:</h2>
+      <button color="primary" (click)="onAddClicked()" mat-raised-button>New</button>
+    </div>
+    <div class="comment" *ngFor="let comment of comments">
+      <div class="author">{{comment.authorId}}</div>
+      <p class="comment-text">
+        {{comment.text}}
+      </p>
+    </div>
+  </div>
+
 </div>

@@ -7,6 +7,9 @@ import { CommentFormComponent } from './comment-form/comment-form.component';
 import { BlogsComponent } from './blogs/blogs.component';
 import { BlogComponent } from './blog/blog.component';
 import { RouterModule } from '@angular/router';
+import { MaterialModule } from 'src/app/infrastructure/material/material.module';
+import { MatDialogModule } from '@angular/material/dialog';
+import { FormsModule } from '@angular/forms';
 
 
 
@@ -20,7 +23,10 @@ import { RouterModule } from '@angular/router';
   imports: [
     CommonModule,
     HttpClientModule,
-    RouterModule
+    MaterialModule,
+    RouterModule,
+    FormsModule,
+    MatDialogModule
   ]
 })
 export class BlogModule implements OnInit {
