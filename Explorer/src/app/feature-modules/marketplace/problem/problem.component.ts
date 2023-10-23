@@ -30,6 +30,7 @@ export class ProblemComponent implements OnInit{
     this.service.getProblemByUserId(id).subscribe({
       next: (result: PagedResults<Problem>) => {
         this.problems=result.results
+        
       },
       error: (err:any) => {
         console.log(err);
