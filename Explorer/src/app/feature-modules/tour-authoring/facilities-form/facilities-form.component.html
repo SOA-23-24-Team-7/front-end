@@ -14,7 +14,7 @@
     </mat-form-field>
     <mat-form-field>
       <mat-label>Slika (nece biti da se kucka)</mat-label>
-      <input matInput formControlName="imageUrl" type="text">
+      <input matInput formControlName="imagePath" type="text">
     </mat-form-field>
     <mat-form-field>
       <mat-label>Select an option</mat-label>
@@ -23,7 +23,19 @@
           {{ option.label }}
         </mat-option>
       </mat-select>
-    </mat-form-field>    
+    </mat-form-field>
+
+<!-- For now, until i add maps, this will be the way to add long and lat-->
+    <mat-form-field>
+      <mat-label>Longitude</mat-label>
+      <input matInput formControlName="longitude" type="number">
+    </mat-form-field>
+    <mat-form-field>
+      <mat-label>Latitude</mat-label>
+      <input matInput formControlName="latitude" type="number">
+    </mat-form-field> 
+
+
     <button *ngIf="!shouldEdit" type="submit" color="primary" (click)="addFacility()" mat-raised-button>Done</button>
     <button *ngIf="shouldEdit" type="submit" color="primary" (click)="updateFacility()" mat-raised-button>Done</button>
   </div>

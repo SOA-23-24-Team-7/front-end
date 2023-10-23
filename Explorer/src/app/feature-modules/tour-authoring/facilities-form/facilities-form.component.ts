@@ -34,29 +34,35 @@ export class FacilitiesFormComponent implements OnChanges {
   ngOnChanges(): void {
     this.facilitiesForm.reset();
     if(this.shouldEdit){
-      const patchedFacility = {
+      const facilityToPatch = {
         name: this.facility.name || null,
         description: this.facility.description || null,
-        imageUrl: this.facility.imageUrl || null,
-        category: this.facility.category.toString() || null
+        imagePath: this.facility.imagePath || null,
+        category: this.facility.category.toString() || null,
+        longitude: this.facility.longitude.toString() || null,
+        latitude: this.facility.latitude.toString() || null
       };
-      this.facilitiesForm.patchValue(patchedFacility);
+      this.facilitiesForm.patchValue(facilityToPatch);
     }
   }
 
   facilitiesForm = new FormGroup({
     name: new FormControl('', [Validators.required]),
     description: new FormControl('', [Validators.required]),
-    imageUrl: new FormControl('', [Validators.required]),
-    category: new FormControl('', [Validators.required])
+    imagePath: new FormControl('', [Validators.required]),
+    category: new FormControl('', [Validators.required]),
+    longitude: new FormControl('', [Validators.required]),
+    latitude: new FormControl('', [Validators.required])
   });
 
   addFacility(): void{
     const facility: Facilities = {
       name: this.facilitiesForm.value.name || "",
       description: this.facilitiesForm.value.description || "",
-      imageUrl: this.facilitiesForm.value.imageUrl || "",
-      category: this.selectedOption ? parseInt(this.selectedOption, 10) : 0
+      imagePath: this.facilitiesForm.value.imagePath || "",
+      category: this.selectedOption ? parseInt(this.selectedOption, 10) : 0,
+      longitude: parseFloat(this.facilitiesForm.value.longitude || "0") || 0,
+      latitude: parseFloat(this.facilitiesForm.value.latitude || "0") || 0
     };
 
     this.service.addFacility(facility).subscribe({
@@ -70,8 +76,10 @@ export class FacilitiesFormComponent implements OnChanges {
     const facility: Facilities = {
       name: this.facilitiesForm.value.name || "",
       description: this.facilitiesForm.value.description || "",
-      imageUrl: this.facilitiesForm.value.imageUrl || "",
-      category: this.selectedOption ? parseInt(this.selectedOption, 10) : 0
+      imagePath: this.facilitiesForm.value.imagePath || "",
+      category: this.selectedOption ? parseInt(this.selectedOption, 10) : 0,
+      longitude: parseFloat(this.facilitiesForm.value.longitude || "0") || 0,
+      latitude: parseFloat(this.facilitiesForm.value.latitude || "0") || 0
     };
     
     if(this.selectedOption == null){

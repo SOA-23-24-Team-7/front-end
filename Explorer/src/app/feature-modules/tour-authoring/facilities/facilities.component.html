@@ -7,10 +7,13 @@
     <table>
       <thead>
         <tr>
-          <th>Naziv</th>
-          <th>Opis</th>
-          <th>Autor</th>
-          <th>Kategorija</th>
+          <th>Name</th>
+          <th>Description</th>
+          <th>Author Id</th>
+          <th>Category</th>
+          <th>Longitude</th>
+          <th>Latitude</th>
+          <th></th>
           <th></th>
         </tr>
       </thead>
@@ -29,6 +32,11 @@
           <td *ngIf="f.category == 7">Bus Stop</td>
           <td *ngIf="f.category == 8">Shop</td>
           <td *ngIf="f.category == 9">Other</td>
+          <td>{{f.longitude}}</td>
+          <td>{{f.latitude}}</td>
+          <td>
+            <img [src]="f.imagePath" alt="Facility Image" width="100" height="100">
+          </td>
           <td>
             <button (click)="onDeleteClicked(f)" color="accent" mat-icon-button>
               <mat-icon>delete</mat-icon>

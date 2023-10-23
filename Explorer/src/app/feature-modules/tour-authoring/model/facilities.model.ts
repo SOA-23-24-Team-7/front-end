@@ -2,7 +2,9 @@ export interface Facilities {
   id?: number,
   name: string,
   description?: string,
-  imageUrl?: string, 
+  imagePath?: string, 
   authorId?: number, 
-  category: number
+  category: number,
+  longitude: number,
+  latitude: number
 }
