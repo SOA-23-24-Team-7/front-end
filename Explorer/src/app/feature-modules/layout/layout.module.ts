@@ -7,13 +7,15 @@ import { RouterModule } from '@angular/router';
 import { FooterComponent } from './footer/footer.component';
 import { HomeTabsComponent } from './home-tabs/home-tabs.component';
 import {FontAwesomeModule} from '@fortawesome/angular-fontawesome';
+import { ClubCardsComponent } from './club-cards/club-cards.component';
 
 @NgModule({
   declarations: [
     HomeComponent,
     NavbarComponent,
     FooterComponent,
-    HomeTabsComponent
+    HomeTabsComponent,
+    ClubCardsComponent
   ],
   imports: [
     CommonModule,
