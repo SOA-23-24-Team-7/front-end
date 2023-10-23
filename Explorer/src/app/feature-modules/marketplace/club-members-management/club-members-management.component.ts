@@ -12,22 +12,28 @@ import { PagedResults } from 'src/app/shared/model/paged-results.model';
   styleUrls: ['./club-members-management.component.css']
 })
 export class ClubMembersManagementComponent implements OnInit {
+
   members: ClubMember[] = [];
   selectedMember: ClubMember;
   user: User | undefined;
   clubId: number;
+  shouldRenderMemberForm: boolean = false;
+  
   constructor(private route: ActivatedRoute, private service: MarketplaceService, private authService: AuthService) {}
+  
   ngOnInit(): void {
     this.authService.user$.subscribe(user => {
       this.user = user;
       this.getMembers();
     });
   }
+
   getMembers(): void {
     this.route.params.subscribe(params => {
       const idString = params['clubId'];
       this.clubId = parseInt(idString, 10); 
     });
+
     this.service.getClubMembers(this.clubId).subscribe({
       next: (result: PagedResults<ClubMember>) => {
         this.members = result.results;
@@ -36,5 +42,18 @@ export class ClubMembersManagementComponent implements OnInit {
         console.log(errData)
       }
     })
+  }
+
+  kick(member: ClubMember): void {
+    this.service.kickMember(member.membershipId).subscribe({
+      next: () => {
+        this.getMembers();
+      }
+    })
+  }
+
+  onAddClicked(): void {
+    if (this.shouldRenderMemberForm === false) this.shouldRenderMemberForm = true;
+    else this.shouldRenderMemberForm = false;
   }
 }

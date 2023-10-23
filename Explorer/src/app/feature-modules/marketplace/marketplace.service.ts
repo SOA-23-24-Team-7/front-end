@@ -51,4 +51,9 @@ export class MarketplaceService {
   getClubMembers(clubId: number): Observable<PagedResults<ClubMember>> {
     return this.http.get<PagedResults<ClubMember>>(environment.apiHost + `tourist/club/members/${clubId}`)
   }
+  kickMember(id: number): Observable<HttpResponse<any>> {
+    const route = environment.apiHost + "tourist/club/members/kick/" + id;
+    console.log(route);
+    return this.http.delete(route, { observe: 'response' });
+  }
 }
