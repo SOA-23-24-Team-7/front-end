@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthService } from 'src/app/infrastructure/auth/auth.service';
 import { User } from 'src/app/infrastructure/auth/model/user.model';
+import { ThemeService } from '../../../infrastructure/theme/theme.service';
 
 @Component({
   selector: 'xp-navbar',
@@ -11,7 +12,7 @@ export class NavbarComponent implements OnInit {
 
   user: User | undefined;
 
-  constructor(private authService: AuthService) {}
+  constructor(private authService: AuthService, private themeService: ThemeService) {}
 
   ngOnInit(): void {
     this.authService.user$.subscribe(user => {
@@ -21,5 +22,13 @@ export class NavbarComponent implements OnInit {
 
   onLogout(): void {
     this.authService.logout();
+  }
+
+  toggleTheme() {
+    this.themeService.toggleTheme();
+  }
+
+  getTheme(): string {
+    return this.themeService.getTheme();
   }
 }
