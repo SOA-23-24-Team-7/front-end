@@ -7,6 +7,7 @@ import { AuthGuard } from '../auth/auth.guard';
 import { RegistrationComponent } from '../auth/registration/registration.component';
 import { TourComponent } from 'src/app/feature-modules/tour-authoring/tour/tour.component';
 import { KeyPointsComponent } from 'src/app/feature-modules/tour-authoring/key-points/key-points.component';
+import { FacilitiesComponent } from 'src/app/feature-modules/tour-authoring/facilities/facilities.component';
 
 const routes: Routes = [
   { path: 'home', component: HomeComponent },
@@ -19,6 +20,7 @@ const routes: Routes = [
   },
   { path: 'tours', component: TourComponent, canActivate: [AuthGuard] },
   { path: 'tour/:id/key-points', component: KeyPointsComponent },
+  { path: 'facilities', component: FacilitiesComponent, canActivate: [AuthGuard] }
 ];
 
 @NgModule({
