@@ -31,6 +31,7 @@
                         <button color="primary" (click)="onEditClicked(to)"  mat-icon-button>
                             <mat-icon>edit</mat-icon>
                         </button>
+                        <button color="primary" mat-raised-button [routerLink]="['equipment',to.id]" >equipment</button>
                     </td>
                 </tr>
                 <tr><button color="primary" (click)="onAddClicked()" mat-icon-button>
