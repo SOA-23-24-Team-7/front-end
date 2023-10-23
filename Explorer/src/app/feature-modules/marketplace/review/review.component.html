@@ -1,67 +1,89 @@
 <div id="equipment">
-    <p>Reviews</p>
-    <hr>
-    <div id="equipment-details">
-        <div>
-            <mat-form-field>
-                <mat-label>TOUR ID:</mat-label>
-                <input matInput [(ngModel)]="tourId"  type="number"/>
-            </mat-form-field>
-            <button color="accent" (click)="getReviews()" mat-icon-button>
-                <mat-icon>search</mat-icon>
-            </button>
-        </div>
-        <div>
-            <table>
-                <thead>
-                    <tr>
-                        <th>Rating</th>
-                        <th>Comment</th>
-                        <th>Tour visit date</th>
-                        <th>Comment date</th>
-                        <th>Tour id</th>
-                        <th>Images</th>
-                        <th></th>
-                        <th></th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr *ngFor="let rev of reviews">
-                        <td>{{rev.rating}}</td>
-                        <td>{{rev.comment}}</td>
-                        <td>{{rev.tourVisitDate}}</td>
-                        <td>{{rev.commentDate}}</td>
-                        <td>{{rev.tourId}}</td>
-                        <td>
-                            <div class="image-container">
-                                <div *ngFor="let img of rev.images">
-                                    <img [src]="img" alt="Image" class="vertical-image">
-                                </div>
-                            </div>
-                        </td>
-                        <td>
-                            <button *ngIf="user.id==rev.touristId" color="accent" (click)="onEditClicked(rev)" mat-icon-button>
-                                <mat-icon>edit</mat-icon>
-                            </button>
-                        </td>
-                        <td>
-                            <button *ngIf="user.id==rev.touristId" color="primary" (click)="deleteReview(rev)" mat-icon-button>
-                                <mat-icon>delete</mat-icon>
-                            </button>
-                        </td>
-                    </tr>
-                    <tr>
-                        <button (click)="onAddClicked()" [disabled]="reviewExists" color="primary" mat-icon-button>
-                            <mat-icon>add</mat-icon>
-                        </button>
-                    </tr>
-                </tbody>
-            </table>
-        </div>
-        <div>
-            <xp-review-form *ngIf="shouldRenderReviewForm" (reviewAdded)="onReviewAdded($event)" (reviewsUpdated)="getReviewsByTourId()" [review]="selectedReview" [shouldEdit]="shouldEdit" [tourIdHelper]="tourIdHelper" [reviewExists]="reviewExists"></xp-review-form>
-        </div>
+  <p>Reviews</p>
+  <hr />
+  <div id="equipment-details">
+    <div>
+      <mat-form-field>
+        <mat-label>TOUR ID:</mat-label>
+        <input matInput [(ngModel)]="tourId" type="number" />
+      </mat-form-field>
+      <button color="accent" (click)="getReviews()" mat-icon-button>
+        <mat-icon>search</mat-icon>
+      </button>
     </div>
+    <div>
+      <table>
+        <thead>
+          <tr>
+            <th>Rating</th>
+            <th>Comment</th>
+            <th>Tour visit date</th>
+            <th>Comment date</th>
+            <th>Tour id</th>
+            <th>Images</th>
+            <th></th>
+            <th></th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let rev of reviews">
+            <td>{{ rev.rating }}</td>
+            <td>{{ rev.comment }}</td>
+            <td>{{ rev.tourVisitDate }}</td>
+            <td>{{ rev.commentDate }}</td>
+            <td>{{ rev.tourId }}</td>
+            <td>
+              <div class="image-container">
+                <div *ngFor="let img of rev.images">
+                  <img [src]="img" alt="Image" class="vertical-image" />
+                </div>
+              </div>
+            </td>
+            <td>
+              <button
+                *ngIf="user.id == rev.touristId"
+                color="accent"
+                (click)="onEditClicked(rev)"
+                mat-icon-button
+              >
+                <mat-icon>edit</mat-icon>
+              </button>
+            </td>
+            <td>
+              <button
+                *ngIf="user.id == rev.touristId"
+                color="primary"
+                (click)="deleteReview(rev)"
+                mat-icon-button
+              >
+                <mat-icon>delete</mat-icon>
+              </button>
+            </td>
+          </tr>
+          <tr>
+            <button
+              (click)="onAddClicked()"
+              [disabled]="reviewExists"
+              color="primary"
+              mat-icon-button
+            >
+              <mat-icon>add</mat-icon>
+            </button>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <div>
+      <xp-review-form
+        *ngIf="shouldRenderReviewForm"
+        (reviewAdded)="onReviewAdded($event)"
+        (reviewsUpdated)="getReviewsByTourId()"
+        [review]="selectedReview"
+        [shouldEdit]="shouldEdit"
+        [tourIdHelper]="tourIdHelper"
+        [reviewExists]="reviewExists"
+      >
+      </xp-review-form>
+    </div>
+  </div>
 </div>
-
-
