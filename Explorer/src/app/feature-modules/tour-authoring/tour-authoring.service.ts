@@ -32,14 +32,14 @@ export class TourAuthoringService {
   }
 
   getTourEquipment(id: number): Observable<PagedResults<Equipment>> {
-    return this.http.get<PagedResults<Equipment>>(environment.apiHost + 'tour/tourEquipment/' + id);
+    return this.http.get<PagedResults<Equipment>>(environment.apiHost + 'tour/equipment/' + id);
   }
 
   addTourEquipment(tourId:number, eqId:number): Observable<Tour> { 
-    return this.http.post<Tour>(environment.apiHost + 'tour/tourEquipment/' + tourId + '/' + eqId,{});
+    return this.http.post<Tour>(environment.apiHost + 'tour/equipment/' + tourId + '/' + eqId,{});
   }
 
   deleteTourEquipment(tourId:number, eqId:number):Observable<Tour> {
-    return this.http.delete<Tour>(environment.apiHost + 'tour/tourEquipment/' + tourId + '/' + eqId);
+    return this.http.delete<Tour>(environment.apiHost + 'tour/equipment/' + tourId + '/' + eqId);
   }
 }
