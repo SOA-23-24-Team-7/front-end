@@ -1,34 +1,49 @@
-import { Component, OnInit } from '@angular/core';
-import { AuthService } from 'src/app/infrastructure/auth/auth.service';
-import { User } from 'src/app/infrastructure/auth/model/user.model';
-import { ThemeService } from '../../../infrastructure/theme/theme.service';
+import { Component, OnInit } from "@angular/core";
+import { AuthService } from "src/app/infrastructure/auth/auth.service";
+import { User } from "src/app/infrastructure/auth/model/user.model";
+import { ThemeService } from "../../../infrastructure/theme/theme.service";
+import { NavigationStart, Router } from "@angular/router";
 
 @Component({
-  selector: 'xp-navbar',
-  templateUrl: './navbar.component.html',
-  styleUrls: ['./navbar.component.css']
+    selector: "xp-navbar",
+    templateUrl: "./navbar.component.html",
+    styleUrls: ["./navbar.component.css"],
 })
 export class NavbarComponent implements OnInit {
+    user: User | undefined;
+    isHome: boolean = false;
 
-  user: User | undefined;
+    constructor(
+        private authService: AuthService,
+        private themeService: ThemeService,
+        private router: Router,
+    ) {
+        this.router.events.subscribe(event => {
+            if (event instanceof NavigationStart) {
+                if (event.url !== "/home") {
+                    this.isHome = false;
+                } else {
+                    this.isHome = true;
+                }
+            }
+        });
+    }
 
-  constructor(private authService: AuthService, private themeService: ThemeService) {}
+    ngOnInit(): void {
+        this.authService.user$.subscribe(user => {
+            this.user = user;
+        });
+    }
 
-  ngOnInit(): void {
-    this.authService.user$.subscribe(user => {
-      this.user = user;
-    });
-  }
+    onLogout(): void {
+        this.authService.logout();
+    }
 
-  onLogout(): void {
-    this.authService.logout();
-  }
+    toggleTheme() {
+        this.themeService.toggleTheme();
+    }
 
-  toggleTheme() {
-    this.themeService.toggleTheme();
-  }
-
-  getTheme(): string {
-    return this.themeService.getTheme();
-  }
+    getTheme(): string {
+        return this.themeService.getTheme();
+    }
 }
