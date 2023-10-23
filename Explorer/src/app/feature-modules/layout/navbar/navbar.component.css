@@ -27,7 +27,7 @@
 }
 
 .navbar-logo-text {
-    font-family: Cinzel, Arial;
+    font-family: Cinzel, Arial, Helvetica, sans-serif;
     margin-left: 2px;
     font-size: 1.4rem;
     font-weight: 500;
@@ -68,8 +68,8 @@
 
 .navbar-menu-item-content-text {
     margin-left: 0.2rem;
-    font-family: Monserrat, Arial;
-    font-size: 0.9375rem;
+    font-family: var(--fnt-body), Arial, Helvetica, sans-serif;
+    font-size: 1rem;
     font-weight: 600;
     color: rgba(var(--clr-text), 1);
     white-space: nowrap;
@@ -137,8 +137,8 @@
 }
 
 .navbar-submenu-item-text {
-    font-family: Monserrat, Arial;
-    font-size: 0.9375rem;
+    font-family: var(--fnt-body), Arial, Helvetica, sans-serif;
+    font-size: 1rem;
     font-weight: 600;
     color: rgba(var(--clr-text), 1);
     padding-left: 0.3125rem;
