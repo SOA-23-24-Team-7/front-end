@@ -9,6 +9,32 @@
     <div class="navbar-right">
         <div class="navbar-menu">
 
+            <!-- CLUBS MENU -->
+            <div class="navbar-menu-item">
+                <div class="navbar-menu-item-content">
+                    <img class="navbar-menu-item-content-icon" [src]="'/assets/icons/help-' + getTheme() + '.svg'"/>
+                    <div class="navbar-menu-item-content-text">
+                        Clubs
+                    </div>
+                    <img class="navbar-menu-item-content-arrow" [src]="'/assets/icons/arrow-down-' + getTheme() + '.svg'"/>
+                </div>
+                <div class="navbar-submenu">
+                    <div class="navbar-submenu-item navbar-submenu-item-border-radius-top" [routerLink]="['clubs']">
+                        <img class="navbar-submenu-item-icon" [src]="'/assets/icons/contact-' + getTheme() + '.svg'">
+                        <div class="navbar-submenu-item-text">
+                            Explore
+                        </div>
+                    </div>
+                    <div class="navbar-submenu-item navbar-submenu-item-border-radius-bottom no-border" [routerLink]="['ownerclubs']">
+                        <img class="navbar-submenu-item-icon" [src]="'/assets/icons/help-' + getTheme() + '.svg'"/>
+                        <div class="navbar-submenu-item-text">
+                            My clubs
+                        </div>
+                    </div>
+                </div> 
+                <div class="navbar-menu-item-selected-indicator"></div>
+            </div>
+
             <!-- HELP MENU -->
             <div class="navbar-menu-item">
                 <div class="navbar-menu-item-content">

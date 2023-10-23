@@ -1,9 +1,9 @@
-#equipment {
+#member {
     margin-top: 20px;
     margin-left: 20px;
 }
 
-#equipment-details {
+#club-member-details {
     display: flex;
     flex-direction: row;
     gap: 50px;
@@ -11,7 +11,7 @@
 }
 
 p {
-    font-size: 20px;
+    font-size: 15px;
 }
 
 table {

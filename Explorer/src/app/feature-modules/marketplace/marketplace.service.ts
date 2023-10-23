@@ -7,6 +7,8 @@ import { Club } from './model/club.model';
 import { MyClubJoinRequest } from './model/my-club-join-request.model';
 import { ClubJoinRequest } from './model/club-join-request.model copy';
 import { ClubMember } from './model/club-member.model';
+import { ClubInvitationUsername } from './model/club-invitation-username.model';
+import { ClubInvitation } from './model/club-invitation.model';
 
 @Injectable({
   providedIn: 'root'
@@ -51,9 +53,13 @@ export class MarketplaceService {
   getClubMembers(clubId: number): Observable<PagedResults<ClubMember>> {
     return this.http.get<PagedResults<ClubMember>>(environment.apiHost + `tourist/club/members/${clubId}`)
   }
-  kickMember(id: number): Observable<HttpResponse<any>> {
+  kickMember(id: number): Observable<ClubMember> {
     const route = environment.apiHost + "tourist/club/members/kick/" + id;
-    console.log(route);
-    return this.http.delete(route, { observe: 'response' });
+    return this.http.delete<ClubMember>(route);
+  }
+  inviteMember(invitation: ClubInvitationUsername): Observable<HttpResponse<any>> {
+    const route = environment.apiHost + "tourist/club/invite/byUsername";
+    const body: ClubInvitationUsername = { username: invitation.username, clubId: invitation.clubId };
+    return this.http.post<PagedResults<ClubInvitationUsername>>(route, body, { observe: 'response' });
   }
 }
