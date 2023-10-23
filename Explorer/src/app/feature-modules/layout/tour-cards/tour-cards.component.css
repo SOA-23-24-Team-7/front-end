@@ -1,0 +1,123 @@
+.tour-cards-container {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+}
+.tour-card {
+    border: rgba(var(--clr-neutral-700), 1) 1px solid;
+    border-radius: 1rem;
+    padding: 10px;
+    width: 18rem;
+    margin: 1.3rem;
+    box-shadow: 0 0 1rem rgba(var(--clr-neutral-700), 1);
+    position: relative;
+    cursor: pointer;
+}
+
+.tour-image {
+    height: 11rem;
+    width: 17rem;
+    border-radius: 1rem;
+    margin: 0 auto;
+    z-index: 1;
+    position: relative;
+}
+
+.tour-card-details {
+    margin-top: 10px;
+}
+
+.tour-name {
+    font-size: 1.3rem;
+    font-weight: bold;
+}
+
+.tour-tags {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.tour-tag {
+    background-color: rgba(var(--clr-neutral-300), 1);
+    padding: 5px 10px;
+    border: 1px solid rgba(var(--clr-neutral-700));
+    border-radius: 5px;
+    display: flex;
+    margin-right: 5px;
+    white-space: nowrap;
+    flex: 0 1 auto;
+    margin-top: 0.5rem;
+}
+
+.tour-review {
+    margin-right: 5px;
+}
+
+.tour-review-content {
+    display: flex;
+    align-items: center;
+    margin-top: 0.5rem;
+}
+
+.tour-review-icon {
+    height: 1.2rem;
+}
+
+.tour-price {
+    margin-top: 0.5rem;
+    font-size: 1.125rem;
+}
+
+.list-cards-button:hover .triangle-left {
+    border-color: transparent rgba(var(--clr-primary-500), 0.95) transparent
+        transparent;
+}
+.list-cards-button:hover .triangle-right {
+    border-color: transparent transparent transparent
+        rgba(var(--clr-primary-500), 0.95);
+}
+
+.list-cards-button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    margin: 1.5rem;
+}
+
+.triangle-left,
+.triangle-right {
+    width: 0;
+    height: 0;
+    border-style: solid;
+}
+
+.triangle-left {
+    border-width: 2rem 2.2rem 2rem 0;
+    border-color: transparent rgba(var(--clr-primary-500), 1) transparent
+        transparent;
+}
+
+.triangle-right {
+    border-width: 2rem 0 2rem 2.2rem;
+    border-color: transparent transparent transparent
+        rgba(var(--clr-primary-500), 1);
+}
+
+.discount-badge {
+    top: 1rem;
+    left: 1rem;
+    background-color: rgba(var(--clr-accent-500), 1);
+    color: rgba(var(--clr--neutral-300), 1);
+    padding: 5px 10px;
+    border-radius: 10px;
+    z-index: 2;
+    position: absolute;
+}
+.tour-discounted-price {
+    color: rgba(var(--clr-accent-700), 1);
+    margin-top: 0.5rem;
+    font-size: 1.125rem;
+}

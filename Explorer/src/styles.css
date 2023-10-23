@@ -7,6 +7,8 @@
     --clr-accent-500: 250, 201, 80;
     --clr-accent-700: 202, 154, 34;
 
+    --clr-discount-500: 255, 143, 6;
+
     --clr-error-500: 255, 0, 0;
     --clr-success-500: 6, 227, 6;
 
@@ -14,6 +16,7 @@
 
     --clr-neutral-100: 255, 255, 255;
     --clr-neutral-300: 243, 243, 243;
+    --clr-neutral-500: 140, 140, 140;
     --clr-neutral-700: 64, 64, 64;
     --clr-neutral-900: 52, 52, 52;
 

@@ -1,0 +1,75 @@
+.blog-cards-container {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+}
+.blog-card {
+    display: flex;
+    flex-direction: column;
+    justify-content: center; /* Promenjeno na justify-content */
+    align-items: center;
+    border: rgba(var(--clr-neutral-700), 1) 1px solid;
+    border-radius: 1rem;
+    padding: 10px;
+    width: 18rem;
+    height: 8rem;
+    margin: 1.3rem;
+    box-shadow: 0 0 1rem rgba(var(--clr-neutral-700), 1);
+    cursor: pointer;
+}
+
+.blog-date {
+    align-self: flex-end;
+}
+
+.blog-name {
+    font-size: 1.3rem;
+    font-weight: bold;
+    align-self: flex-start;
+    margin: auto;
+    margin-left: 0;
+}
+
+.blog-author {
+    font-size: 1rem;
+    margin-top: 0.5rem; /* Autor na dnu */
+    align-self: flex-start;
+}
+
+.list-cards-button:hover .triangle-left {
+    border-color: transparent rgba(var(--clr-primary-500), 0.95) transparent
+        transparent;
+}
+.list-cards-button:hover .triangle-right {
+    border-color: transparent transparent transparent
+        rgba(var(--clr-primary-500), 0.95);
+}
+
+.list-cards-button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    margin: 1.5rem;
+}
+
+.triangle-left,
+.triangle-right {
+    width: 0;
+    height: 0;
+    border-style: solid;
+}
+
+.triangle-left {
+    border-width: 2rem 2.2rem 2rem 0;
+    border-color: transparent rgba(var(--clr-primary-500), 1) transparent
+        transparent;
+}
+
+.triangle-right {
+    border-width: 2rem 0 2rem 2.2rem;
+    border-color: transparent transparent transparent
+        rgba(var(--clr-primary-500), 1);
+}
