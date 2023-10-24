@@ -20,9 +20,9 @@ export class NavbarComponent implements OnInit {
     ) {
         this.router.events.subscribe(event => {
             if (event instanceof NavigationStart) {
-                if (event.url !== "/home") {
+                if (event.url !== "" && this.isHome) {
                     this.isHome = false;
-                } else {
+                } else if (!this.isHome) {
                     this.isHome = true;
                 }
             }

@@ -3,6 +3,7 @@
     position: relative;
     width: 100%;
     height: clamp(30rem, 60%, 50rem);
+    height: 40rem;
     overflow: hidden;
     font-family: var(--fnt-body);
 }
