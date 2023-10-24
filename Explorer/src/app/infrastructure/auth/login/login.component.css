@@ -52,7 +52,7 @@
 
 .login-title {
     color: rgba(var(--clr-text), 1);
-    font-family: var(--fnt-head);
+    font-family: var(--fnt-header);
     font-weight: 600;
     font-size: 2rem;
 }

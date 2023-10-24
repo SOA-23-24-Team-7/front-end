@@ -86,11 +86,12 @@
     color: rgba(var(--clr-text), 1);
     vertical-align: middle;
     transition: color 0.15s;
+    margin-top: 3px;
 }
 
 .navbar-menu-item-content-text {
     margin-left: 0.2rem;
-    font-family: var(--fnt-body), Arial, Helvetica, sans-serif;
+    font-family: var(--fnt-body);
     font-size: 1rem;
     font-weight: 600;
     white-space: nowrap;
@@ -105,6 +106,7 @@
     color: rgba(var(--clr-text), 1);
     vertical-align: middle;
     transition: color 0.15s;
+    margin-top: 3px;
 }
 
 .navbar-submenu {
@@ -156,10 +158,11 @@
     color: rgba(var(--clr-text), 1);
     vertical-align: middle;
     transition: color 0.15s;
+    margin-top: 3px;
 }
 
 .navbar-submenu-item-text {
-    font-family: var(--fnt-body), Arial, Helvetica, sans-serif;
+    font-family: var(--fnt-body);
     font-size: 1rem;
     font-weight: 600;
     color: rgba(var(--clr-text), 1);
@@ -225,7 +228,7 @@
 }
 
 .navbar-log-in-button-text {
-    font-family: Monserrat, Arial;
+    font-family: var(--fnt-body);
     font-size: 0.9375rem;
     font-weight: 700;
     color: rgba(var(--clr-primary-500), 1);
@@ -233,7 +236,7 @@
 }
 
 .navbar-register-button-text {
-    font-family: Monserrat, Arial;
+    font-family: var(--fnt-body);
     font-size: 0.9375rem;
     font-weight: 700;
     color: white;
