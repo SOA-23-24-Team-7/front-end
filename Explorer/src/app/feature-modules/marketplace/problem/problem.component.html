@@ -1,0 +1,45 @@
+<div id="equipment">
+    <p>Problem</p>
+    <hr>
+    <div id="equipment-details">
+    <div>
+        <table>
+            <thead>
+                <tr>
+                    <th>Category</th>
+                    <th>Priority</th>
+                    <th>Description</th>
+                    <th>Reported time</th>
+                    <th>Tour id</th>
+                    <th></th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let p of problems">
+                    
+                    <td>{{p.category}}</td>
+                    <td>{{p.priority}}</td>
+                    <td>{{p.description}}</td>
+                    <td>{{p.reportedTime}}</td>
+                    <td>{{p.tourId}}</td>
+                    <td>
+                        <button *ngIf="p.touristId==user.id" color="accent" (click)="deleteProblem(p.id || 0)" mat-icon-button>
+                            <mat-icon>delete</mat-icon>
+                        </button>
+                        <button *ngIf="p.touristId==user.id" color="primary" (click)="onEditClicked(p)" mat-icon-button>
+                        <mat-icon>edit</mat-icon>
+                    </button></td>
+                </tr>
+                <tr><button color="primary" (click)="onAddClicked()" mat-icon-button>
+                    <mat-icon>add</mat-icon>
+                </button></tr>
+            </tbody>
+        </table>
+    </div>
+    <div>
+        <xp-problem-form *ngIf="shouldRenderProblemForm" (problemUpdated)="getProblemByUserId(user.id)" [problem]="selectedProblem" [shouldEdit]="shouldEdit"></xp-problem-form>
+    </div>
+    </div>
+</div>
+

@@ -10,7 +10,7 @@ import { RegistrationComponent } from "src/app/infrastructure/auth/registration/
 @Component({
   selector: 'xp-login',
   templateUrl: './login.component.html',
-  styleUrls: ['./login.component.css']
+  styleUrls: ['./login.component.css'],
 })
 export class LoginComponent {
   isPasswordVisible: boolean;
@@ -30,8 +30,8 @@ export class LoginComponent {
 
   login(): void {
     const login: Login = {
-      username: this.loginForm.value.username || "",
-      password: this.loginForm.value.password || "",
+      username: this.loginForm.value.username || '',
+      password: this.loginForm.value.password || '',
     };
 
     if (this.loginForm.valid) {

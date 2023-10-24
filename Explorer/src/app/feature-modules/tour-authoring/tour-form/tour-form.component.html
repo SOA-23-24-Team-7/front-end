@@ -1,0 +1,40 @@
+<form [formGroup]="tourForm">
+    <div>
+        <mat-form-field>
+            <mat-label>Name</mat-label>
+            <input matInput formControlName="name" type="text"/>
+        </mat-form-field>
+        <mat-form-field>
+          <mat-label>Description</mat-label>
+          <textarea matInput
+          cdkTextareaAutosize
+          cdkAutosizeMinRows="1"
+          formControlName="description"
+          cdkAutosizeMaxRows="5"></textarea>
+        </mat-form-field>
+        <mat-form-field>
+            <mat-label>Difficulty</mat-label>
+            <input matInput type="number" min="1" max="5" formControlName="difficulty" >
+        </mat-form-field>
+        
+
+        
+        <mat-form-field>
+            <mat-label>Tags</mat-label>
+            <input matInput #tagInput type="text" placeholder="Add a tag">
+          </mat-form-field>
+          <button mat-raised-button (click)="addTag(tagInput.value); tagInput.value=''">Add Tag</button>
+        
+          <div>
+            <div *ngFor="let tag of tourForm.get('tags')?.value; let i = index">
+              <span>{{ tag }}</span>
+              <button (click)="removeTag(i)">Remove</button>
+            </div>
+          </div>
+          
+
+        
+        <button *ngIf="!shouldEdit" color="primary" type="submit" (click)="addTour()" mat-raised-button>Done</button>
+        <button *ngIf="shouldEdit" color="primary" type="submit" (click)="updateTour()" mat-raised-button>Done</button>
+    </div>
+</form>
