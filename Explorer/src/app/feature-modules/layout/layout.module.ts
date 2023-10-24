@@ -11,6 +11,9 @@ import { HomeTabsComponent } from "./home-tabs/home-tabs.component";
 import { FontAwesomeModule } from "@fortawesome/angular-fontawesome";
 import { ClubCardsComponent } from "./club-cards/club-cards.component";
 import { MatDialogModule } from '@angular/material/dialog';
+import { TourCardComponent } from './tour-card/tour-card.component';
+import { BlogCardComponent } from './blog-card/blog-card.component';
+import { ClubCardComponent } from './club-card/club-card.component';
 
 @NgModule({
     declarations: [
@@ -21,6 +24,9 @@ import { MatDialogModule } from '@angular/material/dialog';
         FooterComponent,
         HomeTabsComponent,
         ClubCardsComponent,
+        TourCardComponent,
+        BlogCardComponent,
+        ClubCardComponent,
     ],
     imports: [CommonModule, MaterialModule, RouterModule, FontAwesomeModule, MatDialogModule],
     exports: [NavbarComponent, HomeComponent],
