@@ -1,8 +1,11 @@
 import { Component } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { MatDialog } from '@angular/material/dialog';
+import { MatDialogRef } from '@angular/material/dialog';
 import { AuthService } from '../auth.service';
-import { Router } from '@angular/router';
 import { Login } from '../model/login.model';
+import { faXmark, faEye, faEyeSlash } from "@fortawesome/free-solid-svg-icons";
+import { RegistrationComponent } from "src/app/infrastructure/auth/registration/registration.component";
 
 @Component({
   selector: 'xp-login',
@@ -10,7 +13,15 @@ import { Login } from '../model/login.model';
   styleUrls: ['./login.component.css'],
 })
 export class LoginComponent {
-  constructor(private authService: AuthService, private router: Router) {}
+  isPasswordVisible: boolean;
+
+  constructor(
+    private authService: AuthService,
+    public dialog: MatDialogRef<LoginComponent>,
+    public dialogRef: MatDialog
+  ) {
+    this.isPasswordVisible = false;
+  }
 
   loginForm = new FormGroup({
     username: new FormControl('', [Validators.required]),
@@ -26,9 +37,26 @@ export class LoginComponent {
     if (this.loginForm.valid) {
       this.authService.login(login).subscribe({
         next: () => {
-          this.router.navigate(['/']);
+          this.onClose();
         },
       });
     }
   }
+
+  onRegister(): void {
+    this.onClose();
+    this.dialogRef.open(RegistrationComponent);
+  }
+
+  onClose(): void {
+    this.dialog.close();
+  }
+
+  togglePasswordVisibility() {
+    this.isPasswordVisible = !this.isPasswordVisible;
+  }
+
+  faXmark = faXmark;
+  faEye = faEye;
+  faEyeSlash = faEyeSlash;
 }

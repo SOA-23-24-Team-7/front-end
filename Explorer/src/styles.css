@@ -7,6 +7,8 @@
     --clr-accent-500: 250, 201, 80;
     --clr-accent-700: 202, 154, 34;
 
+    --clr-discount-500: 255, 143, 6;
+
     --clr-error-500: 255, 0, 0;
     --clr-success-500: 6, 227, 6;
 
@@ -14,6 +16,7 @@
 
     --clr-neutral-100: 255, 255, 255;
     --clr-neutral-300: 243, 243, 243;
+    --clr-neutral-500: 140, 140, 140;
     --clr-neutral-700: 64, 64, 64;
     --clr-neutral-900: 52, 52, 52;
 
@@ -21,8 +24,12 @@
     --clr-background-secondary: var(--clr-neutral-300);
     --clr-text-contrast: var(--clr-neutral-100);
 
-    --fnt-body: "Source sans 3", sans-serif;
-    --fnt-header: "Playfair Display", sans-serif;
+    --clr-outline: var(--clr-neutral-300);
+    --clr-outline-contrast: var(--clr-neutral-700);
+
+    --fnt-body: "Source Sans 3", sans-serif;
+
+    --fnt-header: "Playfair Display", serif;
 
     font-family: var(--fnt-body);
     background-color: rgb(var(--clr-background));
@@ -30,7 +37,7 @@
 }
 
 ::selection {
-    background-color: rgb(var(--clr-primary-300));
+    background-color: rgb(var(--clr-primary-500));
 }
 
 .dark-theme {
@@ -38,6 +45,10 @@
     --clr-background-secondary: var(--clr-neutral-700);
     --clr-text: var(--clr-neutral-100);
     --clr-text-contrast: var(--clr-neutral-900);
+    --clr-outline: var(--clr-neutral-700);
+    --clr-outline-contrast: var(--clr-neutral-300);
+
+    background-color: rgb(var(--clr-background));
 }
 
 /* Box sizing rules */
@@ -64,14 +75,10 @@ html:focus-within {
 }
 
 html,
-body,
-#app {
-    height: 100%;
+body {
+    min-height: 100vh;
+    height: auto;
     width: 100%;
-}
-
-#app {
-    display: inline;
 }
 
 /* Set core body defaults */
@@ -110,6 +117,38 @@ button,
 textarea,
 select {
     font: inherit;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+    font-family: var(--fnt-header);
+}
+
+/* Global button styling */
+.btn {
+    width: max-content;
+    padding: 0.5rem 1rem;
+    min-width: 90px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: filter 0.35s;
+    box-shadow: 0 3px 10px rgb(0 0 0 / 0.2);
+    color: white;
+    max-height: 40px;
+    height: 40px;
+    border-radius: 4px;
+    border: none;
+    background-color: rgb(var(--clr-primary-500));
+}
+
+.btn:hover {
+    cursor: pointer;
+    filter: brightness(1.2);
 }
 
 /* Remove all animations, transitions and smooth scroll for people that prefer not to see them */

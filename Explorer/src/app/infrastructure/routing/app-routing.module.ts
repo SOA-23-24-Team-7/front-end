@@ -19,9 +19,8 @@ import { TourEquipmentFormComponent } from "src/app/feature-modules/tour-authori
 import { EditProfileComponent } from "../../feature-modules/stakeholder/edit-profile/edit-profile.component";
 
 const routes: Routes = [
-    { path: "home", component: HomeComponent },
-    { path: "login", component: LoginComponent },
-    { path: "register", component: RegistrationComponent },
+    { path: "", component: HomeComponent },
+    { path: "home", redirectTo: "", pathMatch: "full" },
     {
         path: "equipment",
         component: EquipmentComponent,
