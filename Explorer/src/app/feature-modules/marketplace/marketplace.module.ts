@@ -6,13 +6,20 @@ import { ReviewFormComponent } from './review-form/review-form.component';
 import { MaterialModule } from 'src/app/infrastructure/material/material.module';
 import { ReactiveFormsModule } from '@angular/forms';
 import { FormsModule } from '@angular/forms';
+import { ProblemComponent } from './problem/problem.component';
+import { ProblemFormComponent } from './problem-form/problem-form.component';
+import { RouterModule } from '@angular/router';
+import { MaterialModule } from 'src/app/infrastructure/material/material.module';
+import { ReactiveFormsModule } from '@angular/forms';
 
 
 
 @NgModule({
   declarations: [
     ReviewComponent,
-    ReviewFormComponent
+    ReviewFormComponent,
+    ProblemComponent,
+    ProblemFormComponent
   ],
   imports: [
     CommonModule,
@@ -22,7 +29,9 @@ import { FormsModule } from '@angular/forms';
     FormsModule
   ],
   exports: [
-    ReviewComponent
+    ReviewComponent,
+    ReactiveFormsModule,
+    ProblemComponent
   ]
 })
 export class MarketplaceModule { }
