@@ -23,10 +23,13 @@ export class HomeTabsComponent {
     selectedTab: Tab = Tab.TOURS;
 
     constructor() {
-        this.setActiveTab(Tab.TOURS);
+        this.selectedTab = Tab.TOURS;
     }
 
-    setActiveTab(tab: Tab): void {
+    setActiveTab(tab: Tab, el: HTMLElement): void {
         this.selectedTab = tab;
+        setTimeout(() => {
+            el.scrollIntoView({ behavior: "smooth", block: "start" });
+        }, 1);
     }
 }

@@ -1,22 +1,22 @@
-<div class="tab-list">
+<div class="tab-list" #tabList>
     <div
         class="tab"
         [ngClass]="{ 'selected-tab': selectedTab === Tab.TOURS }"
-        (click)="setActiveTab(Tab.TOURS)"
+        (click)="setActiveTab(Tab.TOURS, tabList)"
     >
         <fa-icon [icon]="faMountainCity" /> Tours
     </div>
     <div
         class="tab"
         [ngClass]="{ 'selected-tab': selectedTab === Tab.BLOGS }"
-        (click)="setActiveTab(Tab.BLOGS)"
+        (click)="setActiveTab(Tab.BLOGS, tabList)"
     >
         <fa-icon [icon]="faNewspaper" /> Blogs
     </div>
     <div
         class="tab"
         [ngClass]="{ 'selected-tab': selectedTab === Tab.CLUBS }"
-        (click)="setActiveTab(Tab.CLUBS)"
+        (click)="setActiveTab(Tab.CLUBS, tabList)"
     >
         <fa-icon [icon]="faUsers" /> Clubs
     </div>
