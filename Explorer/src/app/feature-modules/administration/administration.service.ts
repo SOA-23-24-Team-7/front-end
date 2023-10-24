@@ -5,6 +5,9 @@ import { environment } from 'src/env/environment';
 import { Observable } from 'rxjs';
 import { PagedResults } from 'src/app/shared/model/paged-results.model';
 import { User } from 'src/app/infrastructure/auth/model/user.model';
+import { Rating } from './model/rating.model';
+import { RatingUsername } from './model/ratingWithUsername';
+import { Problem } from '../marketplace/model/problem.model';
 
 @Injectable({
   providedIn: 'root',
@@ -30,6 +33,10 @@ export class AdministrationService {
     );
   }
 
+  getRatings(): Observable<PagedResults<RatingUsername>> {
+    return this.http.get<PagedResults<RatingUsername>>(environment.apiHost + 'rating/ratings')
+  }
+
   deleteEquipment(id: number): Observable<Equipment> {
     return this.http.delete<Equipment>(
       environment.apiHost + 'administration/equipment/' + id
@@ -48,5 +55,9 @@ export class AdministrationService {
       environment.apiHost + 'administration/equipment/' + equipment.id,
       equipment
     );
+  }
+  
+  getProblem(): Observable<PagedResults<Problem>> {
+    return this.http.get<PagedResults<Problem>>(environment.apiHost +'administration/problem')
   }
 }
