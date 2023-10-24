@@ -13,6 +13,7 @@ import { TourExecutionModule } from "./feature-modules/tour-execution/tour-execu
 import { AuthModule } from "./infrastructure/auth/auth.module";
 import { HTTP_INTERCEPTORS, HttpClientModule } from "@angular/common/http";
 import { JwtInterceptor } from "./infrastructure/auth/jwt/jwt.interceptor";
+import { StakeholderModule } from './feature-modules/stakeholder/stakeholder.module';
 
 @NgModule({
     declarations: [AppComponent],
@@ -29,6 +30,7 @@ import { JwtInterceptor } from "./infrastructure/auth/jwt/jwt.interceptor";
         TourExecutionModule,
         AuthModule,
         HttpClientModule,
+        StakeholderModule,
     ],
     providers: [
         {
