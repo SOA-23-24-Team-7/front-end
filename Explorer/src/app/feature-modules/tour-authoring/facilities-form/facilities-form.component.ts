@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Input, OnChanges, Output} from '@angular/core';
+import { Component, EventEmitter, Input, OnChanges, Output, ViewChild} from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { TourAuthoringService } from '../tour-authoring.service';
 import { Facilities } from '../model/facilities.model';
@@ -9,7 +9,7 @@ import { Facilities } from '../model/facilities.model';
   styleUrls: ['./facilities-form.component.css']
 })
 export class FacilitiesFormComponent implements OnChanges {
-  
+
   @Output() facilitiesUpdated = new EventEmitter<null>();
   @Input() facility: Facilities;
   @Input() shouldEdit: boolean = false;
@@ -30,6 +30,9 @@ export class FacilitiesFormComponent implements OnChanges {
   ];
 
   selectedOption: string | null;
+  newLongitude: number = 0;
+  newLatitude: number = 0;
+  isAddButtonDisabled: boolean = true;
 
   ngOnChanges(): void {
     this.facilitiesForm.reset();
@@ -65,11 +68,20 @@ export class FacilitiesFormComponent implements OnChanges {
       latitude: parseFloat(this.facilitiesForm.value.latitude || "0") || 0
     };
 
-    this.service.addFacility(facility).subscribe({
-      next: () => {
-        this.facilitiesUpdated.emit();
-      }
-    });
+    if(this.newLatitude !=0 && this.newLongitude != 0){
+      facility.longitude = this.newLongitude;
+      facility.latitude = this.newLatitude;
+
+      this.service.addFacility(facility).subscribe({
+        next: (_) => {
+          this.facilitiesUpdated.emit();
+          location.reload();
+        }
+      });
+    }
+    else{
+      alert("You have to choose the location on the map");
+    }
   }
 
   updateFacility(): void{
@@ -87,10 +99,16 @@ export class FacilitiesFormComponent implements OnChanges {
     }
 
     facility.id = this.facility.id;
+    
+    if(this.newLatitude !=0 && this.newLongitude != 0){
+      facility.longitude = this.newLongitude;
+      facility.latitude = this.newLatitude;
+    }
 
     this.service.updateFacility(facility).subscribe({
-      next: () => {
+      next: (_) => {
         this.facilitiesUpdated.emit();
+        location.reload(); 
       }
     });
   }

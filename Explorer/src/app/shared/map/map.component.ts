@@ -12,6 +12,8 @@ import { KeyPoint } from 'src/app/feature-modules/tour-authoring/model/key-point
 export class MapComponent implements AfterViewInit {
   private map: any;
   private keyPoints: any;
+  private markerGroup = L.layerGroup(); 
+  public facilitiesUsed: boolean = false;
 
   constructor(private mapService: MapService) {}
 
@@ -90,8 +92,16 @@ export class MapComponent implements AfterViewInit {
       console.log(
         'You clicked the map at latitude: ' + lat + ' and longitude: ' + lng
       );
-      const mp = new L.Marker([lat, lng]).addTo(this.map);
-      alert(mp.getLatLng());
+      if(this.facilitiesUsed){
+        this.markerGroup.clearLayers();
+        const marker = new L.Marker([lat, lng]);
+        this.markerGroup.addLayer(marker);
+        this.map.addLayer(this.markerGroup);
+      }
+      else{
+        const mp = new L.Marker([lat, lng]).addTo(this.map);
+        alert(mp.getLatLng());
+      }
     });
   }
 
@@ -115,5 +125,34 @@ export class MapComponent implements AfterViewInit {
       waypoints.push(L.latLng(keyPoint.latitude, keyPoint.longitude));
     }
     return waypoints;
+  }
+
+  getClickCoordinates(callback: (lat: number, lng: number) => void): void {
+    this.map.on('click', (e: any) => {
+      const coord = e.latlng;
+      const lat = coord.lat;
+      const lng = coord.lng;
+
+      callback(lat, lng);
+    });
+  }
+
+  setMarker(lat: number, lng: number): void{
+    // Clear all previous markers on the map
+    this.markerGroup.clearLayers();
+
+    const marker = new L.Marker([lat, lng]);
+    this.markerGroup.addLayer(marker);
+    this.map.addLayer(this.markerGroup);
+
+    this.map.setView([lat, lng], this.map.getZoom());
+  }
+
+  setMarkersForAllFacilities(lat: number, lng: number): void{
+    const marker = new L.Marker([lat, lng]);
+    this.markerGroup.addLayer(marker);
+    this.map.addLayer(this.markerGroup);
+
+    this.map.setView([lat, lng], this.map.getZoom());
   }
 }

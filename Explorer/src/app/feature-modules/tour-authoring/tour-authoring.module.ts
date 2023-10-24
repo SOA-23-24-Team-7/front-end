@@ -11,6 +11,8 @@ import { MatCardModule } from '@angular/material/card';
 import { FacilitiesComponent } from './facilities/facilities.component';
 import { FacilitiesFormComponent } from './facilities-form/facilities-form.component';
 import { MatSelectModule } from '@angular/material/select';
+import { SharedModule } from 'src/app/shared/shared.module';
+
 
 @NgModule({
   declarations: [
@@ -25,7 +27,8 @@ import { MatSelectModule } from '@angular/material/select';
     CommonModule, 
     MaterialModule, 
     ReactiveFormsModule,
-    MatSelectModule
+    MatSelectModule,
+    SharedModule
   ],
   exports: [
     TourComponent,
