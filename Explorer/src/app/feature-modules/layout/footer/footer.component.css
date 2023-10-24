@@ -1,7 +1,8 @@
 .footer {
-    background-color: rgb(var(--clr-neutral-300));
     color: black;
     padding: 1.25rem 0;
+    background-color: rgba(var(--clr-background-secondary), 1);
+    color: rgb(var(--clr-text));
   }
   
   .footer-container {
@@ -73,8 +74,8 @@
 }
 a{
     text-decoration: underline;
-    color: black;
     font-weight: normal;
+    color: rgb(var(--clr-text));
 }
 a:hover{
     color: blue;
