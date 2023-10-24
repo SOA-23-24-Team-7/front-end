@@ -109,13 +109,6 @@ export class TourPreferenceFormComponent {
         }
       });
     }
-
-    // console.log(tourPreference)
-    // this.service.updatePreference(tourPreference).subscribe({
-    //   next: (result: TourPreference) => { 
-    //     this.preference = result;
-    //   }
-    // });
   }
 
   IsDataValid(tourPreference: TourPreference) : boolean {
