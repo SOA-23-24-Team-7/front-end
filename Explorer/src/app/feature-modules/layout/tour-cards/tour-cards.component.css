@@ -6,6 +6,8 @@
     width: 100%;
 }
 .tour-card {
+    background-color: rgba(var(--clr-neutral-300), 1);
+    border-radius: 1rem;
     border: rgba(var(--clr-neutral-700), 1) 1px solid;
     border-radius: 1rem;
     padding: 10px;

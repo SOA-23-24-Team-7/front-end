@@ -6,9 +6,10 @@
     width: 100%;
 }
 .blog-card {
+    background-color: rgba(var(--clr-neutral-300), 1);
     display: flex;
     flex-direction: column;
-    justify-content: center; /* Promenjeno na justify-content */
+    justify-content: center;
     align-items: center;
     border: rgba(var(--clr-neutral-700), 1) 1px solid;
     border-radius: 1rem;
@@ -34,7 +35,7 @@
 
 .blog-author {
     font-size: 1rem;
-    margin-top: 0.5rem; /* Autor na dnu */
+    margin-top: 0.5rem;
     align-self: flex-start;
 }
 
