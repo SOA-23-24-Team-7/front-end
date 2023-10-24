@@ -5,21 +5,37 @@ import { MaterialModule } from 'src/app/infrastructure/material/material.module'
 import { ReactiveFormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
 import { HomeComponent } from '../layout/home/home.component';
-
+import { ReviewComponent } from './review/review.component';
+import { ReviewFormComponent } from './review-form/review-form.component';
+import { FormsModule } from '@angular/forms';
+import { ProblemComponent } from './problem/problem.component';
+import { ProblemFormComponent } from './problem-form/problem-form.component';
+import { RouterModule } from '@angular/router';
+import { MaterialModule } from 'src/app/infrastructure/material/material.module';
+import { ReactiveFormsModule } from '@angular/forms';
 
 
 
 @NgModule({
   declarations: [
+    ReviewComponent,
+    ReviewFormComponent,
+    ProblemComponent,
+    ProblemFormComponent,
     RatingFormComponent
   ],
   imports: [
     CommonModule,
+    RouterModule,
     MaterialModule,
     ReactiveFormsModule,
-    RouterModule,  ],
+    FormsModule
+  ],
   exports: [
-    RatingFormComponent
+    ReviewComponent,
+    ReactiveFormsModule,
+    RatingFormComponent,
+    ProblemComponent
   ]
 })
 export class MarketplaceModule { }

@@ -1,0 +1,27 @@
+<form [formGroup]="problemForm">
+    <div>
+        <mat-form-field>
+            <mat-label>Category</mat-label>
+            <input matInput formControlName="category" type="text"/>
+        </mat-form-field>
+        <mat-form-field>
+            <mat-label>Priority</mat-label>
+            <input matInput formControlName="priority" type="text"/>
+        </mat-form-field>
+        <mat-form-field>
+          <mat-label>Description</mat-label>
+          <textarea matInput
+          cdkTextareaAutosize
+          cdkAutosizeMinRows="1"
+          formControlName="description"
+          cdkAutosizeMaxRows="5"></textarea>
+        </mat-form-field>
+        
+        <mat-form-field>
+            <mat-label>Tour Id</mat-label>
+            <input matInput formControlName="tourId" type="number"/>
+        </mat-form-field>
+        <button *ngIf="!shouldEdit" color="primary" type="submit" (click)="addProblem()" mat-raised-button>Done</button>
+        <button *ngIf="shouldEdit" color="primary" type="submit" (click)="updateProblem()" mat-raised-button>Done</button>
+    </div>
+</form>

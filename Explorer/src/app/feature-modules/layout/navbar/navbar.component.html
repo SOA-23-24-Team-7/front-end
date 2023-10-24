@@ -8,6 +8,11 @@
             <button *ngIf="user && user.role === 'administrator'"color="primary" mat-raised-button [routerLink]="['equipment']">Manage equipment</button>
             <button *ngIf="user && user.role === 'administrator'"color="primary" mat-raised-button [routerLink]="['ratings']">View ratings</button>
             <button *ngIf="user && (user.role === 'tourist' || user.role === 'author')"color="primary" mat-raised-button [routerLink]="['ratingForm']">Rate the app</button>
+            <button *ngIf="user && user.role === 'tourist'"color="primary" mat-raised-button [routerLink]="['review']">All tour reviews</button>
+            <button *ngIf="user && user.role === 'tourist'"color="primary" mat-raised-button [routerLink]="['problem']">Manage problem</button>
+            <button *ngIf="user && user.role === 'administrator'"color="primary" mat-raised-button [routerLink]="['problems']">List of problems</button>
+            <button *ngIf="user && user.role === 'author'"color="primary" mat-raised-button [routerLink]="['tours']">My Tours</button>
+          
         </div>
     </div>
 </mat-toolbar>

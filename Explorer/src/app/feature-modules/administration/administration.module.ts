@@ -5,6 +5,7 @@ import { EquipmentComponent } from './equipment/equipment.component';
 import { MaterialModule } from 'src/app/infrastructure/material/material.module';
 import { ReactiveFormsModule } from '@angular/forms';
 import { RatingComponent } from './rating/rating.component';
+import { ProblemViewComponent } from './problem-view/problem-view.component';
 
 
 
@@ -13,6 +14,7 @@ import { RatingComponent } from './rating/rating.component';
     EquipmentFormComponent,
     EquipmentComponent,
     RatingComponent
+    ProblemViewComponent
   ],
   imports: [
     CommonModule,
