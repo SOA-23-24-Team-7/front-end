@@ -64,6 +64,7 @@ export class FacilitiesComponent implements OnInit {
     this.service.deleteFacility(facility).subscribe({
       next: () => {
         this.getFacilities();
+        location.reload();
       }
     })
   }

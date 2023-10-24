@@ -17,6 +17,12 @@ export class MapComponent implements AfterViewInit {
 
   constructor(private mapService: MapService) {}
 
+  private facilityIcon = L.icon({
+    iconUrl: 'https://cdn4.iconfinder.com/data/icons/small-n-flat/24/map-marker-512.png',
+    iconSize: [42, 42], 
+    iconAnchor: [16, 32], 
+  });
+
   ngAfterViewInit(): void {
     let DefaultIcon = L.icon({
       iconUrl: 'https://unpkg.com/leaflet@1.6.0/dist/images/marker-icon.png',
@@ -94,7 +100,7 @@ export class MapComponent implements AfterViewInit {
       );
       if(this.facilitiesUsed){
         this.markerGroup.clearLayers();
-        const marker = new L.Marker([lat, lng]);
+        const marker = new L.Marker([lat, lng], { icon: this.facilityIcon });
         this.markerGroup.addLayer(marker);
         this.map.addLayer(this.markerGroup);
       }
@@ -141,7 +147,7 @@ export class MapComponent implements AfterViewInit {
     // Clear all previous markers on the map
     this.markerGroup.clearLayers();
 
-    const marker = new L.Marker([lat, lng]);
+    const marker = new L.Marker([lat, lng], { icon: this.facilityIcon });
     this.markerGroup.addLayer(marker);
     this.map.addLayer(this.markerGroup);
 
@@ -149,7 +155,7 @@ export class MapComponent implements AfterViewInit {
   }
 
   setMarkersForAllFacilities(lat: number, lng: number): void{
-    const marker = new L.Marker([lat, lng]);
+    const marker = new L.Marker([lat, lng], { icon: this.facilityIcon });
     this.markerGroup.addLayer(marker);
     this.map.addLayer(this.markerGroup);
 
