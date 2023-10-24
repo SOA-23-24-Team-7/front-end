@@ -1,0 +1,33 @@
+<form [formGroup]="reviewForm">
+    <div>
+        <mat-form-field>
+            <mat-label>Rating</mat-label>
+            <input matInput formControlName="rating" type="number" min="1" max="5"/>
+        </mat-form-field>
+        <mat-form-field>
+          <mat-label>Comment</mat-label>
+          <textarea matInput
+          cdkTextareaAutosize
+          cdkAutosizeMinRows="1"
+          formControlName="comment"
+          cdkAutosizeMaxRows="5"></textarea>
+        </mat-form-field>
+        <mat-form-field>
+            <mat-label>Tour visit date</mat-label>
+            <input matInput formControlName="tourVisitDate" type="date"/>
+        </mat-form-field>
+
+        <form *ngIf = "!shouldEdit" [formGroup] = "imagesForm">
+            <div>
+                <mat-form-field>
+                    <mat-label>Images</mat-label>
+                    <input matInput formControlName="image" type="text"/>
+                </mat-form-field>
+                <button mat-raised-button type="submit" color="accent" [disabled]="reviewExists" (click)="addImage()">Add image</button>
+           </div>
+        </form>
+
+        <button *ngIf = "!shouldEdit" mat-raised-button type="submit" color="primary" [disabled]="reviewExists" (click)="addReview()">Create</button>
+        <button *ngIf = "shouldEdit" mat-raised-button type="submit" color="primary" (click)="updateReview()">Update</button>
+    </div>
+</form>
