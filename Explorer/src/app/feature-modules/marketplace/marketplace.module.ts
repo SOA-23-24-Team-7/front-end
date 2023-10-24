@@ -1,10 +1,12 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { ReviewComponent } from './review/review.component';
-import { RouterModule } from '@angular/router';
-import { ReviewFormComponent } from './review-form/review-form.component';
+import { RatingFormComponent } from './rating-form/rating-form.component';
 import { MaterialModule } from 'src/app/infrastructure/material/material.module';
 import { ReactiveFormsModule } from '@angular/forms';
+import { RouterModule } from '@angular/router';
+import { HomeComponent } from '../layout/home/home.component';
+import { ReviewComponent } from './review/review.component';
+import { ReviewFormComponent } from './review-form/review-form.component';
 import { FormsModule } from '@angular/forms';
 import { ProblemComponent } from './problem/problem.component';
 import { ProblemFormComponent } from './problem-form/problem-form.component';
@@ -19,7 +21,8 @@ import { ReactiveFormsModule } from '@angular/forms';
     ReviewComponent,
     ReviewFormComponent,
     ProblemComponent,
-    ProblemFormComponent
+    ProblemFormComponent,
+    RatingFormComponent
   ],
   imports: [
     CommonModule,
@@ -31,6 +34,7 @@ import { ReactiveFormsModule } from '@angular/forms';
   exports: [
     ReviewComponent,
     ReactiveFormsModule,
+    RatingFormComponent,
     ProblemComponent
   ]
 })
