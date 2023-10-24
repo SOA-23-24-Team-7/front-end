@@ -1,0 +1,14 @@
+<div class="users">
+  <p>Users</p>
+  <hr />
+  <div class="container" *ngFor="let user of users">
+    <div class="user-data">
+      <div class="data">
+        <div>{{ user.username }}</div>
+      </div>
+      <div class="button">
+        <button (click)="disableAccount(user)">Block</button>
+      </div>
+    </div>
+  </div>
+</div>
