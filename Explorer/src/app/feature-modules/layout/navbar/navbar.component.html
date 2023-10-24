@@ -9,55 +9,88 @@
     </div>
     <div class="navbar-right">
         <div class="navbar-menu">
-
             <!-- HELP MENU -->
             <div class="navbar-menu-item">
                 <div class="navbar-menu-item-content">
-                    <fa-icon class="navbar-menu-item-content-icon" [class.color-white]="isHome" [icon]="faQuestionCircle"/>
+                    <fa-icon
+                        class="navbar-menu-item-content-icon"
+                        [class.color-white]="isHome"
+                        [icon]="faQuestionCircle"
+                    />
                     <div class="navbar-menu-item-content-text">Help</div>
-                    <fa-icon class="navbar-menu-item-content-arrow" [class.color-white]="isHome" [icon]="faChevronDown"/>
+                    <fa-icon
+                        class="navbar-menu-item-content-arrow"
+                        [class.color-white]="isHome"
+                        [icon]="faChevronDown"
+                    />
                 </div>
                 <div class="navbar-submenu">
                     <div
                         class="navbar-submenu-item navbar-submenu-item-border-radius-top"
                     >
-                        <fa-icon class="navbar-submenu-item-icon" [icon]="faQuestionCircle"/>
+                        <fa-icon
+                            class="navbar-submenu-item-icon"
+                            [icon]="faQuestionCircle"
+                        />
                         <div class="navbar-submenu-item-text">FAQ</div>
                     </div>
                     <div
                         class="navbar-submenu-item navbar-submenu-item-border-radius-bottom no-border"
                     >
-                        <fa-icon class="navbar-submenu-item-icon" [icon]="faPhone"/>
+                        <fa-icon
+                            class="navbar-submenu-item-icon"
+                            [icon]="faPhone"
+                        />
                         <div class="navbar-submenu-item-text">Contact us</div>
                     </div>
                 </div>
-                <div class="navbar-menu-item-selected-indicator" [class.background-color-white]="isHome"></div>
+                <div
+                    class="navbar-menu-item-selected-indicator"
+                    [class.background-color-white]="isHome"
+                ></div>
             </div>
 
             <!-- SETTINGS MENU -->
             <div class="navbar-menu-item">
                 <div class="navbar-menu-item-content">
-                    <fa-icon class="navbar-menu-item-content-icon" [class.color-white]="isHome" [icon]="faGear"/>
+                    <fa-icon
+                        class="navbar-menu-item-content-icon"
+                        [class.color-white]="isHome"
+                        [icon]="faGear"
+                    />
                     <div class="navbar-menu-item-content-text">Settings</div>
-                    <fa-icon class="navbar-menu-item-content-arrow" [class.color-white]="isHome" [icon]="faChevronDown"/>
+                    <fa-icon
+                        class="navbar-menu-item-content-arrow"
+                        [class.color-white]="isHome"
+                        [icon]="faChevronDown"
+                    />
                 </div>
                 <div class="navbar-submenu">
                     <div
                         class="navbar-submenu-item navbar-submenu-item-border-radius-top"
                     >
-                    <fa-icon class="navbar-submenu-item-icon" [icon]="faEuroSign"/>
+                        <fa-icon
+                            class="navbar-submenu-item-icon"
+                            [icon]="faEuroSign"
+                        />
                         <div class="navbar-submenu-item-text">Currency</div>
                     </div>
                     <div
                         class="navbar-submenu-item navbar-submenu-item-border-radius-top"
                     >
-                        <fa-icon class="navbar-submenu-item-icon" [icon]="faGlobe"/>
+                        <fa-icon
+                            class="navbar-submenu-item-icon"
+                            [icon]="faGlobe"
+                        />
                         <div class="navbar-submenu-item-text">Language</div>
                     </div>
                     <div
                         class="navbar-submenu-item navbar-submenu-item-border-radius-bottom no-border"
                     >
-                        <fa-icon class="navbar-submenu-item-icon" [icon]="faSun"/>
+                        <fa-icon
+                            class="navbar-submenu-item-icon"
+                            [icon]="faSun"
+                        />
                         <div class="navbar-submenu-item-text">Appearance:</div>
                         <div class="navbar-theme" (click)="toggleTheme()">
                             <div
@@ -69,41 +102,63 @@
                                     getTheme() === 'dark'
                                 "
                             ></div>
-                            <fa-icon class="navbar-theme-sun" [icon]="faSun"/>
-                            <fa-icon class="navbar-theme-moon" [icon]="faMoon"/>
+                            <fa-icon class="navbar-theme-sun" [icon]="faSun" />
+                            <fa-icon
+                                class="navbar-theme-moon"
+                                [icon]="faMoon"
+                            />
                         </div>
                     </div>
                 </div>
-                <div class="navbar-menu-item-selected-indicator" [class.background-color-white]="isHome"></div>
+                <div
+                    class="navbar-menu-item-selected-indicator"
+                    [class.background-color-white]="isHome"
+                ></div>
             </div>
 
             <!-- USER MENU -->
             <div class="navbar-menu-item" *ngIf="user && user.username !== ''">
                 <div class="navbar-menu-item-content">
-                    <fa-icon class="navbar-menu-item-content-icon" [class.color-white]="isHome" [icon]="faUser"/>
+                    <fa-icon
+                        class="navbar-menu-item-content-icon"
+                        [class.color-white]="isHome"
+                        [icon]="faUser"
+                    />
                     <div class="navbar-menu-item-content-text">
                         {{ user.username }}
                     </div>
-                    <fa-icon class="navbar-menu-item-content-arrow" [class.color-white]="isHome" [icon]="faChevronDown"/>
+                    <fa-icon
+                        class="navbar-menu-item-content-arrow"
+                        [class.color-white]="isHome"
+                        [icon]="faChevronDown"
+                    />
                 </div>
                 <div class="navbar-submenu">
                     <div
                         class="navbar-submenu-item navbar-submenu-item-border-radius-top"
                     >
-                        <fa-icon class="navbar-submenu-item-icon" [icon]="faUser"/>
+                        <fa-icon
+                            class="navbar-submenu-item-icon"
+                            [icon]="faUser"
+                        />
                         <div class="navbar-submenu-item-text">Account</div>
                     </div>
                     <div
                         class="navbar-submenu-item navbar-submenu-item-border-radius-bottom no-border"
                         (click)="onLogout()"
                     >
-                        <fa-icon class="navbar-submenu-item-icon" [icon]="faRightFromBracket"/>
+                        <fa-icon
+                            class="navbar-submenu-item-icon"
+                            [icon]="faRightFromBracket"
+                        />
                         <div class="navbar-submenu-item-text">Logout</div>
                     </div>
                 </div>
-                <div class="navbar-menu-item-selected-indicator" [class.background-color-white]="isHome"></div>
+                <div
+                    class="navbar-menu-item-selected-indicator"
+                    [class.background-color-white]="isHome"
+                ></div>
             </div>
-
         </div>
         <div class="navbar-button-panel" *ngIf="user && user.username === ''">
             <div class="navbar-log-in-button" (click)="onLogin()">
