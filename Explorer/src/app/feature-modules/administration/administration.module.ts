@@ -4,17 +4,15 @@ import { EquipmentFormComponent } from './equipment-form/equipment-form.componen
 import { EquipmentComponent } from './equipment/equipment.component';
 import { MaterialModule } from 'src/app/infrastructure/material/material.module';
 import { ReactiveFormsModule } from '@angular/forms';
+import { UsersOverviewComponent } from './users-overview/users-overview.component';
 import { RatingComponent } from './rating/rating.component';
 import { ProblemViewComponent } from './problem-view/problem-view.component';
-
-
 
 @NgModule({
   declarations: [
     EquipmentFormComponent,
     EquipmentComponent,
-    RatingComponent
-    ProblemViewComponent
+    UsersOverviewComponent,
   ],
   imports: [
     CommonModule,
@@ -24,7 +22,9 @@ import { ProblemViewComponent } from './problem-view/problem-view.component';
   exports: [
     EquipmentComponent,
     EquipmentFormComponent,
-    RatingComponent
+    RatingComponent,
+    UsersOverviewComponent,
+    ProblemViewComponent
   ]
 })
-export class AdministrationModule { }
+export class AdministrationModule {}

@@ -5,6 +5,7 @@ import { LoginComponent } from '../auth/login/login.component';
 import { EquipmentComponent } from 'src/app/feature-modules/administration/equipment/equipment.component';
 import { AuthGuard } from '../auth/auth.guard';
 import { RegistrationComponent } from '../auth/registration/registration.component';
+import { UsersOverviewComponent } from 'src/app/feature-modules/administration/users-overview/users-overview.component';
 import { RatingComponent } from 'src/app/feature-modules/administration/rating/rating.component';
 import { RatingFormComponent } from 'src/app/feature-modules/marketplace/rating-form/rating-form.component';
 import { ReviewComponent } from 'src/app/feature-modules/marketplace/review/review.component';
@@ -25,10 +26,11 @@ const routes: Routes = [
   {path: 'problems', component: ProblemViewComponent, canActivate: [AuthGuard],},
   {path: 'tours', component: TourComponent, canActivate: [AuthGuard],},
   {path: 'tours/equipment/:id', component: TourEquipmentFormComponent, canActivate: [AuthGuard],}
+  {path: 'usersOverview',component: UsersOverviewComponent,canActivate: [AuthGuard],},
 ];
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],
-  exports: [RouterModule]
+  exports: [RouterModule],
 })
-export class AppRoutingModule { }
+export class AppRoutingModule {}
