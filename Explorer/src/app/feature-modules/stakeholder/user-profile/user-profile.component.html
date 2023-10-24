@@ -1,0 +1,19 @@
+<mat-card class="profile-card">
+  <div class="profile-container">
+    <div class="profile-info">
+      <img
+        [src]="person.profilePicture"
+        alt="Profile Picture"
+        mat-card-image
+      />
+      <div class="info-container">
+        <h2>{{ person.name }} {{ person.surname }}</h2>
+        <p>Username: {{ user.username }}</p>
+        <p>Email: {{ person.email }}</p>
+        <p>Biography: {{ person.bio }}</p>
+        <p>Motto: {{ person.moto }}</p>
+        <button (click)="toggleEditing()" mat-button>Edit</button>
+      </div>
+    </div>
+  </div>
+</mat-card>
