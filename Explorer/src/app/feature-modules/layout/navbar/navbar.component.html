@@ -6,7 +6,10 @@
             <button *ngIf="user && user.username !== ''" color="accent" mat-raised-button (click)="onLogout()">Logout</button>
             <button color="primary" mat-raised-button [routerLink]="['home']">Home</button>
             <button *ngIf="user && user.role === 'administrator'"color="primary" mat-raised-button [routerLink]="['equipment']">Manage equipment</button>
+            <button *ngIf="user && user.role === 'tourist'"color="primary" mat-raised-button [routerLink]="['problem']">Manage problem</button>
+            <button *ngIf="user && user.role === 'administrator'"color="primary" mat-raised-button [routerLink]="['problems']">List of problems</button>
             <button *ngIf="user && user.role === 'author'"color="primary" mat-raised-button [routerLink]="['tours']">My Tours</button>
+
         </div>
     </div>
 </mat-toolbar>
