@@ -137,7 +137,7 @@
     align-items: center;
     height: 3.125rem;
     min-width: 100%;
-    border-bottom: rgba(var(--clr-neutral-300), 1) 1px solid;
+    border-bottom: rgba(var(--clr-background-secondary), 1) 1px solid;
     transition: background-color 0.15s;
 }
 
