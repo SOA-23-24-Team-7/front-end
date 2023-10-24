@@ -10,6 +10,7 @@ import { FooterComponent } from "./footer/footer.component";
 import { HomeTabsComponent } from "./home-tabs/home-tabs.component";
 import { FontAwesomeModule } from "@fortawesome/angular-fontawesome";
 import { ClubCardsComponent } from "./club-cards/club-cards.component";
+import { MatDialogModule } from '@angular/material/dialog';
 
 @NgModule({
     declarations: [
@@ -21,7 +22,7 @@ import { ClubCardsComponent } from "./club-cards/club-cards.component";
         HomeTabsComponent,
         ClubCardsComponent,
     ],
-    imports: [CommonModule, MaterialModule, RouterModule, FontAwesomeModule],
+    imports: [CommonModule, MaterialModule, RouterModule, FontAwesomeModule, MatDialogModule],
     exports: [NavbarComponent, HomeComponent],
 })
 export class LayoutModule {}

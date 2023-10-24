@@ -9,105 +9,55 @@
     </div>
     <div class="navbar-right">
         <div class="navbar-menu">
+
             <!-- HELP MENU -->
             <div class="navbar-menu-item">
                 <div class="navbar-menu-item-content">
-                    <img
-                        class="navbar-menu-item-content-icon"
-                        [src]="
-                            '/assets/icons/help-' +
-                            (isHome === false ? getTheme() : 'dark') +
-                            '.svg'
-                        "
-                    />
+                    <fa-icon class="navbar-menu-item-content-icon" [class.color-white]="isHome" [icon]="faQuestionCircle"/>
                     <div class="navbar-menu-item-content-text">Help</div>
-                    <img
-                        class="navbar-menu-item-content-arrow"
-                        [src]="
-                            '/assets/icons/arrow-down-' +
-                            (isHome === false ? getTheme() : 'dark') +
-                            '.svg'
-                        "
-                    />
+                    <fa-icon class="navbar-menu-item-content-arrow" [class.color-white]="isHome" [icon]="faChevronDown"/>
                 </div>
                 <div class="navbar-submenu">
                     <div
                         class="navbar-submenu-item navbar-submenu-item-border-radius-top"
                     >
-                        <img
-                            class="navbar-submenu-item-icon"
-                            [src]="
-                                '/assets/icons/contact-' + getTheme() + '.svg'
-                            "
-                        />
-                        <div class="navbar-submenu-item-text">Contact us</div>
+                        <fa-icon class="navbar-submenu-item-icon" [icon]="faQuestionCircle"/>
+                        <div class="navbar-submenu-item-text">FAQ</div>
                     </div>
                     <div
                         class="navbar-submenu-item navbar-submenu-item-border-radius-bottom no-border"
                     >
-                        <img
-                            class="navbar-submenu-item-icon"
-                            [src]="'/assets/icons/help-' + getTheme() + '.svg'"
-                        />
-                        <div class="navbar-submenu-item-text">
-                            FAQ (Frequently asked questions)
-                        </div>
+                        <fa-icon class="navbar-submenu-item-icon" [icon]="faPhone"/>
+                        <div class="navbar-submenu-item-text">Contact us</div>
                     </div>
                 </div>
-                <div class="navbar-menu-item-selected-indicator"></div>
+                <div class="navbar-menu-item-selected-indicator" [class.background-color-white]="isHome"></div>
             </div>
 
             <!-- SETTINGS MENU -->
             <div class="navbar-menu-item">
                 <div class="navbar-menu-item-content">
-                    <img
-                        class="navbar-menu-item-content-icon"
-                        [src]="
-                            '/assets/icons/settings-' +
-                            (isHome === false ? getTheme() : 'dark') +
-                            '.svg'
-                        "
-                    />
+                    <fa-icon class="navbar-menu-item-content-icon" [class.color-white]="isHome" [icon]="faGear"/>
                     <div class="navbar-menu-item-content-text">Settings</div>
-                    <img
-                        class="navbar-menu-item-content-arrow"
-                        [src]="
-                            '/assets/icons/arrow-down-' +
-                            (isHome === false ? getTheme() : 'dark') +
-                            '.svg'
-                        "
-                    />
+                    <fa-icon class="navbar-menu-item-content-arrow" [class.color-white]="isHome" [icon]="faChevronDown"/>
                 </div>
                 <div class="navbar-submenu">
                     <div
                         class="navbar-submenu-item navbar-submenu-item-border-radius-top"
                     >
-                        <img
-                            class="navbar-submenu-item-icon"
-                            [src]="
-                                '/assets/icons/currency-' + getTheme() + '.svg'
-                            "
-                        />
+                    <fa-icon class="navbar-submenu-item-icon" [icon]="faEuroSign"/>
                         <div class="navbar-submenu-item-text">Currency</div>
                     </div>
                     <div
                         class="navbar-submenu-item navbar-submenu-item-border-radius-top"
                     >
-                        <img
-                            class="navbar-submenu-item-icon"
-                            [src]="
-                                '/assets/icons/language-' + getTheme() + '.svg'
-                            "
-                        />
+                        <fa-icon class="navbar-submenu-item-icon" [icon]="faGlobe"/>
                         <div class="navbar-submenu-item-text">Language</div>
                     </div>
                     <div
                         class="navbar-submenu-item navbar-submenu-item-border-radius-bottom no-border"
                     >
-                        <img
-                            class="navbar-submenu-item-icon"
-                            [src]="'/assets/icons/sun-' + getTheme() + '.svg'"
-                        />
+                        <fa-icon class="navbar-submenu-item-icon" [icon]="faSun"/>
                         <div class="navbar-submenu-item-text">Appearance:</div>
                         <div class="navbar-theme" (click)="toggleTheme()">
                             <div
@@ -119,68 +69,47 @@
                                     getTheme() === 'dark'
                                 "
                             ></div>
-                            <img
-                                class="navbar-theme-sun"
-                                [src]="'/assets/icons/sun-dark.svg'"
-                            />
-                            <img
-                                class="navbar-theme-moon"
-                                [src]="'/assets/icons/moon-dark.svg'"
-                            />
+                            <fa-icon class="navbar-theme-sun" [icon]="faSun"/>
+                            <fa-icon class="navbar-theme-moon" [icon]="faMoon"/>
                         </div>
                     </div>
                 </div>
-                <div class="navbar-menu-item-selected-indicator"></div>
+                <div class="navbar-menu-item-selected-indicator" [class.background-color-white]="isHome"></div>
             </div>
 
             <!-- USER MENU -->
             <div class="navbar-menu-item" *ngIf="user && user.username !== ''">
                 <div class="navbar-menu-item-content">
-                    <img
-                        class="navbar-menu-item-content-icon"
-                        [src]="'/assets/icons/user-' + getTheme() + '.svg'"
-                    />
+                    <fa-icon class="navbar-menu-item-content-icon" [class.color-white]="isHome" [icon]="faUser"/>
                     <div class="navbar-menu-item-content-text">
                         {{ user.username }}
                     </div>
-                    <img
-                        class="navbar-menu-item-content-arrow"
-                        [src]="
-                            '/assets/icons/arrow-down-' + getTheme() + '.svg'
-                        "
-                    />
+                    <fa-icon class="navbar-menu-item-content-arrow" [class.color-white]="isHome" [icon]="faChevronDown"/>
                 </div>
                 <div class="navbar-submenu">
                     <div
                         class="navbar-submenu-item navbar-submenu-item-border-radius-top"
                     >
-                        <img
-                            class="navbar-submenu-item-icon"
-                            [src]="'/assets/icons/user-' + getTheme() + '.svg'"
-                        />
+                        <fa-icon class="navbar-submenu-item-icon" [icon]="faUser"/>
                         <div class="navbar-submenu-item-text">Account</div>
                     </div>
                     <div
                         class="navbar-submenu-item navbar-submenu-item-border-radius-bottom no-border"
                         (click)="onLogout()"
                     >
-                        <img
-                            class="navbar-submenu-item-icon"
-                            [src]="
-                                '/assets/icons/log-out-' + getTheme() + '.svg'
-                            "
-                        />
-                        <div class="navbar-submenu-item-text">Log out</div>
+                        <fa-icon class="navbar-submenu-item-icon" [icon]="faRightFromBracket"/>
+                        <div class="navbar-submenu-item-text">Logout</div>
                     </div>
                 </div>
-                <div class="navbar-menu-item-selected-indicator"></div>
+                <div class="navbar-menu-item-selected-indicator" [class.background-color-white]="isHome"></div>
             </div>
+
         </div>
         <div class="navbar-button-panel" *ngIf="user && user.username === ''">
-            <div class="navbar-log-in-button" [routerLink]="['login']">
-                <div class="navbar-log-in-button-text">Log in</div>
+            <div class="navbar-log-in-button" (click)="onLogin()">
+                <div class="navbar-log-in-button-text">Login</div>
             </div>
-            <div class="navbar-register-button" [routerLink]="['register']">
+            <div class="navbar-register-button" (click)="onRegister()">
                 <div class="navbar-register-button-text">Register</div>
             </div>
         </div>

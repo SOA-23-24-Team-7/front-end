@@ -9,8 +9,6 @@ import { RegistrationComponent } from "../auth/registration/registration.compone
 const routes: Routes = [
     { path: "", component: HomeComponent },
     { path: "home", redirectTo: "", pathMatch: "full" },
-    { path: "login", component: LoginComponent },
-    { path: "register", component: RegistrationComponent },
     {
         path: "equipment",
         component: EquipmentComponent,
