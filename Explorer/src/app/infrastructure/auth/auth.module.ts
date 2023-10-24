@@ -4,6 +4,8 @@ import { LoginComponent } from './login/login.component';
 import { MaterialModule } from '../material/material.module';
 import { ReactiveFormsModule } from '@angular/forms';
 import { RegistrationComponent } from './registration/registration.component';
+import { FontAwesomeModule } from "@fortawesome/angular-fontawesome";
+import { MatDialogModule } from '@angular/material/dialog';
 
 
 
@@ -15,7 +17,9 @@ import { RegistrationComponent } from './registration/registration.component';
   imports: [
     CommonModule,
     MaterialModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    FontAwesomeModule,
+    MatDialogModule
   ],
   exports: [
     LoginComponent
