@@ -25,10 +25,16 @@
                             Explore
                         </div>
                     </div>
-                    <div class="navbar-submenu-item navbar-submenu-item-border-radius-bottom no-border" [routerLink]="['ownerclubs']">
+                    <div class="navbar-submenu-item navbar-submenu-item-border-radius-top" [routerLink]="['ownerclubs']">
                         <img class="navbar-submenu-item-icon" [src]="'/assets/icons/help-' + getTheme() + '.svg'"/>
                         <div class="navbar-submenu-item-text">
                             My clubs
+                        </div>
+                    </div>
+                    <div class="navbar-submenu-item navbar-submenu-item-border-radius-bottom no-border" [routerLink]="['my-club-invitations']">
+                        <img class="navbar-submenu-item-icon" [src]="'/assets/icons/help-' + getTheme() + '.svg'"/>
+                        <div class="navbar-submenu-item-text">
+                            My club invitations
                         </div>
                     </div>
                 </div> 

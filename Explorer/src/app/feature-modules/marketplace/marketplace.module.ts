@@ -10,6 +10,7 @@ import { MyClubJoinRequestsComponent } from './my-club-join-requests/my-club-joi
 import { ClubJoinRequestManagementComponent } from './club-join-request-management/club-join-request-management.component';
 import { ClubMembersManagementComponent } from './club-members-management/club-members-management.component';
 import { ClubMembersInviteFormComponent } from './club-members-invite-form/club-members-invite-form.component';
+import { MyClubInvitationsComponent } from './my-club-invitations/my-club-invitations.component';
 
 @NgModule({
   declarations: [
@@ -19,7 +20,8 @@ import { ClubMembersInviteFormComponent } from './club-members-invite-form/club-
     MyClubJoinRequestsComponent,
     ClubJoinRequestManagementComponent,
     ClubMembersManagementComponent,
-    ClubMembersInviteFormComponent
+    ClubMembersInviteFormComponent,
+    MyClubInvitationsComponent
   ],
   imports: [
     CommonModule,

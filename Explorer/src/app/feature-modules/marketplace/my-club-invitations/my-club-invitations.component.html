@@ -1,0 +1,34 @@
+<div id="my-club-invitations">
+    <p>My club invitations</p>
+    <hr>
+    <div id="club-invitation-details">
+        <div>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Club name</th>
+                        <th>Owner username</th>
+                        <th></th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let invitation of invitations">
+                        <td>{{invitation.clubName}}</td>
+                        <td>{{invitation.ownerUsername}}</td>
+                        <td>
+                            <button color="primary" mat-button (click)="acceptInvite(invitation)">
+                                Accept
+                            </button>
+                        </td>
+                        <td>
+                            <button color="primary" mat-button (click)="rejectInvite(invitation)">
+                                Reject
+                            </button>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
