@@ -1,6 +1,6 @@
 import { AfterViewInit, Component, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges } from '@angular/core';
 import * as L from 'leaflet';
-import { MapService } from './map.service';
+import { MapService } from '../map/map.service'
 import { KeyPoint } from 'src/app/feature-modules/tour-authoring/model/key-point.model';
 import { Observable, Subscription } from 'rxjs';
 

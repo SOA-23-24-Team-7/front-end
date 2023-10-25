@@ -8,8 +8,12 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { KeyPointFormComponent } from './key-point-form/key-point-form.component';
 import { MatButtonModule } from '@angular/material/button';
 import { MatCardModule } from '@angular/material/card';
-import {RouterModule} from '@angular/router';
+import { FacilitiesComponent } from './facilities/facilities.component';
+import { FacilitiesFormComponent } from './facilities-form/facilities-form.component';
+import { MatSelectModule } from '@angular/material/select';
+import { RouterModule } from '@angular/router';
 import { SharedModule } from 'src/app/shared/shared.module';
+
 
 @NgModule({
   declarations: [
@@ -17,8 +21,17 @@ import { SharedModule } from 'src/app/shared/shared.module';
     TourFormComponent,
     KeyPointsComponent,
     KeyPointFormComponent,
+    FacilitiesFormComponent,
+    FacilitiesComponent,
   ],
-  imports: [CommonModule, MaterialModule, ReactiveFormsModule, RouterModule, SharedModule],
+  imports: [
+    CommonModule, 
+    MaterialModule, 
+    ReactiveFormsModule,
+    MatSelectModule,
+    RouterModule,
+    SharedModule,
+  ],
   exports: [
     TourComponent,
     TourFormComponent,
@@ -26,6 +39,8 @@ import { SharedModule } from 'src/app/shared/shared.module';
     MatButtonModule,
     KeyPointsComponent,
     KeyPointFormComponent,
+    FacilitiesComponent,
+    FacilitiesFormComponent,
   ],
 })
 export class TourAuthoringModule {}

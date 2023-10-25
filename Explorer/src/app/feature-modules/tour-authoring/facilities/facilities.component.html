@@ -1,0 +1,58 @@
+<div id="facilities">
+  <hr>
+  <p>Facilities</p>
+  <hr>
+  <div id="facilities-details">
+    <div>
+    <table>
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th>Description</th>
+          <th>Category</th>
+          <th>Image</th>
+          <th></th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let f of facilities" (click)="onTableRowClicked(f)" [class.selected-row]="selectedFacility === f">
+          <td>{{f.name}}</td>
+          <td>{{f.description}}</td>
+          <td *ngIf="f.category == 0">Restaurant</td>
+          <td *ngIf="f.category == 1">Parking Lot</td>
+          <td *ngIf="f.category == 2">Toilet</td>
+          <td *ngIf="f.category == 3">Hospital</td>
+          <td *ngIf="f.category == 4">Cafe</td>
+          <td *ngIf="f.category == 5">Pharmacy</td>
+          <td *ngIf="f.category == 6">Exchange Office</td>
+          <td *ngIf="f.category == 7">Bus Stop</td>
+          <td *ngIf="f.category == 8">Shop</td>
+          <td *ngIf="f.category == 9">Other</td>
+          <td>
+            <img [src]="f.imagePath" alt="Facility Image" width="100" height="100">
+          </td>
+          <td>
+            <button (click)="onDeleteClicked(f)" color="accent" mat-icon-button>
+              <mat-icon>delete</mat-icon>
+            </button>
+            <button (click)="onEditClicked(f)" color="primary" mat-icon-button>
+              <mat-icon>edit</mat-icon>
+            </button>
+          </td>
+        </tr>
+        <tr>
+            <button (click)="onAddClicked()" color="primary" mat-icon-button>
+              <mat-icon>add</mat-icon>
+            </button>
+        </tr>
+      </tbody>
+    </table>
+    </div>
+    <div>
+      <xp-facilities-form *ngIf="shouldRenderFacilitiesForm" (facilitesUpdated)="getFacilities()" [facility]="selectedFacility" [shouldEdit]="shouldEdit"></xp-facilities-form>
+      <hr>
+      <button id="closeButton" *ngIf="shouldRenderFacilitiesForm" (click)="onCloseClicked()" color="primary" mat-raised-button>Close</button>
+    </div>
+    <xp-map (click)="onMapClicked()"></xp-map>
+  </div>
+</div>

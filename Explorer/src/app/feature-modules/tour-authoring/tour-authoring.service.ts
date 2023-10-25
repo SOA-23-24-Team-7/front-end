@@ -5,6 +5,7 @@ import { Tour } from './model/tour.model';
 import { Observable } from 'rxjs';
 import { environment } from 'src/env/environment';
 import { KeyPoint } from './model/key-point.model';
+import { Facilities } from './model/facilities.model';
 
 @Injectable({
   providedIn: 'root',
@@ -63,5 +64,25 @@ export class TourAuthoringService {
     return this.http.post(environment.apiHost + 'images', formData, {
       responseType: 'text',
     });
+  }
+
+  getFacilities(): Observable<PagedResults<Facilities>>{
+    return this.http.get<PagedResults<Facilities>>(environment.apiHost + 'facility');
+  }
+
+  getAuthorsFacilities(): Observable<PagedResults<Facilities>>{
+    return this.http.get<PagedResults<Facilities>>(environment.apiHost + 'facility/authorsFacilities');
+  }
+
+  addFacility(facility: Facilities): Observable<Facilities> {
+    return this.http.post<Facilities>(environment.apiHost + 'facility', facility);
+  }
+
+  updateFacility(facility: Facilities): Observable<Facilities>{
+    return this.http.put<Facilities>(environment.apiHost + 'facility/' + facility.id, facility);
+  } 
+
+  deleteFacility(facility: Facilities): Observable<Facilities>{
+    return this.http.delete<Facilities>(environment.apiHost + 'facility/' + facility.id);
   }
 }
