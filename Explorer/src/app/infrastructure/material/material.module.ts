@@ -15,6 +15,7 @@ import { MatInput, MatInputModule } from '@angular/material/input';
 import { MatTable, MatTableModule } from '@angular/material/table';
 import { MatIcon, MatIconModule } from '@angular/material/icon';
 import {MatCardModule} from '@angular/material/card';
+import { MatSnackBarModule } from '@angular/material/snack-bar';
 
 @NgModule({
   declarations: [],
@@ -26,6 +27,7 @@ import {MatCardModule} from '@angular/material/card';
     MatInputModule,
     MatTableModule,
     MatIconModule,
+    MatSnackBarModule,
     MatCardModule,
     MatFormFieldModule,
   ],
