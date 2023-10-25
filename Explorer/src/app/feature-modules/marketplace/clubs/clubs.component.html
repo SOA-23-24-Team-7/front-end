@@ -1,8 +1,4 @@
 <div id="club">
-    <br>
-    <br>
-    <br>
-    <br>
     <p>Clubs</p>
     <hr>
     <div id="club-details">
@@ -25,6 +21,11 @@
                     <td>
                         <button color="primary" mat-icon-button (click)="toggleShowImage(club.image)">
                             <mat-icon>image</mat-icon>
+                        </button>
+                    </td>
+                    <td>
+                        <button *ngIf="user.id != club.ownerId" color="primary" mat-button (click)="sendJoinRequest(club.id !== undefined ? club.id : 0)">
+                            Send join request 
                         </button>
                     </td>
                 </tr>

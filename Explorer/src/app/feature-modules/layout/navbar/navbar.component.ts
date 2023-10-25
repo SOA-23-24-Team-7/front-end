@@ -3,7 +3,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { AuthService } from "src/app/infrastructure/auth/auth.service";
 import { User } from "src/app/infrastructure/auth/model/user.model";
 import { ThemeService } from "../../../infrastructure/theme/theme.service";
-import { NavigationStart, Router } from "@angular/router";
+import { NavigationStart, NavigationEnd, Router } from "@angular/router";
 import { LoginComponent } from "src/app/infrastructure/auth/login/login.component";
 import { RegistrationComponent } from "src/app/infrastructure/auth/registration/registration.component";
 import { 
@@ -16,7 +16,18 @@ import {
     faGlobe,
     faEuroSign,
     faUser,
-    faRightFromBracket
+    faRightFromBracket,
+    faMountainCity,
+    faTriangleExclamation,
+    faStar,
+    faHotel,
+    faNewspaper,
+    faSearch,
+    faHeart,
+    faShield,
+    faPersonHiking,
+    faUsers,
+    faEnvelope
 } from "@fortawesome/free-solid-svg-icons";
 //import { } from "@fortawesome/free-regular-svg-icons";
 
@@ -37,10 +48,12 @@ export class NavbarComponent implements OnInit {
     ) {
         this.router.events.subscribe(event => {
             if (event instanceof NavigationStart) {
-                if (event.url !== "" && this.isHome) {
+                if ((event.url !== "" && event.url !== "/")) {
                     this.isHome = false;
-                } else if (!this.isHome) {
+                    console.log("not home")
+                } else  {
                     this.isHome = true;
+                    console.log("home")
                 }
             }
         });
@@ -62,6 +75,7 @@ export class NavbarComponent implements OnInit {
 
     onLogout(): void {
         this.authService.logout();
+        this.router.navigate(['']);
     }
 
     toggleTheme() {
@@ -82,4 +96,35 @@ export class NavbarComponent implements OnInit {
     faEuroSign = faEuroSign;
     faUser = faUser;
     faRightFromBracket = faRightFromBracket;
+    faMountainCity = faMountainCity;
+    faTriangleExclamation = faTriangleExclamation;
+    faStar = faStar;
+    faHotel = faHotel;
+    faNewspaper = faNewspaper;
+    faSearch = faSearch;
+    faHeart = faHeart;
+    faShield = faShield;
+    faPersonHiking = faPersonHiking;
+    faUsers = faUsers;
+    faEnvelope = faEnvelope;
 }
+
+
+/*
+    1 Dokma
+    2 Anja
+    3 Nina
+    4 Ivana
+    5 Filip
+    6 Milos
+    7 Bosko
+    8 Ceki
+    9 Ivan
+    10 Veljko
+    11? Marko
+    12x Jelena
+    13x Velimir
+    14 Gagi
+    15? Uros
+    16 Krle
+*/

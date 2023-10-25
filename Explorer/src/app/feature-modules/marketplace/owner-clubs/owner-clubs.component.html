@@ -1,8 +1,4 @@
 <div id="club">
-    <br>
-    <br>
-    <br>
-    <br>
     <p>My clubs</p>
     <hr>
     <div id="club-details">
@@ -13,6 +9,7 @@
                     <th>Name</th>
                     <th>Description</th>
                     <th>Image</th>
+                    <th></th>
                     <th></th>
                 </tr>
             </thead>
@@ -31,6 +28,9 @@
                         </button>
                     </td>
                     <td>
+                        <button color="primary" mat-button [routerLink]="['/club-join-request-management', club.id]">
+                            Manage join requests
+                        </button>
                         <button color="primary" (click)="onDeleteClicked(club.id)">
                             <mat-icon>delete</mat-icon>
                         </button>
