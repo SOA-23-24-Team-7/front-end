@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import { ClubInvitationWithClubAndOwnerName } from '../model/club-invitation-with-club-and-owner-name.model';
-import { User } from 'src/app/infrastructure/auth/model/user.model';
 import { MarketplaceService } from '../marketplace.service';
-import { AuthService } from 'src/app/infrastructure/auth/auth.service';
 import { PagedResults } from 'src/app/shared/model/paged-results.model';
+import { AuthService } from 'src/app/infrastructure/auth/auth.service';
+import { User } from 'src/app/infrastructure/auth/model/user.model';
+import { ClubInvitationWithClubAndOwnerName } from '../model/club-invitation-with-club-and-owner-name.model';
 
 @Component({
   selector: 'xp-my-club-invitations',
@@ -12,8 +12,9 @@ import { PagedResults } from 'src/app/shared/model/paged-results.model';
 })
 export class MyClubInvitationsComponent implements OnInit {
 
-  invitations: ClubInvitationWithClubAndOwnerName[];
+  invitations: ClubInvitationWithClubAndOwnerName[] = [];
   user: User;
+  nums: number[] = [1, 2, 3];
 
   constructor(private service: MarketplaceService, private authService: AuthService) {}
   

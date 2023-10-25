@@ -14,6 +14,9 @@ import { ReviewFormComponent } from "./review-form/review-form.component";
 import { FormsModule } from "@angular/forms";
 import { ProblemComponent } from "./problem/problem.component";
 import { ProblemFormComponent } from "./problem-form/problem-form.component";
+import { ClubMembersInviteFormComponent } from "./club-members-invite-form/club-members-invite-form.component";
+import { ClubMembersManagementComponent } from "./club-members-management/club-members-management.component";
+import { MyClubInvitationsComponent } from './my-club-invitations/my-club-invitations.component';
 
 @NgModule({
     declarations: [
@@ -29,7 +32,10 @@ import { ProblemFormComponent } from "./problem-form/problem-form.component";
         RatingFormComponent,
         ClubFormComponent,
         ClubsComponent,
-        OwnerClubsComponent
+        OwnerClubsComponent,
+        ClubMembersInviteFormComponent,
+        ClubMembersManagementComponent,
+        MyClubInvitationsComponent
     ],
     imports: [
         CommonModule,

@@ -23,6 +23,7 @@ import { TouristEquipmentSelectionComponent } from 'src/app/feature-modules/layo
 import { ClubMembersManagementComponent } from "src/app/feature-modules/marketplace/club-members-management/club-members-management.component";
 import { FacilitiesComponent } from "src/app/feature-modules/tour-authoring/facilities/facilities.component";
 import { KeyPointsComponent } from "src/app/feature-modules/tour-authoring/key-points/key-points.component";
+import { MyClubInvitationsComponent } from "src/app/feature-modules/marketplace/my-club-invitations/my-club-invitations.component";
 
 const routes: Routes = [
     { path: "", component: HomeComponent },
@@ -103,12 +104,17 @@ const routes: Routes = [
         canActivate: [AuthGuard],
     },
     {
-        path: 'club-members-management',
+        path: 'club-members-management/:clubId',
         component: ClubMembersManagementComponent,
         canActivate: [AuthGuard],
     },
     {
         path: 'my-club-invitations',
+        component: MyClubInvitationsComponent,
+        canActivate: [AuthGuard],
+    },
+    {
+        path: 'club-members-invite-form',
         component: ClubMembersManagementComponent,
         canActivate: [AuthGuard],
     },
