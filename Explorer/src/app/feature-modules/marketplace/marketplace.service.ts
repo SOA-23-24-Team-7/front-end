@@ -1,8 +1,5 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { environment } from 'src/env/environment';
-import { Observable } from 'rxjs';
-import { PagedResults } from 'src/app/shared/model/paged-results.model';
 import { Club } from './model/club.model';
 import { Rating } from '../administration/model/rating.model';
 import { Observable } from 'rxjs';
@@ -80,5 +77,4 @@ export class MarketplaceService {
   getProblemByUserId(id: number): Observable<PagedResults<Problem>> {
     return this.http.get<PagedResults<Problem>>(environment.apiHost + 'problem/' + id);
   }
-  
 }
