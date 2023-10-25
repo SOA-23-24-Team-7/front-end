@@ -1,0 +1,11 @@
+<div class="tour-cards-container">
+    <div class="list-cards-button" id="prev-button">
+        <div class="triangle-left"></div>
+    </div>
+
+    <xp-tour-card *ngFor="let tour of toursList" [tour]="tour"></xp-tour-card>
+
+    <div class="list-cards-button" id="next-button">
+        <div class="triangle-right"></div>
+    </div>
+</div>

@@ -5,8 +5,11 @@ import { LoginComponent } from "../auth/login/login.component";
 import { EquipmentComponent } from "src/app/feature-modules/administration/equipment/equipment.component";
 import { AuthGuard } from "../auth/auth.guard";
 import { RegistrationComponent } from "../auth/registration/registration.component";
+import { BlogsComponent } from "src/app/feature-modules/blog/blogs/blogs.component";
+import { BlogComponent } from "src/app/feature-modules/blog/blog/blog.component";
 import { UsersOverviewComponent } from "src/app/feature-modules/administration/users-overview/users-overview.component";
 import {UserProfileComponent} from 'src/app/feature-modules/stakeholder/user-profile/user-profile.component';
+import { UserProfileComponent } from "src/app/feature-modules/stakeholder/user-profile/user-profile.component";
 import { RatingComponent } from "src/app/feature-modules/administration/rating/rating.component";
 import { RatingFormComponent } from "src/app/feature-modules/marketplace/rating-form/rating-form.component";
 import { ReviewComponent } from "src/app/feature-modules/marketplace/review/review.component";
@@ -23,6 +26,8 @@ const routes: Routes = [
     { path: "home", component: HomeComponent },
     { path: "login", component: LoginComponent },
     { path: "register", component: RegistrationComponent },
+    { path: "", component: HomeComponent },
+    { path: "home", redirectTo: "", pathMatch: "full" },
     {
         path: "equipment",
         component: EquipmentComponent,
@@ -55,6 +60,13 @@ const routes: Routes = [
     {path: 'edit-profile', component: EditProfileComponent, canActivate: [AuthGuard],},
     {path: 'ownerclubs', component: OwnerClubsComponent, canActivate: [AuthGuard]},
     {path: 'clubs', component: ClubsComponent, canActivate: [AuthGuard]}
+    { path: "blogs", component: BlogsComponent },
+    { path: "blog/:blogId", component: BlogComponent },
+    {
+        path: "edit-profile",
+        component: EditProfileComponent,
+        canActivate: [AuthGuard],
+    },
 ];
 
 @NgModule({

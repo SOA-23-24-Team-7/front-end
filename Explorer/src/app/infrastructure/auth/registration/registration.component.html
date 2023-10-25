@@ -1,4 +1,4 @@
-<form [formGroup]="registrationForm" (ngSubmit)="register()">
+<!--<form [formGroup]="registrationForm" (ngSubmit)="register()">
     <div>
         <mat-form-field>
             <mat-label>Name</mat-label>
@@ -22,6 +22,37 @@
         </mat-form-field>
     <button color="primary" type="submit" mat-raised-button>Register</button>
     </div>
-</form>
+</form>-->
 
+
+<div class="register-modal" (click)="onClose()">
+    <div class="register" (click)="$event.stopPropagation()">
+        <div class="register-head">
+            <fa-icon class="register-x" [icon]="faXmark" (click)="onClose()"/>
+            <div class="register-title">Register</div>
+        </div>
+        <form class="register-form" [formGroup]="registrationForm" (ngSubmit)="register()">
+            <div class="register-label">Name:</div>
+            <input class="register-input" type="text" placeholder="Name" formControlName="name"/>
+            <div class="register-label">Surname:</div>
+            <input class="register-input" type="text" placeholder="Surname" formControlName="surname"/>
+            <div class="register-label">Username:</div>
+            <input class="register-input" type="text" placeholder="Username" formControlName="username"/>
+            <div class="register-label">Email:</div>
+            <input class="register-input" type="text" placeholder="Email" formControlName="email"/>
+            <div class="register-label">Password:</div>
+            <div class="register-password">
+                <input class="register-input" [type]="isPasswordVisible ? 'text' : 'password'" placeholder="Password" formControlName="password"/>
+                <fa-icon class="register-password-eye" [icon]="isPasswordVisible ? faEyeSlash : faEye" (click)="togglePasswordVisibility()"/>
+            </div>
+            <button class="register-submit" type="submit">
+                <div class="register-submit-text">Register</div>
+            </button>
+            <div class="register-footer">
+                <div class="register-question">Already have an account?</div>
+                <div class="register-login" (click)="onLogin()">Login.</div>
+            </div>
+        </form>
+    </div>
+</div>
 

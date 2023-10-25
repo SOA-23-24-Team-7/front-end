@@ -1,0 +1,21 @@
+<div class="tour-card">
+    <div *ngIf="tour.hasDiscount" class="discount-badge">-50% OFF</div>
+    <img class="tour-image" [src]="tour.image" />
+    <div class="tour-card-details">
+        <div class="tour-name">{{ tour.name }}</div>
+        <div class="tour-tags">
+            <div class="tour-tag" *ngFor="let tag of tour.tags">{{ tag }}</div>
+        </div>
+        <div class="tour-review-content">
+            <div class="tour-review">{{ tour.review }}</div>
+            <img class="tour-review-icon" [src]="'/assets/icons/star.svg'" />
+        </div>
+        <div
+            [ngClass]="
+                tour.hasDiscount ? 'tour-discounted-price' : 'tour-price'
+            "
+        >
+            {{ tour.price }}
+        </div>
+    </div>
+</div>
