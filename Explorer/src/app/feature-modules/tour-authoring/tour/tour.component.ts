@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Tour } from '../model/tour.model';
+import { Tour, TourStatus } from '../model/tour.model';
 import {TourAuthoringService} from '../tour-authoring.service';
 import { PagedResults } from 'src/app/shared/model/paged-results.model';
 
@@ -19,6 +19,20 @@ export class TourComponent implements OnInit {
 
   ngOnInit(): void {
     this.getTours();
+  }
+
+  getTourStatusText(status: TourStatus  | undefined): string {
+    if (status === undefined) {
+      return 'N/A'; 
+    }
+    switch (status) {
+      case TourStatus.Draft:
+        return 'Draft';
+      case TourStatus.Published:
+        return 'Published';
+      default:
+        return '';
+    }
   }
 
   getTours(): void {

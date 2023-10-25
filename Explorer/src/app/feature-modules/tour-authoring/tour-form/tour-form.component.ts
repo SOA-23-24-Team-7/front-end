@@ -34,7 +34,7 @@ export class TourFormComponent implements OnChanges{
     name: new FormControl('',[Validators.required]),
     description: new FormControl('',[Validators.required]),
     difficulty: new FormControl('',[Validators.required]),
-    tags: new FormControl([] as string[])
+    tags: new FormControl([] as string[], [Validators.required])
   });
 
 
@@ -54,7 +54,6 @@ export class TourFormComponent implements OnChanges{
   addTag(tag: string): void {
     const tagArray = this.tourForm.get('tags');
     if (tagArray && tagArray.value) {
-      console.log('enter');
       const tags = tagArray.value;
       if (tag && !tags.includes(tag)) {
         tags.push(tag);
@@ -63,9 +62,7 @@ export class TourFormComponent implements OnChanges{
     }
     else if(this.shouldEdit == false){
       const tagArray: string[] = []; 
-      console.log('add');
       if (tag) {
-        console.log('added');
         tagArray.push(tag);
         this.tourForm.setControl('tags', new FormControl(tagArray));
       }

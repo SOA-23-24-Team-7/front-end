@@ -11,8 +11,10 @@ import { MatCardModule } from '@angular/material/card';
 import { FacilitiesComponent } from './facilities/facilities.component';
 import { FacilitiesFormComponent } from './facilities-form/facilities-form.component';
 import { MatSelectModule } from '@angular/material/select';
-import { RouterModule } from '@angular/router';
 import { SharedModule } from 'src/app/shared/shared.module';
+import { TourEquipmentFormComponent } from './tour-equipment-form/tour-equipment-form.component';
+import { RouterModule } from '@angular/router';
+
 
 
 @NgModule({
@@ -23,14 +25,15 @@ import { SharedModule } from 'src/app/shared/shared.module';
     KeyPointFormComponent,
     FacilitiesFormComponent,
     FacilitiesComponent,
+    TourEquipmentFormComponent
   ],
   imports: [
     CommonModule, 
     MaterialModule, 
     ReactiveFormsModule,
     MatSelectModule,
-    RouterModule,
     SharedModule,
+    RouterModule
   ],
   exports: [
     TourComponent,
@@ -41,6 +44,7 @@ import { SharedModule } from 'src/app/shared/shared.module';
     KeyPointFormComponent,
     FacilitiesComponent,
     FacilitiesFormComponent,
-  ],
+    TourEquipmentFormComponent
+  ]
 })
 export class TourAuthoringModule {}

@@ -4,6 +4,10 @@ import { Equipment } from './model/equipment.model';
 import { environment } from 'src/env/environment';
 import { Observable } from 'rxjs';
 import { PagedResults } from 'src/app/shared/model/paged-results.model';
+import { User } from 'src/app/infrastructure/auth/model/user.model';
+import { Rating } from './model/rating.model';
+import { RatingUsername } from './model/ratingWithUsername';
+import { Problem } from '../marketplace/model/problem.model';
 
 @Injectable({
   providedIn: 'root',
@@ -11,10 +15,26 @@ import { PagedResults } from 'src/app/shared/model/paged-results.model';
 export class AdministrationService {
   constructor(private http: HttpClient) {}
 
+  getUsersByAdmin(): Observable<PagedResults<User>> {
+    return this.http.get<PagedResults<User>>(
+      environment.apiHost + 'administration/users'
+    );
+  }
+
+  disableAccount(id: number): Observable<User> {
+    return this.http.get<User>(
+      environment.apiHost + 'administration/users/disable/' + id
+    );
+  }
+
   getEquipment(): Observable<PagedResults<Equipment>> {
     return this.http.get<PagedResults<Equipment>>(
       environment.apiHost + 'administration/equipment'
     );
+  }
+
+  getRatings(): Observable<PagedResults<RatingUsername>> {
+    return this.http.get<PagedResults<RatingUsername>>(environment.apiHost + 'rating/ratings')
   }
 
   deleteEquipment(id: number): Observable<Equipment> {
@@ -35,5 +55,9 @@ export class AdministrationService {
       environment.apiHost + 'administration/equipment/' + equipment.id,
       equipment
     );
+  }
+  
+  getProblem(): Observable<PagedResults<Problem>> {
+    return this.http.get<PagedResults<Problem>>(environment.apiHost +'administration/problem')
   }
 }

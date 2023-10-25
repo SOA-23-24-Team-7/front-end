@@ -28,7 +28,7 @@ export class EquipmentFormComponent implements OnChanges {
     name: new FormControl('', [Validators.required]),
     description: new FormControl('', [Validators.required]),
   });
-
+  
   addEquipment(): void {
     const equipment: Equipment = {
       name: this.equipmentForm.value.name || "",

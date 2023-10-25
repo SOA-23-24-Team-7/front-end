@@ -25,7 +25,7 @@
                     <td>{{to.difficulty}}</td>
                     <td>{{to.tags}}</td>
                     <td>{{to.price}}</td>
-                    <td>{{to.status}}</td>
+                    <td>{{getTourStatusText(to.status)}}</td>
                     <td>
                         <button color="accent" (click)="deleteTour(to.id || 0)" mat-icon-button>
                             <mat-icon>delete</mat-icon>
@@ -33,6 +33,7 @@
                         <button color="primary" (click)="onEditClicked(to)"  mat-icon-button>
                             <mat-icon>edit</mat-icon>
                         </button>
+                        <button color="primary" mat-raised-button [routerLink]="['equipment',to.id]" >equipment</button>
                     </td>
                     <td>
                         <button color="primary" mat-raised-button [routerLink]="['/tour', to.id, 'key-points']">View key points</button>
