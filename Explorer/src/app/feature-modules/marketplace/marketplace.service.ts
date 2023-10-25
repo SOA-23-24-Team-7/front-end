@@ -14,6 +14,7 @@ import { ClubInvitation } from './model/club-invitation.model';
 import { ClubInvitationWithClubAndOwnerName } from './model/club-invitation-with-club-and-owner-name.model';
 import { Review } from './model/review.model';
 import { Problem } from './model/problem.model';
+import { TourPreference } from './model/tour-preference.model';
 
 @Injectable({
   providedIn: 'root'
@@ -21,6 +22,22 @@ import { Problem } from './model/problem.model';
 export class MarketplaceService {
 
   constructor(private http: HttpClient) { }
+
+  getTourPreference(): Observable<TourPreference> {
+    return this.http.get<TourPreference>(environment.apiHost + 'tourist/tour-preferences');
+  }
+
+  addPreference(tourPreference: TourPreference): Observable<TourPreference> {
+    return this.http.post<TourPreference>(environment.apiHost + 'tourist/tour-preferences/create', tourPreference);
+  }
+
+  deletePreference(id: number): Observable<TourPreference> {
+    return this.http.delete<TourPreference>(environment.apiHost + 'tourist/tour-preferences/' + id);
+  }
+
+  updatePreference(preference: TourPreference): Observable<TourPreference> {
+    return this.http.put<TourPreference>(environment.apiHost + 'tourist/tour-preferences', preference);
+  }
 
   addRating(rating: Rating): Observable<Rating> {
     return this.http.post<Rating>(environment.apiHost + 'rating/rating', rating);
