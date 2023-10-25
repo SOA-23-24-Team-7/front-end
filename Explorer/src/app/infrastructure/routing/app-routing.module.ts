@@ -24,8 +24,10 @@ import { ClubsComponent } from 'src/app/feature-modules/marketplace/clubs/clubs.
 import { MyClubJoinRequestsComponent } from 'src/app/feature-modules/marketplace/my-club-join-requests/my-club-join-my-club-join-requests.component';
 import { ClubJoinRequestManagementComponent } from 'src/app/feature-modules/marketplace/club-join-request-management/club-join-request-management.component';
 import { TouristEquipmentSelectionComponent } from 'src/app/feature-modules/layout/tourist-equipment-selection/tourist-equipment-selection.component';
+import { ClubMembersManagementComponent } from "src/app/feature-modules/marketplace/club-members-management/club-members-management.component";
 import { FacilitiesComponent } from "src/app/feature-modules/tour-authoring/facilities/facilities.component";
 import { KeyPointsComponent } from "src/app/feature-modules/tour-authoring/key-points/key-points.component";
+import { MyClubInvitationsComponent } from "src/app/feature-modules/marketplace/my-club-invitations/my-club-invitations.component";
 
 const routes: Routes = [
     { path: "", component: HomeComponent },
@@ -101,10 +103,31 @@ const routes: Routes = [
         canActivate: [AuthGuard],
     },
     {
+        path: 'tourist-equipment-selection',
+        component: TouristEquipmentSelectionComponent,
+        canActivate: [AuthGuard],
+    },
+    {
+        path: 'club-members-management/:clubId',
+        component: ClubMembersManagementComponent,
+        canActivate: [AuthGuard],
+    },
+    {
+        path: 'my-club-invitations',
+        component: MyClubInvitationsComponent,
+        canActivate: [AuthGuard],
+    },
+    {
+        path: 'club-members-invite-form',
+        component: ClubMembersManagementComponent,
+        canActivate: [AuthGuard],
+    },
+    {
         path: 'tour-preference', component: TourPreferencesComponent 
     },
-    {   path: 'tour-preference/tour-preference-form', component: TourPreferenceFormComponent 
-},
+    {   
+        path: 'tour-preference/tour-preference-form', component: TourPreferenceFormComponent
+    },
 ];
 
 @NgModule({

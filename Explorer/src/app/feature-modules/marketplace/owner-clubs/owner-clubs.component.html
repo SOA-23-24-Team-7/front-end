@@ -11,6 +11,7 @@
                     <th>Image</th>
                     <th></th>
                     <th></th>
+                    <th></th>
                 </tr>
             </thead>
             <tbody>
@@ -33,6 +34,11 @@
                         </button>
                         <button color="primary" (click)="onDeleteClicked(club.id)">
                             <mat-icon>delete</mat-icon>
+                        </button>
+                    </td>
+                    <td>
+                        <button color="primary" mat-button [routerLink]="['/club-members-management', club.id]">
+                            Manage members
                         </button>
                     </td>
                 </tr>
