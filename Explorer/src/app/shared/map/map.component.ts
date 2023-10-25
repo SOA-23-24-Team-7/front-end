@@ -58,12 +58,15 @@ export class MapComponent implements AfterViewInit, OnChanges {
   ngOnChanges(changes: SimpleChanges): void {
     if (!this.isKeyPointMap) return;
 
-    this.waypointMap.delete(Number.POSITIVE_INFINITY);
+    if (this.waypointMap.delete(Number.POSITIVE_INFINITY)) {
+      let waypoints = [...this.waypointMap.values()];
+      this.setRoute(waypoints);
+    }
 
     if (!this.canEdit) this.previousCommitted = true;
-    if (!this.selectedKeyPoint) return;
-
-    this.panMapTo(this.selectedKeyPoint.latitude, this.selectedKeyPoint.longitude)
+    if (this.selectedKeyPoint) {
+      this.panMapTo(this.selectedKeyPoint.latitude, this.selectedKeyPoint.longitude)
+    }
 
     if (this.canEdit) {
       if (!this.previousCommitted) {
