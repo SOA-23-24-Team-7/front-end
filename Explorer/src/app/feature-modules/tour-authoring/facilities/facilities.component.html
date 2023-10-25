@@ -53,6 +53,6 @@
       <hr>
       <button id="closeButton" *ngIf="shouldRenderFacilitiesForm" (click)="onCloseClicked()" color="primary" mat-raised-button>Close</button>
     </div>
-    <xp-map (click)="onMapClicked()"></xp-map>
+    <xp-map (click)="onMapClicked()" [canEdit]="true"></xp-map>
   </div>
 </div>

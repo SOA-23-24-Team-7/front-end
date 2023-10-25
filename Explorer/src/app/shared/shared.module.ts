@@ -1,11 +1,10 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { MapComponent } from './map/map.component';
-import { KeyPointMapComponent } from './key-point-map/key-point-map.component';
 
 @NgModule({
-  declarations: [MapComponent, KeyPointMapComponent],
+  declarations: [MapComponent],
   imports: [CommonModule],
-  exports: [MapComponent, KeyPointMapComponent],
+  exports: [MapComponent],
 })
 export class SharedModule {}

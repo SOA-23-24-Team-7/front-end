@@ -1,26 +1,49 @@
-import { AfterViewInit, Component, OnInit } from '@angular/core';
+import { AfterViewInit, Component, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges } from '@angular/core';
 import * as L from 'leaflet';
-import { MapService } from './map.service';
-
+import { MapService } from './map.service'
+import { KeyPoint } from 'src/app/feature-modules/tour-authoring/model/key-point.model';
+import { Observable, Subscription } from 'rxjs';
+import { PagedResults } from '../model/paged-results.model';
+import { Facilities } from 'src/app/feature-modules/tour-authoring/model/facilities.model';
 
 @Component({
   selector: 'xp-map',
   templateUrl: './map.component.html',
   styleUrls: ['./map.component.css'],
 })
-export class MapComponent implements AfterViewInit {
+export class MapComponent implements AfterViewInit, OnChanges {
   private map: any;
-  private keyPoints: any;
+  private waypointMap = new Map<number, any>();
+  private routeControl: L.Routing.Control;
+  private refreshEventsSubscription: Subscription;
+  private previousCommitted = false;
+
   private markerGroup = L.layerGroup(); 
   public facilitiesUsed: boolean = false;
 
-  constructor(private mapService: MapService) {}
+  @Input() refreshEvents: Observable<number>;
+  @Input() selectedKeyPoint: KeyPoint | null;
+  @Input() canEdit = false;
+  @Input() isKeyPointMap = false;
+  @Output() newLongLatEvent = new EventEmitter<[number, number]>();
+
+  constructor(private mapService: MapService) { }
 
   private facilityIcon = L.icon({
     iconUrl: 'https://cdn4.iconfinder.com/data/icons/small-n-flat/24/map-marker-512.png',
     iconSize: [42, 42], 
     iconAnchor: [16, 32], 
   });
+
+  ngOnInit() {
+    if (!this.isKeyPointMap) return;
+    this.refreshEventsSubscription = this.refreshEvents.subscribe(tourId => this.getTourKeyPoints(tourId));
+  }
+
+  ngOnDestroy() {
+    if (!this.isKeyPointMap) return;
+    this.refreshEventsSubscription.unsubscribe();
+  }
 
   ngAfterViewInit(): void {
     let DefaultIcon = L.icon({
@@ -32,9 +55,44 @@ export class MapComponent implements AfterViewInit {
     this.initMap();
   }
 
+  ngOnChanges(changes: SimpleChanges): void {
+    if (!this.isKeyPointMap) return;
+
+    this.waypointMap.delete(Number.POSITIVE_INFINITY);
+
+    if (!this.canEdit) this.previousCommitted = true;
+    if (!this.selectedKeyPoint) return;
+
+    this.panMapTo(this.selectedKeyPoint.latitude, this.selectedKeyPoint.longitude)
+
+    if (this.canEdit) {
+      if (!this.previousCommitted) {
+        let oldKeyPoint = changes['selectedKeyPoint'].previousValue;
+
+        if (oldKeyPoint && oldKeyPoint.id != undefined) {
+          let lng = oldKeyPoint.longitude
+          let lat = oldKeyPoint.latitude
+          this.waypointMap.set(oldKeyPoint.id, { lng, lat });
+        }
+
+        let waypoints = [...this.waypointMap.values()];
+        this.setRoute(waypoints);
+      }
+
+      this.previousCommitted = false;
+    }
+  }
+
+  private panMapTo(lat: number, lng: number): void {
+    setTimeout(() => {
+      this.map.invalidateSize();
+      this.map.panTo(new L.LatLng(lat, lng));
+    }, 100);
+  }
+
   private initMap(): void {
     this.map = L.map('map', {
-      center: [45.2396, 19.8227],
+      center: [0, 0],
       zoom: 13,
     });
     const tiles = L.tileLayer(
@@ -48,7 +106,20 @@ export class MapComponent implements AfterViewInit {
     );
     tiles.addTo(this.map);
     this.registerOnClick();
-    this.getTourKeyPoints(1);
+
+    if (this.isKeyPointMap) {
+      this.mapService.getAuthorsFacilities().subscribe({
+        next: (result: PagedResults<Facilities>) => {
+          let facilities = result.results;
+
+          for(let f of facilities) {
+            this.setMarkersForAllFacilities(f.latitude, f.longitude);
+          }
+        },
+        error: () => {
+        }
+      });
+    }
   }
 
   search(): void {
@@ -60,53 +131,64 @@ export class MapComponent implements AfterViewInit {
           .bindPopup('Pozdrav iz Strazilovske 19.')
           .openPopup();
       },
-      error: () => {},
+      error: () => { },
     });
   }
 
   setRoute(waypoints: any): void {
-    const routeControl = L.Routing.control({
-      waypoints,
+    const planOptions = { addWaypoints: false, draggableWaypoints: false };
+    const plan = new L.Routing.Plan(waypoints, planOptions);
+
+    this.routeControl?.remove();
+
+    this.routeControl = L.Routing.control({
+      plan,
       router: L.routing.mapbox(
         'pk.eyJ1IjoiY2Vrc29uIiwiYSI6ImNsbnl2YTAwdzAxNnoya2xxcG8wMm56ZjAifQ.23pAV3nrCN0BBo-1F8j8gg',
         { profile: 'mapbox/walking' }
       ),
     }).addTo(this.map);
 
-    routeControl.on('routesfound', function (e) {
+    this.routeControl.on('routesfound', function (e) {
       var routes = e.routes;
       var summary = routes[0].summary;
-      alert(
-        'Total distance is ' +
-          summary.totalDistance / 1000 +
-          ' km and total time is ' +
-          Math.round((summary.totalTime % 3600) / 60) +
-          ' minutes'
-      );
     });
   }
 
   registerOnClick(): void {
     this.map.on('click', (e: any) => {
+      if (!this.canEdit) return;
+
       const coord = e.latlng;
       const lat = coord.lat;
       const lng = coord.lng;
+
+      this.newLongLatEvent.emit([lng, lat]);
+
       this.mapService.reverseSearch(lat, lng).subscribe((res) => {
         console.log(res.display_name);
       });
-      console.log(
-        'You clicked the map at latitude: ' + lat + ' and longitude: ' + lng
-      );
+
       if(this.facilitiesUsed){
         this.markerGroup.clearLayers();
         const marker = new L.Marker([lat, lng], { icon: this.facilityIcon });
         this.markerGroup.addLayer(marker);
         this.map.addLayer(this.markerGroup);
+
+        return;
       }
-      else{
-        const mp = new L.Marker([lat, lng]).addTo(this.map);
-        alert(mp.getLatLng());
+
+      console.log(
+        'You clicked the map at latitude: ' + lat + ' and longitude: ' + lng
+      );
+
+      if (this.selectedKeyPoint && this.selectedKeyPoint.id != undefined) {
+        this.waypointMap.set(this.selectedKeyPoint.id, { lng, lat });
+      } else {
+        this.waypointMap.set(Number.POSITIVE_INFINITY, { lng, lat });
       }
+      let waypoints = [...this.waypointMap.values()];
+      this.setRoute(waypoints);
     });
   }
 
@@ -114,9 +196,24 @@ export class MapComponent implements AfterViewInit {
   getTourKeyPoints(tourId: number): void {
     this.mapService.getTourKeyPoints(tourId).subscribe({
       next: (result: any) => {
-        this.keyPoints = result;
-        let waypoints = this.createWaypoints();
+        this.waypointMap.clear();
+
+        let keyPoints = result;
+
+        for (const kp of keyPoints) {
+          let lng = kp.longitude;
+          let lat = kp.latitude;
+          this.waypointMap.set(kp.id, { lng, lat });
+        }
+
+        this.createWaypoints(keyPoints);
+        let waypoints = [...this.waypointMap.values()];
+
         this.setRoute(waypoints);
+
+        if (keyPoints.length > 0) {
+          this.panMapTo(keyPoints[0].latitude, keyPoints[0].longitude);
+        }
       },
       error: () => {
         console.log('Cannot fetch keypoints for tourId:', tourId);
@@ -124,12 +221,12 @@ export class MapComponent implements AfterViewInit {
     });
   }
 
-  createWaypoints(): any[] {
-    let waypoints: any[] = [];
-    for (let keyPoint of this.keyPoints) {
-      waypoints.push(L.latLng(keyPoint.latitude, keyPoint.longitude));
+  createWaypoints(keyPoints: any): void {
+    for (const kp of keyPoints) {
+      let lng = kp.longitude;
+      let lat = kp.latitude;
+      this.waypointMap.set(kp.id, { lng, lat });
     }
-    return waypoints;
   }
 
   getClickCoordinates(callback: (lat: number, lng: number) => void): void {
@@ -158,6 +255,6 @@ export class MapComponent implements AfterViewInit {
     this.markerGroup.addLayer(marker);
     this.map.addLayer(this.markerGroup);
 
-    this.map.setView([lat, lng], this.map.getZoom());
+    if (!this.isKeyPointMap) this.map.setView([lat, lng], this.map.getZoom());
   }
 }

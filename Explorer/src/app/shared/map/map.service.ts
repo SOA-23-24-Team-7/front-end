@@ -2,6 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { environment } from 'src/env/environment';
+import { PagedResults } from '../model/paged-results.model';
 
 @Injectable({
   providedIn: 'root',
@@ -33,5 +34,9 @@ export class MapService {
     return this.http.get<any>(
       environment.apiHost + `market-place/tours/${tourId}/key-points`
     );
+  }
+
+  getAuthorsFacilities(): Observable<PagedResults<any>>{
+    return this.http.get<PagedResults<any>>(environment.apiHost + 'facility/authorsFacilities');
   }
 }

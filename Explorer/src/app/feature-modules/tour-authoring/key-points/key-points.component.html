@@ -50,7 +50,7 @@
             </table>
         </div>
         <div id="two">
-            <xp-key-point-map [refreshEvents]="refreshEventsSubject" (newLongLatEvent)="mapLongLat = $event" [selectedKeyPoint]="selectedKeyPoint" [canEdit]="shouldRenderKeyPointForm"></xp-key-point-map>
+            <xp-map [isKeyPointMap]="true" [refreshEvents]="refreshEventsSubject" (newLongLatEvent)="mapLongLat = $event" [selectedKeyPoint]="selectedKeyPoint" [canEdit]="shouldRenderKeyPointForm"></xp-map>
         </div>
         <div id="three">
             <xp-key-point-form *ngIf="shouldRenderKeyPointForm" [shouldEdit]="shouldEdit" [longLat]="mapLongLat" [keyPoint]="selectedKeyPoint"
