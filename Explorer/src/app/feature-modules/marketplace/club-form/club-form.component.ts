@@ -52,7 +52,7 @@ export class ClubFormComponent implements OnChanges {
     };
     club.id = this.club.id;
     if(this.isValid(club)){
-      this.service.updateEquipment(club).subscribe({
+      this.service.updateClub(club).subscribe({
         next: () => { this.clubUpdated.emit();}
       });
     }

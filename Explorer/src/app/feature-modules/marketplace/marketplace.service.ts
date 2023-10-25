@@ -73,7 +73,7 @@ export class MarketplaceService {
   addClub(club: Club): Observable<Club> {
     return this.http.post<Club>(environment.apiHost + 'tourist/club', club);
   }
-  updateEquipment(club: Club): Observable<Club> {
+  updateClub(club: Club): Observable<Club> {
     return this.http.put<Club>(environment.apiHost + 'tourist/club/', club);
   }
   deleteClub(id: number): any {

@@ -32,7 +32,7 @@ const routes: Routes = [
     },
     { path: "ratings", component: RatingComponent, canActivate: [AuthGuard] },
     {
-        path: "ratingForm",
+        path: "rating-form",
         component: RatingFormComponent,
         canActivate: [AuthGuard],
     },
@@ -50,24 +50,24 @@ const routes: Routes = [
         canActivate: [AuthGuard],
     },
     {
-        path: "usersOverview",
+        path: "user-management",
         component: UsersOverviewComponent,
         canActivate: [AuthGuard],
     },
     {path: 'edit-profile', component: EditProfileComponent, canActivate: [AuthGuard],},
-    {path: 'ownerclubs', component: OwnerClubsComponent, canActivate: [AuthGuard]},
+    {path: 'my-clubs', component: OwnerClubsComponent, canActivate: [AuthGuard]},
     {path: 'clubs', component: ClubsComponent, canActivate: [AuthGuard]},
     { path: "blogs", component: BlogsComponent },
     { path: "blog/:blogId", component: BlogComponent },
     {
-        path: "edit-profile",
-        component: EditProfileComponent,
+        path: "profile",
+        component: UserProfileComponent,
         canActivate: [AuthGuard],
     },
     {
-        path: 'ownerclubs',
-        component: OwnerClubsComponent, 
-        canActivate: [AuthGuard]
+        path: "edit-profile",
+        component: EditProfileComponent,
+        canActivate: [AuthGuard],
     },
     {
         path: 'clubs', component: 

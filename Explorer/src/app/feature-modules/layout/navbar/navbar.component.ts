@@ -16,7 +16,18 @@ import {
     faGlobe,
     faEuroSign,
     faUser,
-    faRightFromBracket
+    faRightFromBracket,
+    faMountainCity,
+    faTriangleExclamation,
+    faStar,
+    faHotel,
+    faNewspaper,
+    faSearch,
+    faHeart,
+    faShield,
+    faPersonHiking,
+    faUsers,
+    faEnvelope
 } from "@fortawesome/free-solid-svg-icons";
 //import { } from "@fortawesome/free-regular-svg-icons";
 
@@ -39,8 +50,10 @@ export class NavbarComponent implements OnInit {
             if (event instanceof NavigationStart) {
                 if ((event.url !== "" && event.url !== "/")) {
                     this.isHome = false;
+                    console.log("not home")
                 } else  {
                     this.isHome = true;
+                    console.log("home")
                 }
             }
         });
@@ -83,4 +96,35 @@ export class NavbarComponent implements OnInit {
     faEuroSign = faEuroSign;
     faUser = faUser;
     faRightFromBracket = faRightFromBracket;
+    faMountainCity = faMountainCity;
+    faTriangleExclamation = faTriangleExclamation;
+    faStar = faStar;
+    faHotel = faHotel;
+    faNewspaper = faNewspaper;
+    faSearch = faSearch;
+    faHeart = faHeart;
+    faShield = faShield;
+    faPersonHiking = faPersonHiking;
+    faUsers = faUsers;
+    faEnvelope = faEnvelope;
 }
+
+
+/*
+    1 Dokma
+    2 Anja
+    3 Nina
+    4 Ivana
+    5 Filip
+    6 Milos
+    7 Bosko
+    8 Ceki
+    9 Ivan
+    10 Veljko
+    11? Marko
+    12x Jelena
+    13x Velimir
+    14 Gagi
+    15? Uros
+    16 Krle
+*/
