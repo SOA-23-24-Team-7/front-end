@@ -108,23 +108,3 @@ export class NavbarComponent implements OnInit {
     faUsers = faUsers;
     faEnvelope = faEnvelope;
 }
-
-
-/*
-    1 Dokma
-    2 Anja
-    3 Nina
-    4 Ivana
-    5 Filip
-    6 Milos
-    7 Bosko
-    8 Ceki
-    9 Ivan
-    10 Veljko
-    11? Marko
-    12x Jelena
-    13x Velimir
-    14 Gagi
-    15? Uros
-    16 Krle
-*/

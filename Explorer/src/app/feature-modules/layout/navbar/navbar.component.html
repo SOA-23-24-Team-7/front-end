@@ -51,7 +51,7 @@
             </div>
 
             <!-- CLUB MENU -->
-            <div class="navbar-menu-item" *ngIf="user && user.username !== ''">
+            <div class="navbar-menu-item" *ngIf="user && user.role === 'tourist'">
                 <div class="navbar-menu-item-content">
                     <fa-icon
                         class="navbar-menu-item-content-icon"
@@ -97,6 +97,16 @@
                             [icon]="faEnvelope"
                         />
                         <div class="navbar-submenu-item-text">My join requests</div>
+                    </div>
+                    <div
+                        class="navbar-submenu-item navbar-submenu-item-border-radius-bottom no-border"
+                        [routerLink]="['my-club-invitations']"
+                    >
+                        <fa-icon
+                            class="navbar-submenu-item-icon"
+                            [icon]="faEnvelope"
+                        />
+                        <div class="navbar-submenu-item-text">My invitations</div>
                     </div>
                 </div>
                 <div
@@ -243,9 +253,30 @@
                         <fa-icon
                             class="navbar-submenu-item-icon"
                             [icon]="faTriangleExclamation"
-                            *ngIf="user && user.role === 'administrator'"
                         />
                         <div class="navbar-submenu-item-text">Problem reports</div>
+                    </div>
+                    
+                    <div
+                        class="navbar-submenu-item"
+                        [routerLink]="['equipment']"
+                    >
+                        <fa-icon
+                            class="navbar-submenu-item-icon"
+                            [icon]="faTriangleExclamation"
+                        />
+                        <div class="navbar-submenu-item-text">Equipment</div>
+                    </div>
+                    
+                    <div
+                        class="navbar-submenu-item"
+                        [routerLink]="['ratings']"
+                    >
+                        <fa-icon
+                            class="navbar-submenu-item-icon"
+                            [icon]="faStar"
+                        />
+                            <div class="navbar-submenu-item-text">Ratings</div>
                     </div>
                 </div>
                 <div

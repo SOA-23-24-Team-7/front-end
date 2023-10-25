@@ -1,0 +1,13 @@
+<form [formGroup]="clubMemberForm">
+    <div>
+        <div>
+            <mat-form-field>
+                <mat-label>Username</mat-label>
+                <input placeholder="Username" matInput formControlName="username" type="text"/>
+            </mat-form-field>
+            <button color="primary" type="submit" (click)="inviteMember()" mat-raised-button>Invite</button>
+            <p *ngIf="showError" style="color: red">Error: Invalid request.</p>
+            <p *ngIf="showSuccess" style="color: green">User invited.</p>
+        </div>
+    </div>
+</form>

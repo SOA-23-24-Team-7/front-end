@@ -14,6 +14,8 @@
                     <th>Price</th>
                     <th>Status</th>
                     <th></th>
+                    <th></th>
+                    <th></th>
                 </tr>
             </thead>
             <tbody>
@@ -32,6 +34,9 @@
                             <mat-icon>edit</mat-icon>
                         </button>
                         <button color="primary" mat-raised-button [routerLink]="['equipment',to.id]" >equipment</button>
+                    </td>
+                    <td>
+                        <button color="primary" mat-raised-button [routerLink]="['/tour', to.id, 'key-points']">View key points</button>
                     </td>
                 </tr>
                 <tr><button color="primary" (click)="onAddClicked()" mat-icon-button>
