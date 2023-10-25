@@ -37,9 +37,11 @@ export class ClubFormComponent implements OnChanges {
       image: this.clubForm.value.image || "",
       ownerId: 0 //na bekendu ce se dodeliti pravi id ulogovanog korisnika
     };
-    this.service.addClub(club).subscribe({
-      next: () => { this.clubUpdated.emit() }
-    });
+    if(this.isValid(club)){
+      this.service.addClub(club).subscribe({
+        next: () => { this.clubUpdated.emit() }
+      });
+    }
   }
   updateClub(): void {
     const club: Club = {
@@ -49,8 +51,25 @@ export class ClubFormComponent implements OnChanges {
       image: this.clubForm.value.image || ""
     };
     club.id = this.club.id;
-    this.service.updateEquipment(club).subscribe({
-      next: () => { this.clubUpdated.emit();}
-    });
+    if(this.isValid(club)){
+      this.service.updateEquipment(club).subscribe({
+        next: () => { this.clubUpdated.emit();}
+      });
+    }
+  }
+  isValid(club: Club){
+    if(!club.name){
+      alert('Name cannot be empty')
+      return false
+    }
+    if(!club.description){
+      alert('Description cannot be empty')
+      return false
+    }
+    if(!club.image){
+      alert('Image cannot be empty')
+      return false
+    }
+    return true
   }
 }

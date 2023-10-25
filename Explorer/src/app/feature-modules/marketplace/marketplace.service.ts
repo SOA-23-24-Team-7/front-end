@@ -76,6 +76,9 @@ export class MarketplaceService {
   updateEquipment(club: Club): Observable<Club> {
     return this.http.put<Club>(environment.apiHost + 'tourist/club/', club);
   }
+  deleteClub(id: number): any {
+    return this.http.delete<any>(environment.apiHost + 'tourist/club/' + id);
+  }
   getMyClubJoinRequests(): Observable<PagedResults<MyClubJoinRequest>> {
     const route = `${environment.apiHost}tourist/club-join-request/tourist?page=1&pageSize=1000`
     return this.http.get<PagedResults<MyClubJoinRequest>>(route)

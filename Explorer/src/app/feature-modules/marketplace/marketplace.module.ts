@@ -1,8 +1,8 @@
-import { NgModule } from "@angular/core";
-import { CommonModule } from "@angular/common";
+import { NgModule } from '@angular/core';
+import { CommonModule } from '@angular/common';
+import { MaterialModule } from 'src/app/infrastructure/material/material.module';
+import { ReactiveFormsModule } from '@angular/forms';
 import { RatingFormComponent } from "./rating-form/rating-form.component";
-import { MaterialModule } from "src/app/infrastructure/material/material.module";
-import { ReactiveFormsModule } from "@angular/forms";
 import { RouterModule } from "@angular/router";
 import { OwnerClubsComponent } from './owner-clubs/owner-clubs.component';
 import { ClubFormComponent } from './club-form/club-form.component';
@@ -27,6 +27,9 @@ import { ProblemFormComponent } from "./problem-form/problem-form.component";
         ProblemComponent,
         ProblemFormComponent,
         RatingFormComponent,
+        ClubFormComponent,
+        ClubsComponent,
+        OwnerClubsComponent
     ],
     imports: [
         CommonModule,
@@ -39,7 +42,8 @@ import { ProblemFormComponent } from "./problem-form/problem-form.component";
         ReviewComponent,
         ReactiveFormsModule,
         RatingFormComponent,
-        ProblemComponent,
+        ProblemComponent
+        
     ],
 })
 export class MarketplaceModule {}

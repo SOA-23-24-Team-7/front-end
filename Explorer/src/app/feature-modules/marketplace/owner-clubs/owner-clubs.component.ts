@@ -50,6 +50,13 @@ export class OwnerClubsComponent implements OnInit{
     this.shouldRenderClubForm = true;
     this.shouldEdit = true;
   }
+  onDeleteClicked(id: any): void {
+    this.service.deleteClub(id).subscribe({
+      next: () => {
+        this.getClubs();
+      },
+    })
+  }
   toggleShowImage(image: string){
     this.shouldShowImage = !this.shouldShowImage
     this.imgSrc = image

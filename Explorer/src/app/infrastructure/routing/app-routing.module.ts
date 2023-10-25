@@ -54,6 +54,9 @@ const routes: Routes = [
         component: UsersOverviewComponent,
         canActivate: [AuthGuard],
     },
+    {path: 'edit-profile', component: EditProfileComponent, canActivate: [AuthGuard],},
+    {path: 'ownerclubs', component: OwnerClubsComponent, canActivate: [AuthGuard]},
+    {path: 'clubs', component: ClubsComponent, canActivate: [AuthGuard]},
     { path: "blogs", component: BlogsComponent },
     { path: "blog/:blogId", component: BlogComponent },
     {

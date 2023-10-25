@@ -116,6 +116,38 @@
                 ></div>
             </div>
 
+            <!-- CLUB MENU -->
+            <div class="navbar-menu-item" *ngIf="user && user.username !== ''">
+                <div class="navbar-menu-item-content">
+                    <div class="navbar-menu-item-content-text">
+                        Club
+                    </div>
+                    <fa-icon
+                        class="navbar-menu-item-content-arrow"
+                        [class.color-white]="isHome"
+                        [icon]="faChevronDown"
+                    />
+                </div>
+                <div class="navbar-submenu">
+                    <div
+                        class="navbar-submenu-item navbar-submenu-item-border-radius-top"
+                        [routerLink]="['clubs']"
+                    >
+                        <div class="navbar-submenu-item-text" >Clubs</div>
+                    </div>
+                    <div
+                        class="navbar-submenu-item navbar-submenu-item-border-radius-bottom no-border"
+                        [routerLink]="['ownerclubs']"
+                    >
+                        <div class="navbar-submenu-item-text">My clubs</div>
+                    </div>
+                </div>
+                <div
+                    class="navbar-menu-item-selected-indicator"
+                    [class.background-color-white]="isHome"
+                ></div>
+            </div>
+
             <!-- USER MENU -->
             <div class="navbar-menu-item" *ngIf="user && user.username !== ''">
                 <div class="navbar-menu-item-content">
