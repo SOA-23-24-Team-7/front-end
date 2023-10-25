@@ -30,7 +30,10 @@
                     </td>
                     <td>
                         <button color="primary" mat-button [routerLink]="['/club-join-request-management', club.id]">
-                            Manage join requests 
+                            Manage join requests
+                        </button>
+                        <button color="primary" (click)="onDeleteClicked(club.id)">
+                            <mat-icon>delete</mat-icon>
                         </button>
                     </td>
                     <td>

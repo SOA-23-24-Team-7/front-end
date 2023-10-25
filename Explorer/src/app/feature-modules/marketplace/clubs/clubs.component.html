@@ -6,6 +6,7 @@
         <table>
             <thead>
                 <tr>
+                    <th>Owner</th>
                     <th>Name</th>
                     <th>Description</th>
                     <th>Image</th>
@@ -14,6 +15,7 @@
             </thead>
             <tbody>
                 <tr *ngFor="let club of clubs">
+                    <td>{{club.username}}</td>
                     <td>{{club.name}}</td>
                     <td>{{club.description}}</td>
                     <td>

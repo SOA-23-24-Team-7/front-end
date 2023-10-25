@@ -1,0 +1,32 @@
+<form [formGroup]="ratingForm">
+    <h2>Rate our app</h2>
+    <h3>Your oppinion is important to us</h3>
+    <div>
+        <mat-form-field>
+            <mat-label>Grade</mat-label>
+            <input matInput formControlName="grade" min="1" max="5" type="number"/>
+        </mat-form-field>
+        <mat-form-field>
+          <mat-label>Comment</mat-label>
+          <textarea matInput
+          cdkTextareaAutosize
+          cdkAutosizeMinRows="1"
+          formControlName="comment"
+          cdkAutosizeMaxRows="5"></textarea>
+        </mat-form-field>
+        <div style="display: inline-block; text-align: center;">
+            <button *ngIf="canAdd" color="primary" type="submit" (click)="addRating()" mat-icon-button>
+                <mat-icon>add</mat-icon>
+            </button>
+            <button *ngIf="canEdit && !isEditing" color="accent" (click)="onUpdateClicked()" mat-icon-button>
+                <mat-icon>edit</mat-icon>
+            </button>
+            <button *ngIf="isEditing" color="accent" (click)="updateRating()" mat-icon-button>
+                <mat-icon>save</mat-icon>
+            </button>
+            <button *ngIf="canDelete && !isEditing" color="accent" (click)="deleteRating(this.rating.id || 0)" mat-icon-button>
+                <mat-icon>delete</mat-icon>
+            </button>
+        </div>
+    </div>
+</form>
