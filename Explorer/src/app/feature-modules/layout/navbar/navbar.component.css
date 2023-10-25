@@ -25,6 +25,7 @@
     border-bottom: rgba(var(--clr-outline), 1) 1px solid;
     background-image: none;
     color: rgb(var(--clr-text));
+    position: initial;
 }
 
 .navbar-not-home .navbar-menu-item-content-text {
