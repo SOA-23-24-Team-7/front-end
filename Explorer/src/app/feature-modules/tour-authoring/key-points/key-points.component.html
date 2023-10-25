@@ -1,33 +1,60 @@
 <div id="key-points">
     <p>Key points</p>
     <hr>
-    <div><button color="primary" (click)="onAddClicked()" mat-icon-button>
-        <mat-icon>add</mat-icon>
-    </button></div>
-    <div id="key-point-details">
-        <div>
-        <mat-card class="example-card" *ngFor="let kp of keyPoints">
-            <mat-card-header>
-            <mat-card-title>{{kp.name}}</mat-card-title>
-            </mat-card-header>
-            <img mat-card-image [src]="getImagePath(kp.imagePath)" alt="Tour image">
-            <mat-card-content>
-            <p>
-                {{kp.description}}
-            </p>
-            </mat-card-content>
-            <mat-card-actions>
-            <button color="accent" (click)="deleteKeyPoint(kp.id || 0)" mat-icon-button>
-                <mat-icon>delete</mat-icon>
-            </button>
-            <button color="primary" (click)="onEditClicked(kp)" mat-icon-button>
-                <mat-icon>edit</mat-icon>
-            </button>
-            </mat-card-actions>
-        </mat-card>
+    <div id="key-point-details" class="container">
+        <div id="one">
+            <!--mat-card class="example-card" *ngFor="let kp of keyPoints">
+                <mat-card-header>
+                    <mat-card-title>{{kp.name}}</mat-card-title>
+                </mat-card-header>
+                <img mat-card-image [src]="getImagePath(kp.imagePath)" alt="Tour image">
+                <mat-card-content>
+                    <p>
+                        {{kp.description}}
+                    </p>
+                </mat-card-content>
+                <mat-card-actions>
+                    <button color="accent" (click)="deleteKeyPoint(kp.id || 0)" mat-icon-button>
+                        <mat-icon>delete</mat-icon>
+                    </button>
+                    <button color="primary" (click)="onEditClicked(kp)" mat-icon-button>
+                        <mat-icon>edit</mat-icon>
+                    </button>
+                </mat-card-actions>
+            </mat-card-->
+            <table>
+                <thead>
+                    <tr>
+                        <th></th>
+                        <th>Name</th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let kp of keyPoints">
+                        <td></td>
+                        <td>{{kp.name}}</td>
+                        <td>
+                            <button color="accent" (click)="deleteKeyPoint(kp.id || 0)" mat-icon-button>
+                                <mat-icon>delete</mat-icon>
+                            </button>
+                            <button color="primary" (click)="onEditClicked(kp)"  mat-icon-button>
+                                <mat-icon>edit</mat-icon>
+                            </button>
+                        </td>
+                    </tr>
+                    <tr><button color="primary" (click)="onAddClicked()" mat-icon-button>
+                        <mat-icon>add</mat-icon>
+                    </button></tr>
+                </tbody>
+            </table>
         </div>
-    <div>
-        <xp-key-point-form *ngIf="shouldRenderKeyPointForm" [shouldEdit]="shouldEdit" [keyPoint]="selectedKeyPoint" (keyPointUpdated)="getKeyPoints(); shouldRenderKeyPointForm = false"></xp-key-point-form>
-    </div>
+        <div id="two">
+            <xp-key-point-map [refreshEvents]="refreshEventsSubject" (newLongLatEvent)="mapLongLat = $event" [selectedKeyPoint]="selectedKeyPoint" [canEdit]="shouldRenderKeyPointForm"></xp-key-point-map>
+        </div>
+        <div id="three">
+            <xp-key-point-form *ngIf="shouldRenderKeyPointForm" [shouldEdit]="shouldEdit" [longLat]="mapLongLat" [keyPoint]="selectedKeyPoint"
+                (keyPointUpdated)="getKeyPoints(); shouldRenderKeyPointForm = false"></xp-key-point-form>
+        </div>
     </div>
 </div>

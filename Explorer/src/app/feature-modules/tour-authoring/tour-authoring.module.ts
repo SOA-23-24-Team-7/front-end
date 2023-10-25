@@ -8,6 +8,8 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { KeyPointFormComponent } from './key-point-form/key-point-form.component';
 import { MatButtonModule } from '@angular/material/button';
 import { MatCardModule } from '@angular/material/card';
+import {RouterModule} from '@angular/router';
+import { SharedModule } from 'src/app/shared/shared.module';
 
 @NgModule({
   declarations: [
@@ -16,7 +18,7 @@ import { MatCardModule } from '@angular/material/card';
     KeyPointsComponent,
     KeyPointFormComponent,
   ],
-  imports: [CommonModule, MaterialModule, ReactiveFormsModule],
+  imports: [CommonModule, MaterialModule, ReactiveFormsModule, RouterModule, SharedModule],
   exports: [
     TourComponent,
     TourFormComponent,

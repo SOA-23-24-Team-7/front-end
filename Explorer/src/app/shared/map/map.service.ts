@@ -2,8 +2,6 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { environment } from 'src/env/environment';
-import { PagedResults } from '../model/paged-results.model';
-import { KeyPoint } from 'src/app/feature-modules/tour-authoring/model/key-point.model';
 
 @Injectable({
   providedIn: 'root',
@@ -33,7 +31,7 @@ export class MapService {
 
   getTourKeyPoints(tourId: number): Observable<any> {
     return this.http.get<any>(
-      environment.apiHost + `tourist/tour/${tourId}/key-points`
+      environment.apiHost + `market-place/tours/${tourId}/key-points`
     );
   }
 }
