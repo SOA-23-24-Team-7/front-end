@@ -1,0 +1,38 @@
+<div id="tourist-equipment-selection">
+    <p>Select Equipment you own</p>
+    <div id="equipment-details">
+    <div>
+        <table>
+            <thead>
+                <tr>
+                    <th>Naziv</th>
+                    <th>Opis</th>
+                    <th>Action</th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let eq of allEquipment" [ngClass]="(touristEquipment.equipmentIds.indexOf(eq.id!=undefined?eq.id:-1)!==-1)? 'selected-item':''">
+                    <td>{{eq.name}}</td>
+                    <td>{{eq.description}}</td>
+                    <td>
+                        <button *ngIf="touristEquipment.equipmentIds.indexOf(eq.id!=undefined?eq.id:-1)!==-1" color="accent" (click)="removeEquipmentFromTourist(eq.id!==undefined?eq.id:-1)" mat-icon-button>
+                            <mat-icon>delete</mat-icon>
+                        </button>
+                        <button *ngIf="touristEquipment.equipmentIds.indexOf(eq.id!=undefined?eq.id:-1)===-1" color="primary" (click)="addEquipmentToTourist(eq.id!==undefined?eq.id:-1)" mat-icon-button>
+                            <mat-icon>add</mat-icon>
+                        </button>
+                    </td>
+                    <td>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+
+        <button color="primary" (click)="save()" mat-icon-button>
+            <mat-icon>save</mat-icon>
+        </button>
+        
+    </div>
+    </div>
+</div>

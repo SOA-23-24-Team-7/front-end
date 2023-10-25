@@ -1,0 +1,37 @@
+<form [formGroup]="tourPreferenceForm">
+    <div class="create-form">
+        <mat-form-field>
+            <mat-label>Difficulty level</mat-label>
+            <input matInput formControlName="difficultyLevel" min="1" max="5" type="number"/>
+        </mat-form-field>
+        <mat-form-field>
+            <mat-label>Walking rating</mat-label>
+            <input matInput formControlName="walkingRating" min="0" max="3" type="number"/>
+        </mat-form-field>
+        <mat-form-field>
+            <mat-label>Cycling rating</mat-label>
+            <input matInput formControlName="cyclingRating" min="0" max="3" type="number"/>
+        </mat-form-field>
+        <mat-form-field>
+            <mat-label>Car rating</mat-label>
+            <input matInput formControlName="carRating" min="0" max="3" type="number"/>
+        </mat-form-field>
+        <mat-form-field>
+            <mat-label>Boat rating</mat-label>
+            <input matInput formControlName="boatRating" min="0" max="3" type="number"/>
+        </mat-form-field>
+    </div>
+</form>
+<div class="tag-input-container">
+    <tag-input [(ngModel)]='Tags'
+                [identifyBy]="'id'"
+                [displayBy]="'name'"
+                [editable]="true"
+                class="custom-tag-input"
+                [placeholder]="'Press enter to add tag'">
+    </tag-input>
+</div>
+<div class="button-container">
+    <button mat-raised-button *ngIf="!shouldEdit" type="submit" color="primary" (click)="addPreference()">Create</button>
+    <button mat-raised-button *ngIf="shouldEdit" type="submit" color="primary" (click)="updatePreference()">Edit</button>
+</div>

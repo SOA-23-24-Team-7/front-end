@@ -1,0 +1,38 @@
+<div id="club-members">
+    <p>Members</p>
+    <hr>
+    <div id="club-member-details">
+        <div>
+            <table>
+                <thead>
+                    <tr>
+                        <th>First name</th>
+                        <th>Last name</th>
+                        <th>Username</th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let member of members">
+                        <td>{{member.firstName}}</td>
+                        <td>{{member.lastName}}</td>
+                        <td>{{member.username}}</td>
+                        <td>
+                            <button color="accent" (click)="kick(member)" mat-icon-button>
+                                <mat-icon>delete</mat-icon>
+                            </button>
+                        </td>
+                    </tr>
+                    <tr>
+                        <button color="primary" (click)="onAddClicked()" mat-icon-button>
+                            <mat-icon>add</mat-icon>
+                        </button>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <div *ngIf="shouldRenderMemberForm">
+            <xp-club-members-invite-form [clubId]="clubId"></xp-club-members-invite-form>
+        </div>
+    </div>
+</div>
