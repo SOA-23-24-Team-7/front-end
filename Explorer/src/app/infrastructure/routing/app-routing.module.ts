@@ -8,7 +8,6 @@ import { RegistrationComponent } from "../auth/registration/registration.compone
 import { BlogsComponent } from "src/app/feature-modules/blog/blogs/blogs.component";
 import { BlogComponent } from "src/app/feature-modules/blog/blog/blog.component";
 import { UsersOverviewComponent } from "src/app/feature-modules/administration/users-overview/users-overview.component";
-import {UserProfileComponent} from 'src/app/feature-modules/stakeholder/user-profile/user-profile.component';
 import { UserProfileComponent } from "src/app/feature-modules/stakeholder/user-profile/user-profile.component";
 import { RatingComponent } from "src/app/feature-modules/administration/rating/rating.component";
 import { RatingFormComponent } from "src/app/feature-modules/marketplace/rating-form/rating-form.component";
@@ -23,9 +22,6 @@ import { ClubsComponent } from 'src/app/feature-modules/marketplace/clubs/clubs.
 
 
 const routes: Routes = [
-    { path: "home", component: HomeComponent },
-    { path: "login", component: LoginComponent },
-    { path: "register", component: RegistrationComponent },
     { path: "", component: HomeComponent },
     { path: "home", redirectTo: "", pathMatch: "full" },
     {
@@ -59,7 +55,7 @@ const routes: Routes = [
     },
     {path: 'edit-profile', component: EditProfileComponent, canActivate: [AuthGuard],},
     {path: 'ownerclubs', component: OwnerClubsComponent, canActivate: [AuthGuard]},
-    {path: 'clubs', component: ClubsComponent, canActivate: [AuthGuard]}
+    {path: 'clubs', component: ClubsComponent, canActivate: [AuthGuard]},
     { path: "blogs", component: BlogsComponent },
     { path: "blog/:blogId", component: BlogComponent },
     {

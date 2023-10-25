@@ -1,21 +1,3 @@
-<mat-toolbar color="primary">
-    <div>
-        <p>Explorer</p>
-        <div id="buttons">
-            <button *ngIf="user && user.username === ''" color="accent" mat-raised-button [routerLink]="['login']">Login</button>
-            <button *ngIf="user && user.username !== ''" color="accent" mat-raised-button (click)="onLogout()">Logout</button>
-            <button color="primary" mat-raised-button [routerLink]="['home']">Home</button>
-            <button *ngIf="user && user.role === 'administrator'"color="primary" mat-raised-button [routerLink]="['equipment']">Manage equipment</button>
-            <button *ngIf="user && user.role === 'tourist'"color="primary" mat-raised-button [routerLink]="['clubs']">Clubs</button>
-            <button *ngIf="user && user.role === 'tourist'"color="primary" mat-raised-button [routerLink]="['ownerclubs']">My clubs</button>
-            <button *ngIf="user && (user.role === 'tourist' || user.role === 'author')"color="primary" mat-raised-button [routerLink]="['profile']">Edit profile</button>
-            <button *ngIf="user && user.role === 'administrator'"color="primary" mat-raised-button [routerLink]="['ratings']">View ratings</button>
-            <button *ngIf="user && (user.role === 'tourist' || user.role === 'author')"color="primary" mat-raised-button [routerLink]="['ratingForm']">Rate the app</button>
-            <button *ngIf="user && user.role === 'tourist'"color="primary" mat-raised-button [routerLink]="['review']">All tour reviews</button>
-            <button *ngIf="user && user.role === 'tourist'"color="primary" mat-raised-button [routerLink]="['problem']">Manage problem</button>
-            <button *ngIf="user && user.role === 'administrator'"color="primary" mat-raised-button [routerLink]="['problems']">List of problems</button>
-            <button *ngIf="user && user.role === 'author'"color="primary" mat-raised-button [routerLink]="['tours']">My Tours</button>
-           <button *ngIf="user && user.role === 'administrator'" color="primary" mat-raised-button [routerLink]="['usersOverview']">Manage users</button>
 <div class="navbar" [ngClass]="{ 'navbar-not-home': isHome === false }">
     <link
         href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600;700;800;900&family=Inter:wght@400;500;700&family=Montserrat:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Roboto:wght@400;500;700&display=swap"
@@ -126,6 +108,38 @@
                                 [icon]="faMoon"
                             />
                         </div>
+                    </div>
+                </div>
+                <div
+                    class="navbar-menu-item-selected-indicator"
+                    [class.background-color-white]="isHome"
+                ></div>
+            </div>
+
+            <!-- CLUB MENU -->
+            <div class="navbar-menu-item" *ngIf="user && user.username !== ''">
+                <div class="navbar-menu-item-content">
+                    <div class="navbar-menu-item-content-text">
+                        Club
+                    </div>
+                    <fa-icon
+                        class="navbar-menu-item-content-arrow"
+                        [class.color-white]="isHome"
+                        [icon]="faChevronDown"
+                    />
+                </div>
+                <div class="navbar-submenu">
+                    <div
+                        class="navbar-submenu-item navbar-submenu-item-border-radius-top"
+                        [routerLink]="['clubs']"
+                    >
+                        <div class="navbar-submenu-item-text" >Clubs</div>
+                    </div>
+                    <div
+                        class="navbar-submenu-item navbar-submenu-item-border-radius-bottom no-border"
+                        [routerLink]="['ownerclubs']"
+                    >
+                        <div class="navbar-submenu-item-text">My clubs</div>
                     </div>
                 </div>
                 <div
