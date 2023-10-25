@@ -52,6 +52,8 @@ export class ProblemFormComponent implements OnChanges {
       tourId: this.problemForm.value.tourId || 0,
     };
     problem.id = this.problem.id;
+    problem.touristId=this.problem.touristId;
+    problem.reportedTime=this.problem.reportedTime;
     this.service.updateProblem(problem).subscribe({
       next: () => { this.problemUpdated.emit();}
     });
