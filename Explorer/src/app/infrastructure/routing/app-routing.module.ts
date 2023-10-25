@@ -16,7 +16,10 @@ import { ProblemComponent } from "src/app/feature-modules/marketplace/problem/pr
 import { ProblemViewComponent } from "src/app/feature-modules/administration/problem-view/problem-view.component";
 import { TourComponent } from "src/app/feature-modules/tour-authoring/tour/tour.component";
 import { TourEquipmentFormComponent } from "src/app/feature-modules/tour-authoring/tour-equipment-form/tour-equipment-form.component";
-import { EditProfileComponent } from "../../feature-modules/stakeholder/edit-profile/edit-profile.component";
+import {EditProfileComponent} from "../../feature-modules/stakeholder/edit-profile/edit-profile.component";
+import { OwnerClubsComponent } from 'src/app/feature-modules/marketplace/owner-clubs/owner-clubs.component';
+import { ClubsComponent } from 'src/app/feature-modules/marketplace/clubs/clubs.component';
+
 
 const routes: Routes = [
     { path: "", component: HomeComponent },
@@ -50,6 +53,9 @@ const routes: Routes = [
         component: UsersOverviewComponent,
         canActivate: [AuthGuard],
     },
+    {path: 'edit-profile', component: EditProfileComponent, canActivate: [AuthGuard],},
+    {path: 'ownerclubs', component: OwnerClubsComponent, canActivate: [AuthGuard]},
+    {path: 'clubs', component: ClubsComponent, canActivate: [AuthGuard]},
     { path: "blogs", component: BlogsComponent },
     { path: "blog/:blogId", component: BlogComponent },
     {

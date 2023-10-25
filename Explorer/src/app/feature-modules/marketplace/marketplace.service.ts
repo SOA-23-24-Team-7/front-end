@@ -1,5 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { Club } from './model/club.model';
 import { Rating } from '../administration/model/rating.model';
 import { Observable } from 'rxjs';
 import { environment } from 'src/env/environment';
@@ -15,6 +16,21 @@ export class MarketplaceService {
 
   constructor(private http: HttpClient) { }
 
+  getClubs(): Observable<PagedResults<Club>> {
+    return this.http.get<PagedResults<Club>>(environment.apiHost + 'tourist/club')
+  }
+  getOwnerClubs(): Observable<PagedResults<Club>> {
+    return this.http.get<PagedResults<Club>>(environment.apiHost + 'tourist/club/ownerclubs')
+  }
+  addClub(club: Club): Observable<Club> {
+    return this.http.post<Club>(environment.apiHost + 'tourist/club', club);
+  }
+  updateEquipment(club: Club): Observable<Club> {
+    return this.http.put<Club>(environment.apiHost + 'tourist/club/', club);
+  }
+  deleteClub(id: number): any {
+    return this.http.delete<any>(environment.apiHost + 'tourist/club/' + id);
+  }
   addRating(rating: Rating): Observable<Rating> {
     return this.http.post<Rating>(environment.apiHost + 'rating/rating', rating);
   }
@@ -61,5 +77,4 @@ export class MarketplaceService {
   getProblemByUserId(id: number): Observable<PagedResults<Problem>> {
     return this.http.get<PagedResults<Problem>>(environment.apiHost + 'problem/' + id);
   }
-  
 }
