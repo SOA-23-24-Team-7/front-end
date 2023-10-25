@@ -21,6 +21,7 @@ import { OwnerClubsComponent } from 'src/app/feature-modules/marketplace/owner-c
 import { ClubsComponent } from 'src/app/feature-modules/marketplace/clubs/clubs.component';
 import { MyClubJoinRequestsComponent } from 'src/app/feature-modules/marketplace/my-club-join-requests/my-club-join-my-club-join-requests.component';
 import { ClubJoinRequestManagementComponent } from 'src/app/feature-modules/marketplace/club-join-request-management/club-join-request-management.component';
+import { TouristEquipmentSelectionComponent } from 'src/app/feature-modules/layout/tourist-equipment-selection/tourist-equipment-selection.component';
 
 const routes: Routes = [
     { path: "", component: HomeComponent },
@@ -83,6 +84,11 @@ const routes: Routes = [
         path: 'club-join-request-management/:clubId', 
         component: ClubJoinRequestManagementComponent, 
         canActivate: [AuthGuard]
+    },
+    {
+        path: 'tourist-equipment-selection',
+        component: TouristEquipmentSelectionComponent,
+        canActivate: [AuthGuard],
     },
 ];
 
