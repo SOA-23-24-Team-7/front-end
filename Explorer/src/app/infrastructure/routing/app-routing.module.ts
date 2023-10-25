@@ -1,10 +1,8 @@
 import { NgModule } from "@angular/core";
 import { RouterModule, Routes } from "@angular/router";
 import { HomeComponent } from "src/app/feature-modules/layout/home/home.component";
-import { LoginComponent } from "../auth/login/login.component";
 import { EquipmentComponent } from "src/app/feature-modules/administration/equipment/equipment.component";
 import { AuthGuard } from "../auth/auth.guard";
-import { RegistrationComponent } from "../auth/registration/registration.component";
 import { BlogsComponent } from "src/app/feature-modules/blog/blogs/blogs.component";
 import { BlogComponent } from "src/app/feature-modules/blog/blog/blog.component";
 import { UsersOverviewComponent } from "src/app/feature-modules/administration/users-overview/users-overview.component";
@@ -23,6 +21,8 @@ import { MyClubJoinRequestsComponent } from 'src/app/feature-modules/marketplace
 import { ClubJoinRequestManagementComponent } from 'src/app/feature-modules/marketplace/club-join-request-management/club-join-request-management.component';
 import { TouristEquipmentSelectionComponent } from 'src/app/feature-modules/layout/tourist-equipment-selection/tourist-equipment-selection.component';
 import { ClubMembersManagementComponent } from "src/app/feature-modules/marketplace/club-members-management/club-members-management.component";
+import { FacilitiesComponent } from "src/app/feature-modules/tour-authoring/facilities/facilities.component";
+import { KeyPointsComponent } from "src/app/feature-modules/tour-authoring/key-points/key-points.component";
 
 const routes: Routes = [
     { path: "", component: HomeComponent },
@@ -50,6 +50,12 @@ const routes: Routes = [
         path: "tours/equipment/:id",
         component: TourEquipmentFormComponent,
         canActivate: [AuthGuard],
+    },
+    { path: 'facilities', component: FacilitiesComponent, canActivate: [AuthGuard] },
+    { 
+        path: 'tour/:id/key-points',
+        component: KeyPointsComponent,
+        canActivate: [AuthGuard] 
     },
     {
         path: "user-management",
