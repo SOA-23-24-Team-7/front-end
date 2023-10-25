@@ -18,9 +18,7 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { StakeholderModule } from './feature-modules/stakeholder/stakeholder.module';
 
 @NgModule({
-  declarations: [
-    AppComponent
-  ],
+  declarations: [AppComponent],
   imports: [
     BrowserModule,
     AppRoutingModule,
@@ -44,6 +42,6 @@ import { StakeholderModule } from './feature-modules/stakeholder/stakeholder.mod
       multi: true,
     },
   ],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
 })
 export class AppModule {}
