@@ -14,6 +14,7 @@ import { MatDialogModule } from '@angular/material/dialog';
 import { TourCardComponent } from './tour-card/tour-card.component';
 import { BlogCardComponent } from './blog-card/blog-card.component';
 import { ClubCardComponent } from './club-card/club-card.component';
+import { TouristEquipmentSelectionComponent } from './tourist-equipment-selection/tourist-equipment-selection.component';
 
 @NgModule({
     declarations: [
@@ -27,6 +28,7 @@ import { ClubCardComponent } from './club-card/club-card.component';
         TourCardComponent,
         BlogCardComponent,
         ClubCardComponent,
+        TouristEquipmentSelectionComponent,
     ],
     imports: [CommonModule, MaterialModule, RouterModule, FontAwesomeModule, MatDialogModule],
     exports: [NavbarComponent, HomeComponent],

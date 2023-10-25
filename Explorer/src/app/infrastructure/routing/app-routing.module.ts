@@ -17,6 +17,11 @@ import { ProblemViewComponent } from "src/app/feature-modules/administration/pro
 import { TourComponent } from "src/app/feature-modules/tour-authoring/tour/tour.component";
 import { TourEquipmentFormComponent } from "src/app/feature-modules/tour-authoring/tour-equipment-form/tour-equipment-form.component";
 import { EditProfileComponent } from "../../feature-modules/stakeholder/edit-profile/edit-profile.component";
+import { OwnerClubsComponent } from 'src/app/feature-modules/marketplace/owner-clubs/owner-clubs.component';
+import { ClubsComponent } from 'src/app/feature-modules/marketplace/clubs/clubs.component';
+import { MyClubJoinRequestsComponent } from 'src/app/feature-modules/marketplace/my-club-join-requests/my-club-join-my-club-join-requests.component';
+import { ClubJoinRequestManagementComponent } from 'src/app/feature-modules/marketplace/club-join-request-management/club-join-request-management.component';
+import { TouristEquipmentSelectionComponent } from 'src/app/feature-modules/layout/tourist-equipment-selection/tourist-equipment-selection.component';
 
 const routes: Routes = [
     { path: "", component: HomeComponent },
@@ -28,7 +33,7 @@ const routes: Routes = [
     },
     { path: "ratings", component: RatingComponent, canActivate: [AuthGuard] },
     {
-        path: "ratingForm",
+        path: "rating-form",
         component: RatingFormComponent,
         canActivate: [AuthGuard],
     },
@@ -46,15 +51,43 @@ const routes: Routes = [
         canActivate: [AuthGuard],
     },
     {
-        path: "usersOverview",
+        path: "user-management",
         component: UsersOverviewComponent,
         canActivate: [AuthGuard],
     },
+    {path: 'edit-profile', component: EditProfileComponent, canActivate: [AuthGuard],},
+    {path: 'my-clubs', component: OwnerClubsComponent, canActivate: [AuthGuard]},
+    {path: 'clubs', component: ClubsComponent, canActivate: [AuthGuard]},
     { path: "blogs", component: BlogsComponent },
     { path: "blog/:blogId", component: BlogComponent },
     {
+        path: "profile",
+        component: UserProfileComponent,
+        canActivate: [AuthGuard],
+    },
+    {
         path: "edit-profile",
         component: EditProfileComponent,
+        canActivate: [AuthGuard],
+    },
+    {
+        path: 'clubs', component: 
+        ClubsComponent, 
+        canActivate: [AuthGuard]
+    },
+    {
+        path: 'my-club-join-requests', 
+        component: MyClubJoinRequestsComponent, 
+        canActivate: [AuthGuard]
+    },
+    {
+        path: 'club-join-request-management/:clubId', 
+        component: ClubJoinRequestManagementComponent, 
+        canActivate: [AuthGuard]
+    },
+    {
+        path: 'tourist-equipment-selection',
+        component: TouristEquipmentSelectionComponent,
         canActivate: [AuthGuard],
     },
 ];

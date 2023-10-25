@@ -35,14 +35,21 @@ export class ReviewComponent implements OnInit {
     getReviews(): void {
         if (this.tourId > 0) {
             this.tourIdHelper = this.tourId;
-            this.getReviewsByTourId();
-            this.service
-                .reviewExists(this.user.id, this.tourIdHelper)
-                .subscribe({
-                    next: (result: boolean) => {
-                        this.reviewExists = result;
-                    },
-                });
+            this.service.getReviews(this.tourIdHelper).subscribe({
+                next: (result: PagedResults<Review>) => {
+                    this.reviews = result.results;
+                    this.service
+                        .reviewExists(this.user.id, this.tourIdHelper)
+                        .subscribe({
+                            next: (result: boolean) => {
+                                this.reviewExists = result;
+                            },
+                        });
+                },
+                error: (err: any) => {
+                    console.log(err);
+                },
+            });
         }
     }
 
@@ -73,8 +80,15 @@ export class ReviewComponent implements OnInit {
     deleteReview(review: Review): void {
         this.service.deleteReview(review).subscribe({
             next: () => {
-                this.getReviewsByTourId();
-                this.reviewExists = false;
+                this.service.getReviews(this.tourIdHelper).subscribe({
+                    next: (result: PagedResults<Review>) => {
+                        this.reviews = result.results;
+                        this.reviewExists = false;
+                    },
+                    error: (err: any) => {
+                        console.log(err);
+                    },
+                });
             },
         });
     }
