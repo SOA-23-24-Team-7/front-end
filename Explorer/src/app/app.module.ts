@@ -16,11 +16,11 @@ import { AuthModule } from './infrastructure/auth/auth.module';
 import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { JwtInterceptor } from './infrastructure/auth/jwt/jwt.interceptor';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
+import { StakeholderModule } from './feature-modules/stakeholder/stakeholder.module';
 
 @NgModule({
-  declarations: [
-    AppComponent
-  ],
+  declarations: [AppComponent],
   imports: [
     BrowserModule,
     AppRoutingModule,
@@ -36,7 +36,9 @@ import { MatSnackBarModule } from '@angular/material/snack-bar';
     TourExecutionModule,
     AuthModule,
     HttpClientModule,
-    MatSnackBarModule
+    MatSnackBarModule,
+    FontAwesomeModule,
+    StakeholderModule,
   ],
   providers: [
     {
@@ -45,6 +47,6 @@ import { MatSnackBarModule } from '@angular/material/snack-bar';
       multi: true,
     },
   ],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
 })
-export class AppModule { }
+export class AppModule {}

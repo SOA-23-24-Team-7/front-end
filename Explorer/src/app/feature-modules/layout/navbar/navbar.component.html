@@ -1,12 +1,410 @@
-<mat-toolbar color="primary">
-    <div>
-        <p>Explorer</p>
-        <div id="buttons">
-            <button *ngIf="user && user.username === ''" color="accent" mat-raised-button [routerLink]="['login']">Login</button>
-            <button *ngIf="user && user.username !== ''" color="accent" mat-raised-button (click)="onLogout()">Logout</button>
-            <button color="primary" mat-raised-button [routerLink]="['home']">Home</button>
-            <button *ngIf="user && user.role === 'administrator'"color="primary" mat-raised-button [routerLink]="['equipment']">Manage equipment</button>
-            <button *ngIf="user && user.role === 'tourist'"color="primary" mat-raised-button [routerLink]="['tour-preference']">Preference</button>
+<div class="navbar" [ngClass]="{ 'navbar-not-home': isHome === false }">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600;700;800;900&family=Inter:wght@400;500;700&family=Montserrat:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Roboto:wght@400;500;700&display=swap"
+        rel="stylesheet"
+    />
+    <div class="navbar-logo" [routerLink]="['']">
+        <img class="navbar-logo-icon" src="/assets/icons/logo.svg" />
+        <div class="navbar-logo-text">Explorer</div>
+    </div>
+    <div class="navbar-right">
+        <div class="navbar-menu">
+            <!-- HELP MENU -->
+            <div class="navbar-menu-item">
+                <div class="navbar-menu-item-content">
+                    <fa-icon
+                        class="navbar-menu-item-content-icon"
+                        [class.color-white]="isHome"
+                        [icon]="faQuestionCircle"
+                    />
+                    <div class="navbar-menu-item-content-text">Help</div>
+                    <fa-icon
+                        class="navbar-menu-item-content-arrow"
+                        [class.color-white]="isHome"
+                        [icon]="faChevronDown"
+                    />
+                </div>
+                <div class="navbar-submenu">
+                    <div
+                        class="navbar-submenu-item"
+                    >
+                        <fa-icon
+                            class="navbar-submenu-item-icon"
+                            [icon]="faQuestionCircle"
+                        />
+                        <div class="navbar-submenu-item-text">FAQ</div>
+                    </div>
+                    <div
+                        class="navbar-submenu-item"
+                    >
+                        <fa-icon
+                            class="navbar-submenu-item-icon"
+                            [icon]="faPhone"
+                        />
+                        <div class="navbar-submenu-item-text">Contact us</div>
+                    </div>
+                </div>
+                <div
+                    class="navbar-menu-item-selected-indicator"
+                    [class.background-color-white]="isHome"
+                ></div>
+            </div>
+
+            <!-- CLUB MENU -->
+            <div class="navbar-menu-item" *ngIf="user && user.username !== ''">
+                <div class="navbar-menu-item-content">
+                    <fa-icon
+                        class="navbar-menu-item-content-icon"
+                        [class.color-white]="isHome"
+                        [icon]="faUsers"
+                    />
+                    <div class="navbar-menu-item-content-text">
+                        Clubs
+                    </div>
+                    <fa-icon
+                        class="navbar-menu-item-content-arrow"
+                        [class.color-white]="isHome"
+                        [icon]="faChevronDown"
+                    />
+                </div>
+                <div class="navbar-submenu">
+                    <div
+                        class="navbar-submenu-item navbar-submenu-item-border-radius-top"
+                        [routerLink]="['clubs']"
+                    >
+                        <fa-icon
+                            class="navbar-submenu-item-icon"
+                            [icon]="faSearch"
+                        />
+                        <div class="navbar-submenu-item-text">Explore</div>
+                    </div>
+                    <div
+                        class="navbar-submenu-item navbar-submenu-item-border-radius-bottom no-border"
+                        [routerLink]="['my-clubs']"
+                    >
+                        <fa-icon
+                            class="navbar-submenu-item-icon"
+                            [icon]="faUser"
+                        />
+                        <div class="navbar-submenu-item-text">My clubs</div>
+                    </div>
+                    <div
+                        class="navbar-submenu-item navbar-submenu-item-border-radius-bottom no-border"
+                        [routerLink]="['my-club-join-requests']"
+                    >
+                        <fa-icon
+                            class="navbar-submenu-item-icon"
+                            [icon]="faEnvelope"
+                        />
+                        <div class="navbar-submenu-item-text">My join requests</div>
+                    </div>
+                </div>
+                <div
+                    class="navbar-menu-item-selected-indicator"
+                    [class.background-color-white]="isHome"
+                ></div>
+            </div>
+
+            <!-- BLOG MENU -->
+            <div class="navbar-menu-item" *ngIf="user && user.username !== ''">
+                <div class="navbar-menu-item-content">
+                    <fa-icon
+                        class="navbar-menu-item-content-icon"
+                        [class.color-white]="isHome"
+                        [icon]="faNewspaper"
+                    />
+                    <div class="navbar-menu-item-content-text">
+                        Blog
+                    </div>
+                    <fa-icon
+                        class="navbar-menu-item-content-arrow"
+                        [class.color-white]="isHome"
+                        [icon]="faChevronDown"
+                    />
+                </div>
+                <div class="navbar-submenu">
+                    <div
+                        class="navbar-submenu-item"
+                        [routerLink]="['blogs']"
+                    >
+                        <fa-icon
+                            class="navbar-submenu-item-icon"
+                            [icon]="faSearch"
+                        />
+                        <div class="navbar-submenu-item-text">Explore</div>
+                    </div>
+                </div>
+                <div
+                    class="navbar-menu-item-selected-indicator"
+                    [class.background-color-white]="isHome"
+                ></div>
+            </div>
+
+            <!-- TOURS MENU -->
+            <div class="navbar-menu-item" *ngIf="user && (user.role === 'author' || user.role === 'tourist')">
+                <div class="navbar-menu-item-content">
+                    <fa-icon
+                        class="navbar-menu-item-content-icon"
+                        [class.color-white]="isHome"
+                        [icon]="faMountainCity"
+                    />
+                    <div class="navbar-menu-item-content-text">Tours</div>
+                    <fa-icon
+                        class="navbar-menu-item-content-arrow"
+                        [class.color-white]="isHome"
+                        [icon]="faChevronDown"
+                    />
+                </div>
+                <div class="navbar-submenu">
+                    <div
+                        class="navbar-submenu-item"
+                        *ngIf="user && user.role === 'author'"
+                        [routerLink]="['tours']"
+                    >
+                        <fa-icon
+                            class="navbar-submenu-item-icon"
+                            [icon]="faUser"
+                        />
+                        <div class="navbar-submenu-item-text">My Tours</div>
+                    </div>
+                    <div
+                        class="navbar-submenu-item"
+                        [routerLink]="['facilities']"
+                        *ngIf="user && user.role === 'author'"
+                    >
+                        <fa-icon
+                            class="navbar-submenu-item-icon"
+                            [icon]="faHotel"
+                        />
+                        <div class="navbar-submenu-item-text">Manage facilities</div>
+                    </div>
+                    <div
+                        class="navbar-submenu-item"
+                        [routerLink]="['review']"
+                        *ngIf="user && user.role === 'tourist'"
+                    >
+                        <fa-icon
+                            class="navbar-submenu-item-icon"
+                            [icon]="faStar"
+                        />
+                        <div class="navbar-submenu-item-text">Make a review</div>
+                    </div>
+                    <div
+                        class="navbar-submenu-item"
+                        [routerLink]="['problem']"
+                        *ngIf="user && user.role === 'tourist'"
+                    >
+                        <fa-icon
+                            class="navbar-submenu-item-icon"
+                            [icon]="faTriangleExclamation"
+                        />
+                        <div class="navbar-submenu-item-text">Report a problem</div>
+                    </div>
+                </div>
+                <div
+                    class="navbar-menu-item-selected-indicator"
+                    [class.background-color-white]="isHome"
+                ></div>
+            </div>
+
+            <!-- ADMINISTRATION MENU -->
+            <div class="navbar-menu-item" *ngIf="user && user.role === 'administrator'">
+                <div class="navbar-menu-item-content">
+                    <fa-icon
+                        class="navbar-menu-item-content-icon"
+                        [class.color-white]="isHome"
+                        [icon]="faShield"
+                    />
+                    <div class="navbar-menu-item-content-text">
+                        Administration
+                    </div>
+                    <fa-icon
+                        class="navbar-menu-item-content-arrow"
+                        [class.color-white]="isHome"
+                        [icon]="faChevronDown"
+                    />
+                </div>
+                <div class="navbar-submenu">
+                    <div
+                        class="navbar-submenu-item"
+                        [routerLink]="['user-management']"
+                    >
+                        <fa-icon
+                            class="navbar-submenu-item-icon"
+                            [icon]="faUser"
+                        />
+                        <div class="navbar-submenu-item-text">Manage users</div>
+                    </div>
+                    
+                    <div
+                        class="navbar-submenu-item"
+                        [routerLink]="['problems']"
+                    >
+                        <fa-icon
+                            class="navbar-submenu-item-icon"
+                            [icon]="faTriangleExclamation"
+                            *ngIf="user && user.role === 'administrator'"
+                        />
+                        <div class="navbar-submenu-item-text">Problem reports</div>
+                    </div>
+                </div>
+                <div
+                    class="navbar-menu-item-selected-indicator"
+                    [class.background-color-white]="isHome"
+                ></div>
+            </div>
+
+            <!-- SETTINGS MENU -->
+            <div class="navbar-menu-item">
+                <div class="navbar-menu-item-content">
+                    <fa-icon
+                        class="navbar-menu-item-content-icon"
+                        [class.color-white]="isHome"
+                        [icon]="faGear"
+                    />
+                    <div class="navbar-menu-item-content-text">Settings</div>
+                    <fa-icon
+                        class="navbar-menu-item-content-arrow"
+                        [class.color-white]="isHome"
+                        [icon]="faChevronDown"
+                    />
+                </div>
+                <div class="navbar-submenu">
+                    <div
+                        class="navbar-submenu-item"
+                    >
+                        <fa-icon
+                            class="navbar-submenu-item-icon"
+                            [icon]="faEuroSign"
+                        />
+                        <div class="navbar-submenu-item-text">Currency</div>
+                    </div>
+                    <div
+                        class="navbar-submenu-item"
+                    >
+                        <fa-icon
+                            class="navbar-submenu-item-icon"
+                            [icon]="faGlobe"
+                        />
+                        <div class="navbar-submenu-item-text">Language</div>
+                    </div>
+                    <div
+                        class="navbar-submenu-item"
+                    >
+                        <fa-icon
+                            class="navbar-submenu-item-icon"
+                            [icon]="faSun"
+                        />
+                        <div class="navbar-submenu-item-text">Appearance:</div>
+                        <div class="navbar-theme" (click)="toggleTheme()">
+                            <div
+                                class="navbar-theme-switch"
+                                [class.navbar-theme-switch-left]="
+                                    getTheme() === 'light'
+                                "
+                                [class.navbar-theme-switch-right]="
+                                    getTheme() === 'dark'
+                                "
+                            ></div>
+                            <fa-icon class="navbar-theme-sun" [icon]="faSun" />
+                            <fa-icon
+                                class="navbar-theme-moon"
+                                [icon]="faMoon"
+                            />
+                        </div>
+                    </div>
+                </div>
+                <div
+                    class="navbar-menu-item-selected-indicator"
+                    [class.background-color-white]="isHome"
+                ></div>
+            </div>
+
+            <!-- USER MENU -->
+            <div class="navbar-menu-item" *ngIf="user && user.username !== ''">
+                <div class="navbar-menu-item-content">
+                    <fa-icon
+                        class="navbar-menu-item-content-icon"
+                        [class.color-white]="isHome"
+                        [icon]="faUser"
+                    />
+                    <div class="navbar-menu-item-content-text">
+                        {{ user.username }}
+                    </div>
+                    <fa-icon
+                        class="navbar-menu-item-content-arrow"
+                        [class.color-white]="isHome"
+                        [icon]="faChevronDown"
+                    />
+                </div>
+                <div class="navbar-submenu">
+                    <div
+                        class="navbar-submenu-item"
+                        [routerLink]="['profile']"
+                    >
+                        <fa-icon
+                            class="navbar-submenu-item-icon"
+                            [icon]="faUser"
+                        />
+                        <div class="navbar-submenu-item-text">Profile</div>
+                    </div>
+                    <div
+                        class="navbar-submenu-item"
+                        [routerLink]="['tour-preference']"
+                        *ngIf="user && user.role === 'tourist'"
+                    >
+                        <fa-icon
+                            class="navbar-submenu-item-icon"
+                            [icon]="faHeart"
+                        />
+                        <div class="navbar-submenu-item-text">Tour preference</div>
+                    </div>
+                    <div
+                        class="navbar-submenu-item"
+                        [routerLink]="['tourist-equipment-selection']"
+                        *ngIf="user && user.role === 'tourist'"
+                    >
+                        <fa-icon
+                            class="navbar-submenu-item-icon"
+                            [icon]="faPersonHiking"
+                        />
+                        <div class="navbar-submenu-item-text">Equipment</div>
+                    </div>
+                    <div
+                        class="navbar-submenu-item"
+                        [routerLink]="['rating-form']"
+                        *ngIf="user && (user.role === 'tourist' || user.role === 'author')"
+                    >
+                        <fa-icon
+                            class="navbar-submenu-item-icon"
+                            [icon]="faStar"
+                        />
+                        <div class="navbar-submenu-item-text">Rate the app</div>
+                    </div>
+                    <div
+                        class="navbar-submenu-item"
+                        (click)="onLogout()"
+                    >
+                        <fa-icon
+                            class="navbar-submenu-item-icon"
+                            [icon]="faRightFromBracket"
+                        />
+                        <div class="navbar-submenu-item-text">Logout</div>
+                    </div>
+                </div>
+                <div
+                    class="navbar-menu-item-selected-indicator"
+                    [class.background-color-white]="isHome"
+                ></div>
+            </div>
+        </div>
+        <div class="navbar-button-panel" *ngIf="user && user.username === ''">
+            <div class="navbar-log-in-button" (click)="onLogin()">
+                <div class="navbar-log-in-button-text">Login</div>
+            </div>
+            <div class="navbar-register-button" (click)="onRegister()">
+                <div class="navbar-register-button-text">Register</div>
+            </div>
         </div>
     </div>
-</mat-toolbar>
+</div>

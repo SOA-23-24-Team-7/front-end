@@ -1,0 +1,53 @@
+<div id="club">
+    <p>My clubs</p>
+    <hr>
+    <div id="club-details">
+    <div>
+        <table>
+            <thead>
+                <tr>
+                    <th>Name</th>
+                    <th>Description</th>
+                    <th>Image</th>
+                    <th></th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let club of clubs">
+                    <td>{{club.name}}</td>
+                    <td>{{club.description}}</td>
+                    <td>
+                        <button color="primary" (click)="toggleShowImage(club.image)" mat-icon-button>
+                            <mat-icon>image</mat-icon>
+                        </button>
+                    </td>
+                    <td>
+                        <button color="primary" (click)="onEditClicked(club)">
+                            <mat-icon>edit</mat-icon>
+                        </button>
+                    </td>
+                    <td>
+                        <button color="primary" mat-button [routerLink]="['/club-join-request-management', club.id]">
+                            Manage join requests
+                        </button>
+                        <button color="primary" (click)="onDeleteClicked(club.id)">
+                            <mat-icon>delete</mat-icon>
+                        </button>
+                    </td>
+                </tr>
+                <tr><button color="primary" (click)="onAddClicked()" mat-icon-button>
+                    <mat-icon>add</mat-icon>
+                </button></tr>
+            </tbody>
+        </table>
+    </div>
+    <div *ngIf="shouldShowImage">
+        <img [src]="imgSrc" width="400px" height="400px"/>
+    </div>
+    <div>
+        <xp-club-form *ngIf="shouldRenderClubForm" [shouldEdit]="shouldEdit" [club]="selectedClub" (clubUpdated)="getClubs()"></xp-club-form>
+    </div>
+    </div>
+</div>
+
