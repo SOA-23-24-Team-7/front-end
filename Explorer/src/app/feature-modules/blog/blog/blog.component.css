@@ -1,0 +1,30 @@
+.blog{
+  display: flex;
+  /* outline:2px solid red; */
+  padding: 2rem;
+  flex-direction: column;
+}
+
+.blog-title{
+  font-weight: bold;
+}
+
+.comments-header{
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.comments{
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  width: 80%;
+}
+
+.comment{
+  display: flex;
+  flex-direction: column;
+  background-color: rgb(212, 212, 212);
+  padding: 0.5rem;
+}

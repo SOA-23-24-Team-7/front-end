@@ -1,0 +1,28 @@
+<div class="tab-list" #tabList>
+    <div
+        class="tab"
+        [ngClass]="{ 'selected-tab': selectedTab === Tab.TOURS }"
+        (click)="setActiveTab(Tab.TOURS, tabList)"
+    >
+        <fa-icon [icon]="faMountainCity" /> Tours
+    </div>
+    <div
+        class="tab"
+        [ngClass]="{ 'selected-tab': selectedTab === Tab.BLOGS }"
+        (click)="setActiveTab(Tab.BLOGS, tabList)"
+    >
+        <fa-icon [icon]="faNewspaper" /> Blogs
+    </div>
+    <div
+        class="tab"
+        [ngClass]="{ 'selected-tab': selectedTab === Tab.CLUBS }"
+        (click)="setActiveTab(Tab.CLUBS, tabList)"
+    >
+        <fa-icon [icon]="faUsers" /> Clubs
+    </div>
+</div>
+<div class="tab-content">
+    <xp-tour-cards *ngIf="selectedTab === Tab.TOURS" />
+    <xp-blog-cards *ngIf="selectedTab === Tab.BLOGS" />
+    <xp-club-cards *ngIf="selectedTab === Tab.CLUBS" />
+</div>
