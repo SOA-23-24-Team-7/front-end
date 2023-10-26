@@ -41,10 +41,12 @@ export class CreateBlogComponent implements OnInit {
     {
       blog.status=BlogStatus.Published 
     }
-    else (blog.status==BlogStatus.Closed)
+    else if(blog.status==BlogStatus.Closed)
     {
       blog.status=BlogStatus.Closed 
     }
+    else
+    console.log("kita")
 
       
       this.blogService.createBlog(blog).subscribe({next:(result:Blog)=>{
