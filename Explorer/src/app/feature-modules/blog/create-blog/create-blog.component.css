@@ -1,0 +1,65 @@
+
+.p-4 {
+    padding: 1.5rem;
+  }
+  
+  .border {
+    border: 1px solid #007BFF; /* Plava boja za ivice */
+  }
+  
+  .rounded {
+    border-radius: 0.25rem;
+  }
+  
+  .mb-3 {
+    margin-bottom: 1rem;
+  }
+  
+  .form-label {
+    font-weight: bold;
+    color: #007BFF; /* Plava boja za labelu */
+    text-transform: uppercase; /* Pretvara tekst u velika slova */
+  }
+  
+  .form-control,
+  .form-select,
+  .markdown-textarea {
+    width: 100%;
+    font-size: 1.2rem; /* Krupnija slova */
+    border: 1px solid #007BFF; /* Plava boja za input, select i textarea polja */
+    border-radius: 0.25rem;
+    padding: 0.5rem;
+    box-sizing: border-box; /* Uklanja dodatni padding od ivice */
+  }
+  
+  .form-select {
+    appearance: none; /* Uklanja ugrađenu strelicu za select polje */
+   
+  }
+  
+  .btn-primary {
+    background-color: #007BFF; /* Plava boja za dugme */
+    border: none;
+    font-size: 1.2rem; /* Krupnija slova za dugme */
+    cursor: pointer;
+    transition: background-color 0.3s ease; /* Efekat prelaza za boju pozadine */
+  }
+  
+  .btn-primary:hover {
+    background-color: #0056b3; /* Tamnija plava boja na hoveru */
+  }
+  
+  .markdown-textarea {
+    min-height: 200px;
+    resize: vertical; /* Omogućava vertikalno proširivanje textarea polja */
+  }
+  
+  /* Centriranje teksta unutar forme */
+  .form-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100vh; /* Visina će popuniti celu visinu ekrana */
+  }
+  

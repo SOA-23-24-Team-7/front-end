@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { Blog } from '../model/blog.model';
-import { BlogService } from '../blog.service';
+
 import { PagedResults } from 'src/app/shared/model/paged-results.model';
+import { BlogService } from '../blog.service';
 
 @Component({
   selector: 'xp-blogs',
@@ -14,16 +15,8 @@ export class BlogsComponent implements OnInit {
   constructor(private service: BlogService) { }
 
   ngOnInit(): void {
-    this.getBlogs();
+    
   }
 
-  getBlogs(): void {
-    this.service.getBlogs().subscribe({
-      next: (result: PagedResults<Blog>) => {
-        this.blogs = result.results;
-      },
-      error: () => { }
-    })
-  }
 
 }

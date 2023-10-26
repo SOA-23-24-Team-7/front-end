@@ -1,9 +1,9 @@
 export interface Blog {
-    Title: string;
-    Description: string;
-    Date: Date;
-    Pictures?: string[]; 
-    Status: BlogStatus
+    title: string;
+    description: string;
+    date: Date;
+    pictures?: string[]; 
+    status: BlogStatus
   }
 
   export enum BlogStatus {'Draft' , 'Published' , 'Closed' }
