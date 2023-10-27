@@ -1,14 +1,23 @@
 <div class="users">
-  <p>Users</p>
-  <hr />
-  <div class="container" *ngFor="let user of users">
-    <div class="user-data">
-      <div class="data">
-        <div>{{ user.username }}</div>
-      </div>
-      <div class="button">
-        <button (click)="disableAccount(user)">Block</button>
-      </div>
+    <p>Users</p>
+    <hr />
+    <div class="container" *ngFor="let user of users">
+        <div class="user-data">
+            <div class="picture"></div>
+            <div class="row">
+                <div>@{{ user.username }}</div>
+                <div class="credentials">
+                    <div>Dragoslav</div>
+                    <div>Maslac</div>
+                </div>
+            </div>
+            <div class="button">
+                <button (click)="disableAccount(user)">Block</button>
+                <div class="status" *ngIf="user.isActive; else notActive">
+                    Active
+                </div>
+                <ng-template #notActive> notActive </ng-template>
+            </div>
+        </div>
     </div>
-  </div>
 </div>
