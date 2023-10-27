@@ -1,35 +1,48 @@
-<mat-card class="profile-card">
-  <form (ngSubmit)="saveProfile()" #editProfileForm="ngForm">
-    <div class="form-group">
-      <mat-form-field class="full-width">
-        <input matInput type="text" id="name" name="name" placeholder="Name" [(ngModel)]="person.name" required>
-      </mat-form-field>
-    </div>
-    <div class="form-group">
-      <mat-form-field class="full-width">
-        <input matInput type="text" id="surname" name="surname" placeholder="Surname" [(ngModel)]="person.surname" required>
-      </mat-form-field>
-    </div>
-    <div class="form-group">
-      <mat-form-field class="full-width">
-        <input matInput type="email" id="email" name="email" placeholder="Email" [(ngModel)]="person.email" required>
-      </mat-form-field>
-    </div>
-    <div class="form-group">
-      <mat-form-field class="full-width">
-        <textarea matInput id="bio" name="bio" placeholder="Biography" [(ngModel)]="person.bio" required></textarea>
-      </mat-form-field>
-    </div>
-    <div class="form-group">
-      <mat-form-field class="full-width">
-        <input matInput type="text" id="moto" name="moto" placeholder="Moto" [(ngModel)]="person.moto" required>
-      </mat-form-field>
-    </div>
-    <div class="form-group">
-      <mat-form-field class="full-width">
-        <input matInput type="text" id="profilePicture" name="profilePicture" placeholder="ProfilePicture" [(ngModel)]="person.profilePicture" required>
-      </mat-form-field>
-    </div>
-    <button type="submit" mat-raised-button color="primary">Save</button>
-  </form>
-</mat-card>
+<ng-container *ngIf="person">
+<div class="main">
+  <form>
+  <mat-card>
+    <mat-card-header>
+    <mat-card-title>
+      Edit Profile
+    </mat-card-title>
+  </mat-card-header>
+    <mat-card-content>
+
+          <mat-form-field>
+            <mat-label>Name</mat-label>
+            <input matInput [(ngModel)]="person.name" name="name" required/>
+          </mat-form-field>
+
+          <mat-form-field>
+            <mat-label>Surname</mat-label>
+            <input matInput [(ngModel)]="person.surname" name="surname" required/>
+          </mat-form-field>
+
+          <mat-form-field>
+            <mat-label>Email</mat-label>
+            <input matInput [(ngModel)]="person.email" name="email" required/>
+          </mat-form-field>
+
+          <mat-form-field>
+            <mat-label>Motto</mat-label>
+            <input matInput [(ngModel)]="person.moto" name="moto" required/>
+          </mat-form-field>
+
+          <mat-form-field>
+            <mat-label>Biography</mat-label>
+            <input matInput [(ngModel)]="person.bio" name="bio" required/>
+          </mat-form-field>
+
+          <mat-form-field>
+            <mat-label>Profile Picture</mat-label>
+            <input matInput [(ngModel)]="person.profilePicture" name="profilePicture" required/>
+          </mat-form-field>
+
+      <button mat-raised-button (click)="editProfile()" color="primary">Save</button>
+
+    </mat-card-content>
+  </mat-card>
+</form>
+</div>
+</ng-container>
