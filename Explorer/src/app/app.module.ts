@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatInputModule } from '@angular/material/input';
 import { AppRoutingModule } from './infrastructure/routing/app-routing.module';
 import { AppComponent } from './app.component';
 import { LayoutModule } from './feature-modules/layout/layout.module';
@@ -14,6 +15,7 @@ import { TourExecutionModule } from './feature-modules/tour-execution/tour-execu
 import { AuthModule } from './infrastructure/auth/auth.module';
 import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { JwtInterceptor } from './infrastructure/auth/jwt/jwt.interceptor';
+import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { StakeholderModule } from './feature-modules/stakeholder/stakeholder.module';
 
@@ -23,6 +25,8 @@ import { StakeholderModule } from './feature-modules/stakeholder/stakeholder.mod
     BrowserModule,
     AppRoutingModule,
     LayoutModule,
+    MatFormFieldModule,
+    MatInputModule,
     BrowserAnimationsModule,
     MaterialModule,
     AdministrationModule,
@@ -32,8 +36,9 @@ import { StakeholderModule } from './feature-modules/stakeholder/stakeholder.mod
     TourExecutionModule,
     AuthModule,
     HttpClientModule,
+    MatSnackBarModule,
     FontAwesomeModule,
-    StakeholderModule
+    StakeholderModule,
   ],
   providers: [
     {

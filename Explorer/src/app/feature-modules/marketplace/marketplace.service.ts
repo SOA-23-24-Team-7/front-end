@@ -8,8 +8,13 @@ import { PagedResults } from 'src/app/shared/model/paged-results.model';
 import { Club } from './model/club.model';
 import { MyClubJoinRequest } from './model/my-club-join-request.model';
 import { ClubJoinRequest } from './model/club-join-request.model copy';
+import { ClubMember } from './model/club-member.model';
+import { ClubInvitationUsername } from './model/club-invitation-username.model';
+import { ClubInvitation } from './model/club-invitation.model';
+import { ClubInvitationWithClubAndOwnerName } from './model/club-invitation-with-club-and-owner-name.model';
 import { Review } from './model/review.model';
 import { Problem } from './model/problem.model';
+import { TourPreference } from './model/tour-preference.model';
 
 @Injectable({
   providedIn: 'root'
@@ -17,6 +22,22 @@ import { Problem } from './model/problem.model';
 export class MarketplaceService {
 
   constructor(private http: HttpClient) { }
+
+  getTourPreference(): Observable<TourPreference> {
+    return this.http.get<TourPreference>(environment.apiHost + 'tourist/tour-preferences');
+  }
+
+  addPreference(tourPreference: TourPreference): Observable<TourPreference> {
+    return this.http.post<TourPreference>(environment.apiHost + 'tourist/tour-preferences/create', tourPreference);
+  }
+
+  deletePreference(id: number): Observable<TourPreference> {
+    return this.http.delete<TourPreference>(environment.apiHost + 'tourist/tour-preferences/' + id);
+  }
+
+  updatePreference(preference: TourPreference): Observable<TourPreference> {
+    return this.http.put<TourPreference>(environment.apiHost + 'tourist/tour-preferences', preference);
+  }
 
   addRating(rating: Rating): Observable<Rating> {
     return this.http.post<Rating>(environment.apiHost + 'rating/rating', rating);
@@ -99,6 +120,30 @@ export class MarketplaceService {
     const route = `${environment.apiHost}tourist/club-join-request`
     const body = { TouristId: touristId, ClubId: clubId }
     return this.http.post<PagedResults<ClubJoinRequest>>(route, body, { observe: 'response' })
+  }
+  getClubMembers(clubId: number): Observable<PagedResults<ClubMember>> {
+    return this.http.get<PagedResults<ClubMember>>(environment.apiHost + `tourist/club/members/${clubId}`)
+  }
+  kickMember(id: number): Observable<ClubMember> {
+    const route = environment.apiHost + "tourist/club/members/kick/" + id;
+    return this.http.delete<ClubMember>(route);
+  }
+  inviteMember(invitation: ClubInvitationUsername): Observable<HttpResponse<any>> {
+    const route = environment.apiHost + "tourist/club/invite/byUsername";
+    const body: ClubInvitationUsername = { username: invitation.username, clubId: invitation.clubId };
+    return this.http.post<PagedResults<ClubInvitationUsername>>(route, body, { observe: 'response' });
+  }
+  getInvitations(): Observable<PagedResults<ClubInvitationWithClubAndOwnerName>> {
+    const route = environment.apiHost + "tourist/club/invite/my-invitations";
+    return this.http.get<PagedResults<ClubInvitationWithClubAndOwnerName>>(route);
+  }
+  acceptInvite(invitationId: number): Observable<any> {
+    const route = environment.apiHost + "tourist/club/invite/accept/" + invitationId;
+    return this.http.patch<any>(route, { observe: 'response' });
+  }
+  rejectInvite(invitationId: number): Observable<any> {
+    const route = environment.apiHost + "tourist/club/invite/reject/" + invitationId;
+    return this.http.patch<any>(route, { observe: 'response' });
   }
   
 }
