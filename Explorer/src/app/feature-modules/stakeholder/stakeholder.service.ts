@@ -4,6 +4,7 @@ import { PagedResults } from 'src/app/shared/model/paged-results.model';
 import { Person } from './model/person.model';
 import { environment } from 'src/env/environment';
 import { Observable } from 'rxjs';
+import { ProblemComment } from './model/problemComment';
 
 @Injectable({
   providedIn: 'root',
@@ -14,6 +15,7 @@ export class StakeholderService {
   getPeople(): Observable<PagedResults<Person>> {
     return this.http.get<PagedResults<Person>>(environment.apiHost + 'people');
   }
+  
   getByUserId(userId: number): Observable<Person> {
     return this.http.get<Person>(
       environment.apiHost + 'people/person/' + userId
@@ -26,4 +28,18 @@ export class StakeholderService {
       person
     );
   }
+
+  createProblemComment(problemComment:ProblemComment):Observable<ProblemComment>{
+    return this.http.post<ProblemComment>(
+      environment.apiHost + 'problemComment/',
+      problemComment
+    );
+  }
+
+  GetCommentsByProblemAnswerId(problemAnswerId: number): Observable<PagedResults<ProblemComment>> {
+    return this.http.get<PagedResults<ProblemComment>>(
+      environment.apiHost + 'problemComment/' + problemAnswerId
+    );
+  }
+
 }

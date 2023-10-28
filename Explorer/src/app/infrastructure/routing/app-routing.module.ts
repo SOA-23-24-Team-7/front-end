@@ -28,6 +28,8 @@ import { ClubMembersManagementComponent } from "src/app/feature-modules/marketpl
 import { FacilitiesComponent } from "src/app/feature-modules/tour-authoring/facilities/facilities.component";
 import { KeyPointsComponent } from "src/app/feature-modules/tour-authoring/key-points/key-points.component";
 import { MyClubInvitationsComponent } from "src/app/feature-modules/marketplace/my-club-invitations/my-club-invitations.component";
+import { ProblemCommentComponent } from 'src/app/feature-modules/stakeholder/problem-comment/problem-comment.component';
+import { ProblemCommentListComponent } from 'src/app/feature-modules/stakeholder/problem-comment-list/problem-comment-list.component';
 
 const routes: Routes = [
     { path: "", component: HomeComponent },
@@ -126,6 +128,9 @@ const routes: Routes = [
     },
     {   
         path: 'tour-preference/tour-preference-form', component: TourPreferenceFormComponent
+    },
+    {   
+        path: 'problem/problem-comment', component: ProblemCommentListComponent
     },
 ];
 

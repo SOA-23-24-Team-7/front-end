@@ -1,0 +1,11 @@
+<div class="form">
+  <xp-problem-comment-create></xp-problem-comment-create>
+</div>
+<div class="comment-list">
+    <xp-problem-comment
+      *ngFor="let comment of comments"
+      [commenterId]="comment.commenterId"
+      [problemAnswerId]="comment.problemAnswerId"
+      [text]="comment.text">
+    </xp-problem-comment>
+</div>
