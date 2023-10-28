@@ -18,13 +18,13 @@ export class EditProfileComponent implements OnInit {
   ngOnInit(): void {
     this.authService.user$.subscribe((user) => {
         this.user = user;
+        this.service.getByUserId(this.user.id).subscribe((result: Person) => {
+          this.person = result;
+        });
       });
-    this.service.getByUserId(this.user.id).subscribe((result: Person) => {
-      this.person = result;
-    });
   }
 
-  saveProfile() {
+  editProfile() {
     this.service.updatePerson(this.person).subscribe((result) => {
       console.log('Profile updated:', result);
       this.router.navigate(['/profile']);

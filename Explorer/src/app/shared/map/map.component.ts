@@ -52,7 +52,9 @@ export class MapComponent implements AfterViewInit, OnChanges {
 
     L.Marker.prototype.options.icon = DefaultIcon;
 
-    this.initMap();
+    setTimeout(() => {
+      this.initMap();
+    }, 5);
   }
 
   ngOnChanges(changes: SimpleChanges): void {
