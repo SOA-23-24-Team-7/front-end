@@ -31,7 +31,6 @@ import { MyClubInvitationsComponent } from "src/app/feature-modules/marketplace/
 
 const routes: Routes = [
     { path: "", component: HomeComponent },
-    { path: "home", redirectTo: "", pathMatch: "full" },
     {
         path: "equipment",
         component: EquipmentComponent,
