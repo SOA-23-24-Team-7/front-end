@@ -1,28 +1,42 @@
-<div id="problems">
-    <p>Problem</p>
-    <hr />
-    <div id="equipment-details">
-        <div>
-            <table>
-                <thead>
-                    <tr>
-                        <th>Category</th>
-                        <th>Priority</th>
-                        <th>Description</th>
-                        <th>Reported time</th>
-                        <th>Tour id</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr *ngFor="let p of problems">
-                        <td>{{ p.category }}</td>
-                        <td>{{ p.priority }}</td>
-                        <td>{{ p.description }}</td>
-                        <td>{{ p.reportedTime }}</td>
-                        <td>{{ p.tourId }}</td>
-                    </tr>
-                </tbody>
-            </table>
+<div class="problems">
+    <div
+        class="container"
+        *ngFor="let problem of problems"
+        (click)="openProblemModal(problem)"
+    >
+        <div class="problem-data">
+            <div class="user-data">
+                <div class="image">
+                    <img src="/assets/images/barcelona.jpg" />
+                </div>
+                <div>@gagi</div>
+            </div>
+            <div class="report-data">
+                <div class="label">Reported at:</div>
+                <div>19-06-2001</div>
+                <div class="label">Tour:</div>
+                <div>Novosadska tura</div>
+            </div>
+        </div>
+        <div class="problem-description">
+            <div class="row">
+                <div class="column">
+                    <div class="label">Category:</div>
+                    <div>{{ problem.category }}</div>
+                </div>
+                <div class="row">
+                    <div class="column">
+                        <div class="label">Priority:</div>
+                        <div>{{ problem.priority }}</div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="column">
+                    <div class="label">Description:</div>
+                    <div>{{ problem.description }}</div>
+                </div>
+            </div>
         </div>
     </div>
 </div>

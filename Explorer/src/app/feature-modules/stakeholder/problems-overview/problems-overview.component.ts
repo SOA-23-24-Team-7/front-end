@@ -4,6 +4,8 @@ import { StakeholderService } from "../stakeholder.service";
 import { PagedResults } from "src/app/shared/model/paged-results.model";
 import { AuthService } from "src/app/infrastructure/auth/auth.service";
 import { User } from "src/app/infrastructure/auth/model/user.model";
+import { MatDialog } from "@angular/material/dialog";
+import { ProblemAnswerComponent } from "../problem-answer/problem-answer.component";
 
 @Component({
     selector: "xp-problems-overview",
@@ -16,6 +18,7 @@ export class ProblemsOverviewComponent implements OnInit {
     constructor(
         private service: StakeholderService,
         private authService: AuthService,
+        public dialogRef: MatDialog,
     ) {}
 
     ngOnInit(): void {
@@ -55,5 +58,9 @@ export class ProblemsOverviewComponent implements OnInit {
                 },
             });
         }
+    }
+
+    openProblemModal(problem: Problem) {
+        this.dialogRef.open(ProblemAnswerComponent, { data: problem });
     }
 }

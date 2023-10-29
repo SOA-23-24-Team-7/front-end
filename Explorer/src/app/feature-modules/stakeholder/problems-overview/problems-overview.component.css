@@ -1,4 +1,4 @@
-#equipment {
+/* #equipment {
     margin-top: 20px;
     margin-left: 20px;
 }
@@ -48,4 +48,84 @@ tbody tr:last-of-type {
 tbody tr.active-row {
     font-weight: bold;
     color: #3f51b5;
+} */
+
+.problems {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    padding-inline: 4rem;
+    overflow: hidden;
+    flex-wrap: wrap;
+}
+
+.container {
+    display: flex;
+    background-color: rgb(var(--clr-background-secondary));
+    width: 30rem;
+    margin: 1.5rem;
+    border-radius: 0.5rem;
+    padding-block: 1rem;
+    border: rgba(var(--clr-outline-contrast), 1) 1px solid;
+    color: rgb(var(--clr-text));
+    transition: 0.3s;
+}
+
+.container:hover {
+    border-color: rgb(var(--clr-primary-300));
+    cursor: pointer;
+}
+
+.report-data {
+    padding: 1rem;
+    padding-bottom: 0rem;
+}
+
+.problem-data {
+    display: flex;
+    flex-direction: column;
+    width: 10rem;
+    border-right: 1px solid rgb(var(--clr-text));
+}
+
+.user-data {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+}
+
+.image {
+    border: 1px solid rgb(var(--clr-text));
+    width: 5rem;
+    height: 5rem;
+    border-radius: 1rem;
+}
+
+.problem-description {
+    display: flex;
+    flex-direction: column;
+    width: 20rem;
+    padding-inline: 1rem;
+    gap: 2rem;
+}
+
+.row {
+    display: flex;
+    gap: 6rem;
+}
+
+.center {
+    display: flex;
+    justify-content: center;
+}
+
+.column {
+    display: flex;
+    flex-direction: column;
+}
+
+.label {
+    color: rgb(var(--clr-text));
+    opacity: 0.7;
 }
