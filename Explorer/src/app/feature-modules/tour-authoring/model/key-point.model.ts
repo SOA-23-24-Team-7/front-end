@@ -7,4 +7,12 @@ export interface KeyPoint {
     latitude: number;
     imagePath: string;
     order: number;
+    status: PublicStatus;
+}
+
+export enum PublicStatus {
+    NoNeeded = 0,
+    Pending = 1,
+    Accepted = 2,
+    Rejected = 3,
 }

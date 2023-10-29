@@ -1,25 +1,54 @@
 <form [formGroup]="keyPointForm">
     <div class="image-form-field form-div">
-        <img [src]="tourImage">
+        <img [src]="tourImage" />
         <label for="file-upload" class="custom-file-upload">
             <i class="fa fa-cloud-upload"></i> Upload tour image
         </label>
-        <input id="file-upload" accept="image/*" type="file" (change)="onSelectImage($event)"/>
+        <input
+            id="file-upload"
+            accept="image/*"
+            type="file"
+            (change)="onSelectImage($event)"
+        />
     </div>
     <div class="form-div">
         <mat-form-field>
             <mat-label>Name</mat-label>
-            <input matInput formControlName="name" type="text"/>
+            <input matInput formControlName="name" type="text" />
         </mat-form-field>
         <mat-form-field>
-          <mat-label>Description</mat-label>
-          <textarea matInput
-          cdkTextareaAutosize
-          cdkAutosizeMinRows="1"
-          formControlName="description"
-          cdkAutosizeMaxRows="5"></textarea>
+            <mat-label>Description</mat-label>
+            <textarea
+                matInput
+                cdkTextareaAutosize
+                cdkAutosizeMinRows="1"
+                formControlName="description"
+                cdkAutosizeMaxRows="5"
+            ></textarea>
         </mat-form-field>
-    <button *ngIf="!shouldEdit" color="primary" type="submit" (click)="addKeyPoint()" mat-raised-button>Done</button>
-    <button *ngIf="shouldEdit" color="primary" type="submit" (click)="updateKeyPoint()" mat-raised-button>Done</button>
+        <mat-label>Is public</mat-label>
+        <input
+            formControlName="status"
+            type="checkbox"
+            [(ngModel)]="isPublicChecked"
+        />
+        <button
+            *ngIf="!shouldEdit"
+            color="primary"
+            type="submit"
+            (click)="addKeyPoint()"
+            mat-raised-button
+        >
+            Done
+        </button>
+        <button
+            *ngIf="shouldEdit"
+            color="primary"
+            type="submit"
+            (click)="updateKeyPoint()"
+            mat-raised-button
+        >
+            Done
+        </button>
     </div>
 </form>
