@@ -6,7 +6,6 @@ import { MaterialModule } from "src/app/infrastructure/material/material.module"
 import { ReactiveFormsModule } from "@angular/forms";
 import { UsersOverviewComponent } from "./users-overview/users-overview.component";
 import { RatingComponent } from "./rating/rating.component";
-import { ProblemViewComponent } from "./problem-view/problem-view.component";
 
 @NgModule({
     declarations: [
@@ -14,7 +13,6 @@ import { ProblemViewComponent } from "./problem-view/problem-view.component";
         EquipmentComponent,
         RatingComponent,
         UsersOverviewComponent,
-        ProblemViewComponent,
     ],
     imports: [CommonModule, MaterialModule, ReactiveFormsModule],
     exports: [
@@ -22,7 +20,6 @@ import { ProblemViewComponent } from "./problem-view/problem-view.component";
         EquipmentFormComponent,
         UsersOverviewComponent,
         RatingComponent,
-        ProblemViewComponent,
     ],
 })
 export class AdministrationModule {}

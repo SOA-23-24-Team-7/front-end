@@ -1,29 +1,49 @@
-import { HttpClient } from '@angular/common/http';
-import { Injectable } from '@angular/core';
-import { PagedResults } from 'src/app/shared/model/paged-results.model';
-import { Person } from './model/person.model';
-import { environment } from 'src/env/environment';
-import { Observable } from 'rxjs';
+import { HttpClient } from "@angular/common/http";
+import { Injectable } from "@angular/core";
+import { PagedResults } from "src/app/shared/model/paged-results.model";
+import { Person } from "./model/person.model";
+import { environment } from "src/env/environment";
+import { Observable } from "rxjs";
+import { Problem } from "../marketplace/model/problem.model";
 
 @Injectable({
-  providedIn: 'root',
+    providedIn: "root",
 })
 export class StakeholderService {
-  constructor(private http: HttpClient) {}
+    constructor(private http: HttpClient) {}
 
-  getPeople(): Observable<PagedResults<Person>> {
-    return this.http.get<PagedResults<Person>>(environment.apiHost + 'people');
-  }
-  getByUserId(userId: number): Observable<Person> {
-    return this.http.get<Person>(
-      environment.apiHost + 'people/person/' + userId
-    );
-  }
+    getPeople(): Observable<PagedResults<Person>> {
+        return this.http.get<PagedResults<Person>>(
+            environment.apiHost + "people",
+        );
+    }
+    getByUserId(userId: number): Observable<Person> {
+        return this.http.get<Person>(
+            environment.apiHost + "people/person/" + userId,
+        );
+    }
 
-  updatePerson(person: Person): Observable<Person> {
-    return this.http.put<Person>(
-      environment.apiHost + 'people/update/',
-      person
-    );
-  }
+    updatePerson(person: Person): Observable<Person> {
+        return this.http.put<Person>(
+            environment.apiHost + "people/update/",
+            person,
+        );
+    }
+    getAdminsProblems(): Observable<PagedResults<Problem>> {
+        return this.http.get<PagedResults<Problem>>(
+            environment.apiHost + "administration/problem",
+        );
+    }
+
+    getTouristsProblems(): Observable<PagedResults<Problem>> {
+        return this.http.get<PagedResults<Problem>>(
+            environment.apiHost + "tourist/problem",
+        );
+    }
+
+    getAuthorsProblems(): Observable<PagedResults<Problem>> {
+        return this.http.get<PagedResults<Problem>>(
+            environment.apiHost + "author/problem",
+        );
+    }
 }

@@ -28,7 +28,8 @@ thead tr {
     text-align: left;
 }
 
-th, td {
+th,
+td {
     padding: 12px 15px;
 }
 
