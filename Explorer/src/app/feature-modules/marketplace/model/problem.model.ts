@@ -8,4 +8,5 @@ export interface Problem {
     dateTime: Date;
     touristId?: number;
     tourId: number;
+    isResolved?: boolean;
 }
