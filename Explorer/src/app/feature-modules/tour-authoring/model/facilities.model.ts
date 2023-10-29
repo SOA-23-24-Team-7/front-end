@@ -1,5 +1,3 @@
-import { PublicStatus } from "./key-point.model";
-
 export interface Facilities {
     id?: number;
     name: string;
@@ -9,5 +7,4 @@ export interface Facilities {
     category: number;
     longitude: number;
     latitude: number;
-    status: PublicStatus;
 }

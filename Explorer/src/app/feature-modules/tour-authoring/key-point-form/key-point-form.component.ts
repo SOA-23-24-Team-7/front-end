@@ -6,11 +6,16 @@ import {
     Output,
     SimpleChanges,
 } from "@angular/core";
-import { KeyPoint, PublicStatus } from "../model/key-point.model";
 import { TourAuthoringService } from "../tour-authoring.service";
 import { FormControl, FormGroup, Validators } from "@angular/forms";
 import { ActivatedRoute, ParamMap } from "@angular/router";
 import { environment } from "src/env/environment";
+import { KeyPoint } from "../model/key-point.model";
+import {
+    PublicKeyPointRequest,
+    PublicStatus,
+} from "../model/public-key-point-request";
+import { KeyedWrite } from "@angular/compiler";
 
 @Component({
     selector: "xp-key-point-form",
@@ -24,7 +29,7 @@ export class KeyPointFormComponent implements OnChanges {
     @Input() shouldEdit: boolean = false;
     tourImage: string | null = null;
     tourImageFile: File | null = null;
-    isPublicChecked = false;
+    //isPublicChecked = false;
 
     constructor(
         private route: ActivatedRoute,
@@ -54,7 +59,7 @@ export class KeyPointFormComponent implements OnChanges {
         longitude: new FormControl<number>(null!, [Validators.required]),
         latitude: new FormControl<number>(null!, [Validators.required]),
         imagePath: new FormControl<string>("", [Validators.required]),
-        status: new FormControl<PublicStatus>(PublicStatus.NoNeeded),
+        isPublicChecked: new FormControl<boolean>(false),
     });
 
     onSelectImage(event: Event) {
@@ -79,10 +84,6 @@ export class KeyPointFormComponent implements OnChanges {
             next: (params: ParamMap) => {
                 this.service.uploadImage(this.tourImageFile!).subscribe({
                     next: (imagePath: string) => {
-                        const status = this.isPublicChecked
-                            ? PublicStatus.Pending
-                            : PublicStatus.NoNeeded;
-
                         const keyPoint: KeyPoint = {
                             tourId: +params.get("id")!,
                             name: this.keyPointForm.value.name || "",
@@ -92,11 +93,20 @@ export class KeyPointFormComponent implements OnChanges {
                             latitude: this.keyPointForm.value.latitude || 0,
                             imagePath: imagePath,
                             order: 0,
-                            status: status,
                         };
                         this.service.addKeyPoint(keyPoint).subscribe({
-                            next: () => {
+                            next: result => {
                                 this.keyPointUpdated.emit();
+                                if (this.keyPointForm.value) {
+                                    const request: PublicKeyPointRequest = {
+                                        keyPointId: result.id as number,
+                                        status: PublicStatus.Pending,
+                                        // Dodajte komentar ako je potrebno
+                                    };
+                                    this.service
+                                        .addPublicKeyPointRequest(request)
+                                        .subscribe({});
+                                }
                             },
                         });
                     },
@@ -119,7 +129,6 @@ export class KeyPointFormComponent implements OnChanges {
                     latitude: this.keyPointForm.value.latitude || 0,
                     imagePath: this.keyPointForm.value.imagePath || "",
                     order: 0,
-                    status: this.keyPoint!.status,
                 };
 
                 if (!keyPoint.imagePath) {

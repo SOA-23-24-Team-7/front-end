@@ -9,7 +9,6 @@ import {
 import { FormControl, FormGroup, Validators } from "@angular/forms";
 import { TourAuthoringService } from "../tour-authoring.service";
 import { Facilities } from "../model/facilities.model";
-import { PublicStatus } from "../model/key-point.model";
 
 @Component({
     selector: "xp-facilities-form",
@@ -64,13 +63,9 @@ export class FacilitiesFormComponent implements OnChanges {
         category: new FormControl("", [Validators.required]),
         longitude: new FormControl("", [Validators.required]),
         latitude: new FormControl("", [Validators.required]),
-        status: new FormControl<PublicStatus>(PublicStatus.NoNeeded),
     });
 
     addFacility(): void {
-        const status = this.isPublicChecked
-            ? PublicStatus.Pending
-            : PublicStatus.NoNeeded;
         const facility: Facilities = {
             name: this.facilitiesForm.value.name || "",
             description: this.facilitiesForm.value.description || "",
@@ -82,7 +77,6 @@ export class FacilitiesFormComponent implements OnChanges {
                 parseFloat(this.facilitiesForm.value.longitude || "0") || 0,
             latitude:
                 parseFloat(this.facilitiesForm.value.latitude || "0") || 0,
-            status: status,
         };
 
         if (this.newLatitude != 0 && this.newLongitude != 0) {
@@ -112,7 +106,6 @@ export class FacilitiesFormComponent implements OnChanges {
                 parseFloat(this.facilitiesForm.value.longitude || "0") || 0,
             latitude:
                 parseFloat(this.facilitiesForm.value.latitude || "0") || 0,
-            status: this.facility!.status,
         };
 
         if (this.selectedOption == null) {

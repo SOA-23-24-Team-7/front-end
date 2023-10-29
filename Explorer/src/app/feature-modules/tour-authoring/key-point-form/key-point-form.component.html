@@ -27,11 +27,7 @@
             ></textarea>
         </mat-form-field>
         <mat-label>Is public</mat-label>
-        <input
-            formControlName="status"
-            type="checkbox"
-            [(ngModel)]="isPublicChecked"
-        />
+        <input formControlName="isPublicChecked" type="checkbox" />
         <button
             *ngIf="!shouldEdit"
             color="primary"
