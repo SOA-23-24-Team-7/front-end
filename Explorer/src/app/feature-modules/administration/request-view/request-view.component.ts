@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { PublicKeyPointRequest, PublicStatus } from '../../tour-authoring/model/public-key-point-request';
 import { AdministrationService } from '../administration.service';
 import { PagedResults } from 'src/app/shared/model/paged-results.model';
+import { FormControl, FormGroup, FormsModule } from '@angular/forms';
 
 @Component({
   selector: 'xp-request-view',
@@ -15,6 +16,10 @@ export class RequestViewComponent implements OnInit{
   ngOnInit(): void {
     this.getRequests();   
   }
+  requestForm = new FormGroup({
+    comment: new FormControl("")
+});
+
   getRequests(): void {
     this.service.getRequests().subscribe({
       next: (result: PagedResults<PublicKeyPointRequest>) => {
@@ -39,6 +44,7 @@ export class RequestViewComponent implements OnInit{
 
   rejectPublicKeyPointRequest(request: PublicKeyPointRequest): void {
     request.status = 2;
+    request.comment = this.requestForm.value.comment || "",
     this.service.respondPublicKeyPointRequest(request).subscribe({
       next: () => {
         request.status = 2;
