@@ -414,6 +414,17 @@
                     </div>
                     <div
                         class="navbar-submenu-item"
+                        *ngIf="user && user.role === 'administrator'"
+                        [routerLink]="['public-requests']"
+                    >
+                        <fa-icon
+                            class="navbar-submenu-item-icon"
+                            [icon]="faUser"
+                        />
+                        <div class="navbar-submenu-item-text">My requests</div>
+                    </div>
+                    <div
+                        class="navbar-submenu-item"
                         (click)="onLogout()"
                     >
                         <fa-icon

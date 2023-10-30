@@ -1,0 +1,29 @@
+<div id="requests">
+    <p>Problem</p>
+    <hr>
+    <div id="equipment-details">
+    <div>
+        <table>
+            <thead>
+                <tr>
+                    <th>KeyPoint id</th>
+                    <th>Status</th>
+                    <th></th>
+                    <th></th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let request of requests">
+                    <td>{{request.keyPointId}}</td>
+                    <td>{{getPublicStatusText(request.status)}}</td>    
+                    <button color="primary" *ngIf="request.status == 0" mat-button (click)="acceptPublicKeyPointRequest(request)">Accept</button>
+                    <button color="primary" *ngIf="request.status == 0" mat-button (click)="rejectPublicKeyPointRequest(request)">Reject</button>
+                    
+            </tbody>
+        </table>
+    </div>
+    
+    </div>
+</div>
+
