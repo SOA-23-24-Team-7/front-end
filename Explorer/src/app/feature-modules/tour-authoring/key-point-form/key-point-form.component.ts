@@ -97,7 +97,7 @@ export class KeyPointFormComponent implements OnChanges {
                         this.service.addKeyPoint(keyPoint).subscribe({
                             next: result => {
                                 this.keyPointUpdated.emit();
-                                if (this.keyPointForm.value) {
+                                if (this.keyPointForm.value.isPublicChecked) {
                                     const request: PublicKeyPointRequest = {
                                         keyPointId: result.id as number,
                                         status: PublicStatus.Pending,

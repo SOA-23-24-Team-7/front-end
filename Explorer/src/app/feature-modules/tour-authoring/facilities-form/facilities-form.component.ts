@@ -9,6 +9,10 @@ import {
 import { FormControl, FormGroup, Validators } from "@angular/forms";
 import { TourAuthoringService } from "../tour-authoring.service";
 import { Facilities } from "../model/facilities.model";
+import {
+    PublicFacilityRequest,
+    PublicStatus,
+} from "../model/public-facility-request";
 
 @Component({
     selector: "xp-facilities-form",
@@ -85,9 +89,19 @@ export class FacilitiesFormComponent implements OnChanges {
             facility.latitude = this.newLatitude;
 
             this.service.addFacility(facility).subscribe({
-                next: _ => {
+                next: result => {
                     this.facilitiesUpdated.emit();
                     location.reload();
+                    if (this.facilitiesForm.value.isPublicChecked) {
+                        const request: PublicFacilityRequest = {
+                            facilityId: result.id as number,
+                            status: PublicStatus.Pending,
+                            // Dodajte komentar ako je potrebno
+                        };
+                        this.service
+                            .addPublicFacilityRequest(request)
+                            .subscribe({});
+                    }
                 },
             });
         } else {
