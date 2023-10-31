@@ -28,6 +28,7 @@ import { ClubMembersManagementComponent } from "src/app/feature-modules/marketpl
 import { FacilitiesComponent } from "src/app/feature-modules/tour-authoring/facilities/facilities.component";
 import { KeyPointsComponent } from "src/app/feature-modules/tour-authoring/key-points/key-points.component";
 import { MyClubInvitationsComponent } from "src/app/feature-modules/marketplace/my-club-invitations/my-club-invitations.component";
+import { RequestViewComponent } from 'src/app/feature-modules/administration/request-view/request-view.component';
 
 const routes: Routes = [
     { path: "", component: HomeComponent },
@@ -127,6 +128,7 @@ const routes: Routes = [
     {   
         path: 'tour-preference/tour-preference-form', component: TourPreferenceFormComponent
     },
+    { path: "public-requests", component: RequestViewComponent, canActivate: [AuthGuard] },
 ];
 
 @NgModule({
