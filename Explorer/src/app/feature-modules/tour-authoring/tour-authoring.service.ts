@@ -8,6 +8,7 @@ import { environment } from "src/env/environment";
 import { KeyPoint } from "./model/key-point.model";
 import { Facilities } from "./model/facilities.model";
 import { PublicKeyPointRequest } from "./model/public-key-point-request";
+import { PublicFacilityRequest } from "./model/public-facility-request";
 
 @Injectable({
     providedIn: "root",
@@ -144,6 +145,15 @@ export class TourAuthoringService {
     ): Observable<PublicKeyPointRequest> {
         return this.http.post<PublicKeyPointRequest>(
             environment.apiHost + "publicKeyPointRequest",
+            request,
+        );
+    }
+
+    addPublicFacilityRequest(
+        request: PublicFacilityRequest,
+    ): Observable<PublicFacilityRequest> {
+        return this.http.post<PublicFacilityRequest>(
+            environment.apiHost + "publicFacilityRequest",
             request,
         );
     }

@@ -63,6 +63,7 @@ export class FacilitiesFormComponent implements OnChanges {
         category: new FormControl("", [Validators.required]),
         longitude: new FormControl("", [Validators.required]),
         latitude: new FormControl("", [Validators.required]),
+        isPublicChecked: new FormControl<boolean>(false),
     });
 
     addFacility(): void {
