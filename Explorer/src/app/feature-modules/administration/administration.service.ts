@@ -9,6 +9,7 @@ import { Rating } from './model/rating.model';
 import { RatingUsername } from './model/ratingWithUsername';
 import { Problem } from '../marketplace/model/problem.model';
 import { PublicKeyPointRequest } from '../tour-authoring/model/public-key-point-request';
+import { PublicFacilityRequest } from '../tour-authoring/model/public-facility-request';
 
 @Injectable({
   providedIn: 'root',
@@ -67,6 +68,14 @@ export class AdministrationService {
   respondPublicKeyPointRequest(request:PublicKeyPointRequest): Observable<PublicKeyPointRequest> {
     return this.http.put<PublicKeyPointRequest>(
       environment.apiHost + 'administration/requests/' + request.id,
+      request);
+  }
+  getFacilityRequests(): Observable<PagedResults<PublicFacilityRequest>> {
+    return this.http.get<PagedResults<PublicFacilityRequest>>(environment.apiHost +'administration/requests/facility')
+  }
+  respondPublicFacilityRequest(request:PublicFacilityRequest): Observable<PublicFacilityRequest> {
+    return this.http.put<PublicFacilityRequest>(
+      environment.apiHost + 'administration/requests/facility/' + request.id,
       request);
   }
 }

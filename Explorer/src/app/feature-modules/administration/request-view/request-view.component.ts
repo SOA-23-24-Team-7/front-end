@@ -3,6 +3,7 @@ import { PublicKeyPointRequest, PublicStatus } from '../../tour-authoring/model/
 import { AdministrationService } from '../administration.service';
 import { PagedResults } from 'src/app/shared/model/paged-results.model';
 import { FormControl, FormGroup, FormsModule } from '@angular/forms';
+import { PublicFacilityRequest } from '../../tour-authoring/model/public-facility-request';
 
 @Component({
   selector: 'xp-request-view',
@@ -11,6 +12,7 @@ import { FormControl, FormGroup, FormsModule } from '@angular/forms';
 })
 export class RequestViewComponent implements OnInit{
   requests: PublicKeyPointRequest[]=[]
+  facilityRequests: PublicFacilityRequest[]=[]
   status:PublicStatus;
   constructor(private service: AdministrationService){}
   ngOnInit(): void {
@@ -23,7 +25,14 @@ export class RequestViewComponent implements OnInit{
   getRequests(): void {
     this.service.getRequests().subscribe({
       next: (result: PagedResults<PublicKeyPointRequest>) => {
-        this.requests=result.results
+          this.requests = result.results;
+          this.service
+              .getFacilityRequests()
+              .subscribe({
+                  next: (result: PagedResults<PublicFacilityRequest>) => {
+                      this.facilityRequests = result.results;
+                  },
+              });
       },
       error: (err:any) => {
         console.log(err);
@@ -32,6 +41,7 @@ export class RequestViewComponent implements OnInit{
   }
   acceptPublicKeyPointRequest(request: PublicKeyPointRequest): void {
     request.status = 1;
+    request.comment = "",
     this.service.respondPublicKeyPointRequest(request).subscribe({
       next: () => {
         request.status = 1;
@@ -66,5 +76,30 @@ export class RequestViewComponent implements OnInit{
       default:
         return 'Pending';
     }
+  }
+  acceptPublicFacilityRequest(request: PublicFacilityRequest): void {
+    request.status = 1;
+    request.comment = "",
+    this.service.respondPublicFacilityRequest(request).subscribe({
+      next: () => {
+        request.status = 1;
+      },
+      error: (errData) => {
+        console.log(errData)
+      }
+    })
+  }
+
+  rejectPublicFacilityRequest(request: PublicFacilityRequest): void {
+    request.status = 2;
+    request.comment = this.requestForm.value.comment || "",
+    this.service.respondPublicFacilityRequest(request).subscribe({
+      next: () => {
+        request.status = 2;
+      },
+      error: (errData) => {
+        console.log(errData)
+      }
+    })
   }
 }
