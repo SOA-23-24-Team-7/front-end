@@ -1,0 +1,88 @@
+:host {
+    width: 50rem;
+}
+
+.blog {
+    display: flex;
+    /* outline:2px solid blue; */
+    background-color: rgb(var(--clr-background-secondary));
+    border: 1px solid rgb(var(--clr-outline));
+    border-radius: 0.5rem;
+    font-size: 1.2rem;
+    transition: filter 0.2s;
+    height: max-content;
+    gap: 1rem;
+    box-shadow: 0 0 0.5rem rgba(var(--clr-outline), 0.6);
+    color: rgb(var(--clr-text));
+}
+
+.blog-title {
+    margin: 0;
+}
+
+.blog:hover {
+    filter: brightness(1.05);
+    cursor: pointer;
+}
+
+.blogs-title {
+    font-size: 3rem;
+}
+
+.blog-header {
+    display: flex;
+    align-items: center;
+}
+
+.blog-date {
+    margin-left: auto;
+}
+
+.blog-description {
+    max-height: 20rem;
+}
+
+.bottom-bar {
+    display: flex;
+}
+
+.sidebar {
+    display: flex;
+    flex-direction: column;
+    background-color: rgb(var(--clr-background));
+    border-top-left-radius: 0.5rem;
+    border-bottom-left-radius: 0.5rem;
+    padding-inline: 0.6rem;
+    padding-block: 0.2rem;
+    align-items: center;
+    justify-content: start;
+    font-size: 1rem;
+}
+
+.vote {
+    font-size: 1.3rem;
+}
+
+.vote fa-icon {
+    transition: color 0.2s;
+}
+
+.vote-count {
+    font-weight: 500;
+}
+
+.upvote:hover {
+    color: rgb(var(--clr-success-700));
+}
+
+.downvote:hover {
+    color: rgb(var(--clr-error-700));
+}
+
+.active .upvote {
+    color: rgb(var(--clr-success-700));
+}
+
+.active .downvote {
+    color: rgb(var(--clr-error-700));
+}

@@ -1,0 +1,34 @@
+<div class="blog">
+    <div class="sidebar">
+        <div
+            class="vote"
+            [ngClass]="{
+                active: vote ? vote.voteType == VoteType.UPVOTE : false
+            }"
+            (click)="onUpVote($event)"
+        >
+            <fa-icon class="upvote" [icon]="faCircleUp" />
+        </div>
+        <div class="vote-count">{{ blog.voteCount }}</div>
+        <div
+            class="vote"
+            [ngClass]="{
+                active: vote ? vote.voteType == VoteType.DOWNVOTE : false
+            }"
+            (click)="onDownVote($event)"
+        >
+            <fa-icon class="downvote" [icon]="faCircleDown" />
+        </div>
+    </div>
+    <div class="blog-content">
+        <div class="blog-header">
+            <h2 class="blog-title">{{ blog.title }}</h2>
+            <span class="blog-date">{{ blog.date }}</span>
+        </div>
+        <div class="blog-description">{{ blog.description }}</div>
+        <div class="bottom-bar">
+            <div class="comments"></div>
+            <div class="share"></div>
+        </div>
+    </div>
+</div>

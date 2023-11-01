@@ -1,31 +1,54 @@
-import { HttpClient } from '@angular/common/http';
-import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
-import { PagedResults } from 'src/app/shared/model/paged-results.model';
-import { environment } from 'src/env/environment';
-import { Blog } from './model/blog.model';
-import { Comment, CreateComment } from './model/comment.model';
+import { HttpClient } from "@angular/common/http";
+import { Injectable } from "@angular/core";
+import { Observable } from "rxjs";
+import { PagedResults } from "src/app/shared/model/paged-results.model";
+import { environment } from "src/env/environment";
+import { Blog } from "./model/blog.model";
+import { Comment, CreateComment } from "./model/comment.model";
+import { Vote } from "./model/vote.model";
 
 @Injectable({
-  providedIn: 'root'
+    providedIn: "root",
 })
 export class BlogService {
+    constructor(private http: HttpClient) {}
 
-  constructor(private http: HttpClient) { }
+    getVotedBlogs(userId: number): Observable<PagedResults<Vote>> {
+        return this.http.get<PagedResults<Vote>>(
+            environment.apiHost + "blog/votedBlogs/user/" + userId,
+        );
+    }
 
-  getBlogs(): Observable<PagedResults<Blog>> {
-    return this.http.get<PagedResults<Blog>>(environment.apiHost + 'blog');
-  }
+    getBlogs(): Observable<PagedResults<Blog>> {
+        return this.http.get<PagedResults<Blog>>(environment.apiHost + "blog");
+    }
 
-  getBlog(id: number): Observable<Blog> {
-    return this.http.get<Blog>(environment.apiHost + 'blog/' + id);
-  }
+    getBlog(id: number): Observable<Blog> {
+        return this.http.get<Blog>(environment.apiHost + "blog/" + id);
+    }
 
-  getComments(blogId: number): Observable<PagedResults<Comment>> {
-    return this.http.get<PagedResults<Comment>>(environment.apiHost + 'tourist/comment/' + blogId);
-  }
+    getComments(blogId: number): Observable<PagedResults<Comment>> {
+        return this.http.get<PagedResults<Comment>>(
+            environment.apiHost + "tourist/comment/" + blogId,
+        );
+    }
 
-  addComment(comment: CreateComment): Observable<Comment> {
-    return this.http.post<Comment>(environment.apiHost + 'tourist/comment', comment);
-  }
+    addComment(comment: CreateComment): Observable<Comment> {
+        return this.http.post<Comment>(
+            environment.apiHost + "tourist/comment",
+            comment,
+        );
+    }
+
+    upVoteBlog(blogId: number): Observable<any> {
+        return this.http.get<any>(
+            environment.apiHost + "blog/upvote/" + blogId,
+        );
+    }
+
+    downVoteBlog(blogId: number): Observable<any> {
+        return this.http.get<any>(
+            environment.apiHost + "blog/downvote/" + blogId,
+        );
+    }
 }
