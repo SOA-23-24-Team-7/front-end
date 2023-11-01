@@ -22,7 +22,7 @@
 
 .navbar-not-home {
     background-color: rgba(var(--clr-background), 1);
-    border-bottom: rgba(var(--clr-outline), 1) 1px solid;
+    border-bottom: rgba(var(--border-primary), 1) 1px solid;
     background-image: none;
     color: rgb(var(--clr-text));
     position: relative;

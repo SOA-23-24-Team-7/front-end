@@ -1,8 +1,11 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { MapComponent } from 'src/app/shared/map/map.component'
+import { MapComponent } from 'src/app/shared/map/map.component';
 import { MarketplaceService } from '../marketplace.service';
 import { PagedResults } from 'src/app/shared/model/paged-results.model';
 import { Tour } from '../../tour-authoring/model/tour.model';
+import { 
+  faFilter
+} from "@fortawesome/free-solid-svg-icons";
 
 
 @Component({
@@ -51,4 +54,6 @@ export class TourSearchComponent implements OnInit{
   onSliderChanged(): void {
     this.distance = this.slider.value;
   }
+
+  faFilter = faFilter;
 }

@@ -23,7 +23,9 @@ import { TagInputModule } from 'ngx-chips';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { FormsModule } from '@angular/forms';
 import { TourSearchComponent } from './tour-search/tour-search.component';
-import { SharedModule } from 'src/app/shared/shared.module'
+import { SharedModule } from 'src/app/shared/shared.module';
+import { FontAwesomeModule } from "@fortawesome/angular-fontawesome";
+import { LayoutModule } from 'src/app/feature-modules/layout/layout.module';
 
 
 @NgModule({
@@ -61,7 +63,9 @@ import { SharedModule } from 'src/app/shared/shared.module'
         BrowserModule,
         TagInputModule, 
         BrowserAnimationsModule,
-        SharedModule
+        SharedModule,
+        FontAwesomeModule,
+        LayoutModule
     ],
     exports: [
         ReviewComponent,
