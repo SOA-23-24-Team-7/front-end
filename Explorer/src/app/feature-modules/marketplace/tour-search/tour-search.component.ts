@@ -32,15 +32,20 @@ export class TourSearchComponent implements OnInit{
   }
 
   onSearch(): void {
-    this.service.findNearbyTours(this.longitude, this.latitude, this.distance).subscribe({
-      next: (result: PagedResults<Tour>) => {
-        this.tours = result.results;
-        console.log(this.tours);
-      },
-      error: (errData) => {
-        console.log(errData);
-      }
-    })
+    if(this.longitude !=-200 && this.latitude != -200){
+      this.service.findNearbyTours(this.longitude, this.latitude, this.distance).subscribe({
+        next: (result: PagedResults<Tour>) => {
+          this.tours = result.results;
+          console.log(this.tours);
+        },
+        error: (errData) => {
+          console.log(errData);
+        }
+      })
+    }
+    else{
+      alert("You have to choose the location on the map");
+    }
   }
 
   onSliderChanged(): void {
