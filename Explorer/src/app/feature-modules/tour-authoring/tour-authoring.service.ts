@@ -157,4 +157,10 @@ export class TourAuthoringService {
             request,
         );
     }
+
+    getTour(tourId : number): Observable<Tour> {
+        return this.http.get<Tour>(
+            environment.apiHost + "tour/" + tourId
+        );
+    }
 }

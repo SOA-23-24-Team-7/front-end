@@ -7,10 +7,12 @@ export interface Tour{
     tags:string[],
     status?: TourStatus,
     price?:number,
-    isDeleted?:boolean
+    isDeleted?:boolean,
+    distance?:number
 }
 
 export enum TourStatus {
     Draft = 0,
     Published = 1,
+    Archived = 2
 }
