@@ -23,6 +23,7 @@ import { TagInputModule } from 'ngx-chips';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { FormsModule } from '@angular/forms';
 import { TourSearchComponent } from './tour-search/tour-search.component';
+import { MapComponent } from '../../shared/map/map.component'
 
 
 @NgModule({
@@ -45,7 +46,8 @@ import { TourSearchComponent } from './tour-search/tour-search.component';
         MyClubInvitationsComponent,
         TourPreferencesComponent,
         TourPreferenceFormComponent,
-        TourSearchComponent
+        TourSearchComponent,
+        MapComponent
     ],
     imports: [
         CommonModule,
