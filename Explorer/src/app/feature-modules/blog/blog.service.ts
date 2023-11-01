@@ -4,7 +4,7 @@ import { Observable } from 'rxjs';
 import { PagedResults } from 'src/app/shared/model/paged-results.model';
 import { environment } from 'src/env/environment';
 import { Blog } from './model/blog.model';
-import { Comment, CreateComment } from './model/comment.model';
+import { Comment, CreateComment, UpdateComment } from './model/comment.model';
 
 @Injectable({
   providedIn: 'root'
@@ -27,5 +27,13 @@ export class BlogService {
 
   addComment(comment: CreateComment): Observable<Comment> {
     return this.http.post<Comment>(environment.apiHost + 'tourist/comment', comment);
+  }
+
+  updateComment(comment: Comment): Observable<Comment> {
+    return this.http.put<Comment>(environment.apiHost + 'tourist/comment/' + comment.id, comment);
+  }
+
+  deleteComment(id: Number): Observable<Comment> {
+    return this.http.delete<Comment>(environment.apiHost + 'tourist/comment/' + id);
   }
 }

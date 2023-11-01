@@ -11,3 +11,8 @@ export interface CreateComment {
   blogId: number;
   text: string;
 }
+
+export interface UpdateComment {
+  id: number
+  text: string;
+}

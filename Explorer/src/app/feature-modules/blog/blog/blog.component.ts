@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Comment } from '../model/comment.model';
+import { Comment, UpdateComment } from '../model/comment.model';
 import { Blog } from '../model/blog.model';
 import { BlogService } from '../blog.service';
 import { ActivatedRoute } from '@angular/router';
@@ -66,4 +66,30 @@ export class BlogComponent implements OnInit {
     });
   }
 
+  onEditComment(editedComment: Comment): void {
+    this.service.updateComment(editedComment).subscribe({
+      next: (result: Comment) => {
+        const updatedCommentIndex = this.comments.findIndex(comment => comment.id === result.id);
+        if (updatedCommentIndex !== -1) {
+          this.comments[updatedCommentIndex] = result;
+        }
+      }
+    });
+  }
+
+  onDeleteComment(deletedComment: Comment): void {
+    if (deletedComment.id) {
+        this.service.deleteComment(deletedComment.id).subscribe({
+            next: () => {
+                this.comments = this.comments.filter(comment => comment.id !== deletedComment.id);
+            },
+            error: (error) => {
+                console.error('Error deleting comment:', error);
+                // Handle error, e.g., display an error message
+            }
+        });
+    } else {
+        console.warn('Comment does not have an ID. Cannot delete.');
+    }
+  }
 }
