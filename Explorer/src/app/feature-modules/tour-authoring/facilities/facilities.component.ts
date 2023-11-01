@@ -73,6 +73,9 @@ export class FacilitiesComponent implements OnInit {
     this.mapComponent.getClickCoordinates((lat, lng) => {
        this.facilitiesFormComponent.newLatitude = lat;
        this.facilitiesFormComponent.newLongitude = lng;
+
+       console.log(this.facilitiesFormComponent.newLatitude);
+       console.log(this.facilitiesFormComponent.newLongitude);
     });
 
     if(this.shouldRenderFacilitiesForm){

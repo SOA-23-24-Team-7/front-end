@@ -15,6 +15,7 @@ import { ClubInvitationWithClubAndOwnerName } from './model/club-invitation-with
 import { Review } from './model/review.model';
 import { Problem } from './model/problem.model';
 import { TourPreference } from './model/tour-preference.model';
+import { Tour } from '../tour-authoring/model/tour.model';
 
 @Injectable({
   providedIn: 'root'
@@ -144,6 +145,10 @@ export class MarketplaceService {
   rejectInvite(invitationId: number): Observable<any> {
     const route = environment.apiHost + "tourist/club/invite/reject/" + invitationId;
     return this.http.patch<any>(route, { observe: 'response' });
+  }
+  findNearbyTours(longitude: number, latitude: number, distance: number): Observable<PagedResults<Tour>> {
+    const route = `${environment.apiHost}tourist/tour?longitude=${longitude}&latitude=${latitude}&maxDistance=${distance}`;
+    return this.http.get<PagedResults<Tour>>(route);
   }
   
 }

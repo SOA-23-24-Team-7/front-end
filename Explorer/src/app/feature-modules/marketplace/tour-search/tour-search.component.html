@@ -15,13 +15,13 @@
                         <div class="tour-search-map-distance-value">5000m</div>
                         <div class="tour-search-map-distance-max">20000m</div>
                     </div>
-                    <input class="tour-search-map-distance" type="range" name="slider" min="0" max="20000" value="50" step="100">
+                    <input id="slider" class="tour-search-map-distance" type="range" name="slider" min="0" max="20000" value="50" step="100" [(ngModel)]="distance">
                     <div class="tour-search-map">
-                        <xp-map [height]="'20rem'" [canEdit]="true"></xp-map>
+                        <xp-map [height]="'20rem'" [canEdit]="true" (click)="onMapClicked()"></xp-map>
                     </div>
                 </div>
             </div>
-            <div class="tour-search-button">
+            <div class="tour-search-button" (click)="onSearch()">
                 <div class="tour-search-button-text">Search</div>
             </div>
         </div>
