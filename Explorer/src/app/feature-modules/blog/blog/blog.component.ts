@@ -8,6 +8,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { CommentFormComponent } from '../comment-form/comment-form.component';
 import { AuthService } from 'src/app/infrastructure/auth/auth.service';
 import { User } from 'src/app/infrastructure/auth/model/user.model';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'xp-blog',
@@ -20,7 +21,7 @@ export class BlogComponent implements OnInit {
   blogId: number;
   user: User | undefined;
 
-  constructor(private authService: AuthService, private service: BlogService, private route: ActivatedRoute, public dialog: MatDialog) { }
+  constructor(private authService: AuthService, private service: BlogService, private route: ActivatedRoute, public dialog: MatDialog, private router:Router) { }
 
   ngOnInit(): void {
     this.authService.user$.subscribe((user) => {
@@ -51,6 +52,22 @@ export class BlogComponent implements OnInit {
     });
 
   }
+  
+ 
+  
+  updateBlog(id: number): void {
+    this.router.navigate([`update-blog/${id}`]);
+  }
+  
+
+  deleteBlog(id: number): void {
+    this.service.deleteBlog(id).subscribe({
+      
+    })
+    this.router.navigate([''])
+  }
+
+  
 
   onAddClicked(): void {
     const dialogRef = this.dialog.open(CommentFormComponent, {

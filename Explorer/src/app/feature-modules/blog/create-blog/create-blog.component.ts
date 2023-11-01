@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Blog, BlogStatus } from '../model/blog.model'; 
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { BlogService } from '../blog.service';
+import { Router } from '@angular/router';
 
 
 @Component({
@@ -14,7 +15,7 @@ import { BlogService } from '../blog.service';
 export class CreateBlogComponent implements OnInit {
   blogStatus: BlogStatus
   blogForm: FormGroup;
-  constructor(private fb: FormBuilder, private  blogService: BlogService) { }
+  constructor(private fb: FormBuilder, private  blogService: BlogService, private router: Router) { }
 
   ngOnInit(): void {
    
@@ -26,9 +27,7 @@ export class CreateBlogComponent implements OnInit {
       status: ['Draft']
     });
   }
-
-  
- 
+   
   submitBlog(): void {
     if (this.blogForm.valid) {
       const blog: Blog = this.blogForm.value;
@@ -46,7 +45,7 @@ export class CreateBlogComponent implements OnInit {
       blog.status=BlogStatus.Closed 
     }
     else
-    console.log("kita")
+    console.log("")
 
       
       this.blogService.createBlog(blog).subscribe({next:(result:Blog)=>{
@@ -56,6 +55,7 @@ export class CreateBlogComponent implements OnInit {
     } else {
       console.log('Nije validn');
     }
+    this.router.navigate(['/blogs'])
 
 }
 

@@ -31,8 +31,9 @@ export class CommentFormComponent {
     const comment: CreateComment = {
       blogId: this.data.blogId,
       text: this.commentText
+    
     }
-
+console.log(comment)
     this.service.addComment(comment).subscribe({
       next: (result: Comment) => {
         this.dialogRef.close({

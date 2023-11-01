@@ -7,6 +7,8 @@
     <div class="comments-header">
       <h2>Comments:</h2>
       <button color="primary" (click)="onAddClicked()" mat-raised-button>New</button>
+      <button color="primary" (click)="deleteBlog(blog.id || 0)"  mat-raised-button>Delete</button>
+      <button color="primary" (click)="updateBlog(blog.id || 0)"  mat-raised-button>Update</button>
     </div>
     <div class="comment" *ngFor="let comment of comments">
       <div class="author">{{comment.authorId}}</div>
@@ -15,5 +17,6 @@
       </p>
     </div>
   </div>
+
 
 </div>

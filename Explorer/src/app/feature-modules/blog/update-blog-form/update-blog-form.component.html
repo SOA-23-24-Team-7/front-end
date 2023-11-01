@@ -1,0 +1,26 @@
+<div class="mb-3">
+  <label for="naslov" class="form-label">Title:</label>
+  <input type="text" id="naslov" class="form-control" [(ngModel)]="updatedBlog.title">
+</div>
+
+<div class="mb-3">
+  <label for="opis">Description:</label>
+  <textarea id="opis" class="form-control" [(ngModel)]="updatedBlog.description"></textarea>
+</div>
+
+
+<div class="mb-3">
+  <label for="slike" class="form-label">Pictures (optional):</label>
+  <input type="text" id="slike" class="form-control" [(ngModel)]="updatedBlog.pictures">
+</div>
+
+<div class="mb-3">
+  <label for="status" class="form-label">Status:</label>
+  <select id="status" class="form-select" [(ngModel)]="updatedBlog.status">
+      <option value=0>Draft</option>
+      <option value=1>Published</option>
+      <option value=2>Closed</option>
+  </select>
+</div>
+
+<button type="button" class="btn btn-primary" (click)="updateBlog()">Update Blog</button>
