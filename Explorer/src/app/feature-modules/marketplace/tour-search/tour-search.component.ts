@@ -20,6 +20,7 @@ export class TourSearchComponent implements OnInit{
   distance: number = 0;
   slider: any;
   tours: Tour[] = [];
+  count: number = 0;
 
   constructor(private service: MarketplaceService) {}
 
@@ -39,6 +40,7 @@ export class TourSearchComponent implements OnInit{
       this.service.findNearbyTours(this.longitude, this.latitude, this.distance).subscribe({
         next: (result: PagedResults<Tour>) => {
           this.tours = result.results;
+          this.count = result.totalCount;
           console.log(this.tours);
         },
         error: (errData) => {

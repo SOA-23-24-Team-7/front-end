@@ -31,6 +31,6 @@ import { TouristEquipmentSelectionComponent } from './tourist-equipment-selectio
         TouristEquipmentSelectionComponent,
     ],
     imports: [CommonModule, MaterialModule, RouterModule, FontAwesomeModule, MatDialogModule],
-    exports: [NavbarComponent, HomeComponent, FooterComponent],
+    exports: [NavbarComponent, HomeComponent, FooterComponent, TourCardComponent ],
 })
 export class LayoutModule {}
