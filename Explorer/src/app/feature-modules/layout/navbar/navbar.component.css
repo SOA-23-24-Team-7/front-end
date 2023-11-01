@@ -285,7 +285,7 @@
 
 .navbar-theme-sun {
     position: absolute;
-    top: auto;
+    top: 1px;
     bottom: auto;
     left: 0.275rem;
     font-size: 1.2rem;
@@ -295,7 +295,7 @@
 
 .navbar-theme-moon {
     position: absolute;
-    top: auto;
+    top: 1px;
     bottom: auto;
     right: 0.275rem;
     font-size: 1.2rem;

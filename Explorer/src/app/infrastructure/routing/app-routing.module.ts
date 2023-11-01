@@ -129,7 +129,9 @@ const routes: Routes = [
         path: 'tour-preference/tour-preference-form', component: TourPreferenceFormComponent
     },
     {   
-        path: 'tour-search', component: TourSearchComponent
+        path: 'tour-search', 
+        component: TourSearchComponent,
+        canActivate: [AuthGuard]
     }
 ];
 
