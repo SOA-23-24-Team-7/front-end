@@ -1,45 +1,11 @@
-.profile-card {
+.card{
+  width: 60%;
+  max-width: 60%;
+  height: 15rem;
+}
+
+.main{
   display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-}
-
-.profile-container {
-  display: flex;
-  flex-direction: row;
-  align-items: flex-start;
-}
-
-.profile-info {
-  flex: 1;
-  display: flex;
-  align-items: flex-start;
-  margin-right: 20px;
-}
-
-.info-container {
-  flex: 1;
-}
-
-
-.edit-card {
-  display: flex;
-  flex-direction: column;
-  max-width: 40%;
-  margin-left: auto;
-}
-
-.edit-container {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 20px;
-}
-
-.edit-card button {
-  align-self: flex-end;
-}
-
-img {
-  width: 280px;
-  height: 280px;
+  width: 100%;
+  justify-content: center;
 }

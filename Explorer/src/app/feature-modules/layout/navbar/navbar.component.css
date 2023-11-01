@@ -11,7 +11,7 @@
     padding-right: 2rem;
     position: absolute;
     width: 100%;
-    z-index: 100;
+    z-index: 999;
     /* background-color: rgba(var(--clr-neutral-900), 0); */
     background-image: linear-gradient(
         rgba(var(--clr-neutral-900), 1),
@@ -26,7 +26,7 @@
     background-image: none;
     color: rgb(var(--clr-text));
     position: relative;
-    z-index: 100;
+    z-index: 999;
 }
 
 .navbar-not-home .navbar-menu-item-content-text {

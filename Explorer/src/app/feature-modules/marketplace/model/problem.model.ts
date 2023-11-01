@@ -5,7 +5,7 @@ export interface Problem {
     category: string;
     priority: string;
     description: string;
-    reportedTime: string;
+    dateTime: Date;
     touristId?: number;
     tourId: number;
 }
