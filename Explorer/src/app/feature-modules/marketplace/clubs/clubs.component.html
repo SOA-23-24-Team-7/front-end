@@ -1,0 +1,40 @@
+<div id="club">
+    <p>Clubs</p>
+    <hr>
+    <div id="club-details">
+    <div>
+        <table>
+            <thead>
+                <tr>
+                    <th>Owner</th>
+                    <th>Name</th>
+                    <th>Description</th>
+                    <th>Image</th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let club of clubs">
+                    <td>{{club.username}}</td>
+                    <td>{{club.name}}</td>
+                    <td>{{club.description}}</td>
+                    <td>
+                        <button color="primary" mat-icon-button (click)="toggleShowImage(club.image)">
+                            <mat-icon>image</mat-icon>
+                        </button>
+                    </td>
+                    <td>
+                        <button *ngIf="user.id != club.ownerId" color="primary" mat-button (click)="sendJoinRequest(club.id !== undefined ? club.id : 0)">
+                            Send join request 
+                        </button>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    <div *ngIf="shouldShowImage">
+        <img [src]="imgSrc" width="400px" height="400px"/>
+    </div>
+    </div>
+</div>
+

@@ -1,0 +1,11 @@
+<div class="blog-cards-container">
+    <div class="list-cards-button">
+        <div class="triangle-left"></div>
+    </div>
+
+    <xp-blog-card *ngFor="let blog of blogsList" [blog]="blog"></xp-blog-card>
+
+    <div class="list-cards-button" id="next-button">
+        <div class="triangle-right"></div>
+    </div>
+</div>

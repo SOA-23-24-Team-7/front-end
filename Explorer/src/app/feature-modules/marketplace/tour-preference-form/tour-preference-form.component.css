@@ -1,0 +1,35 @@
+.create-form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+}
+
+/* Add margin to the form fields for better spacing */
+mat-form-field {
+  margin: 10px 0;
+}
+
+/* Add some space between the form fields and the button */
+button {
+  margin-top: 10px;
+}
+
+.custom-tag-input {
+  max-width: 300px;
+}
+
+.tag-input-container {
+  text-align: center;
+  margin-top: 20px;
+  display: flex;
+  justify-content: center;
+}
+
+.button-container {
+  text-align: center;
+  margin-top: 20px;
+  display: flex;
+  justify-content: center;
+}

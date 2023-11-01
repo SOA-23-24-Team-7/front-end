@@ -1,5 +1,98 @@
-p {
-    margin-left: 10px;
-    margin-top: 10px;
-    font-size: 20px;
+.banner {
+    /* outline: 2px solid red; */
+    position: relative;
+    width: 100%;
+    height: clamp(30rem, 60%, 50rem);
+    height: 40rem;
+    overflow: hidden;
+    font-family: var(--fnt-body);
+}
+.banner::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    top: 0;
+    height: 100%;
+    width: 100%;
+    background-color: black;
+    opacity: 0.6;
+    z-index: 1;
+}
+
+.banner-image {
+    width: 100%;
+    height: 100%;
+    background-image: url("https://images.pexels.com/photos/2087391/pexels-photo-2087391.jpeg?auto=compress&cs=tinysrgb&w=1920&h=1080&dpr=1");
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    filter: blur(3px);
+}
+
+.overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 3;
+    height: 100%;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    gap: 2rem;
+    color: rgb(var(--clr-neutral-100));
+}
+
+.banner h1 {
+    font-family: var(--fnt-header);
+    font-weight: 700;
+    font-size: 3rem;
+}
+
+.banner p {
+    max-width: 70ch;
+    text-align: center;
+    font-size: 1rem;
+    color: rgb(var(--clr-neutral-300));
+}
+
+.home-search-bar {
+    border-radius: 4rem;
+    background-color: white;
+    padding: 0.2rem 0.8rem;
+    padding-right: 0.2rem;
+    outline: none;
+    border: none;
+    color: rgb(var(--clr-text));
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 3.3rem;
+    gap: 0.5rem;
+}
+
+.search-icon {
+    font-size: 1.2rem;
+    color: rgb(var(--clr-neutral-700));
+}
+
+.search-input {
+    width: 100%;
+    border: none;
+    font-size: 1.2rem;
+    width: 40ch;
+}
+
+.search-input:focus {
+    outline: none;
+}
+
+.search-button {
+    border-radius: 2rem;
+    margin-left: auto;
+    height: 100%;
+    max-height: 100%;
+    font-size: 1.05rem;
+    font-weight: 500;
 }

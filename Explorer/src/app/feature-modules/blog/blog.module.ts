@@ -1,15 +1,41 @@
-import { NgModule } from '@angular/core';
+import { NgModule, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { MarkdownModule } from 'ngx-markdown';
+import { CommentComponent } from './comment/comment.component';
+import { HttpClientModule } from '@angular/common/http';
+import { BlogService } from './blog.service';
+import { CommentFormComponent } from './comment-form/comment-form.component';
+import { BlogsComponent } from './blogs/blogs.component';
+import { BlogComponent } from './blog/blog.component';
+import { RouterModule } from '@angular/router';
+import { MaterialModule } from 'src/app/infrastructure/material/material.module';
+import { MatDialogModule } from '@angular/material/dialog';
+import { FormsModule } from '@angular/forms';
+import { UpdateBlogFormComponent } from './update-blog-form/update-blog-form.component';
 
 
 
 @NgModule({
-  declarations: [],
+  declarations: [
+    CommentComponent,
+    CommentFormComponent,
+    BlogsComponent,
+    BlogComponent,
+    UpdateBlogFormComponent
+  ],
   imports: [
     CommonModule,
-    MarkdownModule.forRoot(),
-    
+    HttpClientModule,
+    MaterialModule,
+    RouterModule,
+    FormsModule,
+    MatDialogModule
   ]
 })
-export class BlogModule { }
+export class BlogModule implements OnInit {
+
+  constructor(private service: BlogService) { }
+
+  ngOnInit(): void {
+
+  }
+}
