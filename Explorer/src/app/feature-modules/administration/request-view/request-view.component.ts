@@ -4,6 +4,9 @@ import { AdministrationService } from '../administration.service';
 import { PagedResults } from 'src/app/shared/model/paged-results.model';
 import { FormControl, FormGroup, FormsModule } from '@angular/forms';
 import { PublicFacilityRequest } from '../../tour-authoring/model/public-facility-request';
+import { CommentRequestFormComponent } from '../comment-request-form/comment-request-form.component';
+import { MatDialog, MatDialogRef } from '@angular/material/dialog';
+import { CommentKeyPointRequestFormComponent } from '../comment-keypoint-request-form/comment-keypoint-request-form.component';
 
 @Component({
   selector: 'xp-request-view',
@@ -14,7 +17,11 @@ export class RequestViewComponent implements OnInit{
   requests: PublicKeyPointRequest[]=[]
   facilityRequests: PublicFacilityRequest[]=[]
   status:PublicStatus;
-  constructor(private service: AdministrationService){}
+  isVisible:boolean=false;
+  constructor(private service: AdministrationService, public dialogRef: MatDialog ){
+    
+  }
+  
   ngOnInit(): void {
     this.getRequests();   
   }
@@ -41,27 +48,22 @@ export class RequestViewComponent implements OnInit{
   }
   acceptPublicKeyPointRequest(request: PublicKeyPointRequest): void {
     request.status = 1;
-    request.comment = "",
-    this.service.respondPublicKeyPointRequest(request).subscribe({
-      next: () => {
-        request.status = 1;
-      },
-      error: (errData) => {
-        console.log(errData)
-      }
-    })
+    request.comment = "";
+    if(request.id!=undefined){
+      this.service.acceptPublicKeyPointRequest(request.id).subscribe({
+        next: () => {
+          this.getRequests();
+        },
+        error: (errData) => {
+          console.log(errData)
+        }
+      })
+    }
   }
 
   rejectPublicKeyPointRequest(request: PublicKeyPointRequest): void {
-    request.status = 2;
-    request.comment = this.requestForm.value.comment || "",
-    this.service.respondPublicKeyPointRequest(request).subscribe({
-      next: () => {
-        request.status = 2;
-      },
-      error: (errData) => {
-        console.log(errData)
-      }
+    this.dialogRef.open(CommentKeyPointRequestFormComponent,{
+      data: request,
     })
   }
   getPublicStatusText(status: PublicStatus  | undefined): string {
@@ -79,27 +81,22 @@ export class RequestViewComponent implements OnInit{
   }
   acceptPublicFacilityRequest(request: PublicFacilityRequest): void {
     request.status = 1;
-    request.comment = "",
-    this.service.respondPublicFacilityRequest(request).subscribe({
-      next: () => {
-        request.status = 1;
-      },
-      error: (errData) => {
-        console.log(errData)
-      }
-    })
+    request.comment = "";
+    if(request.id!=undefined){
+      this.service.acceptPublicFacilityRequest(request.id).subscribe({
+        next: () => {
+          this.getRequests()
+        },
+        error: (errData) => {
+          console.log(errData)
+        }
+      })
+    }
   }
 
   rejectPublicFacilityRequest(request: PublicFacilityRequest): void {
-    request.status = 2;
-    request.comment = this.requestForm.value.comment || "",
-    this.service.respondPublicFacilityRequest(request).subscribe({
-      next: () => {
-        request.status = 2;
-      },
-      error: (errData) => {
-        console.log(errData)
-      }
+    this.dialogRef.open(CommentRequestFormComponent,{
+      data: request,
     })
   }
 }

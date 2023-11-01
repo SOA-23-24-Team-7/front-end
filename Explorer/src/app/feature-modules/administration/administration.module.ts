@@ -8,6 +8,8 @@ import { UsersOverviewComponent } from "./users-overview/users-overview.componen
 import { RatingComponent } from "./rating/rating.component";
 import { ProblemViewComponent } from "./problem-view/problem-view.component";
 import { RequestViewComponent } from './request-view/request-view.component';
+import { CommentRequestFormComponent } from './comment-request-form/comment-request-form.component';
+import { CommentKeyPointRequestFormComponent } from './comment-keypoint-request-form/comment-keypoint-request-form.component';
 
 @NgModule({
     declarations: [
@@ -17,6 +19,8 @@ import { RequestViewComponent } from './request-view/request-view.component';
         UsersOverviewComponent,
         ProblemViewComponent,
         RequestViewComponent,
+        CommentRequestFormComponent,
+        CommentKeyPointRequestFormComponent,
     ],
     imports: [CommonModule, MaterialModule, ReactiveFormsModule],
     exports: [

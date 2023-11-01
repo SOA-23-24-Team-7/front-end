@@ -65,17 +65,23 @@ export class AdministrationService {
   getRequests(): Observable<PagedResults<PublicKeyPointRequest>> {
     return this.http.get<PagedResults<PublicKeyPointRequest>>(environment.apiHost +'administration/requests')
   }
-  respondPublicKeyPointRequest(request:PublicKeyPointRequest): Observable<PublicKeyPointRequest> {
-    return this.http.put<PublicKeyPointRequest>(
-      environment.apiHost + 'administration/requests/' + request.id,
-      request);
+  acceptPublicKeyPointRequest(requestId:number): Observable<PublicKeyPointRequest> {
+    const route = environment.apiHost + "administration/requests/accept/" + requestId;
+    return this.http.patch<any>(route, { observe: 'response' });
+  }
+  rejectPublicKeyPointRequest(requestId:number,comment:string): Observable<PublicKeyPointRequest> {
+    const route = environment.apiHost + "administration/requests/reject/" + requestId+'/'+comment;
+    return this.http.patch<any>(route, { observe: 'response' });
   }
   getFacilityRequests(): Observable<PagedResults<PublicFacilityRequest>> {
     return this.http.get<PagedResults<PublicFacilityRequest>>(environment.apiHost +'administration/requests/facility')
   }
-  respondPublicFacilityRequest(request:PublicFacilityRequest): Observable<PublicFacilityRequest> {
-    return this.http.put<PublicFacilityRequest>(
-      environment.apiHost + 'administration/requests/facility/' + request.id,
-      request);
+  acceptPublicFacilityRequest(requestId:number): Observable<PublicFacilityRequest> {
+    const route = environment.apiHost + "administration/requests/facility/accept/" + requestId;
+    return this.http.patch<any>(route, { observe: 'response' });
+  }
+  rejectPublicFacilityRequest(requestId:number,comment:string): Observable<PublicFacilityRequest> {
+    const route = environment.apiHost + "administration/requests/facility/reject/" + requestId+'/'+comment;
+    return this.http.patch<any>(route, { observe: 'response' });
   }
 }

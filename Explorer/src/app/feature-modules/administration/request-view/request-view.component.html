@@ -40,16 +40,10 @@
                     <td>{{getPublicStatusText(request.status)}}</td>    
                     <td><button color="primary" *ngIf="request.status == 0" mat-button (click)="acceptPublicFacilityRequest(request)">Accept</button></td>
                     <td><button color="primary" *ngIf="request.status == 0" mat-button (click)="rejectPublicFacilityRequest(request)">Reject</button></td>
-                
                     
             </tbody>
         </table>
-        <form [formGroup]="requestForm">
-            <mat-form-field>
-                <mat-label>Comment:</mat-label>
-                <input matInput type="text" formControlName="comment">
-            </mat-form-field>
-        </form>
+        
     </div>
     
     </div>
