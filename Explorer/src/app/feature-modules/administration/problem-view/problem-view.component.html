@@ -6,21 +6,23 @@
         <table>
             <thead>
                 <tr>
+                    <th>Tourist id</th>
+                    <th>Tour id</th>
                     <th>Category</th>
                     <th>Priority</th>
                     <th>Description</th>
                     <th>Reported time</th>
-                    <th>Tour id</th>
                 </tr>
             </thead>
             <tbody>
                 <tr *ngFor="let p of problems">
-                    
+                    <td>{{p.touristId}}</td>
+                    <td>{{p.tourId}}</td>
                     <td>{{p.category}}</td>
                     <td>{{p.priority}}</td>
                     <td>{{p.description}}</td>
-                    <td>{{p.reportedTime}}</td>
-                    <td>{{p.tourId}}</td>
+                    <td>{{p.dateTime | date: "medium"}}</td>
+                    
                     
             </tbody>
         </table>

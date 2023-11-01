@@ -28,7 +28,6 @@ export class ProblemFormComponent implements OnChanges {
     category: new FormControl('', [Validators.required]),
     priority: new FormControl('', [Validators.required]),
     description: new FormControl('', [Validators.required]),
-    reportedTime: new FormControl('', [Validators.required]),
     tourId: new FormControl(0, [Validators.required]),
   });
   addProblem(): void {
@@ -36,11 +35,14 @@ export class ProblemFormComponent implements OnChanges {
       category: this.problemForm.value.category || "",
       priority: this.problemForm.value.priority || "",
       description: this.problemForm.value.description || "",
-      reportedTime: this.problemForm.value.reportedTime || "",
+      dateTime: new Date,
       tourId: this.problemForm.value.tourId || 0,
     };
     this.service.addProblem(problem).subscribe({
-      next: () => { this.problemUpdated.emit() }
+      next: () => { 
+        this.problemUpdated.emit();
+        this.problemForm.reset();
+      }
     });
   }
   updateProblem(): void {
@@ -48,14 +50,17 @@ export class ProblemFormComponent implements OnChanges {
       category: this.problemForm.value.category || "",
       priority: this.problemForm.value.priority || "",
       description: this.problemForm.value.description || "",
-      reportedTime: this.problemForm.value.reportedTime || "",
+      dateTime: new Date,
       tourId: this.problemForm.value.tourId || 0,
     };
     problem.id = this.problem.id;
     problem.touristId=this.problem.touristId;
-    problem.reportedTime=this.problem.reportedTime;
+    problem.dateTime=this.problem.dateTime;
     this.service.updateProblem(problem).subscribe({
-      next: () => { this.problemUpdated.emit();}
+      next: () => { 
+        this.problemUpdated.emit();
+        this.problemForm.reset();
+      }
     });
   }
 

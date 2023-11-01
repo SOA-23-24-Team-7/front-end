@@ -40,7 +40,6 @@ const routes: Routes = [
   { path: 'update-blog/:id', component: UpdateBlogFormComponent },
 
     { path: "", component: HomeComponent },
-    { path: "home", redirectTo: "", pathMatch: "full" },
     {
         path: "equipment",
         component: EquipmentComponent,

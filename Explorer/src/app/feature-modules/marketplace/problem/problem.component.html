@@ -6,23 +6,22 @@
         <table>
             <thead>
                 <tr>
+                    <th>Tour id</th>
                     <th>Category</th>
                     <th>Priority</th>
                     <th>Description</th>
                     <th>Reported time</th>
-                    <th>Tour id</th>
                     <th></th>
                     <th></th>
                 </tr>
             </thead>
             <tbody>
                 <tr *ngFor="let p of problems">
-                    
+                    <td>{{p.tourId}}</td>
                     <td>{{p.category}}</td>
                     <td>{{p.priority}}</td>
                     <td>{{p.description}}</td>
-                    <td>{{p.reportedTime}}</td>
-                    <td>{{p.tourId}}</td>
+                    <td>{{p.dateTime | date: "medium"}}</td>
                     <td>
                         <button *ngIf="p.touristId==user.id" color="accent" (click)="deleteProblem(p.id || 0)" mat-icon-button>
                             <mat-icon>delete</mat-icon>
