@@ -200,4 +200,5 @@
 }
 
 .tour-search-results-card {
+    display: flex;
 }

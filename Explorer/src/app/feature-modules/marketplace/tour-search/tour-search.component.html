@@ -35,12 +35,7 @@
         <div class="tour-search-results">
             <div class="tour-search-results-count">{{count}} tours found</div>
             <div class="tour-search-results-card-panel">
-                <div class="tour-search-results-card" *ngFor="let tour of tours">
-                    <xp-tour-card [tour]="tour"></xp-tour-card>
-                    <xp-tour-card [tour]="tour"></xp-tour-card>
-                    <xp-tour-card [tour]="tour"></xp-tour-card>
-                    <xp-tour-card [tour]="tour"></xp-tour-card>
-                </div>
+                <xp-tour-card [tour]="tour" *ngFor="let tour of tours"></xp-tour-card>
             </div>
         </div>
         <div class="tour-search-tours"></div>
