@@ -10,8 +10,19 @@
             <div class="tour-seach-filter-section">
                 <div class="tour-seach-filter-section-title">Map search</div>
                 <div class="tour-seach-filter-section-body">
-                    <xp-map></xp-map>
+                    <div class="tour-search-map-distance-labels">
+                        <div class="tour-search-map-distance-min">0m</div>
+                        <div class="tour-search-map-distance-value">5000m</div>
+                        <div class="tour-search-map-distance-max">20000m</div>
+                    </div>
+                    <input class="tour-search-map-distance" type="range" name="slider" min="0" max="20000" value="50" step="100">
+                    <div class="tour-search-map">
+                        <xp-map [height]="'20rem'" [canEdit]="true"></xp-map>
+                    </div>
                 </div>
+            </div>
+            <div class="tour-search-button">
+                <div class="tour-search-button-text">Search</div>
             </div>
         </div>
         <div class="tour-search-tours"></div>

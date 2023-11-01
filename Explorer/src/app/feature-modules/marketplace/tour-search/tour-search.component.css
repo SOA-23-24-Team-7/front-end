@@ -37,7 +37,8 @@
     display: flex;
     width: 100%;
     min-height: 500px;
-    margin-top: 1rem;
+    margin-top: 2rem;
+    margin-bottom: 2rem;
 }
 
 .tour-search-filters {
@@ -53,7 +54,7 @@
 .tour-seach-filter-section {
     display: flex;
     flex-direction: column;
-    padding-inline: 0.5rem;
+    padding-inline: 1rem;
 }
 
 .tour-seach-filter-section-title {
@@ -64,4 +65,84 @@
     color: rgba(var(--clr-text), 1);
     transition: color 0.15s;
     margin-bottom: 1rem;
+}
+
+.tour-seach-filter-section-body {
+    display: flex;
+    flex-direction: column;
+}
+
+.tour-search-map-distance-labels {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+}
+
+.tour-search-map-distance {
+    margin-bottom: 1rem;
+}
+
+.tour-search-map-distance-min {
+    font-family: var(--fnt-body);
+    font-size: 1rem;
+    font-weight: 500;
+    color: rgba(var(--clr-text), 1);
+    transition: color 0.15s;
+    position: absolute;
+    left: 0;
+    transition: color 0.15s;
+}
+
+.tour-search-map-distance-value {
+    font-family: var(--fnt-body);
+    font-size: 1rem;
+    font-weight: 500;
+    color: rgba(var(--clr-text), 1);
+    transition: color 0.15s;
+    transition: color 0.15s;
+}
+
+.tour-search-map-distance-max {
+    font-family: var(--fnt-body);
+    font-size: 1rem;
+    font-weight: 500;
+    color: rgba(var(--clr-text), 1);
+    transition: color 0.15s;
+    position: absolute;
+    right: 0;
+    transition: color 0.15s;
+}
+
+.tour-search-map-distance {
+    background-color: rgba(var(--clr-primary-300), 1);
+    cursor: pointer;
+}
+
+.tour-search-map {
+    border-radius: 10px;
+}
+
+.tour-search-button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: rgba(var(--clr-primary-500), 1);
+    border-radius: 0.625rem;
+    margin-top: 1rem;
+    margin-inline: 1rem;
+    height: 2rem;
+    transition: background-color 0.15s;
+    cursor: pointer;
+}
+
+.tour-search-button:hover {
+    background-color: rgba(var(--clr-primary-500), 0.9);
+}
+
+.tour-search-button-text {
+    font-family: var(--fnt-body);
+    font-size: 1rem;
+    font-weight: 600;
+    color: rgba(255, 255, 255, 1);
 }
