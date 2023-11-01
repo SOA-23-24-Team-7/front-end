@@ -1,5 +1,5 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { MapComponent } from '../../../shared/map/map.component'
+import { MapComponent } from 'src/app/shared/map/map.component'
 
 
 @Component({
