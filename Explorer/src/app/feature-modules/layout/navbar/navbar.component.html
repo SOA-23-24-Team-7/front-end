@@ -414,6 +414,17 @@
                     </div>
                     <div
                         class="navbar-submenu-item"
+                        [routerLink]="['notifications']"
+                        *ngIf="user && (user.role === 'author')"
+                    >
+                        <fa-icon
+                            class="navbar-submenu-item-icon"
+                            [icon]="faStar"
+                        />
+                        <div class="navbar-submenu-item-text">My notifications</div>
+                    </div>
+                    <div
+                        class="navbar-submenu-item"
                         *ngIf="user && user.role === 'administrator'"
                         [routerLink]="['public-requests']"
                     >

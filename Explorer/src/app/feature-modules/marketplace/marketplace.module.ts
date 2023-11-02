@@ -22,6 +22,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { TagInputModule } from 'ngx-chips';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { FormsModule } from '@angular/forms';
+import { NotificationsComponent } from './notifications/notifications.component';
 
 
 @NgModule({
@@ -43,7 +44,8 @@ import { FormsModule } from '@angular/forms';
         ClubMembersManagementComponent,
         MyClubInvitationsComponent,
         TourPreferencesComponent,
-        TourPreferenceFormComponent
+        TourPreferenceFormComponent,
+        NotificationsComponent
     ],
     imports: [
         CommonModule,

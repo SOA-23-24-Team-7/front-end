@@ -15,6 +15,8 @@ import { ClubInvitationWithClubAndOwnerName } from './model/club-invitation-with
 import { Review } from './model/review.model';
 import { Problem } from './model/problem.model';
 import { TourPreference } from './model/tour-preference.model';
+import { FacilityNotification } from './model/facility-notification';
+import { KeyPointNotification } from './model/keypoint-notification';
 
 @Injectable({
   providedIn: 'root'
@@ -145,5 +147,10 @@ export class MarketplaceService {
     const route = environment.apiHost + "tourist/club/invite/reject/" + invitationId;
     return this.http.patch<any>(route, { observe: 'response' });
   }
-  
+  getFacilityNotificationsByAuthorId(): Observable<PagedResults<FacilityNotification>> {
+    return this.http.get<PagedResults<FacilityNotification>>(environment.apiHost + 'notifications');
+  }
+  getKeyPointNotificationsByAuthorId(): Observable<PagedResults<KeyPointNotification>> {
+    return this.http.get<PagedResults<KeyPointNotification>>(environment.apiHost + 'notifications/keypoint');
+  }
 }
