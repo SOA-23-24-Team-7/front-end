@@ -6,6 +6,7 @@ import { MaterialModule } from "src/app/infrastructure/material/material.module"
 import { ReactiveFormsModule } from "@angular/forms";
 import { UsersOverviewComponent } from "./users-overview/users-overview.component";
 import { RatingComponent } from "./rating/rating.component";
+import { FontAwesomeModule } from "@fortawesome/angular-fontawesome";
 
 @NgModule({
     declarations: [
@@ -14,7 +15,12 @@ import { RatingComponent } from "./rating/rating.component";
         RatingComponent,
         UsersOverviewComponent,
     ],
-    imports: [CommonModule, MaterialModule, ReactiveFormsModule],
+    imports: [
+        CommonModule,
+        MaterialModule,
+        ReactiveFormsModule,
+        FontAwesomeModule,
+    ],
     exports: [
         EquipmentComponent,
         EquipmentFormComponent,

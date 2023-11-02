@@ -6,6 +6,7 @@ import { Observable } from "rxjs";
 import { PagedResults } from "src/app/shared/model/paged-results.model";
 import { User } from "src/app/infrastructure/auth/model/user.model";
 import { RatingUsername } from "./model/ratingWithUsername";
+import { PersonUsername } from "./model/personWithUsername";
 
 @Injectable({
     providedIn: "root",
@@ -13,14 +14,14 @@ import { RatingUsername } from "./model/ratingWithUsername";
 export class AdministrationService {
     constructor(private http: HttpClient) {}
 
-    getUsersByAdmin(): Observable<PagedResults<User>> {
-        return this.http.get<PagedResults<User>>(
-            environment.apiHost + "administration/users",
+    getUsersByAdmin(): Observable<PagedResults<PersonUsername>> {
+        return this.http.get<PagedResults<PersonUsername>>(
+            environment.apiHost + "administration/people",
         );
     }
 
-    disableAccount(id: number): Observable<User> {
-        return this.http.get<User>(
+    disableAccount(id: number): Observable<PersonUsername> {
+        return this.http.get<PersonUsername>(
             environment.apiHost + "administration/users/disable/" + id,
         );
     }

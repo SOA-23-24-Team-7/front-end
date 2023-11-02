@@ -1,23 +1,32 @@
 <div class="users">
-    <p>Users</p>
-    <hr />
-    <div class="container" *ngFor="let user of users">
+    <div
+        class="container"
+        [ngClass]="{ 'container-red': !user.isActive }"
+        *ngFor="let user of users"
+        #userContainer
+    >
         <div class="user-data">
             <div class="picture"></div>
             <div class="row">
-                <div>@{{ user.username }}</div>
+                <div class="username-color">
+                    <div>@{{ user.username }}</div>
+                </div>
                 <div class="credentials">
-                    <div>Dragoslav</div>
-                    <div>Maslac</div>
+                    <div>{{ user.name }}</div>
+                    <div>{{ user.surname }}</div>
                 </div>
+                <div>{{ user.email }}</div>
             </div>
-            <div class="button">
-                <button (click)="disableAccount(user)">Block</button>
-                <div class="status" *ngIf="user.isActive; else notActive">
-                    Active
-                </div>
-                <ng-template #notActive> notActive </ng-template>
+            <div class="button" *ngIf="user.isActive; else notActive">
+                <fa-icon
+                    class="red"
+                    [icon]="faUserXmark"
+                    (click)="disableAccount(user, userContainer)"
+                />
             </div>
+            <ng-template #notActive>
+                <fa-icon class="button green" [icon]="faUserCheck" />
+            </ng-template>
         </div>
     </div>
 </div>
