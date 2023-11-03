@@ -1,6 +1,6 @@
 export interface Vote {
     userId: number;
-    blogId: number;
+    blogId?: number;
     voteType?: VoteType;
 }
 

@@ -1,4 +1,5 @@
 import { Comment } from "./comment.model";
+import { Vote } from "./vote.model";
 
 export interface Blog {
     id: number;
@@ -9,4 +10,5 @@ export interface Blog {
     status: string;
     comments: Comment[];
     voteCount: number;
+    votes: Vote[];
 }

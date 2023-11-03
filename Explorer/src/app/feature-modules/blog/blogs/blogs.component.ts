@@ -13,7 +13,6 @@ import { AuthService } from "src/app/infrastructure/auth/auth.service";
 })
 export class BlogsComponent implements OnInit {
     blogs: Blog[] = [];
-    votes: Vote[] = [];
     user: User | undefined;
 
     constructor(
@@ -26,7 +25,6 @@ export class BlogsComponent implements OnInit {
             this.user = user;
         });
         this.getBlogs();
-        this.getVotedBlogs();
     }
 
     getBlogs(): void {
@@ -38,20 +36,8 @@ export class BlogsComponent implements OnInit {
         });
     }
 
-    getVotedBlogs(): void {
-        if (!this.user) {
-            return;
-        }
-        this.service.getVotedBlogs(this.user?.id).subscribe({
-            next: (result: PagedResults<Vote>) => {
-                this.votes = result.results;
-            },
-            error: () => {},
-        });
-    }
-
     getVote(blog: Blog): Vote | undefined {
-        return this.votes.find(x => x.blogId == blog.id);
+        return blog.votes.find(x => x.userId == this.user?.id);
     }
 
     upVoteBlog(blogId: number): void {
