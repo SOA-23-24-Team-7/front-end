@@ -1,5 +1,7 @@
 <!--button (click)="openDialog()">Otvori dijalog</button-->
-
+<button color="primary" (click)="onAddClicked()" mat-icon-button>
+    <mat-icon>add</mat-icon>
+</button>
 <div class="container">
     <div class="row">
         <div class="column">
@@ -24,6 +26,7 @@
             </div>
         </div>
     </div>
+    <hr />
     <div class="cards">
         <div class="row">
             <div
@@ -34,13 +37,6 @@
                 <div class="triangle-left"></div>
             </div>
             <div class="key-point-cards-container">
-                <button
-                    color="primary"
-                    (click)="onAddClicked()"
-                    mat-icon-button
-                >
-                    <mat-icon>add</mat-icon>
-                </button>
                 <div
                     *ngFor="let kp of keyPoints"
                     class="cards-buttons-container"

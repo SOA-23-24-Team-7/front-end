@@ -75,7 +75,7 @@
     transition: transform 0.2s;
 }
 .key-point-card:hover {
-    transform: scale(1.05); /* Uvećanje kartice kada se miš nalazi iznad nje */
+    transform: scale(1.05);
 }
 .key-point-image {
     width: 100%;
