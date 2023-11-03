@@ -4,7 +4,7 @@ import { PagedResults } from "src/app/shared/model/paged-results.model";
 import { Person } from "./model/person.model";
 import { environment } from "src/env/environment";
 import { Observable } from "rxjs";
-import { Problem } from "../marketplace/model/problem.model";
+import { ProblemUser } from "../marketplace/model/problemWithUser";
 
 @Injectable({
     providedIn: "root",
@@ -29,20 +29,20 @@ export class StakeholderService {
             person,
         );
     }
-    getAdminsProblems(): Observable<PagedResults<Problem>> {
-        return this.http.get<PagedResults<Problem>>(
+    getAdminsProblems(): Observable<PagedResults<ProblemUser>> {
+        return this.http.get<PagedResults<ProblemUser>>(
             environment.apiHost + "administration/problem",
         );
     }
 
-    getTouristsProblems(): Observable<PagedResults<Problem>> {
-        return this.http.get<PagedResults<Problem>>(
+    getTouristsProblems(): Observable<PagedResults<ProblemUser>> {
+        return this.http.get<PagedResults<ProblemUser>>(
             environment.apiHost + "tourist/problem",
         );
     }
 
-    getAuthorsProblems(): Observable<PagedResults<Problem>> {
-        return this.http.get<PagedResults<Problem>>(
+    getAuthorsProblems(): Observable<PagedResults<ProblemUser>> {
+        return this.http.get<PagedResults<ProblemUser>>(
             environment.apiHost + "author/problem",
         );
     }
