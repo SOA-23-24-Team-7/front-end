@@ -4,7 +4,6 @@ export interface Person {
   name: string;
   surname: string;
   email: string;
-  profilePicture: string;
-  bio: string;
-  moto: string;
+  bio?: string;
+  motto?: string;
 }
