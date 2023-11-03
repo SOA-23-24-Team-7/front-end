@@ -9,4 +9,5 @@ export interface ProblemUser {
     touristId?: number;
     tourist: User;
     tourId: number;
+    tourName: string;
 }

@@ -5,8 +5,8 @@ import { environment } from "src/env/environment";
 import { Observable } from "rxjs";
 import { PagedResults } from "src/app/shared/model/paged-results.model";
 import { RatingUsername } from "./model/ratingWithUsername";
-import { PersonUser } from "./model/personWithUser";
 import { User } from "src/app/infrastructure/auth/model/user.model";
+import { Person } from "../stakeholder/model/person.model";
 
 @Injectable({
     providedIn: "root",
@@ -14,8 +14,8 @@ import { User } from "src/app/infrastructure/auth/model/user.model";
 export class AdministrationService {
     constructor(private http: HttpClient) {}
 
-    getUsersByAdmin(): Observable<PagedResults<PersonUser>> {
-        return this.http.get<PagedResults<PersonUser>>(
+    getUsersByAdmin(): Observable<PagedResults<Person>> {
+        return this.http.get<PagedResults<Person>>(
             environment.apiHost + "administration/people",
         );
     }

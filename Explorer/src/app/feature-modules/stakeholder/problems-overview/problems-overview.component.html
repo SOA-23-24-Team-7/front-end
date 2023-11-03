@@ -13,9 +13,11 @@
             </div>
             <div class="report-data">
                 <div class="label">Reported at:</div>
-                <div>{{ problem.reportedTime }}</div>
+                <div>
+                    {{ problem.reportedTime | date : "dd / MM / yyyy" }}
+                </div>
                 <div class="label">Tour:</div>
-                <div>Novosadska tura</div>
+                <div>{{ problem.tourName }}</div>
             </div>
         </div>
         <div class="problem-description">

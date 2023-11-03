@@ -1,9 +1,9 @@
 import { Component, OnInit } from "@angular/core";
 import { AdministrationService } from "../administration.service";
 import { PagedResults } from "src/app/shared/model/paged-results.model";
-import { PersonUser } from "../model/personWithUser";
 import { faUserXmark, faUserCheck } from "@fortawesome/free-solid-svg-icons";
 import { User } from "src/app/infrastructure/auth/model/user.model";
+import { Person } from "../../stakeholder/model/person.model";
 
 @Component({
     selector: "xp-users-overview",
@@ -11,7 +11,7 @@ import { User } from "src/app/infrastructure/auth/model/user.model";
     styleUrls: ["./users-overview.component.css"],
 })
 export class UsersOverviewComponent implements OnInit {
-    people: PersonUser[] = [];
+    people: Person[] = [];
     // selectedUser: User;
 
     constructor(private service: AdministrationService) {}
@@ -22,14 +22,14 @@ export class UsersOverviewComponent implements OnInit {
 
     getUsersByAdmin() {
         this.service.getUsersByAdmin().subscribe({
-            next: (result: PagedResults<PersonUser>) => {
+            next: (result: PagedResults<Person>) => {
                 this.people = result.results;
             },
             error: () => {},
         });
     }
 
-    disableAccount(person: PersonUser, container: any) {
+    disableAccount(person: Person, container: any) {
         this.service.disableAccount(person.userId).subscribe({
             next: (result: User) => {
                 if (!result.isActive) {

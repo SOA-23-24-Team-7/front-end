@@ -34,9 +34,6 @@ export class ProblemsOverviewComponent implements OnInit {
             this.service.getAdminsProblems().subscribe({
                 next: (result: PagedResults<ProblemUser>) => {
                     this.problems = result.results;
-                    for (const problem of this.problems) {
-                        console.log(problem.tourist);
-                    }
                 },
                 error: (err: any) => {
                     console.log(err);
