@@ -2,10 +2,11 @@
   <h1 class="blog-title">{{blog.title}}</h1>
   <p class="blog-description">{{blog.description}}</p>
 
-  <div class="comment-section">
+  <div *ngIf="user" class="comment-section">
     <xp-comment
     *ngFor="let comment of comments"
     [comment]="comment"
+    [user]="user"
     (editComment)="onEditComment($event)"
     (deleteComment)="onDeleteComment($event)"
     ></xp-comment>

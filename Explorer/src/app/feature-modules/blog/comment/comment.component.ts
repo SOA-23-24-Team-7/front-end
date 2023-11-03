@@ -1,5 +1,6 @@
 import { Component, Input, Output, EventEmitter } from '@angular/core';
 import { Comment } from '../model/comment.model';
+import { User } from 'src/app/infrastructure/auth/model/user.model';
 
 @Component({
   selector: 'xp-comment',
@@ -8,6 +9,7 @@ import { Comment } from '../model/comment.model';
 })
 export class CommentComponent {
   @Input() comment: Comment;
+  @Input() user: User;
   @Output() editComment = new EventEmitter<Comment>();
   @Output() deleteComment = new EventEmitter<Comment>(); 
 

@@ -1,7 +1,7 @@
 <div class="comment">
     <div class="comment-header">
         <div class="author">{{comment.authorId}}</div>
-        <div>
+        <div *ngIf="user.id == comment.authorId">
             <button mat-icon-button (click)="toggleEditMode()">
                 <mat-icon>edit</mat-icon>
             </button>
