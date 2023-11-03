@@ -1,0 +1,61 @@
+.key-point-card {
+    background-color: rgba(var(--clr-background-secondary), 1);
+    border-radius: 1rem;
+    border: rgba(var(--clr-outline-contrast), 1) 1px solid;
+    border-radius: 1rem;
+    padding-left: 0.35rem;
+    padding-top: 0.625rem;
+    margin: 1.3rem;
+    box-shadow: 0 0 1rem rgba(var(--clr-outline-contrast), 0.8);
+    position: relative;
+    color: rgb(var(--clr-text));
+    width: 30rem;
+    height: 12rem;
+    display: flex;
+}
+.column-1 {
+    flex: 1.5;
+}
+
+.column-2 {
+    flex: 2;
+}
+.key-point-image {
+    height: 8rem;
+    width: 12rem;
+    border-radius: 1rem;
+    margin: 0 auto;
+    flex: 2;
+}
+
+.key-point-name {
+    font-size: 1.5rem;
+    font-weight: bold;
+    cursor: pointer;
+    text-align: left;
+    align-content: flex-start;
+    padding: 0.2rem;
+    padding-left: 0.6rem;
+}
+
+.key-point-coordinates {
+    font-size: 0.8rem;
+    color: #888;
+    text-align: left;
+    padding-left: 0.5rem;
+    padding-top: 0.35rem;
+}
+
+.key-point-description {
+    flex: 1;
+    overflow-y: scroll;
+    flex-direction: column;
+    height: 8rem;
+    padding: 0.6rem;
+    padding-top: 0.2rem;
+    justify-content: flex-end;
+    width: 16rem;
+    word-wrap: break-word;
+}
+
+/*treba se dodati stil za scroll!*/

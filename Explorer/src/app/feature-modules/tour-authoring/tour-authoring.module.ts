@@ -14,6 +14,7 @@ import { MatSelectModule } from '@angular/material/select';
 import { SharedModule } from 'src/app/shared/shared.module';
 import { TourEquipmentFormComponent } from './tour-equipment-form/tour-equipment-form.component';
 import { RouterModule } from '@angular/router';
+import { KeyPointCardComponent } from './key-point-card/key-point-card.component';
 
 
 
@@ -25,7 +26,8 @@ import { RouterModule } from '@angular/router';
     KeyPointFormComponent,
     FacilitiesFormComponent,
     FacilitiesComponent,
-    TourEquipmentFormComponent
+    TourEquipmentFormComponent,
+    KeyPointCardComponent
   ],
   imports: [
     CommonModule, 

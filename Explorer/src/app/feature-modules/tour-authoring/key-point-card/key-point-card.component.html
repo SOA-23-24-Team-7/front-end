@@ -1,0 +1,15 @@
+<div class="key-point-card">
+    <div class="column-1">
+        <img class="key-point-image" [src]="keyPointImage" />
+        <div class="key-point-coordinates">
+            <div>Latitude: {{ keyPoint.latitude }}</div>
+            <div>Longitude: {{ keyPoint.longitude }}</div>
+        </div>
+    </div>
+    <div class="column-2">
+        <div class="key-point-name">{{ keyPoint.name }}</div>
+        <div class="key-point-description">
+            <p>{{ keyPoint.description }}</p>
+        </div>
+    </div>
+</div>
