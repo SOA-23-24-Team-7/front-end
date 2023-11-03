@@ -1,5 +1,5 @@
 import { Component, Input, Output, EventEmitter } from '@angular/core';
-import { Comment, UpdateComment } from '../model/comment.model';
+import { Comment } from '../model/comment.model';
 
 @Component({
   selector: 'xp-comment',
