@@ -10,7 +10,10 @@
     --clr-discount-500: 255, 143, 6;
 
     --clr-error-500: 255, 0, 0;
+    --clr-error-700: 255, 88, 88;
+
     --clr-success-500: 6, 227, 6;
+    --clr-success-700: 94, 227, 94;
 
     --clr-text: 0, 0, 0;
 
@@ -24,7 +27,7 @@
     --clr-background-secondary: var(--clr-neutral-300);
     --clr-text-contrast: var(--clr-neutral-100);
 
-    --clr-outline: var(--clr-neutral-300);
+    --clr-outline: var(--clr-neutral-500);
     --clr-outline-contrast: var(--clr-neutral-700);
 
     --fnt-body: "Source Sans 3", sans-serif;
@@ -45,7 +48,6 @@
     --clr-background-secondary: var(--clr-neutral-700);
     --clr-text: var(--clr-neutral-100);
     --clr-text-contrast: var(--clr-neutral-900);
-    --clr-outline: var(--clr-neutral-700);
     --clr-outline-contrast: var(--clr-neutral-300);
 
     background-color: rgb(var(--clr-background));
