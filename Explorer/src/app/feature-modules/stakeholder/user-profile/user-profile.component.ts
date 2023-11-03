@@ -2,7 +2,7 @@ import { Component, OnInit } from "@angular/core";
 import { StakeholderService } from "../stakeholder.service";
 import { AuthService } from "src/app/infrastructure/auth/auth.service";
 import { Router } from "@angular/router";
-import { PersonUpdate } from "../model/person-update.model";
+import { Person } from "../model/person.model";
 
 @Component({
     selector: "xp-user-profile",
@@ -11,7 +11,7 @@ import { PersonUpdate } from "../model/person-update.model";
 })
 export class UserProfileComponent implements OnInit {
     editing = false;
-    person: PersonUpdate;
+    person: Person;
 
     constructor(
         private authService: AuthService,

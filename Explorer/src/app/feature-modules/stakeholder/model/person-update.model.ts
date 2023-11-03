@@ -3,10 +3,8 @@ export interface PersonUpdate {
     userId: number;
     name: string;
     surname: string;
-    email:string;
-    username:string;
-    profilePicture?:string;
+    email: string;
+    profilePicture?: string;
     bio?: string;
     motto?: string;
-  }
-  
+}

@@ -5,7 +5,7 @@
                 <div class="card-header">
                     <div class="avatar">
                         <img
-                            src="{{ person.profilePicture }}"
+                            src="{{ person.user.profilePicture }}"
                             onerror="this.style.display='none'"
                         />
                     </div>
@@ -14,7 +14,9 @@
                     </div>
                 </div>
                 <div class="subtitle">
-                    <div class="username">Username: {{ person.username }}</div>
+                    <div class="username">
+                        Username: {{ person.user.username }}
+                    </div>
                     <div class="email">Email: {{ person.email }}</div>
                     <div class="motto">Motto: {{ person.motto }}</div>
                 </div>

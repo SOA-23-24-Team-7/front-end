@@ -3,6 +3,7 @@ import { StakeholderService } from "../stakeholder.service";
 import { Router } from "@angular/router";
 import { AuthService } from "src/app/infrastructure/auth/auth.service";
 import { PersonUpdate } from "../model/person-update.model";
+import { Person } from "../model/person.model";
 @Component({
     selector: "xp-edit-profile",
     templateUrl: "./edit-profile.component.html",
@@ -18,11 +19,10 @@ export class EditProfileComponent implements OnInit {
 
     ngOnInit(): void {
         this.authService.user$.subscribe(user => {
-            this.service
-                .getByUserId(user.id)
-                .subscribe((result: PersonUpdate) => {
-                    this.person = result;
-                });
+            this.service.getByUserId(user.id).subscribe((result: Person) => {
+                this.person = result;
+                this.person.profilePicture = result.user.profilePicture;
+            });
         });
     }
 

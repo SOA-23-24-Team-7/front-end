@@ -49,8 +49,13 @@
 .avatar {
     height: 15rem;
     width: 15rem;
-    border: rgba(var(--clr-outline-contrast), 1) 2px solid;
+}
+
+.avatar img {
+    width: 15rem;
+    height: 15rem;
     border-radius: 50%;
+    border: rgba(var(--clr-outline-contrast), 1) 2px solid;
     box-shadow: 0 0 0.5rem rgba(var(--clr-outline-contrast), 0.8);
 }
 

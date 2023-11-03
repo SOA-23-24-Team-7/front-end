@@ -1,16 +1,18 @@
-<!-- <ng-template *ngIf="person"> -->
-<div class="container">
-    <div class="comment">
-        <div class="commenter-data">
-            <div class="comment-avatar">
-                <img src="{{ person.profilePicture }}" />
+<ng-template *ngIf="person">
+    <div class="container">
+        <div class="comment">
+            <div class="commenter-data">
+                <div class="comment-avatar">
+                    <img src="{{ person.user.profilePicture }}" />
+                </div>
+                <div class="commenter">
+                    {{ person.name }} {{ person.surname }}
+                </div>
+                <div class="commenter-role">Autor/Turista</div>
             </div>
-            <div class="commenter">{{ person.name }} {{ person.surname }}</div>
-            <div class="commenter-role">Autor/Turista</div>
-        </div>
-        <div class="comment-content">
-            <p>{{ text }}</p>
+            <div class="comment-content">
+                <p>{{ text }}</p>
+            </div>
         </div>
     </div>
-</div>
-<!-- </ng-template> -->
+</ng-template>
