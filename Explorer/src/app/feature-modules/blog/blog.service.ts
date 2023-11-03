@@ -40,6 +40,19 @@ export class BlogService {
         );
     }
 
+    updateComment(comment: Comment): Observable<Comment> {
+        return this.http.put<Comment>(
+            environment.apiHost + "tourist/comment/" + comment.id,
+            comment,
+        );
+    }
+
+    deleteComment(id: Number): Observable<Comment> {
+        return this.http.delete<Comment>(
+            environment.apiHost + "tourist/comment/" + id,
+        );
+    }
+
     upVoteBlog(blogId: number): Observable<any> {
         return this.http.get<any>(
             environment.apiHost + "blog/upvote/" + blogId,
