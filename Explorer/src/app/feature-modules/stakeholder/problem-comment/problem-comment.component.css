@@ -28,11 +28,16 @@
 }
 
 .comment-avatar {
+    height: 5rem;
+    width: 5rem;
+}
+
+.comment-avatar img {
     margin-bottom: 1rem;
     height: 5rem;
     width: 5rem;
-    border: rgba(var(--clr-outline-contrast), 1) 2px solid;
     border-radius: 50%;
+    border: rgba(var(--clr-outline-contrast), 1) 2px solid;
     box-shadow: 0 0 0.5rem rgba(var(--clr-outline-contrast), 0.8);
 }
 
