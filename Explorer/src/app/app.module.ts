@@ -18,6 +18,7 @@ import { JwtInterceptor } from './infrastructure/auth/jwt/jwt.interceptor';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { StakeholderModule } from './feature-modules/stakeholder/stakeholder.module';
+import { NgxGoogleAnalyticsModule } from 'ngx-google-analytics';
 
 @NgModule({
   declarations: [AppComponent],
@@ -39,6 +40,7 @@ import { StakeholderModule } from './feature-modules/stakeholder/stakeholder.mod
     MatSnackBarModule,
     FontAwesomeModule,
     StakeholderModule,
+    NgxGoogleAnalyticsModule.forRoot('G-YF6NHGD2NQ'),
   ],
   providers: [
     {
