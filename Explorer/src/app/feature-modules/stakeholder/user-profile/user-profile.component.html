@@ -1,23 +1,31 @@
 <ng-container *ngIf="person">
-<div class="main">
-  <mat-card class="card">
-    <mat-card-header>
-      <div mat-card-avatar>
-        <img src = "https://upload.wikimedia.org/wikipedia/commons/thumb/7/7e/Circle-icons-profile.svg/512px-Circle-icons-profile.svg.png?20160314153816" class = "user-image">
-      </div>
-      <mat-card-title>
-        {{person.name}} {{person.surname}}
-      </mat-card-title>
-      <mat-card-subtitle>{{person.email}}</mat-card-subtitle>
-    </mat-card-header>
-    <mat-card-content>
-      <p>Username: {{person.username}}</p>
-      <p>Motto: {{person.motto}}</p>
-      <p>Bio: {{person.bio}}</p>
-    </mat-card-content>
-    <mat-card-actions>
-        <button color="primary" mat-raised-button (click)="toggleEditing()">Edit</button>
-    </mat-card-actions>
-  </mat-card>
-</div>
+    <div class="container">
+        <div class="card">
+            <div class="column">
+                <div class="card-header">
+                    <div class="avatar">
+                        <img
+                            src="{{ person.profilePicture }}"
+                            onerror="this.style.display='none'"
+                        />
+                    </div>
+                    <div class="title">
+                        {{ person.name }} {{ person.surname }}
+                    </div>
+                </div>
+                <div class="subtitle">
+                    <div class="username">Username: {{ person.username }}</div>
+                    <div class="email">Email: {{ person.email }}</div>
+                    <div class="motto">Motto: {{ person.motto }}</div>
+                </div>
+                <div class="btn" (click)="toggleEditing()">Edit</div>
+            </div>
+            <div class="column">
+                <textarea class="bio" readonly="readonly" unselectable="on">
+Biography: {{ person.bio }}
+</textarea
+                >
+            </div>
+        </div>
+    </div>
 </ng-container>

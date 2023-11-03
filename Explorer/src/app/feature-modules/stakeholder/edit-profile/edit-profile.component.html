@@ -1,43 +1,33 @@
 <ng-container *ngIf="person">
-<div class="main">
-  <form>
-  <mat-card>
-    <mat-card-header>
-    <mat-card-title>
-      Edit Profile
-    </mat-card-title>
-  </mat-card-header>
-    <mat-card-content>
-
-          <mat-form-field>
-            <mat-label>Name</mat-label>
-            <input matInput [(ngModel)]="person.name" name="name" required/>
-          </mat-form-field>
-
-          <mat-form-field>
-            <mat-label>Surname</mat-label>
-            <input matInput [(ngModel)]="person.surname" name="surname" required/>
-          </mat-form-field>
-
-          <mat-form-field>
-            <mat-label>Motto</mat-label>
-            <input matInput [(ngModel)]="person.motto" name="motto" required/>
-          </mat-form-field>
-
-          <mat-form-field>
-            <mat-label>Biography</mat-label>
-            <input matInput [(ngModel)]="person.bio" name="bio" required/>
-          </mat-form-field>
-
-          <mat-form-field>
-            <mat-label>Profile Picture</mat-label>
-            <input matInput [(ngModel)]="person.profilePicture" name="profilePicture" required/>
-          </mat-form-field>
-
-      <button mat-raised-button (click)="editProfile()" color="primary">Save</button>
-
-    </mat-card-content>
-  </mat-card>
-</form>
-</div>
+    <div class="container">
+        <div class="form">
+            <div class="row">
+                <div class="field">
+                    <input [(ngModel)]="person.name" required />
+                    <label>Name</label>
+                </div>
+                <div class="field">
+                    <input [(ngModel)]="person.surname" required />
+                    <label>Surname</label>
+                </div>
+            </div>
+            <div class="row">
+                <div class="field">
+                    <input [(ngModel)]="person.motto" required />
+                    <label>Motto</label>
+                </div>
+                <div class="field">
+                    <input [(ngModel)]="person.profilePicture" required />
+                    <label>Profile Picture</label>
+                </div>
+            </div>
+            <div class="row">
+                <div class="field">
+                    <input [(ngModel)]="person.bio" required />
+                    <label>Biography</label>
+                </div>
+            </div>
+            <div class="btn" (click)="editProfile()">Save</div>
+        </div>
+    </div>
 </ng-container>
