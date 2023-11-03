@@ -23,6 +23,15 @@ mat-card img {
     max-height: 65rem;
 }
 
+.cards-buttons-container {
+    display: flex;
+    align-items: center;
+}
+.buttons-container {
+    display: flex;
+    flex-direction: column;
+}
+
 .column {
     flex: 1;
     padding: 10px;

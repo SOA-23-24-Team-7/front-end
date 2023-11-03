@@ -3,15 +3,6 @@
     <hr />
     <div class="container">
         <div class="column larger-column">
-            <div class="map-container">
-                <xp-map
-                    [isKeyPointMap]="true"
-                    [refreshEvents]="refreshEventsSubject"
-                    (newLongLatEvent)="mapLongLat = $event"
-                    [selectedKeyPoint]="selectedKeyPoint"
-                    [canEdit]="shouldRenderKeyPointForm"
-                ></xp-map>
-            </div>
             <div>
                 <div class="key-point-form">
                     <xp-key-point-form
@@ -21,6 +12,15 @@
                         (keyPointUpdated)="getKeyPoints()"
                     ></xp-key-point-form>
                 </div>
+            </div>
+            <div class="map-container">
+                <xp-map
+                    [isKeyPointMap]="true"
+                    [refreshEvents]="refreshEventsSubject"
+                    (newLongLatEvent)="mapLongLat = $event"
+                    [selectedKeyPoint]="selectedKeyPoint"
+                    [canEdit]="shouldRenderKeyPointForm"
+                ></xp-map>
             </div>
         </div>
         <div class="column">
@@ -32,21 +32,27 @@
                 >
                     <mat-icon>add</mat-icon>
                 </button>
-                <xp-key-point-card *ngFor="let kp of keyPoints" [keyPoint]="kp">
-                    <button
-                        (click)="deleteKeyPoint(kp.id || 0)"
-                        mat-icon-button
-                    >
-                        <mat-icon>delete</mat-icon>
-                    </button>
-                    <button
-                        color="primary"
-                        (click)="onEditClicked(kp)"
-                        mat-icon-button
-                    >
-                        <mat-icon>edit</mat-icon>
-                    </button>
-                </xp-key-point-card>
+                <div
+                    *ngFor="let kp of keyPoints"
+                    class="cards-buttons-container"
+                >
+                    <xp-key-point-card [keyPoint]="kp"> </xp-key-point-card>
+                    <div class="buttons-container">
+                        <button
+                            (click)="deleteKeyPoint(kp.id || 0)"
+                            mat-icon-button
+                        >
+                            <mat-icon>delete</mat-icon>
+                        </button>
+                        <button
+                            color="primary"
+                            (click)="onEditClicked(kp)"
+                            mat-icon-button
+                        >
+                            <mat-icon>edit</mat-icon>
+                        </button>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
