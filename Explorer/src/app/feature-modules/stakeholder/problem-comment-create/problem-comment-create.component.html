@@ -1,10 +1,7 @@
-<div class="main">
-        <mat-form-field>
-            <mat-label>Comment</mat-label>
-            <textarea matInput [(ngModel)]="text"></textarea>
-        </mat-form-field>
-    <button mat-button-raised (click)="leaveComment()">Leave Comment</button>  
+<div class="form">
+    <div class="field">
+        <input [(ngModel)]="text" required />
+        <label>Comment</label>
+    </div>
+    <div class="btn" (click)="leaveComment()">Leave Comment</div>
 </div>
-
-
-  

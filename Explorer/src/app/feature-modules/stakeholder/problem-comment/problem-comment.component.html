@@ -1,16 +1,16 @@
-<div *ngIf="person" class="main">
-    <mat-card class="card">
-    <mat-card-header>
-        <div mat-card-avatar>
-        <img src = {{person.profilePicture}} class = "user-image">
+<!-- <ng-template *ngIf="person"> -->
+<div class="container">
+    <div class="comment">
+        <div class="commenter-data">
+            <div class="comment-avatar">
+                <img src="{{ person.profilePicture }}" />
+            </div>
+            <div class="commenter">{{ person.name }} {{ person.surname }}</div>
+            <div class="commenter-role">Autor/Turista</div>
         </div>
-        <mat-card-title>
-        {{person.name}} {{person.surname}}
-        </mat-card-title>
-        <mat-card-subtitle>Autor/Turista</mat-card-subtitle>
-    </mat-card-header>
-    <mat-card-content>
-        <p>{{text}}</p>
-    </mat-card-content>
-    </mat-card>
+        <div class="comment-content">
+            <p>{{ text }}</p>
+        </div>
+    </div>
 </div>
+<!-- </ng-template> -->
