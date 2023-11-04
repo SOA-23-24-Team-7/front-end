@@ -4,10 +4,10 @@ import { PagedResults } from "src/app/shared/model/paged-results.model";
 import { environment } from "src/env/environment";
 import { Observable } from "rxjs";
 import { PersonUpdate } from "./model/person-update.model";
-import { ProblemComment } from "./model/problemComment";
+import { ProblemComment } from "./model/problem-comment.model";
 import { Problem } from "../marketplace/model/problem.model";
 import { Person } from "./model/person.model";
-import { ProblemUser } from "../marketplace/model/problemWithUser";
+import { ProblemUser } from "../marketplace/model/problem-with-user.model";
 
 @Injectable({
     providedIn: "root",

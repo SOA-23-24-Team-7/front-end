@@ -5,7 +5,7 @@ import { AuthService } from "src/app/infrastructure/auth/auth.service";
 import { User } from "src/app/infrastructure/auth/model/user.model";
 import { MatDialog } from "@angular/material/dialog";
 import { ProblemAnswerComponent } from "../problem-answer/problem-answer.component";
-import { ProblemUser } from "../../marketplace/model/problemWithUser";
+import { ProblemUser } from "../../marketplace/model/problem-with-user.model";
 
 @Component({
     selector: "xp-problems-overview",
