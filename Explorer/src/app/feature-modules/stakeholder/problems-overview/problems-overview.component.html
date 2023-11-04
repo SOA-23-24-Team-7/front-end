@@ -1,0 +1,44 @@
+<div class="problems">
+    <div
+        class="container"
+        *ngFor="let problem of problems"
+        (click)="openProblemModal(problem)"
+    >
+        <div class="problem-data">
+            <div class="user-data">
+                <div class="image">
+                    <img src="/assets/images/barcelona.jpg" />
+                </div>
+                <div>@{{ problem.tourist.username }}</div>
+            </div>
+            <div class="report-data">
+                <div class="label">Reported at:</div>
+                <div>
+                    {{ problem.reportedTime | date : "dd / MM / yyyy" }}
+                </div>
+                <div class="label">Tour:</div>
+                <div>{{ problem.tourName }}</div>
+            </div>
+        </div>
+        <div class="problem-description">
+            <div class="row">
+                <div class="column">
+                    <div class="label">Category:</div>
+                    <div>{{ problem.category }}</div>
+                </div>
+                <div class="row">
+                    <div class="column">
+                        <div class="label">Priority:</div>
+                        <div>{{ problem.priority }}</div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="column">
+                    <div class="label">Description:</div>
+                    <div>{{ problem.description }}</div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

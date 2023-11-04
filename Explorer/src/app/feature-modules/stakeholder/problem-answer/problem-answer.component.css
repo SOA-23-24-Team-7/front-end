@@ -1,0 +1,23 @@
+.problem-answer-modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    animation: fadeIn 0.5s ease-in-out;
+    color: rgba(var(--clr-text));
+}
+
+.problem-answer {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding-inline: 2rem;
+    padding-block: 1.5rem;
+    background-color: rgb(150, 42, 42);
+    border-radius: 1rem;
+    width: 32rem;
+}

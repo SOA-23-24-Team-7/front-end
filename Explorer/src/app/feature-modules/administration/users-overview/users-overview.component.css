@@ -1,25 +1,88 @@
 .users {
-  margin-top: 20px;
-  margin-left: 20px;
-  font-size: 2rem;
+    display: flex;
+    margin-top: 2rem;
+    margin-inline: 4rem;
+    font-size: 2rem;
+    color: rgb(var(--clr-text));
+    overflow: hidden;
+    flex-wrap: wrap;
 }
 
 .container {
-  background-color: #3f51b5;
-  width: 20rem;
-  padding: 1rem;
-  height: 100%;
-  margin: 1rem;
-  border-radius: 0.2rem;
+    background-color: rgb(var(--clr-background-secondary));
+    width: 35rem;
+    padding: 1rem;
+    height: 100%;
+    margin: 1rem;
+    border-radius: 0.5rem;
+    border: rgba(var(--clr-outline-contrast), 1) 1px solid;
+    transition: transform 330ms ease-in-out;
+    box-shadow: 0 0 0.5rem rgba(var(--clr-outline-contrast), 0.8);
+}
+
+.container-red {
+    box-shadow: 0 0 0.5rem rgba(var(--clr-error-700), 0.8);
+    border-color: rgba(var(--clr-error-700), 0.8);
+}
+
+.container:hover {
+    transform: scale(1.05);
 }
 
 .user-data {
-  font-size: 1.5rem;
-  color: white;
-  display: flex;
-  width: 100%;
+    display: flex;
+    font-size: 1.5rem;
+    color: var(--clr-neutral-700);
+    gap: 0.5rem;
+    width: 100%;
+}
+
+.username-color {
+    color: rgb(var(--clr-primary-300));
 }
 
 .button {
-  margin-left: auto;
+    margin-left: auto;
+    margin-block: auto;
+}
+
+fa-icon {
+    font-size: 2rem;
+}
+
+.red {
+    color: rgba(var(--clr-error-700), 0.8);
+}
+
+.green {
+    color: rgba(var(--clr-success-700), 0.8);
+}
+
+fa-icon:hover {
+    cursor: pointer;
+    opacity: 0.9;
+}
+
+.picture {
+    width: 8rem;
+    height: 8rem;
+    border: rgba(var(--clr-outline-contrast), 1) 1px solid;
+    border-radius: 0.5rem;
+}
+
+.row {
+    display: flex;
+    flex-direction: column;
+    margin-left: 0.5rem;
+    margin-block: auto;
+}
+
+.credentials {
+    display: flex;
+    gap: 0.5rem;
+}
+
+.button {
+    display: flex;
+    flex-direction: column;
 }

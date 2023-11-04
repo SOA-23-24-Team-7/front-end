@@ -7,6 +7,7 @@ import { PersonUpdate } from "./model/person-update.model";
 import { ProblemComment } from "./model/problemComment";
 import { Problem } from "../marketplace/model/problem.model";
 import { Person } from "./model/person.model";
+import { ProblemUser } from "../marketplace/model/problemWithUser";
 
 @Injectable({
     providedIn: "root",
@@ -14,6 +15,11 @@ import { Person } from "./model/person.model";
 export class StakeholderService {
     constructor(private http: HttpClient) {}
 
+    getPeople(): Observable<PagedResults<Person>> {
+        return this.http.get<PagedResults<Person>>(
+            environment.apiHost + "people",
+        );
+    }
     getByUserId(userId: number): Observable<Person> {
         return this.http.get<Person>(
             environment.apiHost + "people/person/" + userId,
@@ -47,6 +53,24 @@ export class StakeholderService {
     resolveProblem(problemId: number): Observable<Problem> {
         return this.http.get<Problem>(
             environment.apiHost + "problem/resolve/" + problemId,
+        );
+    }
+
+    getAdminsProblems(): Observable<PagedResults<ProblemUser>> {
+        return this.http.get<PagedResults<ProblemUser>>(
+            environment.apiHost + "administration/problem",
+        );
+    }
+
+    getTouristsProblems(): Observable<PagedResults<ProblemUser>> {
+        return this.http.get<PagedResults<ProblemUser>>(
+            environment.apiHost + "tourist/problem",
+        );
+    }
+
+    getAuthorsProblems(): Observable<PagedResults<ProblemUser>> {
+        return this.http.get<PagedResults<ProblemUser>>(
+            environment.apiHost + "author/problem",
         );
     }
 }
