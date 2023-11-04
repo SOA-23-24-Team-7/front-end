@@ -1,0 +1,26 @@
+<div id="followers">
+    <p>Followers</p>
+    <hr />
+    <div id="follower-details">
+        <div>
+            <table>
+                <thead>
+                    <tr>
+                        <th>username</th>
+                        <th>message</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let f of followers">
+                        <td>{{ f.followedByUserName }}</td>
+                        <td>
+                            <button color="accent" mat-icon-button>
+                                <mat-icon>message</mat-icon>
+                            </button>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
