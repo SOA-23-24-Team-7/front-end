@@ -21,7 +21,10 @@ export class ProblemCommentListComponent implements OnInit {
         this.service.GetCommentsByProblemAnswerId(problemAnswerId).subscribe({
             next: (result: PagedResults<ProblemComment>) => {
                 this.comments = result.results;
-                console.log(this.comments.length);
+                console.log(this.comments);
+                for (const comment of this.comments) {
+                    console.log(comment.commenter);
+                }
             },
             error: () => {},
         });

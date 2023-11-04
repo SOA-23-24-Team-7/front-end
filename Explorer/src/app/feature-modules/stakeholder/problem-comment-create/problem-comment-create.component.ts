@@ -1,7 +1,8 @@
 import { Component, OnInit } from "@angular/core";
 import { StakeholderService } from "../stakeholder.service";
 import { AuthService } from "src/app/infrastructure/auth/auth.service";
-import { ProblemComment } from "../model/problem-comment.model";
+import { ProblemCommentCreate } from "../model/problem-comment-create.model";
+import { faChevronRight } from "@fortawesome/free-solid-svg-icons";
 
 @Component({
     selector: "xp-problem-comment-create",
@@ -24,11 +25,13 @@ export class ProblemCommentCreateComponent implements OnInit {
     }
 
     leaveComment() {
-        const problemComment: ProblemComment = {
+        const problemComment: ProblemCommentCreate = {
             text: this.text,
             problemAnswerId: this.problemAnswerId,
             commenterId: this.commenterId,
         };
         this.service.createProblemComment(problemComment).subscribe(() => {});
     }
+
+    faChevronRight = faChevronRight;
 }

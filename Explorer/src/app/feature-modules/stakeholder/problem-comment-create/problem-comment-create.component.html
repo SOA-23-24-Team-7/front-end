@@ -1,7 +1,5 @@
-<div class="form">
-    <div class="field">
-        <input [(ngModel)]="text" required />
-        <label>Comment</label>
-    </div>
-    <div class="btn" (click)="leaveComment()">Leave Comment</div>
+<div class="field">
+    <textarea [(ngModel)]="text" required></textarea>
+    <label>Comment</label>
+    <fa-icon class="button" [icon]="faChevronRight" (click)="leaveComment()" />
 </div>

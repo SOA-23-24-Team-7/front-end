@@ -8,6 +8,7 @@ import { ProblemComment } from "./model/problem-comment.model";
 import { Problem } from "../marketplace/model/problem.model";
 import { Person } from "./model/person.model";
 import { ProblemUser } from "../marketplace/model/problem-with-user.model";
+import { ProblemCommentCreate } from "./model/problem-comment-create.model";
 
 @Injectable({
     providedIn: "root",
@@ -34,9 +35,9 @@ export class StakeholderService {
     }
 
     createProblemComment(
-        problemComment: ProblemComment,
-    ): Observable<ProblemComment> {
-        return this.http.post<ProblemComment>(
+        problemComment: ProblemCommentCreate,
+    ): Observable<ProblemCommentCreate> {
+        return this.http.post<ProblemCommentCreate>(
             environment.apiHost + "problemComment/",
             problemComment,
         );
@@ -50,8 +51,8 @@ export class StakeholderService {
         );
     }
 
-    resolveProblem(problemId: number): Observable<Problem> {
-        return this.http.get<Problem>(
+    resolveProblem(problemId: number): Observable<ProblemUser> {
+        return this.http.get<ProblemUser>(
             environment.apiHost + "problem/resolve/" + problemId,
         );
     }

@@ -10,6 +10,7 @@ import { ProblemCommentCreateComponent } from "./problem-comment-create/problem-
 import { ProblemResolveComponent } from "./problem-resolve/problem-resolve.component";
 import { ProblemsOverviewComponent } from "./problems-overview/problems-overview.component";
 import { ProblemAnswerComponent } from "./problem-answer/problem-answer.component";
+import { FontAwesomeModule } from "@fortawesome/angular-fontawesome";
 
 @NgModule({
     declarations: [
@@ -22,7 +23,7 @@ import { ProblemAnswerComponent } from "./problem-answer/problem-answer.componen
         ProblemsOverviewComponent,
         ProblemAnswerComponent,
     ],
-    imports: [CommonModule, MaterialModule, FormsModule],
+    imports: [CommonModule, MaterialModule, FormsModule, FontAwesomeModule],
     exports: [
         UserProfileComponent,
         EditProfileComponent,
