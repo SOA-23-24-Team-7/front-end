@@ -1,0 +1,131 @@
+* {
+    margin: 0;
+    padding: 0;
+}
+.modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    z-index: 9999;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: rgba(0, 0, 0, 0.7);
+    animation: fadeIn 0.5s ease-in-out;
+}
+
+.public-key-points {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding-inline: 2rem;
+    padding-block: 1.5rem;
+    background-color: rgba(var(--clr-background, 1));
+    border-radius: 1rem;
+}
+
+.modal-head {
+    position: relative;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.modal-x {
+    position: absolute;
+    left: 0;
+    justify-self: left;
+    color: rgba(var(--clr-primary-500), 1);
+    cursor: pointer;
+    font-size: 2rem;
+    transition: color 0.15s;
+}
+
+.modal-x:hover {
+    color: rgba(var(--clr-primary-500), 0.9);
+}
+
+.modal-title {
+    color: rgba(var(--clr-text), 1);
+    font-family: var(--fnt-header);
+    font-weight: 600;
+    font-size: 2rem;
+}
+.cards {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+}
+
+.modal-plus {
+    color: rgba(var(--clr-primary-500), 1);
+    cursor: pointer;
+    font-size: 2rem;
+    transition: color 0.15s;
+}
+
+.public-key-point-cards-container {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    width: 70rem;
+    overflow-x: hidden;
+    scroll-behavior: smooth;
+}
+
+.list-cards-button:hover .triangle-left {
+    border-color: transparent rgba(var(--clr-primary-500), 0.95) transparent
+        transparent;
+}
+.list-cards-button:hover .triangle-right {
+    border-color: transparent transparent transparent
+        rgba(var(--clr-primary-500), 0.95);
+}
+
+.list-cards-button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    margin: 1.5rem;
+}
+
+.triangle-left,
+.triangle-right {
+    width: 0;
+    height: 0;
+    border-style: solid;
+}
+
+.triangle-left {
+    border-width: 2rem 2.2rem 2rem 0;
+    border-color: transparent rgba(var(--clr-primary-500), 1) transparent
+        transparent;
+}
+
+.triangle-right {
+    border-width: 2rem 0 2rem 2.2rem;
+    border-color: transparent transparent transparent
+        rgba(var(--clr-primary-500), 1);
+}
+.cards-buttons-container {
+    display: flex;
+    align-items: center;
+}
+.buttons-container {
+    display: flex;
+    flex-direction: column;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}

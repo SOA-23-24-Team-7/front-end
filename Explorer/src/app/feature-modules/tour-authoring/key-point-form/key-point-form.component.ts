@@ -14,7 +14,7 @@ import { KeyPoint } from "../model/key-point.model";
 import {
     PublicKeyPointRequest,
     PublicStatus,
-} from "../model/public-key-point-request";
+} from "../model/public-key-point-request.model";
 import { KeyedWrite } from "@angular/compiler";
 
 @Component({

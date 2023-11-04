@@ -7,8 +7,9 @@ import { Observable } from "rxjs";
 import { environment } from "src/env/environment";
 import { KeyPoint } from "./model/key-point.model";
 import { Facilities } from "./model/facilities.model";
-import { PublicKeyPointRequest } from "./model/public-key-point-request";
-import { PublicFacilityRequest } from "./model/public-facility-request";
+import { PublicKeyPointRequest } from "./model/public-key-point-request.model";
+import { PublicFacilityRequest } from "./model/public-facility-request.model";
+import { PublicKeyPoint } from "./model/public-key-point.model";
 
 @Injectable({
     providedIn: "root",
@@ -155,6 +156,12 @@ export class TourAuthoringService {
         return this.http.post<PublicFacilityRequest>(
             environment.apiHost + "publicFacilityRequest",
             request,
+        );
+    }
+
+    getPublicKeyPoints(): Observable<PagedResults<PublicKeyPoint>> {
+        return this.http.get<PagedResults<PublicKeyPoint>>(
+            environment.apiHost + "author/publicKeyPoint",
         );
     }
 }

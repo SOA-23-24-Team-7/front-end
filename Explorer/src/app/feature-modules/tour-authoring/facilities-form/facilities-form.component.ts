@@ -12,7 +12,7 @@ import { Facilities } from "../model/facilities.model";
 import {
     PublicFacilityRequest,
     PublicStatus,
-} from "../model/public-facility-request";
+} from "../model/public-facility-request.model";
 
 @Component({
     selector: "xp-facilities-form",

@@ -6,8 +6,7 @@ import { environment } from "src/env/environment";
 import { MapService } from "src/app/shared/map/map.service";
 import { BehaviorSubject, Subject } from "rxjs";
 import { MAT_DIALOG_DATA, MatDialog } from "@angular/material/dialog";
-
-import { ReviewComponent } from "../../marketplace/review/review.component";
+import { PublicKeyPointsComponent } from "../public-key-points/public-key-points.component";
 
 @Component({
     selector: "xp-key-points",
@@ -106,12 +105,9 @@ export class KeyPointsComponent implements OnInit {
     }
 
     openDialog() {
-        const dialogRef = this.dialogRef.open(
-            ReviewComponent, //komponenta sa listom svih javnih tacaka
-            {
-                //data: this.listaJavnihTacaka, // lista javnih tacaka koju dobijam u ovoj komponenti i ovim je saljem u modalni dijalog
-            },
-        );
+        const dialogRef = this.dialogRef.open(PublicKeyPointsComponent, {
+            //data: this.listaJavnihTacaka, // lista javnih tacaka koju dobijam u ovoj komponenti i ovim je saljem u modalni dijalog
+        });
 
         dialogRef.afterClosed().subscribe(result => {
             console.log("Zatvoren dijalog", result);
