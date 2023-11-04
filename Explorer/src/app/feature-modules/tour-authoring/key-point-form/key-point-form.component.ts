@@ -15,7 +15,6 @@ import {
     PublicKeyPointRequest,
     PublicStatus,
 } from "../model/public-key-point-request.model";
-import { KeyedWrite } from "@angular/compiler";
 
 @Component({
     selector: "xp-key-point-form",

@@ -4,6 +4,7 @@ import { KeyPoint } from "../model/key-point.model";
 import { ActivatedRoute, ParamMap } from "@angular/router";
 import { environment } from "src/env/environment";
 import { MapService } from "src/app/shared/map/map.service";
+
 import { BehaviorSubject, Subject } from "rxjs";
 import { MAT_DIALOG_DATA, MatDialog } from "@angular/material/dialog";
 import { PublicKeyPointsComponent } from "../public-key-points/public-key-points.component";

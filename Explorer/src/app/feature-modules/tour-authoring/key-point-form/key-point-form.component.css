@@ -4,7 +4,9 @@ form {
     gap: 2rem;
     padding-top: 3rem;
 }
-
+.hidden {
+    visibility: hidden;
+}
 h1 {
     color: rgb(var(--clr-text));
     font-family: var(--fnt-header);
@@ -14,6 +16,7 @@ h1 {
     flex: 1;
     display: flex;
     flex-direction: column;
+    width: 23rem;
 }
 
 input[type="file"] {
@@ -38,16 +41,18 @@ img {
 .image-form-field {
     display: flex;
     position: relative;
+    width: 23rem;
 }
 
 .image-form-field label {
     position: relative;
     background-color: rgba(var(--clr-primary-300), 1);
+    border-radius: 1rem;
     color: #fff;
     bottom: 2.4rem;
     z-index: 1;
     height: auto;
-    width: 10rem;
+    width: 8rem;
     text-align: center;
 }
 
@@ -107,7 +112,7 @@ img {
     display: flex;
     align-items: center;
     justify-content: center;
-    width: 100%;
+    width: 18rem;
     height: 2rem;
     background-color: rgba(var(--clr-primary-500), 1);
     border: rgba(var(--clr-primary-500, 1)) 1px solid;

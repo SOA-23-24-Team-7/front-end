@@ -19,15 +19,9 @@
         </mat-form-field>
         <mat-form-field class="description">
             <mat-label>Description</mat-label>
-            <textarea
-                matInput
-                cdkTextareaAutosize
-                cdkAutosizeMinRows="1"
-                formControlName="description"
-                cdkAutosizeMaxRows="5"
-            ></textarea>
+            <input matInput formControlName="description" type="text" />
         </mat-form-field>
-        <div class="checkbox">
+        <div class="checkbox" [class.hidden]="shouldEdit">
             <input
                 id="is-public-checkbox"
                 class="is-public-checkbox"
