@@ -1,6 +1,6 @@
 
 <div id="tour">
-    <p>Tour</p>
+    <p>My Tours: </p>
     <hr>
     <div id="tour-details">
     <div>
@@ -17,6 +17,7 @@
                     <th></th>
                     <th></th>
                     <th></th>
+                    <th></th>
                 </tr>
             </thead>
             <tbody>
@@ -27,21 +28,54 @@
                     <td>{{to.tags}}</td>
                     <td>{{to.price}}</td>
                     <td>{{getTourStatusText(to.status)}}</td>
-                    <td>{{to.distance}}</td>
+                    <td>{{to.distance}} km</td>
                     <td>
-                        <button color="accent" (click)="deleteTour(to.id || 0)" mat-icon-button>
-                            <mat-icon>delete</mat-icon>
+                        <button *ngIf="getTourStatusText(to.status) !== 'Published'" 
+                                color="accent" 
+                                (click)="deleteTour(to.id || 0)" 
+                                mat-icon-button>
+                                <mat-icon>delete</mat-icon>
                         </button>
-                        <button color="primary" (click)="onEditClicked(to)"  mat-icon-button>
+                        <button *ngIf="getTourStatusText(to.status) !== 'Published'" 
+                                color="primary" 
+                                (click)="onEditClicked(to)"  
+                                mat-icon-button>
                             <mat-icon>edit</mat-icon>
                         </button>
-                        <button color="primary" mat-raised-button [routerLink]="['equipment',to.id]" >equipment</button>
                     </td>
                     <td>
-                        <button color="primary" mat-raised-button [routerLink]="['/tour', to.id, 'key-points']">View key points</button>
+                        <button color="primary" 
+                                mat-raised-button 
+                                [routerLink]="['equipment',to.id]" 
+                                >Manage equipment
+                        </button>
                     </td>
                     <td>
-                        <button color="primary" mat-raised-button (click)="onPublishClicked(to.id || 0)">Publish</button>
+                        <button *ngIf="getTourStatusText(to.status) === 'Published'" 
+                                color="primary" 
+                                mat-raised-button 
+                                [routerLink]="['/tour', to.id, 'key-points']"
+                                id="view-key-points-button"
+                                >View key points
+                        </button>
+                        <button *ngIf="getTourStatusText(to.status) !== 'Published'" 
+                                color="primary" 
+                                mat-raised-button 
+                                [routerLink]="['/tour', to.id, 'key-points']"
+                                >Manage key points
+                        </button>
+                    </td>
+                    <td>
+                        <button *ngIf="getTourStatusText(to.status) !== 'Published'" 
+                                color="primary" 
+                                mat-raised-button 
+                                (click)="onPublishClicked(to)"
+                                >Publish
+                        </button>
+                        <p *ngIf="getTourStatusText(to.status) === 'Published'" 
+                            id="already-published"
+                            >Published
+                        </p>
                     </td>
                 </tr>
                 <tr><button color="primary" (click)="onAddClicked()" mat-icon-button>
@@ -51,7 +85,11 @@
         </table>
     </div>
     <div>
-        <xp-tour-form *ngIf="shouldRenderTourForm" [shouldEdit]="shouldEdit" [tour]="selectedTour" (toursUpdated)="getTours()"></xp-tour-form>
+        <xp-tour-form *ngIf="shouldRenderTourForm" 
+                      [shouldEdit]="shouldEdit" 
+                      [tour]="selectedTour" 
+                      (toursUpdated)="getTours()">
+        </xp-tour-form>
     </div>
     </div>
 </div>

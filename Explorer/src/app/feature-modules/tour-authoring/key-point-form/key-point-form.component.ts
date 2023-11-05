@@ -1,10 +1,12 @@
 import {
+    AfterViewInit,
     Component,
     EventEmitter,
     Input,
     OnChanges,
     Output,
     SimpleChanges,
+    ViewChild,
 } from "@angular/core";
 import { TourAuthoringService } from "../tour-authoring.service";
 import { FormControl, FormGroup, Validators } from "@angular/forms";
@@ -15,7 +17,6 @@ import {
     PublicKeyPointRequest,
     PublicStatus,
 } from "../model/public-key-point-request";
-import { KeyedWrite } from "@angular/compiler";
 
 @Component({
     selector: "xp-key-point-form",

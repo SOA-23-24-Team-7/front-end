@@ -1,14 +1,18 @@
+import { TourDuration } from "./tourDuration.model"
+
 export interface Tour{
     authorId?: number,
     id?: number,
     name: string,
     description: string,
     difficulty: number,
-    tags:string[],
+    tags: string[],
     status?: TourStatus,
-    price?:number,
-    isDeleted?:boolean,
-    distance?:number
+    price?: number,
+    isDeleted?: boolean,
+    distance?: number,
+    publishDate?: Date,
+    durations?: TourDuration[]
 }
 
 export enum TourStatus {

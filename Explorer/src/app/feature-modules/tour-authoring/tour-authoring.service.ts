@@ -14,7 +14,9 @@ import { PublicFacilityRequest } from "./model/public-facility-request";
     providedIn: "root",
 })
 export class TourAuthoringService {
+    
     constructor(private http: HttpClient) {}
+    
     getTours(): Observable<PagedResults<Tour>> {
         return this.http.get<PagedResults<Tour>>(
             "https://localhost:44333/api/tour/authors",
@@ -24,6 +26,7 @@ export class TourAuthoringService {
     addTour(tour: Tour): Observable<Tour> {
         return this.http.post<Tour>(environment.apiHost + "tour", tour);
     }
+
     deleteTour(id: number): Observable<Tour> {
         return this.http.delete<Tour>(environment.apiHost + "tour/" + id);
     }
@@ -161,6 +164,13 @@ export class TourAuthoringService {
     getTour(tourId : number): Observable<Tour> {
         return this.http.get<Tour>(
             environment.apiHost + "tour/" + tourId
+        );
+    }
+
+    publishTour(tour: Tour): Observable<Tour> {
+        return this.http.put<Tour>(
+            environment.apiHost + "tour/publish/" + tour.id,
+            tour,
         );
     }
 }
