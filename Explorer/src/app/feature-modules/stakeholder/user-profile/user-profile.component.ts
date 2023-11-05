@@ -25,9 +25,10 @@ export class UserProfileComponent implements OnInit {
 
     ngOnInit(): void {
         this.authService.user$.subscribe(user => {
-            this.service.getByUserId(user.id).subscribe(result => {
-                this.person = result;
-            });
+            if (user.id != 0)
+                this.service.getByUserId(user.id).subscribe(result => {
+                    this.person = result;
+                });
         });
     }
 }
