@@ -1,5 +1,15 @@
 <div class="blogs-container">
     <h1 class="blogs-title">BLOGS</h1>
+
+    <select [(ngModel)]="selectedStatus" (change)="filterByStatus(selectedStatus)">
+        <option value="0">Draft</option>
+        <option value="1">Published</option>
+        <option value="2">Closed</option>
+        <option value="3">Active</option>
+        <option value="4">Famous</option>
+        <option value="5">All</option>
+    </select>
+
     <xp-blog-preview
         *ngFor="let blog of blogs"
         [blog]="blog"
@@ -8,5 +18,6 @@
         [routerLink]="['/blog/' + blog.id]"
         (upvote)="upVoteBlog($event)"
         (downvote)="downVoteBlog($event)"
+        [style.display]="selectedStatus == 5 || blog.status == selectedStatus ? 'block' : 'none'"
     />
 </div>
