@@ -1,23 +1,57 @@
 <ng-container *ngIf="person">
-<div class="main">
-  <mat-card class="card">
-    <mat-card-header>
-      <div mat-card-avatar>
-        <img src = "https://upload.wikimedia.org/wikipedia/commons/thumb/7/7e/Circle-icons-profile.svg/512px-Circle-icons-profile.svg.png?20160314153816" class = "user-image">
-      </div>
-      <mat-card-title>
-        {{person.name}} {{person.surname}}
-      </mat-card-title>
-      <mat-card-subtitle>{{person.email}}</mat-card-subtitle>
-    </mat-card-header>
-    <mat-card-content>
-      <p>Username: {{user.username}}</p>
-      <p>Motto: {{person.moto}}</p>
-      <p>Bio: {{person.bio}}</p>
-    </mat-card-content>
-    <mat-card-actions>
-        <button color="primary" mat-raised-button (click)="toggleEditing()">Edit</button>
-    </mat-card-actions>
-  </mat-card>
-</div>
+    <div class="main">
+        <mat-card class="card">
+            <mat-card-header>
+                <div mat-card-avatar>
+                    <img
+                        src="https://upload.wikimedia.org/wikipedia/commons/thumb/7/7e/Circle-icons-profile.svg/512px-Circle-icons-profile.svg.png?20160314153816"
+                        class="user-image"
+                    />
+                </div>
+                <mat-card-title>
+                    {{ person.name }} {{ person.surname }}
+                </mat-card-title>
+                <mat-card-subtitle>{{ person.email }}</mat-card-subtitle>
+            </mat-card-header>
+            <mat-card-content>
+                <p>Username: {{ user.username }}</p>
+                <p>Motto: {{ person.moto }}</p>
+                <p>Bio: {{ person.bio }}</p>
+            </mat-card-content>
+            <mat-card-actions>
+                <button
+                    color="primary"
+                    mat-raised-button
+                    (click)="toggleEditing()"
+                >
+                    Edit
+                </button>
+            </mat-card-actions>
+        </mat-card>
+        <br />
+    </div>
+    <div id="followers-details">
+        <div>
+            <br />
+            <p>Followers</p>
+            <table>
+                <thead>
+                    <tr>
+                        <th>username</th>
+                        <th>message</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let f of person.user.followers">
+                        <td>{{ f.followedByUserName }}</td>
+                        <td>
+                            <button color="accent" mat-icon-button>
+                                <mat-icon>message</mat-icon>
+                            </button>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
 </ng-container>

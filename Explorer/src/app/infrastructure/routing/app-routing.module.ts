@@ -28,18 +28,12 @@ import { ClubMembersManagementComponent } from "src/app/feature-modules/marketpl
 import { FacilitiesComponent } from "src/app/feature-modules/tour-authoring/facilities/facilities.component";
 import { KeyPointsComponent } from "src/app/feature-modules/tour-authoring/key-points/key-points.component";
 import { MyClubInvitationsComponent } from "src/app/feature-modules/marketplace/my-club-invitations/my-club-invitations.component";
-import { FollowersComponent } from "src/app/feature-modules/stakeholder/followers/followers.component";
 
 const routes: Routes = [
     { path: "", component: HomeComponent },
     {
         path: "equipment",
         component: EquipmentComponent,
-        canActivate: [AuthGuard],
-    },
-    {
-        path: "followers",
-        component: FollowersComponent,
         canActivate: [AuthGuard],
     },
     { path: "ratings", component: RatingComponent, canActivate: [AuthGuard] },
@@ -92,11 +86,6 @@ const routes: Routes = [
     {
         path: "profile",
         component: UserProfileComponent,
-        canActivate: [AuthGuard],
-    },
-    {
-        path: "edit-profile",
-        component: EditProfileComponent,
         canActivate: [AuthGuard],
     },
     {

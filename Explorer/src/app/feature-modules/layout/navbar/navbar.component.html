@@ -380,16 +380,6 @@
                         <div class="navbar-submenu-item-text">Profile</div>
                     </div>
                     <div
-                        *ngIf="
-                            user.role === 'author' || user.role === 'tourist'
-                        "
-                        class="navbar-submenu-item"
-                        [routerLink]="['followers']"
-                    >
-                        <mat-icon>group</mat-icon>
-                        <div class="navbar-submenu-item-text">Followers</div>
-                    </div>
-                    <div
                         class="navbar-submenu-item"
                         [routerLink]="['tour-preference']"
                         *ngIf="user && user.role === 'tourist'"
