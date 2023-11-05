@@ -31,14 +31,12 @@ export class BlogsComponent implements OnInit {
 
     filterByStatus(status: number) {
         this.selectedStatus = status;
-        console.log(this.selectedStatus)
     }
 
     getBlogs(): void {
         this.service.getBlogs().subscribe({
             next: (result: PagedResults<Blog>) => {
                 this.blogs = result.results;
-                console.log(this.blogs)
             },
             error: () => {},
         });
