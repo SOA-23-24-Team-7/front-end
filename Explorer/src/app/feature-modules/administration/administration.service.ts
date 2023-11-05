@@ -1,4 +1,4 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpResponse } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Equipment } from './model/equipment.model';
 import { environment } from 'src/env/environment';
@@ -8,6 +8,8 @@ import { User } from 'src/app/infrastructure/auth/model/user.model';
 import { Rating } from './model/rating.model';
 import { RatingUsername } from './model/ratingWithUsername';
 import { Problem } from '../marketplace/model/problem.model';
+import { PublicKeyPointRequest } from '../tour-authoring/model/public-key-point-request';
+import { PublicFacilityRequest } from '../tour-authoring/model/public-facility-request';
 
 @Injectable({
   providedIn: 'root',
@@ -59,5 +61,21 @@ export class AdministrationService {
   
   getProblem(): Observable<PagedResults<Problem>> {
     return this.http.get<PagedResults<Problem>>(environment.apiHost +'administration/problem')
+  }
+  getRequests(): Observable<PagedResults<PublicKeyPointRequest>> {
+    return this.http.get<PagedResults<PublicKeyPointRequest>>(environment.apiHost +'administration/requests')
+  }
+  respondPublicKeyPointRequest(request:PublicKeyPointRequest): Observable<PublicKeyPointRequest> {
+    return this.http.put<PublicKeyPointRequest>(
+      environment.apiHost + 'administration/requests/' + request.id,
+      request);
+  }
+  getFacilityRequests(): Observable<PagedResults<PublicFacilityRequest>> {
+    return this.http.get<PagedResults<PublicFacilityRequest>>(environment.apiHost +'administration/requests/facility')
+  }
+  respondPublicFacilityRequest(request:PublicFacilityRequest): Observable<PublicFacilityRequest> {
+    return this.http.put<PublicFacilityRequest>(
+      environment.apiHost + 'administration/requests/facility/' + request.id,
+      request);
   }
 }

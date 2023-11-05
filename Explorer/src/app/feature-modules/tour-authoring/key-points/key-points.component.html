@@ -48,6 +48,7 @@
                     </button></tr>
                 </tbody>
             </table>
+            <button id="back-button" color="primary" (click)="onBackClicked()" mat-raised-button>Back</button>
         </div>
         <div id="two">
             <xp-map [isKeyPointMap]="true" [refreshEvents]="refreshEventsSubject" (newLongLatEvent)="mapLongLat = $event" [selectedKeyPoint]="selectedKeyPoint" [canEdit]="shouldRenderKeyPointForm"></xp-map>

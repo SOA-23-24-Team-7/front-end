@@ -30,9 +30,15 @@ export class TourComponent implements OnInit {
         return 'Draft';
       case TourStatus.Published:
         return 'Published';
+      case TourStatus.Archived:
+        return 'Archived';
       default:
         return '';
     }
+  }
+
+  onPublishClicked(id: number): void{
+
   }
 
   getTours(): void {

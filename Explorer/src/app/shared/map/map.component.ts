@@ -13,14 +13,14 @@ import { Facilities } from 'src/app/feature-modules/tour-authoring/model/facilit
 })
 export class MapComponent implements AfterViewInit, OnChanges {
   private map: any;
-  private waypointMap = new Map<number, any>();
+  public waypointMap = new Map<number, any>();
   private routeControl: L.Routing.Control;
   private refreshEventsSubscription: Subscription;
   private previousCommitted = false;
 
   private markerGroup = L.layerGroup(); 
   public facilitiesUsed: boolean = false;
-
+  public tourDistance: number = 0;
   @Input() refreshEvents: Observable<number>;
   @Input() selectedKeyPoint: KeyPoint | null;
   @Input() canEdit = false;
@@ -154,9 +154,13 @@ export class MapComponent implements AfterViewInit, OnChanges {
       ),
     }).addTo(this.map);
 
-    this.routeControl.on('routesfound', function (e) {
-      var routes = e.routes;
-      var summary = routes[0].summary;
+    this.routeControl.on('routesfound', (e) => {
+      const routes = e.routes;
+      if (routes.length > 0) {
+        const summary = routes[0].summary;
+        this.tourDistance = summary.totalDistance/1000; // Total distance in meters
+        console.log('Total route distance: ' + (this.tourDistance/1000) + ' kilometers'); // Convert to kilometers
+      }
     });
   }
 
