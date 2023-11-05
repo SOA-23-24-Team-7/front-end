@@ -1,4 +1,4 @@
-import { AfterViewInit, Component, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges } from '@angular/core';
+import { AfterViewInit, Component, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges, ViewChild } from '@angular/core';
 import * as L from 'leaflet';
 import { MapService } from './map.service'
 import { KeyPoint } from 'src/app/feature-modules/tour-authoring/model/key-point.model';
@@ -47,7 +47,9 @@ export class MapComponent implements AfterViewInit, OnChanges {
 
   ngAfterViewInit(): void {
     let DefaultIcon = L.icon({
-      iconUrl: 'https://unpkg.com/leaflet@1.6.0/dist/images/marker-icon.png',
+      iconUrl: 'https://icon-library.com/images/map-marker-icon/map-marker-icon-18.jpg',
+      iconSize: [46, 46], 
+      iconAnchor: [26, 46],
     });
 
     L.Marker.prototype.options.icon = DefaultIcon;
@@ -158,8 +160,7 @@ export class MapComponent implements AfterViewInit, OnChanges {
       const routes = e.routes;
       if (routes.length > 0) {
         const summary = routes[0].summary;
-        this.tourDistance = summary.totalDistance/1000; // Total distance in meters
-        console.log('Total route distance: ' + (this.tourDistance/1000) + ' kilometers'); // Convert to kilometers
+        this.tourDistance = summary.totalDistance/1000; // Total distance is in meters, tourDistance in km
       }
     });
   }

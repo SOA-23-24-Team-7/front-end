@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Tour, TourStatus } from '../model/tour.model';
-import {TourAuthoringService} from '../tour-authoring.service';
+import { TourAuthoringService } from '../tour-authoring.service';
 import { PagedResults } from 'src/app/shared/model/paged-results.model';
 
 @Component({
@@ -21,7 +21,7 @@ export class TourComponent implements OnInit {
     this.getTours();
   }
 
-  getTourStatusText(status: TourStatus  | undefined): string {
+  getTourStatusText(status: TourStatus | undefined): string {
     if (status === undefined) {
       return 'N/A'; 
     }
@@ -37,8 +37,12 @@ export class TourComponent implements OnInit {
     }
   }
 
-  onPublishClicked(id: number): void{
-
+  onPublishClicked(tour: Tour): void{
+    this.tourAuthoringService.publishTour(tour).subscribe({
+      next: () => {
+        this.getTours();
+      },
+    })
   }
 
   getTours(): void {
