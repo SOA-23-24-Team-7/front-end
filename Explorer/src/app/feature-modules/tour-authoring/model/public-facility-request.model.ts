@@ -6,6 +6,7 @@ export interface PublicFacilityRequest {
     status: PublicStatus;
     comment?: string;
     facility?: Facilities;
+    created?: Date;
 }
 
 export enum PublicStatus {

@@ -100,7 +100,6 @@ export class KeyPointFormComponent implements OnChanges {
                                     const request: PublicKeyPointRequest = {
                                         keyPointId: result.id as number,
                                         status: PublicStatus.Pending,
-                                        // Dodajte komentar ako je potrebno
                                     };
                                     this.service
                                         .addPublicKeyPointRequest(request)
