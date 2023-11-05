@@ -1,4 +1,4 @@
-import { Component, OnInit } from "@angular/core";
+import { Component, Input, OnInit } from "@angular/core";
 import { ProblemComment } from "../model/problem-comment.model";
 import { StakeholderService } from "../stakeholder.service";
 import { PagedResults } from "src/app/shared/model/paged-results.model";
@@ -10,15 +10,16 @@ import { PagedResults } from "src/app/shared/model/paged-results.model";
 })
 export class ProblemCommentListComponent implements OnInit {
     comments: ProblemComment[] = [];
+    @Input() problemAnswerId: number;
 
     constructor(private service: StakeholderService) {}
 
     ngOnInit(): void {
-        this.GetCommentsByProblemAnswerId(1);
+        this.GetCommentsByProblemAnswerId();
     }
 
-    GetCommentsByProblemAnswerId(problemAnswerId: number): void {
-        this.service.GetCommentsByProblemAnswerId(problemAnswerId).subscribe({
+    GetCommentsByProblemAnswerId(): void {
+        this.service.GetCommentsByProblemAnswerId(this.problemAnswerId).subscribe({
             next: (result: PagedResults<ProblemComment>) => {
                 this.comments = result.results;
                 console.log(this.comments);

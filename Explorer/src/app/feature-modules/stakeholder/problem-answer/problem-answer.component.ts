@@ -1,7 +1,5 @@
 import { Component, OnInit, Optional, Inject } from "@angular/core";
 import { MAT_DIALOG_DATA } from "@angular/material/dialog";
-import { Problem } from "../../marketplace/model/problem.model";
-import { ProblemCommentListComponent } from "../problem-comment-list/problem-comment-list.component";
 import { StakeholderService } from "../stakeholder.service";
 import { ProblemUser } from "../../marketplace/model/problem-with-user.model";
 

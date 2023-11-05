@@ -12,7 +12,6 @@ import { Person } from "../../stakeholder/model/person.model";
 })
 export class UsersOverviewComponent implements OnInit {
     people: Person[] = [];
-    // selectedUser: User;
 
     constructor(private service: AdministrationService) {}
 
@@ -29,11 +28,11 @@ export class UsersOverviewComponent implements OnInit {
         });
     }
 
-    disableAccount(person: Person, container: any) {
+    disableAccount(person: Person, card: any) {
         this.service.disableAccount(person.userId).subscribe({
             next: (result: User) => {
                 if (!result.isActive) {
-                    container.classList.add("container-red");
+                    card.classList.add("card-red");
                 }
             },
         });

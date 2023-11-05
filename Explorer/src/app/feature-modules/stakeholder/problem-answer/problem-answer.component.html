@@ -2,15 +2,12 @@
     <div class="problem-answer">
         <div class="header">
             <div>
-                Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                Cupiditate eveniet rerum iusto nostrum facilis hic amet, esse
-                molestias voluptate exercitationem delectus voluptates provident
-                unde fuga assumenda minima earum suscipit.
+                {{problem.description}}
             </div>
             <div class="btn" (click)="resolveProblem()">Resolve Problem</div>
         </div>
         <div class="comments">
-            <xp-problem-comment-list />
+            <xp-problem-comment-list/>
         </div>
     </div>
 </div>

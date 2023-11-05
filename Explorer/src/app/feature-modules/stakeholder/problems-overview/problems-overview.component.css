@@ -1,55 +1,3 @@
-/* #equipment {
-    margin-top: 20px;
-    margin-left: 20px;
-}
-
-#equipment-details {
-    display: flex;
-    flex-direction: row;
-    gap: 50px;
-    align-items: flex-start;
-}
-
-p {
-    font-size: 20px;
-}
-
-table {
-    border-collapse: collapse;
-    font-size: 0.9em;
-    font-family: sans-serif;
-    min-width: 300px;
-    box-shadow: 0 0 20px rgba(0, 0, 0, 0.15);
-}
-
-thead tr {
-    background-color: #3f51b5;
-    color: #ffffff;
-    text-align: left;
-}
-
-th,
-td {
-    padding: 12px 15px;
-}
-
-tbody tr {
-    border-bottom: 1px solid #dddddd;
-}
-
-tbody tr:nth-of-type(even) {
-    background-color: #f3f3f3;
-}
-
-tbody tr:last-of-type {
-    border-bottom: 2px solid #3f51b5;
-}
-
-tbody tr.active-row {
-    font-weight: bold;
-    color: #3f51b5;
-} */
-
 .problems {
     width: 100%;
     height: 100%;
@@ -57,35 +5,35 @@ tbody tr.active-row {
     padding-inline: 4rem;
     overflow: hidden;
     flex-wrap: wrap;
+    justify-content: space-between;
 }
 
-.container {
+.card {
     display: flex;
     background-color: rgb(var(--clr-background-secondary));
-    width: 30rem;
+    width: 34rem;
     margin: 1.5rem;
     border-radius: 0.5rem;
     padding-block: 1rem;
     border: rgba(var(--clr-outline-contrast), 1) 1px solid;
     color: rgb(var(--clr-text));
     transition: 0.3s;
+    box-shadow: 0 0 0.5rem rgba(var(--clr-outline-contrast), 0.8);
 }
 
-.container:hover {
-    border-color: rgb(var(--clr-primary-300));
+.card-hover:hover {
+    transform: scale(1.05);
     cursor: pointer;
-}
-
-.report-data {
-    padding: 1rem;
-    padding-bottom: 0rem;
 }
 
 .problem-data {
     display: flex;
     flex-direction: column;
     width: 10rem;
+    height: 100%;
     border-right: 1px solid rgb(var(--clr-text));
+    justify-content: space-between;
+    text-align: center;
 }
 
 .user-data {
@@ -95,24 +43,47 @@ tbody tr.active-row {
     width: 100%;
 }
 
-.image {
+.report-data {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-inline: 1rem;
+    padding: 0.2rem;
+    background-color: rgb(var(--clr-background));
+    border-radius: 5px;
+}
+
+.user-avatar {
     border: 1px solid rgb(var(--clr-text));
     width: 5rem;
     height: 5rem;
     border-radius: 1rem;
+    background-position: center;
+    background-size: cover;
 }
 
 .problem-description {
     display: flex;
     flex-direction: column;
-    width: 20rem;
     padding-inline: 1rem;
+    width: 25rem;
+    justify-content: space-between;
     gap: 2rem;
+}
+
+.placeholder {
+    display: flex;
+    flex-direction: column;
+    background: rgb(var(--clr-background));
+    padding: 0.6rem;
+    border-radius: 5px;
+    height: 100%;
 }
 
 .row {
     display: flex;
-    gap: 6rem;
+    gap: 2rem;
+    height: 100%;
 }
 
 .center {
@@ -123,6 +94,8 @@ tbody tr.active-row {
 .column {
     display: flex;
     flex-direction: column;
+    flex: 1 0 0;
+    height: 100%;
 }
 
 .label {

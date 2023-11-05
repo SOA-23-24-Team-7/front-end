@@ -1,12 +1,17 @@
 <div class="users">
     <div
-        class="container"
-        [ngClass]="{ 'container-red': !person.user.isActive }"
+        class="card"
+        [ngClass]="{ 'card-red': !person.user.isActive }"
         *ngFor="let person of people"
-        #userContainer
+        #userCard
     >
         <div class="user-data">
-            <div class="picture"></div>
+            <div
+                class="picture"
+                [style.background-image]="
+                    'url(' + person.user.profilePicture + ')'
+                "
+            ></div>
             <div class="row">
                 <div class="username-color">
                     <div>@{{ person.user.username }}</div>
@@ -21,7 +26,7 @@
                 <fa-icon
                     class="red"
                     [icon]="faUserXmark"
-                    (click)="disableAccount(person, userContainer)"
+                    (click)="disableAccount(person, userCard)"
                 />
             </div>
             <ng-template #notActive>

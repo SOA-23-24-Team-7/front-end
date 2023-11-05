@@ -52,6 +52,7 @@ export class ProblemsOverviewComponent implements OnInit {
             this.service.getAuthorsProblems().subscribe({
                 next: (result: PagedResults<ProblemUser>) => {
                     this.problems = result.results;
+                    console.log(this.problems);
                 },
                 error: (err: any) => {
                     console.log(err);
@@ -61,6 +62,15 @@ export class ProblemsOverviewComponent implements OnInit {
     }
 
     openProblemModal(problem: ProblemUser) {
+        if (this.user.role != "author" && !problem.isAnswered) {
+            return;
+        }
         this.dialogRef.open(ProblemAnswerComponent, { data: problem });
+    }
+
+    onMouseover(problem: ProblemUser, problemCard: any) {
+        if (this.user.role != "author" && !problem.isAnswered) {
+            problemCard.classList.remove("card-hover");
+        }
     }
 }

@@ -10,4 +10,5 @@ export interface ProblemUser {
     tourist: User;
     tourId: number;
     tourName: string;
+    isAnswered: boolean;
 }

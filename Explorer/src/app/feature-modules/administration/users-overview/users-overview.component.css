@@ -8,7 +8,7 @@
     flex-wrap: wrap;
 }
 
-.container {
+.card {
     background-color: rgb(var(--clr-background-secondary));
     width: 35rem;
     padding: 1rem;
@@ -20,12 +20,12 @@
     box-shadow: 0 0 0.5rem rgba(var(--clr-outline-contrast), 0.8);
 }
 
-.container-red {
+.card-red {
     box-shadow: 0 0 0.5rem rgba(var(--clr-error-700), 0.8);
     border-color: rgba(var(--clr-error-700), 0.8);
 }
 
-.container:hover {
+.card:hover {
     transform: scale(1.05);
 }
 
@@ -68,6 +68,8 @@ fa-icon:hover {
     height: 8rem;
     border: rgba(var(--clr-outline-contrast), 1) 1px solid;
     border-radius: 0.5rem;
+    background-position: center;
+    background-size: cover;
 }
 
 .row {
