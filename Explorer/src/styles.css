@@ -53,6 +53,13 @@
     background-color: rgb(var(--clr-background));
 }
 
+.dark-theme a {
+    color: rgb(var(--clr-primary-300));
+}
+.dark-theme a:hover {
+    filter: brightness(0.8);
+}
+
 /* Box sizing rules */
 *,
 *::before,

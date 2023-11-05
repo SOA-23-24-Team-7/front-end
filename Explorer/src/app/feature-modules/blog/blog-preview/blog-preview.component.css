@@ -11,9 +11,9 @@
     font-size: 1.2rem;
     transition: filter 0.2s;
     height: max-content;
-    gap: 1rem;
     box-shadow: 0 0 0.5rem rgba(var(--clr-outline), 0.6);
     color: rgb(var(--clr-text));
+    transition: border 0.1s;
 }
 
 .blog-title {
@@ -21,8 +21,8 @@
 }
 
 .blog:hover {
-    filter: brightness(1.05);
     cursor: pointer;
+    border-color: rgb(var(--clr-outline-contrast));
 }
 
 .blogs-title {
@@ -57,6 +57,7 @@
     align-items: center;
     justify-content: start;
     font-size: 1rem;
+    min-width: 2.5rem;
 }
 
 .vote {
@@ -85,4 +86,36 @@
 
 .active .downvote {
     color: rgb(var(--clr-error-700));
+}
+
+.blog-content {
+    padding-inline: 0.3rem;
+    width: 100%;
+}
+
+.blog-description {
+    overflow: hidden;
+    font-size: 1rem;
+}
+
+.bottom-bar {
+    display: flex;
+    color: rgba(var(--clr-text), 0.6);
+    align-items: center;
+    margin-top: 1rem;
+}
+
+.comments fa-icon {
+    margin-right: 4px;
+}
+
+.bottom-bar-button {
+    height: 100%;
+    padding: 0.2rem;
+    padding-inline: 0.5rem;
+    transition: background-color 0.1s;
+}
+
+.bottom-bar-button:hover {
+    background-color: rgb(var(--clr-background));
 }

@@ -1,16 +1,23 @@
 <div class="blog">
-  <h1 class="blog-title">{{blog.title}}</h1>
-  <p class="blog-description">{{blog.description}}</p>
+    <h1 class="blog-title">{{ blog.title }}</h1>
+    <div class="blog-description" [innerHTML]="blogMarkdown"></div>
 
-  <div *ngIf="user" class="comment-section">
-    <xp-comment
-    *ngFor="let comment of comments"
-    [comment]="comment"
-    [user]="user"
-    (editComment)="onEditComment($event)"
-    (deleteComment)="onDeleteComment($event)"
-    ></xp-comment>
+    <div *ngIf="user" class="comment-section">
+        <xp-comment
+            *ngFor="let comment of comments"
+            [comment]="comment"
+            [user]="user"
+            (editComment)="onEditComment($event)"
+            (deleteComment)="onDeleteComment($event)"
+        ></xp-comment>
 
-    <button color="primary" (click)="onAddClicked()" mat-raised-button class="new-comment-button">New</button>
-  </div>
+        <button
+            color="primary"
+            (click)="onAddClicked()"
+            mat-raised-button
+            class="new-comment-button"
+        >
+            New
+        </button>
+    </div>
 </div>

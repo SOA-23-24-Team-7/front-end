@@ -8,3 +8,8 @@
     gap: 1rem;
     align-items: center;
 }
+
+.blogs-title {
+    color: rgb(var(--clr-text));
+    font-weight: 800;
+}

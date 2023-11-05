@@ -1,15 +1,22 @@
 import { Component, EventEmitter, Input, OnInit, Output } from "@angular/core";
 import { Blog } from "../model/blog.model";
-import { faCircleUp, faCircleDown } from "@fortawesome/free-regular-svg-icons";
+import {
+    faCircleUp,
+    faCircleDown,
+    faComment,
+    faShareFromSquare,
+} from "@fortawesome/free-regular-svg-icons";
 import { Vote, VoteType } from "../model/vote.model";
 import { User } from "src/app/infrastructure/auth/model/user.model";
+import { marked } from "marked";
+import * as DOMPurify from "dompurify";
 
 @Component({
     selector: "xp-blog-preview",
     templateUrl: "./blog-preview.component.html",
     styleUrls: ["./blog-preview.component.css"],
 })
-export class BlogPreviewComponent {
+export class BlogPreviewComponent implements OnInit {
     @Input() blog: Blog;
     @Input() vote: Vote | undefined;
     @Input() user: User | undefined;
@@ -17,9 +24,17 @@ export class BlogPreviewComponent {
     @Output() downvote: EventEmitter<number> = new EventEmitter();
 
     VoteType = VoteType;
+    blogMarkdown: string;
 
     faCircleUp = faCircleUp;
     faCircleDown = faCircleDown;
+    faComment = faComment;
+    faShareFromSquare = faShareFromSquare;
+
+    ngOnInit(): void {
+        const md = marked.setOptions({});
+        this.blogMarkdown = DOMPurify.sanitize(md.parse(this.blog.description));
+    }
 
     onUpVote(e: Event) {
         e.stopPropagation();
@@ -37,6 +52,10 @@ export class BlogPreviewComponent {
         }
         this.downvote.emit(this.blog.id);
         this.handleVoteChange(VoteType.DOWNVOTE);
+    }
+
+    shareBlog(e: Event) {
+        e.stopPropagation();
     }
 
     handleVoteChange(voteType: VoteType) {

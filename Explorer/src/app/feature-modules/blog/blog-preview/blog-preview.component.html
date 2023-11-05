@@ -25,10 +25,16 @@
             <h2 class="blog-title">{{ blog.title }}</h2>
             <span class="blog-date">{{ blog.date }}</span>
         </div>
-        <div class="blog-description">{{ blog.description }}</div>
+        <div class="blog-description" [innerHTML]="blogMarkdown"></div>
         <div class="bottom-bar">
-            <div class="comments"></div>
-            <div class="share"></div>
+            <div class="comments bottom-bar-button">
+                <fa-icon [icon]="faComment" />{{ blog.comments.length }}
+                Comments
+            </div>
+            <div class="share bottom-bar-button" (click)="shareBlog($event)">
+                <fa-icon [icon]="faShareFromSquare" />
+                Share
+            </div>
         </div>
     </div>
 </div>
