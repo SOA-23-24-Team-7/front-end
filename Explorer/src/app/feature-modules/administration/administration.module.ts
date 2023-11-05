@@ -10,6 +10,8 @@ import { ProblemViewComponent } from "./problem-view/problem-view.component";
 import { RequestViewComponent } from "./request-view/request-view.component";
 import { CommentRequestFormComponent } from "./comment-request-form/comment-request-form.component";
 import { CommentKeyPointRequestFormComponent } from "./comment-keypoint-request-form/comment-keypoint-request-form.component";
+import { LayoutModule } from "../layout/layout.module";
+import { FontAwesomeModule } from "@fortawesome/angular-fontawesome";
 
 @NgModule({
     declarations: [
@@ -22,7 +24,13 @@ import { CommentKeyPointRequestFormComponent } from "./comment-keypoint-request-
         CommentRequestFormComponent,
         CommentKeyPointRequestFormComponent,
     ],
-    imports: [CommonModule, MaterialModule, ReactiveFormsModule],
+    imports: [
+        CommonModule,
+        MaterialModule,
+        ReactiveFormsModule,
+        LayoutModule,
+        FontAwesomeModule,
+    ],
     exports: [
         EquipmentComponent,
         EquipmentFormComponent,

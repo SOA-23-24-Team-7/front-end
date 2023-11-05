@@ -1,0 +1,19 @@
+<div class="request-key-point-card">
+    <div class="column">Ime Autora</div>
+    <div class="column">Naziv keypointa</div>
+    <div class="column">
+        <div
+            [ngClass]="{
+                'status-0': request.status == 0,
+                'status-1': request.status == 1,
+                'status-2': request.status == 2
+            }"
+        >
+            {{ getPublicStatusText(request.status) }}
+        </div>
+    </div>
+
+    <div class="column created-date">
+        {{ request.created | date : "yyyy-MM-dd HH:mm:ss" }}
+    </div>
+</div>

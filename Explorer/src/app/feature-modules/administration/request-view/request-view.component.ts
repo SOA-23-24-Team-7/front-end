@@ -10,7 +10,7 @@ import { PublicFacilityRequest } from "../../tour-authoring/model/public-facilit
 import { CommentRequestFormComponent } from "../comment-request-form/comment-request-form.component";
 import { MatDialog, MatDialogRef } from "@angular/material/dialog";
 import { CommentKeyPointRequestFormComponent } from "../comment-keypoint-request-form/comment-keypoint-request-form.component";
-
+import { faCheck, faTimes } from "@fortawesome/free-solid-svg-icons";
 @Component({
     selector: "xp-request-view",
     templateUrl: "./request-view.component.html",
@@ -21,6 +21,8 @@ export class RequestViewComponent implements OnInit {
     facilityRequests: PublicFacilityRequest[] = [];
     status: PublicStatus;
     isVisible: boolean = false;
+    faCheck = faCheck;
+    faTimes = faTimes;
     constructor(
         private service: AdministrationService,
         public dialogRef: MatDialog,
@@ -40,6 +42,8 @@ export class RequestViewComponent implements OnInit {
                 this.service.getFacilityRequests().subscribe({
                     next: (result: PagedResults<PublicFacilityRequest>) => {
                         this.facilityRequests = result.results;
+                        this.sortKeyPointRequests();
+                        this.sortFacilityRequests();
                     },
                 });
             },
@@ -99,6 +103,30 @@ export class RequestViewComponent implements OnInit {
     rejectPublicFacilityRequest(request: PublicFacilityRequest): void {
         this.dialogRef.open(CommentRequestFormComponent, {
             data: request,
+        });
+    }
+
+    sortKeyPointRequests(): void {
+        this.requests = this.requests.sort((a, b) => {
+            if (a.status === 0 && b.status !== 0) {
+                return -1;
+            } else if (a.status !== 0 && b.status === 0) {
+                return 1;
+            } else {
+                return 0;
+            }
+        });
+    }
+
+    sortFacilityRequests(): void {
+        this.facilityRequests = this.facilityRequests.sort((a, b) => {
+            if (a.status === 0 && b.status !== 0) {
+                return -1;
+            } else if (a.status !== 0 && b.status === 0) {
+                return 1;
+            } else {
+                return 0;
+            }
         });
     }
 }
