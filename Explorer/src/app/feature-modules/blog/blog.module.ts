@@ -9,9 +9,10 @@ import { BlogComponent } from "./blog/blog.component";
 import { RouterModule } from "@angular/router";
 import { MaterialModule } from "src/app/infrastructure/material/material.module";
 import { MatDialogModule } from "@angular/material/dialog";
-import { FormsModule } from "@angular/forms";
+import { FormsModule, ReactiveFormsModule } from "@angular/forms";
 import { BlogPreviewComponent } from "./blog-preview/blog-preview.component";
 import { FontAwesomeModule } from "@fortawesome/angular-fontawesome";
+import { BlogFormComponent } from './blog-form/blog-form.component';
 
 @NgModule({
     declarations: [
@@ -20,6 +21,7 @@ import { FontAwesomeModule } from "@fortawesome/angular-fontawesome";
         BlogsComponent,
         BlogComponent,
         BlogPreviewComponent,
+        BlogFormComponent,
     ],
     imports: [
         CommonModule,
@@ -29,7 +31,8 @@ import { FontAwesomeModule } from "@fortawesome/angular-fontawesome";
         FormsModule,
         MatDialogModule,
         FontAwesomeModule,
-    ],
+        ReactiveFormsModule
+    ]
 })
 export class BlogModule implements OnInit {
     constructor(private service: BlogService) {}
