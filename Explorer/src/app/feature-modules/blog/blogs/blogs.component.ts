@@ -5,6 +5,7 @@ import { PagedResults } from "src/app/shared/model/paged-results.model";
 import { Vote } from "../model/vote.model";
 import { User } from "src/app/infrastructure/auth/model/user.model";
 import { AuthService } from "src/app/infrastructure/auth/auth.service";
+import { Pipe, PipeTransform } from '@angular/core';
 
 @Component({
     selector: "xp-blogs",
@@ -14,6 +15,7 @@ import { AuthService } from "src/app/infrastructure/auth/auth.service";
 export class BlogsComponent implements OnInit {
     blogs: Blog[] = [];
     user: User | undefined;
+    selectedStatus: number = 5;
 
     constructor(
         private service: BlogService,
@@ -27,10 +29,16 @@ export class BlogsComponent implements OnInit {
         this.getBlogs();
     }
 
+    filterByStatus(status: number) {
+        this.selectedStatus = status;
+        console.log(this.selectedStatus)
+    }
+
     getBlogs(): void {
         this.service.getBlogs().subscribe({
             next: (result: PagedResults<Blog>) => {
                 this.blogs = result.results;
+                console.log(this.blogs)
             },
             error: () => {},
         });

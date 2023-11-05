@@ -1,21 +1,18 @@
-.blog {
-  padding: 2rem;
-}
-
 .blog-title {
+  font-family: 'Roboto', sans-serif;
   font-weight: bold;
-}
-
-.comment-section {
-  margin-top: 1rem;
-}
-
-.comment {
-  background-color: rgb(212, 212, 212);
-  padding: 0.5rem;
+  font-size: 2rem;
   margin-bottom: 1rem;
 }
 
-.new-comment-button {
-  align-self: flex-end;
+.blog-description {
+  font-family: 'Open Sans', sans-serif;
+  font-size: 1.2rem;
+  color: rgba(85, 85, 85, 0.8); /* Slightly transparent */
+  margin-bottom: 2rem;
+}
+
+/* Add padding to your blog */
+.blog {
+  padding: 2rem;
 }

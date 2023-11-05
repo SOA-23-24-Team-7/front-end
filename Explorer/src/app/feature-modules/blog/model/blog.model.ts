@@ -7,7 +7,7 @@ export interface Blog {
     description: string;
     date: string;
     pictures: string[];
-    status: string;
+    status: number;
     comments: Comment[];
     voteCount: number;
     votes: Vote[];
