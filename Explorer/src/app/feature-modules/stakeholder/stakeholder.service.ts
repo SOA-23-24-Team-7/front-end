@@ -9,11 +9,17 @@ import { Problem } from "../marketplace/model/problem.model";
 import { Person } from "./model/person.model";
 import { ProblemUser } from "../marketplace/model/problem-with-user.model";
 import { ProblemCommentCreate } from "./model/problem-comment-create.model";
+import { ProblemAnswer } from "./model/problem-answer";
 
 @Injectable({
     providedIn: "root",
 })
 export class StakeholderService {
+    getProblemAnswer(problemId: number): Observable<ProblemAnswer> {
+        return this.http.get<ProblemAnswer>(
+            environment.apiHost + "problem-answer/problem/" + problemId,
+        );
+    }
     constructor(private http: HttpClient) {}
 
     getPeople(): Observable<PagedResults<Person>> {
@@ -40,6 +46,13 @@ export class StakeholderService {
         return this.http.post<ProblemCommentCreate>(
             environment.apiHost + "problemComment/",
             problemComment,
+        );
+    }
+
+    createAnswer(problemAnswer: ProblemAnswer): Observable<ProblemAnswer> {
+        return this.http.post<ProblemAnswer>(
+            environment.apiHost + "problemAnswer/",
+            problemAnswer,
         );
     }
 

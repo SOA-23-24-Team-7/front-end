@@ -1,8 +1,12 @@
-import { Component, OnInit } from "@angular/core";
+import { Component, Input, OnInit } from "@angular/core";
 import { StakeholderService } from "../stakeholder.service";
 import { AuthService } from "src/app/infrastructure/auth/auth.service";
 import { ProblemCommentCreate } from "../model/problem-comment-create.model";
 import { faChevronRight } from "@fortawesome/free-solid-svg-icons";
+import { User } from "src/app/infrastructure/auth/model/user.model";
+import { ProblemUser } from "../../marketplace/model/problem-with-user.model";
+import { ProblemAnswer } from "../model/problem-answer";
+import { Output, EventEmitter } from "@angular/core";
 
 @Component({
     selector: "xp-problem-comment-create",
@@ -10,9 +14,11 @@ import { faChevronRight } from "@fortawesome/free-solid-svg-icons";
     styleUrls: ["./problem-comment-create.component.css"],
 })
 export class ProblemCommentCreateComponent implements OnInit {
+    @Input() problem: ProblemUser;
+    @Output() onAddAnswer = new EventEmitter<string>();
     text: string;
-    problemAnswerId: number = 1;
-    commenterId: number;
+    user: User;
+    label: string;
     constructor(
         private service: StakeholderService,
         private authService: AuthService,
@@ -20,17 +26,36 @@ export class ProblemCommentCreateComponent implements OnInit {
 
     ngOnInit(): void {
         this.authService.user$.subscribe(user => {
-            this.commenterId = user.id;
+            this.user = user;
         });
+
+        if (this.user.role === "author" && !this.problem.isAnswered) {
+            this.label = "Answer";
+        } else {
+            this.label = "Comment";
+        }
     }
 
     leaveComment() {
         const problemComment: ProblemCommentCreate = {
             text: this.text,
-            problemAnswerId: this.problemAnswerId,
-            commenterId: this.commenterId,
+            problemAnswerId: this.problem.answerId,
+            commenterId: this.user.id,
         };
         this.service.createProblemComment(problemComment).subscribe(() => {});
+    }
+
+    createAnswer() {
+        const problemAnswer: ProblemAnswer = {
+            authorId: this.problem.tourAuthorId,
+            problemId: this.problem.id,
+            answer: this.text,
+        };
+        this.service.createAnswer(problemAnswer).subscribe(() => {});
+        if (this.text !== undefined) {
+            this.onAddAnswer.emit(this.text);
+            this.label = "Comment";
+        }
     }
 
     faChevronRight = faChevronRight;

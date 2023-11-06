@@ -1,13 +1,19 @@
 <div class="problem-answer-modal">
     <div class="problem-answer">
         <div class="header">
-            <div>
-                {{problem.description}}
+            <div class="description">
+                {{ headerText }}
             </div>
-            <div class="btn" (click)="resolveProblem()">Resolve Problem</div>
+            <div class="button" *ngIf="user.role !== 'author'">
+                <fa-icon [icon]="faSquareCheck" (click)="resolveProblem()" />
+            </div>
         </div>
+        <xp-problem-comment-create
+            [problem]="problem"
+            (onAddAnswer)="addHeader($event)"
+        />
         <div class="comments">
-            <xp-problem-comment-list/>
+            <xp-problem-comment-list />
         </div>
     </div>
 </div>

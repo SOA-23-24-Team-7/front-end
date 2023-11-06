@@ -23,12 +23,33 @@
 }
 
 .header {
+    display: flex;
+    flex-direction: column;
     background-color: rgb(150, 42, 42);
     width: 100%;
-    padding-inline: 2rem;
-    padding-block: 1.5rem;
+    padding-inline: 0.8rem;
+    padding-top: 1rem;
     border-top-left-radius: 1rem;
     border-top-right-radius: 1rem;
+    text-align: center;
+}
+
+.description {
+    padding-inline: 0.8rem;
+    padding-bottom: 1rem;
+}
+
+.button {
+    align-self: flex-end;
+    margin-left: 1rem;
+    margin-top: auto;
+    font-size: 2rem;
+    transition: 0.3s;
+}
+
+.button:hover {
+    color: rgba(var(--clr-success-700));
+    cursor: pointer;
 }
 
 .comments {

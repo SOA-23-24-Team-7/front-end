@@ -65,7 +65,9 @@ export class ProblemsOverviewComponent implements OnInit {
         if (this.user.role != "author" && !problem.isAnswered) {
             return;
         }
-        this.dialogRef.open(ProblemAnswerComponent, { data: problem });
+        this.dialogRef.open(ProblemAnswerComponent, {
+            data: { dataProblem: problem, dataUser: this.user },
+        });
     }
 
     onMouseover(problem: ProblemUser, problemCard: any) {
