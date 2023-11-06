@@ -3,22 +3,22 @@
     justify-content: center;
     align-items: center;
     height: 100vh;
-  }
-  
-  .create-form {
+}
+
+.create-form {
     width: 400px;
     margin: auto;
-  }
-  
-  mat-form-field {
+}
+
+mat-form-field {
     width: 100%;
-  }
-  
-  textarea {
+}
+
+textarea {
     width: 100%;
-  }
-  
-  .markup-preview {
+}
+
+.markup-preview {
     border: 1px solid #ccc;
     padding: 10px;
     margin-top: 20px;
@@ -27,19 +27,28 @@
     backdrop-filter: blur(10px);
     max-height: 200px; /* Set a maximum height for the preview container */
     overflow: auto; /* Add a scrollbar if content overflows */
-  }
-  
+}
 
-  .markup-preview mat-label {
+
+.markup-preview mat-label {
     display: block;
     text-align: center;
     font-weight: bold;
     font-size: 1.2em;
     color: rgba(0, 0, 0, 0.6); /* Adjust the color and opacity as needed */
-  }
-  
-  
-  .preview {
+}
+
+.preview {
     min-height: 100px;
-  }
-  
+}
+
+button {
+    margin-top: 10px;
+}
+
+.button-container {
+    text-align: center;
+    margin-top: 20px;
+    display: flex;
+    justify-content: center;
+}

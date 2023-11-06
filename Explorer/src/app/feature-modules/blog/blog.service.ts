@@ -6,6 +6,8 @@ import { environment } from "src/env/environment";
 import { Blog } from "./model/blog.model";
 import { Comment, CreateComment } from "./model/comment.model";
 import { Vote } from "./model/vote.model";
+import { CreateBlog } from "./model/blog-create.model";
+import { UpdateBlog } from "./model/blog-update.model";
 
 @Injectable({
     providedIn: "root",
@@ -50,6 +52,22 @@ export class BlogService {
     deleteComment(id: Number): Observable<Comment> {
         return this.http.delete<Comment>(
             environment.apiHost + "tourist/comment/" + id,
+        );
+    }
+
+    saveBlog(blog: CreateBlog): Observable<CreateBlog> {
+        blog.status = 0;
+        console.log(blog)
+        return this.http.post<CreateBlog>(
+            environment.apiHost + "blog/create", blog
+        );
+    }
+
+    publishBlog(blog: UpdateBlog): Observable<UpdateBlog> {
+        blog.status = 1;
+        console.log(blog)
+        return this.http.put<UpdateBlog>(
+            environment.apiHost + "blog/update", blog
         );
     }
 

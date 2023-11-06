@@ -5,6 +5,7 @@ import {
     faCircleDown,
     faComment,
     faShareFromSquare,
+    faCheckCircle
 } from "@fortawesome/free-regular-svg-icons";
 import { Vote, VoteType } from "../model/vote.model";
 import { User } from "src/app/infrastructure/auth/model/user.model";
@@ -22,6 +23,7 @@ export class BlogPreviewComponent implements OnInit {
     @Input() user: User | undefined;
     @Output() upvote: EventEmitter<number> = new EventEmitter();
     @Output() downvote: EventEmitter<number> = new EventEmitter();
+    @Output() publish: EventEmitter<Blog> = new EventEmitter();
 
     VoteType = VoteType;
     blogMarkdown: string;
@@ -30,6 +32,7 @@ export class BlogPreviewComponent implements OnInit {
     faCircleDown = faCircleDown;
     faComment = faComment;
     faShareFromSquare = faShareFromSquare;
+    faCheckCircle = faCheckCircle;
 
     ngOnInit(): void {
         const md = marked.setOptions({});
@@ -84,5 +87,10 @@ export class BlogPreviewComponent implements OnInit {
                 this.blog.voteCount++;
             this.vote.voteType = voteType;
         }
+    }
+
+    publishBlog(e: Event) {
+        e.stopPropagation();
+        this.publish.emit(this.blog);
     }
 }

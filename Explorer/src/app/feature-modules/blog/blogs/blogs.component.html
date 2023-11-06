@@ -18,6 +18,7 @@
         [routerLink]="['/blog/' + blog.id]"
         (upvote)="upVoteBlog($event)"
         (downvote)="downVoteBlog($event)"
+        (publish)="publishBlogAndRefresh($event)"
         [style.display]="selectedStatus == 5 || blog.status == selectedStatus ? 'block' : 'none'"
     ></xp-blog-preview>
     <button color="primary" mat-icon-button [routerLink]="['blog-form']">

@@ -6,6 +6,7 @@ import { Vote } from "../model/vote.model";
 import { User } from "src/app/infrastructure/auth/model/user.model";
 import { AuthService } from "src/app/infrastructure/auth/auth.service";
 import { Pipe, PipeTransform } from '@angular/core';
+import { UpdateBlog } from "../model/blog-update.model";
 
 @Component({
     selector: "xp-blogs",
@@ -67,4 +68,20 @@ export class BlogsComponent implements OnInit {
             },
         });
     }
+
+    publishBlogAndRefresh(blog: Blog) {
+        const updateBlog: UpdateBlog = {
+            id: blog.id,
+            title: blog.title,
+            description: blog.description,
+            date: new Date().toISOString(),
+            pictures: blog.pictures,
+            status: 1
+        };
+        this.service.publishBlog(updateBlog).subscribe({
+            next: (_) => {
+                this.getBlogs();
+              }
+        })
+      }
 }

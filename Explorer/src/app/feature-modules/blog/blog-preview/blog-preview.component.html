@@ -35,6 +35,10 @@
                 <fa-icon [icon]="faShareFromSquare" />
                 Share
             </div>
+            <div *ngIf="blog.status == 0" class="publish bottom-bar-button" (click)="publishBlog($event)">
+                <fa-icon [icon]="faCheckCircle" />
+                Publish
+            </div>
         </div>
     </div>
 </div>
