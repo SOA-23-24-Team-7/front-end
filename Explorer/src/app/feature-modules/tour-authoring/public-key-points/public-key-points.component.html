@@ -19,7 +19,11 @@
                 >
                     <xp-key-point-card [keyPoint]="kp"> </xp-key-point-card>
                     <div class="buttons-container">
-                        <fa-icon class="modal-plus" [icon]="faPlus"></fa-icon>
+                        <fa-icon
+                            class="modal-plus"
+                            [icon]="faPlus"
+                            (click)="addPublicKeyPointToTour(kp.id || 0)"
+                        ></fa-icon>
                     </div>
                 </div>
             </div>

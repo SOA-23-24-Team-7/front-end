@@ -180,12 +180,19 @@ export class KeyPointsComponent implements OnInit {
     openDialog() {
         const dialogRef = this.dialogRef.open(PublicKeyPointsComponent, {
             //data: this.listaJavnihTacaka, // lista javnih tacaka koju dobijam u ovoj komponenti i ovim je saljem u modalni dijalog
+            data: {
+                tourId: this.tourIdTemp,
+                keyPoints: this.keyPoints,
+            },
         });
-
-        dialogRef.afterClosed().subscribe(result => {
-            console.log("Zatvoren dijalog", result);
-            // Obradis rezultat koji dobijes
+        const sub = dialogRef.componentInstance.onAdd.subscribe(() => {
+            this.getKeyPoints();
         });
+        //ovo obrisati
+        // dialogRef.afterClosed().subscribe(result => {
+        //     console.log("Zatvoren dijalog", result);
+        //     // Obradis rezultat koji dobijes
+        // });
     }
 
     /*

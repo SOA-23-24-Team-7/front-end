@@ -15,9 +15,8 @@ import { PublicKeyPoint } from "./model/public-key-point.model";
     providedIn: "root",
 })
 export class TourAuthoringService {
-    
     constructor(private http: HttpClient) {}
-    
+
     getTours(): Observable<PagedResults<Tour>> {
         return this.http.get<PagedResults<Tour>>(
             "https://localhost:44333/api/tour/authors",
@@ -176,6 +175,20 @@ export class TourAuthoringService {
         return this.http.put<Tour>(
             environment.apiHost + "tour/publish/" + tour.id,
             tour,
+        );
+    }
+
+    addPublicKeyPoint(
+        tourId: number,
+        publicKeyPointId: number,
+    ): Observable<KeyPoint> {
+        return this.http.post<KeyPoint>(
+            environment.apiHost +
+                "author/publicKeyPoint/addPrivate/" +
+                tourId +
+                "/" +
+                publicKeyPointId,
+            {},
         );
     }
 }
