@@ -1,10 +1,12 @@
 import {
+    AfterViewInit,
     Component,
     EventEmitter,
     Input,
     OnChanges,
     Output,
     SimpleChanges,
+    ViewChild,
 } from "@angular/core";
 import { TourAuthoringService } from "../tour-authoring.service";
 import { FormControl, FormGroup, Validators } from "@angular/forms";

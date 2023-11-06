@@ -1,12 +1,5 @@
 <button (click)="openDialog()">Otvori dijalog</button>
-<button
-    id="back-button"
-    color="primary"
-    (click)="onBackClicked()"
-    mat-raised-button
->
-    Back
-</button>
+
 <button color="primary" (click)="onAddClicked()" mat-icon-button>
     <mat-icon>add</mat-icon>
 </button>
@@ -73,6 +66,91 @@
                 (click)="scrollToNextCard()"
             >
                 <div class="triangle-right"></div>
+            </div>
+            <div id="key-points">
+                <p class="text">Manage tours key points:</p>
+                <hr />
+                <div id="key-point-details" class="container">
+                    <div id="one">
+                        <br />
+                        <mat-label *ngIf="areButtonsEnabled" class="text"
+                            >Choose types of transport:
+                        </mat-label>
+                        <mat-label *ngIf="!areButtonsEnabled" class="text"
+                            >Chosen types of transportation:
+                        </mat-label>
+                        <table *ngIf="!areButtonsEnabled">
+                            <tr *ngIf="checkedWalkingDuration">
+                                <td>
+                                    <mat-label>Walking</mat-label>
+                                </td>
+                                <td>{{ walkingDuration }} minutes</td>
+                            </tr>
+                            <tr *ngIf="checkedBicycleRideDuration">
+                                <td>
+                                    <mat-label>Bicycle ride</mat-label>
+                                </td>
+                                <td>{{ bicycleRideDuration }} minutes</td>
+                            </tr>
+                            <tr *ngIf="checkedCarRideDuration">
+                                <td>
+                                    <mat-label>Car ride</mat-label>
+                                </td>
+                                <td>{{ carRideDuration }} minutes</td>
+                            </tr>
+                        </table>
+                        <br />
+                        <table
+                            *ngIf="areButtonsEnabled"
+                            [formGroup]="checkBoxForm"
+                        >
+                            <tr>
+                                <td>
+                                    <mat-label>Walking</mat-label>
+                                </td>
+                                <td>
+                                    <input
+                                        formControlName="onFootChecked"
+                                        type="checkbox"
+                                    />
+                                </td>
+                                <td>{{ walkingDuration }} minutes</td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <mat-label>Bicycle ride</mat-label>
+                                </td>
+                                <td>
+                                    <input
+                                        formControlName="bicycleRideChecked"
+                                        type="checkbox"
+                                    />
+                                </td>
+                                <td>{{ bicycleRideDuration }} minutes</td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <mat-label>Car ride</mat-label>
+                                </td>
+                                <td>
+                                    <input
+                                        formControlName="carRideChecked"
+                                        type="checkbox"
+                                    />
+                                </td>
+                                <td>{{ carRideDuration }} minutes</td>
+                            </tr>
+                        </table>
+                        <button
+                            id="back-button"
+                            color="primary"
+                            (click)="onBackClicked()"
+                            mat-raised-button
+                        >
+                            Back
+                        </button>
+                    </div>
+                </div>
             </div>
         </div>
     </div>

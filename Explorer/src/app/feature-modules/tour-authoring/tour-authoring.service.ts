@@ -15,7 +15,9 @@ import { PublicKeyPoint } from "./model/public-key-point.model";
     providedIn: "root",
 })
 export class TourAuthoringService {
+    
     constructor(private http: HttpClient) {}
+    
     getTours(): Observable<PagedResults<Tour>> {
         return this.http.get<PagedResults<Tour>>(
             "https://localhost:44333/api/tour/authors",
@@ -25,6 +27,7 @@ export class TourAuthoringService {
     addTour(tour: Tour): Observable<Tour> {
         return this.http.post<Tour>(environment.apiHost + "tour", tour);
     }
+
     deleteTour(id: number): Observable<Tour> {
         return this.http.delete<Tour>(environment.apiHost + "tour/" + id);
     }
@@ -166,6 +169,13 @@ export class TourAuthoringService {
     getPublicKeyPoints(): Observable<PagedResults<PublicKeyPoint>> {
         return this.http.get<PagedResults<PublicKeyPoint>>(
             environment.apiHost + "author/publicKeyPoint",
+        );
+    }
+
+    publishTour(tour: Tour): Observable<Tour> {
+        return this.http.put<Tour>(
+            environment.apiHost + "tour/publish/" + tour.id,
+            tour,
         );
     }
 }
