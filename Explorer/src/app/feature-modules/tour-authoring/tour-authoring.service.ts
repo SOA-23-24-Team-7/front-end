@@ -159,6 +159,10 @@ export class TourAuthoringService {
         );
     }
 
+    getTour(tourId: number): Observable<Tour> {
+        return this.http.get<Tour>(environment.apiHost + "tour/" + tourId);
+    }
+
     getPublicKeyPoints(): Observable<PagedResults<PublicKeyPoint>> {
         return this.http.get<PagedResults<PublicKeyPoint>>(
             environment.apiHost + "author/publicKeyPoint",

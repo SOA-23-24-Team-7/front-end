@@ -13,6 +13,7 @@
                     <th>Tags</th>
                     <th>Price</th>
                     <th>Status</th>
+                    <th>Distance</th>
                     <th></th>
                     <th></th>
                     <th></th>
@@ -26,6 +27,7 @@
                     <td>{{to.tags}}</td>
                     <td>{{to.price}}</td>
                     <td>{{getTourStatusText(to.status)}}</td>
+                    <td>{{to.distance}}</td>
                     <td>
                         <button color="accent" (click)="deleteTour(to.id || 0)" mat-icon-button>
                             <mat-icon>delete</mat-icon>
@@ -37,6 +39,9 @@
                     </td>
                     <td>
                         <button color="primary" mat-raised-button [routerLink]="['/tour', to.id, 'key-points']">View key points</button>
+                    </td>
+                    <td>
+                        <button color="primary" mat-raised-button (click)="onPublishClicked(to.id || 0)">Publish</button>
                     </td>
                 </tr>
                 <tr><button color="primary" (click)="onAddClicked()" mat-icon-button>
