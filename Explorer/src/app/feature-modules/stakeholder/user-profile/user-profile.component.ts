@@ -7,7 +7,6 @@ import { Router } from "@angular/router";
 import { Follower } from "../model/follower";
 import { MessageDialogComponent } from "../message-dialog/message-dialog/message-dialog.component";
 
-
 @Component({
     selector: "xp-user-profile",
     templateUrl: "./user-profile.component.html",
@@ -19,7 +18,6 @@ export class UserProfileComponent implements OnInit {
     person: Person;
     followers: Follower[] = [];
     isDialogOpen: boolean = false;
-    
 
     @ViewChild(MessageDialogComponent) messageDialog: MessageDialogComponent;
 
@@ -39,11 +37,12 @@ export class UserProfileComponent implements OnInit {
             if (!user.id) return;
             this.service.getByUserId(this.user.id).subscribe(result => {
                 this.person = result;
-                this.followers = result.user.followers;
+            });
+            this.service.getFollowers().subscribe(result => {
+                this.followers = result.results;
             });
         });
     }
-
 
     openMessageDialog() {
         this.isDialogOpen = true;

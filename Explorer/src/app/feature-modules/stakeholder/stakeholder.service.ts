@@ -4,6 +4,7 @@ import { PagedResults } from "src/app/shared/model/paged-results.model";
 import { Person } from "./model/person.model";
 import { environment } from "src/env/environment";
 import { Observable } from "rxjs";
+import { Follower } from "./model/follower";
 
 @Injectable({
     providedIn: "root",
@@ -14,6 +15,11 @@ export class StakeholderService {
     getPeople(): Observable<PagedResults<Person>> {
         return this.http.get<PagedResults<Person>>(
             environment.apiHost + "people",
+        );
+    }
+    getFollowers(): Observable<PagedResults<Follower>> {
+        return this.http.get<PagedResults<Follower>>(
+            environment.apiHost + "follower/followers",
         );
     }
     getByUserId(userId: number): Observable<Person> {
@@ -29,7 +35,15 @@ export class StakeholderService {
         );
     }
 
-    sendMessage(message: string, senderMessageID: number, reciverMessageID: number) {
-        return this.http.post( environment.apiHost, { message,senderMessageID, reciverMessageID});
-      }
+    sendMessage(
+        message: string,
+        senderMessageID: number,
+        reciverMessageID: number,
+    ) {
+        return this.http.post(environment.apiHost, {
+            message,
+            senderMessageID,
+            reciverMessageID,
+        });
+    }
 }
