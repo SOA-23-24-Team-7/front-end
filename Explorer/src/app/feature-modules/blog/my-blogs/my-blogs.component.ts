@@ -1,20 +1,19 @@
-import { Component, OnInit } from "@angular/core";
-import { Blog } from "../model/blog.model";
-import { BlogService } from "../blog.service";
-import { PagedResults } from "src/app/shared/model/paged-results.model";
-import { Vote } from "../model/vote.model";
-import { User } from "src/app/infrastructure/auth/model/user.model";
-import { AuthService } from "src/app/infrastructure/auth/auth.service";
-import { Pipe, PipeTransform } from '@angular/core';
-import { UpdateBlog } from "../model/blog-update.model";
+import { Component, OnInit } from '@angular/core';
+import { Blog } from '../model/blog.model';
+import { User } from 'src/app/infrastructure/auth/model/user.model';
+import { BlogService } from '../blog.service';
+import { AuthService } from 'src/app/infrastructure/auth/auth.service';
+import { UpdateBlog } from '../model/blog-update.model';
+import { PagedResults } from 'src/app/shared/model/paged-results.model';
+import { Vote } from '../model/vote.model';
 
 @Component({
-    selector: "xp-blogs",
-    templateUrl: "./blogs.component.html",
-    styleUrls: ["./blogs.component.css"],
+  selector: 'xp-my-blogs',
+  templateUrl: './my-blogs.component.html',
+  styleUrls: ['./my-blogs.component.css']
 })
-export class BlogsComponent implements OnInit {
-    blogs: Blog[] = [];
+export class MyBlogsComponent implements OnInit {
+  blogs: Blog[] = [];
     user: User | undefined;
     selectedStatus: number = 5;
 
@@ -40,6 +39,31 @@ export class BlogsComponent implements OnInit {
                 this.blogs = result.results;
             },
             error: () => {},
+        });
+    }
+
+    publishBlogAndRefresh(blog: Blog) {
+        const updateBlog: UpdateBlog = {
+            id: blog.id,
+            title: blog.title,
+            description: blog.description,
+            date: new Date().toISOString(),
+            status: 1,
+            authorId: 0
+        };
+        this.service.publishBlog(updateBlog).subscribe({
+            next: (_) => {
+                this.getBlogs();
+              }
+        })
+    }
+
+      deleteBlogAndRefresh(id: number) {
+        console.log('deleteBlog called with id:', id);
+        this.service.deleteBlog(id).subscribe({
+            next: (_) => {
+                this.getBlogs();
+            }
         });
     }
 

@@ -13,6 +13,7 @@ import { FormsModule, ReactiveFormsModule } from "@angular/forms";
 import { BlogPreviewComponent } from "./blog-preview/blog-preview.component";
 import { FontAwesomeModule } from "@fortawesome/angular-fontawesome";
 import { BlogFormComponent } from './blog-form/blog-form.component';
+import { MyBlogsComponent } from './my-blogs/my-blogs.component';
 
 @NgModule({
     declarations: [
@@ -22,6 +23,7 @@ import { BlogFormComponent } from './blog-form/blog-form.component';
         BlogComponent,
         BlogPreviewComponent,
         BlogFormComponent,
+        MyBlogsComponent,
     ],
     imports: [
         CommonModule,

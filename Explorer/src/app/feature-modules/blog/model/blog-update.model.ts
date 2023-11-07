@@ -3,6 +3,6 @@ export interface UpdateBlog {
     title: string;
     description: string;
     date: string;
-    pictures: Array<string>;
     status: number;
+    authorId: number;
 }

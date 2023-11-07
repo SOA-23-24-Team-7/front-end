@@ -29,6 +29,11 @@ export class BlogService {
         return this.http.get<Blog>(environment.apiHost + "blog/" + id);
     }
 
+    deleteBlog(id: number) {
+        console.log('pozvano u serevisu brisanje')
+        return this.http.delete<Blog>(environment.apiHost + "blog/delete/" + id);
+    }
+
     getComments(blogId: number): Observable<PagedResults<Comment>> {
         return this.http.get<PagedResults<Comment>>(
             environment.apiHost + "tourist/comment/" + blogId,
@@ -63,9 +68,15 @@ export class BlogService {
         );
     }
 
+    updateBlog(blog: UpdateBlog): Observable<UpdateBlog> {
+        return this.http.put<UpdateBlog>(
+            environment.apiHost + "blog/update", blog
+        );
+    }
+
     publishBlog(blog: UpdateBlog): Observable<UpdateBlog> {
+        console.log('pozvao se pablis u servisu')
         blog.status = 1;
-        console.log(blog)
         return this.http.put<UpdateBlog>(
             environment.apiHost + "blog/update", blog
         );

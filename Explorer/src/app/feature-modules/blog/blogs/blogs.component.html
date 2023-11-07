@@ -2,7 +2,6 @@
     <h1 class="blogs-title">BLOGS</h1>
 
     <select [(ngModel)]="selectedStatus" (change)="filterByStatus(selectedStatus)">
-        <option value="0">Draft</option>
         <option value="1">Published</option>
         <option value="2">Closed</option>
         <option value="3">Active</option>
@@ -18,10 +17,7 @@
         [routerLink]="['/blog/' + blog.id]"
         (upvote)="upVoteBlog($event)"
         (downvote)="downVoteBlog($event)"
-        (publish)="publishBlogAndRefresh($event)"
-        [style.display]="selectedStatus == 5 || blog.status == selectedStatus ? 'block' : 'none'"
+        [style.display]="selectedStatus == 5 && blog.status != 0 || blog.status == selectedStatus ? 'block' : 'none'"
     ></xp-blog-preview>
-    <button color="primary" mat-icon-button [routerLink]="['blog-form']">
-        <mat-icon>add</mat-icon>
-    </button>
+
 </div>

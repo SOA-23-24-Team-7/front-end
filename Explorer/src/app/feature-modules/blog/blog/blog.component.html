@@ -1,5 +1,5 @@
 <div class="blog">
-    <h1 class="blog-title">{{ blog.title }}</h1>
+    <h1 class="blog-title" *ngIf="blog">{{ blog.title }}</h1>
     <div class="blog-description" [innerHTML]="blogMarkdown"></div>
 
     <div *ngIf="user" class="comment-section">

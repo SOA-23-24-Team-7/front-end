@@ -15,7 +15,8 @@
         </div>
       </div>
       <div class="button-container">
-        <button mat-raised-button type="submit" color="primary" (click)="saveBlog()">Save</button>
+        <button mat-raised-button type="submit" *ngIf="!blog" color="primary" (click)="createBlog()">Save</button>
+        <button mat-raised-button type="submit" *ngIf="blog" color="primary" (click)="updateBlog()">Update</button>
       </div>
     </form>
   </div>

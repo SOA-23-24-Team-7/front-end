@@ -1,0 +1,17 @@
+<div class="blogs-container">
+    <h1 class="blogs-title">MY BLOGS</h1>
+    <ng-container *ngIf="blogs && user">
+        <xp-blog-preview
+            *ngFor="let blog of blogs"
+            [blog]="blog"
+            [user]="user"
+            [vote]="getVote(blog)"
+            [routerLink]="blog.status == 0 ? '/blog-form/' + blog.id : '/blog/ '+ blog.id"
+            (upvote)="upVoteBlog($event)"
+            (downvote)="downVoteBlog($event)"
+            (publish)="publishBlogAndRefresh($event)"
+            (delete)="deleteBlogAndRefresh($event)"
+            [style.display]="blog.authorId != user.id ? 'block' : 'none'"
+        ></xp-blog-preview>
+    </ng-container>
+</div>

@@ -6,9 +6,9 @@ export interface Blog {
     title: string;
     description: string;
     date: string;
-    pictures: string[];
     status: number;
     comments: Comment[];
     voteCount: number;
     votes: Vote[];
+    authorId: number;
 }

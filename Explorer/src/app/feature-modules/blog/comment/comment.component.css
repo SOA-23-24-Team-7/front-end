@@ -19,10 +19,12 @@
 .edit-mode textarea {
   width: 100%;
   resize: none;
-  border: 2px solid #ccc;
   border-radius: 5px;
   padding: 0.5rem;
   margin-bottom: 10px;
+  background-color: rgb(var(--clr-background-secondary));
+  border: 1px solid rgb(var(--clr-outline));
+  color: rgba(var(--clr-text));
 }
 
 .edit-mode button {
