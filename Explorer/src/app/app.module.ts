@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-import { ReactiveFormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { AppRoutingModule } from './infrastructure/routing/app-routing.module';
@@ -20,6 +20,10 @@ import { BlogModule } from './feature-modules/blog/blog.module';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { StakeholderModule } from './feature-modules/stakeholder/stakeholder.module';
+import { NgxGoogleAnalyticsModule } from 'ngx-google-analytics';
+import { MessageDialogComponent } from './feature-modules/stakeholder/message-dialog/message-dialog/message-dialog.component';
+import { UserProfileComponent } from './feature-modules/stakeholder/user-profile/user-profile.component';
+
 
 
 
@@ -42,7 +46,9 @@ import { StakeholderModule } from './feature-modules/stakeholder/stakeholder.mod
     HttpClientModule,
     ReactiveFormsModule,
     MatSnackBarModule,
+    FormsModule,
     StakeholderModule,
+    NgxGoogleAnalyticsModule.forRoot('G-YF6NHGD2NQ'),
   ],
   providers: [
     {

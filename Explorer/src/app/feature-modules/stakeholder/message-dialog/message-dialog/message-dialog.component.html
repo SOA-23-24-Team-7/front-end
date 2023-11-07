@@ -1,0 +1,9 @@
+<form>
+    <div class="message-dialog" *ngIf="IsOpen">
+        <label for="message">Unesite poruku:</label>
+        <textarea id="message" [(ngModel)]="message"></textarea>
+        <button (click)="sendMessage()">Pošalji</button>
+      </div>
+</form>
+
+  

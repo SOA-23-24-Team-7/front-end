@@ -27,20 +27,7 @@ export class BlogsComponent implements OnInit {
       error: () => { }
     })
   }
-
-
   
-
-  saveBlogChanges(blogId: number,updatedBlog: Blog): void {
-    this.service.updateBlog(blogId, updatedBlog).subscribe(
-      (response) => {
-        console.log('Uspesno dodat blog:', response);
-      },
-      (error) => {
-        console.error('grescica:', error);
-      }
-    );
-  }
 
   toCreateBlog():void{
 this.router.navigate(['/create-blog'])
