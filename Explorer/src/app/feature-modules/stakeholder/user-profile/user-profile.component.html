@@ -45,11 +45,13 @@
                     <tr *ngFor="let f of person.user.followers">
                         <td>{{ f.followedByUserName }}</td>
                         <td>
-                            <button (click)="openMessageDialog()" color="accent" mat-icon-button>
+                            <button
+                                (click)="openMessageDialog(f.userId)"
+                                color="accent"
+                                mat-icon-button
+                            >
                                 <mat-icon>message</mat-icon>
                             </button>
-                            <xp-message-dialog *ngIf="isDialogOpen"></xp-message-dialog>
-                            
                         </td>
                     </tr>
                 </tbody>
