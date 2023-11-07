@@ -8,6 +8,7 @@ export interface PublicKeyPointRequest {
     keyPoint?: KeyPoint;
     created?: Date;
     authorName: string;
+    keyPointName?: string;
 }
 
 export enum PublicStatus {
