@@ -46,6 +46,8 @@ import { RequestFacilityCardComponent } from "./request-facility-card/request-fa
         HomeComponent,
         RequestKeyPointCardComponent,
         RequestFacilityCardComponent,
+        FooterComponent,
+        TourCardComponent,
     ],
 })
 export class LayoutModule {}

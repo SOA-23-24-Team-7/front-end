@@ -23,6 +23,10 @@ import { TagInputModule } from "ngx-chips";
 import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
 import { FormsModule } from "@angular/forms";
 import { NotificationsComponent } from "./notifications/notifications.component";
+import { TourSearchComponent } from "./tour-search/tour-search.component";
+import { SharedModule } from "src/app/shared/shared.module";
+import { FontAwesomeModule } from "@fortawesome/angular-fontawesome";
+import { LayoutModule } from "src/app/feature-modules/layout/layout.module";
 
 @NgModule({
     declarations: [
@@ -45,6 +49,8 @@ import { NotificationsComponent } from "./notifications/notifications.component"
         TourPreferencesComponent,
         TourPreferenceFormComponent,
         NotificationsComponent,
+
+        TourSearchComponent,
     ],
     imports: [
         CommonModule,
@@ -59,7 +65,10 @@ import { NotificationsComponent } from "./notifications/notifications.component"
         BrowserModule,
         TagInputModule,
         BrowserAnimationsModule,
+        SharedModule,
+        FontAwesomeModule,
         FormsModule,
+        LayoutModule,
     ],
     exports: [
         ReviewComponent,

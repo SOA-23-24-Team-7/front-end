@@ -24,6 +24,7 @@ export class MapComponent implements AfterViewInit, OnChanges {
   @Input() refreshEvents: Observable<number>;
   @Input() selectedKeyPoint: KeyPoint | null;
   @Input() canEdit = false;
+  @Input() height: string = '600px';
   @Input() isKeyPointMap = false;
   @Output() newLongLatEvent = new EventEmitter<[number, number]>();
 
