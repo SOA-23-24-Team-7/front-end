@@ -40,10 +40,10 @@ export class StakeholderService {
         senderMessageID: number,
         reciverMessageID: number,
     ) {
-        return this.http.post(environment.apiHost, {
-            message,
-            senderMessageID,
-            reciverMessageID,
+        return this.http.post(environment.apiHost + "messages/create", {
+            Text: message,
+            UserSenderId: senderMessageID,
+            UserReciverId: reciverMessageID,
         });
     }
 }

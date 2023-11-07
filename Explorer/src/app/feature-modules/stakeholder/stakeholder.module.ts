@@ -7,8 +7,16 @@ import { EditProfileComponent } from "./edit-profile/edit-profile.component";
 import { MessageDialogComponent } from "./message-dialog/message-dialog/message-dialog.component";
 
 @NgModule({
-    declarations: [ MessageDialogComponent,UserProfileComponent, EditProfileComponent],
+    declarations: [
+        MessageDialogComponent,
+        UserProfileComponent,
+        EditProfileComponent,
+    ],
     imports: [CommonModule, MaterialModule, FormsModule],
-    exports: [MessageDialogComponent,UserProfileComponent, EditProfileComponent],
+    exports: [
+        MessageDialogComponent,
+        UserProfileComponent,
+        EditProfileComponent,
+    ],
 })
 export class StakeholderModule {}

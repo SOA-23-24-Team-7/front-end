@@ -1,43 +1,52 @@
-import { Component, Input } from '@angular/core';
-import { StakeholderService } from '../../stakeholder.service';
-import { AuthService } from 'src/app/infrastructure/auth/auth.service';
-
-@Component({
-  selector: 'xp-message-dialog',
-  templateUrl: './message-dialog.component.html',
-  styleUrls: ['./message-dialog.component.css']
-})
-export class MessageDialogComponent {
-  @Input() IsOpen:boolean = false;
-  message: string = '';
-  senderId: number
-  
-  isDialogOpen: boolean = true;
-
-  constructor(private stakeholderService: StakeholderService, private authService: AuthService) {}
-
-ngOnInit()
-{
-  this.authService.checkIfUserExists();
+import { Component, Inject, Input, OnInit } from "@angular/core";
+import { StakeholderService } from "../../stakeholder.service";
+import { AuthService } from "src/app/infrastructure/auth/auth.service";
+import { MAT_DIALOG_DATA, MatDialogRef } from "@angular/material/dialog";
+import { User } from "src/app/infrastructure/auth/model/user.model";
+export interface ModalData {
+    user: User;
+    reciverId: number;
 }
+@Component({
+    selector: "xp-message-dialog",
+    templateUrl: "./message-dialog.component.html",
+    styleUrls: ["./message-dialog.component.css"],
+})
+export class MessageDialogComponent implements OnInit {
+    @Input() IsOpen: boolean = false;
+    message: string = "";
+    senderId: number;
 
+    isDialogOpen: boolean = true;
 
-  sendMessage() {
-    if (this.message.trim() === '') {
-      return;
+    constructor(
+        private stakeholderService: StakeholderService,
+        private authService: AuthService,
+        public dialogRef: MatDialogRef<MessageDialogComponent>,
+        @Inject(MAT_DIALOG_DATA) public data: ModalData,
+    ) {}
+
+    ngOnInit() {
+        //this.authService.checkIfUserExists();
     }
 
-    const userId = this.authService.getCurrentUserId().id; // Dobijte ID trenutno ulogovanog korisnika
+    sendMessage() {
+        if (this.message.trim() === "") {
+            console.log(this.message);
+            return;
+        }
+        console.log("usao");
 
-
-this.stakeholderService.sendMessage(this.message,userId,-11).subscribe(
-  () => {        
-    console.log('Poruka poslata');      
-    this.isDialogOpen = false;
-  },
-  error => {        
-    console.log('Nije nes dobro');
-  }
-)
-}
+        const userId = this.authService.getCurrentUserId().id;
+        const reciverId: number = this.data.reciverId;
+        console.log(reciverId);
+        console.log("opopopop");
+        this.stakeholderService
+            .sendMessage(this.message, userId, reciverId)
+            .subscribe({
+                next: (result: any) => {
+                    this.dialogRef.close();
+                },
+            });
+    }
 }

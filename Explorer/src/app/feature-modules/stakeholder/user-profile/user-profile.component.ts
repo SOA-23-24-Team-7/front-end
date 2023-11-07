@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild } from "@angular/core";
+import { Component, Input, OnInit, ViewChild } from "@angular/core";
 import { Person } from "../model/person.model";
 import { StakeholderService } from "../stakeholder.service";
 import { AuthService } from "src/app/infrastructure/auth/auth.service";
@@ -6,6 +6,7 @@ import { User } from "src/app/infrastructure/auth/model/user.model";
 import { Router } from "@angular/router";
 import { Follower } from "../model/follower";
 import { MessageDialogComponent } from "../message-dialog/message-dialog/message-dialog.component";
+import { MatDialog } from "@angular/material/dialog";
 
 @Component({
     selector: "xp-user-profile",
@@ -18,13 +19,16 @@ export class UserProfileComponent implements OnInit {
     person: Person;
     followers: Follower[] = [];
     isDialogOpen: boolean = false;
+    reciverId: number;
 
     @ViewChild(MessageDialogComponent) messageDialog: MessageDialogComponent;
+    text: any;
 
     constructor(
         private authService: AuthService,
         private service: StakeholderService,
         private router: Router,
+        public dialog: MatDialog,
     ) {}
 
     toggleEditing() {
@@ -43,12 +47,14 @@ export class UserProfileComponent implements OnInit {
             });
         });
     }
-
-    openMessageDialog() {
-        this.isDialogOpen = true;
-    }
-
-    closeMessageDialog() {
-        this.isDialogOpen = false;
+    openMessageDialog(reciverID: number): void {
+        console.log(reciverID);
+        console.log("kkkkkkkkk");
+        const dialogRef = this.dialog.open(MessageDialogComponent, {
+            data: {
+                user: this.user,
+                reciverId: reciverID,
+            },
+        });
     }
 }
