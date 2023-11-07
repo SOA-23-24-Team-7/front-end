@@ -13,7 +13,7 @@
             (onAddAnswer)="addHeader($event)"
         />
         <div class="comments">
-            <xp-problem-comment-list />
+            <xp-problem-comment-list [problemAnswerId]="problem.answerId" />
         </div>
     </div>
 </div>

@@ -66,7 +66,7 @@ export class StakeholderService {
 
     resolveProblem(problemId: number): Observable<ProblemUser> {
         return this.http.get<ProblemUser>(
-            environment.apiHost + "problem/resolve/" + problemId,
+            environment.apiHost + "tourist/problem/resolve/" + problemId,
         );
     }
 
