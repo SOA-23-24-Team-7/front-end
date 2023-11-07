@@ -188,26 +188,8 @@ export class KeyPointsComponent implements OnInit {
         const sub = dialogRef.componentInstance.onAdd.subscribe(() => {
             this.getKeyPoints();
         });
-        //ovo obrisati
-        // dialogRef.afterClosed().subscribe(result => {
-        //     console.log("Zatvoren dijalog", result);
-        //     // Obradis rezultat koji dobijes
-        // });
     }
 
-    /*
-        Ovo staviti u komponentu za listu javnih tacaka:
-        import { Inject } from "@angular/core";
-        U konstruktor:@Inject(MAT_DIALOG_DATA) public data: any -> ovim to 'data' u modalnom dijalogu dobija proslijedjenu listu javnih tacaka
-
-        izabrati odredjene javne tacke u modalnom dijalogu, i proslijediti ih ovoj komponenti na sljedeci nacin:
-        @Output() selectedObjects = new EventEmitter<any[]>();  -> ovo se stavi u modalni dijalog
-        <button (click)="confirm(selectedItems)">Confirm</button>
-        confirm(selectedItems: any[]) {
-            this.selectedObjects.emit(selectedItems);
-        }
-        ovim ce selectedItems biti unutar result-a
-    */
     async onBackClicked(): Promise<void> {
         if (this.mapComponent) {
             try {
