@@ -13,4 +13,5 @@ export interface ProblemUser {
     tourAuthorId: number;
     answerId: number;
     isAnswered: boolean;
+    isResolved: boolean;
 }

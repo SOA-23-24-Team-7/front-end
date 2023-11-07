@@ -61,6 +61,7 @@ export class ProblemsOverviewComponent implements OnInit {
         }
     }
 
+    //dodati proveru sa resolved
     openProblemModal(problem: ProblemUser) {
         if (this.user.role != "author" && !problem.isAnswered) {
             return;

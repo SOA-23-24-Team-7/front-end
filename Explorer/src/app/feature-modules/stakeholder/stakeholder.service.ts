@@ -42,8 +42,8 @@ export class StakeholderService {
 
     createProblemComment(
         problemComment: ProblemCommentCreate,
-    ): Observable<ProblemCommentCreate> {
-        return this.http.post<ProblemCommentCreate>(
+    ): Observable<ProblemComment> {
+        return this.http.post<ProblemComment>(
             environment.apiHost + "problemComment/",
             problemComment,
         );
@@ -56,7 +56,7 @@ export class StakeholderService {
         );
     }
 
-    GetCommentsByProblemAnswerId(
+    getCommentsByProblemAnswerId(
         problemAnswerId: number,
     ): Observable<PagedResults<ProblemComment>> {
         return this.http.get<PagedResults<ProblemComment>>(

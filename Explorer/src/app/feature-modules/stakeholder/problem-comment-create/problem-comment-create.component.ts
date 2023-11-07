@@ -7,6 +7,7 @@ import { User } from "src/app/infrastructure/auth/model/user.model";
 import { ProblemUser } from "../../marketplace/model/problem-with-user.model";
 import { ProblemAnswer } from "../model/problem-answer";
 import { Output, EventEmitter } from "@angular/core";
+import { ProblemComment } from "../model/problem-comment.model";
 
 @Component({
     selector: "xp-problem-comment-create",
@@ -16,6 +17,7 @@ import { Output, EventEmitter } from "@angular/core";
 export class ProblemCommentCreateComponent implements OnInit {
     @Input() problem: ProblemUser;
     @Output() onAddAnswer = new EventEmitter<string>();
+    @Output() onAddComment = new EventEmitter<ProblemComment>();
     text: string;
     user: User;
     label: string;
@@ -42,7 +44,12 @@ export class ProblemCommentCreateComponent implements OnInit {
             problemAnswerId: this.problem.answerId,
             commenterId: this.user.id,
         };
-        this.service.createProblemComment(problemComment).subscribe(() => {});
+        this.service.createProblemComment(problemComment).subscribe({
+            next: (result: ProblemComment) => {
+                console.log(result);
+                this.onAddComment.emit(result);
+            },
+        });
     }
 
     createAnswer() {
