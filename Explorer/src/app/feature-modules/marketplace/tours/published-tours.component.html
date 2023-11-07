@@ -1,0 +1,40 @@
+<div id="tour">
+  <p>Published Tours: </p>
+  <hr>
+  <div id="tour-details">
+      <table>
+          <thead>
+              <tr>
+                  <th>Name</th>
+                  <th>Description</th>
+                  <th>Difficulty</th>
+                  <th>Tags</th>
+                  <th>Price</th>
+                  <th>Distance</th>
+                  <th></th>
+              </tr>
+          </thead>
+          <tbody>
+              <tr *ngFor="let pt of publishedTours">
+                  <td>{{pt.name}}</td>
+                  <td>{{pt.description}}</td>
+                  <td>{{pt.difficulty}}</td>
+                  <td>{{pt.tags}}</td>
+                  <td>{{pt.price}}</td>
+                  <td>{{pt.distance}} km</td>
+                  <!--
+                  <td>
+                      <button color="primary" 
+                              mat-raised-button 
+                              [routerLink]="['/tour', to.id, 'key-points']"
+                              id="view-key-points-button"
+                              >View key points
+                      </button>
+                  </td>
+                  -->
+                  <td></td>
+              </tr>
+          </tbody>
+      </table>
+  </div>
+</div>
