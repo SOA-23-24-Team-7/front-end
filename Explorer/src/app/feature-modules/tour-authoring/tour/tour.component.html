@@ -72,10 +72,12 @@
                                 (click)="onPublishClicked(to)"
                                 >Publish
                         </button>
-                        <p *ngIf="getTourStatusText(to.status) === 'Published'" 
-                            id="already-published"
-                            >Published
-                        </p>
+                        <button *ngIf="getTourStatusText(to.status) === 'Published'" 
+                                color="primary" 
+                                mat-raised-button 
+                                (click)="onArchiveClicked(to)"
+                                >Archive
+                        </button>
                     </td>
                 </tr>
                 <tr><button color="primary" (click)="onAddClicked()" mat-icon-button>

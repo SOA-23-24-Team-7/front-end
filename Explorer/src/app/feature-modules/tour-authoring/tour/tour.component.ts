@@ -74,4 +74,11 @@ export class TourComponent implements OnInit {
     this.shouldEdit = false;
     this.shouldRenderTourForm = true;
   }
+  onArchiveClicked(tour: Tour): void{
+    this.tourAuthoringService.archiveTour(tour).subscribe({
+      next: () => {
+        this.getTours();
+      },
+    })
+  }
 }

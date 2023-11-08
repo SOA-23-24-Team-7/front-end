@@ -173,4 +173,10 @@ export class TourAuthoringService {
             tour,
         );
     }
+    archiveTour(tour: Tour): Observable<Tour> {
+        return this.http.put<Tour>(
+            environment.apiHost + "tour/archive/" + tour.id,
+            tour,
+        );
+    }
 }
