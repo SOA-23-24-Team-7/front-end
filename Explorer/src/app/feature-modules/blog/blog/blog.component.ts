@@ -72,6 +72,11 @@ export class BlogComponent implements OnInit {
         });
     }
 
+    onCommentCreated(newComment: Comment): void {
+        this.comments.push(newComment);
+        this.getComments();
+    }
+
     onAddClicked(): void {
         const dialogRef = this.dialog.open(CommentFormComponent, {
             data: {
@@ -80,10 +85,11 @@ export class BlogComponent implements OnInit {
             },
         });
 
-        dialogRef.afterClosed().subscribe(result => {
-            if (result === undefined) return;
-            this.comments.push(result.comment);
-        });
+        dialogRef.componentInstance.commentCreated.subscribe(
+            (newComment: Comment) => {
+                this.onCommentCreated(newComment);
+            },
+        );
     }
 
     onEditComment(editedComment: Comment): void {
@@ -125,11 +131,57 @@ export class BlogComponent implements OnInit {
         if (!this.user) {
             return;
         }
+        this.handleVoteChange(VoteType.UPVOTE);
+        this.service.upVoteBlog(this.blog.id).subscribe({
+            next: (result: any) => {
+                //unblock voting
+            },
+            error: () => {
+                //undo front end vote
+            },
+        });
     }
 
     onDownVote(e: Event) {
         if (!this.user) {
             return;
+        }
+        this.handleVoteChange(VoteType.DOWNVOTE);
+        this.service.downVoteBlog(this.blog.id).subscribe({
+            next: (result: any) => {
+                //unblock voting
+            },
+            error: () => {
+                //undo front end vote
+            },
+        });
+    }
+
+    handleVoteChange(voteType: VoteType) {
+        if (!this.vote) {
+            this.vote = {
+                userId: this.user!.id,
+                blogId: this.blog.id,
+                voteType: voteType,
+            };
+
+            if (this.vote.voteType == VoteType.UPVOTE) this.blog.voteCount++;
+            else this.blog.voteCount--;
+            return;
+        }
+
+        if (this.vote.voteType == voteType) {
+            if (voteType == VoteType.UPVOTE) this.blog.voteCount--;
+            else this.blog.voteCount++;
+            this.vote.voteType = undefined;
+        } else {
+            if (voteType == VoteType.UPVOTE) this.blog.voteCount++;
+            else this.blog.voteCount--;
+
+            if (this.vote.voteType == VoteType.UPVOTE) this.blog.voteCount--;
+            else if (this.vote.voteType == VoteType.DOWNVOTE)
+                this.blog.voteCount++;
+            this.vote.voteType = voteType;
         }
     }
 }

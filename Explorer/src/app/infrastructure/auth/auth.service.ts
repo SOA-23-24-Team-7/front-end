@@ -14,7 +14,12 @@ import { Registration } from "./model/registration.model";
     providedIn: "root",
 })
 export class AuthService {
-    user$ = new BehaviorSubject<User>({ username: "", id: 0, role: "" });
+    user$ = new BehaviorSubject<User>({
+        username: "",
+        id: 0,
+        role: "",
+        profilePicture: "",
+    });
 
     constructor(
         private http: HttpClient,
@@ -56,7 +61,7 @@ export class AuthService {
 
     logout(): void {
         this.tokenStorage.clear();
-        this.user$.next({ username: "", id: 0, role: "" });
+        this.user$.next({ username: "", id: 0, role: "", profilePicture: "" });
     }
 
     checkIfUserExists(): void {
@@ -76,6 +81,8 @@ export class AuthService {
             role: jwtHelperService.decodeToken(accessToken)[
                 "http://schemas.microsoft.com/ws/2008/06/identity/claims/role"
             ],
+            profilePicture:
+                jwtHelperService.decodeToken(accessToken).profilePicture,
         };
         this.user$.next(user);
     }

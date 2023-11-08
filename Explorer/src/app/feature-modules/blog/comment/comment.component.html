@@ -1,6 +1,6 @@
 <div class="comment">
     <div class="comment-header">
-        <div class="author">{{comment.authorId}}</div>
+        <div class="author">{{ comment.author.username }}</div>
         <div *ngIf="user.id == comment.authorId">
             <button mat-icon-button (click)="toggleEditMode()">
                 <mat-icon>edit</mat-icon>
@@ -12,7 +12,9 @@
     </div>
     <div *ngIf="isEditMode" class="edit-mode">
         <textarea [(ngModel)]="editedText" rows="3"></textarea>
-        <button color="primary" (click)="saveChanges()" mat-raised-button>Save</button>
+        <button color="primary" (click)="saveChanges()" mat-raised-button>
+            Save
+        </button>
     </div>
-    <p class="comment-text" *ngIf="!isEditMode">{{comment.text}}</p>
+    <p class="comment-text" *ngIf="!isEditMode">{{ comment.text }}</p>
 </div>

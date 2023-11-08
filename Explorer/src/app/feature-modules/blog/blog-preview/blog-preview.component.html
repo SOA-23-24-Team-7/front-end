@@ -1,5 +1,5 @@
 <div class="blog">
-    <div class="sidebar">
+    <div class="sidebar" *ngIf="blog.status != 0">
         <div
             class="vote"
             [ngClass]="{
@@ -27,13 +27,25 @@
         </div>
         <div class="blog-description" [innerHTML]="blogMarkdown"></div>
         <div class="bottom-bar">
-            <div class="comments bottom-bar-button">
+            <div class="comments bottom-bar-button" *ngIf="blog.status != 0">
                 <fa-icon [icon]="faComment" />{{ blog.comments.length }}
                 Comments
             </div>
-            <div class="share bottom-bar-button" (click)="shareBlog($event)">
+            <div class="share bottom-bar-button" (click)="shareBlog($event)" *ngIf="blog.status != 0">
                 <fa-icon [icon]="faShareFromSquare" />
                 Share
+            </div>
+            <div *ngIf="blog.status == 0" class="publish bottom-bar-button" (click)="publishBlog($event)">
+                <fa-icon [icon]="faCheckCircle" />
+                Publish
+            </div>
+            <div *ngIf="blog.status == 0" class="edit bottom-bar-button" [routerLink]="['blog-form/' + blog.id]">
+                <fa-icon [icon]="faCheckCircle" />
+                Edit
+            </div>
+            <div *ngIf="visibleDelete" class="delete bottom-bar-button" (click)="deleteBlog($event)">
+                <fa-icon [icon]="faTrashCan" />
+                Delete
             </div>
         </div>
     </div>

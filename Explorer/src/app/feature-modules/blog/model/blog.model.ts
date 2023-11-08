@@ -1,3 +1,4 @@
+import { User } from "src/app/infrastructure/auth/model/user.model";
 import { Comment } from "./comment.model";
 import { Vote } from "./vote.model";
 
@@ -6,9 +7,10 @@ export interface Blog {
     title: string;
     description: string;
     date: string;
-    pictures: string[];
     status: number;
     comments: Comment[];
     voteCount: number;
     votes: Vote[];
+    authorId: number;
+    author: User;
 }

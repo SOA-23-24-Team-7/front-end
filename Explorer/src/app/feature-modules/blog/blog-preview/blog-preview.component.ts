@@ -5,11 +5,15 @@ import {
     faCircleDown,
     faComment,
     faShareFromSquare,
+    faCheckCircle,
+    faTrashCan
 } from "@fortawesome/free-regular-svg-icons";
 import { Vote, VoteType } from "../model/vote.model";
 import { User } from "src/app/infrastructure/auth/model/user.model";
 import { marked } from "marked";
 import * as DOMPurify from "dompurify";
+import { Router } from "@angular/router";
+import { BlogService } from "../blog.service";
 
 @Component({
     selector: "xp-blog-preview",
@@ -17,23 +21,34 @@ import * as DOMPurify from "dompurify";
     styleUrls: ["./blog-preview.component.css"],
 })
 export class BlogPreviewComponent implements OnInit {
+    constructor(private router: Router, private service: BlogService) { }
+
     @Input() blog: Blog;
     @Input() vote: Vote | undefined;
     @Input() user: User | undefined;
     @Output() upvote: EventEmitter<number> = new EventEmitter();
     @Output() downvote: EventEmitter<number> = new EventEmitter();
+    @Output() publish: EventEmitter<Blog> = new EventEmitter();
+    @Output() delete: EventEmitter<number> = new EventEmitter(); 
 
     VoteType = VoteType;
     blogMarkdown: string;
+    visibleDelete: boolean;
 
     faCircleUp = faCircleUp;
     faCircleDown = faCircleDown;
     faComment = faComment;
     faShareFromSquare = faShareFromSquare;
+    faCheckCircle = faCheckCircle;
+    faTrashCan = faTrashCan;
 
     ngOnInit(): void {
         const md = marked.setOptions({});
         this.blogMarkdown = DOMPurify.sanitize(md.parse(this.blog.description));
+        if(this.router.url === '/my-blogs')
+            this.visibleDelete = true;
+        else
+            this.visibleDelete = false;
     }
 
     onUpVote(e: Event) {
@@ -84,5 +99,15 @@ export class BlogPreviewComponent implements OnInit {
                 this.blog.voteCount++;
             this.vote.voteType = voteType;
         }
+    }
+
+    publishBlog(e: Event) {
+        e.stopPropagation();
+        this.publish.emit(this.blog);
+    }
+
+    deleteBlog(e: Event) {
+        e.stopPropagation();
+        this.delete.emit(this.blog.id);
     }
 }

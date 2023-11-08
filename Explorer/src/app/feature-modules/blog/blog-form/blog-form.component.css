@@ -1,0 +1,56 @@
+.centered-form {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+.create-form {
+    width: 400px;
+    margin: auto;
+}
+
+mat-form-field {
+    width: 100%;
+}
+
+textarea {
+    width: 100%;
+}
+
+.markup-preview {
+    padding: 10px;
+    margin-top: 20px;
+    text-align: left;
+    background-color: rgb(var(--clr-background-secondary));
+    border: 1px solid rgb(var(--clr-outline));
+    color: rgba(var(--clr-text));
+    backdrop-filter: blur(10px);
+    max-height: 200px; /* Set a maximum height for the preview container */
+    overflow: auto; /* Add a scrollbar if content overflows */
+}
+
+
+.markup-preview mat-label {
+    display: block;
+    text-align: center;
+    font-weight: bold;
+    font-size: 1.2em;
+    background-color: rgb(var(--clr-background-secondary));
+    color: rgba(var(--clr-text));
+}
+
+.preview {
+    min-height: 100px;
+}
+
+button {
+    margin-top: 10px;
+}
+
+.button-container {
+    text-align: center;
+    margin-top: 20px;
+    display: flex;
+    justify-content: center;
+}
