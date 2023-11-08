@@ -99,7 +99,9 @@ export class ProblemsOverviewComponent implements OnInit {
         });
 
         dialogRef.afterClosed().subscribe(result => {
-            problem.isAnswered = true;
+            if (result) {
+                problem.isAnswered = true;
+            }
         });
     }
 

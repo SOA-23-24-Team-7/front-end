@@ -59,9 +59,9 @@ export class ProblemAnswerComponent implements OnInit {
         });
     }
 
-    addHeader(text: string) {
+    addAnswer(text: string) {
         this.headerText = text;
-        this.onAddAnswer.emit();
+        this.onAddAnswer.emit(true);
     }
 
     addComment(comment: ProblemComment) {

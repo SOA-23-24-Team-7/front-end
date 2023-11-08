@@ -21,7 +21,7 @@
         <xp-problem-comment-create
             *ngIf="user.role !== 'administrator' && !problem.isResolved"
             [problem]="problem"
-            (onAddAnswer)="addHeader($event)"
+            (onAddAnswer)="addAnswer($event)"
             (onAddComment)="addComment($event)"
         />
         <div class="comments">
