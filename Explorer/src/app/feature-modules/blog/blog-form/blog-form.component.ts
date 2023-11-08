@@ -5,6 +5,7 @@ import { Blog } from '../model/blog.model';
 import { ActivatedRoute, Router } from '@angular/router';
 import { CreateBlog } from '../model/blog-create.model';
 import { UpdateBlog } from '../model/blog-update.model';
+import { Pipe, PipeTransform } from '@angular/core';
 
 @Component({
   selector: 'xp-blog-form',
@@ -30,7 +31,9 @@ export class BlogFormComponent implements OnInit {
   });
 
   getMarkupPreview() {
-    return this.blogForm.get('description')?.value;
+    var description = this.blogForm.get('description')?.value || '';
+    console.log()
+    return description.replace(/\n/g, '<br/>');
   }
 
   getBlog(): void {

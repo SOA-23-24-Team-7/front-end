@@ -1,56 +1,48 @@
-.centered-form {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100vh;
-}
-
 .create-form {
-    width: 400px;
+    width: 70%;
     margin: auto;
+    height: 20rem;
+    display: flex;
 }
 
-mat-form-field {
+.form {
+    float: left;
+    align-items: center;
+    text-align: center;
+    margin-top: 2rem;
+    width: 45%;
+    height: 100%;
+    margin-right: 10%;
+}
+
+input {
     width: 100%;
+    margin-bottom: 3rem;
 }
 
 textarea {
     width: 100%;
+    resize: none;
 }
 
 .markup-preview {
+    float: right;
+    margin-top: 2rem;
     padding: 10px;
-    margin-top: 20px;
-    text-align: left;
+    text-align: center;
     background-color: rgb(var(--clr-background-secondary));
+    border-radius: 0.45rem;
     border: 1px solid rgb(var(--clr-outline));
     color: rgba(var(--clr-text));
     backdrop-filter: blur(10px);
-    max-height: 200px; /* Set a maximum height for the preview container */
-    overflow: auto; /* Add a scrollbar if content overflows */
-}
-
-
-.markup-preview mat-label {
-    display: block;
-    text-align: center;
-    font-weight: bold;
-    font-size: 1.2em;
-    background-color: rgb(var(--clr-background-secondary));
-    color: rgba(var(--clr-text));
-}
-
-.preview {
-    min-height: 100px;
-}
-
-button {
-    margin-top: 10px;
+    width: 45%;
+    height: 94%;
+    overflow-wrap: break-word;
+    overflow-x: auto;
 }
 
 .button-container {
+    align-items: center;
     text-align: center;
-    margin-top: 20px;
-    display: flex;
-    justify-content: center;
+    margin-top: 5rem;
 }
