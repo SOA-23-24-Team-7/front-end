@@ -3,6 +3,11 @@ import { Tour, TourStatus } from '../model/tour.model';
 import { TourAuthoringService } from '../tour-authoring.service';
 import { PagedResults } from 'src/app/shared/model/paged-results.model';
 
+import { faPen } from '@fortawesome/free-solid-svg-icons';
+import { faTrash } from '@fortawesome/free-solid-svg-icons';
+import { faPlus } from '@fortawesome/free-solid-svg-icons';
+
+
 @Component({
   selector: 'xp-tour',
   templateUrl: './tour.component.html',
@@ -81,4 +86,10 @@ export class TourComponent implements OnInit {
       },
     })
   }
+
+  faPen = faPen;
+  faPlus = faPlus;
+  faTrash = faTrash;
+
+
 }
