@@ -5,7 +5,7 @@ import { PagedResults } from "src/app/shared/model/paged-results.model";
 import { Vote } from "../model/vote.model";
 import { User } from "src/app/infrastructure/auth/model/user.model";
 import { AuthService } from "src/app/infrastructure/auth/auth.service";
-import { Pipe, PipeTransform } from '@angular/core';
+import { Pipe, PipeTransform } from "@angular/core";
 import { UpdateBlog } from "../model/blog-update.model";
 
 @Component({

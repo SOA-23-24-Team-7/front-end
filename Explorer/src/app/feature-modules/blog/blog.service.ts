@@ -22,7 +22,6 @@ export class BlogService {
     }
 
     getBlogs(): Observable<PagedResults<Blog>> {
-        console.log('Dobavljanje blogova')
         return this.http.get<PagedResults<Blog>>(environment.apiHost + "blog");
     }
 
@@ -31,7 +30,9 @@ export class BlogService {
     }
 
     deleteBlog(id: number) {
-        return this.http.delete<Blog>(environment.apiHost + "blog/delete/" + id);
+        return this.http.delete<Blog>(
+            environment.apiHost + "blog/delete/" + id,
+        );
     }
 
     getComments(blogId: number): Observable<PagedResults<Comment>> {
@@ -63,20 +64,23 @@ export class BlogService {
     saveBlog(blog: CreateBlog): Observable<CreateBlog> {
         blog.status = 0;
         return this.http.post<CreateBlog>(
-            environment.apiHost + "blog/create", blog
+            environment.apiHost + "blog/create",
+            blog,
         );
     }
 
     updateBlog(blog: UpdateBlog): Observable<UpdateBlog> {
         return this.http.put<UpdateBlog>(
-            environment.apiHost + "blog/update", blog
+            environment.apiHost + "blog/update",
+            blog,
         );
     }
 
     publishBlog(blog: UpdateBlog): Observable<UpdateBlog> {
         blog.status = 1;
         return this.http.put<UpdateBlog>(
-            environment.apiHost + "blog/update", blog
+            environment.apiHost + "blog/update",
+            blog,
         );
     }
 
