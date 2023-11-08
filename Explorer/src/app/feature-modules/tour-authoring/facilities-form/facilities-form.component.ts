@@ -25,7 +25,8 @@ export class FacilitiesFormComponent implements OnChanges {
     @Output() facilitiesUpdated = new EventEmitter<null>();
     @Input() facility: Facilities;
     @Input() shouldEdit: boolean = false;
-
+    tourImage: string | null = null;
+    tourImageFile: File | null = null;
     constructor(
         private service: TourAuthoringService,
         private authService: AuthService,
@@ -47,9 +48,10 @@ export class FacilitiesFormComponent implements OnChanges {
     selectedOption: string | null;
     newLongitude: number = 0;
     newLatitude: number = 0;
-    isAddButtonDisabled: boolean = true;
+    isAddButtonDisabled: boolean = false; //bilo je true
     isPublicChecked = false;
     person: Person;
+    imagePath:string;
     ngOnInit(): void {
         this.getPerson();
     }
@@ -96,7 +98,7 @@ export class FacilitiesFormComponent implements OnChanges {
             facility.longitude = this.newLongitude;
             facility.latitude = this.newLatitude;
 
-            this.service.addFacility(facility).subscribe({
+            /*this.service.addFacility(facility).subscribe({
                 next: result => {
                     this.facilitiesUpdated.emit();
                     location.reload();
@@ -113,7 +115,32 @@ export class FacilitiesFormComponent implements OnChanges {
                             .subscribe({});
                     }
                 },
-            });
+            });*/
+            this.service.uploadImage(this.tourImageFile!).subscribe({
+                next: (imagePath: string) => {
+                    //this.imagePath=imagePath;
+                    facility.imagePath=imagePath;
+                    this.facilitiesUpdated.emit();
+                    location.reload();
+                    this.service.addFacility(facility).subscribe({
+                        next: result => {
+                            this.facilitiesUpdated.emit();
+                            location.reload();
+                            if (this.facilitiesForm.value.isPublicChecked) {
+                                const request: PublicFacilityRequest = {
+                                    facilityId: result.id as number,
+                                    status: PublicStatus.Pending,
+                                    // Dodajte komentar ako je potrebno
+                                    authorName:
+                                        this.person.name + " " + this.person.surname,
+                                };
+                                this.service
+                                    .addPublicFacilityRequest(request)
+                                    .subscribe({});
+                            }
+                        },
+                    });
+                }})
         } else {
             alert("You have to choose the location on the map");
         }
@@ -143,13 +170,18 @@ export class FacilitiesFormComponent implements OnChanges {
             facility.longitude = this.newLongitude;
             facility.latitude = this.newLatitude;
         }
-
-        this.service.updateFacility(facility).subscribe({
-            next: _ => {
-                this.facilitiesUpdated.emit();
-                location.reload();
+        this.service.uploadImage(this.tourImageFile!).subscribe({
+            next: (imagePath: string) => {
+                facility.imagePath = imagePath;
+                this.service.updateFacility(facility).subscribe({
+                    next: _ => {
+                        this.facilitiesUpdated.emit();
+                        location.reload();
+                    },
+                });
             },
         });
+        
     }
 
     getPerson(): void {
@@ -158,5 +190,19 @@ export class FacilitiesFormComponent implements OnChanges {
                 this.person = result;
             });
         });
+    }
+    onSelectImage(event: Event) {
+        const element = event.currentTarget as HTMLInputElement;
+        if (element.files && element.files[0]) {
+            this.tourImageFile = element.files[0];
+
+            const reader = new FileReader();
+
+            reader.readAsDataURL(this.tourImageFile);
+            reader.onload = (e: ProgressEvent<FileReader>) => {
+                this.tourImage = reader.result as string;
+                this.facilitiesForm.value.imagePath = "";
+            };
+        }
     }
 }
