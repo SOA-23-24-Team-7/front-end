@@ -39,11 +39,11 @@
 }
 
 .red {
-    background-color: rgba(var(--clr-error-700));
+    background-color: rgba(var(--clr-error-700), 0.8);
 }
 
 .green {
-    background-color: rgba(var(--clr-success-500));
+    background-color: rgba(var(--clr-success-700), 0.8);
 }
 
 .button {
