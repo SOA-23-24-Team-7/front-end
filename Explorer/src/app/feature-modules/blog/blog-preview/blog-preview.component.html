@@ -1,21 +1,34 @@
 <div class="blog">
-    <div class="sidebar" *ngIf="blog.status != 0">
+    <div
+        class="sidebar"
+        [ngClass]="{
+            draft: blog.status == 0,
+            published: blog.status == 1,
+            closed: blog.status == 2,
+            activeBlog: blog.status == 3,
+            famous: blog.status == 4
+        }"
+    >
         <div
             class="vote"
             [ngClass]="{
                 active: vote ? vote.voteType == VoteType.UPVOTE : false
             }"
             (click)="onUpVote($event)"
+            *ngIf="blog.status != 0"
         >
             <fa-icon class="upvote" [icon]="faCircleUp" />
         </div>
-        <div class="vote-count">{{ blog.voteCount }}</div>
+        <div class="vote-count" *ngIf="blog.status != 0">
+            {{ blog.voteCount }}
+        </div>
         <div
             class="vote"
             [ngClass]="{
                 active: vote ? vote.voteType == VoteType.DOWNVOTE : false
             }"
             (click)="onDownVote($event)"
+            *ngIf="blog.status != 0"
         >
             <fa-icon class="downvote" [icon]="faCircleDown" />
         </div>
@@ -23,7 +36,7 @@
     <div class="blog-content">
         <div class="blog-header">
             <h2 class="blog-title">{{ blog.title }}</h2>
-            <span class="blog-date">{{blog.date | date:'medium'}}</span>
+            <span class="blog-date">{{ blog.date | date : "medium" }}</span>
         </div>
         <div class="blog-description" [innerHTML]="blogMarkdown"></div>
         <div class="bottom-bar">
@@ -31,19 +44,35 @@
                 <fa-icon [icon]="faComment" />{{ blog.comments.length }}
                 Comments
             </div>
-            <div class="share bottom-bar-button" (click)="shareBlog($event)" *ngIf="blog.status != 0">
+            <div
+                class="share bottom-bar-button"
+                (click)="shareBlog($event)"
+                *ngIf="blog.status != 0"
+            >
                 <fa-icon [icon]="faShareFromSquare" />
                 Share
             </div>
-            <div *ngIf="blog.status == 0" class="publish bottom-bar-button" (click)="publishBlog($event)">
+            <div
+                *ngIf="blog.status == 0"
+                class="publish bottom-bar-button"
+                (click)="publishBlog($event)"
+            >
                 <fa-icon [icon]="faCheckCircle" />
                 Publish
             </div>
-            <div *ngIf="blog.status == 0" class="edit bottom-bar-button" [routerLink]="['blog-form/' + blog.id]">
-                <fa-icon [icon]="faCheckCircle" />
+            <div
+                *ngIf="blog.status == 0"
+                class="edit bottom-bar-button"
+                [routerLink]="['blog-form/' + blog.id]"
+            >
+                <fa-icon [icon]="faPenToSquare" />
                 Edit
             </div>
-            <div *ngIf="visibleDelete" class="delete bottom-bar-button" (click)="deleteBlog($event)">
+            <div
+                *ngIf="visibleDelete"
+                class="delete bottom-bar-button"
+                (click)="deleteBlog($event)"
+            >
                 <fa-icon [icon]="faTrashCan" />
                 Delete
             </div>

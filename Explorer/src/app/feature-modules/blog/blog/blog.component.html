@@ -1,5 +1,14 @@
 <div class="blog">
-    <div class="sidebar">
+    <div
+        class="sidebar"
+        [ngClass]="{
+            draft: blog.status == 0,
+            published: blog.status == 1,
+            closed: blog.status == 2,
+            activeBlog: blog.status == 3,
+            famous: blog.status == 4
+        }"
+    >
         <div
             class="vote"
             [ngClass]="{
@@ -28,12 +37,19 @@
 <div *ngIf="user" class="comment-section">
     <div class="comments-header">
         <h1>Comments:</h1>
-        <div (click)="onAddClicked()" class="btn new-comment-button">New</div>
+        <div
+            *ngIf="blog.status != 2"
+            (click)="onAddClicked()"
+            class="btn new-comment-button"
+        >
+            New
+        </div>
     </div>
     <xp-comment
         *ngFor="let comment of comments"
         [comment]="comment"
         [user]="user"
+        [blog]="blog"
         (editComment)="onEditComment($event)"
         (deleteComment)="onDeleteComment($event)"
     ></xp-comment>

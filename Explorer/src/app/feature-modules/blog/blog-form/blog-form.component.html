@@ -1,23 +1,46 @@
 <div class="centered-form">
     <form [formGroup]="blogForm">
-      <div class="create-form">
-        <mat-form-field>
-          <mat-label>Title</mat-label>
-          <input matInput formControlName="title" type="text" placeholder="Title" />
-        </mat-form-field>
-        <mat-form-field>
-          <mat-label>Description</mat-label>
-          <textarea matInput formControlName="description" rows="8" placeholder="Description"></textarea>
-        </mat-form-field>
-        <div class="markup-preview">
-          <mat-label>Markup Preview</mat-label>
-          <div [innerHTML]="getMarkupPreview()" class="preview"></div>
+        <div class="create-form">
+            <mat-form-field>
+                <mat-label>Title</mat-label>
+                <input
+                    formControlName="title"
+                    type="text"
+                    placeholder="Title"
+                />
+            </mat-form-field>
+            <mat-form-field>
+                <mat-label>Description</mat-label>
+                <textarea
+                    formControlName="description"
+                    rows="8"
+                    placeholder="Description"
+                ></textarea>
+            </mat-form-field>
+            <div class="markup-preview">
+                <mat-label>Markup Preview</mat-label>
+                <div [innerHTML]="getMarkupPreview()" class="preview"></div>
+            </div>
         </div>
-      </div>
-      <div class="button-container">
-        <button mat-raised-button type="submit" *ngIf="!blog" color="primary" (click)="createBlog()">Save</button>
-        <button mat-raised-button type="submit" *ngIf="blog" color="primary" (click)="updateBlog()">Update</button>
-      </div>
+        <div class="button-container">
+            <button
+                mat-raised-button
+                type="submit"
+                *ngIf="!blog"
+                color="primary"
+                (click)="createBlog()"
+            >
+                Save
+            </button>
+            <button
+                mat-raised-button
+                type="submit"
+                *ngIf="blog"
+                color="primary"
+                (click)="updateBlog()"
+            >
+                Update
+            </button>
+        </div>
     </form>
-  </div>
-  
+</div>

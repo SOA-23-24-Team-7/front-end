@@ -34,3 +34,11 @@
 .comment-text {
     margin: 0;
 }
+
+.edit-icon {
+    color: rgba(var(--clr-primary-500), 0.8);
+}
+
+.delete-icon {
+    color: rgba(var(--clr-error-500), 0.8);
+}

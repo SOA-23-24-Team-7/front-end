@@ -56,11 +56,12 @@
 .sidebar {
     display: flex;
     flex-direction: column;
-    background-color: rgb(var(--clr-background));
-    border-top-left-radius: 0.5rem;
-    border-bottom-left-radius: 0.5rem;
+    background-color: rgb(var(--clr-primary-500));
+    color: rgb(var(--clr-neutral-100));
+    border-top-left-radius: 0.45rem;
+    border-bottom-left-radius: 0.45rem;
     padding-inline: 0.6rem;
-    padding-block: 1rem;
+    padding-block: 0.2rem;
     align-items: center;
     justify-content: start;
     font-size: 1rem;
@@ -98,4 +99,17 @@
 
 .active .downvote {
     color: rgb(var(--clr-error-700));
+}
+
+.closed:hover,
+.closed .vote:hover {
+    cursor: not-allowed !important;
+}
+
+.closed .upvote:hover {
+    color: rgb(var(--clr-neutral-100));
+}
+
+.closed .downvote:hover {
+    color: rgb(var(--clr-neutral-100));
 }

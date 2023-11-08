@@ -11,6 +11,7 @@
 
     --clr-error-500: 255, 0, 0;
     --clr-error-700: 255, 88, 88;
+    --clr-error-900: 255, 40, 48;
 
     --clr-success-500: 6, 227, 6;
     --clr-success-700: 94, 227, 94;
@@ -167,6 +168,8 @@ textarea {
     border: 1px solid rgb(var(--clr-outline));
     border-radius: 0.5rem;
     padding: 0.5rem;
+    background-color: rgb(var(--clr-background-secondary));
+    color: rgb(var(--clr-text));
 }
 
 input:focus,

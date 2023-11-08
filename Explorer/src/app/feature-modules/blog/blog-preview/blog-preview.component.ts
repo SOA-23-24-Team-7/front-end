@@ -6,7 +6,8 @@ import {
     faComment,
     faShareFromSquare,
     faCheckCircle,
-    faTrashCan
+    faTrashCan,
+    faPenToSquare,
 } from "@fortawesome/free-regular-svg-icons";
 import { Vote, VoteType } from "../model/vote.model";
 import { User } from "src/app/infrastructure/auth/model/user.model";
@@ -21,7 +22,7 @@ import { BlogService } from "../blog.service";
     styleUrls: ["./blog-preview.component.css"],
 })
 export class BlogPreviewComponent implements OnInit {
-    constructor(private router: Router, private service: BlogService) { }
+    constructor(private router: Router, private service: BlogService) {}
 
     @Input() blog: Blog;
     @Input() vote: Vote | undefined;
@@ -29,7 +30,7 @@ export class BlogPreviewComponent implements OnInit {
     @Output() upvote: EventEmitter<number> = new EventEmitter();
     @Output() downvote: EventEmitter<number> = new EventEmitter();
     @Output() publish: EventEmitter<Blog> = new EventEmitter();
-    @Output() delete: EventEmitter<number> = new EventEmitter(); 
+    @Output() delete: EventEmitter<number> = new EventEmitter();
 
     VoteType = VoteType;
     blogMarkdown: string;
@@ -41,19 +42,18 @@ export class BlogPreviewComponent implements OnInit {
     faShareFromSquare = faShareFromSquare;
     faCheckCircle = faCheckCircle;
     faTrashCan = faTrashCan;
+    faPenToSquare = faPenToSquare;
 
     ngOnInit(): void {
         const md = marked.setOptions({});
         this.blogMarkdown = DOMPurify.sanitize(md.parse(this.blog.description));
-        if(this.router.url === '/my-blogs')
-            this.visibleDelete = true;
-        else
-            this.visibleDelete = false;
+        if (this.router.url === "/my-blogs") this.visibleDelete = true;
+        else this.visibleDelete = false;
     }
 
     onUpVote(e: Event) {
         e.stopPropagation();
-        if (!this.user) {
+        if (!this.user || this.blog.status == 2) {
             return;
         }
         this.upvote.emit(this.blog.id);
@@ -62,7 +62,7 @@ export class BlogPreviewComponent implements OnInit {
 
     onDownVote(e: Event) {
         e.stopPropagation();
-        if (!this.user) {
+        if (!this.user || this.blog.status == 2) {
             return;
         }
         this.downvote.emit(this.blog.id);

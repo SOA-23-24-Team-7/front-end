@@ -1,12 +1,12 @@
 <div class="comment">
     <div class="comment-header">
         <div class="author">{{ comment.author.username }}</div>
-        <div *ngIf="user.id == comment.authorId">
+        <div *ngIf="user.id == comment.authorId && blog.status != 2">
             <button mat-icon-button (click)="toggleEditMode()">
-                <mat-icon>edit</mat-icon>
+                <mat-icon class="edit-icon">edit</mat-icon>
             </button>
             <button mat-icon-button (click)="onDeleteComment()">
-                <mat-icon>delete</mat-icon>
+                <mat-icon class="delete-icon">delete</mat-icon>
             </button>
         </div>
     </div>

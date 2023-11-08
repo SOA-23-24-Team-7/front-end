@@ -31,6 +31,7 @@ export class BlogsComponent implements OnInit {
     }
 
     filterByStatus(status: number) {
+        this.getBlogs();
         this.selectedStatus = status;
     }
 
