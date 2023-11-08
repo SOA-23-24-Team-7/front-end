@@ -6,8 +6,9 @@ import { User } from "src/app/infrastructure/auth/model/user.model";
 import { MatDialog } from "@angular/material/dialog";
 import { ProblemAnswerComponent } from "../problem-answer/problem-answer.component";
 import { ProblemUser } from "../../marketplace/model/problem-with-user.model";
-import { ProblemUpdateDeadline } from "../model/problem-update-deadline.model";
 import { faCircleExclamation } from "@fortawesome/free-solid-svg-icons";
+import { ProblemUpdateDeadline } from "../model/problem-update-deadline.model";
+import { ProblemDeadlineComponent } from "../problem-deadline/problem-deadline.component";
 
 @Component({
     selector: "xp-problems-overview",
@@ -69,21 +70,12 @@ export class ProblemsOverviewComponent implements OnInit {
         return date.getFullYear() < 9999;
     }
 
-    setDeadline(problem: ProblemUser) {
-        if (this.user.role == "administrator") {
-            const updatedProblem: ProblemUpdateDeadline = {
-                id: problem.id,
-                deadline: this.deadline,
-            };
-            this.service.setDeadline(updatedProblem).subscribe();
-        }
-    }
-
-    openDeadlineModal(problem: ProblemUser) {
+    openDeadlineModal(problem: ProblemUser, e: Event) {
+        e.stopPropagation();
         if (this.user.role != "administrator") {
             return;
         }
-        this.dialogRef.open(ProblemAnswerComponent, {
+        this.dialogRef.open(ProblemDeadlineComponent, {
             data: { dataProblem: problem, dataUser: this.user },
         });
     }

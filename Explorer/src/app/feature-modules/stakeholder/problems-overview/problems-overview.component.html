@@ -16,7 +16,7 @@
             <ng-template #notShow>
                 <div
                     class="deadline deadline-hover"
-                    (click)="openDeadlineModal(problem)"
+                    (click)="openDeadlineModal(problem, $event)"
                     (mouseover)="onDeadlineMouseover(deadline)"
                     #deadline
                 >
@@ -68,12 +68,6 @@
                         </div>
                     </div>
                 </div>
-                <!-- <div class="row" *ngIf="user.role == 'administrator'">
-                    <div class="column">
-                        <div class="btn" (click)="setDeadline(problem)"></div>
-                        <input type="date" [(ngModel)]="deadline" />
-                    </div>
-                </div> -->
             </div>
         </div>
     </div>
