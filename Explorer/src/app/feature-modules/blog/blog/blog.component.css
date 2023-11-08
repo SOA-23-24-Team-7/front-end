@@ -86,19 +86,19 @@
 }
 
 .upvote:hover {
-    color: rgb(var(--clr-success-700));
+    color: rgb(var(--clr-success-300));
 }
 
 .downvote:hover {
-    color: rgb(var(--clr-error-700));
+    color: rgb(var(--clr-error-100));
 }
 
 .active .upvote {
-    color: rgb(var(--clr-success-700));
+    color: rgb(var(--clr-success-300));
 }
 
 .active .downvote {
-    color: rgb(var(--clr-error-700));
+    color: rgb(var(--clr-error-100));
 }
 
 .closed:hover,
@@ -112,4 +112,8 @@
 
 .closed .downvote:hover {
     color: rgb(var(--clr-neutral-100));
+}
+
+.closed {
+    background-color: rgba(var(--clr-error-100), 0.7);
 }

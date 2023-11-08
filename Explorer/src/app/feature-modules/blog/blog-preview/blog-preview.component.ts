@@ -35,6 +35,7 @@ export class BlogPreviewComponent implements OnInit {
     VoteType = VoteType;
     blogMarkdown: string;
     visibleDelete: boolean;
+    statusTag: string;
 
     faCircleUp = faCircleUp;
     faCircleDown = faCircleDown;
@@ -46,6 +47,7 @@ export class BlogPreviewComponent implements OnInit {
 
     ngOnInit(): void {
         const md = marked.setOptions({});
+        this.setTag();
         this.blogMarkdown = DOMPurify.sanitize(md.parse(this.blog.description));
         if (this.router.url === "/my-blogs") this.visibleDelete = true;
         else this.visibleDelete = false;
@@ -109,5 +111,25 @@ export class BlogPreviewComponent implements OnInit {
     deleteBlog(e: Event) {
         e.stopPropagation();
         this.delete.emit(this.blog.id);
+    }
+
+    setTag() {
+        switch (this.blog.status) {
+            case 0:
+                this.statusTag = "✏️ Draft";
+                break;
+            case 1:
+                this.statusTag = "";
+                break;
+            case 2:
+                this.statusTag = "🚫 Closed";
+                break;
+            case 3:
+                this.statusTag = "🔥 Active";
+                break;
+            case 4:
+                this.statusTag = "✨ Famous";
+                break;
+        }
     }
 }

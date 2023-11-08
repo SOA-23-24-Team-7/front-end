@@ -15,7 +15,19 @@
 }
 
 select {
-    background-color: rgb(var(--clr-background-secondary));
-    border: 1px solid rgb(var(--clr-outline));
+    background-color: rgb(var(--clr-background));
+    border: none;
+    border-bottom: 1px solid rgb(var(--clr-outline));
     color: rgba(var(--clr-text));
+    text-align: center;
+    font-size: 2rem;
+    font-weight: 800;
+    font-family: var(--fnt-header);
+    width: min-content;
+}
+
+.title {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
 }

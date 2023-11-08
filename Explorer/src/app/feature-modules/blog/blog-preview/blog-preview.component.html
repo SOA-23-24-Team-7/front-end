@@ -36,6 +36,18 @@
     <div class="blog-content">
         <div class="blog-header">
             <h2 class="blog-title">{{ blog.title }}</h2>
+            <div
+                class="tag"
+                [ngClass]="{
+                    'draft-tag': blog.status == 0,
+                    'published-tag': blog.status == 1,
+                    'closed-tag': blog.status == 2,
+                    'active-tag': blog.status == 3,
+                    'famous-tag': blog.status == 4
+                }"
+            >
+                {{ statusTag }}
+            </div>
             <span class="blog-date">{{ blog.date | date : "medium" }}</span>
         </div>
         <div class="blog-description" [innerHTML]="blogMarkdown"></div>

@@ -11,7 +11,7 @@
     font-size: 1.2rem;
     transition: filter 0.2s;
     height: max-content;
-    box-shadow: 0 0 0.5rem rgba(var(--clr-outline), 0.6);
+    box-shadow: 0 0 0.25rem rgba(var(--clr-outline), 0.6);
     color: rgb(var(--clr-text));
     transition: border 0.1s;
 }
@@ -78,19 +78,19 @@
 }
 
 .upvote:hover {
-    color: rgb(var(--clr-success-700));
+    color: rgb(var(--clr-success-300));
 }
 
 .downvote:hover {
-    color: rgb(var(--clr-error-700));
+    color: rgb(var(--clr-error-100));
 }
 
 .active .upvote {
-    color: rgb(var(--clr-success-700));
+    color: rgb(var(--clr-success-300));
 }
 
 .active .downvote {
-    color: rgb(var(--clr-error-700));
+    color: rgb(var(--clr-error-100));
 }
 
 .blog-content {
@@ -107,7 +107,6 @@
     display: flex;
     color: rgba(var(--clr-text), 0.6);
     align-items: center;
-    margin-top: 1rem;
 }
 
 .comments fa-icon {
@@ -126,7 +125,7 @@
 }
 
 .delete {
-    color: rgba(var(--clr-error-500), 0.8);
+    color: rgba(var(--clr-error-300), 0.9);
 }
 
 .edit {
@@ -160,5 +159,32 @@
 }
 
 .closed {
-    background-color: rgba(var(--clr-error-900), 0.7);
+    background-color: rgba(var(--clr-error-100), 0.7);
+}
+
+.tag {
+    font-size: 0.9rem;
+    padding-left: 0.3rem;
+    padding-right: 0.6rem;
+    border-radius: 0.6rem;
+    color: white;
+    text-align: center;
+    font-weight: 600;
+    margin-left: 0.4rem;
+}
+
+.draft-tag {
+    background-color: rgb(var(--clr-accent-700));
+}
+
+.closed-tag {
+    background-color: rgb(var(--clr-error-300));
+}
+
+.active-tag {
+    background-color: rgb(var(--clr-primary-500));
+}
+
+.famous-tag {
+    background-color: rgba(var(--clr-information-500));
 }

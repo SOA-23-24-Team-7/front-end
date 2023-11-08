@@ -1,16 +1,17 @@
 <div class="blogs-container">
-    <h1 class="blogs-title">BLOGS</h1>
-
-    <select
-        [(ngModel)]="selectedStatus"
-        (change)="filterByStatus(selectedStatus)"
-    >
-        <option value="1">Published</option>
-        <option value="2">Closed</option>
-        <option value="3">Active</option>
-        <option value="4">Famous</option>
-        <option value="5">All</option>
-    </select>
+    <div class="title">
+        <select
+            [(ngModel)]="selectedStatus"
+            (change)="filterByStatus(selectedStatus)"
+        >
+            <option value="1">Published</option>
+            <option value="2">Closed</option>
+            <option value="3">Active</option>
+            <option value="4">Famous</option>
+            <option value="5">All</option>
+        </select>
+        <h1 class="blogs-title">Blogs</h1>
+    </div>
 
     <xp-blog-preview
         *ngFor="let blog of blogs"

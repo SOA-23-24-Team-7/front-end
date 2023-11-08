@@ -29,7 +29,7 @@ textarea {
     float: right;
     margin-top: 2rem;
     padding: 10px;
-    text-align: center;
+    /* text-align: center; */
     background-color: rgb(var(--clr-background-secondary));
     border-radius: 0.45rem;
     border: 1px solid rgb(var(--clr-outline));

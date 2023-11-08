@@ -7,22 +7,31 @@
 
 .comment-header {
     display: flex;
-    align-items: center;
-    justify-content: space-between;
+    align-items: flex-start;
     margin-bottom: 10px;
+    gap: 2rem;
 }
 
-.author {
+.author-username {
     font-weight: bold;
+    max-width: 10ch;
+}
+
+.edit-mode {
+    width: 100%;
+    min-height: 8rem;
+    max-height: 15rem;
 }
 
 .edit-mode textarea {
     width: 100%;
+    min-height: 8rem;
+    max-height: 15rem;
     resize: none;
     border-radius: 5px;
     padding: 0.5rem;
     margin-bottom: 10px;
-    background-color: rgb(var(--clr-background-secondary));
+    background-color: rgb(var(--clr-background));
     border: 1px solid rgb(var(--clr-outline));
     color: rgba(var(--clr-text));
 }
@@ -33,12 +42,45 @@
 
 .comment-text {
     margin: 0;
+    width: 100%;
+    background-color: rgb(var(--clr-background));
+    border-radius: 0.5rem;
+    min-height: 8rem;
+    max-height: 15rem;
+    padding: 1rem;
 }
 
 .edit-icon {
-    color: rgba(var(--clr-primary-500), 0.8);
+    color: rgba(var(--clr-primary-500), 0.9);
 }
 
 .delete-icon {
-    color: rgba(var(--clr-error-500), 0.8);
+    color: rgba(var(--clr-error-300), 0.9);
+}
+
+.author-avatar {
+    height: 5rem;
+    width: 5rem;
+    border-radius: 50%;
+    border: rgba(var(--clr-outline-contrast), 1) 2px solid;
+    background-position: center;
+    background-size: cover;
+}
+
+.comment-control {
+    margin-left: auto;
+    display: flex;
+}
+
+.author {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 0.2rem;
+}
+
+.comment-date {
+    font-size: 0.9rem;
+    text-align: center;
 }
