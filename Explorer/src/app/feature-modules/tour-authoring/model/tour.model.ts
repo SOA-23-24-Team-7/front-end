@@ -1,3 +1,4 @@
+import { KeyPoint } from "./key-point.model"
 import { TourDuration } from "./tourDuration.model"
 
 export interface Tour{
@@ -12,7 +13,8 @@ export interface Tour{
     isDeleted?: boolean,
     distance?: number,
     publishDate?: Date,
-    durations?: TourDuration[]
+    durations?: TourDuration[],
+    keyPoints?: KeyPoint[]
 }
 
 export enum TourStatus {

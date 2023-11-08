@@ -1,40 +1,19 @@
-<div id="tour">
-  <p>Published Tours: </p>
+<div id="tour" class="container">
+  <p>Published tours:</p>
   <hr>
-  <div id="tour-details">
-      <table>
-          <thead>
-              <tr>
-                  <th>Name</th>
-                  <th>Description</th>
-                  <th>Difficulty</th>
-                  <th>Tags</th>
-                  <th>Price</th>
-                  <th>Distance</th>
-                  <th></th>
-              </tr>
-          </thead>
-          <tbody>
-              <tr *ngFor="let pt of publishedTours">
-                  <td>{{pt.name}}</td>
-                  <td>{{pt.description}}</td>
-                  <td>{{pt.difficulty}}</td>
-                  <td>{{pt.tags}}</td>
-                  <td>{{pt.price}}</td>
-                  <td>{{pt.distance}} km</td>
-                  <!--
-                  <td>
-                      <button color="primary" 
-                              mat-raised-button 
-                              [routerLink]="['/tour', to.id, 'key-points']"
-                              id="view-key-points-button"
-                              >View key points
-                      </button>
-                  </td>
-                  -->
-                  <td></td>
-              </tr>
-          </tbody>
-      </table>
-  </div>
+      <div id="tour-details" class="tour-rectangles">
+          <div *ngFor="let pt of publishedTours" class="tour-rectangle">
+              <div class="tour-info">
+                  <p class="text"><strong>Name:</strong> {{ pt.name }}</p>
+                  <p class="text"><strong>Description:</strong> {{ pt.description }}</p>
+                  <p class="text"><strong>Difficulty:</strong> {{ pt.difficulty }}</p>
+                  <p class="text"><strong>Tags:</strong> {{ pt.tags }}</p>
+                  <p class="text"><strong>Price:</strong> {{ pt.price }}</p>
+                  <p class="text"><strong>Distance:</strong> {{ pt.distance }} km</p>
+                  <p *ngIf="pt.keyPoints && pt.keyPoints[0]" class="text"><strong>First key point name: </strong> {{ pt.keyPoints[0].name }}</p>
+                  <p *ngIf="pt.keyPoints && pt.keyPoints[0]" class="text"><strong>First key point description: </strong> {{ pt.keyPoints[0].description }}</p>
+                  <p *ngIf="pt.keyPoints && pt.keyPoints[0]" class="text"><strong>First key point location: </strong> {{ pt.keyPoints[0].locationAddress }}</p>
+              </div>
+          </div>
+      </div>
 </div>

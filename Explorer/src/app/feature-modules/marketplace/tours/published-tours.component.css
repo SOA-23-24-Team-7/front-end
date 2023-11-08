@@ -1,60 +1,38 @@
-#tour {
-  margin-top: 20px;
-  margin-left: 20px;
-}
-
-#tour-details {
+.tour{
   display: flex;
-  flex-direction: row;
-  gap: 50px;
-  align-items: flex-start;
+  background-color: rgb(var(--clr-background-secondary));
 }
 
-p {
-  font-size: 20px;
+.tour-rectangles {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
 }
 
-table {
-  border-collapse: collapse;
-  font-size: 0.9em;
-  font-family: sans-serif;
-  min-width: 300px;
-  box-shadow: 0 0 20px rgba(0, 0, 0, 0.15);
+.tour-rectangle {
+  border: 1rem solid rgb(var(--clr-outline));
+  padding: 1.5rem;
+  border-radius: 0.5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  box-shadow: 0 0 0.5rem rgba(var(--clr-outline), 0.6);
 }
 
-thead tr {
-  background-color: #3f51b5;
-  color: #ffffff;
-  text-align: left;
+.tour-info p {
+  margin: 0;
+  font-size: 1.2rem;
+  color: rgb(var(--clr-text));
 }
 
-th, td {
-  padding: 12px 15px;
+.tour-buttons button {
+  gap: 0.7rem;
+  margin: 0.7rem;
+  background-color: rgb(var(--clr-primary-500));
 }
 
-tbody tr {
-  border-bottom: 1px solid #dddddd;
-}
-
-tbody tr:nth-of-type(even) {
-  background-color: #f3f3f3;
-}
-
-tbody tr:last-of-type {
-  border-bottom: 2px solid #3f51b5;
-}
-
-tbody tr.active-row {
-  font-weight: bold;
-  color: #3f51b5;
-}
-
-#already-published {
-  color: #3f51b5; 
-  font-weight: bold;
-  font-size: 18px;
-}
-
-#view-key-points-button{
-  width: 170px;
+p{
+  margin-left: 2.4rem;
+  font-size: 1.2rem;
+  color: rgb(var(--clr-text));
 }
