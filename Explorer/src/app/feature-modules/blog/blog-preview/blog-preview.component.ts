@@ -108,7 +108,6 @@ export class BlogPreviewComponent implements OnInit {
 
     deleteBlog(e: Event) {
         e.stopPropagation();
-        console.log("Id ovog bloga sto nece", this.blog.id);
         this.delete.emit(this.blog.id);
     }
 }

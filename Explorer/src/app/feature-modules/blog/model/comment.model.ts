@@ -5,6 +5,7 @@ export interface Comment {
   createdAt: string;
   updatedAt?: string;
   text: string;
+  author: string;
 }
 
 export interface CreateComment {

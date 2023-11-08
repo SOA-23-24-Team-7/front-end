@@ -6,6 +6,7 @@ import { AuthService } from 'src/app/infrastructure/auth/auth.service';
 import { UpdateBlog } from '../model/blog-update.model';
 import { PagedResults } from 'src/app/shared/model/paged-results.model';
 import { Vote } from '../model/vote.model';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'xp-my-blogs',
@@ -13,13 +14,14 @@ import { Vote } from '../model/vote.model';
   styleUrls: ['./my-blogs.component.css']
 })
 export class MyBlogsComponent implements OnInit {
-  blogs: Blog[] = [];
+    blogs: Blog[] = [];
     user: User | undefined;
     selectedStatus: number = 5;
 
     constructor(
         private service: BlogService,
         private authService: AuthService,
+        private router: Router
     ) {}
 
     ngOnInit(): void {
@@ -34,9 +36,15 @@ export class MyBlogsComponent implements OnInit {
     }
 
     getBlogs(): void {
+        if (!this.user) {
+            return;
+        }
+        
         this.service.getBlogs().subscribe({
             next: (result: PagedResults<Blog>) => {
-                this.blogs = result.results;
+                if (this.user && result.results) {
+                    this.blogs = result.results.filter(blog => blog.authorId === this.user?.id);
+                }
             },
             error: () => {},
         });
@@ -58,8 +66,7 @@ export class MyBlogsComponent implements OnInit {
         })
     }
 
-      deleteBlogAndRefresh(id: number) {
-        console.log('deleteBlog called with id:', id);
+    deleteBlogAndRefresh(id: number) {
         this.service.deleteBlog(id).subscribe({
             next: (_) => {
                 this.getBlogs();

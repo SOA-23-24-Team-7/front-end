@@ -63,19 +63,23 @@ export class BlogComponent implements OnInit {
         });
     }
 
+    onCommentCreated(newComment: Comment): void {
+        this.comments.push(newComment);
+        this.getComments();
+    }
+
     onAddClicked(): void {
         const dialogRef = this.dialog.open(CommentFormComponent, {
-            data: {
-                blogId: this.blogId,
-                user: this.user,
-            },
+          data: {
+            blogId: this.blogId,
+            user: this.user,
+          },
         });
-
-        dialogRef.afterClosed().subscribe(result => {
-            if (result === undefined) return;
-            this.comments.push(result.comment);
+      
+        dialogRef.componentInstance.commentCreated.subscribe((newComment: Comment) => {
+          this.onCommentCreated(newComment);
         });
-    }
+      }
 
     onEditComment(editedComment: Comment): void {
         this.service.updateComment(editedComment).subscribe({

@@ -17,6 +17,7 @@ export interface ModalData {
 export class CommentFormComponent {
   commentText: string = "";
   @Output() commentsUpdated = new EventEmitter<null>();
+  @Output() commentCreated = new EventEmitter<Comment>();
 
   constructor(private service: BlogService,
     public dialogRef: MatDialogRef<CommentFormComponent>,
@@ -27,7 +28,7 @@ export class CommentFormComponent {
     this.dialogRef.close();
   }
 
-  onCommentClick(): void {
+  onCommentClick(e: Event): void {
     const comment: CreateComment = {
       blogId: this.data.blogId,
       text: this.commentText
@@ -38,6 +39,7 @@ export class CommentFormComponent {
         this.dialogRef.close({
           comment: result
         })
+        this.commentCreated.emit(result);
       }
     });
   }
