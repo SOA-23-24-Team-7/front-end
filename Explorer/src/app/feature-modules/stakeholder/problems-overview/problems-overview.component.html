@@ -48,6 +48,12 @@
                     </div>
                 </div>
             </div>
+            <div class="row" *ngIf="user.role == 'administrator'">
+                <div class="column">
+                    <div class="btn" (click)="setDeadline(problem)"></div>
+                    <input type="date" [(ngModel)]="deadline" />
+                </div>
+            </div>
         </div>
     </div>
 </div>

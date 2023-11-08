@@ -6,6 +6,8 @@ import { User } from "src/app/infrastructure/auth/model/user.model";
 import { MatDialog } from "@angular/material/dialog";
 import { ProblemAnswerComponent } from "../problem-answer/problem-answer.component";
 import { ProblemUser } from "../../marketplace/model/problem-with-user.model";
+import { ProblemUpdateDeadline } from "../model/problem-update-deadline.model";
+import { Problem } from "../../marketplace/model/problem.model";
 
 @Component({
     selector: "xp-problems-overview",
@@ -15,6 +17,7 @@ import { ProblemUser } from "../../marketplace/model/problem-with-user.model";
 export class ProblemsOverviewComponent implements OnInit {
     problems: ProblemUser[] = [];
     user: User;
+    deadline: Date = new Date("2023-11-09");
     constructor(
         private service: StakeholderService,
         private authService: AuthService,
@@ -58,6 +61,16 @@ export class ProblemsOverviewComponent implements OnInit {
                     console.log(err);
                 },
             });
+        }
+    }
+
+    setDeadline(problem: ProblemUser) {
+        if (this.user.role == "administrator") {
+            const updatedProblem: ProblemUpdateDeadline = {
+                id: problem.id,
+                deadline: this.deadline,
+            };
+            this.service.setDeadline(updatedProblem).subscribe();
         }
     }
 
