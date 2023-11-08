@@ -1,36 +1,36 @@
 .comment {
-  border: 2px solid #ccc;
-  border-radius: 10px;
-  padding: 1rem;
-  margin-bottom: 10px;
+    border: 2px solid rgb(var(--clr-outline));
+    border-radius: 0.5rem;
+    padding: 1rem;
+    background-color: rgb(var(--clr-background-secondary));
 }
 
 .comment-header {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  margin-bottom: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 10px;
 }
 
 .author {
-  font-weight: bold;
+    font-weight: bold;
 }
 
 .edit-mode textarea {
-  width: 100%;
-  resize: none;
-  border-radius: 5px;
-  padding: 0.5rem;
-  margin-bottom: 10px;
-  background-color: rgb(var(--clr-background-secondary));
-  border: 1px solid rgb(var(--clr-outline));
-  color: rgba(var(--clr-text));
+    width: 100%;
+    resize: none;
+    border-radius: 5px;
+    padding: 0.5rem;
+    margin-bottom: 10px;
+    background-color: rgb(var(--clr-background-secondary));
+    border: 1px solid rgb(var(--clr-outline));
+    color: rgba(var(--clr-text));
 }
 
 .edit-mode button {
-  margin-top: 10px;
+    margin-top: 10px;
 }
 
 .comment-text {
-  margin: 0;
+    margin: 0;
 }

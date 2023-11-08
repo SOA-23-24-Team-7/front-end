@@ -1,5 +1,15 @@
 <div class="comment-form">
-  <textarea class="" cols="40" rows="5" placeholder="Comment text..." [(ngModel)]="commentText"></textarea>
-  <button color="primary" (click)="onCommentClick($event)" mat-raised-button>Comment</button>
-  <button color="primary" (click)="onCancelClick()" mat-raised-button>Cancel</button>
+    <textarea
+        class=""
+        cols="40"
+        rows="5"
+        placeholder="Comment text..."
+        [(ngModel)]="commentText"
+    ></textarea>
+    <button color="primary" (click)="onCommentClick($event)" mat-raised-button>
+        Comment
+    </button>
+    <button color="primary" (click)="onCancelClick()" mat-raised-button>
+        Cancel
+    </button>
 </div>

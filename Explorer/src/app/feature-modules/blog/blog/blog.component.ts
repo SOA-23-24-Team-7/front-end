@@ -1,4 +1,4 @@
-import { Component, OnInit } from "@angular/core";
+import { Component, Input, OnInit } from "@angular/core";
 import { Comment } from "../model/comment.model";
 import { Blog } from "../model/blog.model";
 import { BlogService } from "../blog.service";
@@ -10,6 +10,8 @@ import { AuthService } from "src/app/infrastructure/auth/auth.service";
 import { User } from "src/app/infrastructure/auth/model/user.model";
 import { marked } from "marked";
 import * as DOMPurify from "dompurify";
+import { Vote, VoteType } from "../model/vote.model";
+import { faCircleUp, faCircleDown } from "@fortawesome/free-regular-svg-icons";
 
 @Component({
     selector: "xp-blog",
@@ -17,11 +19,17 @@ import * as DOMPurify from "dompurify";
     styleUrls: ["./blog.component.css"],
 })
 export class BlogComponent implements OnInit {
+    @Input() vote: Vote | undefined;
+
     comments: Comment[] = [];
     blog: Blog;
     blogId: number;
     user: User | undefined;
     blogMarkdown: string;
+
+    VoteType = VoteType;
+    faCircleUp = faCircleUp;
+    faCircleDown = faCircleDown;
 
     constructor(
         private authService: AuthService,
@@ -51,6 +59,7 @@ export class BlogComponent implements OnInit {
                 this.blogMarkdown = DOMPurify.sanitize(
                     md.parse(this.blog.description),
                 );
+                this.vote = this.getVote(this.blog);
             },
         });
     }
@@ -109,6 +118,22 @@ export class BlogComponent implements OnInit {
             });
         } else {
             console.warn("Comment does not have an ID. Cannot delete.");
+        }
+    }
+
+    getVote(blog: Blog): Vote | undefined {
+        return blog.votes.find(x => x.userId == this.user?.id);
+    }
+
+    onUpVote(e: Event) {
+        if (!this.user) {
+            return;
+        }
+    }
+
+    onDownVote(e: Event) {
+        if (!this.user) {
+            return;
         }
     }
 }

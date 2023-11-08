@@ -160,6 +160,20 @@ h6 {
     filter: brightness(1.2);
 }
 
+input,
+textarea {
+    transition: outline 0.2s;
+    outline: 1px solid transparent;
+    border: 1px solid rgb(var(--clr-outline));
+    border-radius: 0.5rem;
+    padding: 0.5rem;
+}
+
+input:focus,
+textarea:focus {
+    outline: 1px solid rgb(var(--clr-primary-500));
+}
+
 /* Remove all animations, transitions and smooth scroll for people that prefer not to see them */
 @media (prefers-reduced-motion: reduce) {
     html:focus-within {

@@ -1,23 +1,40 @@
 <div class="blog">
-    <h1 class="blog-title" *ngIf="blog">{{ blog.title }}</h1>
-    <div class="blog-description" [innerHTML]="blogMarkdown"></div>
-
-    <div *ngIf="user" class="comment-section">
-        <xp-comment
-            *ngFor="let comment of comments"
-            [comment]="comment"
-            [user]="user"
-            (editComment)="onEditComment($event)"
-            (deleteComment)="onDeleteComment($event)"
-        ></xp-comment>
-
-        <button
-            color="primary"
-            (click)="onAddClicked()"
-            mat-raised-button
-            class="new-comment-button"
+    <div class="sidebar">
+        <div
+            class="vote"
+            [ngClass]="{
+                active: vote ? vote.voteType == VoteType.UPVOTE : false
+            }"
+            (click)="onUpVote($event)"
         >
-            New
-        </button>
+            <fa-icon class="upvote" [icon]="faCircleUp" />
+        </div>
+        <div class="vote-count">{{ blog.voteCount }}</div>
+        <div
+            class="vote"
+            [ngClass]="{
+                active: vote ? vote.voteType == VoteType.DOWNVOTE : false
+            }"
+            (click)="onDownVote($event)"
+        >
+            <fa-icon class="downvote" [icon]="faCircleDown" />
+        </div>
     </div>
+    <div class="blog-content">
+        <h1 class="blog-title">{{ blog.title }}</h1>
+        <div class="blog-description" [innerHTML]="blogMarkdown"></div>
+    </div>
+</div>
+<div *ngIf="user" class="comment-section">
+    <div class="comments-header">
+        <h1>Comments:</h1>
+        <div (click)="onAddClicked()" class="btn new-comment-button">New</div>
+    </div>
+    <xp-comment
+        *ngFor="let comment of comments"
+        [comment]="comment"
+        [user]="user"
+        (editComment)="onEditComment($event)"
+        (deleteComment)="onDeleteComment($event)"
+    ></xp-comment>
 </div>
