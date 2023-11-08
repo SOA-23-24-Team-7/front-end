@@ -1,4 +1,21 @@
 <ng-container *ngIf="person">
+    <div id="followers-details">
+        <div>
+            <br />
+            <div class="float-container">
+                <div class="float-child">
+                    <a (click)="openFollowersDialog()">
+                        {{ followersCount }} followers
+                    </a>
+                </div>
+                <div class="float-child">
+                    <a (click)="openFollowingsDialog()">
+                        {{ followingsCount }} following
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
     <div class="main">
         <mat-card class="card">
             <mat-card-header>
@@ -29,33 +46,5 @@
             </mat-card-actions>
         </mat-card>
         <br />
-    </div>
-    <div id="followers-details">
-        <div>
-            <br />
-            <p>Followers</p>
-            <table>
-                <thead>
-                    <tr>
-                        <th>username</th>
-                        <th>message</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr *ngFor="let f of followers">
-                        <td>{{ f.followedByUsername }}</td>
-                        <td>
-                            <button
-                                (click)="openMessageDialog(f.userId)"
-                                color="accent"
-                                mat-icon-button
-                            >
-                                <mat-icon>message</mat-icon>
-                            </button>
-                        </td>
-                    </tr>
-                </tbody>
-            </table>
-        </div>
     </div>
 </ng-container>

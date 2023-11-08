@@ -1,0 +1,48 @@
+<div id="followers-details">
+    <div>
+        <table *ngIf="showFollowers">
+            <thead>
+                <tr>
+                    <th>username</th>
+                    <th>message</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let f of followers">
+                    <td>{{ f.followedByUsername }}</td>
+                    <td>
+                        <button
+                            (click)="openMessageDialog(f.followedById)"
+                            color="accent"
+                            mat-icon-button
+                        >
+                            <mat-icon>message</mat-icon>
+                        </button>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <table *ngIf="showFollowings">
+            <thead>
+                <tr>
+                    <th>username</th>
+                    <th>message</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let f of followings">
+                    <td>{{ f.followingUsername }}</td>
+                    <td>
+                        <button
+                            (click)="openMessageDialog(f.followingId)"
+                            color="accent"
+                            mat-icon-button
+                        >
+                            <mat-icon>message</mat-icon>
+                        </button>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>

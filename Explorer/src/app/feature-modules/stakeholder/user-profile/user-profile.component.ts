@@ -5,8 +5,10 @@ import { AuthService } from "src/app/infrastructure/auth/auth.service";
 import { User } from "src/app/infrastructure/auth/model/user.model";
 import { Router } from "@angular/router";
 import { Follower } from "../model/follower";
-import { MessageDialogComponent } from "../message-dialog/message-dialog/message-dialog.component";
 import { MatDialog } from "@angular/material/dialog";
+import { faL } from "@fortawesome/free-solid-svg-icons";
+import { Following } from "../model/following";
+import { FollowDialogComponent } from "../follow-dialog/follow-dialog.component";
 
 @Component({
     selector: "xp-user-profile",
@@ -18,11 +20,11 @@ export class UserProfileComponent implements OnInit {
     user: User;
     person: Person;
     followers: Follower[] = [];
-    isDialogOpen: boolean = false;
-    reciverId: number;
-
-    @ViewChild(MessageDialogComponent) messageDialog: MessageDialogComponent;
-    text: any;
+    followersCount: number;
+    followings: Following[] = [];
+    followingsCount: number;
+    showFollowers: boolean = false;
+    showFollowings: boolean = false;
 
     constructor(
         private authService: AuthService,
@@ -44,16 +46,33 @@ export class UserProfileComponent implements OnInit {
             });
             this.service.getFollowers().subscribe(result => {
                 this.followers = result.results;
+                this.followersCount = this.followers.length;
+            });
+            this.service.getFollowings().subscribe(result => {
+                this.followings = result.results;
+                this.followingsCount = this.followings.length;
             });
         });
     }
-    openMessageDialog(reciverID: number): void {
-        console.log(reciverID);
-        console.log("kkkkkkkkk");
-        const dialogRef = this.dialog.open(MessageDialogComponent, {
+    openFollowersDialog(): void {
+        const dialogRef = this.dialog.open(FollowDialogComponent, {
             data: {
+                followers: this.followers,
+                followings: this.followings,
+                showFollowers: true,
+                showFollowings: false,
                 user: this.user,
-                reciverId: reciverID,
+            },
+        });
+    }
+    openFollowingsDialog(): void {
+        const dialogRef = this.dialog.open(FollowDialogComponent, {
+            data: {
+                followers: this.followers,
+                followings: this.followings,
+                showFollowers: false,
+                showFollowings: true,
+                user: this.user,
             },
         });
     }

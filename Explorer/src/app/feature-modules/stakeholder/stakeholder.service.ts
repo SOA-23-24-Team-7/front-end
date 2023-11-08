@@ -5,6 +5,7 @@ import { Person } from "./model/person.model";
 import { environment } from "src/env/environment";
 import { Observable } from "rxjs";
 import { Follower } from "./model/follower";
+import { Following } from "./model/following";
 
 @Injectable({
     providedIn: "root",
@@ -20,6 +21,11 @@ export class StakeholderService {
     getFollowers(): Observable<PagedResults<Follower>> {
         return this.http.get<PagedResults<Follower>>(
             environment.apiHost + "follower/followers",
+        );
+    }
+    getFollowings(): Observable<PagedResults<Following>> {
+        return this.http.get<PagedResults<Following>>(
+            environment.apiHost + "follower/followings",
         );
     }
     getByUserId(userId: number): Observable<Person> {

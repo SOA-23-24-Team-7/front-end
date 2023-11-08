@@ -1,4 +1,4 @@
-import { UserWithFollowers } from "./userWithFollowers";
+import { User } from "src/app/infrastructure/auth/model/user.model";
 
 export interface Person {
     id: number;
@@ -9,5 +9,5 @@ export interface Person {
     profilePicture: string;
     bio: string;
     moto: string;
-    user: UserWithFollowers;
+    user: User;
 }
