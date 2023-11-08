@@ -19,6 +19,7 @@
             </div>
         </div>
         <xp-problem-comment-create
+            *ngIf="user.role !== 'administrator' && !problem.isResolved"
             [problem]="problem"
             (onAddAnswer)="addHeader($event)"
             (onAddComment)="addComment($event)"

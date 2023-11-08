@@ -4,6 +4,10 @@
         *ngFor="let problem of problems"
         (click)="openProblemModal(problem)"
         (mouseover)="onMouseover(problem, problemCard)"
+        [ngClass]="{
+            'card-red': problem.isAnswered,
+            'card-green': problem.isResolved
+        }"
         #problemCard
     >
         <div class="problem-data">

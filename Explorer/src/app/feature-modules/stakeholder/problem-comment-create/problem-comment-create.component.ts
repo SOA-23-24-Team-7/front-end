@@ -60,6 +60,7 @@ export class ProblemCommentCreateComponent implements OnInit {
         };
         this.service.createAnswer(problemAnswer).subscribe(() => {});
         if (this.text !== undefined) {
+            this.problem.isAnswered = true;
             this.onAddAnswer.emit(this.text);
             this.label = "Comment";
         }

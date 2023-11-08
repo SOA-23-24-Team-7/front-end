@@ -1,5 +1,12 @@
-import { Component, OnInit, Optional, Inject } from "@angular/core";
-import { MAT_DIALOG_DATA } from "@angular/material/dialog";
+import {
+    Component,
+    OnInit,
+    Optional,
+    Inject,
+    Output,
+    EventEmitter,
+} from "@angular/core";
+import { MAT_DIALOG_DATA, MatDialogRef } from "@angular/material/dialog";
 import { StakeholderService } from "../stakeholder.service";
 import { ProblemUser } from "../../marketplace/model/problem-with-user.model";
 import { User } from "src/app/infrastructure/auth/model/user.model";
@@ -18,11 +25,13 @@ export class ProblemAnswerComponent implements OnInit {
     user: User;
     headerText: string;
     comments: ProblemComment[];
+    @Output() onAddAnswer = new EventEmitter();
 
     constructor(
         @Optional() @Inject(MAT_DIALOG_DATA) public data: any,
         private service: StakeholderService,
     ) {}
+
     ngOnInit(): void {
         this.problem = this.data.dataProblem;
         this.user = this.data.dataUser;
@@ -52,6 +61,7 @@ export class ProblemAnswerComponent implements OnInit {
 
     addHeader(text: string) {
         this.headerText = text;
+        this.onAddAnswer.emit();
     }
 
     addComment(comment: ProblemComment) {

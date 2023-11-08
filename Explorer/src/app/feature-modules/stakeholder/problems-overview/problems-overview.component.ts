@@ -61,13 +61,16 @@ export class ProblemsOverviewComponent implements OnInit {
         }
     }
 
-    //dodati proveru sa resolved
     openProblemModal(problem: ProblemUser) {
         if (this.user.role != "author" && !problem.isAnswered) {
             return;
         }
-        this.dialogRef.open(ProblemAnswerComponent, {
+        const dialogRef = this.dialogRef.open(ProblemAnswerComponent, {
             data: { dataProblem: problem, dataUser: this.user },
+        });
+
+        dialogRef.afterClosed().subscribe(result => {
+            problem.isAnswered = true;
         });
     }
 

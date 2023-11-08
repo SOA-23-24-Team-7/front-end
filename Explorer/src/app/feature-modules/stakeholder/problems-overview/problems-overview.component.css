@@ -27,6 +27,14 @@
     cursor: pointer;
 }
 
+.card-red {
+    border-color: rgba(var(--clr-error-700));
+}
+
+.card-green {
+    border-color: rgba(var(--clr-success-700));
+}
+
 .problem-data {
     display: flex;
     flex-direction: column;
