@@ -5,11 +5,11 @@ import { environment } from "src/env/environment";
 import { Observable } from "rxjs";
 import { PersonUpdate } from "./model/person-update.model";
 import { ProblemComment } from "./model/problem-comment.model";
-import { Problem } from "../marketplace/model/problem.model";
 import { Person } from "./model/person.model";
 import { ProblemUser } from "../marketplace/model/problem-with-user.model";
 import { ProblemCommentCreate } from "./model/problem-comment-create.model";
 import { ProblemAnswer } from "./model/problem-answer";
+import { ProblemUpdateDeadline } from "./model/problem-update-deadline.model";
 
 @Injectable({
     providedIn: "root",
@@ -85,6 +85,18 @@ export class StakeholderService {
     getAuthorsProblems(): Observable<PagedResults<ProblemUser>> {
         return this.http.get<PagedResults<ProblemUser>>(
             environment.apiHost + "author/problem",
+        );
+    }
+
+    setDeadline(
+        problem: ProblemUpdateDeadline,
+    ): Observable<PagedResults<ProblemUser>> {
+        console.log(problem);
+        return this.http.put<PagedResults<ProblemUser>>(
+            environment.apiHost +
+                "administration/problem/set-deadline/" +
+                problem.id,
+            problem,
         );
     }
 }

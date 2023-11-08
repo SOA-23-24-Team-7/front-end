@@ -6,6 +6,9 @@ import { User } from "src/app/infrastructure/auth/model/user.model";
 import { MatDialog } from "@angular/material/dialog";
 import { ProblemAnswerComponent } from "../problem-answer/problem-answer.component";
 import { ProblemUser } from "../../marketplace/model/problem-with-user.model";
+import { faCircleExclamation } from "@fortawesome/free-solid-svg-icons";
+import { ProblemUpdateDeadline } from "../model/problem-update-deadline.model";
+import { ProblemDeadlineComponent } from "../problem-deadline/problem-deadline.component";
 
 @Component({
     selector: "xp-problems-overview",
@@ -15,6 +18,7 @@ import { ProblemUser } from "../../marketplace/model/problem-with-user.model";
 export class ProblemsOverviewComponent implements OnInit {
     problems: ProblemUser[] = [];
     user: User;
+    deadline: Date = new Date("2023-11-09");
     constructor(
         private service: StakeholderService,
         private authService: AuthService,
@@ -61,6 +65,31 @@ export class ProblemsOverviewComponent implements OnInit {
         }
     }
 
+    shouldShowDeadline(deadline: Date): boolean {
+        var date = new Date(deadline);
+        return date.getFullYear() < 9999;
+    }
+
+    hasPassed5DaysSinceReported(reportedTime: Date): boolean {
+        var date = new Date(reportedTime);
+        const now = new Date();
+        const timeDifference = now.getTime() - date.getTime();
+        const daysDifference = timeDifference / (1000 * 60 * 60 * 24);
+
+        return daysDifference >= 5;
+    }
+
+    openDeadlineModal(problem: ProblemUser, e: Event) {
+        e.stopPropagation();
+        if (this.user.role != "administrator") {
+            return;
+        }
+        this.dialogRef.open(ProblemDeadlineComponent, {
+            data: { dataProblem: problem, dataUser: this.user },
+        });
+    }
+
+    //dodati proveru sa resolved
     openProblemModal(problem: ProblemUser) {
         if (this.user.role != "author" && !problem.isAnswered) {
             return;
@@ -74,9 +103,17 @@ export class ProblemsOverviewComponent implements OnInit {
         });
     }
 
-    onMouseover(problem: ProblemUser, problemCard: any) {
+    onProblemCardMouseover(problem: ProblemUser, problemCard: any) {
         if (this.user.role != "author" && !problem.isAnswered) {
             problemCard.classList.remove("card-hover");
         }
     }
+
+    onDeadlineMouseover(deadline: any) {
+        if (this.user.role != "administrator") {
+            deadline.classList.remove("deadline-hover");
+        }
+    }
+
+    faCircleExclamation = faCircleExclamation;
 }

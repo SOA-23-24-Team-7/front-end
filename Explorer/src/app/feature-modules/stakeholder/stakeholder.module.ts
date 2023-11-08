@@ -10,6 +10,7 @@ import { ProblemResolveComponent } from "./problem-resolve/problem-resolve.compo
 import { ProblemsOverviewComponent } from "./problems-overview/problems-overview.component";
 import { ProblemAnswerComponent } from "./problem-answer/problem-answer.component";
 import { FontAwesomeModule } from "@fortawesome/angular-fontawesome";
+import { ProblemDeadlineComponent } from './problem-deadline/problem-deadline.component';
 
 @NgModule({
     declarations: [
@@ -20,6 +21,7 @@ import { FontAwesomeModule } from "@fortawesome/angular-fontawesome";
         ProblemResolveComponent,
         ProblemsOverviewComponent,
         ProblemAnswerComponent,
+        ProblemDeadlineComponent,
     ],
     imports: [CommonModule, MaterialModule, FormsModule, FontAwesomeModule],
     exports: [

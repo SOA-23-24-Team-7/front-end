@@ -3,52 +3,83 @@
         class="card card-hover"
         *ngFor="let problem of problems"
         (click)="openProblemModal(problem)"
-        (mouseover)="onMouseover(problem, problemCard)"
+        (mouseover)="onProblemCardMouseover(problem, problemCard)"
         [ngClass]="{
             'card-red': problem.isAnswered,
             'card-green': problem.isResolved
         }"
         #problemCard
     >
-        <div class="problem-data">
-            <div class="user-data">
-                <div
-                    class="user-avatar"
-                    [style.background-image]="
-                        'url(' + problem.tourist.profilePicture + ')'
-                    "
-                ></div>
-                <div>@{{ problem.tourist.username }}</div>
+        <div class="warning-tab">
+            <div
+                class="deadline"
+                *ngIf="
+                    shouldShowDeadline(problem.deadline) &&
+                    (user.role == 'author' || user.role == 'administrator')
+                "
+            >
+                {{ problem.deadline | date: "dd / MM / yyyy" }}
             </div>
-            <div class="report-data">
-                <div class="label">Reported at:</div>
-                <div>
-                    {{ problem.reportedTime | date: "dd / MM / yyyy" }}
-                </div>
-                <div class="label">Tour:</div>
-                <div>{{ problem.tourName }}</div>
+            <div
+                class="deadline deadline-hover"
+                *ngIf="
+                    shouldShowDeadline(problem.deadline) == false &&
+                    user.role == 'administrator' &&
+                    hasPassed5DaysSinceReported(problem.reportedTime)
+                "
+                (click)="openDeadlineModal(problem, $event)"
+                (mouseover)="onDeadlineMouseover(deadline)"
+                #deadline
+            >
+                Set Deadline
             </div>
+            <fa-icon
+                class="warning-icon"
+                [icon]="faCircleExclamation"
+                *ngIf="hasPassed5DaysSinceReported(problem.reportedTime)"
+            />
         </div>
-        <div class="problem-description">
-            <div class="row">
-                <div class="column">
-                    <div class="placeholder">
-                        <div class="label">Category:</div>
-                        <div>{{ problem.category }}</div>
-                    </div>
+        <div class="data">
+            <div class="problem-data">
+                <div class="user-data">
+                    <div
+                        class="user-avatar"
+                        [style.background-image]="
+                            'url(' + problem.tourist.profilePicture + ')'
+                        "
+                    ></div>
+                    <div>@{{ problem.tourist.username }}</div>
                 </div>
-                <div class="column">
-                    <div class="placeholder">
-                        <div class="label">Priority:</div>
-                        <div>{{ problem.priority }}</div>
+                <div class="report-data">
+                    <div class="label">Reported at:</div>
+                    <div>
+                        {{ problem.reportedTime | date: "dd / MM / yyyy" }}
                     </div>
+                    <div class="label">Tour:</div>
+                    <div>{{ problem.tourName }}</div>
                 </div>
             </div>
-            <div class="row">
-                <div class="column">
-                    <div class="placeholder">
-                        <div class="label">Description:</div>
-                        <div>{{ problem.description }}</div>
+            <div class="problem-description">
+                <div class="row">
+                    <div class="column">
+                        <div class="placeholder">
+                            <div class="label">Category:</div>
+                            <div>{{ problem.category }}</div>
+                        </div>
+                    </div>
+                    <div class="column">
+                        <div class="placeholder">
+                            <div class="label">Priority:</div>
+                            <div>{{ problem.priority }}</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="column">
+                        <div class="placeholder">
+                            <div class="label">Description:</div>
+                            <div>{{ problem.description }}</div>
+                        </div>
                     </div>
                 </div>
             </div>
