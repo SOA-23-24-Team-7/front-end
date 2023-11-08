@@ -9,21 +9,31 @@
         <div class="warning-tab">
             <div
                 class="deadline"
-                *ngIf="shouldShowDeadline(problem.deadline); else notShow"
+                *ngIf="
+                    shouldShowDeadline(problem.deadline) &&
+                    (user.role == 'author' || user.role == 'administrator')
+                "
             >
                 {{ problem.deadline | date: "dd / MM / yyyy" }}
             </div>
-            <ng-template #notShow>
-                <div
-                    class="deadline deadline-hover"
-                    (click)="openDeadlineModal(problem, $event)"
-                    (mouseover)="onDeadlineMouseover(deadline)"
-                    #deadline
-                >
-                    Set Deadline
-                </div>
-            </ng-template>
-            <fa-icon class="warning-icon" [icon]="faCircleExclamation" />
+            <div
+                class="deadline deadline-hover"
+                *ngIf="
+                    shouldShowDeadline(problem.deadline) == false &&
+                    user.role == 'administrator' &&
+                    hasPassed5DaysSinceReported(problem.reportedTime)
+                "
+                (click)="openDeadlineModal(problem, $event)"
+                (mouseover)="onDeadlineMouseover(deadline)"
+                #deadline
+            >
+                Set Deadline
+            </div>
+            <fa-icon
+                class="warning-icon"
+                [icon]="faCircleExclamation"
+                *ngIf="hasPassed5DaysSinceReported(problem.reportedTime)"
+            />
         </div>
         <div class="data">
             <div class="problem-data">

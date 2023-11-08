@@ -70,6 +70,15 @@ export class ProblemsOverviewComponent implements OnInit {
         return date.getFullYear() < 9999;
     }
 
+    hasPassed5DaysSinceReported(reportedTime: Date): boolean {
+        var date = new Date(reportedTime);
+        const now = new Date();
+        const timeDifference = now.getTime() - date.getTime();
+        const daysDifference = timeDifference / (1000 * 60 * 60 * 24);
+
+        return daysDifference >= 5;
+    }
+
     openDeadlineModal(problem: ProblemUser, e: Event) {
         e.stopPropagation();
         if (this.user.role != "administrator") {
