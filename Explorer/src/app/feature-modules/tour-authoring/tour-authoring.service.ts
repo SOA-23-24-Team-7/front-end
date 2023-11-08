@@ -10,6 +10,7 @@ import { Facilities } from "./model/facilities.model";
 import { PublicKeyPointRequest } from "./model/public-key-point-request.model";
 import { PublicFacilityRequest } from "./model/public-facility-request.model";
 import { PublicKeyPoint } from "./model/public-key-point.model";
+import { Person } from "../stakeholder/model/person.model";
 
 @Injectable({
     providedIn: "root",
@@ -189,6 +190,12 @@ export class TourAuthoringService {
                 "/" +
                 publicKeyPointId,
             {},
+        );
+    }
+
+    getPerson(userId: number): Observable<Person> {
+        return this.http.get<Person>(
+            environment.apiHost + "people/person/" + userId,
         );
     }
 }

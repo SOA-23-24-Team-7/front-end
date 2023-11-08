@@ -25,4 +25,8 @@ export class RequestKeyPointCardComponent {
                 return "Pending";
         }
     }
+
+    showName(request: PublicKeyPointRequest): string {
+        return request.keyPointName || "";
+    }
 }

@@ -1,6 +1,6 @@
 <div class="request-key-point-card">
-    <div class="column">Ime Autora</div>
-    <div class="column">Naziv keypointa</div>
+    <div class="column">{{ request.facilityName || "" }}</div>
+    <div class="column">{{ request.authorName }}</div>
     <div class="column">
         <div
             [ngClass]="{

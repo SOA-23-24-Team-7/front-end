@@ -18,6 +18,9 @@ import {
     PublicStatus,
 } from "../model/public-key-point-request.model";
 
+import { AuthService } from "src/app/infrastructure/auth/auth.service";
+import { Person } from "../../stakeholder/model/person.model";
+
 @Component({
     selector: "xp-key-point-form",
     templateUrl: "./key-point-form.component.html",
@@ -31,12 +34,16 @@ export class KeyPointFormComponent implements OnChanges {
     tourImage: string | null = null;
     tourImageFile: File | null = null;
     //isPublicChecked = false;
+    person: Person;
 
     constructor(
         private route: ActivatedRoute,
         private service: TourAuthoringService,
+        private authService: AuthService,
     ) {}
-
+    ngOnInit(): void {
+        this.getPerson();
+    }
     ngOnChanges(changes: SimpleChanges): void {
         if (changes["longLat"] && !changes["longLat"].isFirstChange()) {
             this.keyPointForm.patchValue({
@@ -102,6 +109,10 @@ export class KeyPointFormComponent implements OnChanges {
                                     const request: PublicKeyPointRequest = {
                                         keyPointId: result.id as number,
                                         status: PublicStatus.Pending,
+                                        authorName:
+                                            this.person.name +
+                                            " " +
+                                            this.person.surname,
                                     };
                                     this.service
                                         .addPublicKeyPointRequest(request)
@@ -163,5 +174,13 @@ export class KeyPointFormComponent implements OnChanges {
         }
 
         return false;
+    }
+
+    getPerson(): void {
+        this.authService.user$.subscribe(user => {
+            this.service.getPerson(user.id).subscribe(result => {
+                this.person = result;
+            });
+        });
     }
 }

@@ -7,6 +7,8 @@ export interface PublicKeyPointRequest {
     comment?: string;
     keyPoint?: KeyPoint;
     created?: Date;
+    authorName: string;
+    keyPointName?: string;
 }
 
 export enum PublicStatus {

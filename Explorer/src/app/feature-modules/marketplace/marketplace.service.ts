@@ -18,6 +18,8 @@ import { TourPreference } from "./model/tour-preference.model";
 import { Tour } from "../tour-authoring/model/tour.model";
 import { FacilityNotification } from "./model/facility-notification";
 import { KeyPointNotification } from "./model/keypoint-notification";
+import { PublicKeyPoint } from "./model/public-key-point.model";
+import { PublicFacilities } from "./model/public-facilities.model";
 
 @Injectable({
     providedIn: "root",
@@ -244,6 +246,18 @@ export class MarketplaceService {
     > {
         return this.http.get<PagedResults<KeyPointNotification>>(
             environment.apiHost + "notifications/keypoint",
+        );
+    }
+
+    getPublicKeyPoints(): Observable<PagedResults<PublicKeyPoint>> {
+        return this.http.get<PagedResults<PublicKeyPoint>>(
+            environment.apiHost + "tourist/publicKeyPoint",
+        );
+    }
+
+    getPublicFacilities(): Observable<PagedResults<PublicFacilities>> {
+        return this.http.get<PagedResults<PublicFacilities>>(
+            environment.apiHost + "tourist/facility/public",
         );
     }
 }
