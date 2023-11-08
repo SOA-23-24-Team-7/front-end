@@ -1,19 +1,37 @@
 <div class="problem-answer-modal">
     <div class="problem-answer">
-        <div class="header">
+        <div
+            class="header"
+            [ngClass]="{ red: !problem.isResolved, green: problem.isResolved }"
+            #header
+        >
             <div class="description">
                 {{ headerText }}
             </div>
-            <div class="button" *ngIf="user.role !== 'author'">
-                <fa-icon [icon]="faSquareCheck" (click)="resolveProblem()" />
+            <div
+                class="button"
+                *ngIf="user.role === 'tourist' && !problem.isResolved"
+            >
+                <fa-icon
+                    [icon]="faSquareCheck"
+                    (click)="resolveProblem(header)"
+                />
             </div>
         </div>
         <xp-problem-comment-create
             [problem]="problem"
             (onAddAnswer)="addHeader($event)"
+            (onAddComment)="addComment($event)"
         />
         <div class="comments">
-            <xp-problem-comment-list [problemAnswerId]="problem.answerId" />
+            <xp-problem-comment
+                *ngFor="let comment of comments"
+                [commenterId]="comment.commenterId"
+                [problemAnswerId]="comment.problemAnswerId"
+                [text]="comment.text"
+                [commenter]="comment.commenter"
+            >
+            </xp-problem-comment>
         </div>
     </div>
 </div>

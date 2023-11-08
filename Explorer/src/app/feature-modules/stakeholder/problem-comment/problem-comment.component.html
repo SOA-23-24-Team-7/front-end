@@ -2,9 +2,12 @@
     <div class="comment">
         <div class="commenter-data">
             <div class="row">
-                <div class="comment-avatar">
-                    <img src="{{ commenter.profilePicture }}" />
-                </div>
+                <div
+                    class="comment-avatar"
+                    [style.background-image]="
+                        'url(' + commenter.profilePicture + ')'
+                    "
+                ></div>
                 <div class="commenter">@{{ commenter.username }}</div>
             </div>
         </div>

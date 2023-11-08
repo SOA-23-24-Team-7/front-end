@@ -25,7 +25,6 @@
 .header {
     display: flex;
     flex-direction: column;
-    background-color: rgb(150, 42, 42);
     width: 100%;
     padding-inline: 0.8rem;
     padding-top: 1rem;
@@ -37,6 +36,14 @@
 .description {
     padding-inline: 0.8rem;
     padding-bottom: 1rem;
+}
+
+.red {
+    background-color: rgba(var(--clr-error-700));
+}
+
+.green {
+    background-color: rgba(var(--clr-success-500));
 }
 
 .button {
@@ -55,5 +62,16 @@
 .comments {
     overflow: auto;
     height: 100%;
-    padding-block: 1rem;
+    display: flex;
+    justify-content: space-between;
+    flex-direction: column;
+}
+
+.comments::-webkit-scrollbar {
+    width: 0.5em;
+}
+
+.comments::-webkit-scrollbar-thumb {
+    background-color: rgba(var(--clr-background));
+    border-radius: 0.3rem;
 }

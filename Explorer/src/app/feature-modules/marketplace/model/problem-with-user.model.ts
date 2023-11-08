@@ -14,4 +14,5 @@ export interface ProblemUser {
     answerId: number;
     isAnswered: boolean;
     deadline: Date;
+    isResolved: boolean;
 }

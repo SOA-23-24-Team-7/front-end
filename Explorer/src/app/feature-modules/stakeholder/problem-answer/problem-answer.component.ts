@@ -5,6 +5,8 @@ import { ProblemUser } from "../../marketplace/model/problem-with-user.model";
 import { User } from "src/app/infrastructure/auth/model/user.model";
 import { faSquareCheck } from "@fortawesome/free-solid-svg-icons";
 import { ProblemAnswer } from "../model/problem-answer";
+import { ProblemComment } from "../model/problem-comment.model";
+import { PagedResults } from "src/app/shared/model/paged-results.model";
 
 @Component({
     selector: "xp-problem-answer",
@@ -15,6 +17,7 @@ export class ProblemAnswerComponent implements OnInit {
     problem: ProblemUser;
     user: User;
     headerText: string;
+    comments: ProblemComment[];
 
     constructor(
         @Optional() @Inject(MAT_DIALOG_DATA) public data: any,
@@ -25,6 +28,7 @@ export class ProblemAnswerComponent implements OnInit {
         this.user = this.data.dataUser;
 
         this.loadProblemAnswer(this.problem.id);
+        this.getCommentsByProblemAnswerId();
     }
 
     loadProblemAnswer(problemId: number) {
@@ -37,17 +41,36 @@ export class ProblemAnswerComponent implements OnInit {
         });
     }
 
-    resolveProblem() {
+    resolveProblem(header: any) {
         this.service.resolveProblem(this.problem.id).subscribe({
             next: (result: ProblemUser) => {
-                console.log(result);
+                header.classList.add("green");
+                this.problem.isResolved = true;
             },
         });
     }
 
     addHeader(text: string) {
-        console.log("pizdarija1");
         this.headerText = text;
+    }
+
+    addComment(comment: ProblemComment) {
+        this.comments.push(comment);
+    }
+
+    getCommentsByProblemAnswerId(): void {
+        this.service
+            .getCommentsByProblemAnswerId(this.problem.answerId)
+            .subscribe({
+                next: (result: PagedResults<ProblemComment>) => {
+                    this.comments = result.results;
+                    console.log(this.comments);
+                    for (const comment of this.comments) {
+                        console.log(comment.commenter);
+                    }
+                },
+                error: () => {},
+            });
     }
 
     faSquareCheck = faSquareCheck;
