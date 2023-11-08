@@ -244,7 +244,7 @@ export class KeyPointsComponent implements OnInit {
           break;
         }
         else if(t.transportType == tourDuration.transportType && t.duration != tourDuration.duration){
-          tour.durations.splice(counter);
+          tour.durations.splice(counter,1);
           break;
         }
         counter++;
@@ -261,7 +261,7 @@ export class KeyPointsComponent implements OnInit {
       let counter = 0;
       for(let t of tour.durations){
         if(t.transportType == type){
-          tour.durations.splice(counter);
+          tour.durations.splice(counter,1);
           break;
         }
         counter++;
