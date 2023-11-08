@@ -22,6 +22,7 @@ export class KeyPointsComponent implements OnInit {
   keyPoints: KeyPoint[] = [];
   selectedKeyPoint: KeyPoint | null = null;
   mapLongLat: [number, number];
+  mapLocationAddress: string;
   shouldRenderKeyPointForm: boolean = false;
   shouldEdit: boolean = false;
   refreshEventsSubject: BehaviorSubject<number>;

@@ -22,6 +22,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { TagInputModule } from 'ngx-chips';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { FormsModule } from '@angular/forms';
+import { PublishedToursComponent } from './tours/published-tours.component';
 
 
 @NgModule({
@@ -43,7 +44,8 @@ import { FormsModule } from '@angular/forms';
         ClubMembersManagementComponent,
         MyClubInvitationsComponent,
         TourPreferencesComponent,
-        TourPreferenceFormComponent
+        TourPreferenceFormComponent,
+        PublishedToursComponent
     ],
     imports: [
         CommonModule,
@@ -66,8 +68,7 @@ import { FormsModule } from '@angular/forms';
         RatingFormComponent,
         ProblemComponent,
         TourPreferencesComponent,
-        TourPreferenceFormComponent
-        
+        TourPreferenceFormComponent,
     ],
 })
 export class MarketplaceModule {}
