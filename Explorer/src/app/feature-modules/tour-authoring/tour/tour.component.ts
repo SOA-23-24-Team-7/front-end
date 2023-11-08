@@ -6,6 +6,7 @@ import { PagedResults } from 'src/app/shared/model/paged-results.model';
 import { faPen } from '@fortawesome/free-solid-svg-icons';
 import { faTrash } from '@fortawesome/free-solid-svg-icons';
 import { faPlus } from '@fortawesome/free-solid-svg-icons';
+import { KeyPoint } from '../model/key-point.model';
 
 
 @Component({
@@ -19,6 +20,7 @@ export class TourComponent implements OnInit {
   selectedTour: Tour;
   shouldRenderTourForm: boolean = false;
   shouldEdit: boolean = false;
+  keyPoints: KeyPoint[] = [];
 
   constructor(private tourAuthoringService: TourAuthoringService) {}
 
@@ -43,11 +45,27 @@ export class TourComponent implements OnInit {
   }
 
   onPublishClicked(tour: Tour): void{
-    this.tourAuthoringService.publishTour(tour).subscribe({
-      next: () => {
-        this.getTours();
-      },
-    })
+    if(tour.id){
+      this.tourAuthoringService.getKeyPoints(tour.id).subscribe({
+        next: (result: KeyPoint[]) =>{
+          this.keyPoints = result;
+
+          if(this.keyPoints.length > 1 && tour.durations && tour.durations.length > 0){
+            this.tourAuthoringService.publishTour(tour).subscribe({
+              next: () => {
+                  this.getTours();
+              },
+            })
+          }
+          else{
+            alert("Tour can't be published because it does not have needed requiements!");
+          }
+        },
+        error:(err: any) => {
+          console.log(err);
+        }
+      })
+    }
   }
 
   getTours(): void {
