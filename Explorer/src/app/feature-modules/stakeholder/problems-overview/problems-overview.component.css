@@ -5,25 +5,68 @@
     padding-inline: 4rem;
     overflow: hidden;
     flex-wrap: wrap;
-    justify-content: space-between;
+    justify-content: center;
+    /* gap: 1rem; */
 }
 
 .card {
     display: flex;
+    flex-direction: column;
     background-color: rgb(var(--clr-background-secondary));
     width: 34rem;
     margin: 1.5rem;
     border-radius: 0.5rem;
-    padding-block: 1rem;
     border: rgba(var(--clr-outline-contrast), 1) 1px solid;
     color: rgb(var(--clr-text));
     transition: 0.3s;
     box-shadow: 0 0 0.5rem rgba(var(--clr-outline-contrast), 0.8);
+    gap: 0.5rem;
 }
 
 .card-hover:hover {
     transform: scale(1.05);
     cursor: pointer;
+}
+
+.warning-tab {
+    display: flex;
+    padding-right: 1rem;
+    background-color: rgb(var(--clr-background));
+    border-radius: 0.5rem;
+    border-bottom-left-radius: 0;
+    border-bottom-right-radius: 0;
+    font-size: 1.3rem;
+}
+
+.warning-icon {
+    display: flex;
+    align-items: center;
+    color: rgba(var(--clr-error-700), 0.8);
+    margin-left: auto;
+    padding-block: 0.5rem;
+}
+
+.deadline {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: rgba(var(--clr-error-700), 0.8);
+    padding-inline: 1rem;
+    border-radius: 0.5rem;
+    border-bottom-left-radius: 0;
+    border-bottom-right-radius: 0;
+    border-top-right-radius: 0;
+    width: 9.6rem;
+}
+
+.deadline-hover:hover {
+    cursor: pointer;
+    opacity: 0.8;
+}
+
+.data {
+    display: flex;
+    padding-bottom: 1rem;
 }
 
 .problem-data {
@@ -55,6 +98,7 @@
 
 .user-avatar {
     border: 1px solid rgb(var(--clr-text));
+
     width: 5rem;
     height: 5rem;
     border-radius: 1rem;

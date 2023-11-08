@@ -7,7 +7,7 @@ import { MatDialog } from "@angular/material/dialog";
 import { ProblemAnswerComponent } from "../problem-answer/problem-answer.component";
 import { ProblemUser } from "../../marketplace/model/problem-with-user.model";
 import { ProblemUpdateDeadline } from "../model/problem-update-deadline.model";
-import { Problem } from "../../marketplace/model/problem.model";
+import { faCircleExclamation } from "@fortawesome/free-solid-svg-icons";
 
 @Component({
     selector: "xp-problems-overview",
@@ -64,6 +64,11 @@ export class ProblemsOverviewComponent implements OnInit {
         }
     }
 
+    shouldShowDeadline(deadline: Date): boolean {
+        var date = new Date(deadline);
+        return date.getFullYear() < 9999;
+    }
+
     setDeadline(problem: ProblemUser) {
         if (this.user.role == "administrator") {
             const updatedProblem: ProblemUpdateDeadline = {
@@ -72,6 +77,15 @@ export class ProblemsOverviewComponent implements OnInit {
             };
             this.service.setDeadline(updatedProblem).subscribe();
         }
+    }
+
+    openDeadlineModal(problem: ProblemUser) {
+        if (this.user.role != "administrator") {
+            return;
+        }
+        this.dialogRef.open(ProblemAnswerComponent, {
+            data: { dataProblem: problem, dataUser: this.user },
+        });
     }
 
     openProblemModal(problem: ProblemUser) {
@@ -83,9 +97,17 @@ export class ProblemsOverviewComponent implements OnInit {
         });
     }
 
-    onMouseover(problem: ProblemUser, problemCard: any) {
+    onProblemCardMouseover(problem: ProblemUser, problemCard: any) {
         if (this.user.role != "author" && !problem.isAnswered) {
             problemCard.classList.remove("card-hover");
         }
     }
+
+    onDeadlineMouseover(deadline: any) {
+        if (this.user.role != "administrator") {
+            deadline.classList.remove("deadline-hover");
+        }
+    }
+
+    faCircleExclamation = faCircleExclamation;
 }
