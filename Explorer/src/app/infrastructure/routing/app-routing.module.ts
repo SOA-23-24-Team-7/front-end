@@ -29,6 +29,7 @@ import { FacilitiesComponent } from "src/app/feature-modules/tour-authoring/faci
 import { KeyPointsComponent } from "src/app/feature-modules/tour-authoring/key-points/key-points.component";
 import { MyClubInvitationsComponent } from "src/app/feature-modules/marketplace/my-club-invitations/my-club-invitations.component";
 import { RequestViewComponent } from 'src/app/feature-modules/administration/request-view/request-view.component';
+import { PurchasedToursComponent } from 'src/app/feature-modules/tour-execution/purchased-tour-cards/purchased-tour-cards.component';
 
 const routes: Routes = [
     { path: "", component: HomeComponent },
@@ -51,6 +52,7 @@ const routes: Routes = [
         canActivate: [AuthGuard],
     },
     { path: "tours", component: TourComponent, canActivate: [AuthGuard] },
+    { path: "purcshasedtours", component: PurchasedToursComponent, canActivate: [AuthGuard] },
     {
         path: "tours/equipment/:id",
         component: TourEquipmentFormComponent,

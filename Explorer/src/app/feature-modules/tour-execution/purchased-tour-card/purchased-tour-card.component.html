@@ -1,0 +1,12 @@
+<div class="tour-card">
+    <img class="tour-image" src='/assets/images/istanbul.jpg'/>
+    <div class="tour-card-details">
+        <div class="tour-name">{{ tour.name }}</div>
+        <div class="tour-tags">
+            <div class="tour-tag" *ngFor="let tag of tour.tags">{{ tag }}</div>
+        </div>
+        <div>
+            €{{ tour.price }}
+        </div>
+    </div>
+</div>
