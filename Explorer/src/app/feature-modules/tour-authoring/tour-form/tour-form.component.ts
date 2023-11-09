@@ -1,5 +1,5 @@
 import { Component, EventEmitter, Input, OnChanges, Output } from '@angular/core';
-import { FormArray, FormControl, FormGroup, Validators } from '@angular/forms';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { TourAuthoringService } from '../tour-authoring.service';
 import { Tour } from '../model/tour.model';
 
@@ -85,8 +85,13 @@ export class TourFormComponent implements OnChanges{
       difficulty: parseInt(this.tourForm.value.difficulty || "0"),
       tags: this.tourForm.value.tags ? this.tourForm.value.tags : []
     };
-    tour.id = this.tour.id;
-    this.service.updateTour(tour).subscribe({
+
+    this.tour.name = tour.name;
+    this.tour.description = tour.description;
+    this.tour.difficulty = tour.difficulty;
+    this.tour.tags = tour.tags;
+
+    this.service.updateTour(this.tour).subscribe({
       next: () => { this.toursUpdated.emit();}
     });
   }

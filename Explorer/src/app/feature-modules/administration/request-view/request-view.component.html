@@ -1,0 +1,57 @@
+<div id="requests">
+    <p>Problem</p>
+    <hr>
+    <div id="equipment-details">
+    <div>
+        <table>
+            <thead>
+                <tr>
+                    <th>KeyPoint id</th>
+                    <th>Status</th>
+                    <th></th>
+                    <th></th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let request of requests; let i = index">
+                    <td>{{request.keyPointId}}</td>
+                    <td>{{getPublicStatusText(request.status)}}</td>    
+                    <td><button color="primary" *ngIf="request.status == 0" mat-button (click)="acceptPublicKeyPointRequest(request)">Accept</button></td>
+                    <td><button color="primary" *ngIf="request.status == 0" mat-button (click)="rejectPublicKeyPointRequest(request)">Reject</button></td>
+                
+                    
+            </tbody>
+        </table>
+        <br><br>
+        <table>
+            <thead>
+                <tr>
+                    <th>Facility id</th>
+                    <th>Status</th>
+                    <th></th>
+                    <th></th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let request of facilityRequests; let i = index">
+                    <td>{{request.facilityId}}</td>
+                    <td>{{getPublicStatusText(request.status)}}</td>    
+                    <td><button color="primary" *ngIf="request.status == 0" mat-button (click)="acceptPublicFacilityRequest(request)">Accept</button></td>
+                    <td><button color="primary" *ngIf="request.status == 0" mat-button (click)="rejectPublicFacilityRequest(request)">Reject</button></td>
+                
+                    
+            </tbody>
+        </table>
+        <form [formGroup]="requestForm">
+            <mat-form-field>
+                <mat-label>Comment:</mat-label>
+                <input matInput type="text" formControlName="comment">
+            </mat-form-field>
+        </form>
+    </div>
+    
+    </div>
+</div>
+

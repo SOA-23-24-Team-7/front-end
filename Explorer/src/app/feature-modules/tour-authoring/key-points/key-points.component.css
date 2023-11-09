@@ -82,3 +82,25 @@ tbody tr.active-row {
     font-weight: bold;
     color: #3f51b5;
 }
+
+#back-button{
+    width: 300px;
+    display: flex;
+    gap: 20px;
+    flex-direction: column;
+    margin-top: 20px;
+}
+
+.checkbox-group div {
+    display: flex;
+    align-items: center;
+    margin-bottom: 10px; 
+  }
+  
+.checkbox-group input[type="checkbox"] {
+    margin-left: 50px; 
+}
+
+.text {
+    font-size: 20px;
+}  

@@ -7,6 +7,7 @@ import { ReactiveFormsModule } from "@angular/forms";
 import { UsersOverviewComponent } from "./users-overview/users-overview.component";
 import { RatingComponent } from "./rating/rating.component";
 import { ProblemViewComponent } from "./problem-view/problem-view.component";
+import { RequestViewComponent } from './request-view/request-view.component';
 
 @NgModule({
     declarations: [
@@ -15,6 +16,7 @@ import { ProblemViewComponent } from "./problem-view/problem-view.component";
         RatingComponent,
         UsersOverviewComponent,
         ProblemViewComponent,
+        RequestViewComponent,
     ],
     imports: [CommonModule, MaterialModule, ReactiveFormsModule],
     exports: [

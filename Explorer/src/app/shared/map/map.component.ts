@@ -1,4 +1,4 @@
-import { AfterViewInit, Component, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges } from '@angular/core';
+import { AfterViewInit, Component, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges, ViewChild } from '@angular/core';
 import * as L from 'leaflet';
 import { MapService } from './map.service'
 import { KeyPoint } from 'src/app/feature-modules/tour-authoring/model/key-point.model';
@@ -13,16 +13,20 @@ import { Facilities } from 'src/app/feature-modules/tour-authoring/model/facilit
 })
 export class MapComponent implements AfterViewInit, OnChanges {
   private map: any;
-  private waypointMap = new Map<number, any>();
+  public waypointMap = new Map<number, any>();
   private routeControl: L.Routing.Control;
   private refreshEventsSubscription: Subscription;
   private previousCommitted = false;
 
+  private positionMarker: L.Marker;
   private markerGroup = L.layerGroup(); 
+  
   public facilitiesUsed: boolean = false;
 
   private positionMarker: L.Marker;
 
+  public tourDistance: number = 0;
+  
   @Input() refreshEvents: Observable<number>;
   @Input() selectedKeyPoint: KeyPoint | null;
   @Input() canEdit = false;
@@ -60,7 +64,9 @@ export class MapComponent implements AfterViewInit, OnChanges {
 
   ngAfterViewInit(): void {
     let DefaultIcon = L.icon({
-      iconUrl: 'https://unpkg.com/leaflet@1.6.0/dist/images/marker-icon.png',
+      iconUrl: 'https://icon-library.com/images/map-marker-icon/map-marker-icon-18.jpg',
+      iconSize: [46, 46], 
+      iconAnchor: [26, 46],
     });
 
     L.Marker.prototype.options.icon = DefaultIcon;
@@ -167,9 +173,12 @@ export class MapComponent implements AfterViewInit, OnChanges {
       ),
     }).addTo(this.map);
 
-    this.routeControl.on('routesfound', function (e) {
-      var routes = e.routes;
-      var summary = routes[0].summary;
+    this.routeControl.on('routesfound', (e) => {
+      const routes = e.routes;
+      if (routes.length > 0) {
+        const summary = routes[0].summary;
+        this.tourDistance = summary.totalDistance/1000; // Total distance is in meters, tourDistance in km
+      }
     });
   }
 

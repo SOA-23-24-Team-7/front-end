@@ -49,9 +49,19 @@
     </table>
     </div>
     <div>
-      <xp-facilities-form *ngIf="shouldRenderFacilitiesForm" (facilitesUpdated)="getFacilities()" [facility]="selectedFacility" [shouldEdit]="shouldEdit"></xp-facilities-form>
+      <xp-facilities-form *ngIf="shouldRenderFacilitiesForm" 
+                          (facilitesUpdated)="getFacilities()" 
+                          [facility]="selectedFacility" 
+                          [shouldEdit]="shouldEdit">
+      </xp-facilities-form>
       <hr>
-      <button id="closeButton" *ngIf="shouldRenderFacilitiesForm" (click)="onCloseClicked()" color="primary" mat-raised-button>Close</button>
+      <button id="closeButton" 
+              *ngIf="shouldRenderFacilitiesForm" 
+              (click)="onCloseClicked()" 
+              color="primary" 
+              mat-raised-button
+              >Close
+      </button>
     </div>
     <xp-map (click)="onMapClicked()" [canEdit]="true"></xp-map>
   </div>

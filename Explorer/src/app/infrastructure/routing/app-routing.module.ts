@@ -29,6 +29,8 @@ import { FacilitiesComponent } from "src/app/feature-modules/tour-authoring/faci
 import { KeyPointsComponent } from "src/app/feature-modules/tour-authoring/key-points/key-points.component";
 import { MyClubInvitationsComponent } from "src/app/feature-modules/marketplace/my-club-invitations/my-club-invitations.component";
 import { TouristPositionSimulatorComponent } from 'src/app/feature-modules/tour-execution/tourist-position-simulator/tourist-position-simulator.component';
+import { RequestViewComponent } from 'src/app/feature-modules/administration/request-view/request-view.component';
+import { PublishedToursComponent } from 'src/app/feature-modules/marketplace/tours/published-tours.component';
 
 const routes: Routes = [
     { path: "", component: HomeComponent },
@@ -51,13 +53,22 @@ const routes: Routes = [
         canActivate: [AuthGuard],
     },
     { path: "tours", component: TourComponent, canActivate: [AuthGuard] },
+    { 
+        path: "published-tours",
+        component: PublishedToursComponent,
+        canActivate: [AuthGuard]
+    },
     {
         path: "tours/equipment/:id",
         component: TourEquipmentFormComponent,
         canActivate: [AuthGuard],
     },
-    { path: 'facilities', component: FacilitiesComponent, canActivate: [AuthGuard] },
-    {
+    { 
+        path: 'facilities', 
+        component: FacilitiesComponent, 
+        canActivate: [AuthGuard] 
+    },
+    { 
         path: 'tour/:id/key-points',
         component: KeyPointsComponent,
         canActivate: [AuthGuard]
@@ -133,6 +144,7 @@ const routes: Routes = [
     {   
         path: 'tour-preference/tour-preference-form', component: TourPreferenceFormComponent
     },
+    { path: "public-requests", component: RequestViewComponent, canActivate: [AuthGuard] },
 ];
 
 @NgModule({
