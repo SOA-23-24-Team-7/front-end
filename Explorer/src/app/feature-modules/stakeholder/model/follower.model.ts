@@ -3,4 +3,5 @@ export interface Follower {
     followedById: number;
     followedByUsername: string;
     showMessageDialog?: boolean;
+    followingStatus: boolean;
 }

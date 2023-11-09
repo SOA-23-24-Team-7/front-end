@@ -1,48 +1,64 @@
 <div id="followers-details">
     <div>
-        <table *ngIf="showFollowers">
-            <thead>
-                <tr>
-                    <th>username</th>
-                    <th>message</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr *ngFor="let f of followers">
-                    <td>{{ f.followedByUsername }}</td>
-                    <td>
-                        <button
-                            (click)="openMessageDialog(f.followedById)"
-                            color="accent"
-                            mat-icon-button
-                        >
-                            <mat-icon>message</mat-icon>
-                        </button>
-                    </td>
-                </tr>
-            </tbody>
-        </table>
-        <table *ngIf="showFollowings">
-            <thead>
-                <tr>
-                    <th>username</th>
-                    <th>message</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr *ngFor="let f of followings">
-                    <td>{{ f.followingUsername }}</td>
-                    <td>
-                        <button
-                            (click)="openMessageDialog(f.followingId)"
-                            color="accent"
-                            mat-icon-button
-                        >
-                            <mat-icon>message</mat-icon>
-                        </button>
-                    </td>
-                </tr>
-            </tbody>
-        </table>
+        <div *ngIf="showFollowers">
+            <h3>Followers</h3>
+            <br />
+            <table>
+                <tbody>
+                    <tr *ngFor="let f of followers">
+                        <td>{{ f.followedByUsername }}</td>
+                        <td>
+                            <button
+                                (click)="openMessageDialog(f.followedById)"
+                                color="primary"
+                                mat-raised-button
+                            >
+                                Message
+                            </button>
+                        </td>
+                        <td>
+                            <button
+                                (click)="removeOrFollow(f.id)"
+                                color="accent"
+                                mat-raised-button
+                            >
+                                <p *ngIf="f.followingStatus">Remove</p>
+                                <p *ngIf="!f.followingStatus">Follow</p>
+                            </button>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <div *ngIf="showFollowings">
+            <h3>Following</h3>
+            <br />
+            <table>
+                <tbody>
+                    <tr *ngFor="let f of followings">
+                        <td>{{ f.followingUsername }}</td>
+                        <td>
+                            <button
+                                (click)="openMessageDialog(f.followingId)"
+                                color="primary"
+                                mat-raised-button
+                            >
+                                Message
+                            </button>
+                        </td>
+                        <td>
+                            <button
+                                (click)="unfollowOrFollow(f.id)"
+                                color="basic"
+                                mat-raised-button
+                            >
+                                <p *ngIf="f.followingStatus">Following</p>
+                                <p *ngIf="!f.followingStatus">Follow</p>
+                            </button>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
     </div>
 </div>

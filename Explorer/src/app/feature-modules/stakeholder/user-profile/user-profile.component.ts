@@ -4,10 +4,10 @@ import { StakeholderService } from "../stakeholder.service";
 import { AuthService } from "src/app/infrastructure/auth/auth.service";
 import { User } from "src/app/infrastructure/auth/model/user.model";
 import { Router } from "@angular/router";
-import { Follower } from "../model/follower";
+import { Follower } from "../model/follower.model";
 import { MatDialog } from "@angular/material/dialog";
 import { faL } from "@fortawesome/free-solid-svg-icons";
-import { Following } from "../model/following";
+import { Following } from "../model/following.model";
 import { FollowDialogComponent } from "../follow-dialog/follow-dialog.component";
 
 @Component({
@@ -44,18 +44,34 @@ export class UserProfileComponent implements OnInit {
             this.service.getByUserId(this.user.id).subscribe(result => {
                 this.person = result;
             });
-            this.service.getFollowers().subscribe(result => {
-                this.followers = result.results;
-                this.followersCount = this.followers.length;
+            this.loadFollowers();
+            this.loadFollowings();
+        });
+    }
+    loadFollowings() {
+        this.service.getFollowings().subscribe(result => {
+            this.followings = result.results;
+            this.followingsCount = this.followings.length;
+            this.followings.forEach(item => {
+                item.followingStatus = true;
             });
-            this.service.getFollowings().subscribe(result => {
-                this.followings = result.results;
-                this.followingsCount = this.followings.length;
+        });
+    }
+    loadFollowers() {
+        this.service.getFollowers().subscribe(result => {
+            this.followers = result.results;
+            this.followersCount = this.followers.length;
+            this.followers.forEach(item => {
+                item.followingStatus = true;
             });
         });
     }
     openFollowersDialog(): void {
         const dialogRef = this.dialog.open(FollowDialogComponent, {
+            enterAnimationDuration: "700ms",
+            exitAnimationDuration: "600ms",
+            height: "500px",
+            width: "450px",
             data: {
                 followers: this.followers,
                 followings: this.followings,
@@ -64,9 +80,16 @@ export class UserProfileComponent implements OnInit {
                 user: this.user,
             },
         });
+        dialogRef.afterClosed().subscribe(item => {
+            this.loadFollowers();
+        });
     }
     openFollowingsDialog(): void {
         const dialogRef = this.dialog.open(FollowDialogComponent, {
+            enterAnimationDuration: "700ms",
+            exitAnimationDuration: "600ms",
+            height: "500px",
+            width: "450px",
             data: {
                 followers: this.followers,
                 followings: this.followings,
@@ -74,6 +97,9 @@ export class UserProfileComponent implements OnInit {
                 showFollowings: true,
                 user: this.user,
             },
+        });
+        dialogRef.afterClosed().subscribe(item => {
+            this.loadFollowings();
         });
     }
 }
