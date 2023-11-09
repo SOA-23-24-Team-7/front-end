@@ -1,3 +1,3 @@
 <h1>Position simulator</h1>
 <hr>
-<xp-map [isPositionMap]="true" [canEdit]="true" (newLongLatEvent)="changeTouristPosition($event)"></xp-map>
+<xp-map [isPositionMap]="true" [startPosition]="touristPosition" [canEdit]="true" (newLongLatEvent)="changeTouristPosition($event)"></xp-map>

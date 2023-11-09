@@ -28,6 +28,10 @@ export class MapComponent implements AfterViewInit, OnChanges {
   @Input() canEdit = false;
   @Input() isKeyPointMap = false;
   @Input() isPositionMap = false;
+  @Input() set startPosition(value: any) {
+    if (!value) return;
+    this.positionMarker = L.marker([value.latitude, value.longitude], { icon: this.positionIcon }).addTo(this.map)
+  }
   @Output() newLongLatEvent = new EventEmitter<[number, number]>();
 
   constructor(private mapService: MapService) { }
@@ -134,11 +138,6 @@ export class MapComponent implements AfterViewInit, OnChanges {
         }
       });
     }
-
-    if (this.isPositionMap) {
-      //get current position
-      this.positionMarker = L.marker([45.2396, 19.8227], { icon: this.positionIcon }).addTo(this.map)
-    }
   }
 
   search(): void {
@@ -198,7 +197,9 @@ export class MapComponent implements AfterViewInit, OnChanges {
       }
 
       if (this.isPositionMap) {
-        this.positionMarker.remove();
+        if (this.positionMarker) {
+          this.positionMarker.remove();
+        }
         this.positionMarker = L.marker([lat, lng], { icon: this.positionIcon }).addTo(this.map)
         return;
       }
