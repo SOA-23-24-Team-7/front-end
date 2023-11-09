@@ -1,95 +1,54 @@
 
-<div id="tour">
-    <p>My Tours: </p>
+<div id="tour" class="container">
+    
     <hr>
-    <div id="tour-details">
-    <div>
-        <table>
-            <thead>
-                <tr>
-                    <th>Name</th>
-                    <th>Description</th>
-                    <th>Difficulty</th>
-                    <th>Tags</th>
-                    <th>Price</th>
-                    <th>Status</th>
-                    <th>Distance</th>
-                    <th></th>
-                    <th></th>
-                    <th></th>
-                    <th></th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr *ngFor="let to of tour">
-                    <td>{{to.name}}</td>
-                    <td>{{to.description}}</td>
-                    <td>{{to.difficulty}}</td>
-                    <td>{{to.tags}}</td>
-                    <td>{{to.price}}</td>
-                    <td>{{getTourStatusText(to.status)}}</td>
-                    <td>{{to.distance}} km</td>
-                    <td>
-                        <button *ngIf="getTourStatusText(to.status) !== 'Published'" 
-                                color="accent" 
-                                (click)="deleteTour(to.id || 0)" 
-                                mat-icon-button>
-                                <mat-icon>delete</mat-icon>
-                        </button>
-                        <button *ngIf="getTourStatusText(to.status) !== 'Published'" 
-                                color="primary" 
-                                (click)="onEditClicked(to)"  
-                                mat-icon-button>
-                            <mat-icon>edit</mat-icon>
-                        </button>
-                    </td>
-                    <td>
-                        <button color="primary" 
-                                mat-raised-button 
-                                [routerLink]="['equipment',to.id]" 
-                                >Manage equipment
-                        </button>
-                    </td>
-                    <td>
-                        <button *ngIf="getTourStatusText(to.status) === 'Published'" 
-                                color="primary" 
-                                mat-raised-button 
-                                [routerLink]="['/tour', to.id, 'key-points']"
-                                id="view-key-points-button"
-                                >View key points
-                        </button>
-                        <button *ngIf="getTourStatusText(to.status) !== 'Published'" 
-                                color="primary" 
-                                mat-raised-button 
-                                [routerLink]="['/tour', to.id, 'key-points']"
-                                >Manage key points
-                        </button>
-                    </td>
-                    <td>
-                        <button *ngIf="getTourStatusText(to.status) !== 'Published'" 
-                                color="primary" 
-                                mat-raised-button 
-                                (click)="onPublishClicked(to)"
-                                >Publish
-                        </button>
-                        <p *ngIf="getTourStatusText(to.status) === 'Published'" 
-                            id="already-published"
-                            >Published
-                        </p>
-                    </td>
-                </tr>
-                <tr><button color="primary" (click)="onAddClicked()" mat-icon-button>
-                    <mat-icon>add</mat-icon>
-                </button></tr>
-            </tbody>
-        </table>
-    </div>
-    <div>
-        <xp-tour-form *ngIf="shouldRenderTourForm" 
-                      [shouldEdit]="shouldEdit" 
-                      [tour]="selectedTour" 
-                      (toursUpdated)="getTours()">
-        </xp-tour-form>
-    </div>
-    </div>
+        <div id="tour-details" class="tour-rectangles">
+            <div *ngFor="let to of tour" class="tour-rectangle">
+                <div class="tour-info">
+                    <p class="text"><strong>Name:</strong> {{to.name}}</p>
+                    <p class="text"><strong>Description:</strong> {{to.description}}</p>
+                    <p class="text"><strong>Difficulty:</strong> {{to.difficulty}}</p>
+                    <p class="text"><strong>Tags:</strong> {{to.tags}}</p>
+                    <p class="text"><strong>Price:</strong> {{to.price}}</p>
+                    <p class="text"><strong>Status:</strong> {{getTourStatusText(to.status)}}</p>
+                    <p class="text"><strong>Distance:</strong> {{to.distance}} km</p>
+                </div>
+                <div class="tour-buttons">
+                   
+                    <button *ngIf="getTourStatusText(to.status) !== 'Published'" color="accent" (click)="deleteTour(to.id || 0)" mat-icon-button>
+                        Delete
+                    </button>
+                    <button *ngIf="getTourStatusText(to.status) !== 'Published'" color="primary" (click)="onEditClicked(to)" mat-icon-button>
+                        Edit
+                    </button>
+                    <button color="primary" mat-raised-button [routerLink]="['equipment',to.id]">
+                        Manage equipment
+                    </button>
+                    <button *ngIf="getTourStatusText(to.status) === 'Published'" color="primary" mat-raised-button [routerLink]="['/tour', to.id, 'key-points']" id="view-key-points-button">
+                        View key points
+                    </button>
+                    <button *ngIf="getTourStatusText(to.status) !== 'Published'" color="primary" mat-raised-button [routerLink]="['/tour', to.id, 'key-points']">
+                        Manage key points
+                    </button>
+                    <button *ngIf="getTourStatusText(to.status) !== 'Published'" color="primary" mat-raised-button (click)="onPublishClicked(to)">
+                        Publish
+                    </button>
+                    <button *ngIf="getTourStatusText(to.status) === 'Published'" color="primary" mat-raised-button (click)="onArchiveClicked(to)">
+                        Archive
+                    </button>
+                </div>
+                
+            </div>
+            <button color="primary" (click)="onAddClicked()" mat-icon-button>
+                <mat-icon>add</mat-icon>
+            </button>
+        </div>
+        <div class="right-column">
+            <xp-tour-form *ngIf="shouldRenderTourForm" 
+                        [shouldEdit]="shouldEdit" 
+                        [tour]="selectedTour" 
+                        (toursUpdated)="getTours()">
+            </xp-tour-form>
+        </div>
+    
 </div>

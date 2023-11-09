@@ -3,6 +3,7 @@ import { Observable } from 'rxjs';
 import { PagedResults } from 'src/app/shared/model/paged-results.model';
 import { Tour } from '../tour-authoring/model/tour.model';
 import { HttpClient } from '@angular/common/http';
+import { TouristPosition } from './model/tourist-position.model';
 import { environment } from 'src/env/environment';
 
 @Injectable({
@@ -16,4 +17,16 @@ export class TourExecutionService {
       environment.apiHost + "tourexecuting/tourexecution/purchasedtours"
     );
 }
+
+  addTouristPosition(touristPosition: TouristPosition): Observable<TouristPosition> {
+    return this.http.post<TouristPosition>(environment.apiHost + 'tour-execution/tourists/position', touristPosition);
+  }
+
+  updateTouristPosition(touristPosition: TouristPosition): Observable<TouristPosition> {
+    return this.http.put<TouristPosition>(environment.apiHost + 'tour-execution/tourists/position', touristPosition);
+  }
+
+  getTouristPositionByTouristId(touristId: number): Observable<TouristPosition> {
+    return this.http.get<TouristPosition>(environment.apiHost + 'tour-execution/tourists/' + touristId + '/position');
+  }
 }

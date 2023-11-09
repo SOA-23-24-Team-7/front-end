@@ -28,8 +28,10 @@ import { ClubMembersManagementComponent } from "src/app/feature-modules/marketpl
 import { FacilitiesComponent } from "src/app/feature-modules/tour-authoring/facilities/facilities.component";
 import { KeyPointsComponent } from "src/app/feature-modules/tour-authoring/key-points/key-points.component";
 import { MyClubInvitationsComponent } from "src/app/feature-modules/marketplace/my-club-invitations/my-club-invitations.component";
+import { TouristPositionSimulatorComponent } from 'src/app/feature-modules/tour-execution/tourist-position-simulator/tourist-position-simulator.component';
 import { RequestViewComponent } from 'src/app/feature-modules/administration/request-view/request-view.component';
 import { PurchasedToursComponent } from 'src/app/feature-modules/tour-execution/purchased-tour-cards/purchased-tour-cards.component';
+import { PublishedToursComponent } from 'src/app/feature-modules/marketplace/tours/published-tours.component';
 
 const routes: Routes = [
     { path: "", component: HomeComponent },
@@ -53,16 +55,30 @@ const routes: Routes = [
     },
     { path: "tours", component: TourComponent, canActivate: [AuthGuard] },
     { path: "purcshasedtours", component: PurchasedToursComponent, canActivate: [AuthGuard] },
+    { 
+        path: "published-tours",
+        component: PublishedToursComponent,
+        canActivate: [AuthGuard]
+    },
     {
         path: "tours/equipment/:id",
         component: TourEquipmentFormComponent,
         canActivate: [AuthGuard],
     },
-    { path: 'facilities', component: FacilitiesComponent, canActivate: [AuthGuard] },
+    { 
+        path: 'facilities', 
+        component: FacilitiesComponent, 
+        canActivate: [AuthGuard] 
+    },
     { 
         path: 'tour/:id/key-points',
         component: KeyPointsComponent,
-        canActivate: [AuthGuard] 
+        canActivate: [AuthGuard]
+    },
+    {
+        path: 'tourist-position-simulator',
+        component: TouristPositionSimulatorComponent,
+        canActivate: [AuthGuard]
     },
     {
         path: "user-management",

@@ -14,7 +14,7 @@ import { MatSelectModule } from '@angular/material/select';
 import { SharedModule } from 'src/app/shared/shared.module';
 import { TourEquipmentFormComponent } from './tour-equipment-form/tour-equipment-form.component';
 import { RouterModule } from '@angular/router';
-
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 
 
 @NgModule({
@@ -33,7 +33,8 @@ import { RouterModule } from '@angular/router';
     ReactiveFormsModule,
     MatSelectModule,
     SharedModule,
-    RouterModule
+    RouterModule,
+    FontAwesomeModule
   ],
   exports: [
     TourComponent,
