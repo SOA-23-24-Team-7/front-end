@@ -6,11 +6,10 @@ import { FormsModule } from "@angular/forms";
 import { EditProfileComponent } from "./edit-profile/edit-profile.component";
 import { ProblemCommentComponent } from "./problem-comment/problem-comment.component";
 import { ProblemCommentCreateComponent } from "./problem-comment-create/problem-comment-create.component";
-import { ProblemResolveComponent } from "./problem-resolve/problem-resolve.component";
 import { ProblemsOverviewComponent } from "./problems-overview/problems-overview.component";
 import { ProblemAnswerComponent } from "./problem-answer/problem-answer.component";
 import { FontAwesomeModule } from "@fortawesome/angular-fontawesome";
-import { ProblemDeadlineComponent } from './problem-deadline/problem-deadline.component';
+import { ProblemDeadlineComponent } from "./problem-deadline/problem-deadline.component";
 
 @NgModule({
     declarations: [
@@ -18,7 +17,6 @@ import { ProblemDeadlineComponent } from './problem-deadline/problem-deadline.co
         EditProfileComponent,
         ProblemCommentComponent,
         ProblemCommentCreateComponent,
-        ProblemResolveComponent,
         ProblemsOverviewComponent,
         ProblemAnswerComponent,
         ProblemDeadlineComponent,

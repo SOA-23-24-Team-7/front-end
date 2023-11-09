@@ -51,7 +51,7 @@ export class ProblemAnswerComponent implements OnInit {
     }
 
     resolveProblem(header: any) {
-        this.service.resolveProblem(this.problem.id).subscribe({
+        this.service.resolveProblem(this.problem.id, this.user.role).subscribe({
             next: (result: ProblemUser) => {
                 header.classList.add("green");
                 this.problem.isResolved = true;
@@ -81,6 +81,16 @@ export class ProblemAnswerComponent implements OnInit {
                 },
                 error: () => {},
             });
+    }
+
+    hasDedlinePassed(): boolean {
+        var today = new Date();
+        const deadline = new Date(this.problem.deadline);
+        today.setHours(0, 0, 0, 0);
+
+        // console.log(today);
+
+        return deadline <= today;
     }
 
     faSquareCheck = faSquareCheck;

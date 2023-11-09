@@ -64,15 +64,23 @@ export class StakeholderService {
         );
     }
 
-    resolveProblem(problemId: number): Observable<ProblemUser> {
+    resolveProblem(
+        problemId: number,
+        userRole: string,
+    ): Observable<ProblemUser> {
+        console.log(userRole);
         return this.http.get<ProblemUser>(
-            environment.apiHost + "tourist/problem/resolve/" + problemId,
+            environment.apiHost +
+                userRole +
+                "/problem/" +
+                problemId +
+                "/resolve",
         );
     }
 
     getAdminsProblems(): Observable<PagedResults<ProblemUser>> {
         return this.http.get<PagedResults<ProblemUser>>(
-            environment.apiHost + "administration/problem",
+            environment.apiHost + "administrator/problem",
         );
     }
 
@@ -94,7 +102,7 @@ export class StakeholderService {
         console.log(problem);
         return this.http.put<PagedResults<ProblemUser>>(
             environment.apiHost +
-                "administration/problem/set-deadline/" +
+                "administrator/problem/set-deadline/" +
                 problem.id,
             problem,
         );
