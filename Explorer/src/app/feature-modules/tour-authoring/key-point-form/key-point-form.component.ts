@@ -20,6 +20,7 @@ import {
 
 import { AuthService } from "src/app/infrastructure/auth/auth.service";
 import { Person } from "../../stakeholder/model/person.model";
+import { MapService } from "src/app/shared/map/map.service";
 
 @Component({
     selector: "xp-key-point-form",
@@ -40,6 +41,7 @@ export class KeyPointFormComponent implements OnChanges {
         private route: ActivatedRoute,
         private service: TourAuthoringService,
         private authService: AuthService,
+        private mapService: MapService,
     ) {}
     ngOnInit(): void {
         this.getPerson();
@@ -52,6 +54,7 @@ export class KeyPointFormComponent implements OnChanges {
             });
             return;
         }
+
         this.tourImage = null;
         this.tourImageFile = null;
         this.keyPointForm.reset();
@@ -66,6 +69,7 @@ export class KeyPointFormComponent implements OnChanges {
         description: new FormControl("", [Validators.required]),
         longitude: new FormControl<number>(null!, [Validators.required]),
         latitude: new FormControl<number>(null!, [Validators.required]),
+        address: new FormControl<string>("", [Validators.required]),
         imagePath: new FormControl<string>("", [Validators.required]),
         isPublicChecked: new FormControl<boolean>(false),
     });
@@ -99,27 +103,68 @@ export class KeyPointFormComponent implements OnChanges {
                                 this.keyPointForm.value.description || "",
                             longitude: this.keyPointForm.value.longitude || 0,
                             latitude: this.keyPointForm.value.latitude || 0,
+                            locationAddress:
+                                this.keyPointForm.value.address || "",
                             imagePath: imagePath,
                             order: 0,
                         };
-                        this.service.addKeyPoint(keyPoint).subscribe({
-                            next: result => {
-                                this.keyPointUpdated.emit();
-                                if (this.keyPointForm.value.isPublicChecked) {
-                                    const request: PublicKeyPointRequest = {
-                                        keyPointId: result.id as number,
-                                        status: PublicStatus.Pending,
-                                        authorName:
-                                            this.person.name +
-                                            " " +
-                                            this.person.surname,
-                                    };
-                                    this.service
-                                        .addPublicKeyPointRequest(request)
-                                        .subscribe({});
-                                }
-                            },
-                        });
+                        // Get Key Points location address
+                        this.mapService
+                            .reverseSearch(
+                                keyPoint.latitude,
+                                keyPoint.longitude,
+                            )
+                            .subscribe(res => {
+                                const addressInfo = {
+                                    number: "",
+                                    street: "",
+                                    city: "",
+                                    postalCode: "",
+                                    country: "",
+                                };
+
+                                let addressParts = res.display_name.split(",");
+
+                                this.setAddressInfo(addressInfo, addressParts);
+                                let concatenatedAddress =
+                                    addressInfo.number +
+                                    " " +
+                                    addressInfo.street +
+                                    " " +
+                                    addressInfo.city +
+                                    " " +
+                                    addressInfo.postalCode +
+                                    " " +
+                                    addressInfo.country;
+
+                                keyPoint.locationAddress = concatenatedAddress;
+
+                                this.service.addKeyPoint(keyPoint).subscribe({
+                                    next: result => {
+                                        this.keyPointUpdated.emit();
+                                        if (
+                                            this.keyPointForm.value
+                                                .isPublicChecked
+                                        ) {
+                                            const request: PublicKeyPointRequest =
+                                                {
+                                                    keyPointId:
+                                                        result.id as number,
+                                                    status: PublicStatus.Pending,
+                                                    authorName:
+                                                        this.person.name +
+                                                        " " +
+                                                        this.person.surname,
+                                                };
+                                            this.service
+                                                .addPublicKeyPointRequest(
+                                                    request,
+                                                )
+                                                .subscribe({});
+                                        }
+                                    },
+                                });
+                            });
                     },
                 });
             },
@@ -138,6 +183,7 @@ export class KeyPointFormComponent implements OnChanges {
                     description: this.keyPointForm.value.description || "",
                     longitude: this.keyPointForm.value.longitude || 0,
                     latitude: this.keyPointForm.value.latitude || 0,
+                    locationAddress: this.keyPointForm.value.address || "",
                     imagePath: this.keyPointForm.value.imagePath || "",
                     order: 0,
                 };
@@ -154,11 +200,40 @@ export class KeyPointFormComponent implements OnChanges {
                         },
                     });
                 } else {
-                    this.service.updateKeyPoint(keyPoint).subscribe({
-                        next: () => {
-                            this.keyPointUpdated.emit();
-                        },
-                    });
+                    // Get Key Points location address
+                    this.mapService
+                        .reverseSearch(keyPoint.latitude, keyPoint.longitude)
+                        .subscribe(res => {
+                            const addressInfo = {
+                                number: "",
+                                street: "",
+                                city: "",
+                                postalCode: "",
+                                country: "",
+                            };
+
+                            let addressParts = res.display_name.split(",");
+
+                            this.setAddressInfo(addressInfo, addressParts);
+                            let concatenatedAddress =
+                                addressInfo.number +
+                                " " +
+                                addressInfo.street +
+                                " " +
+                                addressInfo.city +
+                                " " +
+                                addressInfo.postalCode +
+                                " " +
+                                addressInfo.country;
+
+                            keyPoint.locationAddress = concatenatedAddress;
+
+                            this.service.updateKeyPoint(keyPoint).subscribe({
+                                next: () => {
+                                    this.keyPointUpdated.emit();
+                                },
+                            });
+                        });
                 }
             },
         });
@@ -174,6 +249,34 @@ export class KeyPointFormComponent implements OnChanges {
         }
 
         return false;
+    }
+
+    setAddressInfo(addressInfo: any, addressParts: any): void {
+        if (addressParts.length == 10) {
+            addressInfo.number = addressParts[0];
+            addressInfo.street = addressParts[1];
+            addressInfo.city = addressParts[4];
+            addressInfo.postalCode = addressParts[8];
+            addressInfo.country = addressParts[9];
+        } else if (addressParts.length == 9) {
+            addressInfo.number = addressParts[0];
+            addressInfo.street = addressParts[1];
+            addressInfo.city = addressParts[3];
+            addressInfo.postalCode = addressParts[7];
+            addressInfo.country = addressParts[8];
+        } else if (addressParts.length == 8) {
+            addressInfo.number = "";
+            addressInfo.street = addressParts[1];
+            addressInfo.city = addressParts[2];
+            addressInfo.postalCode = addressParts[6];
+            addressInfo.country = addressParts[7];
+        } else if (addressParts.length == 7) {
+            addressInfo.number = "";
+            addressInfo.street = addressParts[0];
+            addressInfo.city = addressParts[1];
+            addressInfo.postalCode = addressParts[5];
+            addressInfo.country = addressParts[6];
+        }
     }
 
     getPerson(): void {

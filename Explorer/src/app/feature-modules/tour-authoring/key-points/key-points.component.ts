@@ -32,6 +32,7 @@ export class KeyPointsComponent implements OnInit {
     keyPoints: KeyPoint[] = [];
     selectedKeyPoint: KeyPoint | null = null;
     mapLongLat: [number, number];
+    mapLocationAddress: string;
     shouldRenderKeyPointForm: boolean = false;
     shouldEdit: boolean = false;
     refreshEventsSubject: BehaviorSubject<number>;
@@ -318,7 +319,7 @@ export class KeyPointsComponent implements OnInit {
                     t.transportType == tourDuration.transportType &&
                     t.duration != tourDuration.duration
                 ) {
-                    tour.durations.splice(counter);
+                    tour.durations.splice(counter, 1);
                     break;
                 }
                 counter++;
@@ -335,7 +336,7 @@ export class KeyPointsComponent implements OnInit {
             let counter = 0;
             for (let t of tour.durations) {
                 if (t.transportType == type) {
-                    tour.durations.splice(counter);
+                    tour.durations.splice(counter, 1);
                     break;
                 }
                 counter++;

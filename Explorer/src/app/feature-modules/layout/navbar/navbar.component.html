@@ -199,6 +199,23 @@
                         />
                         <div class="navbar-submenu-item-text">Manage facilities</div>
                     </div>
+                    
+                    
+                    
+                    <div
+                        class="navbar-submenu-item"
+                        [routerLink]="['published-tours']"
+                        *ngIf="user && user.role === 'tourist'"
+                    >
+                        <fa-icon
+                            class="navbar-submenu-item-icon"
+                            [icon]="faSearch"
+                        />
+                        <div class="navbar-submenu-item-text">Explore</div>
+                    </div>
+
+
+
                     <div
                         class="navbar-submenu-item"
                         [routerLink]="['review']"

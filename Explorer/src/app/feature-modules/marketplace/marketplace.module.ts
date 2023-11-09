@@ -27,6 +27,7 @@ import { TourSearchComponent } from "./tour-search/tour-search.component";
 import { SharedModule } from "src/app/shared/shared.module";
 import { FontAwesomeModule } from "@fortawesome/angular-fontawesome";
 import { LayoutModule } from "src/app/feature-modules/layout/layout.module";
+import { PublishedToursComponent } from "./tours/published-tours.component";
 
 @NgModule({
     declarations: [
@@ -51,6 +52,8 @@ import { LayoutModule } from "src/app/feature-modules/layout/layout.module";
         NotificationsComponent,
 
         TourSearchComponent,
+
+        PublishedToursComponent,
     ],
     imports: [
         CommonModule,
@@ -76,6 +79,7 @@ import { LayoutModule } from "src/app/feature-modules/layout/layout.module";
         RatingFormComponent,
         ProblemComponent,
         TourPreferencesComponent,
+        TourPreferenceFormComponent,
         TourPreferenceFormComponent,
     ],
 })
