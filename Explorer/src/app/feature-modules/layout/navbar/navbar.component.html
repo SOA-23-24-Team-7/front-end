@@ -207,6 +207,17 @@
 
                     <div
                         class="navbar-submenu-item"
+                        [routerLink]="['tourist-position-simulator']"
+                        *ngIf="user && user.role === 'tourist'"
+                    >
+                        <fa-icon
+                            class="navbar-submenu-item-icon"
+                            [icon]="faPersonHiking"
+                        />
+                        <div class="navbar-submenu-item-text">Change position</div>
+                    </div>
+                    <div
+                        class="navbar-submenu-item"
                         [routerLink]="['review']"
                         *ngIf="user && user.role === 'tourist'"
                     >

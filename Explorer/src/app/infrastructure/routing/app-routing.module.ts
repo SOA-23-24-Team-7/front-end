@@ -28,6 +28,7 @@ import { ClubMembersManagementComponent } from "src/app/feature-modules/marketpl
 import { FacilitiesComponent } from "src/app/feature-modules/tour-authoring/facilities/facilities.component";
 import { KeyPointsComponent } from "src/app/feature-modules/tour-authoring/key-points/key-points.component";
 import { MyClubInvitationsComponent } from "src/app/feature-modules/marketplace/my-club-invitations/my-club-invitations.component";
+import { TouristPositionSimulatorComponent } from 'src/app/feature-modules/tour-execution/tourist-position-simulator/tourist-position-simulator.component';
 import { RequestViewComponent } from 'src/app/feature-modules/administration/request-view/request-view.component';
 import { PublishedToursComponent } from 'src/app/feature-modules/marketplace/tours/published-tours.component';
 
@@ -70,7 +71,12 @@ const routes: Routes = [
     { 
         path: 'tour/:id/key-points',
         component: KeyPointsComponent,
-        canActivate: [AuthGuard] 
+        canActivate: [AuthGuard]
+    },
+    {
+        path: 'tourist-position-simulator',
+        component: TouristPositionSimulatorComponent,
+        canActivate: [AuthGuard]
     },
     {
         path: "user-management",
