@@ -14,7 +14,7 @@ import { ReviewCardComponent } from "../../layout/review-cards/review-card.compo
     styleUrls: ["./published-tours.component.css"],
 })
 export class PublishedToursComponent implements OnInit {
-    @Input() inputTours: TourLimitedView[] = [];
+    @Input() inputTours: TourLimitedView[];
     publishedTours: TourLimitedView[] = [];
 
     constructor(
@@ -24,13 +24,19 @@ export class PublishedToursComponent implements OnInit {
 
     ngOnInit(): void {
         //enabling input
-        if (this.inputTours.length === 0) this.getPublishedTours();
+        console.log(this, this.inputTours);
+        if (!this.inputTours || this.inputTours.length === 0)
+            this.getPublishedTours();
         else this.publishedTours = this.inputTours;
+    }
+
+    ngOnChanges(): void {
+        this.publishedTours = this.inputTours;
     }
 
     getPublishedTours(): void {
         this.service.getPublishedTours().subscribe({
-            next: (result: PagedResults<Tour>) => {
+            next: (result: PagedResults<TourLimitedView>) => {
                 this.publishedTours = result.results;
             },
             error: (err: any) => {
