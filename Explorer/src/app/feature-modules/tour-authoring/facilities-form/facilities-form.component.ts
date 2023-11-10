@@ -118,10 +118,7 @@ export class FacilitiesFormComponent implements OnChanges {
             });*/
             this.service.uploadImage(this.tourImageFile!).subscribe({
                 next: (imagePath: string) => {
-                    //this.imagePath=imagePath;
                     facility.imagePath=imagePath;
-                    this.facilitiesUpdated.emit();
-                    location.reload();
                     this.service.addFacility(facility).subscribe({
                         next: result => {
                             this.facilitiesUpdated.emit();
