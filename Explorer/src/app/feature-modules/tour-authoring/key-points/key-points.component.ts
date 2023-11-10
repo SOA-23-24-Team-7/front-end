@@ -186,7 +186,11 @@ export class KeyPointsComponent implements OnInit {
             },
         });
         const sub = dialogRef.componentInstance.onAdd.subscribe(() => {
+            this.mapComponent.createWaypoints(this.keyPoints);
+            let waypoints = [...this.mapComponent.waypointMap.values()];
+            this.mapComponent.setRoute(waypoints);
             this.getKeyPoints();
+            console.log(this.mapComponent.tourDistance);
         });
     }
 
