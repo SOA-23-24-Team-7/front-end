@@ -7,7 +7,8 @@ import { Observable } from "rxjs";
 import { Message } from "./model/message";
 import { Follower } from "./model/follower.model";
 import { Following } from "./model/following.model";
-import { FollowerCreate } from "./model/followerCreate.model";
+import { FollowerCreate } from "./model/follower- create.model";
+import { UserFollow } from "./model/user-follow.model";
 
 @Injectable({
     providedIn: "root",
@@ -30,8 +31,12 @@ export class StakeholderService {
             environment.apiHost + "follower/followings",
         );
     }
+    getSearched(searchUsername: string): Observable<PagedResults<UserFollow>> {
+        return this.http.get<PagedResults<UserFollow>>(
+            environment.apiHost + "follower/search/" + searchUsername,
+        );
+    }
     deleteFollowing(id: number): Observable<Following> {
-        console.log("sdssddsdsds");
         return this.http.delete<Following>(
             environment.apiHost + "follower/" + id,
         );

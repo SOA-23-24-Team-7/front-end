@@ -20,11 +20,11 @@
 
 .float-container {
     padding: 10px;
-    min-width: 350px;
+    min-width: 440px;
 }
 
 .float-child {
-    width: 50%;
+    width: 30%;
     float: left;
     padding: 10px;
     text-align: center;

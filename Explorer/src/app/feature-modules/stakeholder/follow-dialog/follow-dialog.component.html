@@ -9,6 +9,7 @@
                         <td>{{ f.followedByUsername }}</td>
                         <td>
                             <button
+                                *ngIf="f.followingStatus"
                                 (click)="openMessageDialog(f.followedById)"
                                 color="primary"
                                 mat-raised-button
@@ -39,6 +40,7 @@
                         <td>{{ f.followingUsername }}</td>
                         <td>
                             <button
+                                *ngIf="f.followingStatus"
                                 (click)="openMessageDialog(f.followingId)"
                                 color="primary"
                                 mat-raised-button

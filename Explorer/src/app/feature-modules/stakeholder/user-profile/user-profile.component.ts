@@ -9,6 +9,7 @@ import { faL } from "@fortawesome/free-solid-svg-icons";
 import { Following } from "../model/following.model";
 import { FollowDialogComponent } from "../follow-dialog/follow-dialog.component";
 import { StakeholderService } from "../stakeholder.service";
+import { FollowerSearchDialogComponent } from "../follower-search-dialog/follower-search-dialog.component";
 
 @Component({
     selector: "xp-user-profile",
@@ -100,6 +101,21 @@ export class UserProfileComponent implements OnInit {
         });
         dialogRef.afterClosed().subscribe(item => {
             this.loadFollowings();
+        });
+    }
+    openFollowerSearchDialog(): void {
+        const dialogRef = this.dialog.open(FollowerSearchDialogComponent, {
+            enterAnimationDuration: "500ms",
+            exitAnimationDuration: "500ms",
+            height: "500px",
+            width: "450px",
+            data: {
+                userId: this.user.id,
+            },
+        });
+        dialogRef.afterClosed().subscribe(item => {
+            this.loadFollowings();
+            this.loadFollowers();
         });
     }
     goToAllNotifications(): void {

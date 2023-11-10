@@ -1,5 +1,4 @@
 import { Component, OnInit } from "@angular/core";
-import { Follower } from "../model/follower";
 import { Message } from "../model/message";
 import { AuthService } from "src/app/infrastructure/auth/auth.service";
 import { PagedResults } from "src/app/shared/model/paged-results.model";
