@@ -1,0 +1,10 @@
+<div>
+    <h2>Messages</h2>
+    <ul>
+        <li *ngFor="let message of messages" class="notification-container">
+            <div class="notification">
+                {{ message.text }}
+            </div>
+        </li>
+    </ul>
+</div>

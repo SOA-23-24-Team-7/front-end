@@ -1,6 +1,5 @@
 import { Component, Input, OnInit, ViewChild } from "@angular/core";
 import { Person } from "../model/person.model";
-import { StakeholderService } from "../stakeholder.service";
 import { AuthService } from "src/app/infrastructure/auth/auth.service";
 import { User } from "src/app/infrastructure/auth/model/user.model";
 import { Router } from "@angular/router";
@@ -9,6 +8,7 @@ import { MatDialog } from "@angular/material/dialog";
 import { faL } from "@fortawesome/free-solid-svg-icons";
 import { Following } from "../model/following";
 import { FollowDialogComponent } from "../follow-dialog/follow-dialog.component";
+import { StakeholderService } from "../stakeholder.service";
 
 @Component({
     selector: "xp-user-profile",
@@ -75,5 +75,8 @@ export class UserProfileComponent implements OnInit {
                 user: this.user,
             },
         });
+    }
+    goToAllNotifications(): void {
+        this.router.navigate(["/user-notifications"]);
     }
 }

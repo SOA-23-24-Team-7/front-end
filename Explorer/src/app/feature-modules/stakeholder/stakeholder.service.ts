@@ -6,6 +6,7 @@ import { environment } from "src/env/environment";
 import { Observable } from "rxjs";
 import { Follower } from "./model/follower";
 import { Following } from "./model/following";
+import { Message } from "./model/message";
 
 @Injectable({
     providedIn: "root",
@@ -51,5 +52,15 @@ export class StakeholderService {
             UserSenderId: senderMessageID,
             UserReciverId: reciverMessageID,
         });
+    }
+
+    getMessages(
+        page: number,
+        pageSize: number,
+        receiverId: number,
+    ): Observable<PagedResults<Message>> {
+        return this.http.get<PagedResults<Message>>(
+            environment.apiHost + "messages/" + receiverId,
+        );
     }
 }

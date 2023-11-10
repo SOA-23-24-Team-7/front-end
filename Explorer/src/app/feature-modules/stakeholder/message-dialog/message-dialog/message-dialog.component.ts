@@ -1,8 +1,8 @@
 import { Component, Inject, Input, OnInit } from "@angular/core";
-import { StakeholderService } from "../../stakeholder.service";
 import { AuthService } from "src/app/infrastructure/auth/auth.service";
 import { MAT_DIALOG_DATA, MatDialogRef } from "@angular/material/dialog";
 import { User } from "src/app/infrastructure/auth/model/user.model";
+import { StakeholderService } from "../../stakeholder.service";
 export interface ModalData {
     user: User;
     reciverId: number;
