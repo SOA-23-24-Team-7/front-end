@@ -1,19 +1,25 @@
 <div class="request-key-point-card">
-    <div class="column">{{ request.keyPointName || "" }}</div>
-    <div class="column">{{ request.authorName }}</div>
-    <div class="column">
-        <div
-            [ngClass]="{
-                'status-0': request.status == 0,
-                'status-1': request.status == 1,
-                'status-2': request.status == 2
-            }"
-        >
+    <header
+        [ngClass]="{
+            pending: request.status == 0,
+            accepted: request.status == 1,
+            rejected: request.status == 2
+        }"
+    >
+        <div class="request-status">
             {{ getPublicStatusText(request.status) }}
         </div>
-    </div>
-
-    <div class="column created-date">
-        {{ request.created | date : "yyyy-MM-dd HH:mm:ss" }}
+        <div class="request-date">
+            {{ request.created | date : "dd/MM/yyyy,  HH:mm" }}
+        </div>
+    </header>
+    <hr />
+    <div class="text">
+        <div class="request-author">
+            <p>Requested by: {{ request.authorName }}</p>
+        </div>
+        <div class="request-keypoint">
+            <p>Keypoint: {{ request.keyPointName || "" }}</p>
+        </div>
     </div>
 </div>
