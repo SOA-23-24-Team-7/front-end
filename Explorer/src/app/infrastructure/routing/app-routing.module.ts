@@ -30,9 +30,11 @@ import { KeyPointsComponent } from "src/app/feature-modules/tour-authoring/key-p
 import { MyClubInvitationsComponent } from "src/app/feature-modules/marketplace/my-club-invitations/my-club-invitations.component";
 
 import { RequestViewComponent } from "src/app/feature-modules/administration/request-view/request-view.component";
-import { NotificationsComponent } from "src/app/feature-modules/marketplace/notifications/notifications.component";
 
 import { TourSearchComponent } from "src/app/feature-modules/marketplace/tour-search/tour-search.component";
+import { NotificationTabsComponent } from "src/app/feature-modules/stakeholder/notification-tabs/notification-tabs.component";
+import { KeypointsNotificationsComponent } from "src/app/feature-modules/marketplace/keypoints-notifications/keypoints-notifications.component";
+import { FacilitiesNotificationsComponent } from "src/app/feature-modules/marketplace/facilities-notifications/facilities-notifications.component";
 
 const routes: Routes = [
     { path: "", component: HomeComponent },
@@ -153,8 +155,8 @@ const routes: Routes = [
         canActivate: [AuthGuard],
     },
     {
-        path: "notifications",
-        component: NotificationsComponent,
+        path: "notification-tabs",
+        component: NotificationTabsComponent,
         canActivate: [AuthGuard],
     },
 

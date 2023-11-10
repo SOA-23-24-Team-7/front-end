@@ -1,5 +1,5 @@
 .notification-card {
-    width: 28rem;
+    width: 35rem;
     border: rgba(var(--clr-outline-contrast), 0.3) 0.1rem solid;
     border-radius: 1rem;
     box-shadow: 0 0 1rem rgba(var(--clr-outline-contrast), 0.5);
