@@ -4,9 +4,10 @@ import { PagedResults } from "src/app/shared/model/paged-results.model";
 import { Person } from "./model/person.model";
 import { environment } from "src/env/environment";
 import { Observable } from "rxjs";
-import { Follower } from "./model/follower";
-import { Following } from "./model/following";
 import { Message } from "./model/message";
+import { Follower } from "./model/follower.model";
+import { Following } from "./model/following.model";
+import { FollowerCreate } from "./model/followerCreate.model";
 
 @Injectable({
     providedIn: "root",
@@ -27,6 +28,18 @@ export class StakeholderService {
     getFollowings(): Observable<PagedResults<Following>> {
         return this.http.get<PagedResults<Following>>(
             environment.apiHost + "follower/followings",
+        );
+    }
+    deleteFollowing(id: number): Observable<Following> {
+        console.log("sdssddsdsds");
+        return this.http.delete<Following>(
+            environment.apiHost + "follower/" + id,
+        );
+    }
+    addFollowing(follow: FollowerCreate): Observable<FollowerCreate> {
+        return this.http.post<FollowerCreate>(
+            environment.apiHost + "follower",
+            follow,
         );
     }
     getByUserId(userId: number): Observable<Person> {
