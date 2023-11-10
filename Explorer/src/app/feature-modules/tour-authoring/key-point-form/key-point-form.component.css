@@ -1,13 +1,13 @@
 form {
     display: flex;
     flex-direction: row;
-    gap: 2rem;
-    padding-top: 3rem;
+    gap: 1rem;
+    padding-top: 1rem;
 }
 .hidden {
     visibility: hidden;
 }
-h1 {
+h2 {
     color: rgb(var(--clr-text));
     font-family: var(--fnt-header);
 }
@@ -16,7 +16,7 @@ h1 {
     flex: 1;
     display: flex;
     flex-direction: column;
-    width: 23rem;
+    width: 18rem;
 }
 
 input[type="file"] {
@@ -32,7 +32,7 @@ input[type="file"] {
 
 img {
     object-fit: contain;
-    width: 23rem;
+    width: 18rem;
     height: 22rem;
     background-color: rgba(var(--clr-primary-300), 1);
     align-self: center;
@@ -41,7 +41,7 @@ img {
 .image-form-field {
     display: flex;
     position: relative;
-    width: 23rem;
+    width: 18rem;
 }
 
 .image-form-field label {
