@@ -12,7 +12,9 @@ import { Facilities } from "../model/facilities.model";
 import {
     PublicFacilityRequest,
     PublicStatus,
-} from "../model/public-facility-request";
+} from "../model/public-facility-request.model";
+import { AuthService } from "src/app/infrastructure/auth/auth.service";
+import { Person } from "../../stakeholder/model/person.model";
 
 @Component({
     selector: "xp-facilities-form",
@@ -24,7 +26,10 @@ export class FacilitiesFormComponent implements OnChanges {
     @Input() facility: Facilities;
     @Input() shouldEdit: boolean = false;
 
-    constructor(private service: TourAuthoringService) {}
+    constructor(
+        private service: TourAuthoringService,
+        private authService: AuthService,
+    ) {}
 
     options = [
         { value: "0", label: "Restaurant" },
@@ -44,7 +49,10 @@ export class FacilitiesFormComponent implements OnChanges {
     newLatitude: number = 0;
     isAddButtonDisabled: boolean = true;
     isPublicChecked = false;
-
+    person: Person;
+    ngOnInit(): void {
+        this.getPerson();
+    }
     ngOnChanges(): void {
         this.facilitiesForm.reset();
         if (this.shouldEdit) {
@@ -97,6 +105,8 @@ export class FacilitiesFormComponent implements OnChanges {
                             facilityId: result.id as number,
                             status: PublicStatus.Pending,
                             // Dodajte komentar ako je potrebno
+                            authorName:
+                                this.person.name + " " + this.person.surname,
                         };
                         this.service
                             .addPublicFacilityRequest(request)
@@ -139,6 +149,14 @@ export class FacilitiesFormComponent implements OnChanges {
                 this.facilitiesUpdated.emit();
                 location.reload();
             },
+        });
+    }
+
+    getPerson(): void {
+        this.authService.user$.subscribe(user => {
+            this.service.getPerson(user.id).subscribe(result => {
+                this.person = result;
+            });
         });
     }
 }

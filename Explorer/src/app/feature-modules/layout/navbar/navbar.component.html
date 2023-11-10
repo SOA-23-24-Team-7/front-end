@@ -167,6 +167,17 @@
                 </div>
                 <div class="navbar-submenu">
                     <div
+                        class="navbar-submenu-item navbar-submenu-item-border-radius-top"
+                        [routerLink]="['tour-search']"
+                        *ngIf="user && user.role === 'tourist'"
+                    >
+                        <fa-icon
+                            class="navbar-submenu-item-icon"
+                            [icon]="faSearch"
+                        />
+                        <div class="navbar-submenu-item-text">Explore</div>
+                    </div>
+                    <div
                         class="navbar-submenu-item"
                         *ngIf="user && user.role === 'author'"
                         [routerLink]="['tours']"
@@ -439,6 +450,17 @@
                             [icon]="faStar"
                         />
                         <div class="navbar-submenu-item-text">Rate the app</div>
+                    </div>
+                    <div
+                        class="navbar-submenu-item"
+                        [routerLink]="['notifications']"
+                        *ngIf="user && (user.role === 'author')"
+                    >
+                        <fa-icon
+                            class="navbar-submenu-item-icon"
+                            [icon]="faStar"
+                        />
+                        <div class="navbar-submenu-item-text">My notifications</div>
                     </div>
                     <div
                         class="navbar-submenu-item"
