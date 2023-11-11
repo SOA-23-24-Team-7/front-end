@@ -1,10 +1,8 @@
 <div id="facilities">
-  <hr>
-  <p>Facilities</p>
-  <hr>
+  <h2 class="title">Add new facility</h2>
   <div id="facilities-details">
     <div>
-    <table>
+    <!--table>
       <thead>
         <tr>
           <th>Name</th>
@@ -46,23 +44,68 @@
             </button>
         </tr>
       </tbody>
-    </table>
+    </table-->
     </div>
     <div>
-      <xp-facilities-form *ngIf="shouldRenderFacilitiesForm" 
+      <div class="facility-form">
+      <xp-facilities-form 
                           (facilitesUpdated)="getFacilities()" 
                           [facility]="selectedFacility" 
                           [shouldEdit]="shouldEdit">
       </xp-facilities-form>
-      <hr>
+    </div>
       <button id="closeButton" 
               *ngIf="shouldRenderFacilitiesForm" 
               (click)="onCloseClicked()" 
               color="primary" 
+              class="done-submit"
               mat-raised-button
-              >Close
+              ><div class="done-submit-text">Close</div>
       </button>
     </div>
     <xp-map (click)="onMapClicked()" [canEdit]="true"></xp-map>
   </div>
+  <br><br>
+  <hr/>
+  <div class="cards">
+    <div class="row">
+        <div
+            class="list-cards-button"
+            id="prev-button"
+            (click)="scrollToPrevCard()"
+        >
+            <div class="triangle-left"></div>
+        </div>
+        <div class="facility-cards-container">
+            <div
+                *ngFor="let f of facilities"
+                class="cards-buttons-container"
+            >
+                <xp-facility-card [facility]="f"> </xp-facility-card>
+                <div class="buttons-container">
+                    <button
+                        (click)="onDeleteClicked(f)"
+                        mat-icon-button
+                    >
+                        <mat-icon>delete</mat-icon>
+                    </button>
+                    <button
+                        color="primary"
+                        (click)="onEditClicked(f)"
+                        mat-icon-button
+                    >
+                        <mat-icon>edit</mat-icon>
+                    </button>
+                </div>
+            </div>
+        </div>
+        <div
+            class="list-cards-button"
+            id="next-button"
+            (click)="scrollToNextCard()"
+        >
+            <div class="triangle-right"></div>
+        </div>
+        </div>
+        
 </div>
