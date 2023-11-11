@@ -291,8 +291,7 @@ export class MarketplaceService {
     }
     getShoppingCart(id: number): Observable<ShoppingCart> {
         return this.http.get<ShoppingCart>(
-            environment.apiHost +
-                "tourist/shoppingCart/" +id
+            environment.apiHost + "tourist/shoppingCart/" + id,
         );
     }
 }

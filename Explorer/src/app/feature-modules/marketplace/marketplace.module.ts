@@ -22,7 +22,6 @@ import { BrowserModule } from "@angular/platform-browser";
 import { TagInputModule } from "ngx-chips";
 import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
 import { FormsModule } from "@angular/forms";
-import { NotificationsComponent } from "./notifications/notifications.component";
 import { TourSearchComponent } from "./tour-search/tour-search.component";
 import { SharedModule } from "src/app/shared/shared.module";
 import { FontAwesomeModule } from "@fortawesome/angular-fontawesome";
@@ -49,10 +48,7 @@ import { PublishedToursComponent } from "./tours/published-tours.component";
         MyClubInvitationsComponent,
         TourPreferencesComponent,
         TourPreferenceFormComponent,
-        NotificationsComponent,
-
         TourSearchComponent,
-
         PublishedToursComponent,
     ],
     imports: [
@@ -79,7 +75,6 @@ import { PublishedToursComponent } from "./tours/published-tours.component";
         RatingFormComponent,
         ProblemComponent,
         TourPreferencesComponent,
-        TourPreferenceFormComponent,
         TourPreferenceFormComponent,
     ],
 })

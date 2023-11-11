@@ -18,6 +18,7 @@ import { TouristEquipmentSelectionComponent } from "./tourist-equipment-selectio
 import { RequestKeyPointCardComponent } from "./request-key-point-card/request-key-point-card.component";
 import { RequestFacilityCardComponent } from "./request-facility-card/request-facility-card.component";
 import { ReviewCardComponent } from "./review-cards/review-card.component";
+import { PublicKeypointNotificationCardComponent } from "./public-keypoint-notification-card/public-keypoint-notification-card.component";
 
 @NgModule({
     declarations: [
@@ -35,6 +36,7 @@ import { ReviewCardComponent } from "./review-cards/review-card.component";
         RequestKeyPointCardComponent,
         RequestFacilityCardComponent,
         ReviewCardComponent,
+        PublicKeypointNotificationCardComponent,
     ],
     imports: [
         CommonModule,
@@ -51,6 +53,7 @@ import { ReviewCardComponent } from "./review-cards/review-card.component";
         FooterComponent,
         TourCardComponent,
         ReviewCardComponent,
+        PublicKeypointNotificationCardComponent,
     ],
 })
 export class LayoutModule {}

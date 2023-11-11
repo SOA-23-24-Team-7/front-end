@@ -1,3 +1,6 @@
 export interface KeyPointNotification {
-    description:string;
+    description: string;
+    created: Date;
+    isAccepted: boolean;
+    comment?: string;
 }

@@ -18,6 +18,7 @@ import { KeyPointCardComponent } from "./key-point-card/key-point-card.component
 import { PublicKeyPointsComponent } from "./public-key-points/public-key-points.component";
 import { FontAwesomeModule } from "@fortawesome/angular-fontawesome";
 import { MatDialogModule } from "@angular/material/dialog";
+import { FacilityCardComponent } from './facility-card/facility-card.component';
 
 @NgModule({
     declarations: [
@@ -30,6 +31,7 @@ import { MatDialogModule } from "@angular/material/dialog";
         TourEquipmentFormComponent,
         KeyPointCardComponent,
         PublicKeyPointsComponent,
+        FacilityCardComponent,
     ],
     imports: [
         CommonModule,

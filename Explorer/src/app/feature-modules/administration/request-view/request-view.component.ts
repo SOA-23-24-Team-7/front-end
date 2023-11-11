@@ -42,8 +42,6 @@ export class RequestViewComponent implements OnInit {
                 this.service.getFacilityRequests().subscribe({
                     next: (result: PagedResults<PublicFacilityRequest>) => {
                         this.facilityRequests = result.results;
-                        this.sortKeyPointRequests();
-                        this.sortFacilityRequests();
                     },
                 });
             },
@@ -103,30 +101,6 @@ export class RequestViewComponent implements OnInit {
     rejectPublicFacilityRequest(request: PublicFacilityRequest): void {
         this.dialogRef.open(CommentRequestFormComponent, {
             data: request,
-        });
-    }
-
-    sortKeyPointRequests(): void {
-        this.requests = this.requests.sort((a, b) => {
-            if (a.status === 0 && b.status !== 0) {
-                return -1;
-            } else if (a.status !== 0 && b.status === 0) {
-                return 1;
-            } else {
-                return 0;
-            }
-        });
-    }
-
-    sortFacilityRequests(): void {
-        this.facilityRequests = this.facilityRequests.sort((a, b) => {
-            if (a.status === 0 && b.status !== 0) {
-                return -1;
-            } else if (a.status !== 0 && b.status === 0) {
-                return 1;
-            } else {
-                return 0;
-            }
         });
     }
 }

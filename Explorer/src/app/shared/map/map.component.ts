@@ -27,6 +27,7 @@ export class MapComponent implements AfterViewInit, OnChanges {
     private routeControl: L.Routing.Control;
     private refreshEventsSubscription: Subscription;
     private previousCommitted = false;
+<<<<<<< HEAD
     private positionMarker: L.Marker;
   private markerGroup = L.layerGroup(); 
   public facilitiesUsed: boolean = false;
@@ -61,6 +62,55 @@ export class MapComponent implements AfterViewInit, OnChanges {
     iconSize: [42, 42],
     iconAnchor: [16, 32],
     });
+=======
+
+    private positionMarker: L.Marker;
+    private markerGroup = L.layerGroup();
+
+    public facilitiesUsed: boolean = false;
+
+    //   private positionMarker: L.Marker;
+
+    public tourDistance: number = 0;
+
+    @Input() refreshEvents: Observable<number>;
+    @Input() selectedKeyPoint: KeyPoint | null;
+    @Input() canEdit = false;
+    @Input() height: string = "600px";
+    @Input() isKeyPointMap = false;
+    @Input() isPositionMap = false;
+    @Input() set startPosition(value: any) {
+        if (!value) return;
+        this.positionMarker = L.marker([value.latitude, value.longitude], {
+            icon: this.positionIcon,
+        }).addTo(this.map);
+    }
+    @Output() newLongLatEvent = new EventEmitter<[number, number]>();
+
+    constructor(private mapService: MapService) {}
+
+    private facilityIcon = L.icon({
+        iconUrl:
+            "https://cdn4.iconfinder.com/data/icons/small-n-flat/24/map-marker-512.png",
+        iconSize: [42, 42],
+        iconAnchor: [16, 32],
+    });
+
+    private publicKeyPointIcon = L.icon({
+        iconUrl:
+            "https://icon-library.com/images/map-marker-icon/map-marker-icon-18.jpg",
+        iconSize: [42, 42],
+        iconAnchor: [16, 32],
+    });
+
+    private positionIcon = L.icon({
+        iconUrl:
+            "https://images.emojiterra.com/google/android-pie/512px/1f535.png",
+        iconSize: [30, 30],
+        iconAnchor: [15, 15],
+    });
+
+>>>>>>> development
     ngOnInit() {
         if (!this.isKeyPointMap) return;
         this.refreshEventsSubscription = this.refreshEvents.subscribe(tourId =>
@@ -223,6 +273,7 @@ export class MapComponent implements AfterViewInit, OnChanges {
 
                 return;
             }
+<<<<<<< HEAD
             if (this.isPositionMap) {
                 if (this.positionMarker) {
                   this.positionMarker.remove();
@@ -230,6 +281,19 @@ export class MapComponent implements AfterViewInit, OnChanges {
                 this.positionMarker = L.marker([lat, lng], { icon: this.positionIcon }).addTo(this.map)
                 return;
               }
+=======
+
+            if (this.isPositionMap) {
+                if (this.positionMarker) {
+                    this.positionMarker.remove();
+                }
+                this.positionMarker = L.marker([lat, lng], {
+                    icon: this.positionIcon,
+                }).addTo(this.map);
+                return;
+            }
+
+>>>>>>> development
             console.log(
                 "You clicked the map at latitude: " +
                     lat +
