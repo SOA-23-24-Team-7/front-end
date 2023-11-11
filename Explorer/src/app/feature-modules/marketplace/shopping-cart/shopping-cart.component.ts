@@ -9,6 +9,11 @@ import {
 import { AuthService } from "src/app/infrastructure/auth/auth.service";
 import { Review } from "../../marketplace/model/review.model";
 import { ReviewCardComponent } from "../../layout/review-cards/review-card.component";
+import { User } from "src/app/infrastructure/auth/model/user.model";
+import { OrderItem } from "../model/order-item";
+import { Observable } from "rxjs";
+import { ShoppingCart } from "../model/shopping-cart";
+import { PagedResults } from "src/app/shared/model/paged-results.model";
 
 @Component({
     selector: "xp-shopping-cart",
@@ -16,6 +21,9 @@ import { ReviewCardComponent } from "../../layout/review-cards/review-card.compo
     styleUrls: ["./shopping-cart.component.css"],
 })
 export class ShoppingCartComponent {
+    user:User;
+    orderItem:OrderItem;
+    shoppingCart:ShoppingCart;
     constructor(
         private service: MarketplaceService,
         public dialogRef: MatDialog,
@@ -24,7 +32,7 @@ export class ShoppingCartComponent {
         @Inject(MAT_DIALOG_DATA) public data: any,
     ) {}
 
-    gOnInit(): void {
+    ngOnInit(): void {
         //enabling input
         /*console.log(this, this.inputTours);
       if (!this.inputTours || this.inputTours.length === 0)
@@ -47,6 +55,9 @@ export class ShoppingCartComponent {
               }
           })
       });*/
+      this.authService.user$.subscribe(user => {
+        this.user = user;
+      })
     }
     openDialog(input: Review[]) {
         console.log(input);
@@ -57,6 +68,22 @@ export class ShoppingCartComponent {
             data: {
                 reviews: input,
             },
+        });
+    }
+   removeOrderItem(tourId:number): void {
+        this.service.getOrderItem(tourId,this.user.id).subscribe({
+            next: (result: OrderItem) => {
+                this.orderItem = result;
+                this.service.removeOrderItem(this.orderItem.id,this.orderItem.shoppingCartId).subscribe({
+                    next: () => {
+                        this.service.getToursInCart(this.user.id).subscribe({
+                            next: (result: PagedResults<TourLimitedView>) => {
+                                this.data=result.results
+                            }
+                        });
+                    }
+                });
+            }
         });
     }
 }

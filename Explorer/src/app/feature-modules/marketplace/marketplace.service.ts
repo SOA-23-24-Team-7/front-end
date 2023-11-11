@@ -301,4 +301,14 @@ export class MarketplaceService {
             environment.apiHost + "market-place/tours/inCart/" + id,
         );
     }
+    getOrderItem(tourId:number,touristId:number): Observable<OrderItem> {
+        return this.http.get<OrderItem>(
+            environment.apiHost + "tourist/shoppingCart/getItem/"+tourId+"/"+touristId
+        );
+    }
+    removeOrderItem(id:number | undefined,shoppingCartId:number | undefined): any {
+        return this.http.delete<OrderItem>(
+            environment.apiHost + "tourist/shoppingCart/removeItem/"+id+"/"+shoppingCartId
+        );
+    }
 }
