@@ -1,0 +1,72 @@
+.image-container {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+}
+
+.list-cards-button:hover .triangle-left {
+    border-color: transparent rgba(var(--clr-primary-500), 0.95) transparent
+        transparent;
+}
+.list-cards-button:hover .triangle-right {
+    border-color: transparent transparent transparent
+        rgba(var(--clr-primary-500), 0.95);
+}
+
+.list-cards-button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    margin: 1rem;
+}
+
+.triangle-left,
+.triangle-right {
+    width: 0;
+    height: 0;
+    border-style: solid;
+}
+
+.triangle-left {
+    border-width: 2rem 2.2rem 2rem 0;
+    border-color: transparent rgba(var(--clr-primary-500), 1) transparent
+        transparent;
+}
+
+.triangle-right {
+    border-width: 2rem 0 2rem 2.2rem;
+    border-color: transparent transparent transparent
+        rgba(var(--clr-primary-500), 1);
+}
+.my-legend{
+    width: 20%;
+    border-top: solid;
+    position: absolute;
+    bottom: 50px;
+}
+.my-legend .legend-title {
+    text-align: left;
+    margin-bottom: 5px;
+    font-weight: bold;
+    font-size: larger;
+    }
+  .my-legend .legend-scale ul {
+    float: left;
+    }
+  .my-legend .legend-scale ul li {
+    font-size: 80%;
+    list-style: none;
+    margin-left: 0;
+    font-size: medium;
+    line-height: 28px;
+    }
+  .my-legend ul.legend-labels li span {
+    display: block;
+    float: left;
+    height: 40px;
+    width: 30px;
+    margin-right: 5px;
+    }

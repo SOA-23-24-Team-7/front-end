@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { TourExecutionService } from '../tour-execution.service';
 import { TouristPosition } from '../model/tourist-position.model';
 import { AuthService } from 'src/app/infrastructure/auth/auth.service';
@@ -12,7 +12,8 @@ import { User } from 'src/app/infrastructure/auth/model/user.model';
 export class TouristPositionSimulatorComponent implements OnInit {
 
   touristPosition: TouristPosition;
-
+  @Input() isTourExecutionMap = false;
+  @Input() tourId: any;
   constructor(private authService: AuthService, private service: TourExecutionService) { }
 
   ngOnInit(): void {

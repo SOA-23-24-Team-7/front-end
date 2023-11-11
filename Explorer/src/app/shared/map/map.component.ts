@@ -23,8 +23,6 @@ export class MapComponent implements AfterViewInit, OnChanges {
   
   public facilitiesUsed: boolean = false;
 
-  private positionMarker: L.Marker;
-
   public tourDistance: number = 0;
   
   @Input() refreshEvents: Observable<number>;
@@ -32,6 +30,8 @@ export class MapComponent implements AfterViewInit, OnChanges {
   @Input() canEdit = false;
   @Input() isKeyPointMap = false;
   @Input() isPositionMap = false;
+  @Input() isTourExecutionMap = false;
+  @Input() executingTourId = 0;
   @Input() set startPosition(value: any) {
     if (!value) return;
     this.positionMarker = L.marker([value.latitude, value.longitude], { icon: this.positionIcon }).addTo(this.map)
@@ -53,6 +53,10 @@ export class MapComponent implements AfterViewInit, OnChanges {
   });
 
   ngOnInit() {
+    if(this.isTourExecutionMap){
+      this.getTourKeyPoints(this.executingTourId)
+      return;
+    }
     if (!this.isKeyPointMap) return;
     this.refreshEventsSubscription = this.refreshEvents.subscribe(tourId => this.getTourKeyPoints(tourId));
   }

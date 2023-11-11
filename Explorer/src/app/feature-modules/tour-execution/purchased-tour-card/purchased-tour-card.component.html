@@ -6,7 +6,10 @@
             <div class="tour-tag" *ngFor="let tag of tour.tags">{{ tag }}</div>
         </div>
         <div>
-            €{{ tour.price }}
+            Difficulty: <b>{{ tour.difficulty }}</b>
+            <br>
+            Distance: <b>{{ tour.distance }}</b>
         </div>
+        <div class="btn search-button" (click)="StartTour()">Start tour</div>
     </div>
 </div>

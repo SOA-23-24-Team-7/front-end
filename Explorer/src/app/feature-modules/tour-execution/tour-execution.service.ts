@@ -18,6 +18,11 @@ export class TourExecutionService {
     );
 }
 
+  getTour(tourId : number): Observable<Tour> {
+  return this.http.get<Tour>(
+      environment.apiHost + "tourexecuting/tourexecution/" + tourId
+  );
+}
   addTouristPosition(touristPosition: TouristPosition): Observable<TouristPosition> {
     return this.http.post<TouristPosition>(environment.apiHost + 'tour-execution/tourists/position', touristPosition);
   }

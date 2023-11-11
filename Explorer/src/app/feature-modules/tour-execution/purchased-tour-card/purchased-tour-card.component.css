@@ -94,3 +94,12 @@ ista prica
     font-weight: 600;
     text-shadow: rgba(var(--clr-accent-500)) 1px 0 0.625rem;
 }
+
+.search-button {
+    border-radius: 2rem;
+    margin-left: auto;
+    height: 100%;
+    max-height: 100%;
+    font-size: 1.05rem;
+    font-weight: 500;
+}

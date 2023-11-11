@@ -32,6 +32,7 @@ import { TouristPositionSimulatorComponent } from 'src/app/feature-modules/tour-
 import { RequestViewComponent } from 'src/app/feature-modules/administration/request-view/request-view.component';
 import { PurchasedToursComponent } from 'src/app/feature-modules/tour-execution/purchased-tour-cards/purchased-tour-cards.component';
 import { PublishedToursComponent } from 'src/app/feature-modules/marketplace/tours/published-tours.component';
+import { TourExecutingComponent } from 'src/app/feature-modules/tour-execution/tour-executing/tour-executing.component';
 
 const routes: Routes = [
     { path: "", component: HomeComponent },
@@ -80,6 +81,12 @@ const routes: Routes = [
         component: TouristPositionSimulatorComponent,
         canActivate: [AuthGuard]
     },
+    {
+        path: 'tour-executing',
+        component: TourExecutingComponent,
+        canActivate: [AuthGuard]
+    },
+    
     {
         path: "user-management",
         component: UsersOverviewComponent,
