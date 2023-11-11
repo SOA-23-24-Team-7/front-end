@@ -1,0 +1,47 @@
+<div id="tour" class="container">
+    <p>Shopping cart</p>
+    <hr />
+    <div id="tour-details" class="tour-rectangles">
+        <div *ngFor="let pt of cartTours" class="tour-rectangle">
+            <div class="tour-info">
+                <p class="text"><strong>Name:</strong> {{ pt.name }}</p>
+                <p class="text">
+                    <strong>Description:</strong> {{ pt.description }}
+                </p>
+                <p class="text">
+                    <strong>Difficulty:</strong> {{ pt.difficulty }}
+                </p>
+                <p class="text"><strong>Tags:</strong> {{ pt.tags }}</p>
+                <p class="text"><strong>Price:</strong> {{ pt.price }}</p>
+                <p class="text">
+                    <strong>Distance:</strong> {{ pt.distance }} km
+                </p>
+                <p *ngIf="pt.keyPoint && pt.keyPoint" class="text">
+                    <strong>First key point name: </strong>
+                    {{ pt.keyPoint.name }}
+                </p>
+                <p *ngIf="pt.keyPoint && pt.keyPoint" class="text">
+                    <strong>First key point description: </strong>
+                    {{ pt.keyPoint.description }}
+                </p>
+                <p *ngIf="pt.keyPoint && pt.keyPoint" class="text">
+                    <strong>First key point location: </strong>
+                    {{ pt.keyPoint.locationAddress }}
+                </p>
+            </div>
+            <div class="tour-buttons">
+                <button color="accent" (click)="openDialog(pt.reviews || [])">
+                    Reviews
+                </button>
+            </div>
+            <div class="tour-buttons">
+                <button
+                    color="accent"
+                    (click)="removeOrderItem(pt.id, pt.name, pt.price)"
+                >
+                    Remove
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
