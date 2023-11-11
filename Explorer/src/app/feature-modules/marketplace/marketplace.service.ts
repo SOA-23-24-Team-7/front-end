@@ -21,6 +21,8 @@ import { KeyPointNotification } from "./model/keypoint-notification";
 import { PublicKeyPoint } from "./model/public-key-point.model";
 import { PublicFacilities } from "./model/public-facilities.model";
 import { KeyPoint } from "../tour-authoring/model/key-point.model";
+import { ShoppingCart } from "./model/shopping-cart";
+import { OrderItem } from "./model/order-item";
 
 @Injectable({
     providedIn: "root",
@@ -273,6 +275,24 @@ export class MarketplaceService {
                 "market-place/tours/" +
                 tourId +
                 "/first-key-point",
+        );
+    }
+    addShoppingCart(shoppingCart: ShoppingCart): Observable<ShoppingCart> {
+        return this.http.post<ShoppingCart>(
+            environment.apiHost + "tourist/shoppingCart/",
+            shoppingCart,
+        );
+    }
+    addOrderItem(orderItem: OrderItem): Observable<OrderItem> {
+        return this.http.post<OrderItem>(
+            environment.apiHost + "tourist/shoppingCart/addItem/",
+            orderItem,
+        );
+    }
+    getShoppingCart(id: number): Observable<ShoppingCart> {
+        return this.http.get<ShoppingCart>(
+            environment.apiHost +
+                "tourist/shoppingCart/" +id
         );
     }
 }
