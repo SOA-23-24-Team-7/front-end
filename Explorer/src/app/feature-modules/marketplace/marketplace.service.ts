@@ -23,6 +23,7 @@ import { PublicFacilities } from "./model/public-facilities.model";
 import { KeyPoint } from "../tour-authoring/model/key-point.model";
 import { ShoppingCart } from "./model/shopping-cart";
 import { OrderItem } from "./model/order-item";
+import { TourLimitedView } from "./model/tour-limited-view.model";
 
 @Injectable({
     providedIn: "root",
@@ -292,6 +293,12 @@ export class MarketplaceService {
     getShoppingCart(id: number): Observable<ShoppingCart> {
         return this.http.get<ShoppingCart>(
             environment.apiHost + "tourist/shoppingCart/" + id,
+        );
+    }
+
+    getToursInCart(id: number): Observable<PagedResults<Tour>> {
+        return this.http.get<PagedResults<TourLimitedView>>(
+            environment.apiHost + "market-place/tours/inCart/" + id,
         );
     }
 }

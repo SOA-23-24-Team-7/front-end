@@ -7,6 +7,8 @@ import {
     MatDialogRef,
 } from "@angular/material/dialog";
 import { AuthService } from "src/app/infrastructure/auth/auth.service";
+import { Review } from "../../marketplace/model/review.model";
+import { ReviewCardComponent } from "../../layout/review-cards/review-card.component";
 
 @Component({
     selector: "xp-shopping-cart",
@@ -14,10 +16,6 @@ import { AuthService } from "src/app/infrastructure/auth/auth.service";
     styleUrls: ["./shopping-cart.component.css"],
 })
 export class ShoppingCartComponent {
-    @Input() inputTours: TourLimitedView[];
-    @Output() onRemove = new EventEmitter<null>();
-    cartTours: TourLimitedView[] = [];
-
     constructor(
         private service: MarketplaceService,
         public dialogRef: MatDialog,
@@ -49,5 +47,16 @@ export class ShoppingCartComponent {
               }
           })
       });*/
+    }
+    openDialog(input: Review[]) {
+        console.log(input);
+        const dialogRef = this.dialogRef.open(ReviewCardComponent, {
+            //data: this.listaJavnihTacaka, // lista javnih tacaka koju dobijam u ovoj komponenti i ovim je saljem u modalni dijalog
+            height: "400px",
+            width: "600px",
+            data: {
+                reviews: input,
+            },
+        });
     }
 }

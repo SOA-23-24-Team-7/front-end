@@ -11,6 +11,7 @@ import { ShoppingCart } from "../model/shopping-cart";
 import { OrderItem } from "../model/order-item";
 import { AuthService } from "src/app/infrastructure/auth/auth.service";
 import { User } from "src/app/infrastructure/auth/model/user.model";
+import { ShoppingCartComponent } from "../shopping-cart/shopping-cart.component";
 
 @Component({
     selector: "xp-published-tours",
@@ -21,13 +22,14 @@ export class PublishedToursComponent implements OnInit {
     @Input() inputTours: TourLimitedView[];
     publishedTours: TourLimitedView[] = [];
     user: User;
+    addedTours: TourLimitedView[] = [];
+
     constructor(
         private service: MarketplaceService,
         public dialogRef: MatDialog,
-        private authService: AuthService
+        private authService: AuthService,
     ) {}
-    shoppingCart : ShoppingCart={
-    }
+    shoppingCart: ShoppingCart = {};
     ngOnInit(): void {
         //enabling input
         console.log(this, this.inputTours);
@@ -37,19 +39,21 @@ export class PublishedToursComponent implements OnInit {
         this.authService.user$.subscribe(user => {
             this.user = user;
             this.service.getShoppingCart(this.user.id).subscribe({
-                next:(result:ShoppingCart)=>{
-                    this.shoppingCart=result
-                    console.log(result)
-                    if(result==null){
-                        this.shoppingCart={}
-                        this.service.addShoppingCart(this.shoppingCart).subscribe({
-                            next: (result: ShoppingCart) => {
-                                this.shoppingCart = result;
-                            }
-                        })
+                next: (result: ShoppingCart) => {
+                    this.shoppingCart = result;
+                    console.log(result);
+                    if (result == null) {
+                        this.shoppingCart = {};
+                        this.service
+                            .addShoppingCart(this.shoppingCart)
+                            .subscribe({
+                                next: (result: ShoppingCart) => {
+                                    this.shoppingCart = result;
+                                },
+                            });
                     }
-                }
-            })
+                },
+            });
         });
     }
 
@@ -78,20 +82,35 @@ export class PublishedToursComponent implements OnInit {
             },
         });
     }
-    addOrderItem(tourId:number | undefined,name:string,price:number|undefined): void {
-        const orderItem: OrderItem = {  
+    addOrderItem(
+        tourId: number | undefined,
+        name: string,
+        price: number | undefined,
+    ): void {
+        const orderItem: OrderItem = {
             tourId: tourId,
             tourName: name,
-            price:price,
+            price: price,
             shoppingCartId: this.shoppingCart.id,
-          }
-        console.log(orderItem)
+        };
+        console.log(orderItem);
         this.service.addOrderItem(orderItem).subscribe({
-            next: (result: OrderItem) => {
-                
-            },
+            next: (result: OrderItem) => {},
             error: (err: any) => {
                 console.log(err);
+            },
+        });
+    }
+
+    openCartDialog() {
+        this.service.getToursInCart(this.user.id).subscribe({
+            next: (result: PagedResults<TourLimitedView>) => {
+                this.addedTours = result.results;
+                const dialogRef = this.dialogRef.open(ShoppingCartComponent, {
+                    height: "400px",
+                    width: "600px",
+                    data: this.addedTours, // lista javnih tacaka koju dobijam u ovoj komponenti i ovim je saljem u modalni dijalog
+                });
             },
         });
     }

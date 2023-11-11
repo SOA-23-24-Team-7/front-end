@@ -1,4 +1,7 @@
 <div id="tour" class="container">
+    <button class="add-enable" (click)="openCartDialog()" mat-button>
+        <div class="enable-text">Show cart</div>
+    </button>
     <p>Published tours:</p>
     <hr />
     <div id="tour-details" class="tour-rectangles">
@@ -35,7 +38,10 @@
                 </button>
             </div>
             <div class="tour-buttons">
-                <button color="accent" (click)="addOrderItem(pt.id,pt.name,pt.price)">
+                <button
+                    color="accent"
+                    (click)="addOrderItem(pt.id, pt.name, pt.price)"
+                >
                     Add to cart
                 </button>
             </div>

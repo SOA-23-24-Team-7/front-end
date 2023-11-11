@@ -26,7 +26,10 @@ import { TourSearchComponent } from "./tour-search/tour-search.component";
 import { SharedModule } from "src/app/shared/shared.module";
 import { FontAwesomeModule } from "@fortawesome/angular-fontawesome";
 import { LayoutModule } from "src/app/feature-modules/layout/layout.module";
+import { KeypointsNotificationsComponent } from "./keypoints-notifications/keypoints-notifications.component";
+import { FacilitiesNotificationsComponent } from "./facilities-notifications/facilities-notifications.component";
 import { PublishedToursComponent } from "./tours/published-tours.component";
+import { ShoppingCartComponent } from './shopping-cart/shopping-cart.component';
 
 @NgModule({
     declarations: [
@@ -48,8 +51,11 @@ import { PublishedToursComponent } from "./tours/published-tours.component";
         MyClubInvitationsComponent,
         TourPreferencesComponent,
         TourPreferenceFormComponent,
-        TourSearchComponent,
         PublishedToursComponent,
+        TourSearchComponent,
+        KeypointsNotificationsComponent,
+        FacilitiesNotificationsComponent,
+        ShoppingCartComponent,
     ],
     imports: [
         CommonModule,
@@ -76,6 +82,8 @@ import { PublishedToursComponent } from "./tours/published-tours.component";
         ProblemComponent,
         TourPreferencesComponent,
         TourPreferenceFormComponent,
+        KeypointsNotificationsComponent,
+        FacilitiesNotificationsComponent,
     ],
 })
 export class MarketplaceModule {}
