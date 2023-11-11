@@ -78,6 +78,7 @@ export class PublicKeyPointsComponent implements OnInit {
             .addPublicKeyPoint(this.data.tourId, publicKeyPointId)
             .subscribe({
                 next: _ => {
+                    console.log("USAO U METODU");
                     this.onAdd.emit();
                     let idx = this.publicKeyPoints.findIndex(
                         d => d.id == publicKeyPointId,

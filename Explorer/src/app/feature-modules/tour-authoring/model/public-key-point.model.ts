@@ -6,4 +6,5 @@ export interface PublicKeyPoint {
     latitude: number;
     imagePath: string;
     order: number;
+    locationAddress?: string;
 }
