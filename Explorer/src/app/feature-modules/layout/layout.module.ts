@@ -10,11 +10,14 @@ import { FooterComponent } from "./footer/footer.component";
 import { HomeTabsComponent } from "./home-tabs/home-tabs.component";
 import { FontAwesomeModule } from "@fortawesome/angular-fontawesome";
 import { ClubCardsComponent } from "./club-cards/club-cards.component";
-import { MatDialogModule } from '@angular/material/dialog';
-import { TourCardComponent } from './tour-card/tour-card.component';
-import { BlogCardComponent } from './blog-card/blog-card.component';
-import { ClubCardComponent } from './club-card/club-card.component';
-import { TouristEquipmentSelectionComponent } from './tourist-equipment-selection/tourist-equipment-selection.component';
+import { MatDialogModule } from "@angular/material/dialog";
+import { TourCardComponent } from "./tour-card/tour-card.component";
+import { BlogCardComponent } from "./blog-card/blog-card.component";
+import { ClubCardComponent } from "./club-card/club-card.component";
+import { TouristEquipmentSelectionComponent } from "./tourist-equipment-selection/tourist-equipment-selection.component";
+import { RequestKeyPointCardComponent } from "./request-key-point-card/request-key-point-card.component";
+import { RequestFacilityCardComponent } from "./request-facility-card/request-facility-card.component";
+import { PublicKeypointNotificationCardComponent } from "./public-keypoint-notification-card/public-keypoint-notification-card.component";
 
 @NgModule({
     declarations: [
@@ -29,8 +32,25 @@ import { TouristEquipmentSelectionComponent } from './tourist-equipment-selectio
         BlogCardComponent,
         ClubCardComponent,
         TouristEquipmentSelectionComponent,
+        RequestKeyPointCardComponent,
+        RequestFacilityCardComponent,
+        PublicKeypointNotificationCardComponent,
     ],
-    imports: [CommonModule, MaterialModule, RouterModule, FontAwesomeModule, MatDialogModule],
-    exports: [NavbarComponent, HomeComponent, FooterComponent, TourCardComponent ],
+    imports: [
+        CommonModule,
+        MaterialModule,
+        RouterModule,
+        FontAwesomeModule,
+        MatDialogModule,
+    ],
+    exports: [
+        NavbarComponent,
+        HomeComponent,
+        RequestKeyPointCardComponent,
+        RequestFacilityCardComponent,
+        FooterComponent,
+        TourCardComponent,
+        PublicKeypointNotificationCardComponent,
+    ],
 })
 export class LayoutModule {}

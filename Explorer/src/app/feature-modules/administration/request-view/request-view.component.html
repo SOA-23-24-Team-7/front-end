@@ -1,0 +1,56 @@
+<div class="container">
+    <div class="column">
+        <h2>Public keypoint requests</h2>
+        <div class="cards-list">
+            <div
+                *ngFor="let request of requests"
+                class="cards-buttons-container"
+            >
+                <xp-request-key-point-card
+                    [request]="request"
+                ></xp-request-key-point-card>
+                <div class="buttons-container">
+                    <fa-icon
+                        class="fa-accept"
+                        [icon]="faCheck"
+                        *ngIf="request.status == 0"
+                        (click)="acceptPublicKeyPointRequest(request)"
+                    ></fa-icon>
+                    <fa-icon
+                        class="fa-reject"
+                        [icon]="faTimes"
+                        *ngIf="request.status == 0"
+                        (click)="rejectPublicKeyPointRequest(request)"
+                    ></fa-icon>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="column">
+        <h2>Public facility requests</h2>
+        <div class="cards-list">
+            <div
+                *ngFor="let request of facilityRequests"
+                class="cards-buttons-container"
+            >
+                <xp-request-facility-card
+                    [request]="request"
+                ></xp-request-facility-card>
+                <div class="buttons-container">
+                    <fa-icon
+                        class="fa-accept"
+                        [icon]="faCheck"
+                        *ngIf="request.status == 0"
+                        (click)="acceptPublicFacilityRequest(request)"
+                    ></fa-icon>
+                    <fa-icon
+                        class="fa-reject"
+                        [icon]="faTimes"
+                        *ngIf="request.status == 0"
+                        (click)="rejectPublicFacilityRequest(request)"
+                    ></fa-icon>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

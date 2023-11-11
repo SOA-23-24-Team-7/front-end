@@ -1,60 +1,153 @@
-<div id="key-points">
-    <p>Key points</p>
-    <hr>
-    <div id="key-point-details" class="container">
-        <div id="one">
-            <!--mat-card class="example-card" *ngFor="let kp of keyPoints">
-                <mat-card-header>
-                    <mat-card-title>{{kp.name}}</mat-card-title>
-                </mat-card-header>
-                <img mat-card-image [src]="getImagePath(kp.imagePath)" alt="Tour image">
-                <mat-card-content>
-                    <p>
-                        {{kp.description}}
-                    </p>
-                </mat-card-content>
-                <mat-card-actions>
-                    <button color="accent" (click)="deleteKeyPoint(kp.id || 0)" mat-icon-button>
-                        <mat-icon>delete</mat-icon>
-                    </button>
-                    <button color="primary" (click)="onEditClicked(kp)" mat-icon-button>
-                        <mat-icon>edit</mat-icon>
-                    </button>
-                </mat-card-actions>
-            </mat-card-->
-            <table>
-                <thead>
-                    <tr>
-                        <th></th>
-                        <th>Name</th>
-                        <th></th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr *ngFor="let kp of keyPoints">
-                        <td></td>
-                        <td>{{kp.name}}</td>
-                        <td>
-                            <button color="accent" (click)="deleteKeyPoint(kp.id || 0)" mat-icon-button>
-                                <mat-icon>delete</mat-icon>
-                            </button>
-                            <button color="primary" (click)="onEditClicked(kp)"  mat-icon-button>
-                                <mat-icon>edit</mat-icon>
-                            </button>
-                        </td>
-                    </tr>
-                    <tr><button color="primary" (click)="onAddClicked()" mat-icon-button>
-                        <mat-icon>add</mat-icon>
-                    </button></tr>
-                </tbody>
-            </table>
+<button class="add-enable" (click)="onAddClicked()" mat-button>
+    <div class="enable-text">Enable map</div>
+</button>
+<button class="add-enable" (click)="openDialog()" mat-button>
+    <div class="enable-text">Add public key-point</div>
+</button>
+
+<div class="container">
+    <div class="row-1">
+        <div class="column">
+            <div class="map-container">
+                <xp-map
+                    [height]="'22rem'"
+                    [isKeyPointMap]="true"
+                    [refreshEvents]="refreshEventsSubject"
+                    (newLongLatEvent)="mapLongLat = $event"
+                    [selectedKeyPoint]="selectedKeyPoint"
+                    [canEdit]="shouldRenderKeyPointForm"
+                ></xp-map>
+            </div>
         </div>
-        <div id="two">
-            <xp-map [isKeyPointMap]="true" [refreshEvents]="refreshEventsSubject" (newLongLatEvent)="mapLongLat = $event" [selectedKeyPoint]="selectedKeyPoint" [canEdit]="shouldRenderKeyPointForm"></xp-map>
+        <div class="column">
+            <div class="key-point-form">
+                <xp-key-point-form
+                    [shouldEdit]="shouldEdit"
+                    [longLat]="mapLongLat"
+                    [keyPoint]="selectedKeyPoint"
+                    (keyPointUpdated)="getKeyPoints()"
+                ></xp-key-point-form>
+            </div>
         </div>
-        <div id="three">
-            <xp-key-point-form *ngIf="shouldRenderKeyPointForm" [shouldEdit]="shouldEdit" [longLat]="mapLongLat" [keyPoint]="selectedKeyPoint"
-                (keyPointUpdated)="getKeyPoints(); shouldRenderKeyPointForm = false"></xp-key-point-form>
+        <div class="column-separated">
+            <h2>Choose transport</h2>
+            <div class="chechboxes">
+                <br />
+                <div>
+                    <mat-label *ngIf="areButtonsEnabled" class="text"
+                        >Choose types of transport:
+                    </mat-label>
+                    <mat-label *ngIf="!areButtonsEnabled" class="text"
+                        >Chosen types of transportation:
+                    </mat-label>
+                </div>
+                <div>
+                    <table *ngIf="!areButtonsEnabled">
+                        <tr *ngIf="checkedWalkingDuration">
+                            <td>
+                                <mat-label>Walking</mat-label>
+                            </td>
+                            <td>{{ walkingDuration }} minutes</td>
+                        </tr>
+                        <tr *ngIf="checkedBicycleRideDuration">
+                            <td>
+                                <mat-label>Bicycle ride</mat-label>
+                            </td>
+                            <td>{{ bicycleRideDuration }} minutes</td>
+                        </tr>
+                        <tr *ngIf="checkedCarRideDuration">
+                            <td>
+                                <mat-label>Car ride</mat-label>
+                            </td>
+                            <td>{{ carRideDuration }} minutes</td>
+                        </tr>
+                    </table>
+                    <br />
+                    <table *ngIf="areButtonsEnabled" [formGroup]="checkBoxForm">
+                        <tr>
+                            <td>
+                                <mat-label>Walking</mat-label>
+                            </td>
+                            <td>
+                                <input
+                                    formControlName="onFootChecked"
+                                    type="checkbox"
+                                />
+                            </td>
+                            <td>{{ walkingDuration }} minutes</td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <mat-label>Bicycle ride</mat-label>
+                            </td>
+                            <td>
+                                <input
+                                    formControlName="bicycleRideChecked"
+                                    type="checkbox"
+                                />
+                            </td>
+                            <td>{{ bicycleRideDuration }} minutes</td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <mat-label>Car ride</mat-label>
+                            </td>
+                            <td>
+                                <input
+                                    formControlName="carRideChecked"
+                                    type="checkbox"
+                                />
+                            </td>
+                            <td>{{ carRideDuration }} minutes</td>
+                        </tr>
+                    </table>
+                </div>
+                <button class="done-submit" (click)="onBackClicked()">
+                    <div class="done-submit-text">Choose</div>
+                </button>
+            </div>
+        </div>
+    </div>
+    <hr />
+    <div class="cards">
+        <div class="row-2">
+            <div
+                class="list-cards-button"
+                id="prev-button"
+                (click)="scrollToPrevCard()"
+            >
+                <div class="triangle-left"></div>
+            </div>
+            <div class="key-point-cards-container">
+                <div
+                    *ngFor="let kp of keyPoints"
+                    class="cards-buttons-container"
+                >
+                    <xp-key-point-card [keyPoint]="kp"> </xp-key-point-card>
+                    <div class="buttons-container">
+                        <button
+                            (click)="deleteKeyPoint(kp.id || 0)"
+                            mat-icon-button
+                        >
+                            <mat-icon>delete</mat-icon>
+                        </button>
+                        <button
+                            color="primary"
+                            (click)="onEditClicked(kp)"
+                            mat-icon-button
+                        >
+                            <mat-icon>edit</mat-icon>
+                        </button>
+                    </div>
+                </div>
+            </div>
+            <div
+                class="list-cards-button"
+                id="next-button"
+                (click)="scrollToNextCard()"
+            >
+                <div class="triangle-right"></div>
+            </div>
         </div>
     </div>
 </div>

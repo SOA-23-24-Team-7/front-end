@@ -1,0 +1,25 @@
+<div class="request-key-point-card">
+    <header
+        [ngClass]="{
+            pending: request.status == 0,
+            accepted: request.status == 1,
+            rejected: request.status == 2
+        }"
+    >
+        <div class="request-status">
+            {{ getPublicStatusText(request.status) }}
+        </div>
+        <div class="request-date">
+            {{ request.created | date : "dd/MM/yyyy,  HH:mm" }}
+        </div>
+    </header>
+    <hr />
+    <div class="text">
+        <div class="request-author">
+            <p>Requested by: {{ request.authorName }}</p>
+        </div>
+        <div class="request-keypoint">
+            <p>Facility: {{ request.facilityName || "" }}</p>
+        </div>
+    </div>
+</div>
