@@ -1,0 +1,43 @@
+<div class="tour-search">
+    <div class="tour-search-header">
+        <div class="tour-search-header-title">Tour search</div>
+        <div class="tour-search-header-paragraph">
+            Welcome to our tour search page, your gateway to unforgettable travel experiences. Whether you're an adventure seeker, a history enthusiast or simply looking to relax and unwind, our tour search feature is here to help you discover the perfect journey. Explore a wide range of destinations, from exotic getaways to local gems, and find tours tailored to your interests and preferences.
+        </div>
+    </div>
+    <div class="tour-search-body">
+        <div class="tour-search-filters">
+            <div class="tour-search-button" (click)="onSearch()">
+                <div class="tour-search-button-text">Search</div>
+            </div>
+            <div class="tour-search-filters-head">
+                <fa-icon
+                        class="tour-filters-head-icon"
+                        [icon]="faFilter"
+                />
+                <div class="tour-filters-head-text">Filters</div>
+            </div>
+            <div class="tour-seach-filter-section">
+                <div class="tour-seach-filter-section-title">Location</div>
+                <div class="tour-seach-filter-section-body">
+                    <div class="tour-search-map-distance-labels">
+                        <div class="tour-search-map-distance-min">0m</div>
+                        <div class="tour-search-map-distance-value">{{distance}}m</div>
+                        <div class="tour-search-map-distance-max">20000m</div>
+                    </div>
+                    <input id="slider" class="tour-search-map-distance" type="range" name="slider" min="0" max="20000" value="50" step="100" [(ngModel)]="distance">
+                    <div class="tour-search-map">
+                        <xp-map [height]="'20rem'" [canEdit]="true" (click)="onMapClicked()"></xp-map>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="tour-search-results">
+            <div class="tour-search-results-count">{{count}} tours found</div>
+            <div class="tour-search-results-card-panel">
+                <xp-tour-card [tour]="tour" *ngFor="let tour of tours"></xp-tour-card>
+            </div>
+        </div>
+        <div class="tour-search-tours"></div>
+    </div>
+</div>

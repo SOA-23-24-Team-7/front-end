@@ -7,16 +7,17 @@ import { Observable } from "rxjs";
 import { environment } from "src/env/environment";
 import { KeyPoint } from "./model/key-point.model";
 import { Facilities } from "./model/facilities.model";
-import { PublicKeyPointRequest } from "./model/public-key-point-request";
-import { PublicFacilityRequest } from "./model/public-facility-request";
+import { PublicKeyPointRequest } from "./model/public-key-point-request.model";
+import { PublicFacilityRequest } from "./model/public-facility-request.model";
+import { PublicKeyPoint } from "./model/public-key-point.model";
+import { Person } from "../stakeholder/model/person.model";
 
 @Injectable({
     providedIn: "root",
 })
 export class TourAuthoringService {
-    
     constructor(private http: HttpClient) {}
-    
+
     getTours(): Observable<PagedResults<Tour>> {
         return this.http.get<PagedResults<Tour>>(
             "https://localhost:44333/api/tour/authors",
@@ -161,9 +162,13 @@ export class TourAuthoringService {
         );
     }
 
-    getTour(tourId : number): Observable<Tour> {
-        return this.http.get<Tour>(
-            environment.apiHost + "tour/" + tourId
+    getTour(tourId: number): Observable<Tour> {
+        return this.http.get<Tour>(environment.apiHost + "tour/" + tourId);
+    }
+
+    getPublicKeyPoints(): Observable<PagedResults<PublicKeyPoint>> {
+        return this.http.get<PagedResults<PublicKeyPoint>>(
+            environment.apiHost + "author/publicKeyPoint",
         );
     }
 
@@ -177,6 +182,26 @@ export class TourAuthoringService {
         return this.http.put<Tour>(
             environment.apiHost + "tour/archive/" + tour.id,
             tour,
+        );
+    }
+
+    addPublicKeyPoint(
+        tourId: number,
+        publicKeyPointId: number,
+    ): Observable<KeyPoint> {
+        return this.http.post<KeyPoint>(
+            environment.apiHost +
+                "author/publicKeyPoint/addPrivate/" +
+                tourId +
+                "/" +
+                publicKeyPointId,
+            {},
+        );
+    }
+
+    getPerson(userId: number): Observable<Person> {
+        return this.http.get<Person>(
+            environment.apiHost + "people/person/" + userId,
         );
     }
 }

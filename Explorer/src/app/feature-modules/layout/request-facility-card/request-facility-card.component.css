@@ -1,0 +1,84 @@
+.request-key-point-card {
+    width: 28rem;
+    border: rgba(var(--clr-outline-contrast), 0.3) 0.1rem solid;
+    border-radius: 1rem;
+    box-shadow: 0 0 1rem rgba(var(--clr-outline-contrast), 0.5);
+    padding: 0.625rem;
+    margin: 20px;
+    transition: transform 0.2s;
+    color: rgb(var(--clr-text));
+    font-family: var(--fnt-body);
+    font-size: 1rem;
+    transition: transform 0.3s;
+}
+.request-key-point-card:hover {
+    background-color: rgba(var(--clr-background-secondary), 0.6);
+}
+
+.accepted {
+    height: 1.5rem;
+    background-color: rgba(var(--clr-success-500), 0.7);
+    border: transparent 1px solid;
+    border-radius: 1rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    color: white;
+}
+.pending {
+    height: 1.5rem;
+    background-color: rgba(var(--clr-neutral-500), 0.4);
+    border: transparent 1px solid;
+    border-radius: 1rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    color: white;
+}
+.rejected {
+    height: 1.5rem;
+    background-color: rgba(var(--clr-error-500), 0.7);
+    border: transparent 1px solid;
+    border-radius: 1rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    color: white;
+}
+
+.request-date {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    padding-right: 0.4rem;
+}
+
+.request-status {
+    padding-left: 0.4rem;
+}
+
+.request-author {
+    padding: 0.625rem 0 0 0.4rem;
+    text-wrap: wrap;
+    word-wrap: break-word;
+}
+
+.request-keypoint {
+    padding: 0.625rem 0 0 0.4rem;
+    text-wrap: wrap;
+    word-wrap: break-word;
+}
+
+.text {
+    background-color: rgba(var(--clr-background-secondary));
+    border: transparent 1px solid;
+    border-radius: 0 0 1rem 1rem;
+}
+
+hr {
+    height: 3px;
+    background-color: rgba(var(--clr-background-secondary));
+    border: none;
+    border-radius: 5px;
+    margin-top: 5px;
+}

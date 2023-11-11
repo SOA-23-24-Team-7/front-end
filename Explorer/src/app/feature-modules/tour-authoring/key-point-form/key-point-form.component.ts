@@ -16,7 +16,10 @@ import { KeyPoint } from "../model/key-point.model";
 import {
     PublicKeyPointRequest,
     PublicStatus,
-} from "../model/public-key-point-request";
+} from "../model/public-key-point-request.model";
+
+import { AuthService } from "src/app/infrastructure/auth/auth.service";
+import { Person } from "../../stakeholder/model/person.model";
 import { MapService } from "src/app/shared/map/map.service";
 
 @Component({
@@ -32,18 +35,22 @@ export class KeyPointFormComponent implements OnChanges {
     tourImage: string | null = null;
     tourImageFile: File | null = null;
     //isPublicChecked = false;
+    person: Person;
 
     constructor(
         private route: ActivatedRoute,
         private service: TourAuthoringService,
-        private mapService: MapService
+        private authService: AuthService,
+        private mapService: MapService,
     ) {}
-
+    ngOnInit(): void {
+        this.getPerson();
+    }
     ngOnChanges(changes: SimpleChanges): void {
         if (changes["longLat"] && !changes["longLat"].isFirstChange()) {
             this.keyPointForm.patchValue({
                 longitude: this.longLat[0],
-                latitude: this.longLat[1]
+                latitude: this.longLat[1],
             });
             return;
         }
@@ -96,43 +103,68 @@ export class KeyPointFormComponent implements OnChanges {
                                 this.keyPointForm.value.description || "",
                             longitude: this.keyPointForm.value.longitude || 0,
                             latitude: this.keyPointForm.value.latitude || 0,
-                            locationAddress: this.keyPointForm.value.address || "",
+                            locationAddress:
+                                this.keyPointForm.value.address || "",
                             imagePath: imagePath,
                             order: 0,
                         };
                         // Get Key Points location address
-                        this.mapService.reverseSearch(keyPoint.latitude, keyPoint.longitude).subscribe((res) => {
-                            const addressInfo = {
-                                number: "",
-                                street: "",
-                                city: "",
-                                postalCode: "",
-                                country: "",
-                              };
+                        this.mapService
+                            .reverseSearch(
+                                keyPoint.latitude,
+                                keyPoint.longitude,
+                            )
+                            .subscribe(res => {
+                                const addressInfo = {
+                                    number: "",
+                                    street: "",
+                                    city: "",
+                                    postalCode: "",
+                                    country: "",
+                                };
 
-                            let addressParts = res.display_name.split(",");
+                                let addressParts = res.display_name.split(",");
 
-                            this.setAddressInfo(addressInfo, addressParts);
-                            let concatenatedAddress = addressInfo.number + " " + addressInfo.street + " " + addressInfo.city + " " + addressInfo.postalCode + " " + addressInfo.country;
+                                this.setAddressInfo(addressInfo, addressParts);
+                                let concatenatedAddress =
+                                    addressInfo.number +
+                                    " " +
+                                    addressInfo.street +
+                                    " " +
+                                    addressInfo.city +
+                                    " " +
+                                    addressInfo.postalCode +
+                                    " " +
+                                    addressInfo.country;
 
-                            keyPoint.locationAddress = concatenatedAddress;
+                                keyPoint.locationAddress = concatenatedAddress;
 
-                            this.service.addKeyPoint(keyPoint).subscribe({
-                                next: result => {
-                                    this.keyPointUpdated.emit();
-                                    if (this.keyPointForm.value.isPublicChecked) {
-                                        const request: PublicKeyPointRequest = {
-                                            keyPointId: result.id as number,
-                                            status: PublicStatus.Pending,
-                                            // Dodajte komentar ako je potrebno
-                                        };
-                                        this.service
-                                            .addPublicKeyPointRequest(request)
-                                            .subscribe({});
-                                    }
-                                },
+                                this.service.addKeyPoint(keyPoint).subscribe({
+                                    next: result => {
+                                        this.keyPointUpdated.emit();
+                                        if (
+                                            this.keyPointForm.value
+                                                .isPublicChecked
+                                        ) {
+                                            const request: PublicKeyPointRequest =
+                                                {
+                                                    keyPointId:
+                                                        result.id as number,
+                                                    status: PublicStatus.Pending,
+                                                    authorName:
+                                                        this.person.name +
+                                                        " " +
+                                                        this.person.surname,
+                                                };
+                                            this.service
+                                                .addPublicKeyPointRequest(
+                                                    request,
+                                                )
+                                                .subscribe({});
+                                        }
+                                    },
+                                });
                             });
-                        });
                     },
                 });
             },
@@ -169,28 +201,39 @@ export class KeyPointFormComponent implements OnChanges {
                     });
                 } else {
                     // Get Key Points location address
-                    this.mapService.reverseSearch(keyPoint.latitude, keyPoint.longitude).subscribe((res) => {
-                        const addressInfo = {
-                            number: "",
-                            street: "",
-                            city: "",
-                            postalCode: "",
-                            country: "",
-                          };
+                    this.mapService
+                        .reverseSearch(keyPoint.latitude, keyPoint.longitude)
+                        .subscribe(res => {
+                            const addressInfo = {
+                                number: "",
+                                street: "",
+                                city: "",
+                                postalCode: "",
+                                country: "",
+                            };
 
-                        let addressParts = res.display_name.split(",");
+                            let addressParts = res.display_name.split(",");
 
-                        this.setAddressInfo(addressInfo, addressParts);
-                        let concatenatedAddress = addressInfo.number + " " + addressInfo.street + " " + addressInfo.city + " " + addressInfo.postalCode + " " + addressInfo.country;
+                            this.setAddressInfo(addressInfo, addressParts);
+                            let concatenatedAddress =
+                                addressInfo.number +
+                                " " +
+                                addressInfo.street +
+                                " " +
+                                addressInfo.city +
+                                " " +
+                                addressInfo.postalCode +
+                                " " +
+                                addressInfo.country;
 
-                        keyPoint.locationAddress = concatenatedAddress;
+                            keyPoint.locationAddress = concatenatedAddress;
 
-                        this.service.updateKeyPoint(keyPoint).subscribe({
-                            next: () => {
-                                this.keyPointUpdated.emit();
-                            },
+                            this.service.updateKeyPoint(keyPoint).subscribe({
+                                next: () => {
+                                    this.keyPointUpdated.emit();
+                                },
+                            });
                         });
-                    });
                 }
             },
         });
@@ -208,34 +251,39 @@ export class KeyPointFormComponent implements OnChanges {
         return false;
     }
 
-    setAddressInfo(addressInfo: any, addressParts: any): void{
-        if(addressParts.length == 10){
-          addressInfo.number = addressParts[0];
-          addressInfo.street = addressParts[1];
-          addressInfo.city = addressParts[4];
-          addressInfo.postalCode = addressParts[8];
-          addressInfo.country = addressParts[9];
+    setAddressInfo(addressInfo: any, addressParts: any): void {
+        if (addressParts.length == 10) {
+            addressInfo.number = addressParts[0];
+            addressInfo.street = addressParts[1];
+            addressInfo.city = addressParts[4];
+            addressInfo.postalCode = addressParts[8];
+            addressInfo.country = addressParts[9];
+        } else if (addressParts.length == 9) {
+            addressInfo.number = addressParts[0];
+            addressInfo.street = addressParts[1];
+            addressInfo.city = addressParts[3];
+            addressInfo.postalCode = addressParts[7];
+            addressInfo.country = addressParts[8];
+        } else if (addressParts.length == 8) {
+            addressInfo.number = "";
+            addressInfo.street = addressParts[1];
+            addressInfo.city = addressParts[2];
+            addressInfo.postalCode = addressParts[6];
+            addressInfo.country = addressParts[7];
+        } else if (addressParts.length == 7) {
+            addressInfo.number = "";
+            addressInfo.street = addressParts[0];
+            addressInfo.city = addressParts[1];
+            addressInfo.postalCode = addressParts[5];
+            addressInfo.country = addressParts[6];
         }
-        else if(addressParts.length == 9){
-          addressInfo.number = addressParts[0];
-          addressInfo.street = addressParts[1];
-          addressInfo.city = addressParts[3];
-          addressInfo.postalCode = addressParts[7];
-          addressInfo.country = addressParts[8];
-        } 
-        else if(addressParts.length == 8){
-          addressInfo.number = "";
-          addressInfo.street = addressParts[1];
-          addressInfo.city = addressParts[2];
-          addressInfo.postalCode = addressParts[6];
-          addressInfo.country = addressParts[7];
-        }
-        else if(addressParts.length == 7){
-          addressInfo.number = "";
-          addressInfo.street = addressParts[0];
-          addressInfo.city = addressParts[1];
-          addressInfo.postalCode = addressParts[5];
-          addressInfo.country = addressParts[6];
-        }
-      }
+    }
+
+    getPerson(): void {
+        this.authService.user$.subscribe(user => {
+            this.service.getPerson(user.id).subscribe(result => {
+                this.person = result;
+            });
+        });
+    }
 }
