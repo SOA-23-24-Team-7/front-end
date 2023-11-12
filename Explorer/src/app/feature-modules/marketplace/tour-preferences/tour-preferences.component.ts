@@ -28,10 +28,8 @@ export class TourPreferencesComponent implements OnInit {
       this.service.getTourPreference().subscribe({
         next: (result: TourPreference) => {
           this.preference = result;
-          console.log(this.preference)
         },
         error: (err: any) => {
-          console.log(err)
         }
       })
   }

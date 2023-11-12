@@ -24,19 +24,19 @@ export class MarketplaceService {
   constructor(private http: HttpClient) { }
 
   getTourPreference(): Observable<TourPreference> {
-    return this.http.get<TourPreference>(environment.apiHost + 'tourist/tour-preferences');
+    return this.http.get<TourPreference>(environment.apiHost + 'tourist/preferences');
   }
 
   addPreference(tourPreference: TourPreference): Observable<TourPreference> {
-    return this.http.post<TourPreference>(environment.apiHost + 'tourist/tour-preferences/create', tourPreference);
+    return this.http.post<TourPreference>(environment.apiHost + 'tourist/preferences/create', tourPreference);
   }
 
   deletePreference(id: number): Observable<TourPreference> {
-    return this.http.delete<TourPreference>(environment.apiHost + 'tourist/tour-preferences/' + id);
+    return this.http.delete<TourPreference>(environment.apiHost + 'tourist/preferences/' + id);
   }
 
   updatePreference(preference: TourPreference): Observable<TourPreference> {
-    return this.http.put<TourPreference>(environment.apiHost + 'tourist/tour-preferences', preference);
+    return this.http.put<TourPreference>(environment.apiHost + 'tourist/preferences', preference);
   }
 
   addRating(rating: Rating): Observable<Rating> {

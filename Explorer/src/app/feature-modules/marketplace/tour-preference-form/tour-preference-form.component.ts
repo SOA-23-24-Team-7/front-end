@@ -22,7 +22,7 @@ export class TourPreferenceFormComponent {
   @Output() preferenceUpdated = new EventEmitter<null>();
 
   tourPreferenceForm = new FormGroup({
-    difficultyLevel: new FormControl(null,[Validators.required]),
+    difficultyLevel: new FormControl(null,[Validators.required, Validators.min(1), Validators.max(5)]),
     walkingRating: new FormControl(null,[Validators.required]),
     cyclingRating: new FormControl(null,[Validators.required]),
     carRating: new FormControl(null,[Validators.required]),
