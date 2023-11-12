@@ -22,7 +22,7 @@ export class TourPreferenceFormComponent {
   @Output() preferenceUpdated = new EventEmitter<null>();
 
   tourPreferenceForm = new FormGroup({
-    difficultyLevel: new FormControl(null,[Validators.required, Validators.min(1), Validators.max(5)]),
+    difficultyLevel: new FormControl(null,[Validators.required]),
     walkingRating: new FormControl(null,[Validators.required]),
     cyclingRating: new FormControl(null,[Validators.required]),
     carRating: new FormControl(null,[Validators.required]),
@@ -84,7 +84,6 @@ export class TourPreferenceFormComponent {
       boatRating: this.tourPreferenceForm.value.boatRating || 0,
       selectedTags: tagsList
     }
-    console.log()
     if (this.IsDataValid(tourPreference)) {
       this.snackBar.open('Data not valid!', 'Close', {
         duration: 5000

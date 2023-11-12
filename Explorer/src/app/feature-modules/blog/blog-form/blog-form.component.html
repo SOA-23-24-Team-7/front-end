@@ -4,8 +4,10 @@
             <input
                 formControlName="title"
                 type="text"
-                placeholder="Title"
+                placeholder="Title*"
+                [ngClass]="{'error': blogForm.get('title')?.value == '' }"
             />
+            
             <textarea
                 formControlName="description"
                 rows="8"

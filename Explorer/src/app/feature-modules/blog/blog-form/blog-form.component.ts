@@ -71,6 +71,8 @@ export class BlogFormComponent implements OnInit {
                     this.router.navigate(["/my-blogs"]);
                 },
             });
+        else
+            alert("Must enter title!");
     }
 
     updateBlog(): void {
