@@ -27,16 +27,10 @@ export class MapComponent implements AfterViewInit, OnChanges {
     private routeControl: L.Routing.Control;
     private refreshEventsSubscription: Subscription;
     private previousCommitted = false;
-
     private positionMarker: L.Marker;
     private markerGroup = L.layerGroup();
-
     public facilitiesUsed: boolean = false;
-
-    //   private positionMarker: L.Marker;
-
     public tourDistance: number = 0;
-
     @Input() refreshEvents: Observable<number>;
     @Input() selectedKeyPoint: KeyPoint | null;
     @Input() canEdit = false;
@@ -59,21 +53,18 @@ export class MapComponent implements AfterViewInit, OnChanges {
         iconSize: [42, 42],
         iconAnchor: [16, 32],
     });
-
-    private publicKeyPointIcon = L.icon({
-        iconUrl:
-            "https://icon-library.com/images/map-marker-icon/map-marker-icon-18.jpg",
-        iconSize: [42, 42],
-        iconAnchor: [16, 32],
-    });
-
     private positionIcon = L.icon({
         iconUrl:
             "https://images.emojiterra.com/google/android-pie/512px/1f535.png",
         iconSize: [30, 30],
         iconAnchor: [15, 15],
     });
-
+    private publicKeyPointIcon = L.icon({
+        iconUrl:
+            "https://icon-library.com/images/map-marker-icon/map-marker-icon-18.jpg",
+        iconSize: [42, 42],
+        iconAnchor: [16, 32],
+    });
     ngOnInit() {
         if (!this.isKeyPointMap) return;
         this.refreshEventsSubscription = this.refreshEvents.subscribe(tourId =>
@@ -236,7 +227,6 @@ export class MapComponent implements AfterViewInit, OnChanges {
 
                 return;
             }
-
             if (this.isPositionMap) {
                 if (this.positionMarker) {
                     this.positionMarker.remove();

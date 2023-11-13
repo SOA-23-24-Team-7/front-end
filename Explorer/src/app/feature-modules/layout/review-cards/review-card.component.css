@@ -37,9 +37,20 @@ p {
     color: rgb(var(--clr-text));
 }
 
-.add-enable {
-    padding-bottom: 0;
-    border: rgba(var(--clr-outline-contrast, 1)) 1px solid;
-    border-radius: 0.5rem;
-    cursor: pointer;
+.image-container {
+    height: 180px; /* Postavite željenu visinu kontejnera */
+    width: 210px;
+    overflow-y: scroll; /* Omogućava vertikalno skrolovanje ako je sadržaj prevelik */
+    overflow-x: hidden;
+    float: right;
+}
+
+.vertical-image {
+    display: block;
+}
+
+img {
+    height: 118px;
+    width: 178px;
+    margin: 2px;
 }

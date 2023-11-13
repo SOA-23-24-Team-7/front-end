@@ -21,6 +21,10 @@ import { MarketplaceModule } from "../marketplace/marketplace.module";
         FontAwesomeModule,
         MarketplaceModule,
     ],
-    exports: [UserProfileComponent, EditProfileComponent],
+    exports: [
+        UserProfileComponent,
+        EditProfileComponent,
+        NotificationTabsComponent,
+    ],
 })
 export class StakeholderModule {}

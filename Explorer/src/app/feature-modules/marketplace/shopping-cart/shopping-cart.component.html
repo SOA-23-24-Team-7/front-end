@@ -1,11 +1,8 @@
 <div id="tour" class="container">
-    <button class="add-enable" (click)="openCartDialog()">
-        <div class="enable-text">Show cart</div>
-    </button>
-    <p>Published tours:</p>
+    <p>Shopping cart</p>
     <hr />
     <div id="tour-details" class="tour-rectangles">
-        <div *ngFor="let pt of publishedTours" class="tour-rectangle">
+        <div *ngFor="let pt of data" class="tour-rectangle">
             <div class="tour-info">
                 <p class="text"><strong>Name:</strong> {{ pt.name }}</p>
                 <p class="text">
@@ -38,13 +35,15 @@
                 </button>
             </div>
             <div class="tour-buttons">
-                <button
-                    color="accent"
-                    (click)="addOrderItem(pt.id, pt.name, pt.price)"
-                >
-                    Add to cart
+                <button color="accent" (click)="removeOrderItem(pt.id)">
+                    Remove
                 </button>
             </div>
+        </div>
+        <div class="tour-buttons">
+            <button color="accent" (click)="checkout()" [disabled]="isDisabled">
+                Checkout
+            </button>
         </div>
     </div>
 </div>

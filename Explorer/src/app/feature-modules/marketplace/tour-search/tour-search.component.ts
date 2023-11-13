@@ -6,6 +6,7 @@ import { Tour } from "../../tour-authoring/model/tour.model";
 import { faFilter } from "@fortawesome/free-solid-svg-icons";
 import { PublicFacilities } from "../model/public-facilities.model";
 import { PublicKeyPoint } from "../model/public-key-point.model";
+import { TourLimitedView } from "../model/tour-limited-view.model";
 
 @Component({
     selector: "xp-tour-search",
@@ -18,7 +19,7 @@ export class TourSearchComponent implements OnInit {
     latitude: number = -200;
     distance: number = 0;
     slider: any;
-    tours: Tour[] = [];
+    tours: TourLimitedView[] = [];
     count: number = 0;
     publicFacilities: PublicFacilities[] = [];
     publicKeyPoints: PublicKeyPoint[] = [];
@@ -29,6 +30,7 @@ export class TourSearchComponent implements OnInit {
         this.slider = document.getElementById("slider");
         this.getPublicFacilities();
         this.getPublicKeyPoints();
+        this.getPublishedTours();
     }
 
     onMapClicked(): void {
@@ -43,7 +45,7 @@ export class TourSearchComponent implements OnInit {
             this.service
                 .findNearbyTours(this.longitude, this.latitude, this.distance)
                 .subscribe({
-                    next: (result: PagedResults<Tour>) => {
+                    next: (result: PagedResults<TourLimitedView>) => {
                         this.tours = result.results;
                         this.count = result.totalCount;
                         console.log(this.tours);
@@ -89,6 +91,16 @@ export class TourSearchComponent implements OnInit {
             },
         });
     }
-
+    getPublishedTours(): void {
+        this.service.getPublishedTours().subscribe({
+            next: (result: PagedResults<Tour>) => {
+                this.tours = result.results;
+                this.count = result.totalCount;
+            },
+            error: (err: any) => {
+                console.log(err);
+            },
+        });
+    }
     faFilter = faFilter;
 }

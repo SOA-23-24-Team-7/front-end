@@ -29,6 +29,7 @@ import { LayoutModule } from "src/app/feature-modules/layout/layout.module";
 import { KeypointsNotificationsComponent } from "./keypoints-notifications/keypoints-notifications.component";
 import { FacilitiesNotificationsComponent } from "./facilities-notifications/facilities-notifications.component";
 import { PublishedToursComponent } from "./tours/published-tours.component";
+import { ShoppingCartComponent } from './shopping-cart/shopping-cart.component';
 
 @NgModule({
     declarations: [
@@ -54,6 +55,7 @@ import { PublishedToursComponent } from "./tours/published-tours.component";
         TourSearchComponent,
         KeypointsNotificationsComponent,
         FacilitiesNotificationsComponent,
+        ShoppingCartComponent,
     ],
     imports: [
         CommonModule,

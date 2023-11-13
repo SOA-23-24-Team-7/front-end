@@ -36,10 +36,3 @@ p {
     font-size: 1.2rem;
     color: rgb(var(--clr-text));
 }
-
-.add-enable {
-    padding-bottom: 0;
-    border: rgba(var(--clr-outline-contrast, 1)) 1px solid;
-    border-radius: 0.5rem;
-    cursor: pointer;
-}

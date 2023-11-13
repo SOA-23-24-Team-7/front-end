@@ -28,6 +28,7 @@ import {
     faPersonHiking,
     faUsers,
     faEnvelope,
+    faShoppingCart,
     faBell,
 } from "@fortawesome/free-solid-svg-icons";
 //import { } from "@fortawesome/free-regular-svg-icons";
@@ -108,5 +109,6 @@ export class NavbarComponent implements OnInit {
     faPersonHiking = faPersonHiking;
     faUsers = faUsers;
     faEnvelope = faEnvelope;
+    faShoppingCart = faShoppingCart;
     faBell = faBell;
 }
