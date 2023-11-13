@@ -8,6 +8,7 @@ import { AuthService } from 'src/app/infrastructure/auth/auth.service';
 import { User } from 'src/app/infrastructure/auth/model/user.model';
 import { TouristPosition } from '../model/tourist-position.model';
 import { TourExecutionSessionStatus } from '../model/tour-execution-session-status.model';
+import { TourExecutionSession } from '../model/tour-execution-session-model';
 
 @Component({
   selector: 'xp-tour-executing',
@@ -28,7 +29,7 @@ export class TourExecutingComponent implements OnInit {
   }
   touristPosition: any
 
-  constructor(private route: ActivatedRoute, private authService: AuthService, private service: TourExecutionService) { }
+  constructor(private route: ActivatedRoute, private router: Router, private authService: AuthService, private service: TourExecutionService) { }
 
   ngOnInit(): void {
     this.route.paramMap.subscribe((params) => {
@@ -54,7 +55,6 @@ export class TourExecutingComponent implements OnInit {
         this.touristPosition = { longitude: result.longitude, latitude: result.latitude };
 
         this.service.checkKeyPointCompletion(this.tourId, this.touristPosition).subscribe((session) => {
-          alert(JSON.stringify(session))
           if (session.status == TourExecutionSessionStatus.Completed) {
             this.nextKeyPointId = null!;
           } else {
@@ -71,5 +71,15 @@ export class TourExecutingComponent implements OnInit {
         this.tour = result;
       }
     });
+  }
+  abandonTour(){
+    let r = confirm('Are you sure you want to leave this tour?')
+    if(r){
+      this.service.abandonTour(this.tourId).subscribe({
+        next: (result: TourExecutionSession) => {
+          this.router.navigate(['/purchasedtours'])
+        }
+      });
+    }
   }
 }

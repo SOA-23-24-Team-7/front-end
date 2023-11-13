@@ -70,3 +70,18 @@
     width: 30px;
     margin-right: 5px;
     }
+
+.abandon-button {
+        background-color: red; /* Green */
+        border: none;
+        color: white;
+        padding: 5px 12px;
+        text-align: center;
+        text-decoration: none;
+        display: inline-block;
+        font-size: 16px;
+        width: 200px;
+        margin:0 auto;
+        display:block;
+        cursor: pointer;
+      }

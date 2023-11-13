@@ -1,5 +1,4 @@
 <h1>Tour executing</h1>
-<hr>
 <div style="float: left; margin: 40px;">
     <h2>
         {{tour.name}}
@@ -35,7 +34,8 @@
         </div>
     </div>
 </div>
-<div>
+<div class="map-container">
+    <button class="abandon-button" (click)="abandonTour()">Abandon tour</button>
     <xp-map [isTourExecutionMap]="true" [executingTourId]="tourId" [startPosition]="touristPosition" [nextKeyPointId]="nextKeyPointId"></xp-map>
 </div>
 <xp-tourist-position-simulator *ngIf="false"></xp-tourist-position-simulator>
