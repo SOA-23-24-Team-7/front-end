@@ -121,7 +121,8 @@
 }
 
 .bottom-bar-button:hover {
-    background-color: rgb(var(--clr-background));
+    background-color: rgb(var(--clr-background-secondary));
+    filter: brightness(0.9);
 }
 
 .delete {

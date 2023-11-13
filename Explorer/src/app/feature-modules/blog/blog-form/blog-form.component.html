@@ -5,9 +5,9 @@
                 formControlName="title"
                 type="text"
                 placeholder="Title*"
-                [ngClass]="{'error': blogForm.get('title')?.value == '' }"
+                [ngClass]="{ error: blogForm.get('title')?.value == '' }"
             />
-            
+
             <textarea
                 formControlName="description"
                 rows="8"
@@ -27,7 +27,7 @@
             color="primary"
             (click)="createBlog()"
         >
-            Save
+            Create
         </button>
         <button
             mat-raised-button

@@ -48,7 +48,7 @@
             >
                 {{ statusTag }}
             </div>
-            <span class="blog-date">{{ blog.date | date : "medium" }}</span>
+            <span class="blog-date">{{ blog.date | date : "mediumDate" }}</span>
         </div>
         <div class="blog-description" [innerHTML]="blogMarkdown"></div>
         <div class="bottom-bar">

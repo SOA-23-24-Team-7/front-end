@@ -60,6 +60,7 @@ export class BlogPreviewComponent implements OnInit {
         }
         this.upvote.emit(this.blog.id);
         this.handleVoteChange(VoteType.UPVOTE);
+        this.setBlogStatus();
     }
 
     onDownVote(e: Event) {
@@ -69,6 +70,7 @@ export class BlogPreviewComponent implements OnInit {
         }
         this.downvote.emit(this.blog.id);
         this.handleVoteChange(VoteType.DOWNVOTE);
+        this.setBlogStatus();
     }
 
     shareBlog(e: Event) {
@@ -101,6 +103,19 @@ export class BlogPreviewComponent implements OnInit {
                 this.blog.voteCount++;
             this.vote.voteType = voteType;
         }
+    }
+
+    setBlogStatus() {
+        if (this.blog.voteCount < -2) {
+            this.blog.status = 2;
+        } else if (this.blog.voteCount >= 3 && this.blog.comments.length >= 3) {
+            this.blog.status = 4;
+        } else if (this.blog.voteCount >= 2 && this.blog.comments.length >= 2) {
+            this.blog.status = 3;
+        } else {
+            this.blog.status = 1;
+        }
+        this.setTag();
     }
 
     publishBlog(e: Event) {
