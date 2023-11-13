@@ -22,11 +22,14 @@ export class ProblemDeadlineComponent implements OnInit {
     problem: ProblemUser;
     user: User;
     deadline: Date = new Date();
+    todayDate: Date = new Date();
 
     constructor(
         @Optional() @Inject(MAT_DIALOG_DATA) public data: any,
         private service: StakeholderService,
-    ) {}
+    ) {
+        this.todayDate.setDate(this.todayDate.getDate() + 1);
+    }
     ngOnInit(): void {
         this.problem = this.data.dataProblem;
         this.user = this.data.dataUser;
