@@ -55,7 +55,7 @@ const routes: Routes = [
         canActivate: [AuthGuard],
     },
     { path: "tours", component: TourComponent, canActivate: [AuthGuard] },
-    { path: "purcshasedtours", component: PurchasedToursComponent, canActivate: [AuthGuard] },
+    { path: "purchasedtours", component: PurchasedToursComponent, canActivate: [AuthGuard] },
     { 
         path: "published-tours",
         component: PublishedToursComponent,

@@ -25,7 +25,9 @@ export class TourExecutionService {
       environment.apiHost + "tourexecution/tourexecution/" + tourId
     );
   }
-
+  getLiveTour(): Observable<TourExecutionSession>{
+    return this.http.get<TourExecutionSession>(environment.apiHost + "tourexecution/tourexecution/live");
+  }
   startTour(tourId: number): Observable<TourExecutionSession> {
     return this.http.post<TourExecutionSession>(environment.apiHost + "tourexecution/tourexecution/" + tourId, null);
   }

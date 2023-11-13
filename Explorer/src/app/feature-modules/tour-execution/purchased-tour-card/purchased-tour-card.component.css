@@ -103,3 +103,9 @@ ista prica
     font-size: 1.05rem;
     font-weight: 500;
 }
+button:disabled,
+button[disabled]{
+  border: 1px solid #999999;
+  background-color: #cccccc;
+  color: #666666;
+}
