@@ -15,10 +15,14 @@ import { ProblemUpdateDeadline } from "./model/problem-update-deadline.model";
     providedIn: "root",
 })
 export class StakeholderService {
-    getProblemAnswer(problemId: number): Observable<ProblemAnswer> {
+    getProblemAnswer(
+        problemId: number,
+        userRole: string,
+    ): Observable<ProblemAnswer> {
         return this.http.get<ProblemAnswer>(
             environment.apiHost +
-                "author/problem/" +
+                userRole +
+                "/problem/" +
                 problemId +
                 "/problem-answer",
         );

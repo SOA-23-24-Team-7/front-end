@@ -41,7 +41,6 @@ export class ProblemCommentCreateComponent implements OnInit {
     leaveComment() {
         const problemComment: ProblemCommentCreate = {
             text: this.text,
-            problemAnswerId: this.problem.answerId,
             commenterId: this.user.id,
         };
         this.service.createProblemComment(problemComment).subscribe({

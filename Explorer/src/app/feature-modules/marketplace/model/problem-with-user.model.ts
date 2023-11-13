@@ -11,7 +11,7 @@ export interface ProblemUser {
     tourId: number;
     tourName: string;
     tourAuthorId: number;
-    answerId: number;
+    // answerId: number;
     isAnswered: boolean;
     deadline: Date;
     isResolved: boolean;

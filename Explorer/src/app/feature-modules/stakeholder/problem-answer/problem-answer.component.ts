@@ -13,7 +13,6 @@ import { User } from "src/app/infrastructure/auth/model/user.model";
 import { faSquareCheck } from "@fortawesome/free-solid-svg-icons";
 import { ProblemAnswer } from "../model/problem-answer.model";
 import { ProblemComment } from "../model/problem-comment.model";
-import { PagedResults } from "src/app/shared/model/paged-results.model";
 
 @Component({
     selector: "xp-problem-answer",
@@ -37,11 +36,10 @@ export class ProblemAnswerComponent implements OnInit {
         this.user = this.data.dataUser;
 
         this.loadProblemAnswer(this.problem.id);
-        this.getCommentsByProblemAnswerId();
     }
 
     loadProblemAnswer(problemId: number) {
-        this.service.getProblemAnswer(problemId).subscribe({
+        this.service.getProblemAnswer(problemId, this.user.role).subscribe({
             next: (result: ProblemAnswer) => {
                 if (result !== undefined) {
                     this.headerText = result.answer;
@@ -52,9 +50,12 @@ export class ProblemAnswerComponent implements OnInit {
 
     resolveProblem(header: any) {
         this.service.resolveProblem(this.problem.id, this.user.role).subscribe({
-            next: (result: ProblemUser) => {
+            next: () => {
                 header.classList.add("green");
                 this.problem.isResolved = true;
+            },
+            error: () => {
+                console.log("error");
             },
         });
     }
@@ -68,27 +69,10 @@ export class ProblemAnswerComponent implements OnInit {
         this.comments.push(comment);
     }
 
-    getCommentsByProblemAnswerId(): void {
-        this.service
-            .getCommentsByProblemAnswerId(this.problem.answerId)
-            .subscribe({
-                next: (result: PagedResults<ProblemComment>) => {
-                    this.comments = result.results;
-                    console.log(this.comments);
-                    for (const comment of this.comments) {
-                        console.log(comment.commenter);
-                    }
-                },
-                error: () => {},
-            });
-    }
-
     hasDedlinePassed(): boolean {
         var today = new Date();
         const deadline = new Date(this.problem.deadline);
         today.setHours(0, 0, 0, 0);
-
-        // console.log(today);
 
         return deadline <= today;
     }

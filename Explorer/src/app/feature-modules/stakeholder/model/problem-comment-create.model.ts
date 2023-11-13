@@ -1,5 +1,4 @@
-export interface  ProblemCommentCreate {
-    commenterId: number;    
-    problemAnswerId: number;
+export interface ProblemCommentCreate {
+    commenterId: number;
     text: string;
-  }
+}

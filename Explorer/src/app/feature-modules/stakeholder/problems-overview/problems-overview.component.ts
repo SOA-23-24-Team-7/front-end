@@ -7,7 +7,6 @@ import { MatDialog } from "@angular/material/dialog";
 import { ProblemAnswerComponent } from "../problem-answer/problem-answer.component";
 import { ProblemUser } from "../../marketplace/model/problem-with-user.model";
 import { faCircleExclamation } from "@fortawesome/free-solid-svg-icons";
-import { ProblemUpdateDeadline } from "../model/problem-update-deadline.model";
 import { ProblemDeadlineComponent } from "../problem-deadline/problem-deadline.component";
 
 @Component({
