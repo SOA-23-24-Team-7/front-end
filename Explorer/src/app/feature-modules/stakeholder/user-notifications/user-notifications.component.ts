@@ -1,8 +1,9 @@
 import { Component, OnInit } from "@angular/core";
-import { Message } from "../model/message";
+import { Message, MessageUsernames } from "../model/message.model";
 import { AuthService } from "src/app/infrastructure/auth/auth.service";
 import { PagedResults } from "src/app/shared/model/paged-results.model";
 import { StakeholderService } from "../stakeholder.service";
+import { Router } from "@angular/router";
 
 @Component({
     selector: "xp-user-notifications",
@@ -10,13 +11,16 @@ import { StakeholderService } from "../stakeholder.service";
     styleUrls: ["./user-notifications.component.css"],
 })
 export class UserNotificationsComponent implements OnInit {
-    messages: Message[] = [];
+    messages: MessageUsernames[] = [];
     page = 1;
     pageSize = 10;
+    message: Message;
+    messageNew: Message;
 
     constructor(
         private service: StakeholderService,
         private authService: AuthService,
+        private router: Router,
     ) {}
 
     ngOnInit(): void {
@@ -27,9 +31,24 @@ export class UserNotificationsComponent implements OnInit {
         const userId = this.authService.getCurrentUserId().id;
         this.service
             .getMessages(this.page, this.pageSize, userId)
-            .subscribe((data: PagedResults<Message>) => {
+            .subscribe((data: PagedResults<MessageUsernames>) => {
                 this.messages = data.results;
-                console.log(data.results[1]);
             });
+    }
+
+    markAsSeen(message: MessageUsernames): void {
+        console.log(message, "cao");
+
+        const messageNew: Message = {
+            id: message.id,
+            senderId: message.userSenderId,
+            reciverId: message.userReciverId,
+            text: message.text,
+            statusOfMessage: 1,
+        };
+        console.log(messageNew.senderId);
+
+        console.log(messageNew.statusOfMessage);
+        this.service.updateMessageStatusOnSeen(messageNew).subscribe({});
     }
 }

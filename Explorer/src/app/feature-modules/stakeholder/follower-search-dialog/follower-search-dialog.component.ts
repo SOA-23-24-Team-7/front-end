@@ -4,7 +4,7 @@ import { faSearch } from "@fortawesome/free-solid-svg-icons";
 import { UserFollow } from "../model/user-follow.model";
 import { StakeholderService } from "../stakeholder.service";
 import { Following } from "../model/following.model";
-import { FollowerCreate } from "../model/follower- create.model";
+import { FollowerCreate } from "../model/follower-create.model";
 export interface ModalData {
     userId: number;
 }

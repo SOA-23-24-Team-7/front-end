@@ -3,6 +3,10 @@
     <ul>
         <li *ngFor="let message of messages" class="notification-container">
             <div class="notification">
+                <div *ngIf="message.statusOfMessage == 0">
+                    <button (click)="markAsSeen(message)">Seen</button>
+                </div>
+                {{ message.senderUsername }}
                 {{ message.text }}
             </div>
         </li>

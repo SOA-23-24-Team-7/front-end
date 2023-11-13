@@ -4,10 +4,10 @@ import { PagedResults } from "src/app/shared/model/paged-results.model";
 import { Person } from "./model/person.model";
 import { environment } from "src/env/environment";
 import { Observable } from "rxjs";
-import { Message } from "./model/message";
+import { Message, MessageUsernames } from "./model/message.model";
 import { Follower } from "./model/follower.model";
 import { Following } from "./model/following.model";
-import { FollowerCreate } from "./model/follower- create.model";
+import { FollowerCreate } from "./model/follower-create.model";
 import { UserFollow } from "./model/user-follow.model";
 
 @Injectable({
@@ -76,9 +76,16 @@ export class StakeholderService {
         page: number,
         pageSize: number,
         receiverId: number,
-    ): Observable<PagedResults<Message>> {
-        return this.http.get<PagedResults<Message>>(
+    ): Observable<PagedResults<MessageUsernames>> {
+        return this.http.get<PagedResults<MessageUsernames>>(
             environment.apiHost + "messages/" + receiverId,
+        );
+    }
+
+    updateMessageStatusOnSeen(updatedMessage: Message): Observable<Message> {
+        return this.http.put<Message>(
+            environment.apiHost + "messages/update-status",
+            updatedMessage,
         );
     }
 }

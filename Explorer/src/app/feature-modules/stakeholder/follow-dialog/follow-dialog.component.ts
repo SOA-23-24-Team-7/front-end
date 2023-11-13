@@ -6,7 +6,7 @@ import { User } from "src/app/infrastructure/auth/model/user.model";
 import { MessageDialogComponent } from "../message-dialog/message-dialog/message-dialog.component";
 import { faL } from "@fortawesome/free-solid-svg-icons";
 import { StakeholderService } from "../stakeholder.service";
-import { FollowerCreate } from "../model/follower- create.model";
+import { FollowerCreate } from "../model/follower-create.model";
 export interface ModalData {
     followers: Follower[];
     followings: Following[];
