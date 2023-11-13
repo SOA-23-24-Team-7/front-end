@@ -17,7 +17,6 @@ import { ProblemDeadlineComponent } from "../problem-deadline/problem-deadline.c
 export class ProblemsOverviewComponent implements OnInit {
     problems: ProblemUser[] = [];
     user: User;
-    deadline: Date = new Date("2023-11-09");
     constructor(
         private service: StakeholderService,
         private authService: AuthService,

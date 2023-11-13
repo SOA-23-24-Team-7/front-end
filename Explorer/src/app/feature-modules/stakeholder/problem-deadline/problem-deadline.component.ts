@@ -4,6 +4,7 @@ import { StakeholderService } from "../stakeholder.service";
 import { ProblemUser } from "../../marketplace/model/problem-with-user.model";
 import { User } from "src/app/infrastructure/auth/model/user.model";
 import { ProblemUpdateDeadline } from "../model/problem-update-deadline.model";
+import { MatDatepickerInputEvent } from "@angular/material/datepicker";
 
 @Component({
     selector: "xp-problem-deadline",
@@ -13,7 +14,7 @@ import { ProblemUpdateDeadline } from "../model/problem-update-deadline.model";
 export class ProblemDeadlineComponent implements OnInit {
     problem: ProblemUser;
     user: User;
-    deadline: Date;
+    deadline: Date = new Date();
     constructor(
         @Optional() @Inject(MAT_DIALOG_DATA) public data: any,
         private service: StakeholderService,
