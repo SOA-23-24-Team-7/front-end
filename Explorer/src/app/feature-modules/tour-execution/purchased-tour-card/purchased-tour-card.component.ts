@@ -1,6 +1,7 @@
 import { Component, Input } from '@angular/core';
 import { Tour } from '../../tour-authoring/model/tour.model';
 import { Router } from '@angular/router';
+import { TourExecutionService } from '../tour-execution.service';
 
 @Component({
   selector: 'xp-purchased-tour-card',
@@ -9,9 +10,10 @@ import { Router } from '@angular/router';
 })
 export class PurchasedTourCardComponent {
   @Input() tour: Tour;
-  constructor(private router: Router){}
+  constructor(private router: Router, private service: TourExecutionService){}
   StartTour(){
-    console.log(this.tour)
-    this.router.navigate(['/tour-executing', {data: this.tour.id}]);
+    this.service.startTour(this.tour.id!).subscribe(() => {
+      this.router.navigate(['/tour-executing/' + this.tour.id]);
+    });
   }
 }

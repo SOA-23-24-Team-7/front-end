@@ -14,17 +14,21 @@ import { Facilities } from 'src/app/feature-modules/tour-authoring/model/facilit
 export class MapComponent implements AfterViewInit, OnChanges {
   private map: any;
   public waypointMap = new Map<number, any>();
+  public checkedPointsMap = new Map<number, any>();
   private routeControl: L.Routing.Control;
   private refreshEventsSubscription: Subscription;
   private previousCommitted = false;
 
   private positionMarker: L.Marker;
-  private markerGroup = L.layerGroup(); 
-  
+  private markerGroup = L.layerGroup();
+  private checkedPointMarkerGroup = L.layerGroup();
+
   public facilitiesUsed: boolean = false;
 
   public tourDistance: number = 0;
-  
+
+  public touristPosition: [number, number];
+
   @Input() refreshEvents: Observable<number>;
   @Input() selectedKeyPoint: KeyPoint | null;
   @Input() canEdit = false;
@@ -34,7 +38,30 @@ export class MapComponent implements AfterViewInit, OnChanges {
   @Input() executingTourId = 0;
   @Input() set startPosition(value: any) {
     if (!value) return;
-    this.positionMarker = L.marker([value.latitude, value.longitude], { icon: this.positionIcon }).addTo(this.map)
+    if (this.positionMarker) {
+      this.positionMarker.remove();
+    }
+    this.touristPosition = [value.latitude, value.longitude];
+    this.positionMarker = L.marker(this.touristPosition, { icon: this.positionIcon }).addTo(this.map)
+
+    if (!this.isTourExecutionMap) return;
+    let waypoints = [{ lng: this.touristPosition[1], lat: this.touristPosition[0] }, ...this.waypointMap.values()];
+    this.setRoute(waypoints);
+  }
+  @Input() set nextKeyPointId(value: number) {
+    if (value !== null && !value) return;
+    if (!this.isTourExecutionMap) return;
+
+    [...this.waypointMap.entries()].forEach(entry => {
+      if (value == null || entry[1].order < this.waypointMap.get(value).order) {
+        this.checkedPointsMap.set(entry[0], entry[1]);
+        this.waypointMap.delete(entry[0]);
+      }
+    });
+
+    let waypoints = [{ lng: this.touristPosition[1], lat: this.touristPosition[0] }, ...this.waypointMap.values()];
+    this.setRoute(waypoints);
+    this.setCheckedPointsMarkers();
   }
   @Output() newLongLatEvent = new EventEmitter<[number, number]>();
 
@@ -42,18 +69,18 @@ export class MapComponent implements AfterViewInit, OnChanges {
 
   private facilityIcon = L.icon({
     iconUrl: 'https://cdn4.iconfinder.com/data/icons/small-n-flat/24/map-marker-512.png',
-    iconSize: [42, 42], 
-    iconAnchor: [16, 32], 
+    iconSize: [42, 42],
+    iconAnchor: [16, 32],
   });
 
   private positionIcon = L.icon({
     iconUrl: 'https://images.emojiterra.com/google/android-pie/512px/1f535.png',
-    iconSize: [30, 30], 
-    iconAnchor: [15, 15], 
+    iconSize: [30, 30],
+    iconAnchor: [15, 15],
   });
 
   ngOnInit() {
-    if(this.isTourExecutionMap){
+    if (this.isTourExecutionMap) {
       this.getTourKeyPoints(this.executingTourId)
       return;
     }
@@ -69,7 +96,7 @@ export class MapComponent implements AfterViewInit, OnChanges {
   ngAfterViewInit(): void {
     let DefaultIcon = L.icon({
       iconUrl: 'https://icon-library.com/images/map-marker-icon/map-marker-icon-18.jpg',
-      iconSize: [46, 46], 
+      iconSize: [46, 46],
       iconAnchor: [26, 46],
     });
 
@@ -77,7 +104,7 @@ export class MapComponent implements AfterViewInit, OnChanges {
 
     setTimeout(() => {
       this.initMap();
-    }, 5);
+    }, 1);
   }
 
   ngOnChanges(changes: SimpleChanges): void {
@@ -140,7 +167,7 @@ export class MapComponent implements AfterViewInit, OnChanges {
         next: (result: PagedResults<Facilities>) => {
           let facilities = result.results;
 
-          for(let f of facilities) {
+          for (let f of facilities) {
             this.setMarkersForAllFacilities(f.latitude, f.longitude);
           }
         },
@@ -163,8 +190,35 @@ export class MapComponent implements AfterViewInit, OnChanges {
     });
   }
 
-  setRoute(waypoints: any): void {
-    const planOptions = { addWaypoints: false, draggableWaypoints: false };
+  setCheckedPointsMarkers(): void {
+    this.checkedPointMarkerGroup.clearLayers();
+
+    [...this.checkedPointsMap.values()].forEach(element => {
+      const marker = new L.Marker(element.latLng);
+      this.markerGroup.addLayer(marker);
+    });
+
+    this.map.addLayer(this.markerGroup);
+  }
+
+  setRoute(waypoints: any[]): void {
+    let keyPointIcon = L.icon({
+      iconUrl: 'https://icon-library.com/images/map-marker-icon/map-marker-icon-18.jpg',
+      iconSize: [46, 46],
+      iconAnchor: [26, 46],
+    });
+    const planOptions: Record<string, any> = { 
+      addWaypoints: false, 
+      draggableWaypoints: false
+    };
+
+    if (this.isTourExecutionMap && waypoints.length == (this.waypointMap.size + 1)) {
+      planOptions['createMarker'] = function (i: number, waypoint: any, n: number): any { 
+        if (i == 0) return null;
+        return L.marker(waypoint.latLng, {icon: keyPointIcon});
+      }
+    }
+
     const plan = new L.Routing.Plan(waypoints, planOptions);
 
     this.routeControl?.remove();
@@ -181,7 +235,7 @@ export class MapComponent implements AfterViewInit, OnChanges {
       const routes = e.routes;
       if (routes.length > 0) {
         const summary = routes[0].summary;
-        this.tourDistance = summary.totalDistance/1000; // Total distance is in meters, tourDistance in km
+        this.tourDistance = summary.totalDistance / 1000; // Total distance is in meters, tourDistance in km
       }
     });
   }
@@ -200,7 +254,7 @@ export class MapComponent implements AfterViewInit, OnChanges {
         console.log(res.display_name);
       });
 
-      if(this.facilitiesUsed){
+      if (this.facilitiesUsed) {
         this.markerGroup.clearLayers();
         const marker = new L.Marker([lat, lng], { icon: this.facilityIcon });
         this.markerGroup.addLayer(marker);
@@ -242,7 +296,9 @@ export class MapComponent implements AfterViewInit, OnChanges {
         for (const kp of keyPoints) {
           let lng = kp.longitude;
           let lat = kp.latitude;
-          this.waypointMap.set(kp.id, { lng, lat });
+          let order = kp.order;
+
+          this.waypointMap.set(kp.id, { lng, lat, order });
         }
 
         this.createWaypoints(keyPoints);
@@ -264,7 +320,8 @@ export class MapComponent implements AfterViewInit, OnChanges {
     for (const kp of keyPoints) {
       let lng = kp.longitude;
       let lat = kp.latitude;
-      this.waypointMap.set(kp.id, { lng, lat });
+      let order = kp.order;
+      this.waypointMap.set(kp.id, { lng, lat, order });
     }
   }
 
@@ -278,7 +335,7 @@ export class MapComponent implements AfterViewInit, OnChanges {
     });
   }
 
-  setMarker(lat: number, lng: number): void{
+  setMarker(lat: number, lng: number): void {
     // Clear all previous markers on the map
     this.markerGroup.clearLayers();
 
@@ -289,7 +346,7 @@ export class MapComponent implements AfterViewInit, OnChanges {
     this.map.setView([lat, lng], this.map.getZoom());
   }
 
-  setMarkersForAllFacilities(lat: number, lng: number): void{
+  setMarkersForAllFacilities(lat: number, lng: number): void {
     const marker = new L.Marker([lat, lng], { icon: this.facilityIcon });
     this.markerGroup.addLayer(marker);
     this.map.addLayer(this.markerGroup);

@@ -82,7 +82,7 @@ const routes: Routes = [
         canActivate: [AuthGuard]
     },
     {
-        path: 'tour-executing',
+        path: 'tour-executing/:tourId',
         component: TourExecutingComponent,
         canActivate: [AuthGuard]
     },
