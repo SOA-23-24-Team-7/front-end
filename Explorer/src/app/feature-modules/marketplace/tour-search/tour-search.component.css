@@ -60,7 +60,7 @@
 }
 
 .tour-filters-head-icon {
-    font-family: var(--fnt-header);
+    font-family: var(--fnt-body);
     font-size: 1.5rem;
     font-weight: 500;
     color: rgba(255, 255, 255, 1);
@@ -69,7 +69,7 @@
 
 .tour-filters-head-text {
     margin-left: 0.5rem;
-    font-family: var(--fnt-header);
+    font-family: var(--fnt-body);
     font-size: 1.5rem;
     font-weight: 500;
     color: rgba(255, 255, 255, 1);
@@ -87,7 +87,7 @@
 
 .tour-seach-filter-section-title {
     margin-top: 0.25rem;
-    font-family: var(--fnt-header);
+    font-family: var(--fnt-body);
     font-size: 1.5rem;
     font-weight: 500;
     color: rgba(var(--clr-text), 1);
@@ -158,7 +158,7 @@
     background-color: rgba(var(--clr-primary-500), 1);
     border-radius: 0.3125rem;
     margin-bottom: 1rem;
-    height: 2rem;
+    height: 2.5rem;
     transition: background-color 0.15s;
     cursor: pointer;
 }
@@ -169,7 +169,7 @@
 
 .tour-search-button-text {
     font-family: var(--fnt-body);
-    font-size: 1rem;
+    font-size: 1.5rem;
     font-weight: 600;
     color: rgba(255, 255, 255, 1);
 }
@@ -182,7 +182,7 @@
 }
 
 .tour-search-results-count {
-    font-family: var(--fnt-header);
+    font-family: var(--fnt-body);
     font-size: 1.5rem;
     font-weight: 500;
     color: rgba(var(--clr-text), 1);
