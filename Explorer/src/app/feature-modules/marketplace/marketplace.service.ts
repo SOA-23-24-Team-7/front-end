@@ -24,6 +24,7 @@ import { KeyPoint } from "../tour-authoring/model/key-point.model";
 import { ShoppingCart } from "./model/shopping-cart";
 import { OrderItem } from "./model/order-item";
 import { TourLimitedView } from "./model/tour-limited-view.model";
+import { TourToken } from "./model/tour-token.model";
 
 @Injectable({
     providedIn: "root",
@@ -301,14 +302,37 @@ export class MarketplaceService {
             environment.apiHost + "market-place/tours/inCart/" + id,
         );
     }
-    getOrderItem(tourId:number,touristId:number): Observable<OrderItem> {
+    getOrderItem(tourId: number, touristId: number): Observable<OrderItem> {
         return this.http.get<OrderItem>(
-            environment.apiHost + "tourist/shoppingCart/getItem/"+tourId+"/"+touristId
+            environment.apiHost +
+                "tourist/shoppingCart/getItem/" +
+                tourId +
+                "/" +
+                touristId,
         );
     }
-    removeOrderItem(id:number | undefined,shoppingCartId:number | undefined): any {
+    removeOrderItem(
+        id: number | undefined,
+        shoppingCartId: number | undefined,
+    ): any {
         return this.http.delete<OrderItem>(
-            environment.apiHost + "tourist/shoppingCart/removeItem/"+id+"/"+shoppingCartId
+            environment.apiHost +
+                "tourist/shoppingCart/removeItem/" +
+                id +
+                "/" +
+                shoppingCartId,
+        );
+    }
+    addToken(tourId: number | undefined): any {
+        return this.http.post<TourToken>(
+            environment.apiHost + "token/" + tourId,
+            {},
+        );
+    }
+
+    deleteShoppingKart(shoppingKartId: number | undefined): any {
+        return this.http.delete(
+            environment.apiHost + "tourist/shoppingCart/" + shoppingKartId,
         );
     }
 }

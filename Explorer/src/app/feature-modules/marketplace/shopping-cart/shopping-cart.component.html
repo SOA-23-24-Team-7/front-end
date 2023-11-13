@@ -35,8 +35,15 @@
                 </button>
             </div>
             <div class="tour-buttons">
-                <button color="accent" (click)="removeOrderItem(pt.id)">Remove</button>
+                <button color="accent" (click)="removeOrderItem(pt.id)">
+                    Remove
+                </button>
             </div>
+        </div>
+        <div class="tour-buttons">
+            <button color="accent" (click)="checkout()" [disabled]="isDisabled">
+                Checkout
+            </button>
         </div>
     </div>
 </div>

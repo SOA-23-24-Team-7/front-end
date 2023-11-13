@@ -95,7 +95,9 @@ export class PublishedToursComponent implements OnInit {
         };
         console.log(orderItem);
         this.service.addOrderItem(orderItem).subscribe({
-            next: (result: OrderItem) => {},
+            next: (result: OrderItem) => {
+                alert("Item successfully added to cart!");
+            },
             error: (err: any) => {
                 console.log(err);
             },
@@ -107,8 +109,8 @@ export class PublishedToursComponent implements OnInit {
             next: (result: PagedResults<TourLimitedView>) => {
                 this.addedTours = result.results;
                 const dialogRef = this.dialogRef.open(ShoppingCartComponent, {
-                    height: "400px",
-                    width: "600px",
+                    height: "600px",
+                    width: "800px",
                     data: this.addedTours, // lista javnih tacaka koju dobijam u ovoj komponenti i ovim je saljem u modalni dijalog
                 });
             },

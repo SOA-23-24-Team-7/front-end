@@ -14,6 +14,7 @@ import { OrderItem } from "../model/order-item";
 import { Observable } from "rxjs";
 import { ShoppingCart } from "../model/shopping-cart";
 import { PagedResults } from "src/app/shared/model/paged-results.model";
+import { TourToken } from "../model/tour-token.model";
 
 @Component({
     selector: "xp-shopping-cart",
@@ -21,9 +22,11 @@ import { PagedResults } from "src/app/shared/model/paged-results.model";
     styleUrls: ["./shopping-cart.component.css"],
 })
 export class ShoppingCartComponent {
-    user:User;
-    orderItem:OrderItem;
-    shoppingCart:ShoppingCart;
+    user: User;
+    orderItem: OrderItem;
+    shoppingCart: ShoppingCart;
+    isDisabled: boolean;
+
     constructor(
         private service: MarketplaceService,
         public dialogRef: MatDialog,
@@ -50,14 +53,16 @@ export class ShoppingCartComponent {
                           next: (result: ShoppingCart) => {
                               this.shoppingCart = result;
                           }
-                      })
+                      })[
                   }
               }
           })
       });*/
-      this.authService.user$.subscribe(user => {
-        this.user = user;
-      })
+        this.authService.user$.subscribe(user => {
+            this.user = user;
+        });
+        this.getShoppingCart();
+        this.isEmpty();
     }
     openDialog(input: Review[]) {
         console.log(input);
@@ -70,20 +75,56 @@ export class ShoppingCartComponent {
             },
         });
     }
-   removeOrderItem(tourId:number): void {
-        this.service.getOrderItem(tourId,this.user.id).subscribe({
+    removeOrderItem(tourId: number): void {
+        this.service.getOrderItem(tourId, this.user.id).subscribe({
             next: (result: OrderItem) => {
                 this.orderItem = result;
-                this.service.removeOrderItem(this.orderItem.id,this.orderItem.shoppingCartId).subscribe({
-                    next: () => {
-                        this.service.getToursInCart(this.user.id).subscribe({
-                            next: (result: PagedResults<TourLimitedView>) => {
-                                this.data=result.results
-                            }
-                        });
-                    }
-                });
-            }
+                this.service
+                    .removeOrderItem(
+                        this.orderItem.id,
+                        this.orderItem.shoppingCartId,
+                    )
+                    .subscribe({
+                        next: () => {
+                            alert("Item successfully removed from cart!");
+                            this.service
+                                .getToursInCart(this.user.id)
+                                .subscribe({
+                                    next: (
+                                        result: PagedResults<TourLimitedView>,
+                                    ) => {
+                                        this.data = result.results;
+                                    },
+                                });
+                        },
+                    });
+            },
         });
+    }
+    getShoppingCart(): void {
+        this.service.getShoppingCart(this.user.id).subscribe({
+            next: (result: ShoppingCart) => {
+                this.shoppingCart = result;
+            },
+        });
+    }
+    checkout(): void {
+        for (let tour of this.data) {
+            this.service.addToken(tour.id).subscribe({
+                next: (result: TourToken) => {
+                    console.log(result);
+                },
+            });
+        }
+
+        this.service.deleteShoppingKart(this.shoppingCart.id).subscribe({
+            next: () => {
+                this.dialogRef.closeAll();
+                alert("You have successfully bought tours!");
+            },
+        });
+    }
+    isEmpty(): void {
+        this.isDisabled = this.data.length == 0;
     }
 }
