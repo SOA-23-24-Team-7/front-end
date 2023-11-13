@@ -335,4 +335,10 @@ export class MarketplaceService {
             environment.apiHost + "tourist/shoppingCart/" + shoppingKartId,
         );
     }
+
+    getTouristTokens(): Observable<Array<TourToken>> {
+        return this.http.get<Array<TourToken>>(
+            environment.apiHost + "token/tourists/",
+        );
+    }
 }

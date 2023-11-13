@@ -87,6 +87,7 @@ export class ShoppingCartComponent {
                     .subscribe({
                         next: () => {
                             alert("Item successfully removed from cart!");
+
                             this.service
                                 .getToursInCart(this.user.id)
                                 .subscribe({
@@ -94,6 +95,7 @@ export class ShoppingCartComponent {
                                         result: PagedResults<TourLimitedView>,
                                     ) => {
                                         this.data = result.results;
+                                        this.isEmpty();
                                     },
                                 });
                         },
@@ -121,6 +123,12 @@ export class ShoppingCartComponent {
             next: () => {
                 this.dialogRef.closeAll();
                 alert("You have successfully bought tours!");
+                this.shoppingCart = {};
+                this.service.addShoppingCart(this.shoppingCart).subscribe({
+                    next: (result: ShoppingCart) => {
+                        this.shoppingCart = result;
+                    },
+                });
             },
         });
     }

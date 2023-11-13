@@ -12,6 +12,7 @@ import { OrderItem } from "../model/order-item";
 import { AuthService } from "src/app/infrastructure/auth/auth.service";
 import { User } from "src/app/infrastructure/auth/model/user.model";
 import { ShoppingCartComponent } from "../shopping-cart/shopping-cart.component";
+import { TourToken } from "../model/tour-token.model";
 
 @Component({
     selector: "xp-published-tours",
@@ -23,6 +24,8 @@ export class PublishedToursComponent implements OnInit {
     publishedTours: TourLimitedView[] = [];
     user: User;
     addedTours: TourLimitedView[] = [];
+    disabledButton: boolean = false;
+    tokens: TourToken[] = [];
 
     constructor(
         private service: MarketplaceService,
@@ -42,6 +45,7 @@ export class PublishedToursComponent implements OnInit {
                 next: (result: ShoppingCart) => {
                     this.shoppingCart = result;
                     console.log(result);
+                    this.getTokens();
                     if (result == null) {
                         this.shoppingCart = {};
                         this.service
@@ -49,6 +53,7 @@ export class PublishedToursComponent implements OnInit {
                             .subscribe({
                                 next: (result: ShoppingCart) => {
                                     this.shoppingCart = result;
+                                    this.getTokens();
                                 },
                             });
                     }
@@ -94,9 +99,22 @@ export class PublishedToursComponent implements OnInit {
             shoppingCartId: this.shoppingCart.id,
         };
         console.log(orderItem);
+        if (this.addedTours.find(tr => tr.id == tourId)) {
+            alert("You have already added this item to the cart.");
+            return;
+        }
+        if (this.tokens.find(tok => tok.tourId == tourId)) {
+            alert("You have already purcheased this tour.");
+            return;
+        }
         this.service.addOrderItem(orderItem).subscribe({
             next: (result: OrderItem) => {
-                alert("Item successfully added to cart!");
+                this.service.getToursInCart(this.user.id).subscribe({
+                    next: result => {
+                        this.addedTours = result.results;
+                        alert("Item successfully added to cart!");
+                    },
+                });
             },
             error: (err: any) => {
                 console.log(err);
@@ -105,14 +123,32 @@ export class PublishedToursComponent implements OnInit {
     }
 
     openCartDialog() {
-        this.service.getToursInCart(this.user.id).subscribe({
-            next: (result: PagedResults<TourLimitedView>) => {
-                this.addedTours = result.results;
-                const dialogRef = this.dialogRef.open(ShoppingCartComponent, {
-                    height: "600px",
-                    width: "800px",
-                    data: this.addedTours, // lista javnih tacaka koju dobijam u ovoj komponenti i ovim je saljem u modalni dijalog
-                });
+        const dialogRef = this.dialogRef.open(ShoppingCartComponent, {
+            height: "600px",
+            width: "800px",
+            data: this.addedTours, // lista javnih tacaka koju dobijam u ovoj komponenti i ovim je saljem u modalni dijalog
+        });
+
+        dialogRef.afterClosed().subscribe(result => {
+            console.log("Zatvoren dijalog", result);
+            this.service.getToursInCart(this.user.id).subscribe({
+                next: (result: PagedResults<TourLimitedView>) => {
+                    this.addedTours = result.results;
+                    this.getTokens();
+                },
+            });
+        });
+    }
+
+    disableAddButton(tourId: number): void {
+        if (!this.addedTours.find(tr => tr.id == tourId))
+            alert("you have already added this item");
+    }
+
+    getTokens(): void {
+        this.service.getTouristTokens().subscribe({
+            next: result => {
+                this.tokens = result;
             },
         });
     }
