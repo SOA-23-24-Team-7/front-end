@@ -1,10 +1,17 @@
-import { Component, Inject, OnInit, Optional, ViewChild } from "@angular/core";
+import {
+    Component,
+    EventEmitter,
+    Inject,
+    OnInit,
+    Optional,
+    Output,
+    ViewChild,
+} from "@angular/core";
 import { MAT_DIALOG_DATA } from "@angular/material/dialog";
 import { StakeholderService } from "../stakeholder.service";
 import { ProblemUser } from "../../marketplace/model/problem-with-user.model";
 import { User } from "src/app/infrastructure/auth/model/user.model";
 import { ProblemUpdateDeadline } from "../model/problem-update-deadline.model";
-import { MatDatepickerInputEvent } from "@angular/material/datepicker";
 
 @Component({
     selector: "xp-problem-deadline",
@@ -15,6 +22,7 @@ export class ProblemDeadlineComponent implements OnInit {
     problem: ProblemUser;
     user: User;
     deadline: Date = new Date();
+
     constructor(
         @Optional() @Inject(MAT_DIALOG_DATA) public data: any,
         private service: StakeholderService,
@@ -31,6 +39,7 @@ export class ProblemDeadlineComponent implements OnInit {
                 deadline: this.deadline,
             };
             this.service.setDeadline(updatedProblem).subscribe();
+            problem.deadline = this.deadline;
         }
     }
 }

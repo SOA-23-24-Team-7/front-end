@@ -96,11 +96,11 @@ export class ProblemsOverviewComponent implements OnInit {
             data: { dataProblem: problem, dataUser: this.user },
         });
 
-        dialogRef.afterClosed().subscribe(result => {
-            if (result) {
-                problem.isAnswered = true;
-            }
-        });
+        // dialogRef.afterClosed().subscribe(result => {
+        //     if (result) {
+        //         problem.isAnswered = true;
+        //     }
+        // });
     }
 
     onProblemCardMouseover(problem: ProblemUser, problemCard: any) {
