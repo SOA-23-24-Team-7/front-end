@@ -8,6 +8,7 @@ import { AuthService } from 'src/app/infrastructure/auth/auth.service';
 import { User } from 'src/app/infrastructure/auth/model/user.model';
 import { TouristPosition } from '../model/tourist-position.model';
 import { TourExecutionSessionStatus } from '../model/tour-execution-session-status.model';
+import { TourExecutionSession } from '../model/tour-execution-session-model';
 
 @Component({
   selector: 'xp-tour-executing',
@@ -18,8 +19,7 @@ export class TourExecutingComponent implements OnInit {
 
   positionSubscription: Subscription
   touristId: number
-  tourId: any
-  nextKeyPointId: number
+  session: TourExecutionSession = { id: 0, tourId: 0, status: TourExecutionSessionStatus.Started, nextKeyPointId: -1, lastActivity: null! }
   tour: Tour = {
     name: '.',
     description: '.',
@@ -32,8 +32,8 @@ export class TourExecutingComponent implements OnInit {
 
   ngOnInit(): void {
     this.route.paramMap.subscribe((params) => {
-      this.tourId = params.get('tourId')
-      this.getTour(this.tourId)
+      this.session.tourId = +params.get('tourId')!
+      this.getTour()
     })
 
     this.authService.user$.subscribe({
@@ -53,20 +53,19 @@ export class TourExecutingComponent implements OnInit {
       next: (result: TouristPosition) => {
         this.touristPosition = { longitude: result.longitude, latitude: result.latitude };
 
-        this.service.checkKeyPointCompletion(this.tourId, this.touristPosition).subscribe((session) => {
-          alert(JSON.stringify(session))
-          if (session.status == TourExecutionSessionStatus.Completed) {
-            this.nextKeyPointId = null!;
-          } else {
-            this.nextKeyPointId = session.nextKeyPointId;
-          }
-        });
+        if (this.session.status !== TourExecutionSessionStatus.Started) return;
+
+        setTimeout(() => {
+          this.service.checkKeyPointCompletion(this.session.tourId, this.touristPosition).subscribe((session) => {
+            this.session = session;
+          });
+        }, 1000);
       }
     });
   }
 
-  getTour(tourId: any) {
-    this.service.getTour(tourId).subscribe({
+  getTour() {
+    this.service.getTour(this.session.tourId).subscribe({
       next: (result: Tour) => {
         this.tour = result;
       }
