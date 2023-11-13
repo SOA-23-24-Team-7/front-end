@@ -1,13 +1,13 @@
 import { Component, Input, OnInit } from "@angular/core";
 import { StakeholderService } from "../stakeholder.service";
 import { AuthService } from "src/app/infrastructure/auth/auth.service";
-import { ProblemCommentCreate } from "../model/problem-comment-create.model";
 import { faChevronRight } from "@fortawesome/free-solid-svg-icons";
 import { User } from "src/app/infrastructure/auth/model/user.model";
 import { ProblemUser } from "../../marketplace/model/problem-with-user.model";
 import { ProblemAnswer } from "../model/problem-answer.model";
 import { Output, EventEmitter } from "@angular/core";
 import { ProblemComment } from "../model/problem-comment.model";
+import { ProblemCommentCreate } from "../model/problem-comment-create.model";
 
 @Component({
     selector: "xp-problem-comment-create",
@@ -43,12 +43,15 @@ export class ProblemCommentCreateComponent implements OnInit {
             text: this.text,
             commenterId: this.user.id,
         };
-        this.service.createProblemComment(problemComment).subscribe({
-            next: (result: ProblemComment) => {
-                console.log(result);
-                this.onAddComment.emit(result);
-            },
-        });
+        console.log(this.user.role);
+        this.service
+            .createComment(problemComment, this.problem.id, this.user.role)
+            .subscribe({
+                next: (result: ProblemComment) => {
+                    console.log(result);
+                    this.onAddComment.emit(result);
+                },
+            });
     }
 
     createAnswer() {

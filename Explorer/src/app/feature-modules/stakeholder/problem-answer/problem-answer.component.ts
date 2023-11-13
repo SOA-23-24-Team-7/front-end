@@ -13,6 +13,7 @@ import { User } from "src/app/infrastructure/auth/model/user.model";
 import { faSquareCheck } from "@fortawesome/free-solid-svg-icons";
 import { ProblemAnswer } from "../model/problem-answer.model";
 import { ProblemComment } from "../model/problem-comment.model";
+import { PagedResults } from "src/app/shared/model/paged-results.model";
 
 @Component({
     selector: "xp-problem-answer",
@@ -36,6 +37,7 @@ export class ProblemAnswerComponent implements OnInit {
         this.user = this.data.dataUser;
 
         this.loadProblemAnswer(this.problem.id);
+        this.loadProblemComment();
     }
 
     loadProblemAnswer(problemId: number) {
@@ -67,6 +69,18 @@ export class ProblemAnswerComponent implements OnInit {
 
     addComment(comment: ProblemComment) {
         this.comments.push(comment);
+    }
+
+    loadProblemComment(): void {
+        this.service
+            .getProblemComments(this.problem.id, this.user.role)
+            .subscribe({
+                next: (result: PagedResults<ProblemComment>) => {
+                    this.comments = result.results;
+                    console.log(this.comments);
+                },
+                error: () => {},
+            });
     }
 
     hasDedlinePassed(): boolean {

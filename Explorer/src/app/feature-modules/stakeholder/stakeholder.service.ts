@@ -7,9 +7,9 @@ import { PersonUpdate } from "./model/person-update.model";
 import { ProblemComment } from "./model/problem-comment.model";
 import { Person } from "./model/person.model";
 import { ProblemUser } from "../marketplace/model/problem-with-user.model";
-import { ProblemCommentCreate } from "./model/problem-comment-create.model";
 import { ProblemAnswer } from "./model/problem-answer.model";
 import { ProblemUpdateDeadline } from "./model/problem-update-deadline.model";
+import { ProblemCommentCreate } from "./model/problem-comment-create.model";
 
 @Injectable({
     providedIn: "root",
@@ -47,11 +47,17 @@ export class StakeholderService {
         );
     }
 
-    createProblemComment(
+    createComment(
         problemComment: ProblemCommentCreate,
+        problemId: number,
+        userRole: string,
     ): Observable<ProblemComment> {
-        return this.http.post<ProblemComment>(
-            environment.apiHost + "problemComment/",
+        return this.http.patch<ProblemComment>(
+            environment.apiHost +
+                userRole +
+                "/problem/" +
+                problemId +
+                "/problem-comments",
             problemComment,
         );
     }
@@ -70,14 +76,6 @@ export class StakeholderService {
         );
     }
 
-    getCommentsByProblemAnswerId(
-        problemAnswerId: number,
-    ): Observable<PagedResults<ProblemComment>> {
-        return this.http.get<PagedResults<ProblemComment>>(
-            environment.apiHost + "problemComment/" + problemAnswerId,
-        );
-    }
-
     resolveProblem(
         problemId: number,
         userRole: string,
@@ -89,6 +87,19 @@ export class StakeholderService {
                 "/problem/" +
                 problemId +
                 "/resolve",
+        );
+    }
+
+    getProblemComments(
+        problemId: number,
+        userRole: string,
+    ): Observable<PagedResults<ProblemComment>> {
+        return this.http.get<PagedResults<ProblemComment>>(
+            environment.apiHost +
+                userRole +
+                "/problem/" +
+                problemId +
+                "/problem-comments",
         );
     }
 
