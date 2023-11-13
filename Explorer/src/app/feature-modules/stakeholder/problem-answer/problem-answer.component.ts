@@ -6,14 +6,19 @@ import {
     Output,
     EventEmitter,
 } from "@angular/core";
-import { MAT_DIALOG_DATA } from "@angular/material/dialog";
+import {
+    MAT_DIALOG_DATA,
+    MatDialog,
+    MatDialogRef,
+} from "@angular/material/dialog";
 import { StakeholderService } from "../stakeholder.service";
 import { ProblemUser } from "../../marketplace/model/problem-with-user.model";
 import { User } from "src/app/infrastructure/auth/model/user.model";
-import { faSquareCheck } from "@fortawesome/free-solid-svg-icons";
+import { faSquareCheck, faTrash } from "@fortawesome/free-solid-svg-icons";
 import { ProblemAnswer } from "../model/problem-answer.model";
 import { ProblemComment } from "../model/problem-comment.model";
 import { PagedResults } from "src/app/shared/model/paged-results.model";
+import { TourAuthoringService } from "../../tour-authoring/tour-authoring.service";
 
 @Component({
     selector: "xp-problem-answer",
@@ -26,10 +31,13 @@ export class ProblemAnswerComponent implements OnInit {
     headerText: string;
     comments: ProblemComment[];
     @Output() onAddAnswer = new EventEmitter();
+    @Output() onDeleteTour = new EventEmitter<number>();
 
     constructor(
         @Optional() @Inject(MAT_DIALOG_DATA) public data: any,
         private service: StakeholderService,
+        private tourService: TourAuthoringService,
+        private dialogRef: MatDialogRef<ProblemAnswerComponent>,
     ) {}
 
     ngOnInit(): void {
@@ -91,5 +99,16 @@ export class ProblemAnswerComponent implements OnInit {
         return deadline <= today;
     }
 
+    deleteTour(tourId: number, problemId: number) {
+        this.tourService.deleteTourAdmin(tourId).subscribe({
+            next: () => {
+                this.onDeleteTour.emit(problemId);
+                this.dialogRef.close();
+            },
+            error: () => {},
+        });
+    }
+
     faSquareCheck = faSquareCheck;
+    faTrash = faTrash;
 }

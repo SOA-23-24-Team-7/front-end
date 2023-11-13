@@ -33,6 +33,12 @@
     text-align: center;
 }
 
+.row {
+    display: flex;
+    gap: 0.3rem;
+    justify-content: flex-end;
+}
+
 .description {
     padding-inline: 0.8rem;
     padding-bottom: 1rem;
@@ -54,8 +60,20 @@
     transition: 0.3s;
 }
 
+.button-red {
+    margin-left: 1rem;
+    margin-top: auto;
+    font-size: 2rem;
+    transition: 0.3s;
+}
+
 .button:hover {
     color: rgba(var(--clr-success-700));
+    cursor: pointer;
+}
+
+.button-red:hover {
+    color: red;
     cursor: pointer;
 }
 
