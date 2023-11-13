@@ -19,7 +19,7 @@
                 ></xp-map>
             </div>
         </div>
-        <div class="column">
+        <div class="column" *ngIf="areButtonsEnabled">
             <div class="key-point-form">
                 <xp-key-point-form
                     [shouldEdit]="shouldEdit"
@@ -30,22 +30,17 @@
             </div>
         </div>
         <div class="column-separated">
-            <h2>Choose transport</h2>
+            <h2 *ngIf="!areButtonsEnabled">Chosen types of transport</h2>
+            <h2 *ngIf="areButtonsEnabled">Choose types of transport</h2>
             <div class="chechboxes">
                 <br />
-                <div>
-                    <mat-label *ngIf="areButtonsEnabled" class="text"
-                        >Choose types of transport:
-                    </mat-label>
-                    <mat-label *ngIf="!areButtonsEnabled" class="text"
-                        >Chosen types of transportation:
-                    </mat-label>
-                </div>
                 <div>
                     <table *ngIf="!areButtonsEnabled">
                         <tr *ngIf="checkedWalkingDuration">
                             <td>
                                 <mat-label>Walking</mat-label>
+                            </td>
+                            <td>
                             </td>
                             <td>{{ walkingDuration }} minutes</td>
                         </tr>
@@ -53,11 +48,15 @@
                             <td>
                                 <mat-label>Bicycle ride</mat-label>
                             </td>
+                            <td>
+                            </td>
                             <td>{{ bicycleRideDuration }} minutes</td>
                         </tr>
                         <tr *ngIf="checkedCarRideDuration">
                             <td>
                                 <mat-label>Car ride</mat-label>
+                            </td>
+                            <td>
                             </td>
                             <td>{{ carRideDuration }} minutes</td>
                         </tr>
@@ -103,7 +102,7 @@
                     </table>
                 </div>
                 <button class="done-submit" (click)="onBackClicked()">
-                    <div class="done-submit-text">Choose</div>
+                    <div class="done-submit-text">Done</div>
                 </button>
             </div>
         </div>
@@ -126,12 +125,14 @@
                     <xp-key-point-card [keyPoint]="kp"> </xp-key-point-card>
                     <div class="buttons-container">
                         <button
+                            *ngIf="areButtonsEnabled"
                             (click)="deleteKeyPoint(kp.id || 0)"
                             mat-icon-button
                         >
                             <mat-icon>delete</mat-icon>
                         </button>
                         <button
+                            *ngIf="areButtonsEnabled"
                             color="primary"
                             (click)="onEditClicked(kp)"
                             mat-icon-button
