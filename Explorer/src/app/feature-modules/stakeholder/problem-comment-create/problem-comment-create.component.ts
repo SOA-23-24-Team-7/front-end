@@ -5,7 +5,7 @@ import { ProblemCommentCreate } from "../model/problem-comment-create.model";
 import { faChevronRight } from "@fortawesome/free-solid-svg-icons";
 import { User } from "src/app/infrastructure/auth/model/user.model";
 import { ProblemUser } from "../../marketplace/model/problem-with-user.model";
-import { ProblemAnswer } from "../model/problem-answer";
+import { ProblemAnswer } from "../model/problem-answer.model";
 import { Output, EventEmitter } from "@angular/core";
 import { ProblemComment } from "../model/problem-comment.model";
 
@@ -55,15 +55,18 @@ export class ProblemCommentCreateComponent implements OnInit {
     createAnswer() {
         const problemAnswer: ProblemAnswer = {
             authorId: this.problem.tourAuthorId,
-            problemId: this.problem.id,
             answer: this.text,
         };
-        this.service.createAnswer(problemAnswer).subscribe(() => {});
-        if (this.text !== undefined) {
-            this.problem.isAnswered = true;
-            this.onAddAnswer.emit(this.text);
-            this.label = "Comment";
-        }
+        this.service.createAnswer(problemAnswer, this.problem.id).subscribe({
+            next: () => {
+                this.problem.isAnswered = true;
+                this.onAddAnswer.emit(this.text);
+                this.label = "Comment";
+            },
+            error: () => {
+                console.log("error");
+            },
+        });
     }
 
     faChevronRight = faChevronRight;

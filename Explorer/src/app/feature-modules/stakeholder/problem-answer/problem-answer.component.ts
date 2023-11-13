@@ -6,12 +6,12 @@ import {
     Output,
     EventEmitter,
 } from "@angular/core";
-import { MAT_DIALOG_DATA, MatDialogRef } from "@angular/material/dialog";
+import { MAT_DIALOG_DATA } from "@angular/material/dialog";
 import { StakeholderService } from "../stakeholder.service";
 import { ProblemUser } from "../../marketplace/model/problem-with-user.model";
 import { User } from "src/app/infrastructure/auth/model/user.model";
 import { faSquareCheck } from "@fortawesome/free-solid-svg-icons";
-import { ProblemAnswer } from "../model/problem-answer";
+import { ProblemAnswer } from "../model/problem-answer.model";
 import { ProblemComment } from "../model/problem-comment.model";
 import { PagedResults } from "src/app/shared/model/paged-results.model";
 

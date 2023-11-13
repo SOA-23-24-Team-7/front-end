@@ -8,7 +8,7 @@ import { ProblemComment } from "./model/problem-comment.model";
 import { Person } from "./model/person.model";
 import { ProblemUser } from "../marketplace/model/problem-with-user.model";
 import { ProblemCommentCreate } from "./model/problem-comment-create.model";
-import { ProblemAnswer } from "./model/problem-answer";
+import { ProblemAnswer } from "./model/problem-answer.model";
 import { ProblemUpdateDeadline } from "./model/problem-update-deadline.model";
 
 @Injectable({
@@ -17,7 +17,10 @@ import { ProblemUpdateDeadline } from "./model/problem-update-deadline.model";
 export class StakeholderService {
     getProblemAnswer(problemId: number): Observable<ProblemAnswer> {
         return this.http.get<ProblemAnswer>(
-            environment.apiHost + "problem-answer/problem/" + problemId,
+            environment.apiHost +
+                "author/problem/" +
+                problemId +
+                "/problem-answer",
         );
     }
     constructor(private http: HttpClient) {}
@@ -49,9 +52,16 @@ export class StakeholderService {
         );
     }
 
-    createAnswer(problemAnswer: ProblemAnswer): Observable<ProblemAnswer> {
-        return this.http.post<ProblemAnswer>(
-            environment.apiHost + "problemAnswer/",
+    createAnswer(
+        problemAnswer: ProblemAnswer,
+        problemId: number,
+    ): Observable<ProblemAnswer> {
+        console.log(problemId);
+        return this.http.patch<ProblemAnswer>(
+            environment.apiHost +
+                "author/problem/" +
+                problemId +
+                "/problem-answer/",
             problemAnswer,
         );
     }
