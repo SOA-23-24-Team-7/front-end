@@ -19,8 +19,7 @@ export class TourExecutingComponent implements OnInit {
 
   positionSubscription: Subscription
   touristId: number
-  tourId: any
-  nextKeyPointId: number
+  session: TourExecutionSession = { id: 0, tourId: 0, status: TourExecutionSessionStatus.Started, nextKeyPointId: -1, lastActivity: null! }
   tour: Tour = {
     name: '.',
     description: '.',
@@ -32,9 +31,10 @@ export class TourExecutingComponent implements OnInit {
   constructor(private route: ActivatedRoute, private router: Router, private authService: AuthService, private service: TourExecutionService) { }
 
   ngOnInit(): void {
+    this.getLiveTourExecution()
     this.route.paramMap.subscribe((params) => {
-      this.tourId = params.get('tourId')
-      this.getTour(this.tourId)
+      this.session.tourId = +params.get('tourId')!
+      this.getTour()
     })
 
     this.authService.user$.subscribe({
@@ -54,19 +54,19 @@ export class TourExecutingComponent implements OnInit {
       next: (result: TouristPosition) => {
         this.touristPosition = { longitude: result.longitude, latitude: result.latitude };
 
-        this.service.checkKeyPointCompletion(this.tourId, this.touristPosition).subscribe((session) => {
-          if (session.status == TourExecutionSessionStatus.Completed) {
-            this.nextKeyPointId = null!;
-          } else {
-            this.nextKeyPointId = session.nextKeyPointId;
-          }
-        });
+        if (this.session.status !== TourExecutionSessionStatus.Started) return;
+
+        setTimeout(() => {
+          this.service.checkKeyPointCompletion(this.session.tourId, this.touristPosition).subscribe((session) => {
+            this.session = session;
+          });
+        }, 1000);
       }
     });
   }
 
-  getTour(tourId: any) {
-    this.service.getTour(tourId).subscribe({
+  getTour() {
+    this.service.getTour(this.session.tourId).subscribe({
       next: (result: Tour) => {
         this.tour = result;
       }
@@ -75,11 +75,20 @@ export class TourExecutingComponent implements OnInit {
   abandonTour(){
     let r = confirm('Are you sure you want to leave this tour?')
     if(r){
-      this.service.abandonTour(this.tourId).subscribe({
+      this.service.abandonTour(this.session.tourId).subscribe({
         next: (result: TourExecutionSession) => {
           this.router.navigate(['/purchasedtours'])
         }
       });
     }
+  }
+  getLiveTourExecution(){
+    this.service.getLiveTour().subscribe({
+      next: (result: TourExecutionSession) =>{
+        if(result != null){
+          this.session = result
+        }
+      }
+    })
   }
 }
