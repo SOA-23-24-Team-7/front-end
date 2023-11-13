@@ -22,6 +22,7 @@
     --clr-neutral-500: 140, 140, 140;
     --clr-neutral-700: 64, 64, 64;
     --clr-neutral-900: 52, 52, 52;
+    
 
     --clr-background: var(--clr-neutral-100);
     --clr-background-secondary: var(--clr-neutral-300);
@@ -30,6 +31,8 @@
     --clr-outline: var(--clr-neutral-300);
     --clr-outline-contrast: var(--clr-neutral-700);
 
+    --border-primary: 220, 223, 228;
+    
     --fnt-body: "Source Sans 3", sans-serif;
 
     --fnt-header: "Playfair Display", serif;
@@ -52,6 +55,8 @@
     --clr-outline-contrast: var(--clr-neutral-300);
 
     background-color: rgb(var(--clr-background));
+
+    --border-primary: 73, 77, 88;
 }
 
 /* Box sizing rules */

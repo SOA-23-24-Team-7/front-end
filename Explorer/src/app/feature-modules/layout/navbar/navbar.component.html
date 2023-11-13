@@ -168,6 +168,17 @@
                 </div>
                 <div class="navbar-submenu">
                     <div
+                        class="navbar-submenu-item navbar-submenu-item-border-radius-top"
+                        [routerLink]="['tour-search']"
+                        *ngIf="user && user.role === 'tourist'"
+                    >
+                        <fa-icon
+                            class="navbar-submenu-item-icon"
+                            [icon]="faSearch"
+                        />
+                        <div class="navbar-submenu-item-text">Explore</div>
+                    </div>
+                    <div
                         class="navbar-submenu-item"
                         *ngIf="user && user.role === 'author'"
                         [routerLink]="['tours']"
@@ -189,6 +200,34 @@
                         />
                         <div class="navbar-submenu-item-text">
                             Manage facilities
+                        </div>
+                    </div>
+
+                    <div
+                        class="navbar-submenu-item"
+                        [routerLink]="['published-tours']"
+                        *ngIf="user && user.role === 'tourist'"
+                    >
+                        <fa-icon
+                            class="navbar-submenu-item-icon"
+                            [icon]="faShoppingCart"
+                        />
+                        <div class="navbar-submenu-item-text">
+                            Start shopping
+                        </div>
+                    </div>
+
+                    <div
+                        class="navbar-submenu-item"
+                        [routerLink]="['tourist-position-simulator']"
+                        *ngIf="user && user.role === 'tourist'"
+                    >
+                        <fa-icon
+                            class="navbar-submenu-item-icon"
+                            [icon]="faPersonHiking"
+                        />
+                        <div class="navbar-submenu-item-text">
+                            Change position
                         </div>
                     </div>
                     <div
@@ -428,6 +467,30 @@
                             [icon]="faStar"
                         />
                         <div class="navbar-submenu-item-text">Rate the app</div>
+                    </div>
+                    <div
+                        class="navbar-submenu-item"
+                        [routerLink]="['notification-tabs']"
+                        *ngIf="user && user.role === 'author'"
+                    >
+                        <fa-icon
+                            class="navbar-submenu-item-icon"
+                            [icon]="faBell"
+                        />
+                        <div class="navbar-submenu-item-text">
+                            My notifications
+                        </div>
+                    </div>
+                    <div
+                        class="navbar-submenu-item"
+                        *ngIf="user && user.role === 'administrator'"
+                        [routerLink]="['public-requests']"
+                    >
+                        <fa-icon
+                            class="navbar-submenu-item-icon"
+                            [icon]="faUser"
+                        />
+                        <div class="navbar-submenu-item-text">My requests</div>
                     </div>
                     <div class="navbar-submenu-item" (click)="onLogout()">
                         <fa-icon

@@ -1,10 +1,12 @@
 import { NgModule } from "@angular/core";
 import { RouterModule, Routes } from "@angular/router";
 import { HomeComponent } from "src/app/feature-modules/layout/home/home.component";
+import { LoginComponent } from "../auth/login/login.component";
 import { EquipmentComponent } from "src/app/feature-modules/administration/equipment/equipment.component";
 import { TourPreferencesComponent } from "src/app/feature-modules/marketplace/tour-preferences/tour-preferences.component";
 import { TourPreferenceFormComponent } from "src/app/feature-modules/marketplace/tour-preference-form/tour-preference-form.component";
 import { AuthGuard } from "../auth/auth.guard";
+import { RegistrationComponent } from "../auth/registration/registration.component";
 import { BlogsComponent } from "src/app/feature-modules/blog/blogs/blogs.component";
 import { BlogComponent } from "src/app/feature-modules/blog/blog/blog.component";
 import { UsersOverviewComponent } from "src/app/feature-modules/administration/users-overview/users-overview.component";
@@ -28,6 +30,15 @@ import { MyClubInvitationsComponent } from "src/app/feature-modules/marketplace/
 import { ProblemsOverviewComponent } from "src/app/feature-modules/stakeholder/problems-overview/problems-overview.component";
 import { ProblemAnswerComponent } from "src/app/feature-modules/stakeholder/problem-answer/problem-answer.component";
 
+import { TouristPositionSimulatorComponent } from "src/app/feature-modules/tour-execution/tourist-position-simulator/tourist-position-simulator.component";
+import { RequestViewComponent } from "src/app/feature-modules/administration/request-view/request-view.component";
+
+import { TourSearchComponent } from "src/app/feature-modules/marketplace/tour-search/tour-search.component";
+import { NotificationTabsComponent } from "src/app/feature-modules/stakeholder/notification-tabs/notification-tabs.component";
+import { KeypointsNotificationsComponent } from "src/app/feature-modules/marketplace/keypoints-notifications/keypoints-notifications.component";
+import { FacilitiesNotificationsComponent } from "src/app/feature-modules/marketplace/facilities-notifications/facilities-notifications.component";
+import { PublishedToursComponent } from "src/app/feature-modules/marketplace/tours/published-tours.component";
+
 const routes: Routes = [
     { path: "", component: HomeComponent },
     {
@@ -50,6 +61,11 @@ const routes: Routes = [
     },
     { path: "tours", component: TourComponent, canActivate: [AuthGuard] },
     {
+        path: "published-tours",
+        component: PublishedToursComponent,
+        canActivate: [AuthGuard],
+    },
+    {
         path: "tours/equipment/:id",
         component: TourEquipmentFormComponent,
         canActivate: [AuthGuard],
@@ -62,6 +78,16 @@ const routes: Routes = [
     {
         path: "tour/:id/key-points",
         component: KeyPointsComponent,
+        canActivate: [AuthGuard],
+    },
+    {
+        path: "tourist-position-simulator",
+        component: TouristPositionSimulatorComponent,
+        canActivate: [AuthGuard],
+    },
+    {
+        path: "tourist-position-simulator",
+        component: TouristPositionSimulatorComponent,
         canActivate: [AuthGuard],
     },
     {
@@ -143,6 +169,22 @@ const routes: Routes = [
     {
         path: "problem/problem-comment",
         component: ProblemAnswerComponent,
+    },
+    {
+        path: "public-requests",
+        component: RequestViewComponent,
+        canActivate: [AuthGuard],
+    },
+    {
+        path: "notification-tabs",
+        component: NotificationTabsComponent,
+        canActivate: [AuthGuard],
+    },
+
+    {
+        path: "tour-search",
+        component: TourSearchComponent,
+        canActivate: [AuthGuard],
     },
 ];
 

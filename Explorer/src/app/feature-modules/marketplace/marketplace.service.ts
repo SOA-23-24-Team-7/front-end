@@ -15,6 +15,16 @@ import { ClubInvitationWithClubAndOwnerName } from "./model/club-invitation-with
 import { Review } from "./model/review.model";
 import { Problem } from "./model/problem.model";
 import { TourPreference } from "./model/tour-preference.model";
+import { Tour } from "../tour-authoring/model/tour.model";
+import { FacilityNotification } from "./model/facility-notification";
+import { KeyPointNotification } from "./model/keypoint-notification";
+import { PublicKeyPoint } from "./model/public-key-point.model";
+import { PublicFacilities } from "./model/public-facilities.model";
+import { KeyPoint } from "../tour-authoring/model/key-point.model";
+import { ShoppingCart } from "./model/shopping-cart";
+import { OrderItem } from "./model/order-item";
+import { TourLimitedView } from "./model/tour-limited-view.model";
+import { TourToken } from "./model/tour-token.model";
 
 @Injectable({
     providedIn: "root",
@@ -222,5 +232,115 @@ export class MarketplaceService {
         const route =
             environment.apiHost + "tourist/club/invite/reject/" + invitationId;
         return this.http.patch<any>(route, { observe: "response" });
+    }
+    findNearbyTours(
+        longitude: number,
+        latitude: number,
+        distance: number,
+    ): Observable<PagedResults<Tour>> {
+        const route = `${environment.apiHost}tourist/tour?longitude=${longitude}&latitude=${latitude}&maxDistance=${distance}`;
+        return this.http.get<PagedResults<Tour>>(route);
+    }
+    getFacilityNotificationsByAuthorId(): Observable<
+        PagedResults<FacilityNotification>
+    > {
+        return this.http.get<PagedResults<FacilityNotification>>(
+            environment.apiHost + "notifications",
+        );
+    }
+    getKeyPointNotificationsByAuthorId(): Observable<
+        PagedResults<KeyPointNotification>
+    > {
+        return this.http.get<PagedResults<KeyPointNotification>>(
+            environment.apiHost + "notifications/keypoint",
+        );
+    }
+
+    getPublicKeyPoints(): Observable<PagedResults<PublicKeyPoint>> {
+        return this.http.get<PagedResults<PublicKeyPoint>>(
+            environment.apiHost + "tourist/publicKeyPoint",
+        );
+    }
+
+    getPublicFacilities(): Observable<PagedResults<PublicFacilities>> {
+        return this.http.get<PagedResults<PublicFacilities>>(
+            environment.apiHost + "tourist/facility/public",
+        );
+    }
+    getPublishedTours(): Observable<PagedResults<Tour>> {
+        return this.http.get<PagedResults<Tour>>(
+            environment.apiHost + "market-place/tours/published",
+        );
+    }
+
+    getToursFirstKeyPoint(tourId: number): Observable<KeyPoint> {
+        return this.http.get<KeyPoint>(
+            environment.apiHost +
+                "market-place/tours/" +
+                tourId +
+                "/first-key-point",
+        );
+    }
+    addShoppingCart(shoppingCart: ShoppingCart): Observable<ShoppingCart> {
+        return this.http.post<ShoppingCart>(
+            environment.apiHost + "tourist/shoppingCart/",
+            shoppingCart,
+        );
+    }
+    addOrderItem(orderItem: OrderItem): Observable<OrderItem> {
+        return this.http.post<OrderItem>(
+            environment.apiHost + "tourist/shoppingCart/addItem/",
+            orderItem,
+        );
+    }
+    getShoppingCart(id: number): Observable<ShoppingCart> {
+        return this.http.get<ShoppingCart>(
+            environment.apiHost + "tourist/shoppingCart/" + id,
+        );
+    }
+
+    getToursInCart(id: number): Observable<PagedResults<Tour>> {
+        return this.http.get<PagedResults<TourLimitedView>>(
+            environment.apiHost + "market-place/tours/inCart/" + id,
+        );
+    }
+    getOrderItem(tourId: number, touristId: number): Observable<OrderItem> {
+        return this.http.get<OrderItem>(
+            environment.apiHost +
+                "tourist/shoppingCart/getItem/" +
+                tourId +
+                "/" +
+                touristId,
+        );
+    }
+    removeOrderItem(
+        id: number | undefined,
+        shoppingCartId: number | undefined,
+    ): any {
+        return this.http.delete<OrderItem>(
+            environment.apiHost +
+                "tourist/shoppingCart/removeItem/" +
+                id +
+                "/" +
+                shoppingCartId,
+        );
+    }
+    addToken(tourId: number | undefined): any {
+        return this.http.post<TourToken>(
+            environment.apiHost + "token/" + tourId,
+            {},
+        );
+    }
+
+    deleteShoppingKart(shoppingKartId: number | undefined): any {
+        return this.http.delete(
+            environment.apiHost + "tourist/shoppingCart/" + shoppingKartId,
+        );
+    }
+
+    getTouristTokens(): Observable<Array<TourToken>> {
+        return this.http.get<Array<TourToken>>(
+            environment.apiHost + "token/tourists/",
+        );
     }
 }

@@ -10,6 +10,8 @@ import { ProblemsOverviewComponent } from "./problems-overview/problems-overview
 import { ProblemAnswerComponent } from "./problem-answer/problem-answer.component";
 import { FontAwesomeModule } from "@fortawesome/angular-fontawesome";
 import { ProblemDeadlineComponent } from "./problem-deadline/problem-deadline.component";
+import { NotificationTabsComponent } from "./notification-tabs/notification-tabs.component";
+import { MarketplaceModule } from "../marketplace/marketplace.module";
 
 @NgModule({
     declarations: [
@@ -20,12 +22,20 @@ import { ProblemDeadlineComponent } from "./problem-deadline/problem-deadline.co
         ProblemsOverviewComponent,
         ProblemAnswerComponent,
         ProblemDeadlineComponent,
+        NotificationTabsComponent,
     ],
-    imports: [CommonModule, MaterialModule, FormsModule, FontAwesomeModule],
+    imports: [
+        CommonModule,
+        MaterialModule,
+        FormsModule,
+        FontAwesomeModule,
+        MarketplaceModule,
+    ],
     exports: [
         UserProfileComponent,
         EditProfileComponent,
         ProblemsOverviewComponent,
+        NotificationTabsComponent,
     ],
 })
 export class StakeholderModule {}

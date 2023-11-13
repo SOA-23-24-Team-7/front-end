@@ -7,6 +7,10 @@ import { Observable } from "rxjs";
 import { environment } from "src/env/environment";
 import { KeyPoint } from "./model/key-point.model";
 import { Facilities } from "./model/facilities.model";
+import { PublicKeyPointRequest } from "./model/public-key-point-request.model";
+import { PublicFacilityRequest } from "./model/public-facility-request.model";
+import { PublicKeyPoint } from "./model/public-key-point.model";
+import { Person } from "../stakeholder/model/person.model";
 
 @Injectable({
     providedIn: "root",
@@ -141,6 +145,67 @@ export class TourAuthoringService {
     deleteTourEquipment(tourId: number, eqId: number): Observable<Tour> {
         return this.http.delete<Tour>(
             environment.apiHost + "tour/equipment/" + tourId + "/" + eqId,
+        );
+    }
+
+    addPublicKeyPointRequest(
+        request: PublicKeyPointRequest,
+    ): Observable<PublicKeyPointRequest> {
+        return this.http.post<PublicKeyPointRequest>(
+            environment.apiHost + "publicKeyPointRequest",
+            request,
+        );
+    }
+
+    addPublicFacilityRequest(
+        request: PublicFacilityRequest,
+    ): Observable<PublicFacilityRequest> {
+        return this.http.post<PublicFacilityRequest>(
+            environment.apiHost + "publicFacilityRequest",
+            request,
+        );
+    }
+
+    getTour(tourId: number): Observable<Tour> {
+        return this.http.get<Tour>(environment.apiHost + "tour/" + tourId);
+    }
+
+    getPublicKeyPoints(): Observable<PagedResults<PublicKeyPoint>> {
+        return this.http.get<PagedResults<PublicKeyPoint>>(
+            environment.apiHost + "author/publicKeyPoint",
+        );
+    }
+
+    publishTour(tour: Tour): Observable<Tour> {
+        return this.http.put<Tour>(
+            environment.apiHost + "tour/publish/" + tour.id,
+            tour,
+        );
+    }
+    archiveTour(tour: Tour): Observable<Tour> {
+        return this.http.put<Tour>(
+            environment.apiHost + "tour/archive/" + tour.id,
+            tour,
+        );
+    }
+
+    addPublicKeyPoint(
+        tourId: number,
+        publicKeyPointId: number,
+    ): Observable<KeyPoint> {
+        return this.http.post<KeyPoint>(
+            environment.apiHost +
+                "author/publicKeyPoint/addPrivate/" +
+                tourId +
+                "/" +
+                publicKeyPointId,
+            {},
+        );
+    }
+
+    getPerson(userId: number): Observable<Person> {
+        return this.http.get<Person>(
+            environment.apiHost + "people/person/" + userId,
         );
     }
 }
