@@ -31,7 +31,7 @@ export class ProblemAnswerComponent implements OnInit {
     headerText: string;
     comments: ProblemComment[];
     @Output() onAddAnswer = new EventEmitter();
-    @Output() onDeleteTour = new EventEmitter<number>();
+    // @Output() onDeleteTour = new EventEmitter<number>();
 
     constructor(
         @Optional() @Inject(MAT_DIALOG_DATA) public data: any,
@@ -99,11 +99,11 @@ export class ProblemAnswerComponent implements OnInit {
         return deadline <= today;
     }
 
-    deleteTour(tourId: number, problemId: number) {
+    deleteTour(tourId: number) {
+        console.log(tourId);
         this.tourService.deleteTourAdmin(tourId).subscribe({
             next: () => {
-                this.onDeleteTour.emit(problemId);
-                this.dialogRef.close();
+                this.dialogRef.close(tourId);
             },
             error: () => {},
         });

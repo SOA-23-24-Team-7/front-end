@@ -97,11 +97,10 @@ export class ProblemsOverviewComponent implements OnInit {
         });
 
         dialogRef.afterClosed().subscribe(result => {
-            if (!result) {
-                console.log("osakdasdasas");
-                return;
+            console.log(result);
+            if (result !== undefined) {
+                this.problems = this.problems.filter(x => x.tourId !== result);
             }
-            this.problems.splice(result, 1);
         });
     }
 

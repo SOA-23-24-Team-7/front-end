@@ -29,6 +29,7 @@ export class ProblemDeadlineComponent implements OnInit {
         private service: StakeholderService,
     ) {
         this.todayDate.setDate(this.todayDate.getDate() + 1);
+        this.deadline.setDate(this.deadline.getDate() + 1);
     }
     ngOnInit(): void {
         this.problem = this.data.dataProblem;
