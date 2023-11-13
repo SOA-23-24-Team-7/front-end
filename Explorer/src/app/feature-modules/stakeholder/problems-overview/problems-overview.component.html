@@ -15,6 +15,7 @@
                 class="deadline"
                 *ngIf="
                     shouldShowDeadline(problem.deadline) &&
+                    !problem.isResolved &&
                     (user.role == 'author' || user.role == 'administrator')
                 "
             >
@@ -25,6 +26,7 @@
                 *ngIf="
                     shouldShowDeadline(problem.deadline) == false &&
                     user.role == 'administrator' &&
+                    !problem.isResolved &&
                     hasPassed5DaysSinceReported(problem.reportedTime)
                 "
                 (click)="openDeadlineModal(problem, $event)"
@@ -36,7 +38,10 @@
             <fa-icon
                 class="warning-icon"
                 [icon]="faCircleExclamation"
-                *ngIf="hasPassed5DaysSinceReported(problem.reportedTime)"
+                *ngIf="
+                    hasPassed5DaysSinceReported(problem.reportedTime) &&
+                    !problem.isResolved
+                "
             />
         </div>
         <div class="data">
@@ -48,7 +53,7 @@
                             'url(' + problem.tourist.profilePicture + ')'
                         "
                     ></div>
-                    <div>@{{ problem.tourist.username }}</div>
+                    <div>{{ problem.tourist.username }}</div>
                 </div>
                 <div class="report-data">
                     <div class="label">Reported at:</div>
