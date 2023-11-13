@@ -43,7 +43,6 @@ export class ProblemCommentCreateComponent implements OnInit {
             text: this.text,
             commenterId: this.user.id,
         };
-        console.log(this.user.role);
         this.service
             .createComment(problemComment, this.problem.id, this.user.role)
             .subscribe({
