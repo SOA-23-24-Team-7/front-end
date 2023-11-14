@@ -323,11 +323,10 @@ export class MarketplaceService {
                 shoppingCartId,
         );
     }
-    addToken(tourId: number | undefined): any {
-        return this.http.post<TourToken>(
-            environment.apiHost + "token/" + tourId,
-            {},
-        );
+    addToken(tourId: number): Promise<TourToken | undefined> {
+        return this.http
+            .post<TourToken>(environment.apiHost + "token/" + tourId, {})
+            .toPromise();
     }
 
     deleteShoppingKart(shoppingKartId: number | undefined): any {
@@ -343,12 +342,14 @@ export class MarketplaceService {
     }
 
     getTourById(tourId: number): Observable<Tour> {
-        const route: string = environment.apiHost + "market-place/tours/" + tourId;
+        const route: string =
+            environment.apiHost + "market-place/tours/" + tourId;
         return this.http.get<Tour>(route);
     }
-    
+
     canTourBeRated(tourId: number): Observable<boolean> {
-        const route: string = environment.apiHost + "market-place/tours/can-be-rated/" + tourId;
+        const route: string =
+            environment.apiHost + "market-place/tours/can-be-rated/" + tourId;
         return this.http.get<boolean>(route);
     }
 }
