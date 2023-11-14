@@ -10,6 +10,7 @@ import { ProblemUser } from "../marketplace/model/problem-with-user.model";
 import { ProblemAnswer } from "./model/problem-answer.model";
 import { ProblemUpdateDeadline } from "./model/problem-update-deadline.model";
 import { ProblemCommentCreate } from "./model/problem-comment-create.model";
+import { ProblemResolvingNotification } from "./model/problem-resolving-notification.model";
 
 @Injectable({
     providedIn: "root",
@@ -130,6 +131,14 @@ export class StakeholderService {
                 "administrator/problem/set-deadline/" +
                 problem.id,
             problem,
+        );
+    }
+
+    getNotificationsByLoggedInUser(): Observable<
+        PagedResults<ProblemResolvingNotification>
+    > {
+        return this.http.get<PagedResults<ProblemResolvingNotification>>(
+            environment.apiHost + "notifications/problems",
         );
     }
 }

@@ -12,6 +12,7 @@ import { FontAwesomeModule } from "@fortawesome/angular-fontawesome";
 import { ProblemDeadlineComponent } from "./problem-deadline/problem-deadline.component";
 import { NotificationTabsComponent } from "./notification-tabs/notification-tabs.component";
 import { MarketplaceModule } from "../marketplace/marketplace.module";
+import { ProblemResolvingNotificationsComponent } from "./problem-resolving-notifications/problem-resolving-notifications.component";
 
 @NgModule({
     declarations: [
@@ -23,6 +24,7 @@ import { MarketplaceModule } from "../marketplace/marketplace.module";
         ProblemAnswerComponent,
         ProblemDeadlineComponent,
         NotificationTabsComponent,
+        ProblemResolvingNotificationsComponent,
     ],
     imports: [
         CommonModule,

@@ -1,9 +1,11 @@
 import { Component } from "@angular/core";
 import { faMapMarker, faBuilding } from "@fortawesome/free-solid-svg-icons";
+import { faTriangleExclamation } from "@fortawesome/free-solid-svg-icons";
 
 enum Tab {
     KEYPOINTS,
     FACILITIES,
+    PROBLEMRESOLVINGS,
 }
 @Component({
     selector: "xp-notification-tabs",
@@ -14,6 +16,7 @@ export class NotificationTabsComponent {
     //icons
     faMapMarker = faMapMarker;
     faBuilding = faBuilding;
+    faTriangleExclamation = faTriangleExclamation;
 
     Tab = Tab;
     selectedTab: Tab = Tab.KEYPOINTS;

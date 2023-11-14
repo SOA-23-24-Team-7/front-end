@@ -1,0 +1,30 @@
+<div class="column">
+    <div class="cards-list">
+        <div
+            *ngFor="let notification of problemResolvingNotifications"
+            class="card"
+        >
+            <div class="notification">
+                <div class="picture">
+                    <div
+                        class="sender-avatar"
+                        [style.background-image]="
+                            'url(' + notification.sender.profilePicture + ')'
+                        "
+                    ></div>
+                </div>
+                <div class="notification-column">
+                    <div class="notification-content">
+                        {{ notification.message }}
+                    </div>
+                    <div class="notification-row">
+                        <div>Sent by</div>
+                        <div class="sender">
+                            {{ notification.sender.username }}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
