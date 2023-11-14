@@ -1,0 +1,33 @@
+<div id="tour" class="container">
+    <p>Reviews</p>
+    <div id="tour-details" class="tour-rectangles">
+        <div *ngFor="let rt of reviews" class="tour-rectangle">
+            <table>
+                <tr>
+                    <td>
+                        <div class="tour-info">
+                            <p class="text">
+                                <strong>Name:</strong> {{ rt.rating }}
+                            </p>
+                            <br />
+                            <p class="text">
+                                <strong>Comment:</strong> {{ rt.comment }}
+                            </p>
+                        </div>
+                    </td>
+                    <td>
+                        <div class="image-container">
+                            <div *ngFor="let img of rt.images">
+                                <img
+                                    [src]="img"
+                                    alt="Image"
+                                    class="vertical-image"
+                                />
+                            </div>
+                        </div>
+                    </td>
+                </tr>
+            </table>
+        </div>
+    </div>
+</div>

@@ -45,7 +45,8 @@
     width: 20%;
     border-top: solid;
     position: absolute;
-    bottom: 50px;
+    top: 80px;
+    right: 20px;
 }
 .my-legend .legend-title {
     text-align: left;

@@ -9,6 +9,10 @@ import { User } from 'src/app/infrastructure/auth/model/user.model';
 import { TouristPosition } from '../model/tourist-position.model';
 import { TourExecutionSessionStatus } from '../model/tour-execution-session-status.model';
 import { TourExecutionSession } from '../model/tour-execution-session-model';
+import { KeyPoint } from '../../tour-authoring/model/key-point.model';
+import { latLng } from 'leaflet';
+import { MatDialog } from '@angular/material/dialog';
+import { ClickedKeyPointComponent } from '../clicked-key-point/clicked-key-point.component';
 
 @Component({
   selector: 'xp-tour-executing',
@@ -18,6 +22,7 @@ import { TourExecutionSession } from '../model/tour-execution-session-model';
 export class TourExecutingComponent implements OnInit {
 
   changePositionObservable: Observable<any>
+  clickedKeyPoint: KeyPoint
   positionSubscription: Subscription
   touristId: number
   session: TourExecutionSession = { id: 0, tourId: 0, status: TourExecutionSessionStatus.Started, nextKeyPointId: -1, lastActivity: null! }
@@ -29,7 +34,8 @@ export class TourExecutingComponent implements OnInit {
   }
   touristPosition: any = null;
 
-  constructor(private route: ActivatedRoute, private router: Router, private authService: AuthService, private service: TourExecutionService) { }
+  constructor(private route: ActivatedRoute, private router: Router, private authService: AuthService, 
+    private service: TourExecutionService, public dialogRef: MatDialog) { }
 
   ngOnInit(): void {
     this.route.paramMap.subscribe((params) => {
@@ -53,8 +59,13 @@ export class TourExecutingComponent implements OnInit {
     if (this.session.status !== TourExecutionSessionStatus.Started) return;
     
     this.service.checkKeyPointCompletion(this.session.tourId, this.touristPosition).subscribe((session) => {
+      if(this.session.nextKeyPointId != session.nextKeyPointId){
+        this.showSecret()
+      }
       this.session = session;
-      console.log(this.session.nextKeyPointId);
+      if(this.session.status == TourExecutionSessionStatus.Completed){
+        alert('Tour completed')
+      }
     }, () => {
       alert("No started tour!");
     });
@@ -71,16 +82,21 @@ export class TourExecutingComponent implements OnInit {
       }
     });
   }
-
+  showSecret(){
+    alert('secret unlocked')
+  }
   getTour() {
     this.service.getTour(this.session.tourId).subscribe({
       next: (result: Tour) => {
         this.tour = result;
+        console.log(this.tour)
       }
     });
   }
-
-  abandonTour() {
+  abandonTour(){
+    if(this.session.status != TourExecutionSessionStatus.Started){
+      this.router.navigate(['/purchasedtours'])
+    }
     let r = confirm('Are you sure you want to leave this tour?')
     if (r) {
       this.service.abandonTour(this.session.tourId).subscribe({
@@ -99,5 +115,19 @@ export class TourExecutingComponent implements OnInit {
         }
       }
     })
+  }
+  getKeyPoint(LatLng: any){
+    this.tour.keyPoints?.forEach(keyPoint =>{
+      if(keyPoint.latitude == LatLng.lat && keyPoint.longitude == LatLng.lng){
+        this.clickedKeyPoint = keyPoint
+      }
+    })
+    this.dialogRef.open(ClickedKeyPointComponent, {
+      width: '380px',
+      height: '420px',
+      data: {
+        dataKey: this.clickedKeyPoint
+      }
+    });
   }
 }

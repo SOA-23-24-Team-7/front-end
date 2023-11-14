@@ -21,8 +21,8 @@ export class PurchasedToursComponent implements OnInit {
   }
   getTours(){
     this.tourExecutionService.getTours().subscribe({
-      next: (result: PagedResults<Tour>) =>{
-        this.purchasedTours = result.results;
+      next: (result: Tour[]) =>{
+        this.purchasedTours = result;
       },
       error:(err: any) => {
         console.log(err);

@@ -36,6 +36,7 @@ export class MapComponent implements AfterViewInit, OnChanges {
   @Input() isPositionMap = false;
   @Input() isTourExecutionMap = false;
   @Input() executingTourId = 0;
+  @Input() height: string = "600px";
   @Input() set startPosition(value: any) {
     if (!value) return;
     if (this.positionMarker) {
@@ -65,6 +66,7 @@ export class MapComponent implements AfterViewInit, OnChanges {
     this.setRoute(waypoints);
     this.setCheckedPointsMarkers();
   }
+  @Output() keyPointClickEvent = new EventEmitter<any>();
   @Output() newLongLatEvent = new EventEmitter<[number, number]>();
   @Output() newPositionEvent = new EventEmitter<void>();
 
@@ -87,7 +89,12 @@ export class MapComponent implements AfterViewInit, OnChanges {
     iconSize: [46, 46],
     iconAnchor: [0, 46]
   });
-
+  private publicKeyPointIcon = L.icon({
+    iconUrl:
+        "https://icon-library.com/images/map-marker-icon/map-marker-icon-18.jpg",
+    iconSize: [42, 42],
+    iconAnchor: [16, 32],
+});
   ngOnInit() {
     if (this.isTourExecutionMap) {
       this.getTourKeyPoints(this.executingTourId)
@@ -204,6 +211,9 @@ export class MapComponent implements AfterViewInit, OnChanges {
 
     [...this.checkedPointsMap.values()].forEach(element => {
       const marker = new L.Marker([element.lat, element.lng], { icon: this.completedKeyPointIcon });
+      marker.addEventListener('click', () => {
+        this.keyPointClickEvent.emit(element);
+       })
       this.markerGroup.addLayer(marker);
     });
 
@@ -222,9 +232,13 @@ export class MapComponent implements AfterViewInit, OnChanges {
     };
 
     if (this.isTourExecutionMap && waypoints.length == (this.waypointMap.size + 1)) {
-      planOptions['createMarker'] = function (i: number, waypoint: any, n: number): any {
+      planOptions['createMarker'] = (i: number, waypoint: any, n: number): any => {
         if (i == 0) return null;
-        return L.marker(waypoint.latLng, { icon: keyPointIcon });
+        const marker = L.marker(waypoint.latLng, { icon: keyPointIcon });
+        marker.addEventListener('click', () => {
+         this.keyPointClickEvent.emit(waypoint.latLng);
+        })
+        return marker;
       }
     }
 
@@ -363,5 +377,15 @@ export class MapComponent implements AfterViewInit, OnChanges {
     this.map.addLayer(this.markerGroup);
 
     if (!this.isKeyPointMap) this.map.setView([lat, lng], this.map.getZoom());
+  }
+  setMarkersForPublicKeyPoints(lat: number, long: number): void {
+    const marker = new L.Marker([lat, long], {
+        icon: this.publicKeyPointIcon,
+    });
+    this.markerGroup.addLayer(marker);
+    this.map.addLayer(this.markerGroup);
+
+    if (!this.isKeyPointMap)
+        this.map.setView([lat, long], this.map.getZoom());
   }
 }
