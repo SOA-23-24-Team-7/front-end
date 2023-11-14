@@ -1,1 +1,36 @@
-<p>comment works!</p>
+<div class="comment">
+    <div class="comment-header">
+        <div class="author">
+            <div
+                class="author-avatar"
+                [style.background-image]="
+                    'url(' + comment.author.profilePicture + ')'
+                "
+            ></div>
+            <div class="author-username">
+                {{ comment.author.username }}
+            </div>
+            <div class="comment-date">
+                {{ comment.createdAt | date : "mediumDate" }}
+            </div>
+        </div>
+        <div *ngIf="isEditMode" class="edit-mode">
+            <textarea [(ngModel)]="editedText"></textarea>
+            <button color="primary" (click)="saveChanges()" mat-raised-button>
+                Save
+            </button>
+        </div>
+        <p class="comment-text" *ngIf="!isEditMode">{{ comment.text }}</p>
+        <div
+            *ngIf="user.id == comment.authorId && blog.status != 2"
+            class="comment-control"
+        >
+            <button mat-icon-button (click)="toggleEditMode()">
+                <mat-icon class="edit-icon">edit</mat-icon>
+            </button>
+            <button mat-icon-button (click)="onDeleteComment()">
+                <mat-icon class="delete-icon">delete</mat-icon>
+            </button>
+        </div>
+    </div>
+</div>

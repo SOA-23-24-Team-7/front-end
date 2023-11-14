@@ -1,10 +1,16 @@
+import { User } from "src/app/infrastructure/auth/model/user.model";
+import { Comment } from "./comment.model";
+import { Vote } from "./vote.model";
+
 export interface Blog {
-    id?: number,
+    id: number;
     title: string;
     description: string;
-    date: Date;
-    pictures?: string[]; 
-    status: BlogStatus
-  }
-
-  export enum BlogStatus {'Draft' , 'Published' , 'Closed' }
+    date: string;
+    status: number;
+    comments: Comment[];
+    voteCount: number;
+    votes: Vote[];
+    authorId: number;
+    author: User;
+}

@@ -15,7 +15,6 @@ import { TourExecutionModule } from "./feature-modules/tour-execution/tour-execu
 import { AuthModule } from "./infrastructure/auth/auth.module";
 import { HTTP_INTERCEPTORS, HttpClientModule } from "@angular/common/http";
 import { JwtInterceptor } from "./infrastructure/auth/jwt/jwt.interceptor";
-import { CreateBlogComponent } from "./feature-modules/blog/create-blog/create-blog.component";
 import { BlogModule } from "./feature-modules/blog/blog.module";
 import { MatSnackBarModule } from "@angular/material/snack-bar";
 import { FontAwesomeModule } from "@fortawesome/angular-fontawesome";
@@ -25,7 +24,8 @@ import { UserProfileComponent } from "./feature-modules/stakeholder/user-profile
 import { StakeholderModule } from "./feature-modules/stakeholder/stakeholder.module";
 
 @NgModule({
-    declarations: [AppComponent, CreateBlogComponent],
+    declarations: [AppComponent],
+
     imports: [
         BrowserModule,
         AppRoutingModule,
@@ -45,6 +45,7 @@ import { StakeholderModule } from "./feature-modules/stakeholder/stakeholder.mod
         MatSnackBarModule,
         StakeholderModule,
         FormsModule,
+        FontAwesomeModule,
         NgxGoogleAnalyticsModule.forRoot("G-YF6NHGD2NQ"),
     ],
     providers: [

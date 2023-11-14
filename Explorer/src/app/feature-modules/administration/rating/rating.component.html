@@ -1,26 +1,26 @@
 <div id="rating">
     <p>Ratings</p>
-    <hr>
+    <hr />
     <div id="rating-details">
-    <div>
-        <table>
-            <thead>
-                <tr>
-                    <th>Grade</th>
-                    <th>Comment</th>
-                    <th>Date and time</th>
-                    <th>User</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr *ngFor="let r of ratings">
-                    <td>{{r.grade}}</td>
-                    <td>{{r.comment}}</td>
-                    <td>{{r.dateTime | date: "medium"}}</td>
-                    <td>{{r.userName}}</td>
-                </tr>
-            </tbody>
-        </table>
-    </div>
+        <div>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Grade</th>
+                        <th>Comment</th>
+                        <th>Date and time</th>
+                        <th>User</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let r of ratings">
+                        <td>{{ r.grade }}</td>
+                        <td>{{ r.comment }}</td>
+                        <td>{{ r.dateTime | date : "medium" }}</td>
+                        <td>{{ r.userName }}</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
     </div>
 </div>

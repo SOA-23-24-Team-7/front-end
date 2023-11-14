@@ -7,7 +7,6 @@ import { TourPreferencesComponent } from "src/app/feature-modules/marketplace/to
 import { TourPreferenceFormComponent } from "src/app/feature-modules/marketplace/tour-preference-form/tour-preference-form.component";
 import { AuthGuard } from "../auth/auth.guard";
 import { RegistrationComponent } from "../auth/registration/registration.component";
-import { CreateBlogComponent } from "../../feature-modules/blog/create-blog/create-blog.component";
 import { BlogsComponent } from "src/app/feature-modules/blog/blogs/blogs.component";
 import { BlogComponent } from "src/app/feature-modules/blog/blog/blog.component";
 import { UsersOverviewComponent } from "src/app/feature-modules/administration/users-overview/users-overview.component";
@@ -29,8 +28,8 @@ import { ClubMembersManagementComponent } from "src/app/feature-modules/marketpl
 import { FacilitiesComponent } from "src/app/feature-modules/tour-authoring/facilities/facilities.component";
 import { KeyPointsComponent } from "src/app/feature-modules/tour-authoring/key-points/key-points.component";
 import { MyClubInvitationsComponent } from "src/app/feature-modules/marketplace/my-club-invitations/my-club-invitations.component";
-import { UpdateBlogFormComponent } from "src/app/feature-modules/blog/update-blog-form/update-blog-form.component";
-import { UserNotificationsComponent } from "src/app/feature-modules/stakeholder/user-notifications/user-notifications.component";
+import { BlogFormComponent } from "src/app/feature-modules/blog/blog-form/blog-form.component";
+import { MyBlogsComponent } from "src/app/feature-modules/blog/my-blogs/my-blogs.component";
 
 import { TouristPositionSimulatorComponent } from "src/app/feature-modules/tour-execution/tourist-position-simulator/tourist-position-simulator.component";
 import { RequestViewComponent } from "src/app/feature-modules/administration/request-view/request-view.component";
@@ -40,6 +39,7 @@ import { NotificationTabsComponent } from "src/app/feature-modules/stakeholder/n
 import { KeypointsNotificationsComponent } from "src/app/feature-modules/marketplace/keypoints-notifications/keypoints-notifications.component";
 import { FacilitiesNotificationsComponent } from "src/app/feature-modules/marketplace/facilities-notifications/facilities-notifications.component";
 import { PublishedToursComponent } from "src/app/feature-modules/marketplace/tours/published-tours.component";
+import { UserNotificationsComponent } from "src/app/feature-modules/stakeholder/user-notifications/user-notifications.component";
 
 const routes: Routes = [
     { path: "home", component: HomeComponent },
@@ -51,9 +51,6 @@ const routes: Routes = [
         component: EquipmentComponent,
         canActivate: [AuthGuard],
     },
-    { path: "create-blog", component: CreateBlogComponent },
-    { path: "update-blog/:id", component: UpdateBlogFormComponent },
-
     { path: "", component: HomeComponent },
     { path: "ratings", component: RatingComponent, canActivate: [AuthGuard] },
     {
@@ -101,7 +98,10 @@ const routes: Routes = [
     },
     { path: "clubs", component: ClubsComponent, canActivate: [AuthGuard] },
     { path: "blogs", component: BlogsComponent },
+    { path: "my-blogs", component: MyBlogsComponent },
     { path: "blog/:blogId", component: BlogComponent },
+    { path: "my-blogs/blog-form/:blogId", component: BlogFormComponent },
+    { path: "blog-form/:blogId", component: BlogFormComponent },
     {
         path: "profile",
         component: UserProfileComponent,

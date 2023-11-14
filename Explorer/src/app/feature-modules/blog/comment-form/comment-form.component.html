@@ -1,6 +1,11 @@
 <div class="comment-form">
-  <textarea cols="40" rows="5" placeholder="Comment text..." [(ngModel)]="commentText"></textarea>
-  <button color="primary" (click)="onCommentClick()" mat-raised-button>Comment</button>
-  <button color="primary" (click)="onCancelClick()" mat-raised-button>Cancel</button>
-    
+    <textarea
+        cols="80"
+        rows="10"
+        placeholder="Comment text..."
+        [(ngModel)]="commentText"
+        resize="none"
+    ></textarea>
+    <div class="btn" (click)="onCommentClick()">Comment</div>
+    <div class="btn" (click)="onCancelClick()">Cancel</div>
 </div>

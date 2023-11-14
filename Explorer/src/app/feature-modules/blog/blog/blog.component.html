@@ -1,22 +1,56 @@
 <div class="blog">
-
-  <h1 class="blog-title">{{blog.title}}</h1>
-  <p class="blog-description">{{blog.description}}</p>
-
-  <div class="comments">
+    <div
+        class="sidebar"
+        [ngClass]="{
+            draft: blog.status == 0,
+            published: blog.status == 1,
+            closed: blog.status == 2,
+            activeBlog: blog.status == 3,
+            famous: blog.status == 4
+        }"
+    >
+        <div
+            class="vote"
+            [ngClass]="{
+                active: vote ? vote.voteType == VoteType.UPVOTE : false
+            }"
+            (click)="onUpVote($event)"
+        >
+            <fa-icon class="upvote" [icon]="faCircleUp" />
+        </div>
+        <div class="vote-count">{{ blog.voteCount }}</div>
+        <div
+            class="vote"
+            [ngClass]="{
+                active: vote ? vote.voteType == VoteType.DOWNVOTE : false
+            }"
+            (click)="onDownVote($event)"
+        >
+            <fa-icon class="downvote" [icon]="faCircleDown" />
+        </div>
+    </div>
+    <div class="blog-content">
+        <h1 class="blog-title">{{ blog.title }}</h1>
+        <div class="blog-description" [innerHTML]="blogMarkdown"></div>
+    </div>
+</div>
+<div *ngIf="user" class="comment-section">
     <div class="comments-header">
-      <h2>Comments:</h2>
-      <button color="primary" (click)="onAddClicked()" mat-raised-button>New</button>
-      <button color="primary" (click)="deleteBlog(blog.id || 0)"  mat-raised-button>Delete</button>
-      <button color="primary" (click)="updateBlog(blog.id || 0)"  mat-raised-button>Update</button>
+        <h1>Comments:</h1>
+        <div
+            *ngIf="blog.status != 2"
+            (click)="onAddClicked()"
+            class="btn new-comment-button"
+        >
+            New
+        </div>
     </div>
-    <div class="comment" *ngFor="let comment of comments">
-      <div class="author">{{comment.authorId}}</div>
-      <p class="comment-text">
-        {{comment.text}}
-      </p>
-    </div>
-  </div>
-
-
+    <xp-comment
+        *ngFor="let comment of comments"
+        [comment]="comment"
+        [user]="user"
+        [blog]="blog"
+        (editComment)="onEditComment($event)"
+        (deleteComment)="onDeleteComment($event)"
+    ></xp-comment>
 </div>

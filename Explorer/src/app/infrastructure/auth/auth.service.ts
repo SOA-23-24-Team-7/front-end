@@ -18,6 +18,7 @@ export class AuthService {
         username: "",
         id: 0,
         role: "",
+        profilePicture: "",
     });
 
     constructor(
@@ -61,7 +62,7 @@ export class AuthService {
     logout(): void {
         this.tokenStorage.clear();
         this.router.navigate([""]);
-        this.user$.next({ username: "", id: 0, role: "" });
+        this.user$.next({ username: "", id: 0, role: "", profilePicture: "" });
     }
 
     checkIfUserExists(): void {
@@ -81,22 +82,17 @@ export class AuthService {
             role: jwtHelperService.decodeToken(accessToken)[
                 "http://schemas.microsoft.com/ws/2008/06/identity/claims/role"
             ],
+            profilePicture:
+                jwtHelperService.decodeToken(accessToken).profilePicture,
         };
         this.user$.next(user);
     }
 
-    getCurrentUserId(): User {
+    getCurrentUserId(): number {
         const jwtHelperService = new JwtHelperService();
         const accessToken = this.tokenStorage.getAccessToken() || "";
         const decodedToken = jwtHelperService.decodeToken(accessToken);
 
-        // Ovde pravite objekat User koristeći informacije iz decodedToken
-        const user: User = {
-            id: decodedToken.id,
-            username: decodedToken.username,
-            role: "",
-        };
-
-        return user;
+        return decodedToken.id;
     }
 }
