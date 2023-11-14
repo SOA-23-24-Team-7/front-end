@@ -31,7 +31,6 @@ export class ProblemAnswerComponent implements OnInit {
     headerText: string;
     comments: ProblemComment[];
     @Output() onAddAnswer = new EventEmitter();
-    // @Output() onDeleteTour = new EventEmitter<number>();
 
     constructor(
         @Optional() @Inject(MAT_DIALOG_DATA) public data: any,

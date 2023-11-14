@@ -16,6 +16,11 @@ import { ProblemResolvingNotification } from "./model/problem-resolving-notifica
     providedIn: "root",
 })
 export class StakeholderService {
+    getProblem(problemId: number, userRole: string): Observable<ProblemUser> {
+        return this.http.get<ProblemUser>(
+            environment.apiHost + userRole + "/problem/" + problemId,
+        );
+    }
     getProblemAnswer(
         problemId: number,
         userRole: string,

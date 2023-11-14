@@ -471,7 +471,7 @@
                     <div
                         class="navbar-submenu-item"
                         [routerLink]="['notification-tabs']"
-                        *ngIf="user && user.role === 'author'"
+                        *ngIf="user && user.role !== 'administrator'"
                     >
                         <fa-icon
                             class="navbar-submenu-item-icon"

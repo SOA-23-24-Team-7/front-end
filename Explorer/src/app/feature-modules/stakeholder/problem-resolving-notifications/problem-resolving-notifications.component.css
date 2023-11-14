@@ -12,20 +12,12 @@
     overflow-y: scroll;
     overflow-x: hidden;
     border-radius: 1rem;
+    color: rgb(var(--clr-text));
     height: 100%;
     display: flex;
     align-items: center;
     flex-direction: column;
     margin-top: 1rem;
-}
-.column h2 {
-    text-align: center;
-    color: rgba(var(--clr-text), 1);
-    font-family: var(--fnt-header);
-    font-weight: 600;
-    font-size: 2rem;
-    padding-bottom: 0.5rem;
-    transition: color 0.15s;
 }
 
 .notification {
@@ -37,6 +29,17 @@
     gap: 1rem;
     margin: 0.5rem;
     border-radius: 0.5rem;
+    transition: 0.5s;
+    border: 1px solid;
+}
+
+.notification:hover {
+    cursor: pointer;
+    border-color: rgb(var(--clr-primary-300));
+}
+
+.notification-content {
+    font-weight: 500;
 }
 
 .picture {
@@ -50,10 +53,6 @@
     border: rgba(var(--clr-outline-contrast), 1) 2px solid;
     background-position: center;
     background-size: cover;
-}
-
-.notification-content {
-    font-weight: 500;
 }
 
 .sender {
