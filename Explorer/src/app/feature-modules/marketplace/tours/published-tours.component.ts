@@ -56,6 +56,12 @@ export class PublishedToursComponent implements OnInit {
                                     this.getTokens();
                                 },
                             });
+                    } else {
+                        this.service.getToursInCart(this.user.id).subscribe({
+                            next: result => {
+                                this.addedTours = result.results;
+                            },
+                        });
                     }
                 },
             });
@@ -126,7 +132,7 @@ export class PublishedToursComponent implements OnInit {
         const dialogRef = this.dialogRef.open(ShoppingCartComponent, {
             height: "600px",
             width: "800px",
-            data: this.addedTours, // lista javnih tacaka koju dobijam u ovoj komponenti i ovim je saljem u modalni dijalog
+            data: this.addedTours,
         });
 
         dialogRef.afterClosed().subscribe(result => {
