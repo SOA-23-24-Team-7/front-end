@@ -48,24 +48,25 @@ export class MapComponent implements AfterViewInit, OnChanges {
     let waypoints = [{ lng: this.touristPosition[1], lat: this.touristPosition[0] }, ...this.waypointMap.values()];
     this.setRoute(waypoints);
     this.setCheckedPointsMarkers();
+    setTimeout(() => this.newPositionEvent.emit(), 500);
   }
   @Input() set nextKeyPointId(value: number) {
     if (value !== null && !value) return;
     if (!this.isTourExecutionMap) return;
+    if (!this.touristPosition) return;
     
-    alert(value);
     [...this.waypointMap.entries()].forEach(entry => {
       if (value == -1 || entry[1].order < this.waypointMap.get(value).order) {
         this.checkedPointsMap.set(entry[0], entry[1]);
         this.waypointMap.delete(entry[0]);
       }
     });
-    if (!this.touristPosition) return;
     let waypoints = [{ lng: this.touristPosition[1], lat: this.touristPosition[0] }, ...this.waypointMap.values()];
     this.setRoute(waypoints);
     this.setCheckedPointsMarkers();
   }
   @Output() newLongLatEvent = new EventEmitter<[number, number]>();
+  @Output() newPositionEvent = new EventEmitter<void>();
 
   constructor(private mapService: MapService) { }
 
@@ -310,7 +311,7 @@ export class MapComponent implements AfterViewInit, OnChanges {
         }
 
         this.createWaypoints(keyPoints);
-        if (!this.isTourExecutionMap) {
+        if (!this.touristPosition || !this.isTourExecutionMap) {
           let waypoints = [...this.waypointMap.values()];
 
           this.setRoute(waypoints);
