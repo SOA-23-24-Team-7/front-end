@@ -5,6 +5,7 @@ import { PurchasedTourCardComponent } from './purchased-tour-card/purchased-tour
 import { TouristPositionSimulatorComponent } from './tourist-position-simulator/tourist-position-simulator.component';
 import { SharedModule } from 'src/app/shared/shared.module';
 import { TourExecutingComponent } from './tour-executing/tour-executing.component';
+import { ClickedKeyPointComponent } from './clicked-key-point/clicked-key-point.component';
 
 
 
@@ -13,7 +14,8 @@ import { TourExecutingComponent } from './tour-executing/tour-executing.componen
     PurchasedToursComponent,
     PurchasedTourCardComponent,
     TouristPositionSimulatorComponent,
-    TourExecutingComponent
+    TourExecutingComponent,
+    ClickedKeyPointComponent
   ],
   imports: [
     CommonModule,

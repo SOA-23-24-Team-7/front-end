@@ -32,4 +32,7 @@ export class PurchasedTourCardComponent implements OnInit{
       }
     }
   }
+  ShowKeyPoints(){
+    // get key points of tour
+  }
 }

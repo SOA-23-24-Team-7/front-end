@@ -33,15 +33,10 @@ import { RequestViewComponent } from 'src/app/feature-modules/administration/req
 import { PurchasedToursComponent } from 'src/app/feature-modules/tour-execution/purchased-tour-cards/purchased-tour-cards.component';
 import { PublishedToursComponent } from 'src/app/feature-modules/marketplace/tours/published-tours.component';
 import { TourExecutingComponent } from 'src/app/feature-modules/tour-execution/tour-executing/tour-executing.component';
-
-import { TouristPositionSimulatorComponent } from "src/app/feature-modules/tour-execution/tourist-position-simulator/tourist-position-simulator.component";
-import { RequestViewComponent } from "src/app/feature-modules/administration/request-view/request-view.component";
-
 import { TourSearchComponent } from "src/app/feature-modules/marketplace/tour-search/tour-search.component";
 import { NotificationTabsComponent } from "src/app/feature-modules/stakeholder/notification-tabs/notification-tabs.component";
 import { KeypointsNotificationsComponent } from "src/app/feature-modules/marketplace/keypoints-notifications/keypoints-notifications.component";
 import { FacilitiesNotificationsComponent } from "src/app/feature-modules/marketplace/facilities-notifications/facilities-notifications.component";
-import { PublishedToursComponent } from "src/app/feature-modules/marketplace/tours/published-tours.component";
 
 const routes: Routes = [
     { path: "", component: HomeComponent },

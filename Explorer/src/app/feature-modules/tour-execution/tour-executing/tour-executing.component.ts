@@ -9,6 +9,10 @@ import { User } from 'src/app/infrastructure/auth/model/user.model';
 import { TouristPosition } from '../model/tourist-position.model';
 import { TourExecutionSessionStatus } from '../model/tour-execution-session-status.model';
 import { TourExecutionSession } from '../model/tour-execution-session-model';
+import { KeyPoint } from '../../tour-authoring/model/key-point.model';
+import { latLng } from 'leaflet';
+import { MatDialog } from '@angular/material/dialog';
+import { ClickedKeyPointComponent } from '../clicked-key-point/clicked-key-point.component';
 
 @Component({
   selector: 'xp-tour-executing',
@@ -17,6 +21,7 @@ import { TourExecutionSession } from '../model/tour-execution-session-model';
 })
 export class TourExecutingComponent implements OnInit {
 
+  clickedKeyPoint: KeyPoint
   positionSubscription: Subscription
   touristId: number
   session: TourExecutionSession = { id: 0, tourId: 0, status: TourExecutionSessionStatus.Started, nextKeyPointId: -1, lastActivity: null! }
@@ -28,7 +33,8 @@ export class TourExecutingComponent implements OnInit {
   }
   touristPosition: any
 
-  constructor(private route: ActivatedRoute, private router: Router, private authService: AuthService, private service: TourExecutionService) { }
+  constructor(private route: ActivatedRoute, private router: Router, private authService: AuthService, 
+    private service: TourExecutionService, public dialogRef: MatDialog) { }
 
   ngOnInit(): void {
     this.getLiveTourExecution()
@@ -58,21 +64,33 @@ export class TourExecutingComponent implements OnInit {
 
         setTimeout(() => {
           this.service.checkKeyPointCompletion(this.session.tourId, this.touristPosition).subscribe((session) => {
+            if(this.session.nextKeyPointId != session.nextKeyPointId){
+              this.showSecret()
+            }
             this.session = session;
+            if(this.session.status == TourExecutionSessionStatus.Completed){
+              alert('Tour completed')
+            }
           });
         }, 1000);
       }
     });
   }
-
+  showSecret(){
+    alert('secret unlocked')
+  }
   getTour() {
     this.service.getTour(this.session.tourId).subscribe({
       next: (result: Tour) => {
         this.tour = result;
+        console.log(this.tour)
       }
     });
   }
   abandonTour(){
+    if(this.session.status != TourExecutionSessionStatus.Started){
+      this.router.navigate(['/purchasedtours'])
+    }
     let r = confirm('Are you sure you want to leave this tour?')
     if(r){
       this.service.abandonTour(this.session.tourId).subscribe({
@@ -91,8 +109,18 @@ export class TourExecutingComponent implements OnInit {
       }
     })
   }
-  getKeyPoint(longLat: [number, number]){
-    alert('dosao do roditelja!!!')
-    console.log(longLat)
+  getKeyPoint(LatLng: any){
+    this.tour.keyPoints?.forEach(keyPoint =>{
+      if(keyPoint.latitude == LatLng.lat && keyPoint.longitude == LatLng.lng){
+        this.clickedKeyPoint = keyPoint
+      }
+    })
+    this.dialogRef.open(ClickedKeyPointComponent, {
+      width: '380px',
+      height: '420px',
+      data: {
+        dataKey: this.clickedKeyPoint
+      }
+    });
   }
 }

@@ -36,6 +36,7 @@ export class MapComponent implements AfterViewInit, OnChanges {
   @Input() isPositionMap = false;
   @Input() isTourExecutionMap = false;
   @Input() executingTourId = 0;
+  @Input() height: string = "600px";
   @Input() set startPosition(value: any) {
     if (!value) return;
     if (this.positionMarker) {
@@ -53,7 +54,6 @@ export class MapComponent implements AfterViewInit, OnChanges {
     if (value !== null && !value) return;
     if (!this.isTourExecutionMap) return;
     
-    alert(value);
     [...this.waypointMap.entries()].forEach(entry => {
       if (value == -1 || entry[1].order < this.waypointMap.get(value).order) {
         this.checkedPointsMap.set(entry[0], entry[1]);
@@ -209,6 +209,9 @@ export class MapComponent implements AfterViewInit, OnChanges {
 
     [...this.checkedPointsMap.values()].forEach(element => {
       const marker = new L.Marker([element.lat, element.lng], { icon: this.completedKeyPointIcon });
+      marker.addEventListener('click', () => {
+        this.keyPointClickEvent.emit(element);
+       })
       this.markerGroup.addLayer(marker);
     });
 
@@ -227,11 +230,11 @@ export class MapComponent implements AfterViewInit, OnChanges {
     };
 
     if (this.isTourExecutionMap && waypoints.length == (this.waypointMap.size + 1)) {
-      planOptions['createMarker'] = function (i: number, waypoint: any, n: number): any {
+      planOptions['createMarker'] = (i: number, waypoint: any, n: number): any => {
         if (i == 0) return null;
         const marker = L.marker(waypoint.latLng, { icon: keyPointIcon });
         marker.addEventListener('click', () => {
-         this.keyPointClickEvent.emit(waypoint);
+         this.keyPointClickEvent.emit(waypoint.latLng);
         })
         return marker;
       }

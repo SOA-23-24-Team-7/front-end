@@ -14,8 +14,8 @@ export class TourExecutionService {
 
   constructor(private http: HttpClient) { }
 
-  getTours(): Observable<PagedResults<Tour>> {
-    return this.http.get<PagedResults<Tour>>(
+  getTours(): Observable<Tour[]> {
+    return this.http.get<Tour[]>(
       environment.apiHost + "tourexecution/tourexecution/purchasedtours"
     );
   }
