@@ -9,7 +9,6 @@ import { Login } from "./model/login.model";
 import { AuthenticationResponse } from "./model/authentication-response.model";
 import { User } from "./model/user.model";
 import { Registration } from "./model/registration.model";
-import * as jwt_decode from 'jwt-decode';
 
 @Injectable({
     providedIn: "root",
@@ -88,18 +87,16 @@ export class AuthService {
 
     getCurrentUserId(): User {
         const jwtHelperService = new JwtHelperService();
-        const accessToken = this.tokenStorage.getAccessToken() || '';
+        const accessToken = this.tokenStorage.getAccessToken() || "";
         const decodedToken = jwtHelperService.decodeToken(accessToken);
-    
+
         // Ovde pravite objekat User koristeći informacije iz decodedToken
         const user: User = {
             id: decodedToken.id,
             username: decodedToken.username,
-            role: ""
+            role: "",
         };
-    
-        return user;
-      }
 
-   
+        return user;
+    }
 }

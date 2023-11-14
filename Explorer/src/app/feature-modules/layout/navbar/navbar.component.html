@@ -456,49 +456,42 @@
                         />
                         <div class="navbar-submenu-item-text">Rate the app</div>
                     </div>
-                    <<<<<<< HEAD
-                    <div class="navbar-submenu-item" (click)="onLogout()">
-                        =======
-                        <div
-                            class="navbar-submenu-item"
-                            [routerLink]="['notification-tabs']"
-                            *ngIf="user && user.role === 'author'"
-                        >
-                            >>>>>>> bb0f14b5ea66e68e7d6fe3d8c1d827bf34b2660b
-                            <fa-icon
-                                class="navbar-submenu-item-icon"
-                                [icon]="faBell"
-                            />
-                            <div class="navbar-submenu-item-text">
-                                My notifications
-                            </div>
-                        </div>
-                        <div
-                            class="navbar-submenu-item"
-                            *ngIf="user && user.role === 'administrator'"
-                            [routerLink]="['public-requests']"
-                        >
-                            <fa-icon
-                                class="navbar-submenu-item-icon"
-                                [icon]="faUser"
-                            />
-                            <div class="navbar-submenu-item-text">
-                                My requests
-                            </div>
-                        </div>
-                        <div class="navbar-submenu-item" (click)="onLogout()">
-                            <fa-icon
-                                class="navbar-submenu-item-icon"
-                                [icon]="faRightFromBracket"
-                            />
-                            <div class="navbar-submenu-item-text">Logout</div>
+                    <div
+                        class="navbar-submenu-item"
+                        [routerLink]="['notification-tabs']"
+                        *ngIf="user && user.role === 'author'"
+                    >
+                        <fa-icon
+                            class="navbar-submenu-item-icon"
+                            [icon]="faBell"
+                        />
+                        <div class="navbar-submenu-item-text">
+                            My notifications
                         </div>
                     </div>
                     <div
-                        class="navbar-menu-item-selected-indicator"
-                        [class.background-color-white]="isHome"
-                    ></div>
+                        class="navbar-submenu-item"
+                        *ngIf="user && user.role === 'administrator'"
+                        [routerLink]="['public-requests']"
+                    >
+                        <fa-icon
+                            class="navbar-submenu-item-icon"
+                            [icon]="faUser"
+                        />
+                        <div class="navbar-submenu-item-text">My requests</div>
+                    </div>
+                    <div class="navbar-submenu-item" (click)="onLogout()">
+                        <fa-icon
+                            class="navbar-submenu-item-icon"
+                            [icon]="faRightFromBracket"
+                        />
+                        <div class="navbar-submenu-item-text">Logout</div>
+                    </div>
                 </div>
+                <div
+                    class="navbar-menu-item-selected-indicator"
+                    [class.background-color-white]="isHome"
+                ></div>
             </div>
             <div
                 class="navbar-button-panel"
