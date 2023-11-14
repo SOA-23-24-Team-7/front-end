@@ -5,6 +5,7 @@ export interface KeyPoint {
     description: string;
     longitude: number;
     latitude: number;
+    locationAddress?: string;
     imagePath: string;
     order: number;
 }

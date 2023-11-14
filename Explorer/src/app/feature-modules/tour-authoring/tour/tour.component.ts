@@ -1,7 +1,13 @@
 import { Component, OnInit } from '@angular/core';
 import { Tour, TourStatus } from '../model/tour.model';
-import {TourAuthoringService} from '../tour-authoring.service';
+import { TourAuthoringService } from '../tour-authoring.service';
 import { PagedResults } from 'src/app/shared/model/paged-results.model';
+
+import { faPen } from '@fortawesome/free-solid-svg-icons';
+import { faTrash } from '@fortawesome/free-solid-svg-icons';
+import { faPlus } from '@fortawesome/free-solid-svg-icons';
+import { KeyPoint } from '../model/key-point.model';
+
 
 @Component({
   selector: 'xp-tour',
@@ -14,6 +20,7 @@ export class TourComponent implements OnInit {
   selectedTour: Tour;
   shouldRenderTourForm: boolean = false;
   shouldEdit: boolean = false;
+  keyPoints: KeyPoint[] = [];
 
   constructor(private tourAuthoringService: TourAuthoringService) {}
 
@@ -21,7 +28,7 @@ export class TourComponent implements OnInit {
     this.getTours();
   }
 
-  getTourStatusText(status: TourStatus  | undefined): string {
+  getTourStatusText(status: TourStatus | undefined): string {
     if (status === undefined) {
       return 'N/A'; 
     }
@@ -30,8 +37,34 @@ export class TourComponent implements OnInit {
         return 'Draft';
       case TourStatus.Published:
         return 'Published';
+      case TourStatus.Archived:
+        return 'Archived';
       default:
         return '';
+    }
+  }
+
+  onPublishClicked(tour: Tour): void{
+    if(tour.id){
+      this.tourAuthoringService.getKeyPoints(tour.id).subscribe({
+        next: (result: KeyPoint[]) =>{
+          this.keyPoints = result;
+
+          if(this.keyPoints.length > 1 && tour.durations && tour.durations.length > 0){
+            this.tourAuthoringService.publishTour(tour).subscribe({
+              next: () => {
+                  this.getTours();
+              },
+            })
+          }
+          else{
+            alert("Tour can't be published because it does not have needed requiements!");
+          }
+        },
+        error:(err: any) => {
+          console.log(err);
+        }
+      })
     }
   }
 
@@ -64,4 +97,17 @@ export class TourComponent implements OnInit {
     this.shouldEdit = false;
     this.shouldRenderTourForm = true;
   }
+  onArchiveClicked(tour: Tour): void{
+    this.tourAuthoringService.archiveTour(tour).subscribe({
+      next: () => {
+        this.getTours();
+      },
+    })
+  }
+
+  faPen = faPen;
+  faPlus = faPlus;
+  faTrash = faTrash;
+
+
 }

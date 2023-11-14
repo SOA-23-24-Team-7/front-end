@@ -30,6 +30,8 @@ import {
     faUsers,
     faEnvelope,
     faPlus,
+    faShoppingCart,
+    faBell,
 } from "@fortawesome/free-solid-svg-icons";
 //import { } from "@fortawesome/free-regular-svg-icons";
 
@@ -109,4 +111,6 @@ export class NavbarComponent implements OnInit {
     faEnvelope = faEnvelope;
     faFolderClosed = faFolderClosed;
     faPlus = faPlus;
+    faShoppingCart = faShoppingCart;
+    faBell = faBell;
 }
