@@ -27,7 +27,25 @@
             ></textarea>
         </mat-form-field>
         <mat-label>Is public</mat-label>
-        <input formControlName="isPublicChecked" type="checkbox" />
+        <input formControlName="isPublicChecked" type="checkbox"/>
+        <div *ngIf="keyPointForm.get('isPublicChecked') != null && keyPointForm.get('isPublicChecked')!.value === false">
+            <mat-label >Key point have secret?</mat-label>
+            <input formControlName="haveSecret" type="checkbox" [readonly]="shouldEdit"/>
+        </div>
+        <div *ngIf="keyPointForm.get('isPublicChecked') != null && keyPointForm.get('isPublicChecked')!.value === false
+                    && keyPointForm.get('haveSecret') != null && keyPointForm.get('haveSecret')!.value === true">
+            <mat-form-field>
+                <mat-label>Secret description</mat-label>
+                <textarea
+                    matInput
+                    cdkTextareaAutosize
+                    cdkAutosizeMinRows="1"
+                    formControlName="secretDescription"
+                    cdkAutosizeMaxRows="5"
+                    [readonly]="shouldEdit"
+                ></textarea>
+            </mat-form-field>
+        </div>
         <button
             *ngIf="!shouldEdit"
             color="primary"
