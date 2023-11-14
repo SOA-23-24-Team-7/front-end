@@ -13,6 +13,7 @@ import { AuthService } from "src/app/infrastructure/auth/auth.service";
 import { User } from "src/app/infrastructure/auth/model/user.model";
 import { ShoppingCartComponent } from "../shopping-cart/shopping-cart.component";
 import { TourToken } from "../model/tour-token.model";
+import { environment } from "src/env/environment";
 
 @Component({
     selector: "xp-published-tours",
@@ -26,6 +27,7 @@ export class PublishedToursComponent implements OnInit {
     addedTours: TourLimitedView[] = [];
     disabledButton: boolean = false;
     tokens: TourToken[] = [];
+    environment = environment;
 
     constructor(
         private service: MarketplaceService,
