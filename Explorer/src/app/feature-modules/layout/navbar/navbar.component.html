@@ -513,13 +513,16 @@
                     [class.background-color-white]="isHome"
                 ></div>
             </div>
-        </div>
-        <div class="navbar-button-panel" *ngIf="user && user.username === ''">
-            <div class="navbar-log-in-button" (click)="onLogin()">
-                <div class="navbar-log-in-button-text">Login</div>
-            </div>
-            <div class="navbar-register-button" (click)="onRegister()">
-                <div class="navbar-register-button-text">Register</div>
+            <div
+                class="navbar-button-panel"
+                *ngIf="user && user.username === ''"
+            >
+                <div class="navbar-log-in-button" (click)="onLogin()">
+                    <div class="navbar-log-in-button-text">Login</div>
+                </div>
+                <div class="navbar-register-button" (click)="onRegister()">
+                    <div class="navbar-register-button-text">Register</div>
+                </div>
             </div>
         </div>
     </div>

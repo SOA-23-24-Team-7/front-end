@@ -39,14 +39,19 @@ import { NotificationTabsComponent } from "src/app/feature-modules/stakeholder/n
 import { KeypointsNotificationsComponent } from "src/app/feature-modules/marketplace/keypoints-notifications/keypoints-notifications.component";
 import { FacilitiesNotificationsComponent } from "src/app/feature-modules/marketplace/facilities-notifications/facilities-notifications.component";
 import { PublishedToursComponent } from "src/app/feature-modules/marketplace/tours/published-tours.component";
+import { UserNotificationsComponent } from "src/app/feature-modules/stakeholder/user-notifications/user-notifications.component";
 
 const routes: Routes = [
-    { path: "", component: HomeComponent },
+    { path: "home", component: HomeComponent },
+    { path: "login", component: LoginComponent },
+    { path: "register", component: RegistrationComponent },
+    { path: "user-notifications", component: UserNotificationsComponent },
     {
         path: "equipment",
         component: EquipmentComponent,
         canActivate: [AuthGuard],
     },
+    { path: "", component: HomeComponent },
     { path: "ratings", component: RatingComponent, canActivate: [AuthGuard] },
     {
         path: "rating-form",
@@ -73,9 +78,7 @@ const routes: Routes = [
     },
     {
         path: "facilities",
-
         component: FacilitiesComponent,
-
         canActivate: [AuthGuard],
     },
     {
@@ -89,23 +92,8 @@ const routes: Routes = [
         canActivate: [AuthGuard],
     },
     {
-        path: "tourist-position-simulator",
-        component: TouristPositionSimulatorComponent,
-        canActivate: [AuthGuard],
-    },
-    {
         path: "user-management",
         component: UsersOverviewComponent,
-        canActivate: [AuthGuard],
-    },
-    {
-        path: "edit-profile",
-        component: EditProfileComponent,
-        canActivate: [AuthGuard],
-    },
-    {
-        path: "my-clubs",
-        component: OwnerClubsComponent,
         canActivate: [AuthGuard],
     },
     { path: "clubs", component: ClubsComponent, canActivate: [AuthGuard] },
@@ -125,6 +113,11 @@ const routes: Routes = [
         canActivate: [AuthGuard],
     },
     {
+        path: "my-clubs",
+        component: OwnerClubsComponent,
+        canActivate: [AuthGuard],
+    },
+    {
         path: "clubs",
         component: ClubsComponent,
         canActivate: [AuthGuard],
@@ -137,11 +130,6 @@ const routes: Routes = [
     {
         path: "club-join-request-management/:clubId",
         component: ClubJoinRequestManagementComponent,
-        canActivate: [AuthGuard],
-    },
-    {
-        path: "tourist-equipment-selection",
-        component: TouristEquipmentSelectionComponent,
         canActivate: [AuthGuard],
     },
     {
@@ -172,7 +160,6 @@ const routes: Routes = [
         path: "tour-preference/tour-preference-form",
         component: TourPreferenceFormComponent,
     },
-
     {
         path: "public-requests",
         component: RequestViewComponent,
@@ -183,7 +170,6 @@ const routes: Routes = [
         component: NotificationTabsComponent,
         canActivate: [AuthGuard],
     },
-
     {
         path: "tour-search",
         component: TourSearchComponent,

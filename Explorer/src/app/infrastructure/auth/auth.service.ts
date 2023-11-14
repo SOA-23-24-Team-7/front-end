@@ -61,6 +61,7 @@ export class AuthService {
 
     logout(): void {
         this.tokenStorage.clear();
+        this.router.navigate([""]);
         this.user$.next({ username: "", id: 0, role: "", profilePicture: "" });
     }
 
@@ -85,5 +86,13 @@ export class AuthService {
                 jwtHelperService.decodeToken(accessToken).profilePicture,
         };
         this.user$.next(user);
+    }
+
+    getCurrentUserId(): number {
+        const jwtHelperService = new JwtHelperService();
+        const accessToken = this.tokenStorage.getAccessToken() || "";
+        const decodedToken = jwtHelperService.decodeToken(accessToken);
+
+        return decodedToken.id;
     }
 }

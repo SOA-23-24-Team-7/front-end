@@ -12,8 +12,8 @@ import { MatDialogModule } from "@angular/material/dialog";
 import { FormsModule, ReactiveFormsModule } from "@angular/forms";
 import { BlogPreviewComponent } from "./blog-preview/blog-preview.component";
 import { FontAwesomeModule } from "@fortawesome/angular-fontawesome";
-import { BlogFormComponent } from './blog-form/blog-form.component';
-import { MyBlogsComponent } from './my-blogs/my-blogs.component';
+import { BlogFormComponent } from "./blog-form/blog-form.component";
+import { MyBlogsComponent } from "./my-blogs/my-blogs.component";
 
 @NgModule({
     declarations: [
@@ -33,8 +33,8 @@ import { MyBlogsComponent } from './my-blogs/my-blogs.component';
         FormsModule,
         MatDialogModule,
         FontAwesomeModule,
-        ReactiveFormsModule
-    ]
+        ReactiveFormsModule,
+    ],
 })
 export class BlogModule implements OnInit {
     constructor(private service: BlogService) {}

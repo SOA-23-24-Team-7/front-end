@@ -1,23 +1,66 @@
 <ng-container *ngIf="person">
-<div class="main">
-  <mat-card class="card">
-    <mat-card-header>
-      <div mat-card-avatar>
-        <img src = "https://upload.wikimedia.org/wikipedia/commons/thumb/7/7e/Circle-icons-profile.svg/512px-Circle-icons-profile.svg.png?20160314153816" class = "user-image">
-      </div>
-      <mat-card-title>
-        {{person.name}} {{person.surname}}
-      </mat-card-title>
-      <mat-card-subtitle>{{person.email}}</mat-card-subtitle>
-    </mat-card-header>
-    <mat-card-content>
-      <p>Username: {{user.username}}</p>
-      <p>Motto: {{person.moto}}</p>
-      <p>Bio: {{person.bio}}</p>
-    </mat-card-content>
-    <mat-card-actions>
-        <button color="primary" mat-raised-button (click)="toggleEditing()">Edit</button>
-    </mat-card-actions>
-  </mat-card>
-</div>
+    <div id="followers-details">
+        <div>
+            <br />
+            <div class="float-container">
+                <div class="float-child">
+                    <a (click)="openFollowersDialog()">
+                        {{ followersCount }} followers
+                    </a>
+                </div>
+                <div class="float-child">
+                    <a (click)="openFollowingsDialog()">
+                        {{ followingsCount }} following
+                    </a>
+                </div>
+                <div class="float-child">
+                    <button
+                        class="add-followers-button"
+                        (click)="openFollowerSearchDialog()"
+                    >
+                        Add followers
+                    </button>
+                </div>
+                <div class="float-child">
+                    <button
+                        class="all-notifications-button"
+                        (click)="goToAllNotifications()"
+                    >
+                        All messages
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="main">
+        <mat-card class="card">
+            <mat-card-header>
+                <div mat-card-avatar>
+                    <img
+                        src="https://upload.wikimedia.org/wikipedia/commons/thumb/7/7e/Circle-icons-profile.svg/512px-Circle-icons-profile.svg.png?20160314153816"
+                        class="user-image"
+                    />
+                </div>
+                <mat-card-title>
+                    {{ person.name }} {{ person.surname }}
+                </mat-card-title>
+                <mat-card-subtitle>{{ person.email }}</mat-card-subtitle>
+            </mat-card-header>
+            <mat-card-content>
+                <p>Username: {{ user.username }}</p>
+                <p>Motto: {{ person.moto }}</p>
+                <p>Bio: {{ person.bio }}</p>
+            </mat-card-content>
+            <mat-card-actions>
+                <button
+                    color="primary"
+                    mat-raised-button
+                    (click)="toggleEditing()"
+                >
+                    Edit
+                </button>
+            </mat-card-actions>
+        </mat-card>
+        <br />
+    </div>
 </ng-container>
