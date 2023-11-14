@@ -28,7 +28,7 @@ export class UserNotificationsComponent implements OnInit {
     }
 
     loadMessages() {
-        const userId = this.authService.getCurrentUserId().id;
+        const userId = this.authService.getCurrentUserId();
         this.service
             .getMessages(this.page, this.pageSize, userId)
             .subscribe((data: PagedResults<MessageUsernames>) => {

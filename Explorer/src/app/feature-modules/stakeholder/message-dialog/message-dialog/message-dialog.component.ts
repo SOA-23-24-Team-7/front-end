@@ -35,12 +35,9 @@ export class MessageDialogComponent implements OnInit {
             console.log(this.message);
             return;
         }
-        console.log("usao");
 
-        const userId = this.authService.getCurrentUserId().id;
+        const userId = this.authService.getCurrentUserId();
         const reciverId: number = this.data.reciverId;
-        console.log(reciverId);
-        console.log("opopopop");
         this.stakeholderService
             .sendMessage(this.message, userId, reciverId)
             .subscribe({
