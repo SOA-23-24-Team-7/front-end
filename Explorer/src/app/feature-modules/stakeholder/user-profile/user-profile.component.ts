@@ -50,7 +50,7 @@ export class UserProfileComponent implements OnInit {
         });
     }
     loadFollowings() {
-        this.service.getFollowings().subscribe(result => {
+        this.service.getFollowings(this.user.id).subscribe(result => {
             this.followings = result.results;
             this.followingsCount = this.followings.length;
             this.followings.forEach(item => {
@@ -59,7 +59,7 @@ export class UserProfileComponent implements OnInit {
         });
     }
     loadFollowers() {
-        this.service.getFollowers().subscribe(result => {
+        this.service.getFollowers(this.user.id).subscribe(result => {
             this.followers = result.results;
             this.followersCount = this.followers.length;
             this.followers.forEach(item => {

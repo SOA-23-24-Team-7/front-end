@@ -21,14 +21,14 @@ export class StakeholderService {
             environment.apiHost + "people",
         );
     }
-    getFollowers(): Observable<PagedResults<Follower>> {
+    getFollowers(id: number): Observable<PagedResults<Follower>> {
         return this.http.get<PagedResults<Follower>>(
-            environment.apiHost + "follower/followers",
+            environment.apiHost + "follower/followers/" + id,
         );
     }
-    getFollowings(): Observable<PagedResults<Following>> {
+    getFollowings(id: number): Observable<PagedResults<Following>> {
         return this.http.get<PagedResults<Following>>(
-            environment.apiHost + "follower/followings",
+            environment.apiHost + "follower/followings/" + id,
         );
     }
     getSearched(searchUsername: string): Observable<PagedResults<UserFollow>> {
