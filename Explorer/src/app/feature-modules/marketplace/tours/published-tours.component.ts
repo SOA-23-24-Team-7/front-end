@@ -139,13 +139,17 @@ export class PublishedToursComponent implements OnInit {
 
         dialogRef.afterClosed().subscribe(result => {
             console.log("Zatvoren dijalog", result);
-            this.service.getToursInCart(this.user.id).subscribe({
-                next: (result: PagedResults<TourLimitedView>) => {
-                    this.addedTours = result.results;
-                    this.service.getShoppingCart(this.user.id).subscribe({
-                        next: (result: ShoppingCart) => {
-                            this.shoppingCart = result;
-                            this.getTokens();
+            this.service.getShoppingCart(this.user.id).subscribe({
+                next: (result: ShoppingCart) => {
+                    this.shoppingCart = result;
+                    this.service.getToursInCart(this.user.id).subscribe({
+                        next: (result: PagedResults<TourLimitedView>) => {
+                            this.addedTours = result.results;
+                            this.service.getTouristTokens().subscribe({
+                                next: result => {
+                                    this.tokens = result;
+                                },
+                            });
                         },
                     });
                 },
