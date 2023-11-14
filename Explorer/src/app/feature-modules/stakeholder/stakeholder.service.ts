@@ -141,4 +141,14 @@ export class StakeholderService {
             environment.apiHost + "notifications/problems",
         );
     }
+
+    setSeenStatus(
+        notificationId: number,
+    ): Observable<ProblemResolvingNotification> {
+        return this.http.get<ProblemResolvingNotification>(
+            environment.apiHost +
+                "notifications/problems/set-seen/" +
+                notificationId,
+        );
+    }
 }

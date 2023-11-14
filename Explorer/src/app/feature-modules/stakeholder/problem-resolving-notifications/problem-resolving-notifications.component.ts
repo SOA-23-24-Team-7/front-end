@@ -25,4 +25,8 @@ export class ProblemResolvingNotificationsComponent {
             },
         });
     }
+
+    setSeenStatus(notificationId: number) {
+        this.service.setSeenStatus(notificationId).subscribe();
+    }
 }

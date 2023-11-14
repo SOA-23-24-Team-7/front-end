@@ -3,6 +3,7 @@
         <div
             *ngFor="let notification of problemResolvingNotifications"
             class="card"
+            (click)="setSeenStatus(notification.id)"
         >
             <div class="notification">
                 <div class="picture">
