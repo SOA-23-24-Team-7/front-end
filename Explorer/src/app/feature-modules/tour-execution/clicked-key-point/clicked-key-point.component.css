@@ -1,0 +1,32 @@
+.keypoint-modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    z-index: 9999;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: rgba(0, 0, 0, 0.7);
+    animation: fadeIn 0.5s ease-in-out;
+}
+
+.kp {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding-inline: 2rem;
+    padding-block: 1.5rem;
+    background-color: rgba(var(--clr-background, 1));
+    border-radius: 1rem;
+    width: 22rem;
+}
+
+.keypoint-head {
+    position: relative;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}

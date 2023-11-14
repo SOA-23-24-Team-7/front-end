@@ -211,6 +211,17 @@
                     </div>
                     <div
                         class="navbar-submenu-item"
+                        *ngIf="user && user.role === 'tourist'"
+                        [routerLink]="['purchasedtours']"
+                    >
+                        <fa-icon
+                            class="navbar-submenu-item-icon"
+                            [icon]="faUser"
+                        />
+                        <div class="navbar-submenu-item-text">Purchased Tours</div>
+                    </div>
+                    <div
+                        class="navbar-submenu-item"
                         [routerLink]="['facilities']"
                         *ngIf="user && user.role === 'author'"
                     >
@@ -250,19 +261,7 @@
                             Change position
                         </div>
                     </div>
-                    <div
-                        class="navbar-submenu-item"
-                        [routerLink]="['review']"
-                        *ngIf="user && user.role === 'tourist'"
-                    >
-                        <fa-icon
-                            class="navbar-submenu-item-icon"
-                            [icon]="faStar"
-                        />
-                        <div class="navbar-submenu-item-text">
-                            Make a review
-                        </div>
-                    </div>
+                    
                     <div
                         class="navbar-submenu-item"
                         [routerLink]="['problem']"
