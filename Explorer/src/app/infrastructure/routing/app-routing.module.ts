@@ -33,25 +33,34 @@ import { RequestViewComponent } from 'src/app/feature-modules/administration/req
 import { PurchasedToursComponent } from 'src/app/feature-modules/tour-execution/purchased-tour-cards/purchased-tour-cards.component';
 import { PublishedToursComponent } from 'src/app/feature-modules/marketplace/tours/published-tours.component';
 import { TourExecutingComponent } from 'src/app/feature-modules/tour-execution/tour-executing/tour-executing.component';
+import { BlogFormComponent } from "src/app/feature-modules/blog/blog-form/blog-form.component";
+import { MyBlogsComponent } from "src/app/feature-modules/blog/my-blogs/my-blogs.component";
+
 import { TourSearchComponent } from "src/app/feature-modules/marketplace/tour-search/tour-search.component";
 import { NotificationTabsComponent } from "src/app/feature-modules/stakeholder/notification-tabs/notification-tabs.component";
 import { KeypointsNotificationsComponent } from "src/app/feature-modules/marketplace/keypoints-notifications/keypoints-notifications.component";
 import { FacilitiesNotificationsComponent } from "src/app/feature-modules/marketplace/facilities-notifications/facilities-notifications.component";
+import { TourDetailsComponent } from 'src/app/feature-modules/marketplace/tour-details/tour-details.component';
+import { UserNotificationsComponent } from "src/app/feature-modules/stakeholder/user-notifications/user-notifications.component";
 
 const routes: Routes = [
-    { path: "", component: HomeComponent },
+    { path: "home", component: HomeComponent },
+    { path: "login", component: LoginComponent },
+    { path: "register", component: RegistrationComponent },
+    { path: "user-notifications", component: UserNotificationsComponent },
     {
         path: "equipment",
         component: EquipmentComponent,
         canActivate: [AuthGuard],
     },
+    { path: "", component: HomeComponent },
     { path: "ratings", component: RatingComponent, canActivate: [AuthGuard] },
     {
         path: "rating-form",
         component: RatingFormComponent,
         canActivate: [AuthGuard],
     },
-    { path: "review", component: ReviewComponent, canActivate: [AuthGuard] },
+    { path: "review/:tourId", component: ReviewComponent, canActivate: [AuthGuard] },
     { path: "problem", component: ProblemComponent, canActivate: [AuthGuard] },
     {
         path: "problems",
@@ -72,9 +81,7 @@ const routes: Routes = [
     },
     {
         path: "facilities",
-
         component: FacilitiesComponent,
-
         canActivate: [AuthGuard],
     },
     {
@@ -103,19 +110,12 @@ const routes: Routes = [
         component: UsersOverviewComponent,
         canActivate: [AuthGuard],
     },
-    {
-        path: "edit-profile",
-        component: EditProfileComponent,
-        canActivate: [AuthGuard],
-    },
-    {
-        path: "my-clubs",
-        component: OwnerClubsComponent,
-        canActivate: [AuthGuard],
-    },
     { path: "clubs", component: ClubsComponent, canActivate: [AuthGuard] },
     { path: "blogs", component: BlogsComponent },
+    { path: "my-blogs", component: MyBlogsComponent },
     { path: "blog/:blogId", component: BlogComponent },
+    { path: "my-blogs/blog-form/:blogId", component: BlogFormComponent },
+    { path: "blog-form/:blogId", component: BlogFormComponent },
     {
         path: "profile",
         component: UserProfileComponent,
@@ -124,6 +124,11 @@ const routes: Routes = [
     {
         path: "edit-profile",
         component: EditProfileComponent,
+        canActivate: [AuthGuard],
+    },
+    {
+        path: "my-clubs",
+        component: OwnerClubsComponent,
         canActivate: [AuthGuard],
     },
     {
@@ -139,11 +144,6 @@ const routes: Routes = [
     {
         path: "club-join-request-management/:clubId",
         component: ClubJoinRequestManagementComponent,
-        canActivate: [AuthGuard],
-    },
-    {
-        path: "tourist-equipment-selection",
-        component: TouristEquipmentSelectionComponent,
         canActivate: [AuthGuard],
     },
     {
@@ -174,7 +174,6 @@ const routes: Routes = [
         path: "tour-preference/tour-preference-form",
         component: TourPreferenceFormComponent,
     },
-
     {
         path: "public-requests",
         component: RequestViewComponent,
@@ -185,12 +184,13 @@ const routes: Routes = [
         component: NotificationTabsComponent,
         canActivate: [AuthGuard],
     },
-
     {
         path: "tour-search",
         component: TourSearchComponent,
         canActivate: [AuthGuard],
     },
+    { path: "public-requests", component: RequestViewComponent, canActivate: [AuthGuard] },
+    { path: "tour-details/:tourId", component: TourDetailsComponent }
 ];
 
 @NgModule({

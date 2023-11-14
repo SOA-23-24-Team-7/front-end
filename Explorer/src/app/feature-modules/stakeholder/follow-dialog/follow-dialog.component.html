@@ -1,0 +1,66 @@
+<div id="followers-details">
+    <div>
+        <div *ngIf="showFollowers">
+            <h3>Followers</h3>
+            <br />
+            <table>
+                <tbody>
+                    <tr *ngFor="let f of followers">
+                        <td>{{ f.followedByUsername }}</td>
+                        <td>
+                            <button
+                                *ngIf="f.followingStatus"
+                                (click)="openMessageDialog(f.followedById)"
+                                color="primary"
+                                mat-raised-button
+                            >
+                                Message
+                            </button>
+                        </td>
+                        <td>
+                            <button
+                                (click)="removeOrFollow(f.id)"
+                                color="accent"
+                                mat-raised-button
+                            >
+                                <p *ngIf="f.followingStatus">Remove</p>
+                                <p *ngIf="!f.followingStatus">Follow</p>
+                            </button>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <div *ngIf="showFollowings">
+            <h3>Following</h3>
+            <br />
+            <table>
+                <tbody>
+                    <tr *ngFor="let f of followings">
+                        <td>{{ f.followingUsername }}</td>
+                        <td>
+                            <button
+                                *ngIf="f.followingStatus"
+                                (click)="openMessageDialog(f.followingId)"
+                                color="primary"
+                                mat-raised-button
+                            >
+                                Message
+                            </button>
+                        </td>
+                        <td>
+                            <button
+                                (click)="unfollowOrFollow(f.id)"
+                                color="basic"
+                                mat-raised-button
+                            >
+                                <p *ngIf="f.followingStatus">Following</p>
+                                <p *ngIf="!f.followingStatus">Follow</p>
+                            </button>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>

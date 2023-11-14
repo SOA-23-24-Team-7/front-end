@@ -5,6 +5,8 @@
     </h2>
     <br>
     <h4>{{tour.description}}</h4>
+
+    <div class="progress">Progress: {{session.progress.toFixed(1)}}%</div>
     
 </div>
 <div class='my-legend' style="float: left;">
@@ -28,7 +30,7 @@
 </div>
 <div class="map-container">
     <button class="abandon-button" (click)="abandonTour()">Abandon tour</button>
-    <xp-map [isTourExecutionMap]="true" [executingTourId]="session.tourId" [startPosition]="touristPosition" [nextKeyPointId]="session.nextKeyPointId" 
+    <xp-map [isTourExecutionMap]="true" (newPositionEvent)="checkKeyPointCompletion()" [executingTourId]="session.tourId" [startPosition]="touristPosition" [nextKeyPointId]="session.nextKeyPointId" 
     (keyPointClickEvent)="getKeyPoint($event)"></xp-map>
 </div>
 <xp-tourist-position-simulator *ngIf="false"></xp-tourist-position-simulator>

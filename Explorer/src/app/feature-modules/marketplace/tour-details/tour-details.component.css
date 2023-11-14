@@ -1,0 +1,134 @@
+.tour-details {
+    padding-left: 2rem;
+}
+
+.tour-heading {
+    display: flex;
+    color: rgb(var(--clr-text));
+    font-family: var(--fnt-header);
+    font-size: 3rem;
+    transition: color 0.15s;
+}
+
+.tour-informations {
+    display: flex;
+    flex-direction: column;
+}
+
+.tour-information {
+    display: flex;
+    color: rgb(var(--clr-text));
+    font-family: var(--fnt-body);
+    font-size: 1.5rem;
+    transition: color 0.15s;
+}
+
+.rate-button {
+    background-color: rgba(var(--clr-primary-500), 1);
+    display: flex;
+    width: 6rem;
+    border-radius: 0.5rem;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.5rem;
+    font-family: var(--fnt-body);
+    cursor: pointer;
+    transition: background-color 0.15s;
+}
+
+
+.rate-button:hover {
+    background-color: rgba(var(--clr-primary-500), 0.95);
+}
+
+.rate-button:active {
+    background-color: rgba(var(--clr-primary-500), 0.9);
+}
+
+.rate-button-text {
+    color: white;
+    user-select: none;
+}
+
+.tour-image {
+    height: 11rem;
+    width: 17rem;
+    border-radius: 1rem;
+    margin: 0 auto;
+    z-index: 1;
+    position: relative;
+    cursor: pointer;
+}
+
+.tour-name {
+    font-size: 1.3rem;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.tour-name:hover {
+    color: rgba(var(--clr-primary-500), 1);
+    text-decoration: underline;
+}
+
+.tour-tags {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.tour-tag {
+    background-color: rgba(var(--clr-neutral-300), 1);
+    padding: 5px 0.625rem;
+    border: 1px solid rgba(var(--clr-neutral-700));
+    border-radius: 5px;
+    display: flex;
+    margin-right: 5px;
+    white-space: nowrap;
+    flex: 0 1 auto;
+    margin-top: 0.5rem;
+    color: rgb(var(--clr-neutral-900));
+}
+
+.tour-review {
+    margin-right: 5px;
+}
+
+.tour-review-content {
+    display: flex;
+    align-items: center;
+    margin-top: 0.5rem;
+}
+
+.tour-review-icon {
+    height: 1.2rem;
+}
+
+.tour-price {
+    margin-top: 0.5rem;
+    font-size: 1.125rem;
+}
+
+.tour-discounted-price {
+    color: rgba(var(--clr-accent-700), 1);
+    margin-top: 0.5rem;
+    font-size: 1.125rem;
+    font-weight: 600;
+    text-shadow: rgba(var(--clr-accent-500)) 1px 0 0.625rem;
+}
+
+.search-button {
+    border-radius: 2rem;
+    margin-left: auto;
+    height: 100%;
+    max-height: 100%;
+    font-size: 1.05rem;
+    font-weight: 500;
+}
+
+button:disabled,
+
+button[disabled]{
+  border: 1px solid #999999;
+  background-color: #cccccc;
+  color: #666666;
+}

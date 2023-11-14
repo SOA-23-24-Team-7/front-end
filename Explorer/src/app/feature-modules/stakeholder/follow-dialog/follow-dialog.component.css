@@ -1,0 +1,47 @@
+.float-container {
+    padding: 10px;
+    min-width: 440px;
+}
+
+.float-child {
+    width: 33%;
+    float: left;
+    padding: 10px;
+    text-align: center;
+}
+#followers-details {
+    display: flex;
+    width: 100%;
+    justify-content: center;
+    position: relative;
+}
+
+table {
+    border-collapse: collapse;
+    font-family: sans-serif;
+    min-width: 450px;
+}
+
+th,
+td {
+    padding: 12px 15px;
+    text-align: center;
+    font-family: var(--fnt-body);
+}
+
+tbody tr {
+    border-bottom: 1px solid rgb(var(--clr-accent-300));
+}
+
+tbody tr:last-of-type {
+    border-bottom: 2px solid rgb(var(--clr-accent-300));
+}
+
+tbody tr.active-row {
+    font-weight: bold;
+}
+
+h3 {
+    text-align: center;
+    font-family: var(--fnt-header);
+}
