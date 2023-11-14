@@ -1,0 +1,21 @@
+<div class="notification-card">
+    <header
+        [ngClass]="{
+            accepted: notification.isAccepted,
+            rejected: !notification.isAccepted
+        }"
+    >
+        <div class="notification-date">
+            {{ notification.created | date : "dd/MM/yyyy,  HH:mm" }}
+        </div>
+    </header>
+    <hr />
+    <div class="text">
+        <div class="notification-description">
+            <p>{{ notification.description }}</p>
+        </div>
+        <div class="notification-comment" *ngIf="!notification.isAccepted">
+            <p>Comment: {{ notification.comment }}</p>
+        </div>
+    </div>
+</div>
