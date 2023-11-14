@@ -139,6 +139,26 @@
                         />
                         <div class="navbar-submenu-item-text">Explore</div>
                     </div>
+                    <div
+                        class="navbar-submenu-item"
+                        [routerLink]="['my-blogs']"
+                    >
+                        <fa-icon
+                            class="navbar-submenu-item-icon"
+                            [icon]="faFolderClosed"
+                        />
+                        <div class="navbar-submenu-item-text">My blogs</div>
+                    </div>
+                    <div
+                        class="navbar-submenu-item"
+                        [routerLink]="['blog-form/' + 0]"
+                    >
+                        <fa-icon
+                            class="navbar-submenu-item-icon"
+                            [icon]="faPlus"
+                        />
+                        <div class="navbar-submenu-item-text">Create blog</div>
+                    </div>
                 </div>
                 <div
                     class="navbar-menu-item-selected-indicator"

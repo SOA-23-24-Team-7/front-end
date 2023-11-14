@@ -28,6 +28,8 @@ import { ClubMembersManagementComponent } from "src/app/feature-modules/marketpl
 import { FacilitiesComponent } from "src/app/feature-modules/tour-authoring/facilities/facilities.component";
 import { KeyPointsComponent } from "src/app/feature-modules/tour-authoring/key-points/key-points.component";
 import { MyClubInvitationsComponent } from "src/app/feature-modules/marketplace/my-club-invitations/my-club-invitations.component";
+import { BlogFormComponent } from "src/app/feature-modules/blog/blog-form/blog-form.component";
+import { MyBlogsComponent } from "src/app/feature-modules/blog/my-blogs/my-blogs.component";
 
 import { TouristPositionSimulatorComponent } from "src/app/feature-modules/tour-execution/tourist-position-simulator/tourist-position-simulator.component";
 import { RequestViewComponent } from "src/app/feature-modules/administration/request-view/request-view.component";
@@ -108,7 +110,10 @@ const routes: Routes = [
     },
     { path: "clubs", component: ClubsComponent, canActivate: [AuthGuard] },
     { path: "blogs", component: BlogsComponent },
+    { path: "my-blogs", component: MyBlogsComponent },
     { path: "blog/:blogId", component: BlogComponent },
+    { path: "my-blogs/blog-form/:blogId", component: BlogFormComponent },
+    { path: "blog-form/:blogId", component: BlogFormComponent },
     {
         path: "profile",
         component: UserProfileComponent,

@@ -16,7 +16,8 @@
 
 .card {
   width: 250px;
-  background-color: #fff;
+  background-color: rgb(var(--clr-background-secondary));
+  color: rgb(var(--clr-text));
   border-radius: 8px;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
   padding: 10px;
