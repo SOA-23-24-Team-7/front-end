@@ -1,13 +1,16 @@
-<div>
-    <h2>Messages</h2>
+<div class="main">
+    <h2>Notifications</h2>
     <ul>
         <li *ngFor="let message of messages" class="notification-container">
-            <div class="notification">
+            <div
+                class="notification"
+                [ngClass]="{ 'has-seen-button': message.statusOfMessage == 0 }"
+            >
+                <span class="message-sender">{{ message.senderUsername }}</span>
+                <span class="message-text">{{ message.text }}</span>
                 <div *ngIf="message.statusOfMessage == 0">
                     <button (click)="markAsSeen(message)">Seen</button>
                 </div>
-                {{ message.senderUsername }}
-                {{ message.text }}
             </div>
         </li>
     </ul>

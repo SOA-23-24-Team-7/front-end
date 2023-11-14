@@ -37,8 +37,6 @@ export class UserNotificationsComponent implements OnInit {
     }
 
     markAsSeen(message: MessageUsernames): void {
-        console.log(message, "cao");
-
         const messageNew: Message = {
             id: message.id,
             senderId: message.userSenderId,
@@ -46,9 +44,9 @@ export class UserNotificationsComponent implements OnInit {
             text: message.text,
             statusOfMessage: 1,
         };
-        console.log(messageNew.senderId);
 
-        console.log(messageNew.statusOfMessage);
-        this.service.updateMessageStatusOnSeen(messageNew).subscribe({});
+        this.service.updateMessageStatusOnSeen(messageNew).subscribe(() => {
+            this.router.navigate(["/profile"]);
+        });
     }
 }
