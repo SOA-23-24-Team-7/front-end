@@ -9,20 +9,30 @@ import { FollowDialogComponent } from "./follow-dialog/follow-dialog.component";
 import { UserNotificationsComponent } from "./user-notifications/user-notifications.component";
 import { FollowerSearchDialogComponent } from "./follower-search-dialog/follower-search-dialog.component";
 import { FontAwesomeModule } from "@fortawesome/angular-fontawesome";
+import { NotificationTabsComponent } from "./notification-tabs/notification-tabs.component";
+import { MarketplaceModule } from "../marketplace/marketplace.module";
 
 @NgModule({
     declarations: [
-        MessageDialogComponent,
         UserProfileComponent,
         EditProfileComponent,
+        NotificationTabsComponent,
+        MessageDialogComponent,
         FollowDialogComponent,
         UserNotificationsComponent,
         FollowerSearchDialogComponent,
     ],
-    imports: [CommonModule, MaterialModule, FormsModule, FontAwesomeModule],
+    imports: [
+        CommonModule,
+        MaterialModule,
+        FormsModule,
+        FontAwesomeModule,
+        MarketplaceModule,
+    ],
     exports: [
-        MessageDialogComponent,
         UserProfileComponent,
+        NotificationTabsComponent,
+        MessageDialogComponent,
         EditProfileComponent,
     ],
 })

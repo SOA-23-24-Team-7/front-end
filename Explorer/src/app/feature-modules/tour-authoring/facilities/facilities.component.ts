@@ -19,10 +19,13 @@ export class FacilitiesComponent implements OnInit {
 
   shouldEdit: boolean = false;
   shouldRenderFacilitiesForm: boolean = false;
-
+  facilityContainer:any;
   constructor(private service: TourAuthoringService) {}
 
   ngOnInit(): void {
+    this.facilityContainer = document.querySelector(
+      ".facility-cards-container",
+  );
     this.getFacilities();
   }
 
@@ -73,6 +76,9 @@ export class FacilitiesComponent implements OnInit {
     this.mapComponent.getClickCoordinates((lat, lng) => {
        this.facilitiesFormComponent.newLatitude = lat;
        this.facilitiesFormComponent.newLongitude = lng;
+
+       console.log(this.facilitiesFormComponent.newLatitude);
+       console.log(this.facilitiesFormComponent.newLongitude);
     });
 
     if(this.shouldRenderFacilitiesForm){
@@ -92,4 +98,21 @@ export class FacilitiesComponent implements OnInit {
     this.shouldRenderFacilitiesForm = false;
     this.shouldEdit = false;
   }
+  currentIndex: number = 0;
+  scrollToNextCard(): void {
+    this.currentIndex++;
+    if (this.currentIndex >= this.facilityContainer.children.length) {
+        this.currentIndex = 0;
+    }
+    this.facilityContainer.scrollLeft +=
+        this.facilityContainer.children[this.currentIndex].clientWidth;
+}
+  scrollToPrevCard(): void {
+    this.currentIndex--;
+    if (this.currentIndex < 0) {
+        this.currentIndex = this.facilityContainer!.children.length - 1;
+    }
+    this.facilityContainer!.scrollLeft -=
+        this.facilityContainer.children[this.currentIndex].clientWidth;
+}
 }

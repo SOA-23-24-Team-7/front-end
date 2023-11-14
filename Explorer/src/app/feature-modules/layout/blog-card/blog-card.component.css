@@ -12,8 +12,11 @@
     margin: 1.3rem;
     box-shadow: 0 0 1rem rgba(var(--clr-outline-contrast), 0.8);
     color: rgb(var(--clr-text));
+    transition: transform 0.2s;
 }
-
+.blog-card:hover {
+    transform: scale(1.05); /* Uvećanje kartice kada se miš nalazi iznad nje */
+}
 .blog-date {
     align-self: flex-end;
 }

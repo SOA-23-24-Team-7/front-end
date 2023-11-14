@@ -1,0 +1,7 @@
+<form [formGroup]="commentRequestForm">
+    <mat-form-field>
+        <mat-label>Leave a comment:</mat-label>
+        <input matInput type="text" formControlName="comment">
+        <button color="primary" mat-button (click)="submit()">Submit</button>
+    </mat-form-field>
+</form>

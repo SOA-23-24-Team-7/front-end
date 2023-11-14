@@ -32,6 +32,15 @@ import { MyClubInvitationsComponent } from "src/app/feature-modules/marketplace/
 import { UpdateBlogFormComponent } from "src/app/feature-modules/blog/update-blog-form/update-blog-form.component";
 import { UserNotificationsComponent } from "src/app/feature-modules/stakeholder/user-notifications/user-notifications.component";
 
+import { TouristPositionSimulatorComponent } from "src/app/feature-modules/tour-execution/tourist-position-simulator/tourist-position-simulator.component";
+import { RequestViewComponent } from "src/app/feature-modules/administration/request-view/request-view.component";
+
+import { TourSearchComponent } from "src/app/feature-modules/marketplace/tour-search/tour-search.component";
+import { NotificationTabsComponent } from "src/app/feature-modules/stakeholder/notification-tabs/notification-tabs.component";
+import { KeypointsNotificationsComponent } from "src/app/feature-modules/marketplace/keypoints-notifications/keypoints-notifications.component";
+import { FacilitiesNotificationsComponent } from "src/app/feature-modules/marketplace/facilities-notifications/facilities-notifications.component";
+import { PublishedToursComponent } from "src/app/feature-modules/marketplace/tours/published-tours.component";
+
 const routes: Routes = [
     { path: "home", component: HomeComponent },
     { path: "login", component: LoginComponent },
@@ -46,11 +55,6 @@ const routes: Routes = [
     { path: "update-blog/:id", component: UpdateBlogFormComponent },
 
     { path: "", component: HomeComponent },
-    {
-        path: "equipment",
-        component: EquipmentComponent,
-        canActivate: [AuthGuard],
-    },
     { path: "ratings", component: RatingComponent, canActivate: [AuthGuard] },
     {
         path: "rating-form",
@@ -65,6 +69,11 @@ const routes: Routes = [
         canActivate: [AuthGuard],
     },
     { path: "tours", component: TourComponent, canActivate: [AuthGuard] },
+    {
+        path: "published-tours",
+        component: PublishedToursComponent,
+        canActivate: [AuthGuard],
+    },
     {
         path: "tours/equipment/:id",
         component: TourEquipmentFormComponent,
@@ -81,8 +90,21 @@ const routes: Routes = [
         canActivate: [AuthGuard],
     },
     {
+        path: "tourist-position-simulator",
+        component: TouristPositionSimulatorComponent,
+        canActivate: [AuthGuard],
+    },
+    {
         path: "user-management",
         component: UsersOverviewComponent,
+        canActivate: [AuthGuard],
+    },
+    { path: "clubs", component: ClubsComponent, canActivate: [AuthGuard] },
+    { path: "blogs", component: BlogsComponent },
+    { path: "blog/:blogId", component: BlogComponent },
+    {
+        path: "profile",
+        component: UserProfileComponent,
         canActivate: [AuthGuard],
     },
     {
@@ -93,14 +115,6 @@ const routes: Routes = [
     {
         path: "my-clubs",
         component: OwnerClubsComponent,
-        canActivate: [AuthGuard],
-    },
-    { path: "clubs", component: ClubsComponent, canActivate: [AuthGuard] },
-    { path: "blogs", component: BlogsComponent },
-    { path: "blog/:blogId", component: BlogComponent },
-    {
-        path: "profile",
-        component: UserProfileComponent,
         canActivate: [AuthGuard],
     },
     {
@@ -116,11 +130,6 @@ const routes: Routes = [
     {
         path: "club-join-request-management/:clubId",
         component: ClubJoinRequestManagementComponent,
-        canActivate: [AuthGuard],
-    },
-    {
-        path: "tourist-equipment-selection",
-        component: TouristEquipmentSelectionComponent,
         canActivate: [AuthGuard],
     },
     {
@@ -150,6 +159,21 @@ const routes: Routes = [
     {
         path: "tour-preference/tour-preference-form",
         component: TourPreferenceFormComponent,
+    },
+    {
+        path: "public-requests",
+        component: RequestViewComponent,
+        canActivate: [AuthGuard],
+    },
+    {
+        path: "notification-tabs",
+        component: NotificationTabsComponent,
+        canActivate: [AuthGuard],
+    },
+    {
+        path: "tour-search",
+        component: TourSearchComponent,
+        canActivate: [AuthGuard],
     },
 ];
 
