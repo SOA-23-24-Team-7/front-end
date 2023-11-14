@@ -36,6 +36,7 @@
 </div>
 <div class="map-container">
     <button class="abandon-button" (click)="abandonTour()">Abandon tour</button>
-    <xp-map [isTourExecutionMap]="true" [executingTourId]="session.tourId" [startPosition]="touristPosition" [nextKeyPointId]="session.nextKeyPointId"></xp-map>
+    <xp-map [isTourExecutionMap]="true" [executingTourId]="session.tourId" [startPosition]="touristPosition" [nextKeyPointId]="session.nextKeyPointId" 
+    (keyPointClickEvent)="getKeyPoint($event)"></xp-map>
 </div>
 <xp-tourist-position-simulator *ngIf="false"></xp-tourist-position-simulator>

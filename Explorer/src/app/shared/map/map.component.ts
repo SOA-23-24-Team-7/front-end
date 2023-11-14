@@ -28,7 +28,7 @@ export class MapComponent implements AfterViewInit, OnChanges {
   public tourDistance: number = 0;
 
   public touristPosition: [number, number];
-
+  @Output() keyPointClickEvent = new EventEmitter<any>();
   @Input() refreshEvents: Observable<number>;
   @Input() selectedKeyPoint: KeyPoint | null;
   @Input() canEdit = false;
@@ -53,7 +53,7 @@ export class MapComponent implements AfterViewInit, OnChanges {
     if (value !== null && !value) return;
     if (!this.isTourExecutionMap) return;
     
-    alert(value);
+    //alert(value);
     [...this.waypointMap.entries()].forEach(entry => {
       if (value == -1 || entry[1].order < this.waypointMap.get(value).order) {
         this.checkedPointsMap.set(entry[0], entry[1]);
@@ -66,7 +66,7 @@ export class MapComponent implements AfterViewInit, OnChanges {
     this.setCheckedPointsMarkers();
   }
   @Output() newLongLatEvent = new EventEmitter<[number, number]>();
-
+  
   constructor(private mapService: MapService) { }
 
   private facilityIcon = L.icon({
@@ -221,12 +221,16 @@ export class MapComponent implements AfterViewInit, OnChanges {
     };
 
     if (this.isTourExecutionMap && waypoints.length == (this.waypointMap.size + 1)) {
-      planOptions['createMarker'] = function (i: number, waypoint: any, n: number): any {
+      planOptions['createMarker'] = (i: number, waypoint: any, n: number): any => {
         if (i == 0) return null;
-        return L.marker(waypoint.latLng, { icon: keyPointIcon });
+        const marker = L.marker(waypoint.latLng, { icon: keyPointIcon });
+        marker.addEventListener('click', () => {
+         this.keyPointClickEvent.emit(waypoint);
+        })
+        return marker;
       }
     }
-
+    
     const plan = new L.Routing.Plan(waypoints, planOptions);
 
     this.routeControl?.remove();
@@ -247,7 +251,9 @@ export class MapComponent implements AfterViewInit, OnChanges {
       }
     });
   }
-
+  asd(waypoint:any){
+      alert(waypoint)
+  }
   registerOnClick(): void {
     this.map.on('click', (e: any) => {
       if (!this.canEdit) return;

@@ -91,4 +91,8 @@ export class TourExecutingComponent implements OnInit {
       }
     })
   }
+  getKeyPoint(longLat: [number, number]){
+    alert('dosao do roditelja!!!')
+    console.log(longLat)
+  }
 }
