@@ -341,4 +341,9 @@ export class MarketplaceService {
             environment.apiHost + "token/tourists/",
         );
     }
+
+    getTourById(tourId: number): Observable<Tour> {
+        const route: string = environment.apiHost + "market-place/tours/" + tourId
+        return this.http.get<Tour>(route);
+    }
 }

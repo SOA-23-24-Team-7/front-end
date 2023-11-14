@@ -15,21 +15,22 @@ import { ProblemComponent } from "./problem/problem.component";
 import { ProblemFormComponent } from "./problem-form/problem-form.component";
 import { ClubMembersInviteFormComponent } from "./club-members-invite-form/club-members-invite-form.component";
 import { ClubMembersManagementComponent } from "./club-members-management/club-members-management.component";
-import { MyClubInvitationsComponent } from "./my-club-invitations/my-club-invitations.component";
-import { TourPreferencesComponent } from "./tour-preferences/tour-preferences.component";
-import { TourPreferenceFormComponent } from "./tour-preference-form/tour-preference-form.component";
-import { BrowserModule } from "@angular/platform-browser";
-import { TagInputModule } from "ngx-chips";
-import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
-import { FormsModule } from "@angular/forms";
 import { TourSearchComponent } from "./tour-search/tour-search.component";
 import { SharedModule } from "src/app/shared/shared.module";
 import { FontAwesomeModule } from "@fortawesome/angular-fontawesome";
 import { LayoutModule } from "src/app/feature-modules/layout/layout.module";
 import { KeypointsNotificationsComponent } from "./keypoints-notifications/keypoints-notifications.component";
 import { FacilitiesNotificationsComponent } from "./facilities-notifications/facilities-notifications.component";
-import { PublishedToursComponent } from "./tours/published-tours.component";
 import { ShoppingCartComponent } from './shopping-cart/shopping-cart.component';
+import { MyClubInvitationsComponent } from './my-club-invitations/my-club-invitations.component';
+import { TourPreferencesComponent } from './tour-preferences/tour-preferences.component';
+import { TourPreferenceFormComponent } from './tour-preference-form/tour-preference-form.component';
+import { BrowserModule } from '@angular/platform-browser';
+import { TagInputModule } from 'ngx-chips';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { FormsModule } from '@angular/forms';
+import { PublishedToursComponent } from './tours/published-tours.component';
+import { TourDetailsComponent } from './tour-details/tour-details.component';
 
 @NgModule({
     declarations: [
@@ -56,6 +57,7 @@ import { ShoppingCartComponent } from './shopping-cart/shopping-cart.component';
         KeypointsNotificationsComponent,
         FacilitiesNotificationsComponent,
         ShoppingCartComponent,
+        TourDetailsComponent
     ],
     imports: [
         CommonModule,

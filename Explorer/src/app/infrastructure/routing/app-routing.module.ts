@@ -37,6 +37,7 @@ import { NotificationTabsComponent } from "src/app/feature-modules/stakeholder/n
 import { KeypointsNotificationsComponent } from "src/app/feature-modules/marketplace/keypoints-notifications/keypoints-notifications.component";
 import { FacilitiesNotificationsComponent } from "src/app/feature-modules/marketplace/facilities-notifications/facilities-notifications.component";
 import { PublishedToursComponent } from "src/app/feature-modules/marketplace/tours/published-tours.component";
+import { TourDetailsComponent } from 'src/app/feature-modules/marketplace/tour-details/tour-details.component';
 
 const routes: Routes = [
     { path: "", component: HomeComponent },
@@ -51,7 +52,7 @@ const routes: Routes = [
         component: RatingFormComponent,
         canActivate: [AuthGuard],
     },
-    { path: "review", component: ReviewComponent, canActivate: [AuthGuard] },
+    { path: "review/:tourId", component: ReviewComponent, canActivate: [AuthGuard] },
     { path: "problem", component: ProblemComponent, canActivate: [AuthGuard] },
     {
         path: "problems",
@@ -184,6 +185,8 @@ const routes: Routes = [
         component: TourSearchComponent,
         canActivate: [AuthGuard],
     },
+    { path: "public-requests", component: RequestViewComponent, canActivate: [AuthGuard] },
+    { path: "tour-details/:tourId", component: TourDetailsComponent }
 ];
 
 @NgModule({
