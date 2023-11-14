@@ -1,10 +1,22 @@
 <form [formGroup]="facilitiesForm">
-    <div>
-        <mat-form-field>
+    <div class="image-form-field form-div">
+        <img [src]="tourImage" />
+        <label for="file-upload" class="custom-file-upload">
+            Upload image
+        </label>
+        <input
+            id="file-upload"
+            accept="image/*"
+            type="file"
+            (change)="onSelectImage($event)"
+        />
+    </div>
+    <div class="form-div">
+        <mat-form-field class="name">
             <mat-label>Name</mat-label>
             <input matInput formControlName="name" type="text" />
         </mat-form-field>
-        <mat-form-field>
+        <mat-form-field class="description">
             <mat-label>Description</mat-label>
             <textarea
                 matInput
@@ -14,11 +26,8 @@
                 cdkAutosizeMaxRows="5"
             ></textarea>
         </mat-form-field>
-        <mat-form-field>
-            <mat-label>Image Path</mat-label>
-            <input matInput formControlName="imagePath" type="text" />
-        </mat-form-field>
-        <mat-form-field>
+        
+        <mat-form-field class="category">
             <mat-label>Select category</mat-label>
             <mat-select [(value)]="selectedOption">
                 <mat-option
@@ -29,26 +38,37 @@
                 </mat-option>
             </mat-select>
         </mat-form-field>
-        <mat-label>Is public</mat-label>
-        <input formControlName="isPublicChecked" type="checkbox" />
+        <div class="checkbox" [class.hidden]="shouldEdit">
+            <input
+                id="is-public-checkbox"
+                class="is-public-checkbox"
+                formControlName="isPublicChecked"
+                type="checkbox"
+            />
+            <label for="is-public-checkbox" class="is-public-label"
+                >Public</label
+            >
+        </div>
         <button
             *ngIf="!shouldEdit"
+            class="done-submit"
             type="submit"
             color="primary"
             (click)="addFacility()"
             [disabled]="isAddButtonDisabled"
             mat-raised-button
         >
-            Done
+        <div class="done-submit-text">Done</div>
         </button>
         <button
             *ngIf="shouldEdit"
             type="submit"
             color="primary"
+            class="done-submit"
             (click)="updateFacility()"
             mat-raised-button
         >
-            Done
+        <div class="done-submit-text">Done</div>
         </button>
     </div>
 </form>

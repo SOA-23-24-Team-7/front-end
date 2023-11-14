@@ -1,0 +1,204 @@
+.tour-search{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+    padding-left: 2rem;
+    padding-right: 2rem;
+}
+
+.tour-search-header {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    border-bottom: rgba(var(--border-primary), 1) 1px solid;
+}
+
+.tour-search-header-title {
+    margin-top: 2rem;
+    font-family: var(--fnt-header);
+    font-size: 2.25rem;
+    font-weight: 500;
+    color: rgba(var(--clr-text), 1);
+    transition: color 0.15s;
+}
+
+.tour-search-header-paragraph {
+    margin-top: 0.5rem;
+    font-family: var(--fnt-body);
+    font-size: 1.25rem;
+    font-weight: 400;
+    color: rgba(var(--clr-text), 1);
+    transition: color 0.15s;
+    margin-bottom: 1rem;
+}
+
+.tour-search-body{
+    display: flex;
+    width: 100%;
+    min-height: 500px;
+    margin-top: 2rem;
+    margin-bottom: 2rem;
+}
+
+.tour-search-filters {
+    display: flex;
+    flex-direction: column;
+    width: 25%;
+    padding-bottom: 1rem;
+}
+
+.tour-search-filters-head {
+    display: flex;
+    align-items: center;
+    padding-inline: 1rem;
+    border-radius: 0.3125rem;
+    border: rgba(var(--clr-primary-500), 1) 1px solid;
+    background-color: rgba(var(--clr-primary-500), 1);
+    padding-block: 1rem;
+    margin-bottom: 1rem;
+}
+
+.tour-filters-head-icon {
+    font-family: var(--fnt-body);
+    font-size: 1.5rem;
+    font-weight: 500;
+    color: rgba(255, 255, 255, 1);
+    transition: color 0.15s;
+}
+
+.tour-filters-head-text {
+    margin-left: 0.5rem;
+    font-family: var(--fnt-body);
+    font-size: 1.5rem;
+    font-weight: 500;
+    color: rgba(255, 255, 255, 1);
+    transition: color 0.15s;
+}
+
+.tour-seach-filter-section {
+    display: flex;
+    flex-direction: column;
+    padding-inline: 1rem;
+    border-radius: 0.3125rem;
+    border: rgba(var(--border-primary), 1) 1px solid;
+    padding-bottom: 1rem;
+}
+
+.tour-seach-filter-section-title {
+    margin-top: 0.25rem;
+    font-family: var(--fnt-body);
+    font-size: 1.5rem;
+    font-weight: 500;
+    color: rgba(var(--clr-text), 1);
+    transition: color 0.15s;
+    margin-bottom: 1rem;
+}
+
+.tour-seach-filter-section-body {
+    display: flex;
+    flex-direction: column;
+}
+
+.tour-search-map-distance-labels {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+}
+
+.tour-search-map-distance {
+    margin-bottom: 1rem;
+}
+
+.tour-search-map-distance-min {
+    font-family: var(--fnt-body);
+    font-size: 1rem;
+    font-weight: 500;
+    color: rgba(var(--clr-text), 1);
+    transition: color 0.15s;
+    position: absolute;
+    left: 0;
+    transition: color 0.15s;
+}
+
+.tour-search-map-distance-value {
+    font-family: var(--fnt-body);
+    font-size: 1rem;
+    font-weight: 500;
+    color: rgba(var(--clr-text), 1);
+    transition: color 0.15s;
+    transition: color 0.15s;
+}
+
+.tour-search-map-distance-max {
+    font-family: var(--fnt-body);
+    font-size: 1rem;
+    font-weight: 500;
+    color: rgba(var(--clr-text), 1);
+    transition: color 0.15s;
+    position: absolute;
+    right: 0;
+    transition: color 0.15s;
+}
+
+.tour-search-map-distance {
+    background-color: rgba(var(--clr-primary-300), 1);
+    cursor: pointer;
+}
+
+.tour-search-map {
+    border-radius: 10px;
+}
+
+.tour-search-button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: rgba(var(--clr-primary-500), 1);
+    border-radius: 0.3125rem;
+    margin-bottom: 1rem;
+    height: 2.5rem;
+    transition: background-color 0.15s;
+    cursor: pointer;
+}
+
+.tour-search-button:hover {
+    background-color: rgba(var(--clr-primary-500), 0.9);
+}
+
+.tour-search-button-text {
+    font-family: var(--fnt-body);
+    font-size: 1.5rem;
+    font-weight: 600;
+    color: rgba(255, 255, 255, 1);
+}
+
+.tour-search-results {
+    display: flex;
+    flex-direction: column;
+    margin-left: 2rem;
+    width: 75%;
+}
+
+.tour-search-results-count {
+    font-family: var(--fnt-body);
+    font-size: 1.5rem;
+    font-weight: 500;
+    color: rgba(var(--clr-text), 1);
+    transition: color 0.15s;
+    margin-bottom: 1rem;
+}
+
+.tour-search-results-card-panel {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: flex-start;
+    gap: 1rem;
+    border-top: rgba(var(--border-primary), 1) 1px solid;
+    padding-top: 2rem;
+}
+
+.tour-search-results-card {
+    display: flex;
+}

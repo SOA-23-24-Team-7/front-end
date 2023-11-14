@@ -103,3 +103,18 @@ ista prica
     font-size: 1.05rem;
     font-weight: 500;
 }
+.key-points-button{
+    border-radius: 2rem;
+    margin-right: auto;
+    height: 100%;
+    max-height: 100%;
+    font-size: 1.05rem;
+    font-weight: 500;
+    float: left;
+}
+button:disabled,
+button[disabled]{
+  border: 1px solid #999999;
+  background-color: #cccccc;
+  color: #666666;
+}

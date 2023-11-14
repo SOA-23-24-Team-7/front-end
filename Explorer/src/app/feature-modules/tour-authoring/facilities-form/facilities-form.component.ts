@@ -12,7 +12,9 @@ import { Facilities } from "../model/facilities.model";
 import {
     PublicFacilityRequest,
     PublicStatus,
-} from "../model/public-facility-request";
+} from "../model/public-facility-request.model";
+import { AuthService } from "src/app/infrastructure/auth/auth.service";
+import { Person } from "../../stakeholder/model/person.model";
 
 @Component({
     selector: "xp-facilities-form",
@@ -23,8 +25,12 @@ export class FacilitiesFormComponent implements OnChanges {
     @Output() facilitiesUpdated = new EventEmitter<null>();
     @Input() facility: Facilities;
     @Input() shouldEdit: boolean = false;
-
-    constructor(private service: TourAuthoringService) {}
+    tourImage: string | null = null;
+    tourImageFile: File | null = null;
+    constructor(
+        private service: TourAuthoringService,
+        private authService: AuthService,
+    ) {}
 
     options = [
         { value: "0", label: "Restaurant" },
@@ -42,9 +48,13 @@ export class FacilitiesFormComponent implements OnChanges {
     selectedOption: string | null;
     newLongitude: number = 0;
     newLatitude: number = 0;
-    isAddButtonDisabled: boolean = true;
+    isAddButtonDisabled: boolean = false; //bilo je true
     isPublicChecked = false;
-
+    person: Person;
+    imagePath:string;
+    ngOnInit(): void {
+        this.getPerson();
+    }
     ngOnChanges(): void {
         this.facilitiesForm.reset();
         if (this.shouldEdit) {
@@ -88,7 +98,7 @@ export class FacilitiesFormComponent implements OnChanges {
             facility.longitude = this.newLongitude;
             facility.latitude = this.newLatitude;
 
-            this.service.addFacility(facility).subscribe({
+            /*this.service.addFacility(facility).subscribe({
                 next: result => {
                     this.facilitiesUpdated.emit();
                     location.reload();
@@ -97,13 +107,37 @@ export class FacilitiesFormComponent implements OnChanges {
                             facilityId: result.id as number,
                             status: PublicStatus.Pending,
                             // Dodajte komentar ako je potrebno
+                            authorName:
+                                this.person.name + " " + this.person.surname,
                         };
                         this.service
                             .addPublicFacilityRequest(request)
                             .subscribe({});
                     }
                 },
-            });
+            });*/
+            this.service.uploadImage(this.tourImageFile!).subscribe({
+                next: (imagePath: string) => {
+                    facility.imagePath=imagePath;
+                    this.service.addFacility(facility).subscribe({
+                        next: result => {
+                            this.facilitiesUpdated.emit();
+                            location.reload();
+                            if (this.facilitiesForm.value.isPublicChecked) {
+                                const request: PublicFacilityRequest = {
+                                    facilityId: result.id as number,
+                                    status: PublicStatus.Pending,
+                                    // Dodajte komentar ako je potrebno
+                                    authorName:
+                                        this.person.name + " " + this.person.surname,
+                                };
+                                this.service
+                                    .addPublicFacilityRequest(request)
+                                    .subscribe({});
+                            }
+                        },
+                    });
+                }})
         } else {
             alert("You have to choose the location on the map");
         }
@@ -133,12 +167,39 @@ export class FacilitiesFormComponent implements OnChanges {
             facility.longitude = this.newLongitude;
             facility.latitude = this.newLatitude;
         }
-
-        this.service.updateFacility(facility).subscribe({
-            next: _ => {
-                this.facilitiesUpdated.emit();
-                location.reload();
+        this.service.uploadImage(this.tourImageFile!).subscribe({
+            next: (imagePath: string) => {
+                facility.imagePath = imagePath;
+                this.service.updateFacility(facility).subscribe({
+                    next: _ => {
+                        this.facilitiesUpdated.emit();
+                        location.reload();
+                    },
+                });
             },
         });
+        
+    }
+
+    getPerson(): void {
+        this.authService.user$.subscribe(user => {
+            this.service.getPerson(user.id).subscribe(result => {
+                this.person = result;
+            });
+        });
+    }
+    onSelectImage(event: Event) {
+        const element = event.currentTarget as HTMLInputElement;
+        if (element.files && element.files[0]) {
+            this.tourImageFile = element.files[0];
+
+            const reader = new FileReader();
+
+            reader.readAsDataURL(this.tourImageFile);
+            reader.onload = (e: ProgressEvent<FileReader>) => {
+                this.tourImage = reader.result as string;
+                this.facilitiesForm.value.imagePath = "";
+            };
+        }
     }
 }

@@ -4,7 +4,8 @@
         <div class="triangle-left"></div>
     </div>
 
-    <xp-purchased-tour-card *ngFor="let tour of purchasedTours" [tour]="tour"></xp-purchased-tour-card>
+    <xp-purchased-tour-card *ngFor="let tour of purchasedTours" 
+    [tour]="tour" [hasActiveTour]="hasTourActive" [activeTourId]="activeTourId"></xp-purchased-tour-card>
 
     <div class="list-cards-button" id="next-button">
         <div class="triangle-right"></div>
