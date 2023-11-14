@@ -28,15 +28,15 @@ import { ClubMembersManagementComponent } from "src/app/feature-modules/marketpl
 import { FacilitiesComponent } from "src/app/feature-modules/tour-authoring/facilities/facilities.component";
 import { KeyPointsComponent } from "src/app/feature-modules/tour-authoring/key-points/key-points.component";
 import { MyClubInvitationsComponent } from "src/app/feature-modules/marketplace/my-club-invitations/my-club-invitations.component";
-
-import { TouristPositionSimulatorComponent } from "src/app/feature-modules/tour-execution/tourist-position-simulator/tourist-position-simulator.component";
-import { RequestViewComponent } from "src/app/feature-modules/administration/request-view/request-view.component";
-
+import { TouristPositionSimulatorComponent } from 'src/app/feature-modules/tour-execution/tourist-position-simulator/tourist-position-simulator.component';
+import { RequestViewComponent } from 'src/app/feature-modules/administration/request-view/request-view.component';
+import { PurchasedToursComponent } from 'src/app/feature-modules/tour-execution/purchased-tour-cards/purchased-tour-cards.component';
+import { PublishedToursComponent } from 'src/app/feature-modules/marketplace/tours/published-tours.component';
+import { TourExecutingComponent } from 'src/app/feature-modules/tour-execution/tour-executing/tour-executing.component';
 import { TourSearchComponent } from "src/app/feature-modules/marketplace/tour-search/tour-search.component";
 import { NotificationTabsComponent } from "src/app/feature-modules/stakeholder/notification-tabs/notification-tabs.component";
 import { KeypointsNotificationsComponent } from "src/app/feature-modules/marketplace/keypoints-notifications/keypoints-notifications.component";
 import { FacilitiesNotificationsComponent } from "src/app/feature-modules/marketplace/facilities-notifications/facilities-notifications.component";
-import { PublishedToursComponent } from "src/app/feature-modules/marketplace/tours/published-tours.component";
 import { TourDetailsComponent } from 'src/app/feature-modules/marketplace/tour-details/tour-details.component';
 
 const routes: Routes = [
@@ -60,7 +60,8 @@ const routes: Routes = [
         canActivate: [AuthGuard],
     },
     { path: "tours", component: TourComponent, canActivate: [AuthGuard] },
-    {
+    { path: "purchasedtours", component: PurchasedToursComponent, canActivate: [AuthGuard] },
+    { 
         path: "published-tours",
         component: PublishedToursComponent,
         canActivate: [AuthGuard],
@@ -92,6 +93,12 @@ const routes: Routes = [
         component: TouristPositionSimulatorComponent,
         canActivate: [AuthGuard],
     },
+    {
+        path: 'tour-executing/:tourId',
+        component: TourExecutingComponent,
+        canActivate: [AuthGuard]
+    },
+    
     {
         path: "user-management",
         component: UsersOverviewComponent,
