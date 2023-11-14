@@ -5,5 +5,6 @@ export interface TourExecutionSession {
     status: TourExecutionSessionStatus,
     tourId: number,
     nextKeyPointId: number,
-    lastActivity: Date
+    lastActivity: Date,
+    progress: number
 }

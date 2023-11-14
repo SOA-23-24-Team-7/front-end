@@ -40,7 +40,6 @@ export class TourDetailsComponent implements OnInit  {
     this.service.canTourBeRated(tourId).subscribe({
       next: (result: boolean) => {
         this.canBeRated = result;
-        console.log(this.canBeRated);
       },
       error: (errData) => {
         console.log(errData);
