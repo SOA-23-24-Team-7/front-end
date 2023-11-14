@@ -140,7 +140,12 @@ export class PublishedToursComponent implements OnInit {
             this.service.getToursInCart(this.user.id).subscribe({
                 next: (result: PagedResults<TourLimitedView>) => {
                     this.addedTours = result.results;
-                    this.getTokens();
+                    this.service.getShoppingCart(this.user.id).subscribe({
+                        next: (result: ShoppingCart) => {
+                            this.shoppingCart = result;
+                            this.getTokens();
+                        },
+                    });
                 },
             });
         });

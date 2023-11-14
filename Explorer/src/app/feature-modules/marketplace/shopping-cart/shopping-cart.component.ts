@@ -89,14 +89,6 @@ export class ShoppingCartComponent {
         });
     }
     checkout(): void {
-        for (let tour of this.data) {
-            this.service.addToken(tour.id).subscribe({
-                next: (result: TourToken) => {
-                    console.log(result);
-                },
-            });
-        }
-
         this.service.deleteShoppingKart(this.shoppingCart.id).subscribe({
             next: () => {
                 this.dialogRef.closeAll();
@@ -105,6 +97,13 @@ export class ShoppingCartComponent {
                 this.service.addShoppingCart(this.shoppingCart).subscribe({
                     next: (result: ShoppingCart) => {
                         this.shoppingCart = result;
+                        for (let tour of this.data) {
+                            this.service.addToken(tour.id).subscribe({
+                                next: (result: TourToken) => {
+                                    console.log(result);
+                                },
+                            });
+                        }
                     },
                 });
             },
