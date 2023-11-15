@@ -6,6 +6,7 @@ import { HttpClient } from '@angular/common/http';
 import { TouristPosition } from './model/tourist-position.model';
 import { environment } from 'src/env/environment';
 import { TourExecutionSession } from './model/tour-execution-session-model';
+import { TourExecutionSessionInfo } from './model/tour-execution-session-info.model';
 
 @Injectable({
   providedIn: 'root'
@@ -48,5 +49,9 @@ export class TourExecutionService {
 
   checkKeyPointCompletion(tourId: number, touristPosition: TouristPosition): Observable<TourExecutionSession> {
     return this.http.put<TourExecutionSession>(environment.apiHost + 'tourexecution/tourexecution/' + tourId + '/keypoint', touristPosition);
+  }
+
+  getTourExecutionSessionInfo(): Observable<TourExecutionSessionInfo[]> {
+    return this.http.get<TourExecutionSessionInfo[]>(environment.apiHost + 'tourexecution/tourexecution/allInfo');
   }
 }

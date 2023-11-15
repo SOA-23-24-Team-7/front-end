@@ -10,6 +10,7 @@ import { Following } from "../model/following.model";
 import { FollowDialogComponent } from "../follow-dialog/follow-dialog.component";
 import { StakeholderService } from "../stakeholder.service";
 import { FollowerSearchDialogComponent } from "../follower-search-dialog/follower-search-dialog.component";
+import { TourExecutionHistoryComponent } from "../../tour-execution/tour-execution-history/tour-execution-history.component";
 
 @Component({
     selector: "xp-user-profile",
@@ -120,5 +121,16 @@ export class UserProfileComponent implements OnInit {
     }
     goToAllNotifications(): void {
         this.router.navigate(["/user-notifications"]);
+    }
+    openTourExecutionHistoryDialog(): void {
+        const dialogRef = this.dialog.open(TourExecutionHistoryComponent, {
+            enterAnimationDuration: "300ms",
+            exitAnimationDuration: "200ms",
+            height: "500px",
+            width: "37rem",
+            data: {
+                user: this.user,
+            },
+        });
     }
 }
