@@ -84,7 +84,6 @@ export class TourPreferenceFormComponent {
       boatRating: this.tourPreferenceForm.value.boatRating || 0,
       selectedTags: tagsList
     }
-    console.log()
     if (this.IsDataValid(tourPreference)) {
       this.snackBar.open('Data not valid!', 'Close', {
         duration: 5000

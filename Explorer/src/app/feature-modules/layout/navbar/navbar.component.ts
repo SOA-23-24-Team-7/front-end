@@ -6,6 +6,7 @@ import { ThemeService } from "../../../infrastructure/theme/theme.service";
 import { NavigationStart, NavigationEnd, Router } from "@angular/router";
 import { LoginComponent } from "src/app/infrastructure/auth/login/login.component";
 import { RegistrationComponent } from "src/app/infrastructure/auth/registration/registration.component";
+import { faFolderClosed } from "@fortawesome/free-regular-svg-icons";
 import {
     faChevronDown,
     faPhone,
@@ -28,6 +29,7 @@ import {
     faPersonHiking,
     faUsers,
     faEnvelope,
+    faPlus,
     faShoppingCart,
     faBell,
 } from "@fortawesome/free-solid-svg-icons";
@@ -52,10 +54,8 @@ export class NavbarComponent implements OnInit {
             if (event instanceof NavigationStart) {
                 if (event.url !== "" && event.url !== "/") {
                     this.isHome = false;
-                    console.log("not home");
                 } else {
                     this.isHome = true;
-                    console.log("home");
                 }
             }
         });
@@ -109,6 +109,8 @@ export class NavbarComponent implements OnInit {
     faPersonHiking = faPersonHiking;
     faUsers = faUsers;
     faEnvelope = faEnvelope;
+    faFolderClosed = faFolderClosed;
+    faPlus = faPlus;
     faShoppingCart = faShoppingCart;
     faBell = faBell;
 }

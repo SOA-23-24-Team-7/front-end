@@ -7,6 +7,11 @@
     <div id="tour-details" class="tour-rectangles">
         <div *ngFor="let pt of publishedTours" class="tour-rectangle">
             <div class="tour-info">
+                <img
+                    class="key-point-image"
+                    [src]="environment.imageHost + pt?.keyPoint?.imagePath"
+                />
+
                 <p class="text"><strong>Name:</strong> {{ pt.name }}</p>
                 <p class="text">
                     <strong>Description:</strong> {{ pt.description }}
@@ -43,6 +48,14 @@
                     (click)="addOrderItem(pt.id, pt.name, pt.price)"
                 >
                     Add to cart
+                </button>
+            </div>
+            <div class="tour-buttons">
+                <button
+                    color="accent"
+                    [routerLink]="['/tour-details/', pt.id]"
+                >
+                    Details
                 </button>
             </div>
         </div>

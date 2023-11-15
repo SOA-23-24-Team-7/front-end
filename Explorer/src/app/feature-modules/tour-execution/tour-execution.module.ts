@@ -7,6 +7,9 @@ import { SharedModule } from 'src/app/shared/shared.module';
 import { TourExecutingComponent } from './tour-executing/tour-executing.component';
 import { ClickedKeyPointComponent } from './clicked-key-point/clicked-key-point.component';
 import { TourExecutionHistoryComponent } from './tour-execution-history/tour-execution-history.component';
+import { KeyPointsViewComponent } from "./key-points-view/key-points-view.component";
+import { FontAwesomeModule } from "@fortawesome/angular-fontawesome";
+import { TourAuthoringModule } from "../tour-authoring/tour-authoring.module";
 
 
 
@@ -17,11 +20,14 @@ import { TourExecutionHistoryComponent } from './tour-execution-history/tour-exe
     TouristPositionSimulatorComponent,
     TourExecutingComponent,
     ClickedKeyPointComponent,
-    TourExecutionHistoryComponent
+    TourExecutionHistoryComponent,
+    KeyPointsViewComponent,
   ],
   imports: [
     CommonModule,
-    SharedModule
+    SharedModule,
+    FontAwesomeModule,
+    TourAuthoringModule,
   ]
 })
-export class TourExecutionModule { }
+export class TourExecutionModule {}

@@ -15,6 +15,13 @@
         rgba(var(--clr-primary-500), 0.95);
 }
 
+.progress {
+    color: rgba(var(--clr-text), 1);
+    font-family: var(--fnt-body);
+    font-size: 1.5rem;
+    margin-top: 2rem;
+}
+
 .list-cards-button {
     display: flex;
     align-items: center;
