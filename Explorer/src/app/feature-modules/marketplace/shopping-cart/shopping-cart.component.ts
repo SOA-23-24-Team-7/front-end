@@ -73,6 +73,7 @@ export class ShoppingCartComponent {
                                     ) => {
                                         this.data = result.results;
                                         this.isEmpty();
+                                        this.getShoppingCart(); // update the price
                                     },
                                 });
                         },
