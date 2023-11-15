@@ -17,7 +17,6 @@ import { Person } from "../stakeholder/model/person.model";
 })
 export class TourAuthoringService {
     constructor(private http: HttpClient) {}
-
     getTours(): Observable<PagedResults<Tour>> {
         return this.http.get<PagedResults<Tour>>(
             "https://localhost:44333/api/tour/authors",
@@ -27,9 +26,14 @@ export class TourAuthoringService {
     addTour(tour: Tour): Observable<Tour> {
         return this.http.post<Tour>(environment.apiHost + "tour", tour);
     }
-
     deleteTour(id: number): Observable<Tour> {
         return this.http.delete<Tour>(environment.apiHost + "tour/" + id);
+    }
+
+    deleteTourAdmin(id: number): Observable<Tour> {
+        return this.http.delete<Tour>(
+            environment.apiHost + "administrator/tour/" + id,
+        );
     }
 
     updateTour(tour: Tour): Observable<Tour> {
