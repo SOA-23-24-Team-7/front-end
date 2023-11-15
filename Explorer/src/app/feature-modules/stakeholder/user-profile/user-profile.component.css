@@ -37,7 +37,8 @@ a {
 }
 
 button.all-notifications-button,
-button.add-followers-button {
+button.add-followers-button,
+button.show-tour-execution-history {
     color: white;
     background-color: #4054b4;
     padding: 10px 20px;
