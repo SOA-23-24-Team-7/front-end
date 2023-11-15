@@ -231,9 +231,9 @@ export class MapComponent implements AfterViewInit, OnChanges {
       draggableWaypoints: false
     };
 
-    if (this.isTourExecutionMap && waypoints.length == (this.waypointMap.size + 1)) {
+    if (this.isTourExecutionMap) {
       planOptions['createMarker'] = (i: number, waypoint: any, n: number): any => {
-        if (i == 0) return null;
+        if (waypoints.length == (this.waypointMap.size + 1) && i == 0) return null;
         const marker = L.marker(waypoint.latLng, { icon: keyPointIcon });
         marker.addEventListener('click', () => {
          this.keyPointClickEvent.emit(waypoint.latLng);
