@@ -1,6 +1,8 @@
-import { Component } from "@angular/core";
+import { Component, OnInit } from "@angular/core";
 import { faMapMarker, faBuilding } from "@fortawesome/free-solid-svg-icons";
 import { faTriangleExclamation } from "@fortawesome/free-solid-svg-icons";
+import { AuthService } from "src/app/infrastructure/auth/auth.service";
+import { User } from "src/app/infrastructure/auth/model/user.model";
 
 enum Tab {
     KEYPOINTS,
@@ -12,7 +14,7 @@ enum Tab {
     templateUrl: "./notification-tabs.component.html",
     styleUrls: ["./notification-tabs.component.css"],
 })
-export class NotificationTabsComponent {
+export class NotificationTabsComponent implements OnInit {
     //icons
     faMapMarker = faMapMarker;
     faBuilding = faBuilding;
@@ -20,9 +22,16 @@ export class NotificationTabsComponent {
 
     Tab = Tab;
     selectedTab: Tab = Tab.KEYPOINTS;
+    user: User;
 
-    constructor() {
+    constructor(private authService: AuthService) {
         this.selectedTab = Tab.KEYPOINTS;
+    }
+
+    ngOnInit(): void {
+        this.authService.user$.subscribe(user => {
+            this.user = user;
+        });
     }
 
     setActiveTab(tab: Tab, el: HTMLElement): void {

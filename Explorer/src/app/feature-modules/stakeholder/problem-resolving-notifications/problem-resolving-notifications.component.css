@@ -9,8 +9,7 @@
 }
 
 .cards-list {
-    overflow-y: scroll;
-    overflow-x: hidden;
+    overflow: auto;
     border-radius: 1rem;
     color: rgb(var(--clr-text));
     height: 100%;
@@ -18,6 +17,15 @@
     align-items: center;
     flex-direction: column;
     margin-top: 1rem;
+}
+
+.cards-list::-webkit-scrollbar {
+    width: 0.5em;
+}
+
+.cards-list::-webkit-scrollbar-thumb {
+    background-color: rgba(var(--clr-background-secondary));
+    border-radius: 0.3rem;
 }
 
 .notification {

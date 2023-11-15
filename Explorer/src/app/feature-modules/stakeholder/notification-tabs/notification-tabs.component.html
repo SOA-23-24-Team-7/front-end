@@ -1,6 +1,7 @@
 <div class="tab-list" #tabList>
     <div
         class="tab"
+        *ngIf="user.role === 'author'"
         [ngClass]="{ 'selected-tab': selectedTab === Tab.KEYPOINTS }"
         (click)="setActiveTab(Tab.KEYPOINTS, tabList)"
     >
@@ -8,6 +9,7 @@
     </div>
     <div
         class="tab"
+        *ngIf="user.role === 'author'"
         [ngClass]="{ 'selected-tab': selectedTab === Tab.FACILITIES }"
         (click)="setActiveTab(Tab.FACILITIES, tabList)"
     >
