@@ -9,8 +9,16 @@
 
     --clr-discount-500: 255, 143, 6;
 
+    --clr-error-100: 255, 88, 88;
+    --clr-error-300: 255, 40, 48;
     --clr-error-500: 255, 0, 0;
+    --clr-error-700: 255, 88, 88;
+
+    --clr-success-300: 94, 227, 94;
     --clr-success-500: 6, 227, 6;
+    --clr-success-700: 94, 227, 94;
+
+    --clr-information-500: 132, 0, 255;
 
     --clr-text: 0, 0, 0;
 
@@ -24,8 +32,10 @@
     --clr-background-secondary: var(--clr-neutral-300);
     --clr-text-contrast: var(--clr-neutral-100);
 
-    --clr-outline: var(--clr-neutral-300);
+    --clr-outline: var(--clr-neutral-500);
     --clr-outline-contrast: var(--clr-neutral-700);
+
+    --border-primary: 220, 223, 228;
 
     --fnt-body: "Source Sans 3", sans-serif;
 
@@ -45,10 +55,18 @@
     --clr-background-secondary: var(--clr-neutral-700);
     --clr-text: var(--clr-neutral-100);
     --clr-text-contrast: var(--clr-neutral-900);
-    --clr-outline: var(--clr-neutral-700);
     --clr-outline-contrast: var(--clr-neutral-300);
 
     background-color: rgb(var(--clr-background));
+
+    --border-primary: 73, 77, 88;
+}
+
+.dark-theme a {
+    color: rgb(var(--clr-primary-300));
+}
+.dark-theme a:hover {
+    filter: brightness(0.8);
 }
 
 /* Box sizing rules */
@@ -149,6 +167,22 @@ h6 {
 .btn:hover {
     cursor: pointer;
     filter: brightness(1.2);
+}
+
+input,
+textarea {
+    transition: outline 0.2s;
+    outline: 1px solid transparent;
+    border: 1px solid rgb(var(--clr-outline));
+    border-radius: 0.5rem;
+    padding: 0.5rem;
+    background-color: rgb(var(--clr-background-secondary));
+    color: rgb(var(--clr-text));
+}
+
+input:focus,
+textarea:focus {
+    outline: 1px solid rgb(var(--clr-primary-500));
 }
 
 /* Remove all animations, transitions and smooth scroll for people that prefer not to see them */

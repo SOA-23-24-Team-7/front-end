@@ -1,17 +1,18 @@
 import { Component, OnInit } from "@angular/core";
-import { MatDialog } from '@angular/material/dialog';
+import { MatDialog } from "@angular/material/dialog";
 import { AuthService } from "src/app/infrastructure/auth/auth.service";
 import { User } from "src/app/infrastructure/auth/model/user.model";
 import { ThemeService } from "../../../infrastructure/theme/theme.service";
 import { NavigationStart, NavigationEnd, Router } from "@angular/router";
 import { LoginComponent } from "src/app/infrastructure/auth/login/login.component";
 import { RegistrationComponent } from "src/app/infrastructure/auth/registration/registration.component";
-import { 
-    faChevronDown, 
-    faPhone, 
-    faGear, 
-    faQuestionCircle, 
-    faSun, 
+import { faFolderClosed } from "@fortawesome/free-regular-svg-icons";
+import {
+    faChevronDown,
+    faPhone,
+    faGear,
+    faQuestionCircle,
+    faSun,
     faMoon,
     faGlobe,
     faEuroSign,
@@ -27,7 +28,10 @@ import {
     faShield,
     faPersonHiking,
     faUsers,
-    faEnvelope
+    faEnvelope,
+    faPlus,
+    faShoppingCart,
+    faBell,
 } from "@fortawesome/free-solid-svg-icons";
 //import { } from "@fortawesome/free-regular-svg-icons";
 
@@ -44,16 +48,14 @@ export class NavbarComponent implements OnInit {
         private authService: AuthService,
         private themeService: ThemeService,
         private router: Router,
-        public dialogRef: MatDialog
+        public dialogRef: MatDialog,
     ) {
         this.router.events.subscribe(event => {
             if (event instanceof NavigationStart) {
-                if ((event.url !== "" && event.url !== "/")) {
+                if (event.url !== "" && event.url !== "/") {
                     this.isHome = false;
-                    console.log("not home")
-                } else  {
+                } else {
                     this.isHome = true;
-                    console.log("home")
                 }
             }
         });
@@ -75,7 +77,7 @@ export class NavbarComponent implements OnInit {
 
     onLogout(): void {
         this.authService.logout();
-        this.router.navigate(['']);
+        this.router.navigate([""]);
     }
 
     toggleTheme() {
@@ -86,10 +88,10 @@ export class NavbarComponent implements OnInit {
         return this.themeService.getTheme();
     }
 
-    faChevronDown= faChevronDown;
+    faChevronDown = faChevronDown;
     faQuestionCircle = faQuestionCircle;
     faPhone = faPhone;
-    faGear= faGear;
+    faGear = faGear;
     faSun = faSun;
     faMoon = faMoon;
     faGlobe = faGlobe;
@@ -107,4 +109,8 @@ export class NavbarComponent implements OnInit {
     faPersonHiking = faPersonHiking;
     faUsers = faUsers;
     faEnvelope = faEnvelope;
+    faFolderClosed = faFolderClosed;
+    faPlus = faPlus;
+    faShoppingCart = faShoppingCart;
+    faBell = faBell;
 }

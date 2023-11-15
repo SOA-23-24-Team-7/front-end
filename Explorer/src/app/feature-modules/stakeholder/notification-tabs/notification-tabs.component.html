@@ -1,0 +1,32 @@
+<div class="tab-list" #tabList>
+    <div
+        class="tab"
+        *ngIf="user.role === 'author'"
+        [ngClass]="{ 'selected-tab': selectedTab === Tab.KEYPOINTS }"
+        (click)="setActiveTab(Tab.KEYPOINTS, tabList)"
+    >
+        <fa-icon [icon]="faMapMarker" /> Public keypoints
+    </div>
+    <div
+        class="tab"
+        *ngIf="user.role === 'author'"
+        [ngClass]="{ 'selected-tab': selectedTab === Tab.FACILITIES }"
+        (click)="setActiveTab(Tab.FACILITIES, tabList)"
+    >
+        <fa-icon [icon]="faBuilding" /> Public facilities
+    </div>
+    <div
+        class="tab"
+        [ngClass]="{ 'selected-tab': selectedTab === Tab.PROBLEMRESOLVINGS }"
+        (click)="setActiveTab(Tab.PROBLEMRESOLVINGS, tabList)"
+    >
+        <fa-icon [icon]="faTriangleExclamation" /> Problem resolving
+    </div>
+</div>
+<div class="tab-content">
+    <xp-keypoints-notifications *ngIf="selectedTab === Tab.KEYPOINTS" />
+    <xp-facilities-notifications *ngIf="selectedTab === Tab.FACILITIES" />
+    <xp-problem-resolving-notifications
+        *ngIf="selectedTab === Tab.PROBLEMRESOLVINGS"
+    />
+</div>

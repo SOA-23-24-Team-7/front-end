@@ -1,7 +1,4 @@
-.map-frame {
-  border: 2px solid black;
-}
-
-#map {
-  height: 600px;
-}
+.map-container {
+    width: 100%;
+    align-self: center;
+  }

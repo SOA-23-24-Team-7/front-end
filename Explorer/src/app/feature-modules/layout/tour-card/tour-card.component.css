@@ -9,8 +9,11 @@
     box-shadow: 0 0 1rem rgba(var(--clr-outline-contrast), 0.8);
     position: relative;
     color: rgb(var(--clr-text));
+    transition: transform 0.2s;
 }
-
+.tour-card:hover {
+    transform: scale(1.05); /* Uvećanje kartice kada se miš nalazi iznad nje */
+}
 .tour-image {
     height: 11rem;
     width: 17rem;

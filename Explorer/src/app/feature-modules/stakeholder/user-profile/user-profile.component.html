@@ -1,19 +1,74 @@
-<mat-card class="profile-card">
-  <div class="profile-container">
-    <div class="profile-info">
-      <img
-        [src]="person.profilePicture"
-        alt="Profile Picture"
-        mat-card-image
-      />
-      <div class="info-container">
-        <h2>{{ person.name }} {{ person.surname }}</h2>
-        <p>Username: {{ user.username }}</p>
-        <p>Email: {{ person.email }}</p>
-        <p>Biography: {{ person.bio }}</p>
-        <p>Motto: {{ person.moto }}</p>
-        <button (click)="toggleEditing()" mat-button>Edit</button>
-      </div>
+<ng-container *ngIf="person">
+    <div id="followers-details">
+        <div>
+            <br />
+            <div class="float-container">
+                <div class="float-child">
+                    <a (click)="openFollowersDialog()">
+                        {{ followersCount }} followers
+                    </a>
+                </div>
+                <div class="float-child">
+                    <a (click)="openFollowingsDialog()">
+                        {{ followingsCount }} following
+                    </a>
+                </div>
+                <div class="float-child">
+                    <button
+                        class="add-followers-button"
+                        (click)="openFollowerSearchDialog()"
+                    >
+                        Add followers
+                    </button>
+                </div>
+                <div class="float-child">
+                    <button
+                        class="all-notifications-button"
+                        (click)="goToAllNotifications()"
+                    >
+                        All messages
+                    </button>
+                </div>
+                <div class="float-child">
+                    <button
+                        class="show-tour-execution-history"
+                        (click)="openTourExecutionHistoryDialog()"
+                    >
+                        Tour execution history
+                    </button>
+                </div>
+            </div>
+        </div>
     </div>
-  </div>
-</mat-card>
+    <div class="container">
+        <div class="card">
+            <div class="column">
+                <div class="card-header">
+                    <div class="avatar">
+                        <img
+                            src="{{ person.user.profilePicture }}"
+                            onerror="this.style.display='none'"
+                        />
+                    </div>
+                    <div class="title">
+                        {{ person.name }} {{ person.surname }}
+                    </div>
+                </div>
+                <div class="subtitle">
+                    <div class="username">
+                        Username: {{ person.user.username }}
+                    </div>
+                    <div class="email">Email: {{ person.email }}</div>
+                    <div class="motto">Motto: {{ person.motto }}</div>
+                </div>
+                <div class="btn" (click)="toggleEditing()">Edit</div>
+            </div>
+            <div class="column">
+                <textarea class="bio" readonly="readonly" unselectable="on">
+Biography: {{ person.bio }}
+</textarea
+                >
+            </div>
+        </div>
+    </div>
+</ng-container>

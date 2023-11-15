@@ -6,7 +6,11 @@ import { MaterialModule } from "src/app/infrastructure/material/material.module"
 import { ReactiveFormsModule } from "@angular/forms";
 import { UsersOverviewComponent } from "./users-overview/users-overview.component";
 import { RatingComponent } from "./rating/rating.component";
-import { ProblemViewComponent } from "./problem-view/problem-view.component";
+import { RequestViewComponent } from "./request-view/request-view.component";
+import { CommentRequestFormComponent } from "./comment-request-form/comment-request-form.component";
+import { CommentKeyPointRequestFormComponent } from "./comment-keypoint-request-form/comment-keypoint-request-form.component";
+import { LayoutModule } from "../layout/layout.module";
+import { FontAwesomeModule } from "@fortawesome/angular-fontawesome";
 
 @NgModule({
     declarations: [
@@ -14,15 +18,22 @@ import { ProblemViewComponent } from "./problem-view/problem-view.component";
         EquipmentComponent,
         RatingComponent,
         UsersOverviewComponent,
-        ProblemViewComponent,
+        RequestViewComponent,
+        CommentRequestFormComponent,
+        CommentKeyPointRequestFormComponent,
     ],
-    imports: [CommonModule, MaterialModule, ReactiveFormsModule],
+    imports: [
+        CommonModule,
+        MaterialModule,
+        ReactiveFormsModule,
+        LayoutModule,
+        FontAwesomeModule,
+    ],
     exports: [
         EquipmentComponent,
         EquipmentFormComponent,
         UsersOverviewComponent,
         RatingComponent,
-        ProblemViewComponent,
     ],
 })
 export class AdministrationModule {}

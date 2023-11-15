@@ -1,0 +1,67 @@
+<div class="problem-answer-modal">
+    <div class="problem-answer">
+        <div
+            class="header"
+            [ngClass]="{ red: !problem.isResolved, green: problem.isResolved }"
+            #header
+        >
+            <div class="description">
+                {{ headerText }}
+            </div>
+            <!-- <i class="fa-solid fa-trash"></i> -->
+            <div
+                class="button"
+                *ngIf="user.role === 'tourist' && !problem.isResolved"
+            >
+                <fa-icon
+                    [icon]="faSquareCheck"
+                    (click)="resolveProblem(header)"
+                />
+            </div>
+
+            <div class="row">
+                <div
+                    class="button-red"
+                    *ngIf="
+                        user.role === 'administrator' &&
+                        !problem.isResolved &&
+                        hasDedlinePassed()
+                    "
+                >
+                    <fa-icon
+                        [icon]="faTrash"
+                        (click)="deleteTour(problem.tourId)"
+                    />
+                </div>
+                <div
+                    class="button"
+                    *ngIf="
+                        user.role === 'administrator' &&
+                        !problem.isResolved &&
+                        hasDedlinePassed()
+                    "
+                >
+                    <fa-icon
+                        [icon]="faSquareCheck"
+                        (click)="resolveProblem(header)"
+                    />
+                </div>
+            </div>
+        </div>
+        <xp-problem-comment-create
+            *ngIf="user.role !== 'administrator' && !problem.isResolved"
+            [problem]="problem"
+            (onAddAnswer)="addAnswer($event)"
+            (onAddComment)="addComment($event)"
+        />
+        <div class="comments">
+            <xp-problem-comment
+                *ngFor="let comment of comments"
+                [commenterId]="comment.commenterId"
+                [text]="comment.text"
+                [commenter]="comment.commenter"
+            >
+            </xp-problem-comment>
+        </div>
+    </div>
+</div>

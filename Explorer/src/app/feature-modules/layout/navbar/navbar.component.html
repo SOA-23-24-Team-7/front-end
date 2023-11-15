@@ -25,18 +25,14 @@
                     />
                 </div>
                 <div class="navbar-submenu">
-                    <div
-                        class="navbar-submenu-item"
-                    >
+                    <div class="navbar-submenu-item">
                         <fa-icon
                             class="navbar-submenu-item-icon"
                             [icon]="faQuestionCircle"
                         />
                         <div class="navbar-submenu-item-text">FAQ</div>
                     </div>
-                    <div
-                        class="navbar-submenu-item"
-                    >
+                    <div class="navbar-submenu-item">
                         <fa-icon
                             class="navbar-submenu-item-icon"
                             [icon]="faPhone"
@@ -51,16 +47,17 @@
             </div>
 
             <!-- CLUB MENU -->
-            <div class="navbar-menu-item" *ngIf="user && user.role === 'tourist'">
+            <div
+                class="navbar-menu-item"
+                *ngIf="user && user.role === 'tourist'"
+            >
                 <div class="navbar-menu-item-content">
                     <fa-icon
                         class="navbar-menu-item-content-icon"
                         [class.color-white]="isHome"
                         [icon]="faUsers"
                     />
-                    <div class="navbar-menu-item-content-text">
-                        Clubs
-                    </div>
+                    <div class="navbar-menu-item-content-text">Clubs</div>
                     <fa-icon
                         class="navbar-menu-item-content-arrow"
                         [class.color-white]="isHome"
@@ -96,7 +93,9 @@
                             class="navbar-submenu-item-icon"
                             [icon]="faEnvelope"
                         />
-                        <div class="navbar-submenu-item-text">My join requests</div>
+                        <div class="navbar-submenu-item-text">
+                            My join requests
+                        </div>
                     </div>
                     <div
                         class="navbar-submenu-item navbar-submenu-item-border-radius-bottom no-border"
@@ -106,7 +105,9 @@
                             class="navbar-submenu-item-icon"
                             [icon]="faEnvelope"
                         />
-                        <div class="navbar-submenu-item-text">My invitations</div>
+                        <div class="navbar-submenu-item-text">
+                            My invitations
+                        </div>
                     </div>
                 </div>
                 <div
@@ -123,9 +124,7 @@
                         [class.color-white]="isHome"
                         [icon]="faNewspaper"
                     />
-                    <div class="navbar-menu-item-content-text">
-                        Blog
-                    </div>
+                    <div class="navbar-menu-item-content-text">Blog</div>
                     <fa-icon
                         class="navbar-menu-item-content-arrow"
                         [class.color-white]="isHome"
@@ -133,15 +132,32 @@
                     />
                 </div>
                 <div class="navbar-submenu">
-                    <div
-                        class="navbar-submenu-item"
-                        [routerLink]="['blogs']"
-                    >
+                    <div class="navbar-submenu-item" [routerLink]="['blogs']">
                         <fa-icon
                             class="navbar-submenu-item-icon"
                             [icon]="faSearch"
                         />
                         <div class="navbar-submenu-item-text">Explore</div>
+                    </div>
+                    <div
+                        class="navbar-submenu-item"
+                        [routerLink]="['my-blogs']"
+                    >
+                        <fa-icon
+                            class="navbar-submenu-item-icon"
+                            [icon]="faFolderClosed"
+                        />
+                        <div class="navbar-submenu-item-text">My blogs</div>
+                    </div>
+                    <div
+                        class="navbar-submenu-item"
+                        [routerLink]="['blog-form/' + 0]"
+                    >
+                        <fa-icon
+                            class="navbar-submenu-item-icon"
+                            [icon]="faPlus"
+                        />
+                        <div class="navbar-submenu-item-text">Create blog</div>
                     </div>
                 </div>
                 <div
@@ -151,7 +167,12 @@
             </div>
 
             <!-- TOURS MENU -->
-            <div class="navbar-menu-item" *ngIf="user && (user.role === 'author' || user.role === 'tourist')">
+            <div
+                class="navbar-menu-item"
+                *ngIf="
+                    user && (user.role === 'author' || user.role === 'tourist')
+                "
+            >
                 <div class="navbar-menu-item-content">
                     <fa-icon
                         class="navbar-menu-item-content-icon"
@@ -167,6 +188,17 @@
                 </div>
                 <div class="navbar-submenu">
                     <div
+                        class="navbar-submenu-item navbar-submenu-item-border-radius-top"
+                        [routerLink]="['tour-search']"
+                        *ngIf="user && user.role === 'tourist'"
+                    >
+                        <fa-icon
+                            class="navbar-submenu-item-icon"
+                            [icon]="faSearch"
+                        />
+                        <div class="navbar-submenu-item-text">Explore</div>
+                    </div>
+                    <div
                         class="navbar-submenu-item"
                         *ngIf="user && user.role === 'author'"
                         [routerLink]="['tours']"
@@ -179,6 +211,17 @@
                     </div>
                     <div
                         class="navbar-submenu-item"
+                        *ngIf="user && user.role === 'tourist'"
+                        [routerLink]="['purchasedtours']"
+                    >
+                        <fa-icon
+                            class="navbar-submenu-item-icon"
+                            [icon]="faUser"
+                        />
+                        <div class="navbar-submenu-item-text">Purchased Tours</div>
+                    </div>
+                    <div
+                        class="navbar-submenu-item"
                         [routerLink]="['facilities']"
                         *ngIf="user && user.role === 'author'"
                     >
@@ -186,19 +229,39 @@
                             class="navbar-submenu-item-icon"
                             [icon]="faHotel"
                         />
-                        <div class="navbar-submenu-item-text">Manage facilities</div>
+                        <div class="navbar-submenu-item-text">
+                            Manage facilities
+                        </div>
                     </div>
+
                     <div
                         class="navbar-submenu-item"
-                        [routerLink]="['review']"
+                        [routerLink]="['published-tours']"
                         *ngIf="user && user.role === 'tourist'"
                     >
                         <fa-icon
                             class="navbar-submenu-item-icon"
-                            [icon]="faStar"
+                            [icon]="faShoppingCart"
                         />
-                        <div class="navbar-submenu-item-text">Make a review</div>
+                        <div class="navbar-submenu-item-text">
+                            Start shopping
+                        </div>
                     </div>
+
+                    <div
+                        class="navbar-submenu-item"
+                        [routerLink]="['tourist-position-simulator']"
+                        *ngIf="user && user.role === 'tourist'"
+                    >
+                        <fa-icon
+                            class="navbar-submenu-item-icon"
+                            [icon]="faPersonHiking"
+                        />
+                        <div class="navbar-submenu-item-text">
+                            Change position
+                        </div>
+                    </div>
+                    
                     <div
                         class="navbar-submenu-item"
                         [routerLink]="['problem']"
@@ -208,7 +271,21 @@
                             class="navbar-submenu-item-icon"
                             [icon]="faTriangleExclamation"
                         />
-                        <div class="navbar-submenu-item-text">Report a problem</div>
+                        <div class="navbar-submenu-item-text">
+                            Report a problem
+                        </div>
+                    </div>
+                    <div
+                        class="navbar-submenu-item"
+                        [routerLink]="['problems']"
+                    >
+                        <fa-icon
+                            class="navbar-submenu-item-icon"
+                            [icon]="faTriangleExclamation"
+                        />
+                        <div class="navbar-submenu-item-text">
+                            Problem reports
+                        </div>
                     </div>
                 </div>
                 <div
@@ -218,7 +295,10 @@
             </div>
 
             <!-- ADMINISTRATION MENU -->
-            <div class="navbar-menu-item" *ngIf="user && user.role === 'administrator'">
+            <div
+                class="navbar-menu-item"
+                *ngIf="user && user.role === 'administrator'"
+            >
                 <div class="navbar-menu-item-content">
                     <fa-icon
                         class="navbar-menu-item-content-icon"
@@ -245,7 +325,7 @@
                         />
                         <div class="navbar-submenu-item-text">Manage users</div>
                     </div>
-                    
+
                     <div
                         class="navbar-submenu-item"
                         [routerLink]="['problems']"
@@ -254,9 +334,11 @@
                             class="navbar-submenu-item-icon"
                             [icon]="faTriangleExclamation"
                         />
-                        <div class="navbar-submenu-item-text">Problem reports</div>
+                        <div class="navbar-submenu-item-text">
+                            Problem reports
+                        </div>
                     </div>
-                    
+
                     <div
                         class="navbar-submenu-item"
                         [routerLink]="['equipment']"
@@ -267,16 +349,13 @@
                         />
                         <div class="navbar-submenu-item-text">Equipment</div>
                     </div>
-                    
-                    <div
-                        class="navbar-submenu-item"
-                        [routerLink]="['ratings']"
-                    >
+
+                    <div class="navbar-submenu-item" [routerLink]="['ratings']">
                         <fa-icon
                             class="navbar-submenu-item-icon"
                             [icon]="faStar"
                         />
-                            <div class="navbar-submenu-item-text">Ratings</div>
+                        <div class="navbar-submenu-item-text">Ratings</div>
                     </div>
                 </div>
                 <div
@@ -301,27 +380,21 @@
                     />
                 </div>
                 <div class="navbar-submenu">
-                    <div
-                        class="navbar-submenu-item"
-                    >
+                    <div class="navbar-submenu-item">
                         <fa-icon
                             class="navbar-submenu-item-icon"
                             [icon]="faEuroSign"
                         />
                         <div class="navbar-submenu-item-text">Currency</div>
                     </div>
-                    <div
-                        class="navbar-submenu-item"
-                    >
+                    <div class="navbar-submenu-item">
                         <fa-icon
                             class="navbar-submenu-item-icon"
                             [icon]="faGlobe"
                         />
                         <div class="navbar-submenu-item-text">Language</div>
                     </div>
-                    <div
-                        class="navbar-submenu-item"
-                    >
+                    <div class="navbar-submenu-item">
                         <fa-icon
                             class="navbar-submenu-item-icon"
                             [icon]="faSun"
@@ -369,10 +442,7 @@
                     />
                 </div>
                 <div class="navbar-submenu">
-                    <div
-                        class="navbar-submenu-item"
-                        [routerLink]="['profile']"
-                    >
+                    <div class="navbar-submenu-item" [routerLink]="['profile']">
                         <fa-icon
                             class="navbar-submenu-item-icon"
                             [icon]="faUser"
@@ -388,7 +458,9 @@
                             class="navbar-submenu-item-icon"
                             [icon]="faHeart"
                         />
-                        <div class="navbar-submenu-item-text">Tour preference</div>
+                        <div class="navbar-submenu-item-text">
+                            Tour preference
+                        </div>
                     </div>
                     <div
                         class="navbar-submenu-item"
@@ -404,7 +476,10 @@
                     <div
                         class="navbar-submenu-item"
                         [routerLink]="['rating-form']"
-                        *ngIf="user && (user.role === 'tourist' || user.role === 'author')"
+                        *ngIf="
+                            user &&
+                            (user.role === 'tourist' || user.role === 'author')
+                        "
                     >
                         <fa-icon
                             class="navbar-submenu-item-icon"
@@ -414,8 +489,29 @@
                     </div>
                     <div
                         class="navbar-submenu-item"
-                        (click)="onLogout()"
+                        [routerLink]="['notification-tabs']"
+                        *ngIf="user && user.role !== 'administrator'"
                     >
+                        <fa-icon
+                            class="navbar-submenu-item-icon"
+                            [icon]="faBell"
+                        />
+                        <div class="navbar-submenu-item-text">
+                            My notifications
+                        </div>
+                    </div>
+                    <div
+                        class="navbar-submenu-item"
+                        *ngIf="user && user.role === 'administrator'"
+                        [routerLink]="['public-requests']"
+                    >
+                        <fa-icon
+                            class="navbar-submenu-item-icon"
+                            [icon]="faUser"
+                        />
+                        <div class="navbar-submenu-item-text">My requests</div>
+                    </div>
+                    <div class="navbar-submenu-item" (click)="onLogout()">
                         <fa-icon
                             class="navbar-submenu-item-icon"
                             [icon]="faRightFromBracket"
@@ -428,13 +524,16 @@
                     [class.background-color-white]="isHome"
                 ></div>
             </div>
-        </div>
-        <div class="navbar-button-panel" *ngIf="user && user.username === ''">
-            <div class="navbar-log-in-button" (click)="onLogin()">
-                <div class="navbar-log-in-button-text">Login</div>
-            </div>
-            <div class="navbar-register-button" (click)="onRegister()">
-                <div class="navbar-register-button-text">Register</div>
+            <div
+                class="navbar-button-panel"
+                *ngIf="user && user.username === ''"
+            >
+                <div class="navbar-log-in-button" (click)="onLogin()">
+                    <div class="navbar-log-in-button-text">Login</div>
+                </div>
+                <div class="navbar-register-button" (click)="onRegister()">
+                    <div class="navbar-register-button-text">Register</div>
+                </div>
             </div>
         </div>
     </div>

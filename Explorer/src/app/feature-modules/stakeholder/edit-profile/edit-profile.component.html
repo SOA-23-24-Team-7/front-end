@@ -1,35 +1,33 @@
-<mat-card class="profile-card">
-  <form (ngSubmit)="saveProfile()" #editProfileForm="ngForm">
-    <div class="form-group">
-      <mat-form-field class="full-width">
-        <input matInput type="text" id="name" name="name" placeholder="Name" [(ngModel)]="person.name" required>
-      </mat-form-field>
+<ng-container *ngIf="person">
+    <div class="container">
+        <div class="form">
+            <div class="row">
+                <div class="field">
+                    <input [(ngModel)]="person.name" required />
+                    <label>Name</label>
+                </div>
+                <div class="field">
+                    <input [(ngModel)]="person.surname" required />
+                    <label>Surname</label>
+                </div>
+            </div>
+            <div class="row">
+                <div class="field">
+                    <input [(ngModel)]="person.motto" required />
+                    <label>Motto</label>
+                </div>
+                <div class="field">
+                    <input [(ngModel)]="person.profilePicture" required />
+                    <label>Profile Picture</label>
+                </div>
+            </div>
+            <div class="row">
+                <div class="field">
+                    <input [(ngModel)]="person.bio" required />
+                    <label>Biography</label>
+                </div>
+            </div>
+            <div class="btn" (click)="editProfile()">Save</div>
+        </div>
     </div>
-    <div class="form-group">
-      <mat-form-field class="full-width">
-        <input matInput type="text" id="surname" name="surname" placeholder="Surname" [(ngModel)]="person.surname" required>
-      </mat-form-field>
-    </div>
-    <div class="form-group">
-      <mat-form-field class="full-width">
-        <input matInput type="email" id="email" name="email" placeholder="Email" [(ngModel)]="person.email" required>
-      </mat-form-field>
-    </div>
-    <div class="form-group">
-      <mat-form-field class="full-width">
-        <textarea matInput id="bio" name="bio" placeholder="Biography" [(ngModel)]="person.bio" required></textarea>
-      </mat-form-field>
-    </div>
-    <div class="form-group">
-      <mat-form-field class="full-width">
-        <input matInput type="text" id="moto" name="moto" placeholder="Moto" [(ngModel)]="person.moto" required>
-      </mat-form-field>
-    </div>
-    <div class="form-group">
-      <mat-form-field class="full-width">
-        <input matInput type="text" id="profilePicture" name="profilePicture" placeholder="ProfilePicture" [(ngModel)]="person.profilePicture" required>
-      </mat-form-field>
-    </div>
-    <button type="submit" mat-raised-button color="primary">Save</button>
-  </form>
-</mat-card>
+</ng-container>
