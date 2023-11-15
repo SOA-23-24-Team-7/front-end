@@ -25,7 +25,7 @@ export class TourExecutingComponent implements OnInit {
   clickedKeyPoint: KeyPoint
   positionSubscription: Subscription
   touristId: number
-  session: TourExecutionSession = { id: 0, tourId: 0, status: TourExecutionSessionStatus.Started, nextKeyPointId: -1, lastActivity: null! }
+  session: TourExecutionSession = { id: 0, tourId: 0, status: TourExecutionSessionStatus.Started, nextKeyPointId: -1, lastActivity: null!, progress: 0 }
   tour: Tour = {
     name: '.',
     description: '.',
@@ -60,7 +60,7 @@ export class TourExecutingComponent implements OnInit {
     
     this.service.checkKeyPointCompletion(this.session.tourId, this.touristPosition).subscribe((session) => {
       if(this.session.nextKeyPointId != session.nextKeyPointId){
-        this.showSecret()
+        this.showSecret();
       }
       this.session = session;
       if(this.session.status == TourExecutionSessionStatus.Completed){

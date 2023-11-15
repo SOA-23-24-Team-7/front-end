@@ -36,33 +36,10 @@ export class ShoppingCartComponent {
     ) {}
 
     ngOnInit(): void {
-        //enabling input
-        /*console.log(this, this.inputTours);
-      if (!this.inputTours || this.inputTours.length === 0)
-          //this.getPublishedTours();
-      else this.publishedTours = this.inputTours;
-      this.authService.user$.subscribe(user => {
-          this.user = user;
-          this.service.getShoppingCart(this.user.id).subscribe({
-              next:(result:ShoppingCart)=>{
-                  this.shoppingCart=result
-                  console.log(result)
-                  if(result==null){
-                      this.shoppingCart={}
-                      this.service.addShoppingCart(this.shoppingCart).subscribe({
-                          next: (result: ShoppingCart) => {
-                              this.shoppingCart = result;
-                          }
-                      })[
-                  }
-              }
-          })
-      });*/
         this.authService.user$.subscribe(user => {
             this.user = user;
+            this.getShoppingCart();
         });
-        this.getShoppingCart();
-        this.isEmpty();
     }
     openDialog(input: Review[]) {
         console.log(input);
@@ -96,6 +73,7 @@ export class ShoppingCartComponent {
                                     ) => {
                                         this.data = result.results;
                                         this.isEmpty();
+                                        this.getShoppingCart(); // update the price
                                     },
                                 });
                         },
@@ -107,26 +85,23 @@ export class ShoppingCartComponent {
         this.service.getShoppingCart(this.user.id).subscribe({
             next: (result: ShoppingCart) => {
                 this.shoppingCart = result;
+                this.isEmpty();
             },
         });
     }
     checkout(): void {
-        for (let tour of this.data) {
-            this.service.addToken(tour.id).subscribe({
-                next: (result: TourToken) => {
-                    console.log(result);
-                },
-            });
-        }
-
         this.service.deleteShoppingKart(this.shoppingCart.id).subscribe({
             next: () => {
-                this.dialogRef.closeAll();
                 alert("You have successfully bought tours!");
                 this.shoppingCart = {};
                 this.service.addShoppingCart(this.shoppingCart).subscribe({
-                    next: (result: ShoppingCart) => {
+                    next: async (result: ShoppingCart) => {
                         this.shoppingCart = result;
+                        for (let tour of this.data) {
+                            const result = await this.service.addToken(tour.id);
+                            console.log(result);
+                        }
+                        this.dialogRef.closeAll();
                     },
                 });
             },

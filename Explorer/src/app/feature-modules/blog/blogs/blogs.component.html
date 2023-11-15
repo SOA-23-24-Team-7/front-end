@@ -1,10 +1,31 @@
 <div class="blogs-container">
-  <h1 class="blogs-title">BLOGS</h1>
-  <div class="blog" *ngFor="let blog of blogs" [routerLink]="['/blog/'+blog.id]">
-    <div class="blog-header">
-      <h2 class="blog-title">{{blog.title}}</h2>
-      <span class="blog-date">{{blog.date}}</span>
+    <div class="title">
+        <select
+            [(ngModel)]="selectedStatus"
+            (change)="filterByStatus(selectedStatus)"
+        >
+            <option value="1">Published</option>
+            <option value="2">Closed</option>
+            <option value="3">Active</option>
+            <option value="4">Famous</option>
+            <option value="5">All</option>
+        </select>
+        <h1 class="blogs-title">Blogs</h1>
     </div>
-    <div class="blog-description">{{blog.description}}</div>
-  </div>
+
+    <xp-blog-preview
+        *ngFor="let blog of blogs"
+        [blog]="blog"
+        [vote]="getVote(blog)"
+        [user]="user"
+        [routerLink]="['/blog/' + blog.id]"
+        (upvote)="upVoteBlog($event)"
+        (downvote)="downVoteBlog($event)"
+        [style.display]="
+            (selectedStatus == 5 && blog.status != 0) ||
+            blog.status == selectedStatus
+                ? 'block'
+                : 'none'
+        "
+    ></xp-blog-preview>
 </div>

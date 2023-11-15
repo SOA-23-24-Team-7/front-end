@@ -43,3 +43,8 @@ p {
     border-radius: 0.5rem;
     cursor: pointer;
 }
+
+img {
+    height: 10rem;
+    width: 12rem;
+}

@@ -4,6 +4,7 @@ import { MarketplaceService } from "../marketplace.service";
 import { PagedResults } from "src/app/shared/model/paged-results.model";
 import { User } from "src/app/infrastructure/auth/model/user.model";
 import { AuthService } from "src/app/infrastructure/auth/auth.service";
+import { ActivatedRoute } from "@angular/router";
 
 @Component({
     selector: "xp-review",
@@ -24,12 +25,18 @@ export class ReviewComponent implements OnInit {
     constructor(
         private service: MarketplaceService,
         private authService: AuthService,
+        private route: ActivatedRoute
     ) {}
 
     ngOnInit(): void {
         this.authService.user$.subscribe(user => {
             this.user = user;
         });
+        
+        this.route.params.subscribe(params => {
+            this.tourId = params['tourId'];
+            this.getReviews();
+        })
     }
 
     getReviews(): void {

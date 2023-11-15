@@ -3,11 +3,13 @@ import { Tour } from '../../tour-authoring/model/tour.model';
 import { Router } from '@angular/router';
 import { TourExecutionService } from '../tour-execution.service';
 import { environment } from 'src/env/environment';
+import { MatDialog } from "@angular/material/dialog";
+import { KeyPointsViewComponent } from "../key-points-view/key-points-view.component";
 
 @Component({
-  selector: 'xp-purchased-tour-card',
-  templateUrl: './purchased-tour-card.component.html',
-  styleUrls: ['./purchased-tour-card.component.css']
+    selector: "xp-purchased-tour-card",
+    templateUrl: "./purchased-tour-card.component.html",
+    styleUrls: ["./purchased-tour-card.component.css"],
 })
 export class PurchasedTourCardComponent implements OnInit{
   @Input() tour: Tour;
@@ -15,7 +17,7 @@ export class PurchasedTourCardComponent implements OnInit{
   @Input() activeTourId: number;
   tourImage: string
   isTourActive: boolean = false
-  constructor(private router: Router, private service: TourExecutionService){}
+  constructor(private router: Router, private service: TourExecutionService, public dialogRef: MatDialog){}
   ngOnInit(): void {
     this.CheckIfTourIsActive()
     this.tourImage = environment.imageHost + this.tour.keyPoints![0].imagePath
@@ -35,7 +37,12 @@ export class PurchasedTourCardComponent implements OnInit{
       }
     }
   }
-  ShowKeyPoints(){
-    // get key points of tour
-  }
+  ShowKeyPoints() {
+    const dialogRef = this.dialogRef.open(KeyPointsViewComponent, {
+        data: {
+            keyPoints: this.tour.keyPoints,
+        },
+    });
+      
+    }
 }
