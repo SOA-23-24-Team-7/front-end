@@ -1,0 +1,31 @@
+<div class="dialog">
+    <div class="search-bar">
+        <fa-icon [icon]="faSearch" class="search-icon" />
+        <input
+            [(ngModel)]="searchUsername"
+            type="text"
+            class="search-input"
+            placeholder="Search users to follow"
+        />
+        <div (click)="search()" class="btn search-button">Search</div>
+    </div>
+    <div>
+        <table>
+            <tbody>
+                <tr *ngFor="let u of users">
+                    <td>{{ u.username }}</td>
+                    <td>
+                        <button
+                            *ngIf="!u.followingStatus"
+                            (click)="follow(u.id)"
+                            color="primary"
+                            mat-raised-button
+                        >
+                            Follow
+                        </button>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>

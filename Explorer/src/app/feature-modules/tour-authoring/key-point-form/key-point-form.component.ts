@@ -13,6 +13,7 @@ import { FormControl, FormGroup, Validators } from "@angular/forms";
 import { ActivatedRoute, ParamMap } from "@angular/router";
 import { environment } from "src/env/environment";
 import { KeyPoint } from "../model/key-point.model";
+import { KeyPointSecret } from "../model/key-point-secret.model";
 import {
     PublicKeyPointRequest,
     PublicStatus,
@@ -72,6 +73,9 @@ export class KeyPointFormComponent implements OnChanges {
         address: new FormControl<string>("", [Validators.required]),
         imagePath: new FormControl<string>("", [Validators.required]),
         isPublicChecked: new FormControl<boolean>(false),
+        haveSecret: new FormControl<boolean>(false),
+        secretDescription: new FormControl<string>(""),
+        secretImages: new FormControl<string>(""),
     });
 
     onSelectImage(event: Event) {
@@ -107,6 +111,9 @@ export class KeyPointFormComponent implements OnChanges {
                                 this.keyPointForm.value.address || "",
                             imagePath: imagePath,
                             order: 0,
+                            haveSecret: this.keyPointForm.value.haveSecret || false,
+                            secret: { images: [""],
+                                    description: this.keyPointForm.value.secretDescription || ""} || null
                         };
                         // Get Key Points location address
                         this.mapService
@@ -186,6 +193,9 @@ export class KeyPointFormComponent implements OnChanges {
                     locationAddress: this.keyPointForm.value.address || "",
                     imagePath: this.keyPointForm.value.imagePath || "",
                     order: 0,
+                    haveSecret: this.keyPointForm.value.haveSecret || false,
+                    secret: { images: [""],
+                            description: this.keyPointForm.value.secretDescription || ""} || null
                 };
 
                 if (!keyPoint.imagePath) {

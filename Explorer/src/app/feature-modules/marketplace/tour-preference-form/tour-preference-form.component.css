@@ -1,35 +1,39 @@
 .create-form {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    margin-top: 3rem;
 }
 
-/* Add margin to the form fields for better spacing */
-mat-form-field {
-  margin: 10px 0;
+input {
+    margin: 1rem;
+    width: 13rem;
 }
 
-/* Add some space between the form fields and the button */
 button {
-  margin-top: 10px;
+    margin-top: 10px;
 }
 
 .custom-tag-input {
-  max-width: 300px;
+    max-width: 13rem;
 }
 
 .tag-input-container {
-  text-align: center;
-  margin-top: 20px;
-  display: flex;
-  justify-content: center;
+    text-align: center;
+    margin-top: 20px;
+    display: flex;
+    justify-content: center;
 }
 
 .button-container {
-  text-align: center;
-  margin-top: 20px;
-  display: flex;
-  justify-content: center;
+    text-align: center;
+    margin: 2rem;
+    display: flex;
+    justify-content: center;
+}
+
+tag {
+    background-color: rgb(var(--clr-background-secondary)) !important;
 }

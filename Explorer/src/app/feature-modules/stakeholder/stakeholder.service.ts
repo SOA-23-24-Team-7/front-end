@@ -11,6 +11,11 @@ import { ProblemAnswer } from "./model/problem-answer.model";
 import { ProblemUpdateDeadline } from "./model/problem-update-deadline.model";
 import { ProblemCommentCreate } from "./model/problem-comment-create.model";
 import { ProblemResolvingNotification } from "./model/problem-resolving-notification.model";
+import { Message, MessageUsernames } from "./model/message.model";
+import { Follower } from "./model/follower.model";
+import { Following } from "./model/following.model";
+import { FollowerCreate } from "./model/follower-create.model";
+import { UserFollow } from "./model/user-follow.model";
 
 @Injectable({
     providedIn: "root",
@@ -38,6 +43,32 @@ export class StakeholderService {
     getPeople(): Observable<PagedResults<Person>> {
         return this.http.get<PagedResults<Person>>(
             environment.apiHost + "people",
+        );
+    }
+    getFollowers(id: number): Observable<PagedResults<Follower>> {
+        return this.http.get<PagedResults<Follower>>(
+            environment.apiHost + "follower/followers/" + id,
+        );
+    }
+    getFollowings(id: number): Observable<PagedResults<Following>> {
+        return this.http.get<PagedResults<Following>>(
+            environment.apiHost + "follower/followings/" + id,
+        );
+    }
+    getSearched(searchUsername: string): Observable<PagedResults<UserFollow>> {
+        return this.http.get<PagedResults<UserFollow>>(
+            environment.apiHost + "follower/search/" + searchUsername,
+        );
+    }
+    deleteFollowing(id: number): Observable<Following> {
+        return this.http.delete<Following>(
+            environment.apiHost + "follower/" + id,
+        );
+    }
+    addFollowing(follow: FollowerCreate): Observable<FollowerCreate> {
+        return this.http.post<FollowerCreate>(
+            environment.apiHost + "follower",
+            follow,
         );
     }
     getByUserId(userId: number): Observable<Person> {
@@ -154,6 +185,34 @@ export class StakeholderService {
             environment.apiHost +
                 "notifications/problems/set-seen/" +
                 notificationId,
+        );
+    }
+    sendMessage(
+        message: string,
+        senderMessageID: number,
+        reciverMessageID: number,
+    ) {
+        return this.http.post(environment.apiHost + "messages/create", {
+            Text: message,
+            UserSenderId: senderMessageID,
+            UserReciverId: reciverMessageID,
+        });
+    }
+
+    getMessages(
+        page: number,
+        pageSize: number,
+        receiverId: number,
+    ): Observable<PagedResults<MessageUsernames>> {
+        return this.http.get<PagedResults<MessageUsernames>>(
+            environment.apiHost + "messages/" + receiverId,
+        );
+    }
+
+    updateMessageStatusOnSeen(updatedMessage: Message): Observable<Message> {
+        return this.http.put<Message>(
+            environment.apiHost + "messages/update-status",
+            updatedMessage,
         );
     }
 }

@@ -4,6 +4,7 @@ import { Router } from "@angular/router";
 import { AuthService } from "src/app/infrastructure/auth/auth.service";
 import { PersonUpdate } from "../model/person-update.model";
 import { Person } from "../model/person.model";
+
 @Component({
     selector: "xp-edit-profile",
     templateUrl: "./edit-profile.component.html",
@@ -28,6 +29,7 @@ export class EditProfileComponent implements OnInit {
 
     editProfile() {
         this.service.updatePerson(this.person).subscribe(result => {
+            console.log("Profile updated:", result);
             this.router.navigate(["/profile"]);
         });
     }

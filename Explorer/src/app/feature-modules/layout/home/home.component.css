@@ -82,6 +82,8 @@
     border: none;
     font-size: 1.2rem;
     width: 40ch;
+    background-color: white;
+    outline: none;
 }
 
 .search-input:focus {

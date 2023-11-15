@@ -1,4 +1,45 @@
 <ng-container *ngIf="person">
+    <div id="followers-details">
+        <div>
+            <br />
+            <div class="float-container">
+                <div class="float-child">
+                    <a (click)="openFollowersDialog()">
+                        {{ followersCount }} followers
+                    </a>
+                </div>
+                <div class="float-child">
+                    <a (click)="openFollowingsDialog()">
+                        {{ followingsCount }} following
+                    </a>
+                </div>
+                <div class="float-child">
+                    <button
+                        class="add-followers-button"
+                        (click)="openFollowerSearchDialog()"
+                    >
+                        Add followers
+                    </button>
+                </div>
+                <div class="float-child">
+                    <button
+                        class="all-notifications-button"
+                        (click)="goToAllNotifications()"
+                    >
+                        All messages
+                    </button>
+                </div>
+                <div class="float-child">
+                    <button
+                        class="show-tour-execution-history"
+                        (click)="openTourExecutionHistoryDialog()"
+                    >
+                        Tour execution history
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
     <div class="container">
         <div class="card">
             <div class="column">

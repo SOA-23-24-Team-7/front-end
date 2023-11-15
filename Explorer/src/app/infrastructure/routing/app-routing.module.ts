@@ -29,30 +29,40 @@ import { KeyPointsComponent } from "src/app/feature-modules/tour-authoring/key-p
 import { MyClubInvitationsComponent } from "src/app/feature-modules/marketplace/my-club-invitations/my-club-invitations.component";
 import { ProblemsOverviewComponent } from "src/app/feature-modules/stakeholder/problems-overview/problems-overview.component";
 import { ProblemAnswerComponent } from "src/app/feature-modules/stakeholder/problem-answer/problem-answer.component";
-
 import { TouristPositionSimulatorComponent } from "src/app/feature-modules/tour-execution/tourist-position-simulator/tourist-position-simulator.component";
 import { RequestViewComponent } from "src/app/feature-modules/administration/request-view/request-view.component";
-
+import { PurchasedToursComponent } from "src/app/feature-modules/tour-execution/purchased-tour-cards/purchased-tour-cards.component";
+import { PublishedToursComponent } from "src/app/feature-modules/marketplace/tours/published-tours.component";
+import { TourExecutingComponent } from "src/app/feature-modules/tour-execution/tour-executing/tour-executing.component";
+import { BlogFormComponent } from "src/app/feature-modules/blog/blog-form/blog-form.component";
+import { MyBlogsComponent } from "src/app/feature-modules/blog/my-blogs/my-blogs.component";
 import { TourSearchComponent } from "src/app/feature-modules/marketplace/tour-search/tour-search.component";
 import { NotificationTabsComponent } from "src/app/feature-modules/stakeholder/notification-tabs/notification-tabs.component";
-import { KeypointsNotificationsComponent } from "src/app/feature-modules/marketplace/keypoints-notifications/keypoints-notifications.component";
-import { FacilitiesNotificationsComponent } from "src/app/feature-modules/marketplace/facilities-notifications/facilities-notifications.component";
-import { PublishedToursComponent } from "src/app/feature-modules/marketplace/tours/published-tours.component";
+import { TourDetailsComponent } from "src/app/feature-modules/marketplace/tour-details/tour-details.component";
+import { UserNotificationsComponent } from "src/app/feature-modules/stakeholder/user-notifications/user-notifications.component";
 
 const routes: Routes = [
-    { path: "", component: HomeComponent },
+    { path: "home", component: HomeComponent },
+    { path: "login", component: LoginComponent },
+    { path: "register", component: RegistrationComponent },
+    { path: "user-notifications", component: UserNotificationsComponent },
     {
         path: "equipment",
         component: EquipmentComponent,
         canActivate: [AuthGuard],
     },
+    { path: "", component: HomeComponent },
     { path: "ratings", component: RatingComponent, canActivate: [AuthGuard] },
     {
         path: "rating-form",
         component: RatingFormComponent,
         canActivate: [AuthGuard],
     },
-    { path: "review", component: ReviewComponent, canActivate: [AuthGuard] },
+    {
+        path: "review/:tourId",
+        component: ReviewComponent,
+        canActivate: [AuthGuard],
+    },
     { path: "problem", component: ProblemComponent, canActivate: [AuthGuard] },
     {
         path: "problems",
@@ -60,6 +70,11 @@ const routes: Routes = [
         canActivate: [AuthGuard],
     },
     { path: "tours", component: TourComponent, canActivate: [AuthGuard] },
+    {
+        path: "purchasedtours",
+        component: PurchasedToursComponent,
+        canActivate: [AuthGuard],
+    },
     {
         path: "published-tours",
         component: PublishedToursComponent,
@@ -91,8 +106,25 @@ const routes: Routes = [
         canActivate: [AuthGuard],
     },
     {
+        path: "tour-executing/:tourId",
+        component: TourExecutingComponent,
+        canActivate: [AuthGuard],
+    },
+
+    {
         path: "user-management",
         component: UsersOverviewComponent,
+        canActivate: [AuthGuard],
+    },
+    { path: "clubs", component: ClubsComponent, canActivate: [AuthGuard] },
+    { path: "blogs", component: BlogsComponent },
+    { path: "my-blogs", component: MyBlogsComponent },
+    { path: "blog/:blogId", component: BlogComponent },
+    { path: "my-blogs/blog-form/:blogId", component: BlogFormComponent },
+    { path: "blog-form/:blogId", component: BlogFormComponent },
+    {
+        path: "profile",
+        component: UserProfileComponent,
         canActivate: [AuthGuard],
     },
     {
@@ -103,19 +135,6 @@ const routes: Routes = [
     {
         path: "my-clubs",
         component: OwnerClubsComponent,
-        canActivate: [AuthGuard],
-    },
-    { path: "clubs", component: ClubsComponent, canActivate: [AuthGuard] },
-    { path: "blogs", component: BlogsComponent },
-    { path: "blog/:blogId", component: BlogComponent },
-    {
-        path: "profile",
-        component: UserProfileComponent,
-        canActivate: [AuthGuard],
-    },
-    {
-        path: "edit-profile",
-        component: EditProfileComponent,
         canActivate: [AuthGuard],
     },
     {
@@ -131,11 +150,6 @@ const routes: Routes = [
     {
         path: "club-join-request-management/:clubId",
         component: ClubJoinRequestManagementComponent,
-        canActivate: [AuthGuard],
-    },
-    {
-        path: "tourist-equipment-selection",
-        component: TouristEquipmentSelectionComponent,
         canActivate: [AuthGuard],
     },
     {
@@ -180,12 +194,17 @@ const routes: Routes = [
         component: NotificationTabsComponent,
         canActivate: [AuthGuard],
     },
-
     {
         path: "tour-search",
         component: TourSearchComponent,
         canActivate: [AuthGuard],
     },
+    {
+        path: "public-requests",
+        component: RequestViewComponent,
+        canActivate: [AuthGuard],
+    },
+    { path: "tour-details/:tourId", component: TourDetailsComponent },
 ];
 
 @NgModule({
