@@ -10,6 +10,7 @@ import { TourExecutionHistoryComponent } from './tour-execution-history/tour-exe
 import { KeyPointsViewComponent } from "./key-points-view/key-points-view.component";
 import { FontAwesomeModule } from "@fortawesome/angular-fontawesome";
 import { TourAuthoringModule } from "../tour-authoring/tour-authoring.module";
+import { TourExecutionInfoComponent } from './tour-execution-info/tour-execution-info.component';
 
 
 
@@ -22,6 +23,7 @@ import { TourAuthoringModule } from "../tour-authoring/tour-authoring.module";
     ClickedKeyPointComponent,
     TourExecutionHistoryComponent,
     KeyPointsViewComponent,
+    TourExecutionInfoComponent,
   ],
   imports: [
     CommonModule,

@@ -1,1 +1,13 @@
-<p>tour-execution-history works!</p>
+<p>Your tour execution info</p>
+<div class="info-container">
+    <xp-tour-execution-info *ngFor="let info of tourExecutionSessionInfos"
+    [name]="info.name"
+    [difficulty]="info.difficulty"
+    [tags]="info.tags"
+    [tourStatus]="info.tourStatus"
+    [description]="info.description"
+    [lastActivity]="info.lastActivity"
+    [tourExecutionStatus]="info.tourExecutionStatus">
+
+    </xp-tour-execution-info>
+</div>
