@@ -59,8 +59,8 @@ export class TourExecutingComponent implements OnInit {
     if (this.session.status !== TourExecutionSessionStatus.Started) return;
     
     this.service.checkKeyPointCompletion(this.session.tourId, this.touristPosition).subscribe((session) => {
-      if(this.session.nextKeyPointId != session.nextKeyPointId){
-        this.showSecret();
+      if(this.session.nextKeyPointId != -1 && this.session.nextKeyPointId != session.nextKeyPointId){
+        this.showSecret(this.session.nextKeyPointId);
       }
       this.session = session;
       if(this.session.status == TourExecutionSessionStatus.Completed){
@@ -82,8 +82,14 @@ export class TourExecutingComponent implements OnInit {
       }
     });
   }
-  showSecret(){
-    alert('secret unlocked')
+  showSecret(keyPointId: number){
+    this.tour.keyPoints?.forEach(keyPoint =>{
+      if(keyPoint.id == keyPointId){
+        if(keyPoint.haveSecret){
+          alert('secret unlocked: '+ keyPoint.secret?.description)
+        }
+      }
+    })
   }
   getTour() {
     this.service.getTour(this.session.tourId).subscribe({
@@ -122,11 +128,19 @@ export class TourExecutingComponent implements OnInit {
         this.clickedKeyPoint = keyPoint
       }
     })
+    let nextKeyPointId : number
+    if(this.session.status == TourExecutionSessionStatus.Completed){
+      nextKeyPointId = Number.POSITIVE_INFINITY
+    }
+    else{
+      nextKeyPointId = this.session.nextKeyPointId
+    }
     this.dialogRef.open(ClickedKeyPointComponent, {
       width: '380px',
       height: '420px',
       data: {
-        dataKey: this.clickedKeyPoint
+        dataKey: this.clickedKeyPoint,
+        nextKeyPointId: nextKeyPointId
       }
     });
   }

@@ -10,6 +10,8 @@ import { environment } from 'src/env/environment';
 export class ClickedKeyPointComponent implements OnInit{
   keyPoint: any
   keyPointImage: string
+  nextKeyPointId: number;
+  secret: string = 'Not unlocked yet'
   constructor(
     @Inject(MAT_DIALOG_DATA) public data: KeyPoint,
     public dialog: MatDialogRef<ClickedKeyPointComponent>,
@@ -17,8 +19,16 @@ export class ClickedKeyPointComponent implements OnInit{
  ) { }
  ngOnInit(): void {
   this.keyPoint = this.data
+  this.nextKeyPointId = this.keyPoint.nextKeyPointId
   this.keyPointImage = environment.imageHost + this.keyPoint.dataKey.imagePath;
-  console.log(this.keyPointImage)
+  if(this.keyPoint.dataKey.id < this.nextKeyPointId){
+    if(this.keyPoint.dataKey.haveSecret){
+      this.secret = this.keyPoint.dataKey.secret.description
+    }
+    else{
+      this.secret = 'No secret'
+    }
+  }
 }
  onClose(): void {
   this.dialog.close();
