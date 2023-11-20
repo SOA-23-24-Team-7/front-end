@@ -1,0 +1,32 @@
+<div class="register-modal" [formGroup]="editTourForm">
+    <div class="register" (click)="$event.stopPropagation()">
+        <div class="register-head">
+            <fa-icon class="register-x" />
+            <div class="register-title">Edit tour</div>
+        </div>
+        <form class="register-form">
+            <div class="register-label">Name:</div>
+            <input class="register-input" type="text" placeholder="Name" formControlName="name"/>
+            <div class="register-label">Description:</div>
+            <input class="register-input" type="text" placeholder="Description" formControlName="description"/>
+            <div class="register-label">Difficulty</div>
+            <input class="register-input" min="1" max="5"  type="number" placeholder="Difficulty" formControlName="difficulty">
+            <div class="register-label">Tags:</div>
+            <input class="register-input" type="text" placeholder="Tags" formControlName="tags" #tagInput type="text"/>
+            <button class="register-submit" (click)="addTag(tagInput.value); tagInput.value=''">
+                <div class="register-submit-text">Add tag</div>
+            </button><br>
+            <div>
+                <div *ngFor="let tag of editTourForm.get('tags')?.value; let i = index">
+                  <span>{{ tag }}</span>
+                  <button class="form-button-remove" (click)="removeTag(i)">Remove</button>
+                </div>
+              </div>
+            <button class="register-submit" type="submit" (click)="submit()">
+                <div class="register-submit-text">Edit</div>
+            </button>
+           
+        </form>
+    </div>
+</div>
+

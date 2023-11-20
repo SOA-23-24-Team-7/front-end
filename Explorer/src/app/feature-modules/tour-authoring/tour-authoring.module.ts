@@ -19,6 +19,7 @@ import { PublicKeyPointsComponent } from "./public-key-points/public-key-points.
 import { FontAwesomeModule } from "@fortawesome/angular-fontawesome";
 import { MatDialogModule } from "@angular/material/dialog";
 import { FacilityCardComponent } from "./facility-card/facility-card.component";
+import { EditTourFormComponent } from './edit-tour-form/edit-tour-form.component';
 
 @NgModule({
     declarations: [
@@ -32,6 +33,7 @@ import { FacilityCardComponent } from "./facility-card/facility-card.component";
         KeyPointCardComponent,
         PublicKeyPointsComponent,
         FacilityCardComponent,
+        EditTourFormComponent,
     ],
     imports: [
         CommonModule,
