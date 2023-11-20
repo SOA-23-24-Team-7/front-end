@@ -28,7 +28,8 @@ thead tr {
     text-align: left;
 }
 
-th, td {
+th,
+td {
     padding: 12px 15px;
 }
 
@@ -45,23 +46,257 @@ tbody tr:last-of-type {
 }
 
 tbody tr.active-row {
-    font-weight: bold;
     color: #3f51b5;
 }
-
+.image-controls {
+    display: flex;
+}
 .image-container {
-    height: 120px; /* Postavite željenu visinu kontejnera */
-    width: 180px;
-    overflow-y: scroll; /* Omogućava vertikalno skrolovanje ako je sadržaj prevelik */
+    height: 6rem;
+    width: 12rem;
+    overflow-y: scroll;
     overflow-x: hidden;
-  }
-  
-  .vertical-image {
-    display: block;
-  }
+}
 
-  img {
-    height: 118px;
-    width: 178px;
+.vertical-image {
+    display: block;
+}
+
+img {
+    height: 8rem;
+    width: 12rem;
     margin: 2px;
-  }
+}
+
+/*novo*/
+.review-container {
+    width: 40rem;
+    height: 54rem;
+    padding: 1.2rem;
+    text-align: center;
+    background-color: rgb(var(--clr-background-secondary), 1);
+    color: rgba(var(--clr-text), 1);
+    border-radius: 1rem;
+    border: rgba(var(--clr-outline-contrast), 1) 3px solid;
+    box-shadow: 0 0 1rem rgba(var(--clr-outline-contrast), 0.8);
+}
+
+h2 {
+    margin-top: 0;
+    border-bottom: 1px solid rgba(var(--clr-outline-contrast), 1);
+    padding-bottom: 0.3rem;
+    font-family: var(--fnt-header);
+}
+
+.center-align {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding-top: 2rem;
+    display: flex;
+    width: 100%;
+    margin-bottom: 1rem;
+}
+
+.date-travel,
+.rating,
+.photos,
+.comment {
+    margin-bottom: 0.5rem;
+    color: rgba(var(--clr-text), 1);
+    font-family: var(--fnt-body);
+}
+
+.rating h3,
+.photos h3,
+.comment h3 {
+    color: rgba(var(--clr-text), 1);
+    font-family: var(--fnt-body);
+}
+
+.stars {
+    display: flex;
+    justify-content: center;
+}
+
+input[type="radio"] {
+    display: none;
+}
+
+.lab1 {
+    display: inline-block;
+    width: 3.5rem;
+    height: 3.5rem;
+    line-height: 3.5rem;
+    text-align: center;
+    border-radius: 50%;
+    background-color: rgb(var(--clr-accent-300), 0.1);
+    cursor: pointer;
+    margin-right: 1.2rem;
+    transition: background-color 0.3s ease;
+}
+
+.lab2 {
+    display: inline-block;
+    width: 3.5rem;
+    height: 3.5rem;
+    line-height: 3.5rem;
+    text-align: center;
+    border-radius: 50%;
+    background-color: rgb(var(--clr-accent-300), 0.2);
+    cursor: pointer;
+    margin-right: 20px;
+    transition: background-color 0.3s ease;
+}
+.lab3 {
+    display: inline-block;
+    width: 3.5rem;
+    height: 3.5rem;
+    line-height: 3.5rem;
+    text-align: center;
+    border-radius: 50%;
+    background-color: rgb(var(--clr-success-700), 0.2);
+    cursor: pointer;
+    margin-right: 20px;
+    transition: background-color 0.3s ease;
+}
+.lab4 {
+    display: inline-block;
+    width: 3.5rem;
+    height: 3.5rem;
+    line-height: 3.5rem;
+    text-align: center;
+    border-radius: 50%;
+    background-color: rgb(var(--clr-success-700), 0.5);
+    cursor: pointer;
+    margin-right: 20px;
+    transition: background-color 0.3s ease;
+}
+.lab5 {
+    display: inline-block;
+    width: 3.5rem;
+    height: 3.5rem;
+    line-height: 3.5rem;
+    text-align: center;
+    border-radius: 50%;
+    background-color: rgb(var(--clr-success-700), 0.7);
+    cursor: pointer;
+    margin-right: 1.5rempx;
+    transition: background-color 0.3s ease;
+}
+
+label span {
+    display: inline-block;
+    line-height: 2.5rem;
+    color: rgba(var(--clr-text), 1);
+    font-family: var(--fnt-body);
+}
+
+input[type="radio"] {
+    transform: scale(1);
+    transition: transform 0.2s ease-in-out;
+}
+
+input[type="radio"]:checked + label {
+    background-color: rgb(var(--clr-primary-500), 0.8);
+    transform: scale(1.2);
+}
+
+input[type="radio"]:not(:checked):hover + label {
+    background-color: rgb(var(--clr-primary-500), 1);
+    transform: scale(1.2);
+}
+
+.date-calendar {
+    margin-bottom: 1rem;
+    width: 18rem;
+}
+
+.image-preview {
+    width: 18rem;
+    height: 11rem;
+    border: 1px solid rgba(var(--clr-outline), 1);
+    margin-bottom: 1.5rem;
+}
+
+.prev-button,
+.next-button {
+    border: none;
+    background-color: transparent;
+    font-size: 20px;
+    cursor: pointer;
+}
+
+.comment-input {
+    width: 18rem;
+    height: 7rem;
+    text-wrap: wrap;
+    resize: none;
+}
+
+.list-cards-button:hover .triangle-left {
+    border-color: transparent rgba(var(--clr-primary-500), 0.95) transparent
+        transparent;
+}
+.list-cards-button:hover .triangle-right {
+    border-color: transparent transparent transparent
+        rgba(var(--clr-primary-500), 0.95);
+}
+
+.list-cards-button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    margin: 1.5rem;
+}
+
+.triangle-left,
+.triangle-right {
+    width: 0;
+    height: 0;
+    border-style: solid;
+}
+
+.triangle-left {
+    border-width: 1rem 1.2rem 1rem 0;
+    border-color: transparent rgba(var(--clr-primary-500), 1) transparent
+        transparent;
+}
+
+.triangle-right {
+    border-width: 1rem 0 1rem 1.2rem;
+    border-color: transparent transparent transparent
+        rgba(var(--clr-primary-500), 1);
+}
+
+.submit {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 18rem;
+    height: 2rem;
+    background-color: rgba(var(--clr-primary-500), 1);
+    border: rgba(var(--clr-primary-500, 1)) 1px solid;
+    border-radius: 0.5rem;
+    cursor: pointer;
+    transition: background-color 0.15s;
+    margin-top: 2rem;
+}
+
+.submit:hover {
+    background-color: rgba(var(--clr-primary-500), 0.9);
+}
+
+.submit-text {
+    color: rgba(255, 255, 255, 1);
+    font-family: var(--fnt-body);
+    font-weight: 500;
+    font-size: 1.25rem;
+}
+
+.description {
+    color: rgba(var(--clr-text), 1);
+    font-family: var(--fnt-body);
+    font-size: 0.9rem;
+}

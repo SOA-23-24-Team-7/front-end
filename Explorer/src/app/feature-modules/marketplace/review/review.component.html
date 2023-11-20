@@ -1,8 +1,8 @@
 <div id="equipment">
-  <p>Reviews</p>
-  <hr />
-  <div id="equipment-details">
-    <!-- <div>
+    <p>Reviews</p>
+    <hr />
+    <div id="equipment-details">
+        <!-- <div>
       <mat-form-field>
         <mat-label>TOUR ID:</mat-label>
         <input matInput readonly="true" [(ngModel)]="tourId" type="number" />
@@ -11,79 +11,144 @@
         <mat-icon>search</mat-icon>
       </button>
     </div> -->
-    <div>
-      <table>
-        <thead>
-          <tr>
-            <th>Rating</th>
-            <th>Comment</th>
-            <th>Tour visit date</th>
-            <th>Comment date</th>
-            <th>Tour id</th>
-            <th>Images</th>
-            <th></th>
-            <th></th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr *ngFor="let rev of reviews">
-            <td>{{ rev.rating }}</td>
-            <td>{{ rev.comment }}</td>
-            <td>{{ rev.tourVisitDate }}</td>
-            <td>{{ rev.commentDate }}</td>
-            <td>{{ rev.tourId }}</td>
-            <td>
-              <div class="image-container">
-                <div *ngFor="let img of rev.images">
-                  <img [src]="img" alt="Image" class="vertical-image" />
-                </div>
-              </div>
-            </td>
-            <td>
-              <button
-                *ngIf="user.id == rev.touristId"
-                color="accent"
-                (click)="onEditClicked(rev)"
-                mat-icon-button
-              >
-                <mat-icon>edit</mat-icon>
-              </button>
-            </td>
-            <td>
-              <button
-                *ngIf="user.id == rev.touristId"
-                color="primary"
-                (click)="deleteReview(rev)"
-                mat-icon-button
-              >
-                <mat-icon>delete</mat-icon>
-              </button>
-            </td>
-          </tr>
-          <tr>
-            <button
-              (click)="onAddClicked()"
-              [disabled]="reviewExists"
-              color="primary"
-              mat-icon-button
+        <div>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Rating</th>
+                        <th>Comment</th>
+                        <th>Tour visit date</th>
+                        <th>Comment date</th>
+                        <th>Tour id</th>
+                        <th>Images</th>
+                        <th></th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let rev of reviews">
+                        <td>{{ rev.rating }}</td>
+                        <td>{{ rev.comment }}</td>
+                        <td>{{ rev.tourVisitDate }}</td>
+                        <td>{{ rev.commentDate }}</td>
+                        <td>{{ rev.tourId }}</td>
+                        <td>
+                            <div class="image-container">
+                                <div *ngFor="let img of rev.images">
+                                    <img
+                                        [src]="img"
+                                        alt="Image"
+                                        class="vertical-image"
+                                    />
+                                </div>
+                            </div>
+                        </td>
+                        <td>
+                            <button
+                                *ngIf="user.id == rev.touristId"
+                                color="accent"
+                                (click)="onEditClicked(rev)"
+                                mat-icon-button
+                            >
+                                <mat-icon>edit</mat-icon>
+                            </button>
+                        </td>
+                        <td>
+                            <button
+                                *ngIf="user.id == rev.touristId"
+                                color="primary"
+                                (click)="deleteReview(rev)"
+                                mat-icon-button
+                            >
+                                <mat-icon>delete</mat-icon>
+                            </button>
+                        </td>
+                    </tr>
+                    <tr>
+                        <button
+                            (click)="onAddClicked()"
+                            [disabled]="reviewExists"
+                            color="primary"
+                            mat-icon-button
+                        >
+                            <mat-icon>add</mat-icon>
+                        </button>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <div>
+            <xp-review-form
+                *ngIf="shouldRenderReviewForm"
+                (reviewAdded)="onReviewAdded($event)"
+                (reviewsUpdated)="getReviewsByTourId()"
+                [review]="selectedReview"
+                [shouldEdit]="shouldEdit"
+                [tourIdHelper]="tourIdHelper"
+                [reviewExists]="reviewExists"
             >
-              <mat-icon>add</mat-icon>
-            </button>
-          </tr>
-        </tbody>
-      </table>
+            </xp-review-form>
+        </div>
     </div>
-    <div>
-      <xp-review-form
-        *ngIf="shouldRenderReviewForm"
-        (reviewAdded)="onReviewAdded($event)"
-        (reviewsUpdated)="getReviewsByTourId()"
-        [review]="selectedReview"
-        [shouldEdit]="shouldEdit"
-        [tourIdHelper]="tourIdHelper"
-        [reviewExists]="reviewExists"
-      >
-      </xp-review-form>
+
+    <div class="review-container">
+        <h2>Leave a Review</h2>
+
+        <div class="description">
+            Share your experience to help us enhance our services and create
+            better travel experiences, thanks to your valuable feedback.
+        </div>
+
+        <div class="center-align">
+            <div class="date-travel">
+                <h3>Date of travel</h3>
+                <input class="date-calendar" type="date" />
+            </div>
+
+            <div class="rating">
+                <h3>Rating</h3>
+                <div class="stars">
+                    <input type="radio" id="star1" name="rating" value="1" />
+                    <label class="lab1" for="star1"><span>1</span></label>
+                    <input type="radio" id="star2" name="rating" value="2" />
+                    <label class="lab2" for="star2"><span>2</span></label>
+                    <input type="radio" id="star3" name="rating" value="3" />
+                    <label class="lab3" for="star3"><span>3</span></label>
+                    <input type="radio" id="star4" name="rating" value="4" />
+                    <label class="lab4" for="star4"><span>4</span></label>
+                    <input type="radio" id="star5" name="rating" value="5" />
+                    <label class="lab5" for="star5"><span>5</span></label>
+                </div>
+            </div>
+        </div>
+
+        <div class="center-align">
+            <div class="photos">
+                <h3>Photos</h3>
+                <div class="image-controls">
+                    <div class="list-cards-button" id="prev-button">
+                        <div class="triangle-left"></div>
+                    </div>
+                    <div class="image-preview"></div>
+                    <div class="list-cards-button" id="next-button">
+                        <div class="triangle-right"></div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="comment">
+                <h3>Comment</h3>
+                <textarea
+                    class="comment-input"
+                    placeholder="Leave your comment"
+                ></textarea>
+            </div>
+
+            <div>
+                <button class="submit" type="submit">
+                    <div class="submit-text">Submit</div>
+                </button>
+            </div>
+        </div>
     </div>
-  </div>
 </div>
