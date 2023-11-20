@@ -4,6 +4,7 @@ import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Tour } from '../model/tour.model';
 import { TourAuthoringService } from '../tour-authoring.service';
+import { faXmark } from '@fortawesome/free-solid-svg-icons';
 
 @Component({
   selector: 'xp-edit-tour-form',
@@ -86,5 +87,7 @@ export class EditTourFormComponent implements OnInit{
   onClose() : void {
     this.dialog.close();
   }
+  faXmark = faXmark;
+ 
 }
 
