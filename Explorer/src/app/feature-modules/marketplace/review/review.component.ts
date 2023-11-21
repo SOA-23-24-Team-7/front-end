@@ -77,6 +77,20 @@ export class ReviewComponent implements OnInit {
         this.shouldRenderReviewForm = true;
         this.selectedReview = review;
         this.shouldEdit = true;
+        const dialogRef = this.dialogRef.open(ReviewFormComponent, {
+            data: {
+                shouldEdit: true,
+                tourIdHelper: this.tourIdHelper,
+                review: this.selectedReview,
+            },
+        });
+
+        dialogRef.afterClosed().subscribe((result: Array<boolean>) => {
+            console.log("Rezultat recenzije:", result);
+            if (result[1] == true) {
+                this.getReviewsByTourId();
+            }
+        });
     }
 
     onAddClicked(): void {

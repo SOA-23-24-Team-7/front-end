@@ -12,6 +12,7 @@ import { FormControl, FormGroup, Validators } from "@angular/forms";
 import { MarketplaceService } from "../marketplace.service";
 import { Review } from "../model/review.model";
 import { MAT_DIALOG_DATA, MatDialogRef } from "@angular/material/dialog";
+import { faXmark } from "@fortawesome/free-solid-svg-icons";
 
 @Component({
     selector: "xp-review-form",
@@ -21,12 +22,13 @@ import { MAT_DIALOG_DATA, MatDialogRef } from "@angular/material/dialog";
 export class ReviewFormComponent implements OnChanges, OnInit {
     @Output() reviewsUpdated = new EventEmitter<null>();
     //@Output() reviewAdded = new EventEmitter<boolean>();
-    @Input() review: Review;
+    review: Review;
     //@Input() shouldEdit: boolean = false;
     //@Input() tourIdHelper: number;
-    @Input() reviewExists: boolean;
+    //@Input() reviewExists: boolean;
     shouldEdit: boolean = false;
     tourIdHelper: number;
+    faXmark = faXmark;
     //imageList: { url: string }[] = [];
     constructor(
         private service: MarketplaceService,
@@ -37,6 +39,12 @@ export class ReviewFormComponent implements OnChanges, OnInit {
     ngOnInit(): void {
         this.shouldEdit = this.data.shouldEdit;
         this.tourIdHelper = this.data.tourIdHelper;
+        this.reviewForm.reset();
+        if (this.shouldEdit) {
+            this.review = this.data.review;
+            this.reviewForm.patchValue(this.review);
+            this.imagesList = this.review.images;
+        }
     }
     ngOnChanges(changes: SimpleChanges): void {
         this.reviewForm.reset();
@@ -84,22 +92,26 @@ export class ReviewFormComponent implements OnChanges, OnInit {
     }
 
     updateReview(): void {
-        const review: Review = {
-            rating: this.reviewForm.value.rating || 0,
-            comment: this.reviewForm.value.comment || "",
-            tourVisitDate: this.reviewForm.value.tourVisitDate || new Date(),
-            tourId: this.review.tourId || 0,
-            images: this.review.images,
-        };
-        review.id = this.review.id;
-        review.touristId = this.review.touristId;
-        review.commentDate = this.review.commentDate;
-        this.service.updateReview(review).subscribe({
-            next: () => {
-                this.reviewsUpdated.emit();
-                this.reviewForm.reset();
-            },
-        });
+        if (this.isFormValid()) {
+            const review: Review = {
+                rating: this.reviewForm.value.rating || 0,
+                comment: this.reviewForm.value.comment || "",
+                tourVisitDate:
+                    this.reviewForm.value.tourVisitDate || new Date(),
+                tourId: this.review.tourId || 0,
+                images: this.imagesList || this.review.images,
+            };
+            review.id = this.review.id;
+            review.touristId = this.review.touristId;
+            review.commentDate = this.review.commentDate;
+            this.service.updateReview(review).subscribe({
+                next: () => {
+                    //this.reviewsUpdated.emit();
+                    this.reviewForm.reset();
+                    this.dialog.close([false, true]); //review Added, review Updated
+                },
+            });
+        } else alert("All fields are required.");
     }
 
     onFileSelected(event: any): void {
@@ -109,7 +121,7 @@ export class ReviewFormComponent implements OnChanges, OnInit {
                 const reader = new FileReader();
                 reader.onload = (e: any) => {
                     this.imagesList.push(e.target.result);
-                    this.currentImageIndex = this.imagesList.length - 1; // Postavlja poslednju dodatu sliku kao trenutno prikazanu
+                    this.currentImageIndex = this.imagesList.length - 1;
                 };
                 reader.readAsDataURL(files[i]);
             }
@@ -136,7 +148,7 @@ export class ReviewFormComponent implements OnChanges, OnInit {
     }
 
     onClose(): void {
-        this.dialog.close();
+        this.dialog.close([false, false]);
     }
 
     isRatingInvalid(): boolean {
