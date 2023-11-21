@@ -1,66 +1,124 @@
-<form [formGroup]="reviewForm">
-    <div>
-        <mat-form-field>
-            <mat-label>Rating</mat-label>
-            <input
-                matInput
-                formControlName="rating"
-                type="number"
-                min="1"
-                max="5"
-            />
-        </mat-form-field>
-        <mat-form-field>
-            <mat-label>Comment</mat-label>
-            <textarea
-                matInput
-                cdkTextareaAutosize
-                cdkAutosizeMinRows="1"
-                formControlName="comment"
-                cdkAutosizeMaxRows="5"
-            ></textarea>
-        </mat-form-field>
-        <mat-form-field>
-            <mat-label>Tour visit date</mat-label>
-            <input matInput formControlName="tourVisitDate" type="date" />
-        </mat-form-field>
-
-        <form *ngIf="!shouldEdit" [formGroup]="imagesForm">
-            <div>
-                <mat-form-field>
-                    <mat-label>Images</mat-label>
-                    <input matInput formControlName="image" type="text" />
-                </mat-form-field>
-                <button
-                    mat-raised-button
-                    type="submit"
-                    color="accent"
-                    [disabled]="reviewExists"
-                    (click)="addImage()"
-                >
-                    Add image
-                </button>
+<div class="modal">
+    <div class="register" (click)="$event.stopPropagation()">
+        <div class="register-head">
+            <fa-icon class="register-x" />
+            <div class="register-title">Leave a review</div>
+        </div>
+        <div class="description">
+            Share your experience to help us enhance our services and create
+            better travel experiences, thanks to your valuable feedback.
+        </div>
+        <form [formGroup]="reviewForm" class="register-form">
+            <div class="stars">
+                <input
+                    type="radio"
+                    id="star1"
+                    name="rating"
+                    value="1"
+                    formControlName="rating"
+                />
+                <label class="lab1" for="star1"><span>1</span></label>
+                <input
+                    type="radio"
+                    id="star2"
+                    name="rating"
+                    value="2"
+                    formControlName="rating"
+                />
+                <label class="lab2" for="star2"><span>2</span></label>
+                <input
+                    type="radio"
+                    id="star3"
+                    name="rating"
+                    value="3"
+                    formControlName="rating"
+                />
+                <label class="lab3" for="star3"><span>3</span></label>
+                <input
+                    type="radio"
+                    id="star4"
+                    name="rating"
+                    value="4"
+                    formControlName="rating"
+                />
+                <label class="lab4" for="star4"><span>4</span></label>
+                <input
+                    type="radio"
+                    id="star5"
+                    name="rating"
+                    value="5"
+                    formControlName="rating"
+                />
+                <label class="lab5" for="star5"><span>5</span></label>
             </div>
-        </form>
 
-        <button
-            *ngIf="!shouldEdit"
-            mat-raised-button
-            type="submit"
-            color="primary"
-            [disabled]="reviewExists"
-            (click)="addReview()"
-        >
-            Create
-        </button>
-        <button
-            *ngIf="shouldEdit"
-            mat-raised-button
-            type="submit"
-            color="primary"
-            (click)="updateReview()"
-        >
-            Update
-        </button>
+            <div class="image-controls">
+                <div
+                    class="list-cards-button"
+                    id="prev-button"
+                    (click)="changeImage(-1)"
+                >
+                    <div class="triangle-left"></div>
+                </div>
+                <form [formGroup]="imagesForm">
+                    <div class="image-preview">
+                        <img
+                            [src]="imagesList[currentImageIndex]"
+                            class="image-entered"
+                        />
+                    </div>
+                    <label for="image-upload" class="upload-button"
+                        >Browse</label
+                    >
+                    <input
+                        type="file"
+                        (change)="onFileSelected($event)"
+                        id="image-upload"
+                        multiple
+                        style="display: none"
+                    />
+                </form>
+                <div
+                    class="list-cards-button"
+                    id="next-button"
+                    (click)="changeImage(1)"
+                >
+                    <div class="triangle-right"></div>
+                </div>
+            </div>
+
+            <div class="register-label">Date of travel:</div>
+            <input
+                class="register-input"
+                formControlName="tourVisitDate"
+                type="date"
+                required
+            />
+
+            <div class="register-label">Comment:</div>
+            <textarea
+                class="comment-input"
+                formControlName="comment"
+                placeholder="Leave your comment"
+                required
+            ></textarea>
+
+            <button
+                *ngIf="!shouldEdit"
+                class="submit"
+                type="submit"
+                (click)="addReview()"
+            >
+                <div class="submit-text">Submit</div>
+            </button>
+            <button
+                *ngIf="shouldEdit"
+                class="submit"
+                type="submit"
+                (click)="updateReview()"
+            >
+                <div class="submit-text">Update</div>
+            </button>
+        </form>
     </div>
-</form>
+</div>

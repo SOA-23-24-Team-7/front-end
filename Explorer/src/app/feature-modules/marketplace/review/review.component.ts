@@ -1,10 +1,12 @@
-import { Component, OnInit } from "@angular/core";
+import { Component, Input, OnInit } from "@angular/core";
 import { Review } from "../model/review.model";
 import { MarketplaceService } from "../marketplace.service";
 import { PagedResults } from "src/app/shared/model/paged-results.model";
 import { User } from "src/app/infrastructure/auth/model/user.model";
 import { AuthService } from "src/app/infrastructure/auth/auth.service";
 import { ActivatedRoute } from "@angular/router";
+import { MatDialog } from "@angular/material/dialog";
+import { ReviewFormComponent } from "../review-form/review-form.component";
 
 @Component({
     selector: "xp-review",
@@ -13,30 +15,30 @@ import { ActivatedRoute } from "@angular/router";
 })
 export class ReviewComponent implements OnInit {
     user: User;
-
     reviews: Review[] = [];
     selectedReview: Review;
     shouldEdit: boolean;
     shouldRenderReviewForm: boolean = false;
     tourId: number;
     tourIdHelper: number;
-    reviewExists: boolean = false;
+    @Input() reviewExists: boolean = false;
 
     constructor(
         private service: MarketplaceService,
         private authService: AuthService,
-        private route: ActivatedRoute
+        private route: ActivatedRoute,
+        public dialogRef: MatDialog,
     ) {}
 
     ngOnInit(): void {
         this.authService.user$.subscribe(user => {
             this.user = user;
         });
-        
+
         this.route.params.subscribe(params => {
-            this.tourId = params['tourId'];
+            this.tourId = params["tourId"];
             this.getReviews();
-        })
+        });
     }
 
     getReviews(): void {
@@ -82,6 +84,20 @@ export class ReviewComponent implements OnInit {
             this.shouldRenderReviewForm = true;
             this.shouldEdit = false;
         }
+        const dialogRef = this.dialogRef.open(ReviewFormComponent, {
+            data: {
+                shouldEdit: false,
+                tourIdHelper: this.tourIdHelper,
+            },
+        });
+
+        dialogRef.afterClosed().subscribe((result: Array<boolean>) => {
+            console.log("Rezultat recenzije:", result);
+            this.reviewExists = result[0];
+            if (this.reviewExists == true) {
+                this.getReviewsByTourId();
+            }
+        });
     }
 
     deleteReview(review: Review): void {
@@ -100,7 +116,7 @@ export class ReviewComponent implements OnInit {
         });
     }
 
-    onReviewAdded(isAdded: boolean) {
+    /* onReviewAdded(isAdded: boolean) {
         this.reviewExists = isAdded;
-    }
+    }*/
 }
