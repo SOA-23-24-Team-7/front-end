@@ -29,7 +29,6 @@ export class ReviewFormComponent implements OnChanges, OnInit {
     shouldEdit: boolean = false;
     tourIdHelper: number;
     faXmark = faXmark;
-    //imageList: { url: string }[] = [];
     constructor(
         private service: MarketplaceService,
         public dialog: MatDialogRef<ReviewFormComponent>,
@@ -43,7 +42,7 @@ export class ReviewFormComponent implements OnChanges, OnInit {
         if (this.shouldEdit) {
             this.review = this.data.review;
             this.reviewForm.patchValue(this.review);
-            this.imagesList = this.review.images;
+            this.imagesList = this.review.images.slice(); //kopija, da ne obrise i slike iz review odmah
         }
     }
     ngOnChanges(changes: SimpleChanges): void {
