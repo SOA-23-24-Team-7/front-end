@@ -67,6 +67,12 @@
                             class="image-entered"
                         />
                     </div>
+                    <fa-icon
+                        *ngIf="imagesList.length > 0"
+                        class="delete-x"
+                        [icon]="faXmark"
+                        (click)="removeCurrentImage()"
+                    />
                     <label for="image-upload" class="upload-button"
                         >Browse</label
                     >

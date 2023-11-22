@@ -147,6 +147,15 @@ export class ReviewFormComponent implements OnChanges, OnInit {
         }
     }
 
+    removeCurrentImage() {
+        if (this.imagesList.length > 0) {
+            this.imagesList.splice(this.currentImageIndex, 1);
+            if (this.currentImageIndex >= this.imagesList.length) {
+                this.currentImageIndex = this.imagesList.length - 1;
+            }
+        }
+    }
+
     onClose(): void {
         this.dialog.close([false, false]);
     }
