@@ -4,6 +4,7 @@ import { Equipment } from "./model/equipment.model";
 import { environment } from "src/env/environment";
 import { Observable } from "rxjs";
 import { PagedResults } from "src/app/shared/model/paged-results.model";
+import { Person } from "../stakeholder/model/person.model";
 import { User } from "src/app/infrastructure/auth/model/user.model";
 import { Rating } from "./model/rating.model";
 import { RatingUsername } from "./model/ratingWithUsername";
@@ -17,9 +18,9 @@ import { PublicFacilityRequest } from "../tour-authoring/model/public-facility-r
 export class AdministrationService {
     constructor(private http: HttpClient) {}
 
-    getUsersByAdmin(): Observable<PagedResults<User>> {
-        return this.http.get<PagedResults<User>>(
-            environment.apiHost + "administration/users",
+    getUsersByAdmin(): Observable<PagedResults<Person>> {
+        return this.http.get<PagedResults<Person>>(
+            environment.apiHost + "administration/people",
         );
     }
 

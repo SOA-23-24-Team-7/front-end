@@ -9,6 +9,7 @@ import { faPlus } from '@fortawesome/free-solid-svg-icons';
 import { KeyPoint } from '../model/key-point.model';
 import { MatDialog } from '@angular/material/dialog';
 import { AddTourFormComponent } from '../add-tour-form/add-tour-form.component';
+import { EditTourFormComponent } from '../edit-tour-form/edit-tour-form.component';
 
 
 @Component({
@@ -25,6 +26,7 @@ export class TourComponent implements OnInit {
   keyPoints: KeyPoint[] = [];
 
   constructor(private tourAuthoringService: TourAuthoringService, public dialogRef: MatDialog,) {}
+
 
   ngOnInit(): void {
     this.getTours();
@@ -90,9 +92,12 @@ export class TourComponent implements OnInit {
   }
 
   onEditClicked(tour: Tour): void {
-    this.selectedTour = tour;
-    this.shouldRenderTourForm = true;
-    this.shouldEdit = true;
+    //this.selectedTour = tour;
+    //this.shouldRenderTourForm = true;
+    //this.shouldEdit = true;
+    this.dialogRef.open(EditTourFormComponent, {
+      data: tour,
+  });
   }
 
   onAddClicked(): void {

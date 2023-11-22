@@ -275,6 +275,18 @@
                             Report a problem
                         </div>
                     </div>
+                    <div
+                        class="navbar-submenu-item"
+                        [routerLink]="['problems']"
+                    >
+                        <fa-icon
+                            class="navbar-submenu-item-icon"
+                            [icon]="faTriangleExclamation"
+                        />
+                        <div class="navbar-submenu-item-text">
+                            Problem reports
+                        </div>
+                    </div>
                 </div>
                 <div
                     class="navbar-menu-item-selected-indicator"
@@ -478,7 +490,7 @@
                     <div
                         class="navbar-submenu-item"
                         [routerLink]="['notification-tabs']"
-                        *ngIf="user && user.role === 'author'"
+                        *ngIf="user && user.role !== 'administrator'"
                     >
                         <fa-icon
                             class="navbar-submenu-item-icon"

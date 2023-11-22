@@ -1,0 +1,19 @@
+<div
+    class="field"
+    *ngIf="user.role === 'author' && !problem.isAnswered; else createComment"
+>
+    <textarea [(ngModel)]="text" required></textarea>
+    <label>{{ label }}</label>
+    <fa-icon class="button" [icon]="faChevronRight" (click)="createAnswer()" />
+</div>
+<ng-template #createComment>
+    <div class="field">
+        <textarea [(ngModel)]="text" required></textarea>
+        <label>{{ label }}</label>
+        <fa-icon
+            class="button"
+            [icon]="faChevronRight"
+            (click)="leaveComment()"
+        />
+    </div>
+</ng-template>

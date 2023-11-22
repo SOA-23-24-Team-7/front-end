@@ -1,0 +1,95 @@
+.problem-answer-modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    animation: fadeIn 0.5s ease-in-out;
+    color: rgba(var(--clr-text));
+}
+
+.problem-answer {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    align-items: center;
+    width: 40rem;
+    height: 70%;
+    background-color: rgb(var(--clr-background-secondary));
+    border-radius: 1rem;
+}
+
+.header {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    padding-inline: 0.8rem;
+    padding-top: 1rem;
+    border-top-left-radius: 1rem;
+    border-top-right-radius: 1rem;
+    text-align: center;
+}
+
+.row {
+    display: flex;
+    gap: 0.3rem;
+    justify-content: flex-end;
+}
+
+.description {
+    padding-inline: 0.8rem;
+    padding-bottom: 1rem;
+}
+
+.red {
+    background-color: rgba(var(--clr-error-700), 0.8);
+}
+
+.green {
+    background-color: rgba(var(--clr-success-700), 0.8);
+}
+
+.button {
+    align-self: flex-end;
+    margin-left: 1rem;
+    margin-top: auto;
+    font-size: 2rem;
+    transition: 0.3s;
+}
+
+.button-red {
+    margin-left: 1rem;
+    margin-top: auto;
+    font-size: 2rem;
+    transition: 0.3s;
+}
+
+.button:hover {
+    color: rgba(var(--clr-success-700));
+    cursor: pointer;
+}
+
+.button-red:hover {
+    color: red;
+    cursor: pointer;
+}
+
+.comments {
+    overflow: auto;
+    height: 100%;
+    display: flex;
+    gap: 1rem;
+    flex-direction: column;
+}
+
+.comments::-webkit-scrollbar {
+    width: 0.5em;
+}
+
+.comments::-webkit-scrollbar-thumb {
+    background-color: rgba(var(--clr-background));
+    border-radius: 0.3rem;
+}

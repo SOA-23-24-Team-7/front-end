@@ -29,38 +29,46 @@
                         All messages
                     </button>
                 </div>
+                <div class="float-child">
+                    <button
+                        class="show-tour-execution-history"
+                        (click)="openTourExecutionHistoryDialog()"
+                    >
+                        Tour execution history
+                    </button>
+                </div>
             </div>
         </div>
     </div>
-    <div class="main">
-        <mat-card class="card">
-            <mat-card-header>
-                <div mat-card-avatar>
-                    <img
-                        src="https://upload.wikimedia.org/wikipedia/commons/thumb/7/7e/Circle-icons-profile.svg/512px-Circle-icons-profile.svg.png?20160314153816"
-                        class="user-image"
-                    />
+    <div class="container">
+        <div class="card">
+            <div class="column">
+                <div class="card-header">
+                    <div class="avatar">
+                        <img
+                            src="{{ person.user.profilePicture }}"
+                            onerror="this.style.display='none'"
+                        />
+                    </div>
+                    <div class="title">
+                        {{ person.name }} {{ person.surname }}
+                    </div>
                 </div>
-                <mat-card-title>
-                    {{ person.name }} {{ person.surname }}
-                </mat-card-title>
-                <mat-card-subtitle>{{ person.email }}</mat-card-subtitle>
-            </mat-card-header>
-            <mat-card-content>
-                <p>Username: {{ user.username }}</p>
-                <p>Motto: {{ person.moto }}</p>
-                <p>Bio: {{ person.bio }}</p>
-            </mat-card-content>
-            <mat-card-actions>
-                <button
-                    color="primary"
-                    mat-raised-button
-                    (click)="toggleEditing()"
+                <div class="subtitle">
+                    <div class="username">
+                        Username: {{ person.user.username }}
+                    </div>
+                    <div class="email">Email: {{ person.email }}</div>
+                    <div class="motto">Motto: {{ person.motto }}</div>
+                </div>
+                <div class="btn" (click)="toggleEditing()">Edit</div>
+            </div>
+            <div class="column">
+                <textarea class="bio" readonly="readonly" unselectable="on">
+Biography: {{ person.bio }}
+</textarea
                 >
-                    Edit
-                </button>
-            </mat-card-actions>
-        </mat-card>
-        <br />
+            </div>
+        </div>
     </div>
 </ng-container>
