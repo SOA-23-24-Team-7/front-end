@@ -22,6 +22,7 @@ import { NgxGoogleAnalyticsModule } from "ngx-google-analytics";
 import { MessageDialogComponent } from "./feature-modules/stakeholder/message-dialog/message-dialog/message-dialog.component";
 import { UserProfileComponent } from "./feature-modules/stakeholder/user-profile/user-profile.component";
 import { StakeholderModule } from "./feature-modules/stakeholder/stakeholder.module";
+import { SharedModule } from "./shared/shared.module";
 
 @NgModule({
     declarations: [AppComponent],

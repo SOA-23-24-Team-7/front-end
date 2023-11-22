@@ -32,6 +32,7 @@ import {
     faPlus,
     faShoppingCart,
     faBell,
+    faLanguage,
 } from "@fortawesome/free-solid-svg-icons";
 //import { } from "@fortawesome/free-regular-svg-icons";
 
@@ -96,6 +97,7 @@ export class NavbarComponent implements OnInit {
     faMoon = faMoon;
     faGlobe = faGlobe;
     faEuroSign = faEuroSign;
+    faLanguage = faLanguage;
     faUser = faUser;
     faRightFromBracket = faRightFromBracket;
     faMountainCity = faMountainCity;
