@@ -5,14 +5,14 @@
     right: 4.2rem;
     padding: 0.3rem 0.3rem;
     cursor: pointer;
-    color: rgb(var(--clr-primary-500), 1);
+    color: rgb(var(--clr-primary-500), 0.7);
     transition:
         color 0.3s,
         background-color 0.3s;
     background-color: rgb(var(--clr-background-secondary), 1);
 }
 .upload-button:hover {
-    color: rgb(var(--clr-text), 0.5);
+    color: rgb(var(--clr-primary-500), 1);
 }
 
 .review-container {
