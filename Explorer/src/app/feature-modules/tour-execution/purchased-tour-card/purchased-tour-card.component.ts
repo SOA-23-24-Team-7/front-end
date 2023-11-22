@@ -5,6 +5,7 @@ import { TourExecutionService } from '../tour-execution.service';
 import { environment } from 'src/env/environment';
 import { MatDialog } from "@angular/material/dialog";
 import { KeyPointsViewComponent } from "../key-points-view/key-points-view.component";
+import { TourWheatherComponent } from '../tour-wheather/tour-wheather.component';
 
 @Component({
     selector: "xp-purchased-tour-card",
@@ -43,6 +44,14 @@ export class PurchasedTourCardComponent implements OnInit{
             keyPoints: this.tour.keyPoints,
         },
     });
-      
-    }
+  }
+  ShowWheather() {
+    const dialogRef = this.dialogRef.open(TourWheatherComponent, {
+        data: {
+            longitude: this.tour.keyPoints![0].longitude,
+            latitude: this.tour.keyPoints![0].latitude,
+            tourName: this.tour.name
+        },
+    });
+  }
 }

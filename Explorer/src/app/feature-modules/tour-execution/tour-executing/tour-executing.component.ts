@@ -20,7 +20,14 @@ import { ClickedKeyPointComponent } from '../clicked-key-point/clicked-key-point
   styleUrls: ['./tour-executing.component.css']
 })
 export class TourExecutingComponent implements OnInit {
-
+  weather: any = {
+    temp: 0,
+    min_temp: 0,
+    max_temp: 0,
+    sunset: 0,
+    cloud_pct: 0,
+    state: 'Clear'
+  }
   changePositionObservable: Observable<any>
   clickedKeyPoint: KeyPoint
   positionSubscription: Subscription
@@ -95,7 +102,7 @@ export class TourExecutingComponent implements OnInit {
     this.service.getTour(this.session.tourId).subscribe({
       next: (result: Tour) => {
         this.tour = result;
-        console.log(this.tour)
+        this.getWeather()
       }
     });
   }
@@ -141,6 +148,23 @@ export class TourExecutingComponent implements OnInit {
       data: {
         dataKey: this.clickedKeyPoint,
         nextKeyPointId: nextKeyPointId
+      }
+    });
+  }
+  getWeather(){
+    this.service.getWheather(this.tour.keyPoints![0].latitude, this.tour.keyPoints![0].longitude).subscribe({
+      next: (result: any) => {
+        this.weather = result
+        this.weather.sunset = new Date(this.weather.sunset * 1000).toString().split(" ")[4];
+        if(this.weather.cloud_pct > 50){
+            this.weather.state = 'Cloudy'
+        }
+        else if(this.weather.cloud_pct > 30){
+          this.weather.state = 'Mostly cloudy'
+        }
+        else{
+          this.weather.state = 'Clear'
+        }
       }
     });
   }

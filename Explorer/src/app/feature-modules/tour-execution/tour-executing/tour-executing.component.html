@@ -1,5 +1,6 @@
+<hr style="border-top: 2px solid;">
 <h1>Tour executing</h1>
-<div style=" margin: 40px;">
+<div style=" margin-left: 40px; display: inline-block;">
     <h2>
         {{tour.name}}
     </h2>
@@ -9,7 +10,16 @@
     <div class="progress">Progress: {{session.progress.toFixed(1)}}%</div>
     
 </div>
-<div class='my-legend' style="float: left;">
+<div style="width: 300px; height: 100px; display: inline-block; margin: auto; width: 70%; text-align: center;">
+<h2>Weather</h2>
+<div style="font-size: 20px;">
+    <p style="font-size: 35px;">{{weather.temp}}°C</p>
+    <p style="font-size: 30px;">{{weather.state}}</p>
+    <p>min/max: {{weather.min_temp}}°C | {{weather.max_temp}}°C</p>
+    <p>Sunset at {{weather.sunset}}</p>
+</div>
+</div>
+<div class='my-legend' style="float: left; margin-top: 40px;">
     <div class='legend-title'>Legend</div>
     <div class='legend-scale'>
         <ul class='legend-labels'>
@@ -34,6 +44,7 @@
         </ul>
     </div>
 </div>
+<br><br><br><br>
 <div class="map-container">
     <button class="abandon-button" (click)="abandonTour()">Abandon tour</button>
     <xp-map [isTourExecutionMap]="true" (newPositionEvent)="checkKeyPointCompletion()" [executingTourId]="session.tourId" [startPosition]="touristPosition" [nextKeyPointId]="session.nextKeyPointId" 

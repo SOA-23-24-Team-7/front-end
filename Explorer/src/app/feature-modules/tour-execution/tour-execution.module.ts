@@ -11,6 +11,7 @@ import { KeyPointsViewComponent } from "./key-points-view/key-points-view.compon
 import { FontAwesomeModule } from "@fortawesome/angular-fontawesome";
 import { TourAuthoringModule } from "../tour-authoring/tour-authoring.module";
 import { TourExecutionInfoComponent } from './tour-execution-info/tour-execution-info.component';
+import { TourWheatherComponent } from './tour-wheather/tour-wheather.component';
 
 
 
@@ -24,6 +25,7 @@ import { TourExecutionInfoComponent } from './tour-execution-info/tour-execution
     TourExecutionHistoryComponent,
     KeyPointsViewComponent,
     TourExecutionInfoComponent,
+    TourWheatherComponent,
   ],
   imports: [
     CommonModule,

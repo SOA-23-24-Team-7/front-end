@@ -11,6 +11,7 @@
             Distance: <b>{{ tour.distance }}</b>
         </div>
         <button class="btn key-points-button" (click)="ShowKeyPoints()">Show key points</button>
+        <button class="btn search-button" (click)="ShowWheather()">Check the weather</button>
         <button class="btn search-button" (click)="StartTour()" *ngIf="!hasActiveTour">Start tour</button>
         <button class="btn search-button" (click)="ContinueTour()" *ngIf="hasActiveTour && isTourActive">Continue tour</button>
         <button class="btn search-button" *ngIf="hasActiveTour && !isTourActive" disabled>Start tour</button>

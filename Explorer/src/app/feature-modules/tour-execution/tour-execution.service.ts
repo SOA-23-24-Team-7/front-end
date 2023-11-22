@@ -2,16 +2,24 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { PagedResults } from 'src/app/shared/model/paged-results.model';
 import { Tour } from '../tour-authoring/model/tour.model';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { TouristPosition } from './model/tourist-position.model';
 import { environment } from 'src/env/environment';
 import { TourExecutionSession } from './model/tour-execution-session-model';
 import { TourExecutionSessionInfo } from './model/tour-execution-session-info.model';
 
+const weatherAPIHeader = {
+  'X-Api-Key': '1v0nBplsz23KDWRr/hQ8oQ==DslkPs5rmlijidmQ'
+}
+const requestOptions = {                                                                                                                                                                                 
+  headers: new HttpHeaders(weatherAPIHeader), 
+};
 @Injectable({
   providedIn: 'root'
 })
 export class TourExecutionService {
+
+  
 
   constructor(private http: HttpClient) { }
 
@@ -54,4 +62,7 @@ export class TourExecutionService {
   getTourExecutionSessionInfo(): Observable<TourExecutionSessionInfo[]> {
     return this.http.get<TourExecutionSessionInfo[]>(environment.apiHost + 'tourexecution/tourexecution/allInfo');
   }
+  getWheather(latitude: number, longitude: number):  Observable<any>{
+    return this.http.get('https://api.api-ninjas.com/v1/weather?lat='+latitude+'&lon='+longitude, requestOptions);
+  } 
 }
