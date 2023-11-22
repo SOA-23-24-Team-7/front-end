@@ -2,7 +2,9 @@
     <div class="register" (click)="$event.stopPropagation()">
         <div class="register-head">
             <fa-icon class="register-x" [icon]="faXmark" (click)="onClose()" />
-            <div class="register-title">Leave a review</div>
+            <div class="register-title">
+                {{ shouldEdit ? "Edit review" : "Leave a review" }}
+            </div>
         </div>
         <div class="description">
             Share your experience to help us enhance our services and create
