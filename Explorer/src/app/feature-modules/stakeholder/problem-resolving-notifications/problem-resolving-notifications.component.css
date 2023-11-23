@@ -9,6 +9,7 @@
     min-height: 40rem;
     background-color: rgba(var(--clr-background-secondary));
     color: rgb(var(--clr-text));
+    border: 2px solid rgba(var(--clr-background-secondary));
 }
 
 .cards-list::-webkit-scrollbar {
@@ -22,15 +23,19 @@
 
 .notification {
     display: flex;
-    background-color: rgb(var(--clr-background-secondary));
-    width: 35rem;
-    padding: 1rem;
+    background-color: rgb(var(--clr-background));
+    width: 100%;
+    padding-inline: 1rem;
+    padding-block: 0.7rem;
     padding-bottom: 0.3rem;
     gap: 1rem;
-    margin: 0.5rem;
-    border-radius: 0.5rem;
     transition: 0.5s;
-    border: 1px solid;
+    border-bottom: 1px solid;
+    color: rgb(var(--clr-text));
+}
+
+.seen {
+    background-color: rgb(var(--clr-background-secondary));
 }
 
 .notification:hover {
@@ -39,16 +44,17 @@
 }
 
 .notification-content {
-    font-weight: 500;
+    color: rgb(var(--clr-text), 0.7);
+    align-self: center;
 }
 
 .picture {
-    padding-bottom: 1rem;
+    padding-bottom: 0.7rem;
 }
 
 .sender-avatar {
-    height: 4rem;
-    width: 4rem;
+    height: 3rem;
+    width: 3rem;
     border-radius: 50%;
     border: rgba(var(--clr-outline-contrast), 1) 2px solid;
     background-position: center;
@@ -62,9 +68,13 @@
 .notification-column {
     display: flex;
     flex-direction: column;
-    width: 30rem;
+    min-width: 12rem;
     height: 100%;
     gap: 0.6rem;
+}
+
+.row {
+    display: flex;
 }
 
 .notification-row {

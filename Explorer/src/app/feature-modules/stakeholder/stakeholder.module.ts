@@ -17,6 +17,7 @@ import { FontAwesomeModule } from "@fortawesome/angular-fontawesome";
 import { NotificationTabsComponent } from "./notification-tabs/notification-tabs.component";
 import { MarketplaceModule } from "../marketplace/marketplace.module";
 import { ProblemResolvingNotificationsComponent } from "./problem-resolving-notifications/problem-resolving-notifications.component";
+import { SharedModule } from "src/app/shared/shared.module";
 
 @NgModule({
     declarations: [
@@ -40,6 +41,7 @@ import { ProblemResolvingNotificationsComponent } from "./problem-resolving-noti
         FormsModule,
         FontAwesomeModule,
         MarketplaceModule,
+        SharedModule,
     ],
     exports: [
         UserProfileComponent,

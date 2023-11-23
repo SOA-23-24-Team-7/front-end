@@ -1,21 +1,22 @@
 <div class="cards-list">
     <div
+        class="notification"
         *ngFor="let notification of problemResolvingNotifications"
-        class="card"
-        (click)="setSeenStatus(notification.id, notification.problemId)"
+        (click)="setSeenStatus(notification, notification.problemId)"
+        [class.seen]="!notification.hasSeen"
     >
-        <div class="notification">
-            <div class="picture">
-                <div
-                    class="sender-avatar"
-                    [style.background-image]="
-                        'url(' + notification.sender.profilePicture + ')'
-                    "
-                ></div>
-            </div>
+        <div class="picture">
+            <div
+                class="sender-avatar"
+                [style.background-image]="
+                    'url(' + notification.sender.profilePicture + ')'
+                "
+            ></div>
+        </div>
+        <div class="row">
             <div class="notification-column">
-                <div class="notification-content">
-                    {{ notification.message }}
+                <div class="notification-header">
+                    {{ notification.header }}
                 </div>
                 <div class="notification-row">
                     <div>Sent by</div>
@@ -24,6 +25,10 @@
                     </div>
                 </div>
             </div>
+            <xp-tag tagText="✨new" *ngIf="!notification.hasSeen" />
+        </div>
+        <div class="notification-content">
+            {{ notification.message }}
         </div>
     </div>
 </div>

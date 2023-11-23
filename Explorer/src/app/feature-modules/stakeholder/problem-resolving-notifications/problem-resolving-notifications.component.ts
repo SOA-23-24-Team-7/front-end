@@ -39,13 +39,17 @@ export class ProblemResolvingNotificationsComponent {
         });
     }
 
-    setSeenStatus(notificationId: number, problemId: number) {
-        this.service.setSeenStatus(notificationId).subscribe();
+    setSeenStatus(
+        notification: ProblemResolvingNotification,
+        problemId: number,
+    ) {
+        this.service.setSeenStatus(notification.id).subscribe();
         this.service.getProblem(problemId, this.user.role).subscribe({
             next: (result: ProblemUser) => {
                 const dialogRef = this.dialogRef.open(ProblemAnswerComponent, {
                     data: { dataProblem: result, dataUser: this.user },
                 });
+                notification.hasSeen = true;
             },
         });
     }
