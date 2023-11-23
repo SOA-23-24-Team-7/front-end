@@ -5,8 +5,15 @@ import { PagedResults } from "src/app/shared/model/paged-results.model";
 import { User } from "src/app/infrastructure/auth/model/user.model";
 import { AuthService } from "src/app/infrastructure/auth/auth.service";
 import { ActivatedRoute } from "@angular/router";
-import { MatDialog } from "@angular/material/dialog";
+import { MatDialog, MatDialogRef } from "@angular/material/dialog";
 import { ReviewFormComponent } from "../review-form/review-form.component";
+import {
+    faStar,
+    faEdit,
+    faTrashAlt,
+    faXmark,
+} from "@fortawesome/free-solid-svg-icons";
+import { FullSizeImageComponent } from "../full-size-image/full-size-image.component";
 
 @Component({
     selector: "xp-review",
@@ -21,6 +28,10 @@ export class ReviewComponent implements OnInit {
     shouldRenderReviewForm: boolean = false;
     tourId: number;
     tourIdHelper: number;
+    faStar = faStar;
+    faEdit = faEdit;
+    faTrashAlt = faTrashAlt;
+    faXmark = faXmark;
     @Input() reviewExists: boolean = false;
 
     constructor(
@@ -28,6 +39,7 @@ export class ReviewComponent implements OnInit {
         private authService: AuthService,
         private route: ActivatedRoute,
         public dialogRef: MatDialog,
+        private dialog: MatDialog,
     ) {}
 
     ngOnInit(): void {
@@ -133,4 +145,15 @@ export class ReviewComponent implements OnInit {
     /* onReviewAdded(isAdded: boolean) {
         this.reviewExists = isAdded;
     }*/
+    toggleShowMore(review: Review) {
+        review.showMore = !review.showMore;
+    }
+
+    showImage(imageUrl: string) {
+        const dialogRef = this.dialogRef.open(FullSizeImageComponent, {
+            data: {
+                imagePath: imageUrl,
+            },
+        });
+    }
 }

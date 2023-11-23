@@ -359,6 +359,3 @@ input[type="radio"]:not(:checked):hover + label {
     background-color: rgba(var(--clr-background-secondary));
     border-radius: 0.3rem;
 }
-.error-border {
-    border: 20px solid red;
-}
