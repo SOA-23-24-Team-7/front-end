@@ -20,28 +20,14 @@
                     </div>
                     <div class="user-details">
                         <div class="username">
-                            review.username
+                            {{ review.tourist?.username }}
                             <span class="middot"> &middot; </span>
                             <span class="comment-date">{{
                                 review.commentDate
                             }}</span>
-                            <span class="delete-edit-buttons">
-                                <fa-icon
-                                    *ngIf="user.id == review.touristId"
-                                    (click)="onEditClicked(review)"
-                                    class="fa-icon-edit"
-                                    [icon]="faEdit"
-                                ></fa-icon>
-                                <fa-icon
-                                    *ngIf="user.id == review.touristId"
-                                    (click)="deleteReview(review)"
-                                    class="fa-icon-delete"
-                                    [icon]="faTrashAlt"
-                                ></fa-icon>
-                            </span>
                         </div>
                         <div class="stars">
-                            5
+                            {{ review.rating }}
                             <fa-icon class="fa-star" [icon]="faStar" />
                         </div>
                     </div>
@@ -78,7 +64,25 @@
                 </div>
             </div>
 
-            <div class="trip-date">Trip date: {{ review.tourVisitDate }}</div>
+            <div class="last-row">
+                <div class="trip-date">
+                    Trip date: {{ review.tourVisitDate }}
+                </div>
+                <span class="delete-edit-buttons">
+                    <fa-icon
+                        *ngIf="user.id == review.touristId"
+                        (click)="onEditClicked(review)"
+                        class="fa-icon-edit"
+                        [icon]="faEdit"
+                    ></fa-icon>
+                    <fa-icon
+                        *ngIf="user.id == review.touristId"
+                        (click)="deleteReview(review)"
+                        class="fa-icon-delete"
+                        [icon]="faTrashAlt"
+                    ></fa-icon>
+                </span>
+            </div>
         </div>
     </div>
 </div>

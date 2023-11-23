@@ -121,6 +121,7 @@
     margin-left: 10px;
     font-weight: normal;
     color: rgba(var(--clr-text), 1);
+    width: auto;
 }
 
 .trip-date {
@@ -130,7 +131,8 @@
     padding-top: 10px;
 }
 .delete-edit-buttons {
-    padding-left: 23rem;
+    /*padding-left: 23rem;*/
+    margin-right: 0;
 }
 
 .image-gallery {
@@ -164,4 +166,9 @@
     border-radius: 10px;
     cursor: pointer;
     min-width: 7rem;
+}
+.last-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
 }
