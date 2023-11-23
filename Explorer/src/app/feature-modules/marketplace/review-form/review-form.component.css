@@ -177,6 +177,14 @@ input[type="radio"]:not(:checked):hover + label {
     font-weight: 400;
     font-size: 1rem;
 }
+.comment-input::-webkit-scrollbar {
+    width: 0.5em;
+}
+
+.comment-input::-webkit-scrollbar-thumb {
+    background-color: rgba(var(--clr-background-secondary));
+    border-radius: 0.3rem;
+}
 
 .list-cards-button:hover .triangle-left {
     border-color: transparent rgba(var(--clr-primary-500), 0.95) transparent

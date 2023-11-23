@@ -101,6 +101,7 @@
                 formControlName="tourVisitDate"
                 type="date"
                 required
+                max="{{ currentDate | date: 'yyyy-MM-dd' }}"
             />
 
             <div class="register-label">Comment:</div>

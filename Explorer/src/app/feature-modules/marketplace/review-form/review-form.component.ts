@@ -29,6 +29,7 @@ export class ReviewFormComponent implements OnChanges, OnInit {
     shouldEdit: boolean = false;
     tourIdHelper: number;
     faXmark = faXmark;
+    currentDate: Date = new Date();
     constructor(
         private service: MarketplaceService,
         public dialog: MatDialogRef<ReviewFormComponent>,
@@ -87,7 +88,7 @@ export class ReviewFormComponent implements OnChanges, OnInit {
                     this.dialog.close([true, false]); //review Added, review Updated
                 },
             });
-        } else alert("All fields are required.");
+        } else alert("Please enter valid data. All fields are required.");
     }
 
     updateReview(): void {
@@ -110,7 +111,7 @@ export class ReviewFormComponent implements OnChanges, OnInit {
                     this.dialog.close([false, true]); //review Added, review Updated
                 },
             });
-        } else alert("All fields are required.");
+        } else alert("Please enter valid data. All fields are required.");
     }
 
     onFileSelected(event: any): void {
@@ -171,7 +172,8 @@ export class ReviewFormComponent implements OnChanges, OnInit {
         return (
             this.reviewForm.value.tourVisitDate == null ||
             this.reviewForm.value.tourVisitDate == undefined ||
-            this.reviewForm.value.tourVisitDate > new Date()
+            this.reviewForm.value.tourVisitDate.toString() == "" ||
+            new Date(this.reviewForm.value.tourVisitDate) > new Date()
         );
     }
     isCommentInvalid(): boolean {
