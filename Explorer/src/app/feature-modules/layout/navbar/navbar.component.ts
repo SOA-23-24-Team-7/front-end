@@ -32,7 +32,7 @@ import {
     faPlus,
     faShoppingCart,
     faBell,
-    faFlagCheckered,
+    faCircleQuestion
 } from "@fortawesome/free-solid-svg-icons";
 //import { } from "@fortawesome/free-regular-svg-icons";
 
@@ -114,5 +114,5 @@ export class NavbarComponent implements OnInit {
     faPlus = faPlus;
     faShoppingCart = faShoppingCart;
     faBell = faBell;
-    faFlagCheckered = faFlagCheckered;
+    faCircleQuestion = faCircleQuestion;
 }

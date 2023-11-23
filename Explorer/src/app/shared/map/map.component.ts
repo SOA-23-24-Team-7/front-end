@@ -79,7 +79,7 @@ export class MapComponent implements AfterViewInit, OnChanges {
   });
 
   private encounterIcon = L.icon({
-    iconUrl: 'https://images.fineartamerica.com/images/artworkimages/medium/3/racing-flag-icon-race-checker-chequred-checkered-flag-tom-hill-transparent.png',
+    iconUrl: 'https://cdn-icons-png.flaticon.com/512/5184/5184592.png',
     iconSize: [42, 42],
     iconAnchor: [16, 32],
   });
