@@ -1,11 +1,9 @@
 .notification-card {
-    width: 35rem;
+    width: 100%;
     border: rgba(var(--clr-outline-contrast), 0.3) 0.1rem solid;
     border-radius: 1rem;
     box-shadow: 0 0 1rem rgba(var(--clr-outline-contrast), 0.5);
-    padding: 0.625rem;
-    margin: 20px;
-    transition: transform 0.2s;
+    padding: 0.7rem;
     color: rgb(var(--clr-text));
     font-family: var(--fnt-body);
     font-size: 1rem;

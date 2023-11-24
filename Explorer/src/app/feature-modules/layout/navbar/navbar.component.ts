@@ -1,4 +1,4 @@
-import { Component, OnInit } from "@angular/core";
+import { Component, OnInit, ViewEncapsulation } from "@angular/core";
 import { MatDialog } from "@angular/material/dialog";
 import { AuthService } from "src/app/infrastructure/auth/auth.service";
 import { User } from "src/app/infrastructure/auth/model/user.model";
@@ -33,6 +33,8 @@ import {
     faShoppingCart,
     faBell,
 } from "@fortawesome/free-solid-svg-icons";
+import { StakeholderService } from "../../stakeholder/stakeholder.service";
+import { interval, Subscription } from "rxjs";
 //import { } from "@fortawesome/free-regular-svg-icons";
 
 @Component({
@@ -43,11 +45,15 @@ import {
 export class NavbarComponent implements OnInit {
     user: User | undefined;
     isHome: boolean = false;
+    notificationNumber: number;
+    checkNotifications: Subscription;
+    source = interval(2 * 60 * 1000);
 
     constructor(
         private authService: AuthService,
         private themeService: ThemeService,
         private router: Router,
+        private stakeholderService: StakeholderService,
         public dialogRef: MatDialog,
     ) {
         this.router.events.subscribe(event => {
@@ -64,7 +70,24 @@ export class NavbarComponent implements OnInit {
     ngOnInit(): void {
         this.authService.user$.subscribe(user => {
             this.user = user;
+            this.getUnseenNotifications();
+            if (this.user.id !== 0) {
+                this.checkNotifications = this.source.subscribe(val =>
+                    this.getUnseenNotifications(),
+                );
+            }
         });
+    }
+
+    getUnseenNotifications() {
+        console.log("subscribe");
+        if (this.user!.id !== 0) {
+            this.stakeholderService.countNotifications().subscribe({
+                next: (result: number) => {
+                    this.notificationNumber = result;
+                },
+            });
+        }
     }
 
     onLogin(): void {
@@ -76,6 +99,7 @@ export class NavbarComponent implements OnInit {
     }
 
     onLogout(): void {
+        this.unsubscribe();
         this.authService.logout();
         this.router.navigate([""]);
     }
@@ -86,6 +110,15 @@ export class NavbarComponent implements OnInit {
 
     getTheme(): string {
         return this.themeService.getTheme();
+    }
+
+    ngOnDestroy() {
+        this.unsubscribe();
+    }
+
+    unsubscribe() {
+        console.log("destroyed");
+        this.checkNotifications.unsubscribe();
     }
 
     faChevronDown = faChevronDown;

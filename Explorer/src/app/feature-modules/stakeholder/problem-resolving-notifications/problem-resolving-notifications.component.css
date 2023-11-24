@@ -34,13 +34,18 @@
     color: rgb(var(--clr-text));
 }
 
+:host ::ng-deep.tag {
+    border-radius: 50% !important;
+}
+
 .seen {
     background-color: rgb(var(--clr-background-secondary));
 }
 
 .notification:hover {
     cursor: pointer;
-    border-color: rgb(var(--clr-primary-300));
+    background-color: rgb(var(--clr-background-secondary), 0.4);
+    box-shadow: 0 0 1rem rgba(var(--clr-outline-contrast), 0.5);
 }
 
 .notification-content {
@@ -68,13 +73,14 @@
 .notification-column {
     display: flex;
     flex-direction: column;
-    min-width: 12rem;
     height: 100%;
     gap: 0.6rem;
+    min-width: 15rem;
 }
 
 .row {
     display: flex;
+    width: 20rem;
 }
 
 .notification-row {

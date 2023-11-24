@@ -18,3 +18,8 @@
     background-color: rgba(var(--clr-background-secondary));
     border-radius: 0.3rem;
 }
+
+.notification {
+    width: 100%;
+    padding: 1rem;
+}
