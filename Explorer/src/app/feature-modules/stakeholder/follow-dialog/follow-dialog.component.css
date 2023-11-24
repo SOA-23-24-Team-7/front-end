@@ -1,47 +1,31 @@
-.float-container {
-    padding: 10px;
-    min-width: 440px;
+:host {
+    border-radius: 1rem !important;
 }
 
-.float-child {
-    width: 33%;
-    float: left;
-    padding: 10px;
+.dialog {
+    min-width: 35rem;
+    min-height: 40rem;
+    background-color: rgb(var(--clr-background-secondary));
+    color: rgb(var(--clr-text));
+    max-height: 45rem;
+    overflow: auto;
+    border-radius: 1rem;
+}
+
+h1 {
     text-align: center;
 }
-#followers-details {
+
+.user-container {
     display: flex;
-    width: 100%;
-    justify-content: center;
-    position: relative;
+    flex-direction: column;
+    gap: 1rem;
+    min-height: min-content;
+    padding-inline: 1rem;
+    padding-block: 1rem;
 }
 
-table {
-    border-collapse: collapse;
-    font-family: sans-serif;
-    min-width: 450px;
-}
-
-th,
-td {
-    padding: 12px 15px;
-    text-align: center;
-    font-family: var(--fnt-body);
-}
-
-tbody tr {
-    border-bottom: 1px solid rgb(var(--clr-accent-300));
-}
-
-tbody tr:last-of-type {
-    border-bottom: 2px solid rgb(var(--clr-accent-300));
-}
-
-tbody tr.active-row {
-    font-weight: bold;
-}
-
-h3 {
-    text-align: center;
-    font-family: var(--fnt-header);
+.title {
+    background-color: rgb(var(--clr-background));
+    padding-block: 1.5rem;
 }

@@ -72,6 +72,17 @@
     gap: 1rem;
     font-size: 1.1rem;
     font-weight: 300;
+    display: flex;
+    align-items: center;
+}
+
+.follow-btn {
+    font-weight: 600;
+    color: rgb(var(--clr-primary-500));
+}
+
+.follow-btn:hover {
+    cursor: pointer;
 }
 
 .following:hover {

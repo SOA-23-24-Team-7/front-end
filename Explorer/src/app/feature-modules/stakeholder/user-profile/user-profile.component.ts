@@ -78,8 +78,6 @@ export class UserProfileComponent implements OnInit {
     }
     openFollowersDialog(): void {
         const dialogRef = this.dialog.open(FollowDialogComponent, {
-            height: "500px",
-            width: "450px",
             data: {
                 followers: this.followers,
                 followings: this.followings,
@@ -94,8 +92,6 @@ export class UserProfileComponent implements OnInit {
     }
     openFollowingsDialog(): void {
         const dialogRef = this.dialog.open(FollowDialogComponent, {
-            height: "500px",
-            width: "450px",
             data: {
                 followers: this.followers,
                 followings: this.followings,
@@ -110,10 +106,6 @@ export class UserProfileComponent implements OnInit {
     }
     openFollowerSearchDialog(): void {
         const dialogRef = this.dialog.open(FollowerSearchDialogComponent, {
-            enterAnimationDuration: "500ms",
-            exitAnimationDuration: "500ms",
-            height: "500px",
-            width: "450px",
             data: {
                 userId: this.user.id,
             },
