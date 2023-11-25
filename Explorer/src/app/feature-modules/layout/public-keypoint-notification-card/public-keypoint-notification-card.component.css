@@ -1,70 +1,79 @@
-.notification-card {
+.notification {
+    display: flex;
+    background-color: rgb(var(--clr-background));
     width: 100%;
-    border: rgba(var(--clr-outline-contrast), 0.3) 0.1rem solid;
-    border-radius: 1rem;
-    box-shadow: 0 0 1rem rgba(var(--clr-outline-contrast), 0.5);
-    padding: 0.7rem;
+    gap: 0.3rem;
+    border-bottom: 1px solid;
     color: rgb(var(--clr-text));
-    font-family: var(--fnt-body);
-    font-size: 1rem;
-    transition: transform 0.3s;
 }
-.notification-card:hover {
-    background-color: rgba(var(--clr-background-secondary), 0.6);
+
+.data {
+    display: flex;
+    gap: 1rem;
+    padding-inline: 1rem;
+    padding-block: 0.7rem;
+    padding-bottom: 0.3rem;
+}
+
+.picture {
+    padding-bottom: 0.7rem;
+}
+
+.notification-content {
+    color: rgb(var(--clr-text), 0.7);
+    align-self: center;
+}
+
+.sender-avatar {
+    height: 3rem;
+    width: 3rem;
+    border-radius: 50%;
+    border: rgba(var(--clr-outline-contrast), 1) 2px solid;
+    background-position: center;
+    background-size: cover;
+}
+
+.sender {
+    color: rgb(var(--clr-primary-300));
+}
+
+.notification-column {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    gap: 0.6rem;
+    min-width: 15rem;
+}
+
+.row {
+    display: flex;
+    width: 20rem;
+}
+
+.notification-row {
+    display: flex;
+    gap: 0.3rem;
+    font-weight: 300;
 }
 
 .accepted {
-    height: 1.5rem;
-    background-color: rgba(var(--clr-success-500), 0.7);
-    border: transparent 1px solid;
-    border-radius: 1rem;
-    display: flex;
-    justify-content: flex-end;
-    align-items: center;
-    color: white;
+    background-color: rgba(var(--clr-success-700), 0.8);
 }
 
 .rejected {
-    height: 1.5rem;
-    background-color: rgba(var(--clr-error-500), 0.7);
-    border: transparent 1px solid;
-    border-radius: 1rem;
-    display: flex;
-    justify-content: flex-end;
-    align-items: center;
-    color: white;
+    background-color: rgba(var(--clr-error-700), 0.8);
 }
 
-.notification-date {
-    display: flex;
-    flex-direction: column;
-    align-items: flex-end;
-    padding-right: 0.4rem;
+.acceptedDate {
+    color: rgba(var(--clr-success-700), 0.8);
 }
 
-.notification-description {
-    padding: 0.625rem 0 0 0.4rem;
-    text-wrap: wrap;
-    word-wrap: break-word;
+.rejectedDate {
+    color: rgba(var(--clr-error-700), 0.8);
 }
 
-.notification-comment {
-    padding: 0.625rem 0 0 0.4rem;
-    text-wrap: wrap;
-    word-wrap: break-word;
-    color: rgb(var(--clr-text), 0.8);
-}
-
-.text {
-    background-color: rgba(var(--clr-background-secondary));
-    border: transparent 1px solid;
-    border-radius: 0 0 1rem 1rem;
-}
-
-hr {
-    height: 3px;
-    background-color: rgba(var(--clr-background-secondary));
-    border: none;
-    border-radius: 5px;
-    margin-top: 5px;
+.marker {
+    width: 0.7rem;
+    height: 4.7rem;
+    border-radius: 0.1rem;
 }

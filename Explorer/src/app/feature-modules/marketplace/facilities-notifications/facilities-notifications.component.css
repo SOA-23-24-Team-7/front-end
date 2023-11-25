@@ -8,6 +8,7 @@
     border-bottom-right-radius: 1rem;
     min-height: 40rem;
     background-color: rgba(var(--clr-background-secondary));
+    border: 2px solid rgba(var(--clr-background-secondary));
 }
 
 .cards-list::-webkit-scrollbar {
@@ -21,5 +22,4 @@
 
 .notification {
     width: 100%;
-    padding: 1rem;
 }

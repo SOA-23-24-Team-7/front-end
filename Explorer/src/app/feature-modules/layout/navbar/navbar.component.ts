@@ -45,7 +45,7 @@ import { interval, Subscription } from "rxjs";
 export class NavbarComponent implements OnInit {
     user: User | undefined;
     isHome: boolean = false;
-    notificationNumber: number;
+    notificationNumber: number = 0;
     checkNotifications: Subscription;
     source = interval(2 * 60 * 1000);
 
