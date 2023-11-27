@@ -32,6 +32,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { FormsModule } from '@angular/forms';
 import { PublishedToursComponent } from './tours/published-tours.component';
 import { TourDetailsComponent } from './tour-details/tour-details.component';
+import { FullSizeImageComponent } from './full-size-image/full-size-image.component';
 
 @NgModule({
     declarations: [
@@ -58,7 +59,8 @@ import { TourDetailsComponent } from './tour-details/tour-details.component';
         KeypointsNotificationsComponent,
         FacilitiesNotificationsComponent,
         ShoppingCartComponent,
-        TourDetailsComponent
+        TourDetailsComponent,
+        FullSizeImageComponent
     ],
     imports: [
         CommonModule,

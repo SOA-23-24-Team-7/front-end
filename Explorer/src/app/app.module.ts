@@ -22,7 +22,7 @@ import { NgxGoogleAnalyticsModule } from "ngx-google-analytics";
 import { MessageDialogComponent } from "./feature-modules/stakeholder/message-dialog/message-dialog/message-dialog.component";
 import { UserProfileComponent } from "./feature-modules/stakeholder/user-profile/user-profile.component";
 import { StakeholderModule } from "./feature-modules/stakeholder/stakeholder.module";
-
+import { EncounterModule } from "./feature-modules/encounter/encounter.module";
 @NgModule({
     declarations: [AppComponent],
 
@@ -47,6 +47,7 @@ import { StakeholderModule } from "./feature-modules/stakeholder/stakeholder.mod
         FormsModule,
         FontAwesomeModule,
         NgxGoogleAnalyticsModule.forRoot("G-YF6NHGD2NQ"),
+        EncounterModule,
     ],
     providers: [
         {

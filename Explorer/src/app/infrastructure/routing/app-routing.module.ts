@@ -41,6 +41,7 @@ import { NotificationTabsComponent } from "src/app/feature-modules/stakeholder/n
 import { TourDetailsComponent } from "src/app/feature-modules/marketplace/tour-details/tour-details.component";
 import { UserNotificationsComponent } from "src/app/feature-modules/stakeholder/user-notifications/user-notifications.component";
 import { TourCardViewComponent } from "src/app/shared/tour-card-view/tour-card-view.component";
+import { ActiveEncounterViewComponent } from "src/app/feature-modules/encounter/active-encounter-view/active-encounter-view.component";
 
 const routes: Routes = [
     { path: "home", component: HomeComponent },
@@ -210,6 +211,11 @@ const routes: Routes = [
         component: TourCardViewComponent
     },
     { path: "tour-details/:tourId", component: TourDetailsComponent },
+    {
+        path: "active-encounters",
+        component: ActiveEncounterViewComponent,
+        canActivate: [AuthGuard],
+    },
 ];
 
 @NgModule({
