@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Tour, TourStatus } from '../model/tour.model';
 import { TourAuthoringService } from '../tour-authoring.service';
 import { PagedResults } from 'src/app/shared/model/paged-results.model';
+import { TourCardViewComponent } from 'src/app/shared/tour-card-view/tour-card-view.component';
 
 import { faPen } from '@fortawesome/free-solid-svg-icons';
 import { faTrash } from '@fortawesome/free-solid-svg-icons';

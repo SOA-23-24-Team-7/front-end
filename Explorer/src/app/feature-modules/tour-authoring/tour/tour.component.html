@@ -3,7 +3,8 @@
     
     <hr>
         <div id="tour-details" class="tour-rectangles">
-            <div *ngFor="let to of tour" class="tour-rectangle">
+            <xp-tour-card-view *ngFor="let to of tour" [tour]="to"></xp-tour-card-view>
+            <!--<div *ngFor="let to of tour" class="tour-rectangle">
                 <div class="tour-info">
                     <p class="text"><strong>Name:</strong> {{to.name}}</p>
                     <p class="text"><strong>Description:</strong> {{to.description}}</p>
@@ -38,7 +39,7 @@
                     </button>
                 </div>
                 
-            </div>
+            </div>-->
             <button color="primary" (click)="onAddClicked()" mat-icon-button>
                 <mat-icon>add</mat-icon>
             </button>

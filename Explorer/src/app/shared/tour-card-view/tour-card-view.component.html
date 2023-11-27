@@ -1,0 +1,56 @@
+
+<div class="tour-card">
+    <div class="tour-card-left">
+        <div class="tour-image-container" *ngIf="tour && tour.keyPoints && tour.keyPoints[0]">
+            <img class="tour-image" [src]="imageHost + tour.keyPoints[0].imagePath"/>
+        </div>
+    </div>
+    <div class="tour-card-content">
+        <div class="tour-card-top">
+            <div class="tour-tags">
+                <div class="tour-tag" *ngFor="let tag of tour.tags">{{tag}}</div>
+            </div>
+            <div class="tour-actions" *ngIf="user && user.role === 'author'">
+                <fa-icon class="tour-action" *ngIf="tour.status == 2 || tour.status == 0" [icon]="faTrash"/>
+                <fa-icon class="tour-action" *ngIf="tour.status == 2" [icon]="faPen"/>
+                <fa-icon class="tour-action" [icon]="faPersonHiking" [routerLink]="['/tours/equipment', tour.id]"/>
+                <fa-icon class="tour-action" [icon]="faMapLocation" [routerLink]="['/tour', tour.id, 'key-points']"/>
+                <fa-icon class="tour-action" *ngIf="tour.status == 2 || tour.status == 0" [icon]="faShareNodes" (click)="onPublishClicked(tour)"/>
+                <fa-icon class="tour-action" *ngIf="tour.status == 1" [icon]="faBoxArchive" (click)="onArchiveClicked(tour)"/>
+            </div>
+        </div>
+        <div class="tour-card-information">
+            <div class="tour-card-center">
+                <div class="tour-title">{{tour.name}}</div>
+                <div class="tour-rating">
+                    <fa-icon class="tour-rating-star" [icon]="faStar"/>
+                    <div class="tour-rating-average">{{tour.averageRating}}</div>
+                    <div class="tour-rating-count">(17 reviews)</div>
+                </div>
+                <div class="tour-description">
+                    {{tour.description}}
+                </div>
+                <div class="tour-keypoints" *ngIf="tour && tour.keyPoints && tour.keyPoints[0]">
+                    <div class="tour-keypoints-label">Keypoints:</div>
+                    <div class="tour-keypoint" *ngFor="let keyPoint of tour.keyPoints">{{keyPoint.name}}</div>
+                </div>
+                <div class="tour-distance">
+                    <div class="tour-distance-label">Distance:</div>
+                    <div class="tour-distance-value">{{tour.distance}} km</div>
+                </div>
+            </div>
+            <div class="tour-card-right">
+                <div class="tour-price">
+                    <div class="tour-price-label">Price:</div>
+                    <div class="tour-price-value">{{tour.price}}</div>
+                    <fa-icon class="tour-price-tokens" [icon]="faCoins"/>
+                </div>
+                <div class="btn add-to-cart" *ngIf="user && user.role === 'tourist'" (click)="addOrderItem(tour.id, tour.name, tour.price)">
+                    <fa-icon [icon]="faCartShopping"/>
+                    <div class="add-to-cart-text">&nbsp;Add</div>
+                </div>
+                <div class="btn view">View tour</div>
+            </div>
+        </div>
+    </div>
+</div>

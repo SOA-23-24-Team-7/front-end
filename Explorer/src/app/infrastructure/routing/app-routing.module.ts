@@ -40,6 +40,7 @@ import { TourSearchComponent } from "src/app/feature-modules/marketplace/tour-se
 import { NotificationTabsComponent } from "src/app/feature-modules/stakeholder/notification-tabs/notification-tabs.component";
 import { TourDetailsComponent } from "src/app/feature-modules/marketplace/tour-details/tour-details.component";
 import { UserNotificationsComponent } from "src/app/feature-modules/stakeholder/user-notifications/user-notifications.component";
+import { TourCardViewComponent } from "src/app/shared/tour-card-view/tour-card-view.component";
 
 const routes: Routes = [
     { path: "home", component: HomeComponent },
@@ -203,6 +204,10 @@ const routes: Routes = [
         path: "public-requests",
         component: RequestViewComponent,
         canActivate: [AuthGuard],
+    },
+    {
+        path: "tour-card",
+        component: TourCardViewComponent
     },
     { path: "tour-details/:tourId", component: TourDetailsComponent },
 ];

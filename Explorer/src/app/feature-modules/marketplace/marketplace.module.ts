@@ -1,6 +1,7 @@
 import { NgModule } from "@angular/core";
 import { CommonModule } from "@angular/common";
 import { MaterialModule } from "src/app/infrastructure/material/material.module";
+import { MatChipsModule } from '@angular/material/chips';
 import { ReactiveFormsModule } from "@angular/forms";
 import { RatingFormComponent } from "./rating-form/rating-form.component";
 import { RouterModule } from "@angular/router";
@@ -76,6 +77,7 @@ import { TourDetailsComponent } from './tour-details/tour-details.component';
         FontAwesomeModule,
         FormsModule,
         LayoutModule,
+        MatChipsModule
     ],
     exports: [
         ReviewComponent,
@@ -85,7 +87,7 @@ import { TourDetailsComponent } from './tour-details/tour-details.component';
         TourPreferencesComponent,
         TourPreferenceFormComponent,
         KeypointsNotificationsComponent,
-        FacilitiesNotificationsComponent,
+        FacilitiesNotificationsComponent
     ],
 })
 export class MarketplaceModule {}
