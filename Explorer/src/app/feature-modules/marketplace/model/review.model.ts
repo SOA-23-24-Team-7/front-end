@@ -1,3 +1,5 @@
+import { User } from "src/app/infrastructure/auth/model/user.model";
+
 export interface Review {
     id?: number;
     rating: number;
@@ -7,4 +9,6 @@ export interface Review {
     commentDate?: Date;
     tourId: number;
     images: Array<string>;
+    tourist?: User;
+    showMore?: boolean;
 }

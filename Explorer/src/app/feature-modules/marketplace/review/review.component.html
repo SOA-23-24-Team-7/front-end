@@ -1,89 +1,88 @@
-<div id="equipment">
-  <p>Reviews</p>
-  <hr />
-  <div id="equipment-details">
-    <!-- <div>
-      <mat-form-field>
-        <mat-label>TOUR ID:</mat-label>
-        <input matInput readonly="true" [(ngModel)]="tourId" type="number" />
-      </mat-form-field>
-      <button color="accent" (click)="getReviews()" mat-icon-button>
-        <mat-icon>search</mat-icon>
-      </button>
-    </div> -->
-    <div>
-      <table>
-        <thead>
-          <tr>
-            <th>Rating</th>
-            <th>Comment</th>
-            <th>Tour visit date</th>
-            <th>Comment date</th>
-            <th>Tour id</th>
-            <th>Images</th>
-            <th></th>
-            <th></th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr *ngFor="let rev of reviews">
-            <td>{{ rev.rating }}</td>
-            <td>{{ rev.comment }}</td>
-            <td>{{ rev.tourVisitDate }}</td>
-            <td>{{ rev.commentDate }}</td>
-            <td>{{ rev.tourId }}</td>
-            <td>
-              <div class="image-container">
-                <div *ngFor="let img of rev.images">
-                  <img [src]="img" alt="Image" class="vertical-image" />
+<button
+    (click)="onAddClicked()"
+    [disabled]="reviewExists"
+    color="primary"
+    mat-icon-button
+>
+    <mat-icon>add</mat-icon>
+</button>
+
+<div class="review-list">
+    <div class="review" *ngFor="let review of reviews">
+        <div class="border">
+            <div class="user-info">
+                <div class="tourist-row">
+                    <div class="tourist-image">
+                        <img
+                            [src]="review.tourist!.profilePicture"
+                            alt="Tourist Image"
+                        />
+                    </div>
+                    <div class="user-details">
+                        <div class="username">
+                            {{ review.tourist?.username }}
+                            <span class="middot"> &middot; </span>
+                            <span class="comment-date">{{
+                                review.commentDate | date: "MMM d, y"
+                            }}</span>
+                        </div>
+                        <div class="stars">
+                            {{ review.rating }}
+                            <fa-icon class="fa-star" [icon]="faStar" />
+                        </div>
+                    </div>
                 </div>
-              </div>
-            </td>
-            <td>
-              <button
-                *ngIf="user.id == rev.touristId"
-                color="accent"
-                (click)="onEditClicked(rev)"
-                mat-icon-button
-              >
-                <mat-icon>edit</mat-icon>
-              </button>
-            </td>
-            <td>
-              <button
-                *ngIf="user.id == rev.touristId"
-                color="primary"
-                (click)="deleteReview(rev)"
-                mat-icon-button
-              >
-                <mat-icon>delete</mat-icon>
-              </button>
-            </td>
-          </tr>
-          <tr>
-            <button
-              (click)="onAddClicked()"
-              [disabled]="reviewExists"
-              color="primary"
-              mat-icon-button
-            >
-              <mat-icon>add</mat-icon>
-            </button>
-          </tr>
-        </tbody>
-      </table>
+            </div>
+
+            <div class="review-comment">
+                <div>
+                    {{
+                        review.showMore
+                            ? review.comment
+                            : review.comment.length > 300
+                            ? review.comment.slice(0, 300) + " ..."
+                            : review.comment
+                    }}
+                </div>
+                <button
+                    *ngIf="review.comment.length > 300"
+                    class="show-more-button"
+                    (click)="toggleShowMore(review)"
+                >
+                    {{ review.showMore ? "Hide" : "Show more" }}
+                </button>
+            </div>
+
+            <div class="image-gallery">
+                <div class="gallery-design">
+                    <button
+                        *ngFor="let image of review.images"
+                        (click)="showImage(image)"
+                    >
+                        <img [src]="image" alt="Review Image" />
+                    </button>
+                </div>
+            </div>
+
+            <div class="last-row">
+                <div class="trip-date">
+                    Trip date: {{ review.tourVisitDate | date: "MMM d, y" }}
+                </div>
+                <span class="delete-edit-buttons">
+                    <fa-icon
+                        *ngIf="user.id == review.touristId"
+                        (click)="onEditClicked(review)"
+                        class="fa-icon-edit"
+                        [icon]="faEdit"
+                    ></fa-icon>
+                    <fa-icon
+                        *ngIf="user.id == review.touristId"
+                        (click)="deleteReview(review)"
+                        class="fa-icon-delete"
+                        [icon]="faTrashAlt"
+                    ></fa-icon>
+                </span>
+            </div>
+        </div>
     </div>
-    <div>
-      <xp-review-form
-        *ngIf="shouldRenderReviewForm"
-        (reviewAdded)="onReviewAdded($event)"
-        (reviewsUpdated)="getReviewsByTourId()"
-        [review]="selectedReview"
-        [shouldEdit]="shouldEdit"
-        [tourIdHelper]="tourIdHelper"
-        [reviewExists]="reviewExists"
-      >
-      </xp-review-form>
-    </div>
-  </div>
 </div>
