@@ -1,0 +1,48 @@
+
+<div id="tour" class="container">
+    
+  <hr>
+      <div id="tour-details" class="tour-rectangles">
+          <div *ngFor="let to of tour" class="tour-rectangle">
+              <div class="tour-info">
+                  <p class="text"><strong>Name:</strong> {{to.name}}</p>
+                  <p class="text"><strong>Description:</strong> {{to.description}}</p>
+                  <p class="text"><strong>Status:</strong> {{getTourStatusText(to.status)}}</p>
+                  <p class="text"><strong>Distance:</strong> {{to.distance}} km</p>
+              </div>
+              <div class="tour-buttons">
+                 
+                  <button *ngIf="getTourStatusText(to.status) !== 'Ready'" color="accent" (click)="deleteTour(to.id || 0)" mat-icon-button>
+                      Delete
+                  </button>
+                  <button *ngIf="getTourStatusText(to.status) !== 'Ready'" color="primary" (click)="onEditClicked(to)" mat-icon-button>
+                      Edit
+                  </button>
+                  <button color="primary" mat-raised-button [routerLink]="['equipment',to.id]">
+                      Manage equipment
+                  </button>
+                  <button *ngIf="getTourStatusText(to.status) === 'Ready'" color="primary" mat-raised-button [routerLink]="['/tour', to.id, 'tourists-key-points']" id="view-key-points-button">
+                      View key points
+                  </button>
+                  <button *ngIf="getTourStatusText(to.status) !== 'Ready'" color="primary" mat-raised-button [routerLink]="['/tour', to.id, 'tourists-key-points']">
+                      Manage key points
+                  </button>
+                  <button *ngIf="getTourStatusText(to.status) !== 'Ready'" color="primary" mat-raised-button (click)="onReadyClicked(to)">
+                      Mark as ready
+                  </button>
+              </div>
+              
+          </div>
+          <button color="primary" (click)="onAddClicked()" mat-icon-button>
+              <mat-icon>add</mat-icon>
+          </button>
+      </div>
+      <div class="right-column">
+          <xp-tour-form *ngIf="shouldRenderTourForm" 
+                      [shouldEdit]="shouldEdit" 
+                      [tour]="selectedTour" 
+                      (toursUpdated)="getTours()">
+          </xp-tour-form>
+      </div>
+  
+</div>

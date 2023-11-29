@@ -32,7 +32,8 @@ import {
     faPlus,
     faShoppingCart,
     faBell,
-    faCircleQuestion
+    faCircleQuestion,
+    faMapLocationDot
 } from "@fortawesome/free-solid-svg-icons";
 //import { } from "@fortawesome/free-regular-svg-icons";
 
@@ -115,4 +116,5 @@ export class NavbarComponent implements OnInit {
     faShoppingCart = faShoppingCart;
     faBell = faBell;
     faCircleQuestion = faCircleQuestion;
+    faMapLocationDot = faMapLocationDot;
 }

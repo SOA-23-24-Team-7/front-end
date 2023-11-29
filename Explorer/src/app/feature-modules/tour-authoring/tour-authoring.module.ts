@@ -21,6 +21,10 @@ import { MatDialogModule } from "@angular/material/dialog";
 import { FacilityCardComponent } from "./facility-card/facility-card.component";
 import { AddTourFormComponent } from './add-tour-form/add-tour-form.component';
 import { EditTourFormComponent } from './edit-tour-form/edit-tour-form.component';
+import { TouristsTourComponent } from './tourists-tour/tourists-tour.component';
+import { AddTouristsTourFormComponent } from './add-tourists-tour-form/add-tourists-tour-form.component';
+import { EditTouristsTourFormComponent } from './edit-tourists-tour-form/edit-tourists-tour-form.component';
+import { TouristsKeyPointsComponent } from './tourists-key-points/tourists-key-points.component';
 
 @NgModule({
     declarations: [
@@ -36,6 +40,10 @@ import { EditTourFormComponent } from './edit-tour-form/edit-tour-form.component
         FacilityCardComponent,
         AddTourFormComponent,
         EditTourFormComponent,
+        TouristsTourComponent,
+        AddTouristsTourFormComponent,
+        EditTouristsTourFormComponent,
+        TouristsKeyPointsComponent,
     ],
     imports: [
         CommonModule,

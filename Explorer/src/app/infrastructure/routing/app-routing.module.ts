@@ -41,6 +41,8 @@ import { NotificationTabsComponent } from "src/app/feature-modules/stakeholder/n
 import { TourDetailsComponent } from "src/app/feature-modules/marketplace/tour-details/tour-details.component";
 import { UserNotificationsComponent } from "src/app/feature-modules/stakeholder/user-notifications/user-notifications.component";
 import { ActiveEncounterViewComponent } from "src/app/feature-modules/encounter/active-encounter-view/active-encounter-view.component";
+import { TouristsTourComponent } from "src/app/feature-modules/tour-authoring/tourists-tour/tourists-tour.component";
+import { TouristsKeyPointsComponent } from "src/app/feature-modules/tour-authoring/tourists-key-points/tourists-key-points.component";
 
 const routes: Routes = [
     { path: "home", component: HomeComponent },
@@ -209,6 +211,16 @@ const routes: Routes = [
     {
         path: "active-encounters",
         component: ActiveEncounterViewComponent,
+        canActivate: [AuthGuard],
+    },
+    {
+        path: "tourists-tour",
+        component: TouristsTourComponent,
+        canActivate: [AuthGuard],
+    },
+    {
+        path: "tour/:id/tourists-key-points",
+        component: TouristsKeyPointsComponent,
         canActivate: [AuthGuard],
     },
 ];

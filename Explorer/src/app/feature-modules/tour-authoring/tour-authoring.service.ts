@@ -26,6 +26,7 @@ export class TourAuthoringService {
     addTour(tour: Tour): Observable<Tour> {
         return this.http.post<Tour>(environment.apiHost + "tour", tour);
     }
+    
     deleteTour(id: number): Observable<Tour> {
         return this.http.delete<Tour>(environment.apiHost + "tour/" + id);
     }
@@ -182,9 +183,17 @@ export class TourAuthoringService {
             tour,
         );
     }
+    
     archiveTour(tour: Tour): Observable<Tour> {
         return this.http.put<Tour>(
             environment.apiHost + "tour/archive/" + tour.id,
+            tour,
+        );
+    }
+
+    markTourAsReady(tour: Tour): Observable<Tour> {
+        return this.http.put<Tour>(
+            environment.apiHost + "tour/markAsReady/" + tour.id,
             tour,
         );
     }

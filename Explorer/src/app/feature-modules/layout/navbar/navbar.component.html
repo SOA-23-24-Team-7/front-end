@@ -261,7 +261,21 @@
                             Change position
                         </div>
                     </div>
-                    
+                
+                    <div
+                        class="navbar-submenu-item"
+                        [routerLink]="['tourists-tour']"
+                        *ngIf="user && user.role === 'tourist'"
+                    >
+                        <fa-icon
+                            class="navbar-submenu-item-icon"
+                            [icon]="faMapLocationDot"
+                        />
+                        <div class="navbar-submenu-item-text">
+                            Plan your tour
+                        </div>
+                    </div>
+
                     <div
                         class="navbar-submenu-item"
                         [routerLink]="['problem']"
