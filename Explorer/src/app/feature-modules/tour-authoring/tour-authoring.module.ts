@@ -21,6 +21,7 @@ import { MatDialogModule } from "@angular/material/dialog";
 import { FacilityCardComponent } from "./facility-card/facility-card.component";
 import { AddTourFormComponent } from './add-tour-form/add-tour-form.component';
 import { EditTourFormComponent } from './edit-tour-form/edit-tour-form.component';
+import { FormsModule } from '@angular/forms';
 
 @NgModule({
     declarations: [
@@ -46,6 +47,7 @@ import { EditTourFormComponent } from './edit-tour-form/edit-tour-form.component
         RouterModule,
         FontAwesomeModule,
         MatDialogModule,
+        FormsModule
     ],
     exports: [
         TourComponent,
@@ -57,7 +59,7 @@ import { EditTourFormComponent } from './edit-tour-form/edit-tour-form.component
         FacilitiesComponent,
         FacilitiesFormComponent,
         TourEquipmentFormComponent,
-        KeyPointCardComponent,
+        KeyPointCardComponent
     ],
 })
 export class TourAuthoringModule {}
