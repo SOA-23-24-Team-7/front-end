@@ -33,6 +33,8 @@ import { FormsModule } from '@angular/forms';
 import { PublishedToursComponent } from './tours/published-tours.component';
 import { TourDetailsComponent } from './tour-details/tour-details.component';
 import { FullSizeImageComponent } from './full-size-image/full-size-image.component';
+import { TourPageComponent } from './tour-page/tour-page.component';
+import { TourAuthoringModule } from "../tour-authoring/tour-authoring.module";
 
 @NgModule({
     declarations: [
@@ -60,7 +62,8 @@ import { FullSizeImageComponent } from './full-size-image/full-size-image.compon
         FacilitiesNotificationsComponent,
         ShoppingCartComponent,
         TourDetailsComponent,
-        FullSizeImageComponent
+        FullSizeImageComponent,
+        TourPageComponent
     ],
     imports: [
         CommonModule,
@@ -79,7 +82,8 @@ import { FullSizeImageComponent } from './full-size-image/full-size-image.compon
         FontAwesomeModule,
         FormsModule,
         LayoutModule,
-        MatChipsModule
+        MatChipsModule,
+        TourAuthoringModule
     ],
     exports: [
         ReviewComponent,

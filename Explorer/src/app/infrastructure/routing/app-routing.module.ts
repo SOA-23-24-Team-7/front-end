@@ -42,6 +42,7 @@ import { TourDetailsComponent } from "src/app/feature-modules/marketplace/tour-d
 import { UserNotificationsComponent } from "src/app/feature-modules/stakeholder/user-notifications/user-notifications.component";
 import { TourCardViewComponent } from "src/app/shared/tour-card-view/tour-card-view.component";
 import { ActiveEncounterViewComponent } from "src/app/feature-modules/encounter/active-encounter-view/active-encounter-view.component";
+import { TourPageComponent } from "src/app/feature-modules/marketplace/tour-page/tour-page.component";
 
 const routes: Routes = [
     { path: "home", component: HomeComponent },
@@ -216,6 +217,11 @@ const routes: Routes = [
         component: ActiveEncounterViewComponent,
         canActivate: [AuthGuard],
     },
+    {
+        path: "tour/:tourId",
+        component: TourPageComponent,
+        canActivate: [AuthGuard],
+    }
 ];
 
 @NgModule({
