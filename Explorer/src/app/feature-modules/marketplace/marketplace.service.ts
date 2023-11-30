@@ -110,27 +110,29 @@ export class MarketplaceService {
     }
     getProblem(): Observable<PagedResults<Problem>> {
         return this.http.get<PagedResults<Problem>>(
-            environment.apiHost + "problem",
+            environment.apiHost + "tourist/problem/all",
         );
     }
     addProblem(problem: Problem): Observable<Problem> {
         return this.http.post<Problem>(
-            environment.apiHost + "problem",
+            environment.apiHost + "tourist/problem",
             problem,
         );
     }
     updateProblem(problem: Problem): Observable<Problem> {
         return this.http.put<Problem>(
-            environment.apiHost + "problem/" + problem.id,
+            environment.apiHost + "tourist/problem/" + problem.id,
             problem,
         );
     }
     deleteProblem(id: number): Observable<Problem> {
-        return this.http.delete<Problem>(environment.apiHost + "problem/" + id);
+        return this.http.delete<Problem>(
+            environment.apiHost + "tourist/problem/" + id,
+        );
     }
-    getProblemByUserId(id: number): Observable<PagedResults<Problem>> {
+    getProblemByUserId(): Observable<PagedResults<Problem>> {
         return this.http.get<PagedResults<Problem>>(
-            environment.apiHost + "problem/" + id,
+            environment.apiHost + "tourist/problem/",
         );
     }
     getClubs(): Observable<PagedResults<Club>> {
@@ -323,11 +325,10 @@ export class MarketplaceService {
                 shoppingCartId,
         );
     }
-    addToken(tourId: number | undefined): any {
-        return this.http.post<TourToken>(
-            environment.apiHost + "token/" + tourId,
-            {},
-        );
+    addToken(tourId: number): Promise<TourToken | undefined> {
+        return this.http
+            .post<TourToken>(environment.apiHost + "token/" + tourId, {})
+            .toPromise();
     }
 
     deleteShoppingKart(shoppingKartId: number | undefined): any {
@@ -343,12 +344,34 @@ export class MarketplaceService {
     }
 
     getTourById(tourId: number): Observable<Tour> {
-        const route: string = environment.apiHost + "market-place/tours/" + tourId;
+        const route: string =
+            environment.apiHost + "market-place/tours/" + tourId;
         return this.http.get<Tour>(route);
     }
-    
+
     canTourBeRated(tourId: number): Observable<boolean> {
-        const route: string = environment.apiHost + "market-place/tours/can-be-rated/" + tourId;
+        const route: string =
+            environment.apiHost + "market-place/tours/can-be-rated/" + tourId;
         return this.http.get<boolean>(route);
     }
+
+    searchTours(searchFilter: any): Observable<PagedResults<Tour>> {
+        let query = `?page=${searchFilter.page}&pageSize=${searchFilter.pageSize}`
+        query += searchFilter.minPrice >= 0 && searchFilter.minPrice !== "" ? `&minPrice=${searchFilter.minPrice}` : "";
+        query += searchFilter.maxPrice >= 0  && searchFilter.maxPrice !== "" ? `&maxPrice=${searchFilter.maxPrice}` : "";
+        query += searchFilter.minDifficulty >= 0  && searchFilter.minDifficulty !== "" ? `&minDifficulty=${searchFilter.minDifficulty}` : "";
+        query += searchFilter.maxDifficulty >= 0  && searchFilter.maxDifficulty !== "" ? `&maxDifficulty=${searchFilter.maxDifficulty}` : "";
+        query += searchFilter.minDuration >= 0 && searchFilter.minDuration !== "" ? `&minDuration=${searchFilter.minDuration}` : "";
+        query += searchFilter.maxDuration >= 0 && searchFilter.maxDuration !== "" ? `&maxDuration=${searchFilter.maxDuration}` : "";
+        query += searchFilter.minAverageRating >= 0 && searchFilter.minAverageRating !== "" ? `&minAverageRating=${searchFilter.minAverageRating}` : "";
+        query += searchFilter.minLength >= 0 && searchFilter.minLength !== "" ? `&minLength=${searchFilter.minLength}` : "";
+        query += searchFilter.maxLength >= 0 && searchFilter.maxLength !== "" ? `&maxLength=${searchFilter.maxLength}` : "";
+        query += searchFilter.longitude >= -180 && searchFilter.longitude !== "" ? `&longitude=${searchFilter.longitude}` : "";
+        query += searchFilter.latitude >= -180 && searchFilter.latitude !== "" ? `&latitude=${searchFilter.latitude}` : "";
+        query += searchFilter.maxDistance > 0 && searchFilter.maxDistance !== "" ? `&maxDistance=${searchFilter.maxDistance}` : "";
+        console.log(query);
+        const path = environment.apiHost + "tourist/tour/search" + query;
+        return this.http.get<PagedResults<Tour>>(path);
+      }
+    
 }

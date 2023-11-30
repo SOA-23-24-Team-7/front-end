@@ -1,0 +1,17 @@
+<div class="comment">
+    <div class="picture">
+        <div
+            class="comment-avatar"
+            [style.background-image]="'url(' + commenter.profilePicture + ')'"
+        ></div>
+    </div>
+    <div class="column">
+        <div class="comment-content">
+            {{ text }}
+        </div>
+        <div class="row">
+            <div>Commented by</div>
+            <div class="commenter">{{ commenter.username }}</div>
+        </div>
+    </div>
+</div>

@@ -23,6 +23,7 @@ import { MessageDialogComponent } from "./feature-modules/stakeholder/message-di
 import { UserProfileComponent } from "./feature-modules/stakeholder/user-profile/user-profile.component";
 import { StakeholderModule } from "./feature-modules/stakeholder/stakeholder.module";
 import {MatCardModule} from '@angular/material/card';
+import { EncounterModule } from "./feature-modules/encounter/encounter.module";
 
 @NgModule({
     declarations: [AppComponent],
@@ -49,6 +50,7 @@ import {MatCardModule} from '@angular/material/card';
         FontAwesomeModule,
         NgxGoogleAnalyticsModule.forRoot("G-YF6NHGD2NQ"),
         MatCardModule,
+        EncounterModule,
     ],
     providers: [
         {

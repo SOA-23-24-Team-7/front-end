@@ -73,6 +73,7 @@ export class ShoppingCartComponent {
                                     ) => {
                                         this.data = result.results;
                                         this.isEmpty();
+                                        this.getShoppingCart(); // update the price
                                     },
                                 });
                         },
@@ -91,19 +92,16 @@ export class ShoppingCartComponent {
     checkout(): void {
         this.service.deleteShoppingKart(this.shoppingCart.id).subscribe({
             next: () => {
-                this.dialogRef.closeAll();
                 alert("You have successfully bought tours!");
                 this.shoppingCart = {};
                 this.service.addShoppingCart(this.shoppingCart).subscribe({
-                    next: (result: ShoppingCart) => {
+                    next: async (result: ShoppingCart) => {
                         this.shoppingCart = result;
                         for (let tour of this.data) {
-                            this.service.addToken(tour.id).subscribe({
-                                next: (result: TourToken) => {
-                                    console.log(result);
-                                },
-                            });
+                            const result = await this.service.addToken(tour.id);
+                            console.log(result);
                         }
+                        this.dialogRef.closeAll();
                     },
                 });
             },

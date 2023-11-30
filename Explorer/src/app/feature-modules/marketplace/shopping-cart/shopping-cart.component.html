@@ -40,6 +40,12 @@
                 </button>
             </div>
         </div>
+        <div>
+            <p>
+                <strong>Total price:</strong>
+                {{ shoppingCart ? shoppingCart.totalPrice : 0 }}
+            </p>
+        </div>
         <div class="tour-buttons">
             <button color="accent" (click)="checkout()" [disabled]="isDisabled">
                 Checkout

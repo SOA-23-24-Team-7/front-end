@@ -12,9 +12,11 @@
     --clr-error-100: 255, 88, 88;
     --clr-error-300: 255, 40, 48;
     --clr-error-500: 255, 0, 0;
+    --clr-error-700: 255, 88, 88;
 
     --clr-success-300: 94, 227, 94;
     --clr-success-500: 6, 227, 6;
+    --clr-success-700: 94, 227, 94;
 
     --clr-information-500: 132, 0, 255;
 
@@ -25,7 +27,6 @@
     --clr-neutral-500: 140, 140, 140;
     --clr-neutral-700: 64, 64, 64;
     --clr-neutral-900: 52, 52, 52;
-    
 
     --clr-background: var(--clr-neutral-100);
     --clr-background-secondary: var(--clr-neutral-300);
@@ -35,7 +36,7 @@
     --clr-outline-contrast: var(--clr-neutral-700);
 
     --border-primary: 220, 223, 228;
-    
+
     --fnt-body: "Source Sans 3", sans-serif;
 
     --fnt-header: "Playfair Display", serif;

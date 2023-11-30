@@ -1,0 +1,45 @@
+.comment {
+    display: flex;
+    background-color: rgb(var(--clr-background));
+    width: 35rem;
+    padding: 1rem;
+    padding-bottom: 0.3rem;
+    gap: 1rem;
+    margin: 0.5rem;
+    border-radius: 0.5rem;
+}
+
+.picture {
+    padding-bottom: 1rem;
+}
+
+.comment-avatar {
+    height: 4rem;
+    width: 4rem;
+    border-radius: 50%;
+    border: rgba(var(--clr-outline-contrast), 1) 2px solid;
+    background-position: center;
+    background-size: cover;
+}
+
+.comment-content {
+    font-weight: 500;
+}
+
+.commenter {
+    color: rgb(var(--clr-primary-300));
+}
+
+.column {
+    display: flex;
+    flex-direction: column;
+    width: 30rem;
+    height: 100%;
+    gap: 0.6rem;
+}
+
+.row {
+    display: flex;
+    gap: 0.3rem;
+    font-weight: 300;
+}

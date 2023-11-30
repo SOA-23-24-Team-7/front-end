@@ -78,6 +78,12 @@ export class MapComponent implements AfterViewInit, OnChanges {
     iconAnchor: [16, 32],
   });
 
+  private encounterIcon = L.icon({
+    iconUrl: 'https://cdn-icons-png.flaticon.com/512/5184/5184592.png',
+    iconSize: [42, 42],
+    iconAnchor: [16, 32],
+  });
+
   private positionIcon = L.icon({
     iconUrl: 'https://images.emojiterra.com/google/android-pie/512px/1f535.png',
     iconSize: [30, 30],
@@ -231,9 +237,9 @@ export class MapComponent implements AfterViewInit, OnChanges {
       draggableWaypoints: false
     };
 
-    if (this.isTourExecutionMap && waypoints.length == (this.waypointMap.size + 1)) {
+    if (this.isTourExecutionMap) {
       planOptions['createMarker'] = (i: number, waypoint: any, n: number): any => {
-        if (i == 0) return null;
+        if (waypoints.length == (this.waypointMap.size + 1) && i == 0) return null;
         const marker = L.marker(waypoint.latLng, { icon: keyPointIcon });
         marker.addEventListener('click', () => {
          this.keyPointClickEvent.emit(waypoint.latLng);
@@ -369,6 +375,12 @@ export class MapComponent implements AfterViewInit, OnChanges {
     this.map.addLayer(this.markerGroup);
 
     this.map.setView([lat, lng], this.map.getZoom());
+  }
+
+  setEncounterMarker(lat: number, lng: number): void {
+    const marker = new L.Marker([lat, lng], { icon: this.encounterIcon });
+    this.markerGroup.addLayer(marker);
+    this.map.addLayer(this.markerGroup);
   }
 
   setMarkersForAllFacilities(lat: number, lng: number): void {
