@@ -1,7 +1,8 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { TourExecutionSessionInfo } from '../model/tour-execution-session-info.model';
 import { TourStatus } from '../../tour-authoring/model/tour.model';
 import { TourExecutionSessionStatus } from '../model/tour-execution-session-status.model';
+import {formatDate} from '@angular/common';
 
 @Component({
   selector: 'xp-tour-execution-info',
@@ -16,4 +17,21 @@ export class TourExecutionInfoComponent {
   @Input() description: string;
   @Input() lastActivity: Date;
   @Input() tourExecutionStatus: TourExecutionSessionStatus;
+  formatedDate : string;
+  tourExecutionStatusString : string;
+
+  ngOnInit(){
+    this.formatedDate = formatDate(this.lastActivity, 'dd/MM/yyyy', 'en');
+    this.tourExecutionStatusString = TourExecutionSessionStatus[this.tourExecutionStatus];
+  }
+
+  changeColor(){
+    if(this.tourExecutionStatus == TourExecutionSessionStatus.Abandoned){
+      return { 'color': 'red' };
+    }
+    if(this.tourExecutionStatus == TourExecutionSessionStatus.Completed){
+      return { 'color': 'green' };
+    }
+    return { 'color': 'blue'};
+  }
 }
