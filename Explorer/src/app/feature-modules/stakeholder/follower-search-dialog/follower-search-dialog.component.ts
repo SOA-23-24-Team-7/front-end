@@ -54,7 +54,7 @@ export class FollowerSearchDialogComponent implements OnInit {
         this.service.getSearched(this.searchUsername).subscribe(result => {
             this.users = result.results;
             this.users.forEach(user => {
-                if (this.followings.some(f => user.id === f.followingId)) {
+                if (this.followings.some(f => user.id === f.following.id)) {
                     user.followingStatus = true;
                 } else {
                     user.followingStatus = false;

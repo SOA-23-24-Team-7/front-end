@@ -17,6 +17,7 @@ import { FontAwesomeModule } from "@fortawesome/angular-fontawesome";
 import { NotificationTabsComponent } from "./notification-tabs/notification-tabs.component";
 import { MarketplaceModule } from "../marketplace/marketplace.module";
 import { ProblemResolvingNotificationsComponent } from "./problem-resolving-notifications/problem-resolving-notifications.component";
+import { UserRowComponent } from './user-row/user-row.component';
 
 @NgModule({
     declarations: [
@@ -33,6 +34,7 @@ import { ProblemResolvingNotificationsComponent } from "./problem-resolving-noti
         FollowDialogComponent,
         UserNotificationsComponent,
         FollowerSearchDialogComponent,
+        UserRowComponent,
     ],
     imports: [
         CommonModule,
