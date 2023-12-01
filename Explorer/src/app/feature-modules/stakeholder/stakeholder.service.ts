@@ -21,6 +21,11 @@ import { UserFollow } from "./model/user-follow.model";
     providedIn: "root",
 })
 export class StakeholderService {
+    countNotifications(): Observable<number> {
+        return this.http.get<number>(
+            environment.apiHost + "notifications/count",
+        );
+    }
     getProblem(problemId: number, userRole: string): Observable<ProblemUser> {
         return this.http.get<ProblemUser>(
             environment.apiHost + userRole + "/problem/" + problemId,
