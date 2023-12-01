@@ -41,15 +41,8 @@ export class FollowDialogComponent implements OnInit {
         this.userId = this.data.user.id;
     }
 
-    openMessageDialog(reciverID: number): void {
-        const dialogRef = this.dialog.open(MessageDialogComponent, {
-            data: {
-                userId: this.userId,
-                reciverId: reciverID,
-            },
-        });
-    }
     unfollowOrFollow(id: number): void {
+        console.log(id);
         var clicked = this.followings.find(f => f.id == id);
         if (clicked != undefined) {
             if (clicked.followingStatus) {
@@ -65,18 +58,18 @@ export class FollowDialogComponent implements OnInit {
             }
         }
     }
-    addFollowing(follwing: Following): void {
+    addFollowing(following: Following): void {
         const followCreate: FollowerCreate = {
             followedById: this.userId,
-            userId: follwing.followingId,
+            userId: following.following.id,
         };
         this.service.addFollowing(followCreate).subscribe({
             next: (result: FollowerCreate) => {
                 console.log(result.id);
                 if (result.id != undefined) {
-                    follwing.id = result.id;
+                    following.id = result.id;
                 }
-                follwing.followingStatus = true;
+                following.followingStatus = true;
             },
         });
     }
@@ -99,7 +92,7 @@ export class FollowDialogComponent implements OnInit {
     addFollower(id: number, follwer: Follower): void {
         const followCreate: FollowerCreate = {
             userId: this.userId,
-            followedById: follwer.followedById,
+            followedById: follwer.followedBy.id,
         };
         this.service.addFollowing(followCreate).subscribe({
             next: (result: FollowerCreate) => {

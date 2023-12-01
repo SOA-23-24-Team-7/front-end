@@ -18,6 +18,8 @@ import { NotificationTabsComponent } from "./notification-tabs/notification-tabs
 import { MarketplaceModule } from "../marketplace/marketplace.module";
 import { ProblemResolvingNotificationsComponent } from "./problem-resolving-notifications/problem-resolving-notifications.component";
 import { SharedModule } from "src/app/shared/shared.module";
+import { UserRowComponent } from './user-row/user-row.component';
+
 
 @NgModule({
     declarations: [
@@ -34,6 +36,7 @@ import { SharedModule } from "src/app/shared/shared.module";
         FollowDialogComponent,
         UserNotificationsComponent,
         FollowerSearchDialogComponent,
+        UserRowComponent,
     ],
     imports: [
         CommonModule,

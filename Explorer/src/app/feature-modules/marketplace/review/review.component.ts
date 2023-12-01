@@ -59,13 +59,14 @@ export class ReviewComponent implements OnInit {
             this.service.getReviews(this.tourIdHelper).subscribe({
                 next: (result: PagedResults<Review>) => {
                     this.reviews = result.results;
-                    this.service
-                        .reviewExists(this.user.id, this.tourIdHelper)
-                        .subscribe({
-                            next: (result: boolean) => {
-                                this.reviewExists = result;
-                            },
-                        });
+                    this.service.canTourBeRated(this.tourIdHelper).subscribe({
+                        next: (result: boolean) => {
+                          this.reviewExists = result;
+                        },
+                        error: (errData) => {
+                          console.log(errData);
+                        }
+                      })
                 },
                 error: (err: any) => {
                     console.log(err);

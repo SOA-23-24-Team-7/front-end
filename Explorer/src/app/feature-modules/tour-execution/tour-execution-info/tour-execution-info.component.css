@@ -1,34 +1,9 @@
-.info {
-    display: flex;
-    background-color: rgb(var(--clr-background));
-    width: 35rem;
-    padding: 1rem;
-    padding-bottom: 0.3rem;
-    gap: 1rem;
-    margin: 0.5rem;
-    border-radius: 0.5rem;
+.container {
+    background-color: rgb(var(--clr-background-secondary));
 }
 
-.info-content {
-    font-weight: 500;
-}
-
-.column {
-    display: flex;
-    flex-direction: column;
-    width: 30rem;
-    height: 100%;
-    gap: 0.6rem;
-}
-
-.row {
-    display: flex;
-    gap: 0.3rem;
+.last-activity{
     font-weight: 300;
-}
-
-.name {
-    display: flex;
-    gap: 0.3rem;
-    font-weight: 0.5rem;
+    text-align: right;
+    padding-right: 25px;
 }
