@@ -18,9 +18,9 @@ import { NotificationTabsComponent } from "./notification-tabs/notification-tabs
 import { MarketplaceModule } from "../marketplace/marketplace.module";
 import { ProblemResolvingNotificationsComponent } from "./problem-resolving-notifications/problem-resolving-notifications.component";
 import { SharedModule } from "src/app/shared/shared.module";
-import { UserRowComponent } from './user-row/user-row.component';
-import { PaymentHistoryComponent } from './payment-history/payment-history.component';
-
+import { UserRowComponent } from "./user-row/user-row.component";
+import { PaymentHistoryComponent } from "./payment-history/payment-history.component";
+import { ShoppingNotificationsComponent } from "./shopping-notifications/shopping-notifications.component";
 
 @NgModule({
     declarations: [
@@ -39,6 +39,7 @@ import { PaymentHistoryComponent } from './payment-history/payment-history.compo
         FollowerSearchDialogComponent,
         UserRowComponent,
         PaymentHistoryComponent,
+        ShoppingNotificationsComponent,
     ],
     imports: [
         CommonModule,
