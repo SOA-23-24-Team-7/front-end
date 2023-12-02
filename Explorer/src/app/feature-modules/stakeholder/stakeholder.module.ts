@@ -19,6 +19,7 @@ import { MarketplaceModule } from "../marketplace/marketplace.module";
 import { ProblemResolvingNotificationsComponent } from "./problem-resolving-notifications/problem-resolving-notifications.component";
 import { SharedModule } from "src/app/shared/shared.module";
 import { UserRowComponent } from './user-row/user-row.component';
+import { PaymentHistoryComponent } from './payment-history/payment-history.component';
 
 
 @NgModule({
@@ -37,6 +38,7 @@ import { UserRowComponent } from './user-row/user-row.component';
         UserNotificationsComponent,
         FollowerSearchDialogComponent,
         UserRowComponent,
+        PaymentHistoryComponent,
     ],
     imports: [
         CommonModule,
