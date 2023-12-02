@@ -38,8 +38,8 @@ export class RecommendedTourCardsComponent {
           }
     
           this.tourAuthoringService.getRecommendedTours(this.keyPointIds).subscribe({
-              next: (result: Tour[]) => {
-                  this.recommendedTours = result;
+              next: (result) => {
+                  this.recommendedTours = result.results;
               },
               error:(err: any) => {
                 console.log(err);

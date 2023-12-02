@@ -10,9 +10,12 @@
           <br>
           Distance: <b>{{ tour.distance }}</b>
       </div>
+      <div *ngIf="tour.keyPoints && tour.keyPoints.length > 0">
+      <div>First key point name: <b>{{tour.keyPoints[0].name}}</b></div>
+      <div>First key point description: <b>{{tour.keyPoints[0].description}}</b></div>
+      <div>First key point adress: <b>{{tour.keyPoints[0].locationAddress}}</b></div>
+      </div>
       <button class="btn key-points-button" (click)="ShowKeyPoints()">Show key points</button>
-      <button class="btn search-button" (click)="StartTour()" *ngIf="!hasActiveTour">Start tour</button>
-      <button class="btn search-button" (click)="ContinueTour()" *ngIf="hasActiveTour && isTourActive">Continue tour</button>
-      <button class="btn search-button" *ngIf="hasActiveTour && !isTourActive" disabled>Start tour</button>
+      <button class="btn search-button" (click)="BuyTour()" >Buy</button>
   </div>
 </div>

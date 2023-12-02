@@ -219,10 +219,10 @@ export class TourAuthoringService {
         );
     }
 
-    getRecommendedTours(keyPointIds: number[]): Observable<Tour[]> {
+    getRecommendedTours(keyPointIds: number[]): Observable<PagedResults<Tour>> {
         const params = new HttpParams().set('keyPointIds', keyPointIds.join(','));
 
-        return this.http.get<Tour[]>(
+        return this.http.get<PagedResults<Tour>>(
             environment.apiHost + 'tour/recommended/' + params
         );
     }

@@ -10,6 +10,8 @@ import { Tour, TourStatus } from '../model/tour.model';
 import { TourDuration, TransportType } from '../model/tourDuration.model';
 import { PublicKeyPointsComponent } from '../public-key-points/public-key-points.component';
 import { TourAuthoringService } from '../tour-authoring.service';
+import { PagedResults } from 'src/app/shared/model/paged-results.model';
+
 
 @Component({
   selector: 'xp-tourists-key-points',
@@ -18,7 +20,7 @@ import { TourAuthoringService } from '../tour-authoring.service';
 })
 export class TouristsKeyPointsComponent implements OnInit{
     tour: Tour | null = null;
-    keyPoints: KeyPoint[] = [];    
+    keyPoints: KeyPoint[] = [];   
     recommendedTours: Tour[] = [];
     keyPointIds: number[] = [];
     selectedKeyPoint: KeyPoint | null = null;
@@ -31,6 +33,7 @@ export class TouristsKeyPointsComponent implements OnInit{
     areButtonsEnabled: boolean = true;
     hasTourActive: boolean
     activeTourId: number
+    
     @ViewChild(MapComponent, { static: false }) mapComponent: MapComponent;
 
     public distance: number;
@@ -60,10 +63,10 @@ export class TouristsKeyPointsComponent implements OnInit{
         this.keyPointContainer = document.querySelector(
             ".key-point-cards-container",
         );
+        this.getKeyPoints();
         this.tourContainer = document.querySelector(
             ".tour-cards-container",
         );
-        this.getKeyPoints();
         this.enableButtons();
     }
 
@@ -96,6 +99,10 @@ export class TouristsKeyPointsComponent implements OnInit{
         });
     }
 
+
+
+   
+
     getKeyPoints(): void {
         this.route.paramMap.subscribe({
             next: (params: ParamMap) => {
@@ -113,8 +120,11 @@ export class TouristsKeyPointsComponent implements OnInit{
                 this.service.getKeyPoints(tourId).subscribe({
                     next: (result: KeyPoint[]) => {
                         this.keyPoints = result;
-
-                        this.getRecommendedTours(this.keyPoints);
+                        //console.log(this.keyPoints);
+                        if(result){
+                            this.getRecommendedTours();
+                        }
+                        
 
                         if (this.keyPoints.length < 2) {
                             this.walkingDuration = 0;
@@ -137,6 +147,7 @@ export class TouristsKeyPointsComponent implements OnInit{
                                 },
                             });
                         }
+                        
                     },
                     error: () => {},
                 });
@@ -346,20 +357,27 @@ export class TouristsKeyPointsComponent implements OnInit{
         }
     }
 
-    getRecommendedTours(keyPoints: KeyPoint[]): void{
-        if(keyPoints){
-            for(let kp of keyPoints){
+    getRecommendedTours(): void{
+        this.keyPointIds.length = 0;
+
+        if(this.keyPoints){
+            for(let kp of this.keyPoints){
                 if(kp.id){
                     this.keyPointIds.push(kp.id);
                 }
             }
-
+        
+        if(this.keyPointIds.length > 0){
             this.service.getRecommendedTours(this.keyPointIds).subscribe({
-                next: (result: Tour[]) => {
-                    this.recommendedTours = result;
+                next: (result) => {
+                    console.log(result);
+                    this.recommendedTours = result.results;
                 },
                 error: () => {},
             })
+        }else{
+            this.recommendedTours = [];
+        }
         }
     } 
 
