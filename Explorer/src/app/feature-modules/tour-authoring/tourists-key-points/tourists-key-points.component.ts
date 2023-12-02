@@ -17,8 +17,10 @@ import { TourAuthoringService } from '../tour-authoring.service';
   styleUrls: ['./tourists-key-points.component.css']
 })
 export class TouristsKeyPointsComponent implements OnInit{
-  tour: Tour | null = null;
-    keyPoints: KeyPoint[] = [];
+    tour: Tour | null = null;
+    keyPoints: KeyPoint[] = [];    
+    recommendedTours: Tour[] = [];
+    keyPointIds: number[] = [];
     selectedKeyPoint: KeyPoint | null = null;
     mapLongLat: [number, number];
     mapLocationAddress: string;
@@ -27,6 +29,8 @@ export class TouristsKeyPointsComponent implements OnInit{
     refreshEventsSubject: BehaviorSubject<number>;
     tourIdTemp: number = 0;
     areButtonsEnabled: boolean = true;
+    hasTourActive: boolean
+    activeTourId: number
     @ViewChild(MapComponent, { static: false }) mapComponent: MapComponent;
 
     public distance: number;
@@ -38,6 +42,7 @@ export class TouristsKeyPointsComponent implements OnInit{
     checkedBicycleRideDuration: boolean = false;
     checkedCarRideDuration: boolean = false;
     keyPointContainer: any;
+    tourContainer: any;
     constructor(
         private route: ActivatedRoute,
         private service: TourAuthoringService,
@@ -54,6 +59,9 @@ export class TouristsKeyPointsComponent implements OnInit{
     ngOnInit(): void {
         this.keyPointContainer = document.querySelector(
             ".key-point-cards-container",
+        );
+        this.tourContainer = document.querySelector(
+            ".tour-cards-container",
         );
         this.getKeyPoints();
         this.enableButtons();
@@ -105,6 +113,8 @@ export class TouristsKeyPointsComponent implements OnInit{
                 this.service.getKeyPoints(tourId).subscribe({
                     next: (result: KeyPoint[]) => {
                         this.keyPoints = result;
+
+                        this.getRecommendedTours(this.keyPoints);
 
                         if (this.keyPoints.length < 2) {
                             this.walkingDuration = 0;
@@ -335,4 +345,51 @@ export class TouristsKeyPointsComponent implements OnInit{
             }
         }
     }
+
+    getRecommendedTours(keyPoints: KeyPoint[]): void{
+        if(keyPoints){
+            for(let kp of keyPoints){
+                if(kp.id){
+                    this.keyPointIds.push(kp.id);
+                }
+            }
+
+            this.service.getRecommendedTours(this.keyPointIds).subscribe({
+                next: (result: Tour[]) => {
+                    this.recommendedTours = result;
+                },
+                error: () => {},
+            })
+        }
+    } 
+
+    currentTourIndex: number = 0;
+
+    // Moram namestiti da kada klikne levo a nema vise gde da ide levo ne racuna mu currentTourIndex, jer onda kada treba da ide desno
+    // moracu da kliknem jedanput vise zbog tog jednog ulevo
+    scrollToNextTourCard(): void {
+        this.currentTourIndex++;
+        if (this.currentTourIndex >= this.tourContainer.children.length) {
+          this.currentTourIndex = 0;
+        }
+        const nextCardWidth = this.tourContainer.children[this.currentTourIndex].clientWidth;
+        this.scrollTo(this.tourContainer.scrollLeft + nextCardWidth);
+    }
+      
+    scrollToPrevTourCard(): void {
+        this.currentTourIndex--;
+        if (this.currentTourIndex < 0) {
+          this.currentTourIndex = this.tourContainer.children.length - 1;
+        }
+        const prevCardWidth = this.tourContainer.children[this.currentTourIndex].clientWidth;
+        this.scrollTo(this.tourContainer.scrollLeft - prevCardWidth);
+    }
+      
+    private scrollTo(scrollLeft: number): void {
+        this.tourContainer.scrollTo({
+          left: scrollLeft,
+          behavior: 'smooth',
+        });
+    }
+      
 }

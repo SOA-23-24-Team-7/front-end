@@ -1,0 +1,18 @@
+<div class="tour-card">
+  <img class="tour-image" [src]="tourImage"/>
+  <div class="tour-card-details">
+      <div class="tour-name">{{ tour.name }}</div>
+      <div class="tour-tags">
+          <div class="tour-tag" *ngFor="let tag of tour.tags">{{ tag }}</div>
+      </div>
+      <div>
+          Difficulty: <b>{{ tour.difficulty }}</b>
+          <br>
+          Distance: <b>{{ tour.distance }}</b>
+      </div>
+      <button class="btn key-points-button" (click)="ShowKeyPoints()">Show key points</button>
+      <button class="btn search-button" (click)="StartTour()" *ngIf="!hasActiveTour">Start tour</button>
+      <button class="btn search-button" (click)="ContinueTour()" *ngIf="hasActiveTour && isTourActive">Continue tour</button>
+      <button class="btn search-button" *ngIf="hasActiveTour && !isTourActive" disabled>Start tour</button>
+  </div>
+</div>

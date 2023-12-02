@@ -93,6 +93,26 @@
               </button>
           </div>
       </div>
+      <div *ngIf="areButtonsEnabled && keyPoints.length > 0">
+        <h1 id="recTourH1">Recommended tours</h1>
+        <div class="tour-cards-container">
+          
+          <div class="tour-list-cards-button" id="prev-button" (click)="scrollToPrevTourCard()">
+            <div class="tour-triangle-left"></div>
+          </div>
+
+          <div class="tour-slider">
+            <div class="tour-card">
+                <xp-recommended-tour-card [tour]="recommendedTours[currentTourIndex]"></xp-recommended-tour-card>
+            </div>
+          </div>
+
+          <div class="tour-list-cards-button" id="next-button" (click)="scrollToNextTourCard()">
+            <div class="tour-triangle-right"></div>
+          </div>
+
+        </div>
+      </div>
   </div>
   <hr />
   <div class="cards">

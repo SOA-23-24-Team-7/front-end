@@ -25,6 +25,9 @@ import { TouristsTourComponent } from './tourists-tour/tourists-tour.component';
 import { AddTouristsTourFormComponent } from './add-tourists-tour-form/add-tourists-tour-form.component';
 import { EditTouristsTourFormComponent } from './edit-tourists-tour-form/edit-tourists-tour-form.component';
 import { TouristsKeyPointsComponent } from './tourists-key-points/tourists-key-points.component';
+import { TourExecutionModule } from "../tour-execution/tour-execution.module";
+import { RecommendedTourCardComponent } from './recommended-tour-card/recommended-tour-card.component';
+import { RecommendedTourCardsComponent } from './recommended-tour-cards/recommended-tour-cards.component';
 
 @NgModule({
     declarations: [
@@ -44,6 +47,8 @@ import { TouristsKeyPointsComponent } from './tourists-key-points/tourists-key-p
         AddTouristsTourFormComponent,
         EditTouristsTourFormComponent,
         TouristsKeyPointsComponent,
+        RecommendedTourCardComponent,
+        RecommendedTourCardsComponent,
     ],
     imports: [
         CommonModule,
@@ -54,6 +59,7 @@ import { TouristsKeyPointsComponent } from './tourists-key-points/tourists-key-p
         RouterModule,
         FontAwesomeModule,
         MatDialogModule,
+        //TourExecutionModule
     ],
     exports: [
         TourComponent,

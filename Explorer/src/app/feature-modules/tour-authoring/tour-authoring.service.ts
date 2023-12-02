@@ -1,4 +1,4 @@
-import { HttpClient } from "@angular/common/http";
+import { HttpClient, HttpParams } from "@angular/common/http";
 import { Injectable } from "@angular/core";
 import { PagedResults } from "src/app/shared/model/paged-results.model";
 import { Tour } from "./model/tour.model";
@@ -17,6 +17,7 @@ import { Person } from "../stakeholder/model/person.model";
 })
 export class TourAuthoringService {
     constructor(private http: HttpClient) {}
+    
     getTours(): Observable<PagedResults<Tour>> {
         return this.http.get<PagedResults<Tour>>(
             "https://localhost:44333/api/tour/authors",
@@ -217,4 +218,13 @@ export class TourAuthoringService {
             environment.apiHost + "people/person/" + userId,
         );
     }
+
+    getRecommendedTours(keyPointIds: number[]): Observable<Tour[]> {
+        const params = new HttpParams().set('keyPointIds', keyPointIds.join(','));
+
+        return this.http.get<Tour[]>(
+            environment.apiHost + 'tour/recommended/' + params
+        );
+    }
+    
 }

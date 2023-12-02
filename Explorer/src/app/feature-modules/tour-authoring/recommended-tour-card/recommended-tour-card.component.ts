@@ -1,18 +1,21 @@
-import { Component, Input, OnInit } from '@angular/core';
-import { Tour } from '../../tour-authoring/model/tour.model';
+import { Component, Input } from '@angular/core';
+import { MatDialog } from '@angular/material/dialog';
 import { Router } from '@angular/router';
-import { TourExecutionService } from '../tour-execution.service';
 import { environment } from 'src/env/environment';
-import { MatDialog } from "@angular/material/dialog";
-import { KeyPointsViewComponent } from "../key-points-view/key-points-view.component";
+import { KeyPointsViewComponent } from '../../tour-execution/key-points-view/key-points-view.component';
+import { TourExecutionService } from '../../tour-execution/tour-execution.service';
+import { Tour } from '../model/tour.model';
 
 @Component({
-    selector: "xp-purchased-tour-card",
-    templateUrl: "./purchased-tour-card.component.html",
-    styleUrls: ["./purchased-tour-card.component.css"],
+  selector: 'xp-recommended-tour-card',
+  templateUrl: './recommended-tour-card.component.html',
+  styleUrls: ['./recommended-tour-card.component.css']
 })
-export class PurchasedTourCardComponent implements OnInit{
-  @Input() tour: Tour;
+export class RecommendedTourCardComponent {
+  @Input() tour: Tour = {
+    name: "name",
+    description: "desc"
+  };
   @Input() hasActiveTour: boolean;
   @Input() activeTourId: number;
   tourImage: string

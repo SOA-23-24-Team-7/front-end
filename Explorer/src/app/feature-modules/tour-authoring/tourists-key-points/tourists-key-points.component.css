@@ -12,6 +12,7 @@ mat-card img {
   display: flex;
   align-items: center;
 }
+
 .buttons-container {
   display: flex;
   flex-direction: column;
@@ -31,9 +32,11 @@ mat-card img {
   display: flex;
   flex-direction: column;
 }
+
 .cards {
   margin-top: 3rem;
 }
+
 .row-1 {
   display: flex;
   justify-content: center;
@@ -41,6 +44,7 @@ mat-card img {
   border-radius: 1rem;
   box-shadow: 0 0 1rem rgba(var(--clr-outline-contrast), 0.2);
 }
+
 .row-2 {
   display: flex;
   justify-content: center;
@@ -141,11 +145,13 @@ mat-card img {
   font-weight: 500;
   font-size: 1.25rem;
 }
+
 .enable-text {
   color: rgb(var(--clr-text));
   font-family: var(--fnt-body);
   font-weight: 500;
 }
+
 .checkbox-group div {
   display: flex;
   align-items: center;
@@ -170,4 +176,66 @@ h2 {
   color: rgb(var(--clr-text));
   flex-direction: column;
   justify-content: space-between;
+}
+
+.tour-cards-container {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  width: 30rem;
+  overflow-x: hidden;
+  scroll-behavior: smooth;
+}
+
+.tour-slider {
+  display: flex;
+  transition: transform 0.5s ease-in-out;
+  align-items: center;
+}
+
+.tour-list-cards-button:hover .tour-triangle-left {
+  border-color: transparent rgba(var(--clr-primary-500), 0.95) transparent
+      transparent;
+}
+
+.tour-list-cards-button:hover .tour-triangle-right {
+  border-color: transparent transparent transparent
+      rgba(var(--clr-primary-500), 0.95);
+}
+
+.tour-triangle-left,
+.tour-triangle-right {
+  width: 0;
+  height: 0;
+  border-style: solid;
+}
+
+.tour-triangle-left {
+  border-width: 2rem 2.2rem 2rem 0;
+  border-color: transparent rgba(var(--clr-primary-500), 1) transparent
+      transparent;
+}
+
+.tour-triangle-right {
+  border-width: 2rem 0 2rem 2.2rem;
+  border-color: transparent transparent transparent
+      rgba(var(--clr-primary-500), 1);
+}
+
+.tour-list-cards-button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  margin: 1.5rem;
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+.tour-card {
+  flex: 0 0 100%;
+}
+
+#recTourH1 {
+  margin-left: 5rem;
 }
