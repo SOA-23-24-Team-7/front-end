@@ -21,6 +21,8 @@ import { ShoppingCart } from '../../feature-modules/marketplace/model/shopping-c
 import { OrderItem } from '../../feature-modules/marketplace/model/order-item';
 import { TourAuthoringService } from '../../feature-modules/tour-authoring/tour-authoring.service';
 import { KeyPoint } from '../../feature-modules/tour-authoring/model/key-point.model';
+import { MatDialog } from '@angular/material/dialog';
+import { EditTourFormComponent } from 'src/app/feature-modules/tour-authoring/edit-tour-form/edit-tour-form.component';
 
 
 @Component({
@@ -48,12 +50,15 @@ export class TourCardViewComponent {
   constructor(
     private authService: AuthService, 
     private marketplaceService: MarketplaceService,
-    private tourAuthoringService: TourAuthoringService) {}
+    private tourAuthoringService: TourAuthoringService,
+    public dialogRef: MatDialog) {}
 
   ngOnInit(): void {
     this.authService.user$.subscribe(user => {
       this.user = user;
-      this.getShoppingCart();
+      if (user.role.toLocaleLowerCase() === 'tourist') {
+        this.getShoppingCart();
+      }
     });
   }
 
@@ -169,5 +174,14 @@ export class TourCardViewComponent {
       },
     })
   }
-}
 
+  onEditClicked(): void {
+    //this.shouldEdit = false;
+    //this.shouldRenderTourForm = true;
+    this.dialogRef.open(EditTourFormComponent, {
+      data: this.tour,
+      
+    });
+  }
+  
+}
