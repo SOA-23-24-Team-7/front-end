@@ -4,7 +4,7 @@
             <fa-icon class="edit-x" [icon]="faXmark" (click)="onClose()"/>
             <div class="edit-title">Edit tour</div>
         </div>
-        <form class="edit-form">
+        <form class="edit-form" [formGroup]="editTourForm">
             <div class="edit-label">Name:</div>
             <input class="edit-input" type="text" placeholder="Name" formControlName="name"/>
             <div class="edit-label">Description:</div>

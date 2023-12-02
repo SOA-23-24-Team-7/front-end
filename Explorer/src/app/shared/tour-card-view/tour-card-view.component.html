@@ -12,7 +12,7 @@
             </div>
             <div class="tour-actions" *ngIf="user && user.role === 'author'">
                 <fa-icon class="tour-action" *ngIf="tour.status == 2 || tour.status == 0" [icon]="faTrash"/>
-                <fa-icon class="tour-action" *ngIf="tour.status == 2" [icon]="faPen"/>
+                <fa-icon class="tour-action" *ngIf="tour.status == 2 || tour.status == 0" (click)="onEditClicked()" [icon]="faPen"/>
                 <fa-icon class="tour-action" [icon]="faPersonHiking" [routerLink]="['/tours/equipment', tour.id]"/>
                 <fa-icon class="tour-action" [icon]="faMapLocation" [routerLink]="['/tour', tour.id, 'key-points']"/>
                 <fa-icon class="tour-action" *ngIf="tour.status == 2 || tour.status == 0" [icon]="faShareNodes" (click)="onPublishClicked(tour)"/>
