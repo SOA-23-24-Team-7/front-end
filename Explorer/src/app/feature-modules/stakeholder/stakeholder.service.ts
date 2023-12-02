@@ -17,6 +17,7 @@ import { Following } from "./model/following.model";
 import { FollowerCreate } from "./model/follower-create.model";
 import { UserFollow } from "./model/user-follow.model";
 import { ShoppingNotification } from "./model/shopping-notification.model";
+import { Record } from "./model/record.model";
 
 @Injectable({
     providedIn: "root",
@@ -236,6 +237,12 @@ export class StakeholderService {
             environment.apiHost +
                 "shoppingNotifications/set-seen/" +
                 notificationId,
+        );
+    }
+
+    getTouristsPaymentHistory(): Observable<PagedResults<Record>> {
+        return this.http.get<PagedResults<Record>>(
+            environment.apiHost + "tourist/record",
         );
     }
 }

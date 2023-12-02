@@ -359,12 +359,17 @@
                         />
                         <div class="navbar-submenu-item-text">Ratings</div>
                     </div>
-                    <div class="navbar-submenu-item" [routerLink]="['active-encounters']">
+                    <div
+                        class="navbar-submenu-item"
+                        [routerLink]="['active-encounters']"
+                    >
                         <fa-icon
                             class="navbar-submenu-item-icon"
                             [icon]="faCircleQuestion"
                         />
-                        <div class="navbar-submenu-item-text">Active Encounters</div>
+                        <div class="navbar-submenu-item-text">
+                            Active Encounters
+                        </div>
                     </div>
                 </div>
                 <div
@@ -512,6 +517,19 @@
                         />
                         <div class="navbar-submenu-item-text">
                             My notifications
+                        </div>
+                    </div>
+                    <div
+                        class="navbar-submenu-item"
+                        [routerLink]="['payment-history']"
+                        *ngIf="user && user.role == 'tourist'"
+                    >
+                        <fa-icon
+                            class="navbar-submenu-item-icon"
+                            [icon]="faCoins"
+                        />
+                        <div class="navbar-submenu-item-text">
+                            Payments history
                         </div>
                     </div>
                     <div
