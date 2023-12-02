@@ -21,13 +21,15 @@ export class AddTourFormComponent implements OnInit{
     name:"",
     description: "",
     difficulty: parseInt("0"),
-    tags: []
+    tags: [],
+    price: parseInt("0"),
   };
   addTourForm = new FormGroup({
     name: new FormControl('',[Validators.required]),
     description: new FormControl('',[Validators.required]),
     difficulty: new FormControl('',[Validators.required]),
-    tags: new FormControl([] as string[], [Validators.required])
+    tags: new FormControl([] as string[], [Validators.required]),
+    price: new FormControl('',[Validators.required]),
   });
   ngOnInit() {
     
@@ -59,7 +61,8 @@ export class AddTourFormComponent implements OnInit{
       name: this.addTourForm.value.name || "",
       description: this.addTourForm.value.description || "",
       difficulty: parseInt(this.addTourForm.value.difficulty || "0"),
-      tags: this.addTourForm.value.tags ? this.addTourForm.value.tags : []
+      tags: this.addTourForm.value.tags ? this.addTourForm.value.tags : [],
+      price: parseInt(this.addTourForm.value.price || "0"),
     };
     this.service.addTour(tour).subscribe({
       next: () => { 

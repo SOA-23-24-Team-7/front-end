@@ -90,16 +90,18 @@ export class ShoppingCartComponent {
         });
     }
     checkout(): void {
+        var totalPrice=this.shoppingCart.totalPrice
+        
         this.service.deleteShoppingKart(this.shoppingCart.id).subscribe({
             next: () => {
-                alert("You have successfully bought tours!");
                 this.shoppingCart = {};
                 this.service.addShoppingCart(this.shoppingCart).subscribe({
                     next: async (result: ShoppingCart) => {
                         this.shoppingCart = result;
                         for (let tour of this.data) {
-                            const result = await this.service.addToken(tour.id,this.shoppingCart.touristId as number);
+                            const result = await this.service.addToken(tour.id,this.shoppingCart.touristId as number,totalPrice as number);
                             console.log(result);
+                            alert("You have successfully bought tours!");
                         }
                         this.dialogRef.closeAll();
                     },
