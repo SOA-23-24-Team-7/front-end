@@ -35,6 +35,7 @@
         </div>
         <div
             class="tab"
+            *ngIf="user.role === 'tourist'"
             [ngClass]="{
                 'selected-tab': selectedTab === Tab.SHOPPINGNOTIFICATIONS
             }"
