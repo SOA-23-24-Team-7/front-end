@@ -80,7 +80,7 @@
                                 +
                             </div>
                         </div>
-                        <div class="row wallet">
+                        <div class="row wallet" *ngIf="user.role=='tourist'">
                             <div>
                                 <span class="count">{{ wallet.adventureCoin }}</span>
                                 Action Coins

@@ -80,6 +80,9 @@ export class UserProfileComponent implements OnInit {
         });
     }
     loadWallet() {
+        if(this.user.role !== 'tourist'){
+            return;
+        }
         this.service.getTouristWallet().subscribe(result => {
             this.wallet = result;
         })
