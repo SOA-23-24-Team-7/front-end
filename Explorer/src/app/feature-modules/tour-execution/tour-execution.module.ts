@@ -12,6 +12,7 @@ import { FontAwesomeModule } from "@fortawesome/angular-fontawesome";
 import { TourAuthoringModule } from "../tour-authoring/tour-authoring.module";
 import { TourExecutionInfoComponent } from "./tour-execution-info/tour-execution-info.component";
 import { FormsModule, ReactiveFormsModule } from "@angular/forms";
+import { CampaignCardComponent } from './campaign-card/campaign-card.component';
 
 @NgModule({
     declarations: [
@@ -23,6 +24,7 @@ import { FormsModule, ReactiveFormsModule } from "@angular/forms";
         TourExecutionHistoryComponent,
         KeyPointsViewComponent,
         TourExecutionInfoComponent,
+        CampaignCardComponent,
     ],
     imports: [
         CommonModule,

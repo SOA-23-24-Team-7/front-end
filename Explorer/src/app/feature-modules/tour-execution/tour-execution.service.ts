@@ -8,6 +8,7 @@ import { environment } from "src/env/environment";
 import { TourExecutionSession } from "./model/tour-execution-session-model";
 import { TourExecutionSessionInfo } from "./model/tour-execution-session-info.model";
 import { CampaignCreate } from "./model/campaign-create.model";
+import { Campaign } from "./model/campaign-info.model";
 
 @Injectable({
     providedIn: "root",
@@ -18,6 +19,12 @@ export class TourExecutionService {
     getTours(): Observable<Tour[]> {
         return this.http.get<Tour[]>(
             environment.apiHost + "tourexecution/tourexecution/purchasedtours",
+        );
+    }
+
+    getCampaigns(): Observable<Campaign[]> {
+        return this.http.get<Campaign[]>(
+            environment.apiHost + "tourist/campaign/tourist-campaigns",
         );
     }
 

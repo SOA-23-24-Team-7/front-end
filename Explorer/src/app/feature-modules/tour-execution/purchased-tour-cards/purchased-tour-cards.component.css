@@ -19,6 +19,15 @@ tako da bude pristupacan iz bilo kog dela
         rgba(var(--clr-primary-500), 0.95);
 }
 
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+    color: rgba(var(--clr-text), 1);
+}
+
 .list-cards-button {
     display: flex;
     align-items: center;

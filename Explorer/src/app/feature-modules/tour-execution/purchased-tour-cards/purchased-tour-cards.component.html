@@ -24,7 +24,6 @@
         <p>Describe the campaign</p>
         <input type="text" formControlName="campaignDescription" />
     </form>
-
     <div>
         <li *ngFor="let t of selectedTours">
             {{ t.name }}
@@ -37,4 +36,19 @@
     >
         Create campaign
     </button>
+</div>
+<h1>My campaigns</h1>
+<div class="tour-cards-container">
+    <div class="list-cards-button" id="prev-button">
+        <div class="triangle-left"></div>
+    </div>
+
+    <xp-campaign-card
+        *ngFor="let c of campaigns"
+        [campaign]="c"
+    ></xp-campaign-card>
+
+    <div class="list-cards-button" id="next-button">
+        <div class="triangle-right"></div>
+    </div>
 </div>

@@ -7,6 +7,7 @@ import { TourExecutionSession } from "../model/tour-execution-session-model";
 import { CampaignCreate } from "../model/campaign-create.model";
 import { AuthService } from "src/app/infrastructure/auth/auth.service";
 import { FormControl, FormGroup, Validators } from "@angular/forms";
+import { Campaign } from "../model/campaign-info.model";
 
 @Component({
     selector: "xp-purchased-tour-cards",
@@ -15,6 +16,7 @@ import { FormControl, FormGroup, Validators } from "@angular/forms";
 })
 export class PurchasedToursComponent implements OnInit {
     purchasedTours: Tour[] = [];
+    campaigns: Campaign[] = [];
     hasTourActive: boolean;
     activeTourId: number;
     selectedTours: Tour[] = [];
@@ -34,11 +36,22 @@ export class PurchasedToursComponent implements OnInit {
         this.authService.user$.subscribe(user => {
             this.userId = user.id;
         });
+        this.getCampaigns();
     }
     getTours() {
         this.tourExecutionService.getTours().subscribe({
             next: (result: Tour[]) => {
                 this.purchasedTours = result;
+            },
+            error: (err: any) => {
+                console.log(err);
+            },
+        });
+    }
+    getCampaigns() {
+        this.tourExecutionService.getCampaigns().subscribe({
+            next: (result: Campaign[]) => {
+                this.campaigns = result;
             },
             error: (err: any) => {
                 console.log(err);
