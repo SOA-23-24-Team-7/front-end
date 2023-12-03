@@ -13,7 +13,7 @@
     </div>
     <div class="map-container">
         <xp-map [isTourExecutionMap]="true" (newPositionEvent)="checkKeyPointCompletion()"
-            [executingTourId]="session.tourId" [startPosition]="touristPosition"
+            [executingTourId]="session.tourId" [isCampaign]="session.isCampaign" [startPosition]="touristPosition"
             [nextKeyPointId]="session.nextKeyPointId" (keyPointClickEvent)="getKeyPoint($event)"></xp-map>
     </div>
 </div>

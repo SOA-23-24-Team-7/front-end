@@ -19,6 +19,7 @@ export class PurchasedToursComponent implements OnInit {
     campaigns: Campaign[] = [];
     hasTourActive: boolean;
     activeTourId: number;
+    isCampaign: boolean
     selectedTours: Tour[] = [];
     selectedTourIds: number[] = [];
     userId: number;
@@ -67,6 +68,7 @@ export class PurchasedToursComponent implements OnInit {
                 } else {
                     this.hasTourActive = true;
                     this.activeTourId = result.tourId;
+                    this.isCampaign = result.isCampaign
                 }
             },
         });

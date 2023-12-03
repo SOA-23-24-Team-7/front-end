@@ -9,6 +9,7 @@ import { TourExecutionSession } from "./model/tour-execution-session-model";
 import { TourExecutionSessionInfo } from "./model/tour-execution-session-info.model";
 import { CampaignCreate } from "./model/campaign-create.model";
 import { Campaign } from "./model/campaign-info.model";
+import { TourExecutionStart } from "./model/tour-execution-start-model";
 
 @Injectable({
     providedIn: "root",
@@ -38,18 +39,17 @@ export class TourExecutionService {
             environment.apiHost + "tourexecution/tourexecution/live",
         );
     }
-    startTour(tourId: number): Observable<TourExecutionSession> {
+    startTour(execution: TourExecutionStart): Observable<TourExecutionSession> {
         return this.http.post<TourExecutionSession>(
-            environment.apiHost + "tourexecution/tourexecution/" + tourId,
-            null,
+            environment.apiHost + "tourexecution/tourexecution",
+            execution
         );
     }
-    abandonTour(tourId: number): Observable<TourExecutionSession> {
+    abandonTour(execution: TourExecutionStart): Observable<TourExecutionSession> {
         return this.http.put<TourExecutionSession>(
             environment.apiHost +
-                "tourexecution/tourexecution/abandoning?tourId=" +
-                tourId,
-            null,
+                "tourexecution/tourexecution/abandoning",
+                execution
         );
     }
     addTouristPosition(
@@ -83,12 +83,14 @@ export class TourExecutionService {
 
     checkKeyPointCompletion(
         tourId: number,
+        isCampaign: boolean,
         touristPosition: TouristPosition,
     ): Observable<TourExecutionSession> {
         return this.http.put<TourExecutionSession>(
             environment.apiHost +
                 "tourexecution/tourexecution/" +
                 tourId +
+                "/"+isCampaign+
                 "/keypoint",
             touristPosition,
         );
@@ -104,6 +106,11 @@ export class TourExecutionService {
         return this.http.post<CampaignCreate>(
             environment.apiHost + "tourist/campaign",
             campaign,
+        );
+    }
+    getCampaign(id: number): Observable<Tour> {
+        return this.http.get<Tour>(
+            environment.apiHost + "tourist/campaign?campaignId="+id
         );
     }
 }

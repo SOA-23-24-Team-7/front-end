@@ -5,6 +5,8 @@ import { TourExecutionService } from "../tour-execution.service";
 import { environment } from "src/env/environment";
 import { MatDialog } from "@angular/material/dialog";
 import { KeyPointsViewComponent } from "../key-points-view/key-points-view.component";
+import { TourExecutionStart } from "../model/tour-execution-start-model";
+import { faL } from "@fortawesome/free-solid-svg-icons";
 
 @Component({
     selector: "xp-purchased-tour-card",
@@ -12,9 +14,11 @@ import { KeyPointsViewComponent } from "../key-points-view/key-points-view.compo
     styleUrls: ["./purchased-tour-card.component.css"],
 })
 export class PurchasedTourCardComponent implements OnInit {
+    execution: TourExecutionStart = {tourId: 0, isCampaign: false}
     @Input() tour: Tour;
     @Input() hasActiveTour: boolean;
     @Input() activeTourId: number;
+    @Input() isCampaign: boolean;
     @Output() onSelected = new EventEmitter<any>();
     tourImage: string;
     isTourActive: boolean = false;
@@ -29,8 +33,10 @@ export class PurchasedTourCardComponent implements OnInit {
             environment.imageHost + this.tour.keyPoints![0].imagePath;
     }
     StartTour() {
-        this.service.startTour(this.tour.id!).subscribe(() => {
-            this.router.navigate(["/tour-executing/" + this.tour.id]);
+        this.execution.tourId = this.tour.id!
+        this.execution.isCampaign = false
+        this.service.startTour(this.execution).subscribe(() => {
+            this.router.navigate(["/tour-executing/" + this.tour.id, {isCampaign: false}]);
         });
     }
     ContinueTour() {
@@ -38,7 +44,7 @@ export class PurchasedTourCardComponent implements OnInit {
     }
     CheckIfTourIsActive() {
         if (this.hasActiveTour) {
-            if (this.tour.id == this.activeTourId) {
+            if (this.tour.id == this.activeTourId && !this.isCampaign) {
                 this.isTourActive = true;
             }
         }

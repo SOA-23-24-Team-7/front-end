@@ -7,5 +7,12 @@
             <br />
             Distance: <b>{{ campaign.distance }}</b>
         </div>
+        <button
+            class="btn search-button"
+            (click)="StartCampaign()"
+            *ngIf="!hasActiveCampaign"
+        >
+            Start Campaign
+        </button>
     </div>
 </div>
