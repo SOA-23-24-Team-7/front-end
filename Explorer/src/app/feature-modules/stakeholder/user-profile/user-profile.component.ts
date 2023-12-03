@@ -13,6 +13,7 @@ import { FollowerSearchDialogComponent } from "../follower-search-dialog/followe
 import { TourExecutionHistoryComponent } from "../../tour-execution/tour-execution-history/tour-execution-history.component";
 import * as DOMPurify from "dompurify";
 import { marked } from "marked";
+import { Wallet } from "../model/wallet.model";
 
 @Component({
     selector: "xp-user-profile",
@@ -30,6 +31,7 @@ export class UserProfileComponent implements OnInit {
     showFollowers: boolean = false;
     showFollowings: boolean = false;
     bioMarkdown: string;
+    wallet: Wallet;
 
     constructor(
         private authService: AuthService,
@@ -56,6 +58,7 @@ export class UserProfileComponent implements OnInit {
             });
             this.loadFollowers();
             this.loadFollowings();
+            this.loadWallet();
         });
     }
     loadFollowings() {
@@ -75,6 +78,11 @@ export class UserProfileComponent implements OnInit {
                 item.followingStatus = true;
             });
         });
+    }
+    loadWallet() {
+        this.service.getTouristWallet().subscribe(result => {
+            this.wallet = result;
+        })
     }
     openFollowersDialog(): void {
         const dialogRef = this.dialog.open(FollowDialogComponent, {

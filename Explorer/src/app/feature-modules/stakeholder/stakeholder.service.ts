@@ -18,6 +18,7 @@ import { FollowerCreate } from "./model/follower-create.model";
 import { UserFollow } from "./model/user-follow.model";
 import { ShoppingNotification } from "./model/shopping-notification.model";
 import { Record } from "./model/record.model";
+import { Wallet } from "./model/wallet.model";
 
 @Injectable({
     providedIn: "root",
@@ -243,6 +244,12 @@ export class StakeholderService {
     getTouristsPaymentHistory(): Observable<PagedResults<Record>> {
         return this.http.get<PagedResults<Record>>(
             environment.apiHost + "tourist/record",
+        );
+    }
+
+    getTouristWallet(): Observable<Wallet> {
+        return this.http.get<Wallet>(
+            environment.apiHost + "wallet"
         );
     }
 }
