@@ -111,15 +111,15 @@ export class TourComponent implements OnInit {
         lengthDropped: true
     }
     this.slider = document.getElementById("slider");
-    this.getPublicFacilities();
-    this.getPublicKeyPoints();
+    // this.getPublicFacilities();
+    // this.getPublicKeyPoints();
     this.resetMinPrice();
     this.resetMaxPrice();
     this.resetMinDuration();
     this.resetMaxDuration();
     this.resetMinLength();
     this.resetMaxLength();
-    this.onSearch();
+    // this.onSearch();
   }
 
   getTourStatusText(status: TourStatus | undefined): string {
@@ -165,7 +165,7 @@ export class TourComponent implements OnInit {
   getTours(): void {
     this.tourAuthoringService.getTours().subscribe({
       next: (result: PagedResults<Tour>) =>{
-        this.tour = result.results;
+        this.tours = result.results;
       },
       error:(err: any) => {
         console.log(err);
@@ -197,6 +197,7 @@ export class TourComponent implements OnInit {
       data: this.tour,
       
   });
+  
   }
   onArchiveClicked(tour: Tour): void{
     this.tourAuthoringService.archiveTour(tour).subscribe({

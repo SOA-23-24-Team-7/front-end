@@ -1,4 +1,5 @@
 .keypoint-modal {
+    color: rgba(var(--clr-text), 1);
     position: fixed;
     top: 0;
     left: 0;
@@ -8,25 +9,60 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    background-color: rgba(0, 0, 0, 0.7);
-    animation: fadeIn 0.5s ease-in-out;
+    visibility: hidden;
+    opacity: 0;
 }
 
 .kp {
     display: flex;
+    background-color: rgba(var(--clr-background-secondary), 1);
     flex-direction: column;
     align-items: center;
-    padding-inline: 2rem;
-    padding-block: 1.5rem;
-    background-color: rgba(var(--clr-background, 1));
+    padding: 2rem;
     border-radius: 1rem;
     width: 22rem;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+    animation: fadeIn 1s ease-in-out;
 }
 
 .keypoint-head {
-    position: relative;
     width: 100%;
     display: flex;
     align-items: center;
     justify-content: center;
+    margin-bottom: 1rem;
+}
+
+.keypoint-image {
+    width: 100%;
+    height: auto;
+    max-height: 200px;
+    object-fit: cover;
+    border-radius: 0.5rem;
+}
+
+.keypoint-description {
+    margin-top: 1rem;
+    text-align: center;
+}
+
+.keypoint-secret {
+    font-weight: bold;
+}
+
+.keypoint-location {
+    margin-top: 1rem;
+    font-style: italic;
+    background-color: rgba(var(--clr-background-secondary), 1);
+}
+
+.delayed-fade-in {
+    animation: fadeIn 0.5s ease-in-out 0.1s forwards;
+}
+
+@keyframes fadeIn {
+    to {
+        visibility: visible;
+        opacity: 1;
+    }
 }
