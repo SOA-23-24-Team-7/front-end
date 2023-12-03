@@ -1,43 +1,39 @@
-import {
-    Component,
-    EventEmitter,
-    OnInit,
-    Output,
-    ViewChild,
-} from "@angular/core";
-import { TourAuthoringService } from "../tour-authoring.service";
-import { KeyPoint } from "../model/key-point.model";
-import { ActivatedRoute, ParamMap } from "@angular/router";
-import { environment } from "src/env/environment";
-import { MapService } from "src/app/shared/map/map.service";
+import { Component, OnInit, ViewChild } from '@angular/core';
+import { FormGroup, FormControl } from '@angular/forms';
+import { MatDialog } from '@angular/material/dialog';
+import { ActivatedRoute, Router, ParamMap } from '@angular/router';
+import { BehaviorSubject } from 'rxjs';
+import { MapComponent } from 'src/app/shared/map/map.component';
+import { environment } from 'src/env/environment';
+import { KeyPoint } from '../model/key-point.model';
+import { Tour, TourStatus } from '../model/tour.model';
+import { TourDuration, TransportType } from '../model/tourDuration.model';
+import { PublicKeyPointsComponent } from '../public-key-points/public-key-points.component';
+import { TourAuthoringService } from '../tour-authoring.service';
+import { PagedResults } from 'src/app/shared/model/paged-results.model';
 
-import { BehaviorSubject, Observable, Subject } from "rxjs";
-import { MAT_DIALOG_DATA, MatDialog } from "@angular/material/dialog";
-import { PublicKeyPointsComponent } from "../public-key-points/public-key-points.component";
-import { Router } from "@angular/router";
-import { MapComponent } from "src/app/shared/map/map.component";
-import { TourComponent } from "../tour/tour.component";
-import { PagedResults } from "src/app/shared/model/paged-results.model";
-import { Tour, TourStatus } from "../model/tour.model";
-import { FormControl, FormGroup } from "@angular/forms";
-import { TourDuration, TransportType } from "../model/tourDuration.model";
 
 @Component({
-    selector: "xp-key-points",
-    templateUrl: "./key-points.component.html",
-    styleUrls: ["./key-points.component.css"],
+  selector: 'xp-tourists-key-points',
+  templateUrl: './tourists-key-points.component.html',
+  styleUrls: ['./tourists-key-points.component.css']
 })
-export class KeyPointsComponent implements OnInit {
+export class TouristsKeyPointsComponent implements OnInit{
     tour: Tour | null = null;
-    keyPoints: KeyPoint[] = [];
+    keyPoints: KeyPoint[] = [];   
+    recommendedTours: Tour[] = [];
+    keyPointIds: number[] = [];
     selectedKeyPoint: KeyPoint | null = null;
     mapLongLat: [number, number];
     mapLocationAddress: string;
-    shouldRenderKeyPointForm: boolean = true;
+    shouldRenderKeyPointForm: boolean = false;
     shouldEdit: boolean = false;
     refreshEventsSubject: BehaviorSubject<number>;
     tourIdTemp: number = 0;
     areButtonsEnabled: boolean = true;
+    hasTourActive: boolean
+    activeTourId: number
+    
     @ViewChild(MapComponent, { static: false }) mapComponent: MapComponent;
 
     public distance: number;
@@ -49,10 +45,10 @@ export class KeyPointsComponent implements OnInit {
     checkedBicycleRideDuration: boolean = false;
     checkedCarRideDuration: boolean = false;
     keyPointContainer: any;
+    tourContainer: any;
     constructor(
         private route: ActivatedRoute,
         private service: TourAuthoringService,
-        private mapService: MapService,
         public dialogRef: MatDialog,
         private router: Router,
     ) {}
@@ -68,6 +64,9 @@ export class KeyPointsComponent implements OnInit {
             ".key-point-cards-container",
         );
         this.getKeyPoints();
+        this.tourContainer = document.querySelector(
+            ".tour-cards-container",
+        );
         this.enableButtons();
     }
 
@@ -75,7 +74,7 @@ export class KeyPointsComponent implements OnInit {
         this.service
             .getTour(this.tourIdTemp)
             .subscribe((tourResult: Tour | undefined) => {
-                if (tourResult?.status == TourStatus.Published) {
+                if (tourResult?.status == TourStatus.Ready) {
                     this.areButtonsEnabled = false;
                     this.getDurationInfo(tourResult);
                 } else {
@@ -100,6 +99,10 @@ export class KeyPointsComponent implements OnInit {
         });
     }
 
+
+
+   
+
     getKeyPoints(): void {
         this.route.paramMap.subscribe({
             next: (params: ParamMap) => {
@@ -117,6 +120,11 @@ export class KeyPointsComponent implements OnInit {
                 this.service.getKeyPoints(tourId).subscribe({
                     next: (result: KeyPoint[]) => {
                         this.keyPoints = result;
+                        //console.log(this.keyPoints);
+                        if(result){
+                            this.getRecommendedTours();
+                        }
+                        
 
                         if (this.keyPoints.length < 2) {
                             this.walkingDuration = 0;
@@ -139,6 +147,7 @@ export class KeyPointsComponent implements OnInit {
                                 },
                             });
                         }
+                        
                     },
                     error: () => {},
                 });
@@ -265,7 +274,7 @@ export class KeyPointsComponent implements OnInit {
             }
         }
 
-        this.router.navigate(["/tours"]);
+        this.router.navigate(["/tourists-tour"]);
     }
 
     calculateDurations(distance: number): void {
@@ -347,4 +356,58 @@ export class KeyPointsComponent implements OnInit {
             }
         }
     }
+
+    getRecommendedTours(): void{
+        this.keyPointIds.length = 0;
+
+        if(this.keyPoints){
+            for(let kp of this.keyPoints){
+                if(kp.id){
+                    this.keyPointIds.push(kp.id);
+                }
+            }
+        
+        if(this.keyPointIds.length > 0){
+            this.service.getRecommendedTours(this.keyPointIds).subscribe({
+                next: (result) => {
+                    console.log(result);
+                    this.recommendedTours = result.results;
+                },
+                error: () => {},
+            })
+        }else{
+            this.recommendedTours = [];
+        }
+        }
+    } 
+
+    currentTourIndex: number = 0;
+
+    // Moram namestiti da kada klikne levo a nema vise gde da ide levo ne racuna mu currentTourIndex, jer onda kada treba da ide desno
+    // moracu da kliknem jedanput vise zbog tog jednog ulevo
+    scrollToNextTourCard(): void {
+        this.currentTourIndex++;
+        if (this.currentTourIndex >= this.tourContainer.children.length) {
+          this.currentTourIndex = 0;
+        }
+        const nextCardWidth = this.tourContainer.children[this.currentTourIndex].clientWidth;
+        this.scrollTo(this.tourContainer.scrollLeft + nextCardWidth);
+    }
+      
+    scrollToPrevTourCard(): void {
+        this.currentTourIndex--;
+        if (this.currentTourIndex < 0) {
+          this.currentTourIndex = this.tourContainer.children.length - 1;
+        }
+        const prevCardWidth = this.tourContainer.children[this.currentTourIndex].clientWidth;
+        this.scrollTo(this.tourContainer.scrollLeft - prevCardWidth);
+    }
+      
+    private scrollTo(scrollLeft: number): void {
+        this.tourContainer.scrollTo({
+          left: scrollLeft,
+          behavior: 'smooth',
+        });
+    }
+      
 }

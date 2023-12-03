@@ -188,7 +188,7 @@ export class TourComponent implements OnInit {
     //this.shouldEdit = true;
     this.dialogRef.open(EditTourFormComponent, {
       data: tour,
-  });
+    });
   }
 
   onAddClicked(): void {
@@ -197,9 +197,9 @@ export class TourComponent implements OnInit {
     this.dialogRef.open(AddTourFormComponent, {
       data: this.tour,
       
-  });
-  
+    });   
   }
+
   onArchiveClicked(tour: Tour): void{
     this.tourAuthoringService.archiveTour(tour).subscribe({
       next: () => {
@@ -442,7 +442,5 @@ onSearch(): void {
       this.searchFilter.maxLength = "";
       var inputElement = document.getElementsByName('maxLength')[0] as HTMLInputElement;
       inputElement.value = "";
-  }
-
-
+  } 
 }

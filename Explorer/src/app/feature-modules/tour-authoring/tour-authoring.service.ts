@@ -1,4 +1,4 @@
-import { HttpClient } from "@angular/common/http";
+import { HttpClient, HttpParams } from "@angular/common/http";
 import { Injectable } from "@angular/core";
 import { PagedResults } from "src/app/shared/model/paged-results.model";
 import { Tour } from "./model/tour.model";
@@ -17,6 +17,7 @@ import { Person } from "../stakeholder/model/person.model";
 })
 export class TourAuthoringService {
     constructor(private http: HttpClient) {}
+    
     getTours(): Observable<PagedResults<Tour>> {
         return this.http.get<PagedResults<Tour>>(
             "https://localhost:44333/api/tour/authors",
@@ -26,6 +27,7 @@ export class TourAuthoringService {
     addTour(tour: Tour): Observable<Tour> {
         return this.http.post<Tour>(environment.apiHost + "tour", tour);
     }
+    
     deleteTour(id: number): Observable<Tour> {
         return this.http.delete<Tour>(environment.apiHost + "tour/" + id);
     }
@@ -182,9 +184,17 @@ export class TourAuthoringService {
             tour,
         );
     }
+    
     archiveTour(tour: Tour): Observable<Tour> {
         return this.http.put<Tour>(
             environment.apiHost + "tour/archive/" + tour.id,
+            tour,
+        );
+    }
+
+    markTourAsReady(tour: Tour): Observable<Tour> {
+        return this.http.put<Tour>(
+            environment.apiHost + "tour/markAsReady/" + tour.id,
             tour,
         );
     }
@@ -209,6 +219,20 @@ export class TourAuthoringService {
         );
     }
 
+    getRecommendedTours(keyPointIds: number[]): Observable<PagedResults<Tour>> {
+        const params = new HttpParams().set('keyPointIds', keyPointIds.join(','));
+
+        return this.http.get<PagedResults<Tour>>(
+            environment.apiHost + 'tour/recommended/' + params
+        );
+    }
+
+    getAllEquipment(): Observable<PagedResults<Equipment>>{
+        return this.http.get<PagedResults<Equipment>>(
+            environment.apiHost + "tourist/only_equipment"
+        );
+    }
+    
     searchTours(searchFilter: any): Observable<PagedResults<Tour>> {
         let query = `?page=${searchFilter.page}&pageSize=${searchFilter.pageSize}`
         query += searchFilter.minPrice >= 0 && searchFilter.minPrice !== "" ? `&minPrice=${searchFilter.minPrice}` : "";

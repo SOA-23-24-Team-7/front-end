@@ -1,0 +1,117 @@
+.tour-card {
+  background-color: rgba(var(--clr-background-secondary), 1);
+  border-radius: 1rem;
+  border: rgba(var(--clr-outline-contrast), 1) 1px solid;
+  border-radius: 1rem;
+  padding: 0.625rem;
+  width: 18rem;
+  margin: 1.3rem;
+  box-shadow: 0 0 1rem rgba(var(--clr-outline-contrast), 0.8);
+  position: relative;
+  color: rgb(var(--clr-text));
+}
+
+.tour-image {
+  height: 11rem;
+  width: 17rem;
+  border-radius: 1rem;
+  margin: 0 auto;
+  z-index: 1;
+  position: relative;
+  cursor: pointer;
+}
+
+.tour-card-details {
+  margin-top: 0.625rem;
+}
+
+.tour-name {
+  font-size: 1.3rem;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.tour-name:hover {
+  color: rgba(var(--clr-primary-500), 1);
+  text-decoration: underline;
+}
+
+.tour-tags {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.tour-tag {
+  background-color: rgba(var(--clr-neutral-300), 1);
+  padding: 5px 0.625rem;
+  border: 1px solid rgba(var(--clr-neutral-700));
+  border-radius: 5px;
+  display: flex;
+  margin-right: 5px;
+  white-space: nowrap;
+  flex: 0 1 auto;
+  margin-top: 0.5rem;
+  color: rgb(var(--clr-neutral-900));
+}
+
+.tour-review {
+  margin-right: 5px;
+}
+
+.tour-review-content {
+  display: flex;
+  align-items: center;
+  margin-top: 0.5rem;
+}
+
+.tour-review-icon {
+  height: 1.2rem;
+}
+
+.tour-price {
+  margin-top: 0.5rem;
+  font-size: 1.125rem;
+}
+
+.discount-badge {
+  top: 1rem;
+  left: 1rem;
+  background-color: rgba(var(--clr-accent-500), 1);
+  color: rgb(var(--clr-neutral-900));
+  padding: 5px 0.625rem;
+  border-radius: 0.625rem;
+  z-index: 2;
+  position: absolute;
+  font-weight: 600;
+}
+.tour-discounted-price {
+  color: rgba(var(--clr-accent-700), 1);
+  margin-top: 0.5rem;
+  font-size: 1.125rem;
+  font-weight: 600;
+  text-shadow: rgba(var(--clr-accent-500)) 1px 0 0.625rem;
+}
+
+.search-button {
+  border-radius: 2rem;
+  margin-left: auto;
+  height: 100%;
+  max-height: 100%;
+  font-size: 1.05rem;
+  font-weight: 500;
+}
+.key-points-button{
+  border-radius: 2rem;
+  margin-right: auto;
+  height: 100%;
+  max-height: 100%;
+  font-size: 1.05rem;
+  font-weight: 500;
+  float: left;
+}
+button:disabled,
+button[disabled]{
+border: 1px solid #999999;
+background-color: #cccccc;
+color: #666666;
+}

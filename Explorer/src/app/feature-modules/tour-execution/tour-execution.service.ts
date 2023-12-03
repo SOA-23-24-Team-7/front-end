@@ -26,15 +26,19 @@ export class TourExecutionService {
       environment.apiHost + "tourexecution/tourexecution/" + tourId
     );
   }
+
   getLiveTour(): Observable<TourExecutionSession>{
     return this.http.get<TourExecutionSession>(environment.apiHost + "tourexecution/tourexecution/live");
   }
+  
   startTour(tourId: number): Observable<TourExecutionSession> {
     return this.http.post<TourExecutionSession>(environment.apiHost + "tourexecution/tourexecution/" + tourId, null);
   }
+  
   abandonTour(tourId: number): Observable<TourExecutionSession> {
     return this.http.put<TourExecutionSession>(environment.apiHost + "tourexecution/tourexecution/abandoning?tourId="+tourId, null)
   }
+  
   addTouristPosition(touristPosition: TouristPosition): Observable<TouristPosition> {
     return this.http.post<TouristPosition>(environment.apiHost + 'tour-execution/tourists/position', touristPosition);
   }

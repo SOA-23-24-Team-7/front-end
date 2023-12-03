@@ -16,23 +16,26 @@ export class AddTourFormComponent implements OnInit{
     public dialog: MatDialogRef<AddTourFormComponent>,
     @Inject(MAT_DIALOG_DATA) public data: any
   ){}
+
   @Output() toursUpdated = new EventEmitter<null>();
+
   public tour: Tour = {
     name:"",
     description: "",
     difficulty: parseInt("0"),
     tags: []
   };
+
   addTourForm = new FormGroup({
     name: new FormControl('',[Validators.required]),
     description: new FormControl('',[Validators.required]),
     difficulty: new FormControl('',[Validators.required]),
     tags: new FormControl([] as string[], [Validators.required])
   });
+
   ngOnInit() {
     
   }
- 
 
   addTag(tag: string): void {
     const tagArray = this.addTourForm.get('tags');
@@ -53,6 +56,7 @@ export class AddTourFormComponent implements OnInit{
       tagArray.setValue(tags);
     }
   }
+  
   submit():void{
     console.log(this.addTourForm.value);
     const tour: Tour = {
