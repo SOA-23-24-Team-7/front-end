@@ -43,6 +43,7 @@ import { UserNotificationsComponent } from "src/app/feature-modules/stakeholder/
 import { TourCardViewComponent } from "src/app/shared/tour-card-view/tour-card-view.component";
 import { ActiveEncounterViewComponent } from "src/app/feature-modules/encounter/active-encounter-view/active-encounter-view.component";
 import { TourPageComponent } from "src/app/feature-modules/marketplace/tour-page/tour-page.component";
+import { CouponsViewComponent } from "src/app/feature-modules/marketplace/coupons-view/coupons-view.component";
 
 const routes: Routes = [
     { path: "home", component: HomeComponent },
@@ -220,6 +221,11 @@ const routes: Routes = [
     {
         path: "tour/:tourId",
         component: TourPageComponent,
+        canActivate: [AuthGuard],
+    },
+    {
+        path: "coupons",
+        component: CouponsViewComponent,
         canActivate: [AuthGuard],
     }
 ];

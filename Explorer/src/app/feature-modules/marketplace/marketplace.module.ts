@@ -35,6 +35,9 @@ import { TourDetailsComponent } from './tour-details/tour-details.component';
 import { FullSizeImageComponent } from './full-size-image/full-size-image.component';
 import { TourPageComponent } from './tour-page/tour-page.component';
 import { TourAuthoringModule } from "../tour-authoring/tour-authoring.module";
+import { CouponsComponent } from './coupons/coupons.component';
+import { CouponsViewComponent } from './coupons-view/coupons-view.component';
+import { EditCouponFormComponent } from './edit-coupon-form/edit-coupon-form.component';
 
 @NgModule({
     declarations: [
@@ -63,7 +66,10 @@ import { TourAuthoringModule } from "../tour-authoring/tour-authoring.module";
         ShoppingCartComponent,
         TourDetailsComponent,
         FullSizeImageComponent,
-        TourPageComponent
+        TourPageComponent,
+        CouponsComponent,
+        CouponsViewComponent,
+        EditCouponFormComponent
     ],
     imports: [
         CommonModule,

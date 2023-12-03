@@ -25,6 +25,7 @@ import { ShoppingCart } from "./model/shopping-cart";
 import { OrderItem } from "./model/order-item";
 import { TourLimitedView } from "./model/tour-limited-view.model";
 import { TourToken } from "./model/tour-token.model";
+import { Coupon } from "./model/coupon.model";
 
 @Injectable({
     providedIn: "root",
@@ -373,5 +374,23 @@ export class MarketplaceService {
         const path = environment.apiHost + "tourist/tour/search" + query;
         return this.http.get<PagedResults<Tour>>(path);
       }
-    
+      addCoupon(coupon:Coupon): Observable<Coupon> {
+        return this.http.post<Coupon>(
+            environment.apiHost + "coupon/",
+            coupon,
+        );
+    }
+    getCoupons(): Observable<PagedResults<Coupon>>  {
+        return this.http.get<PagedResults<Coupon>>(
+            environment.apiHost + "coupon/",
+        );
+    }
+    deleteCoupon(id: number): Observable<Coupon> {
+        return this.http.delete<Coupon>(
+            environment.apiHost + "coupon/" + id,
+        );
+    }
+    updateCoupon(coupon: Coupon): Observable<Coupon> {
+        return this.http.put<Coupon>(environment.apiHost + "coupon/" + coupon.id, coupon);
+    }
 }
