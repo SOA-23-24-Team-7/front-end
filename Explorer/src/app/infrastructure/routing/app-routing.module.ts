@@ -42,7 +42,10 @@ import { TourDetailsComponent } from "src/app/feature-modules/marketplace/tour-d
 import { UserNotificationsComponent } from "src/app/feature-modules/stakeholder/user-notifications/user-notifications.component";
 import { TourCardViewComponent } from "src/app/shared/tour-card-view/tour-card-view.component";
 import { ActiveEncounterViewComponent } from "src/app/feature-modules/encounter/active-encounter-view/active-encounter-view.component";
-import { TourPageComponent } from "src/app/feature-modules/marketplace/tour-page/tour-page.component";
+import { TouristsTourComponent } from "src/app/feature-modules/tour-authoring/tourists-tour/tourists-tour.component";
+import { TouristsKeyPointsComponent } from "src/app/feature-modules/tour-authoring/tourists-key-points/tourists-key-points.component";
+import { TouristsEquipmentComponent } from "src/app/feature-modules/tour-authoring/tourists-equipment/tourists-equipment.component";
+import { TourPageComponent } from "src/app/feature-modules/marketplace/tour-page/tour-page.component"; 
 
 const routes: Routes = [
     { path: "home", component: HomeComponent },
@@ -218,10 +221,25 @@ const routes: Routes = [
         canActivate: [AuthGuard],
     },
     {
+        path: "tourists-tour",
+        component: TouristsTourComponent,
+        canActivate: [AuthGuard],
+    },
+    {
+        path: "tour/:id/tourists-key-points",
+        component: TouristsKeyPointsComponent,
+        canActivate: [AuthGuard],
+    },
+    {
+        path:"tourists-tour/equipment/:id",
+        component: TouristsEquipmentComponent,
+        canActivate: [AuthGuard],
+    },
+    {
         path: "tour/:tourId",
         component: TourPageComponent,
         canActivate: [AuthGuard],
-    }
+    } 
 ];
 
 @NgModule({

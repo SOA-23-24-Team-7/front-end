@@ -23,7 +23,7 @@ export class TourFormComponent implements OnChanges{
       const tourPatch = {
         name: this.tour.name || null,
         description: this.tour.description || null,
-        difficulty: this.tour.difficulty.toString() || null,
+        difficulty: this.tour.difficulty?.toString() || null,
         tags: this.tour.tags || null
       };
       this.tourForm.patchValue(tourPatch);

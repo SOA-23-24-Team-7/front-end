@@ -32,7 +32,8 @@ import {
     faPlus,
     faShoppingCart,
     faBell,
-    faCircleQuestion
+    faCircleQuestion,
+    faMapLocationDot
 } from "@fortawesome/free-solid-svg-icons";
 import { StakeholderService } from "../../stakeholder/stakeholder.service";
 import { interval, Subscription } from "rxjs";
@@ -148,4 +149,5 @@ export class NavbarComponent implements OnInit {
     faShoppingCart = faShoppingCart;
     faBell = faBell;
     faCircleQuestion = faCircleQuestion;
+    faMapLocationDot = faMapLocationDot;
 }
