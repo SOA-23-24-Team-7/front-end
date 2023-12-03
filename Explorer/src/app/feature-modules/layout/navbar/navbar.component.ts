@@ -33,6 +33,7 @@ import {
     faShoppingCart,
     faBell,
     faCircleQuestion,
+    faCoins,
     faMapLocationDot
 } from "@fortawesome/free-solid-svg-icons";
 import { StakeholderService } from "../../stakeholder/stakeholder.service";
@@ -149,5 +150,7 @@ export class NavbarComponent implements OnInit {
     faShoppingCart = faShoppingCart;
     faBell = faBell;
     faCircleQuestion = faCircleQuestion;
+    faCoins = faCoins;
     faMapLocationDot = faMapLocationDot;
+
 }
