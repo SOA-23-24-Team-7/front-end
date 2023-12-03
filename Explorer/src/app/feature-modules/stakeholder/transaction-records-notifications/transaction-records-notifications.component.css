@@ -1,0 +1,59 @@
+.cards-list {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    width: 100%;
+    overflow: auto;
+    border-bottom-left-radius: 1rem;
+    border-bottom-right-radius: 1rem;
+    min-height: 40rem;
+    background-color: rgba(var(--clr-background-secondary));
+    color: rgb(var(--clr-text));
+    border: 2px solid rgba(var(--clr-background-secondary));
+}
+.cards-list::-webkit-scrollbar {
+    width: 0.5em;
+}
+
+.cards-list::-webkit-scrollbar-thumb {
+    background-color: rgba(var(--clr-background-secondary));
+    border-radius: 0.3rem;
+}
+
+.transaction {
+    display: flex;
+    background-color: rgb(var(--clr-background));
+    width: 100%;
+    padding-inline: 1rem;
+    padding-block: 0.7rem;
+    padding-bottom: 0.3rem;
+    gap: 1rem;
+    transition: 0.5s;
+    border-bottom: 1px solid;
+    color: rgb(var(--clr-text));
+}
+
+.transaction:hover {
+    cursor: pointer;
+    background-color: rgb(var(--clr-background-secondary), 0.4);
+    box-shadow: 0 0 1rem rgba(var(--clr-outline-contrast), 0.5);
+}
+
+.transaction-content {
+    color: rgb(var(--clr-text), 0.7);
+    align-self: center;
+}
+
+.transaction-column {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    gap: 0.6rem;
+    min-width: 15rem;
+}
+
+.transaction-row {
+    display: flex;
+    gap: 0.3rem;
+    font-weight: 300;
+}
