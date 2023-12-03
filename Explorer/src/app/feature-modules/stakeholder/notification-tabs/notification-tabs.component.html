@@ -33,12 +33,24 @@
         >
             <fa-icon [icon]="faTriangleExclamation" /> Problem resolving
         </div>
+        <div
+            class="tab"
+            [ngClass]="{
+                'selected-tab': selectedTab === Tab.SHOPPINGNOTIFICATIONS
+            }"
+            (click)="setActiveTab(Tab.SHOPPINGNOTIFICATIONS, tabList)"
+        >
+            <fa-icon [icon]="faShoppingCart" /> Shopping notifications
+        </div>
     </div>
     <div class="tab-content">
         <xp-keypoints-notifications *ngIf="selectedTab === Tab.KEYPOINTS" />
         <xp-facilities-notifications *ngIf="selectedTab === Tab.FACILITIES" />
         <xp-problem-resolving-notifications
             *ngIf="selectedTab === Tab.PROBLEMRESOLVINGS"
+        />
+        <xp-shopping-notifications
+            *ngIf="selectedTab === Tab.SHOPPINGNOTIFICATIONS"
         />
     </div>
 </div>

@@ -86,9 +86,10 @@ export class TourComponent implements OnInit {
 
 
   ngOnInit(): void {
-    this.getTours();
+    
     this.authService.user$.subscribe(user => {
       this.user = user;
+      this.getTours();
   });
     this.searchFilter = {
       name: "",

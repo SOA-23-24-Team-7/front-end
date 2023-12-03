@@ -16,6 +16,7 @@ import { Follower } from "./model/follower.model";
 import { Following } from "./model/following.model";
 import { FollowerCreate } from "./model/follower-create.model";
 import { UserFollow } from "./model/user-follow.model";
+import { ShoppingNotification } from "./model/shopping-notification.model";
 
 @Injectable({
     providedIn: "root",
@@ -218,6 +219,23 @@ export class StakeholderService {
         return this.http.put<Message>(
             environment.apiHost + "messages/update-status",
             updatedMessage,
+        );
+    }
+
+    getShoppingNotificationsByLoggedInUser(): Observable<
+        PagedResults<ShoppingNotification>
+    > {
+        return this.http.get<PagedResults<ShoppingNotification>>(
+            environment.apiHost + "shoppingNotifications",
+        );
+    }
+    setSeenStatusForShoppingNotification(
+        notificationId: number,
+    ): Observable<ShoppingNotification> {
+        return this.http.get<ShoppingNotification>(
+            environment.apiHost +
+                "shoppingNotifications/set-seen/" +
+                notificationId,
         );
     }
 }
