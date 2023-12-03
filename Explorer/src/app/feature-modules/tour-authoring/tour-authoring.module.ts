@@ -28,6 +28,7 @@ import { TouristsKeyPointsComponent } from './tourists-key-points/tourists-key-p
 import { TourExecutionModule } from "../tour-execution/tour-execution.module";
 import { RecommendedTourCardComponent } from './recommended-tour-card/recommended-tour-card.component';
 import { RecommendedTourCardsComponent } from './recommended-tour-cards/recommended-tour-cards.component';
+import { TouristsEquipmentComponent } from './tourists-equipment/tourists-equipment.component';
 
 @NgModule({
     declarations: [
@@ -49,6 +50,7 @@ import { RecommendedTourCardsComponent } from './recommended-tour-cards/recommen
         TouristsKeyPointsComponent,
         RecommendedTourCardComponent,
         RecommendedTourCardsComponent,
+        TouristsEquipmentComponent,
     ],
     imports: [
         CommonModule,

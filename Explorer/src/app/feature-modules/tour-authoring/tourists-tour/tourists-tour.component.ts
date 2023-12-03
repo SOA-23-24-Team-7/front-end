@@ -7,6 +7,9 @@ import { faPen, faPlus, faTrash } from '@fortawesome/free-solid-svg-icons';
 import { PagedResults } from 'src/app/shared/model/paged-results.model';
 import { EditTouristsTourFormComponent } from '../edit-tourists-tour-form/edit-tourists-tour-form.component';
 import { AddTouristsTourFormComponent } from '../add-tourists-tour-form/add-tourists-tour-form.component';
+import { MarketplaceService } from '../../marketplace/marketplace.service';
+import { TourExecutionService } from '../../tour-execution/tour-execution.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'xp-tourists-tour',
@@ -21,7 +24,7 @@ export class TouristsTourComponent implements OnInit {
   shouldEdit: boolean = false;
   keyPoints: KeyPoint[] = [];
 
-  constructor(private tourAuthoringService: TourAuthoringService, public dialogRef: MatDialog,) {}
+  constructor(private router: Router,private tourAuthoringService: TourAuthoringService,private service: TourExecutionService, public dialogRef: MatDialog,) {}
 
   ngOnInit(): void {
     this.getTours();
@@ -103,4 +106,12 @@ export class TouristsTourComponent implements OnInit {
   faPen = faPen;
   faPlus = faPlus;
   faTrash = faTrash;
+
+  StartTour(id: number){
+    this.service.startTour(id).subscribe(() => {
+      this.router.navigate(['/tour-executing/' + id]);
+    });
+  }
+
+
 }

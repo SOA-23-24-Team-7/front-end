@@ -30,6 +30,9 @@
                   <button *ngIf="getTourStatusText(to.status) !== 'Ready'" color="primary" mat-raised-button (click)="onReadyClicked(to)">
                       Mark as ready
                   </button>
+                  <button *ngIf="getTourStatusText(to.status) === 'Ready'" color="primary" mat-raised-button (click)="StartTour(to.id || 0)">
+                    Start tour
+                  </button>
               </div>
               
           </div>

@@ -226,5 +226,11 @@ export class TourAuthoringService {
             environment.apiHost + 'tour/recommended/' + params
         );
     }
+
+    getAllEquipment(): Observable<PagedResults<Equipment>>{
+        return this.http.get<PagedResults<Equipment>>(
+            environment.apiHost + "tourist/only_equipment"
+        );
+    }
     
 }

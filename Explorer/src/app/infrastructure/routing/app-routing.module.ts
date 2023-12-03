@@ -43,7 +43,7 @@ import { UserNotificationsComponent } from "src/app/feature-modules/stakeholder/
 import { ActiveEncounterViewComponent } from "src/app/feature-modules/encounter/active-encounter-view/active-encounter-view.component";
 import { TouristsTourComponent } from "src/app/feature-modules/tour-authoring/tourists-tour/tourists-tour.component";
 import { TouristsKeyPointsComponent } from "src/app/feature-modules/tour-authoring/tourists-key-points/tourists-key-points.component";
-
+import { TouristsEquipmentComponent } from "src/app/feature-modules/tour-authoring/tourists-equipment/tourists-equipment.component";
 const routes: Routes = [
     { path: "home", component: HomeComponent },
     { path: "login", component: LoginComponent },
@@ -221,6 +221,11 @@ const routes: Routes = [
     {
         path: "tour/:id/tourists-key-points",
         component: TouristsKeyPointsComponent,
+        canActivate: [AuthGuard],
+    },
+    {
+        path:"tourists-tour/equipment/:id",
+        component: TouristsEquipmentComponent,
         canActivate: [AuthGuard],
     },
 ];
