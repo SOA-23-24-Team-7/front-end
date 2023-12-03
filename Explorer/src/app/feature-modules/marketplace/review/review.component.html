@@ -1,4 +1,5 @@
 <button
+    *ngIf="user.role === 'tourist'"
     (click)="onAddClicked()"
     [disabled]="!reviewExists"
     color="primary"
@@ -23,7 +24,7 @@
                             {{ review.tourist?.username }}
                             <span class="middot"> &middot; </span>
                             <span class="comment-date">{{
-                                review.commentDate | date: "MMM d, y"
+                                review.commentDate | date : "MMM d, y"
                             }}</span>
                         </div>
                         <div class="stars">
@@ -66,7 +67,7 @@
 
             <div class="last-row">
                 <div class="trip-date">
-                    Trip date: {{ review.tourVisitDate | date: "MMM d, y" }}
+                    Trip date: {{ review.tourVisitDate | date : "MMM d, y" }}
                 </div>
                 <span class="delete-edit-buttons">
                     <fa-icon

@@ -85,7 +85,7 @@ export class ReviewFormComponent implements OnChanges, OnInit {
                     this.imagesList = Array<string>();
                     //this.reviewAdded.emit(true);
 
-                    this.dialog.close([true, false]); //review Added, review Updated
+                    this.dialog.close([false, false]); //review not Added, review Updated
                 },
             });
         } else alert("Please enter valid data. All fields are required.");

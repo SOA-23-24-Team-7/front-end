@@ -45,11 +45,10 @@ export class ReviewComponent implements OnInit {
     ngOnInit(): void {
         this.authService.user$.subscribe(user => {
             this.user = user;
-        });
-
-        this.route.params.subscribe(params => {
-            this.tourId = params["tourId"];
-            this.getReviews();
+            this.route.params.subscribe(params => {
+                this.tourId = params["tourId"];
+                this.getReviews();
+            });
         });
     }
 
@@ -61,12 +60,12 @@ export class ReviewComponent implements OnInit {
                     this.reviews = result.results;
                     this.service.canTourBeRated(this.tourIdHelper).subscribe({
                         next: (result: boolean) => {
-                          this.reviewExists = result;
+                            this.reviewExists = result;
                         },
-                        error: (errData) => {
-                          console.log(errData);
-                        }
-                      })
+                        error: errData => {
+                            console.log(errData);
+                        },
+                    });
                 },
                 error: (err: any) => {
                     console.log(err);
@@ -121,7 +120,7 @@ export class ReviewComponent implements OnInit {
         dialogRef.afterClosed().subscribe((result: Array<boolean>) => {
             console.log("Rezultat recenzije:", result);
             this.reviewExists = result[0];
-            if (this.reviewExists == true) {
+            if (this.reviewExists == false) {
                 this.getReviewsByTourId();
             }
         });
@@ -133,7 +132,7 @@ export class ReviewComponent implements OnInit {
                 this.service.getReviews(this.tourIdHelper).subscribe({
                     next: (result: PagedResults<Review>) => {
                         this.reviews = result.results;
-                        this.reviewExists = false;
+                        this.reviewExists = true;
                     },
                     error: (err: any) => {
                         console.log(err);
