@@ -1,6 +1,7 @@
 <ng-container *ngIf="person">
     <div class="container">
         <div class="form">
+            <h1>Edit Profile</h1>
             <div class="row">
                 <div class="field">
                     <input [(ngModel)]="person.name" required />
@@ -22,9 +23,14 @@
                 </div>
             </div>
             <div class="row">
-                <div class="field">
-                    <input [(ngModel)]="person.bio" required />
-                    <label>Biography</label>
+                <div class="field bio">
+                    <h2>Biography</h2>
+                    <textarea
+                        [(ngModel)]="person.bio"
+                        rows="8"
+                        placeholder="Biography"
+                    >
+                    </textarea>
                 </div>
             </div>
             <div class="btn" (click)="editProfile()">Save</div>

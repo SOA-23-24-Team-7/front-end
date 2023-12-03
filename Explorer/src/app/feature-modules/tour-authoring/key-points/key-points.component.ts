@@ -33,7 +33,7 @@ export class KeyPointsComponent implements OnInit {
     selectedKeyPoint: KeyPoint | null = null;
     mapLongLat: [number, number];
     mapLocationAddress: string;
-    shouldRenderKeyPointForm: boolean = false;
+    shouldRenderKeyPointForm: boolean = true;
     shouldEdit: boolean = false;
     refreshEventsSubject: BehaviorSubject<number>;
     tourIdTemp: number = 0;

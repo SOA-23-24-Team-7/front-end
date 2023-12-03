@@ -30,10 +30,6 @@
 }
 
 .btn {
-    font-size: 1.5rem;
-    width: 10rem;
-    height: 5rem;
-    max-height: 10rem;
     align-self: center;
 }
 
@@ -45,7 +41,7 @@
     width: 22rem;
     height: 4rem;
     border-radius: 0.5rem;
-    font-size: 1.5rem;
+    font-size: 1.3rem;
     padding: 1rem;
     border: rgba(var(--clr-outline-contrast), 1) 2px solid;
     background: transparent;
@@ -59,7 +55,7 @@
     left: 15px;
     transform: translateY(-50%);
     color: rgb(var(--clr-text));
-    font-size: 1.5rem;
+    font-size: 1.3rem;
     pointer-events: none;
     transition: 0.3s;
 }
@@ -75,4 +71,23 @@ input:valid ~ label {
     font-size: 1.2rem;
     padding: 1px;
     background-color: rgb(var(--clr-background-secondary));
+}
+
+.bio {
+    width: 100%;
+}
+
+.bio h2 {
+    font-family: var(--fnt-body);
+    font-weight: 400;
+}
+
+.bio textarea {
+    width: 100%;
+    font-size: 1.3rem;
+    resize: none;
+}
+
+h1 {
+    text-align: center;
 }

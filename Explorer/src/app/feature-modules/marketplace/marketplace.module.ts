@@ -1,6 +1,7 @@
 import { NgModule } from "@angular/core";
 import { CommonModule } from "@angular/common";
 import { MaterialModule } from "src/app/infrastructure/material/material.module";
+import { MatChipsModule } from '@angular/material/chips';
 import { ReactiveFormsModule } from "@angular/forms";
 import { RatingFormComponent } from "./rating-form/rating-form.component";
 import { RouterModule } from "@angular/router";
@@ -32,6 +33,8 @@ import { FormsModule } from '@angular/forms';
 import { PublishedToursComponent } from './tours/published-tours.component';
 import { TourDetailsComponent } from './tour-details/tour-details.component';
 import { FullSizeImageComponent } from './full-size-image/full-size-image.component';
+import { TourPageComponent } from './tour-page/tour-page.component';
+import { TourAuthoringModule } from "../tour-authoring/tour-authoring.module";
 
 @NgModule({
     declarations: [
@@ -59,7 +62,8 @@ import { FullSizeImageComponent } from './full-size-image/full-size-image.compon
         FacilitiesNotificationsComponent,
         ShoppingCartComponent,
         TourDetailsComponent,
-        FullSizeImageComponent
+        FullSizeImageComponent,
+        TourPageComponent
     ],
     imports: [
         CommonModule,
@@ -78,6 +82,8 @@ import { FullSizeImageComponent } from './full-size-image/full-size-image.compon
         FontAwesomeModule,
         FormsModule,
         LayoutModule,
+        MatChipsModule,
+        TourAuthoringModule
     ],
     exports: [
         ReviewComponent,
@@ -87,7 +93,7 @@ import { FullSizeImageComponent } from './full-size-image/full-size-image.compon
         TourPreferencesComponent,
         TourPreferenceFormComponent,
         KeypointsNotificationsComponent,
-        FacilitiesNotificationsComponent,
+        FacilitiesNotificationsComponent
     ],
 })
 export class MarketplaceModule {}

@@ -1,10 +1,10 @@
-<div class="add-modal" [formGroup]="addTourForm" (click)="onClose()">
+<div class="add-modal" (click)="onClose()">
     <div class="add" (click)="$event.stopPropagation()">
         <div class="add-head">
             <fa-icon class="add-x" [icon]="faXmark" (click)="onClose()"/>
             <div class="add-title">Add tour</div>
         </div>
-        <form class="add-form">
+        <form class="add-form" [formGroup]="addTourForm">
             <div class="add-label">Name:</div>
             <input class="add-input" type="text" placeholder="Name" formControlName="name"/>
             <div class="add-label">Description:</div>

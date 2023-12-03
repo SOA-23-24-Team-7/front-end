@@ -40,10 +40,13 @@ import { TourSearchComponent } from "src/app/feature-modules/marketplace/tour-se
 import { NotificationTabsComponent } from "src/app/feature-modules/stakeholder/notification-tabs/notification-tabs.component";
 import { TourDetailsComponent } from "src/app/feature-modules/marketplace/tour-details/tour-details.component";
 import { UserNotificationsComponent } from "src/app/feature-modules/stakeholder/user-notifications/user-notifications.component";
+import { TourCardViewComponent } from "src/app/shared/tour-card-view/tour-card-view.component";
 import { ActiveEncounterViewComponent } from "src/app/feature-modules/encounter/active-encounter-view/active-encounter-view.component";
 import { TouristsTourComponent } from "src/app/feature-modules/tour-authoring/tourists-tour/tourists-tour.component";
 import { TouristsKeyPointsComponent } from "src/app/feature-modules/tour-authoring/tourists-key-points/tourists-key-points.component";
 import { TouristsEquipmentComponent } from "src/app/feature-modules/tour-authoring/tourists-equipment/tourists-equipment.component";
+import { TourPageComponent } from "src/app/feature-modules/marketplace/tour-page/tour-page.component"; 
+
 const routes: Routes = [
     { path: "home", component: HomeComponent },
     { path: "login", component: LoginComponent },
@@ -207,6 +210,10 @@ const routes: Routes = [
         component: RequestViewComponent,
         canActivate: [AuthGuard],
     },
+    {
+        path: "tour-card",
+        component: TourCardViewComponent
+    },
     { path: "tour-details/:tourId", component: TourDetailsComponent },
     {
         path: "active-encounters",
@@ -228,6 +235,11 @@ const routes: Routes = [
         component: TouristsEquipmentComponent,
         canActivate: [AuthGuard],
     },
+    {
+        path: "tour/:tourId",
+        component: TourPageComponent,
+        canActivate: [AuthGuard],
+    } 
 ];
 
 @NgModule({

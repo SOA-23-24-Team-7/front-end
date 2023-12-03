@@ -1,9 +1,11 @@
-<div class="kp" (click)="onClose()">
-    <h1>{{keyPoint.dataKey.name}}</h1>
-    <img [src]="keyPointImage" style="width: 200; height: 200;"/>
-    <p>{{keyPoint.dataKey.description}}</p>
-    <p>Secret: {{secret}}</p>
-    <p>{{keyPoint.dataKey.locationAddress}}</p>
-</div>
-
-
+<div class="keypoint-modal delayed-fade-in" (click)="onClose()">
+    <div class="kp">
+      <div class="keypoint-head">
+        <h1>{{keyPoint.dataKey.name}}</h1>
+      </div>
+      <img [src]="keyPointImage" alt="Keypoint Image" class="keypoint-image" />
+      <p class="keypoint-description">{{keyPoint.dataKey.description}}</p>
+      <p class="keypoint-secret">Secret: {{secret}}</p>
+      <p class="keypoint-location">{{keyPoint.dataKey.locationAddress}}</p>
+    </div>
+  </div>

@@ -218,7 +218,9 @@
                             class="navbar-submenu-item-icon"
                             [icon]="faUser"
                         />
-                        <div class="navbar-submenu-item-text">Purchased Tours</div>
+                        <div class="navbar-submenu-item-text">
+                            Purchased Tours
+                        </div>
                     </div>
                     <div
                         class="navbar-submenu-item"
@@ -448,6 +450,11 @@
             <!-- USER MENU -->
             <div class="navbar-menu-item" *ngIf="user && user.username !== ''">
                 <div class="navbar-menu-item-content">
+                    <xp-tag
+                        tagColor="orange"
+                        tagText="{{ notificationNumber }}"
+                        *ngIf="notificationNumber !== 0"
+                    />
                     <fa-icon
                         class="navbar-menu-item-content-icon"
                         [class.color-white]="isHome"

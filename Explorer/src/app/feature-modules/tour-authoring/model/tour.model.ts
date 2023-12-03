@@ -14,7 +14,8 @@ export interface Tour{
     distance?: number,
     publishDate?: Date,
     durations?: TourDuration[],
-    keyPoints?: KeyPoint[]
+    keyPoints?: KeyPoint[],
+    averageRating?: number
 }
 
 export enum TourStatus {

@@ -25,10 +25,10 @@ import { TouristsTourComponent } from './tourists-tour/tourists-tour.component';
 import { AddTouristsTourFormComponent } from './add-tourists-tour-form/add-tourists-tour-form.component';
 import { EditTouristsTourFormComponent } from './edit-tourists-tour-form/edit-tourists-tour-form.component';
 import { TouristsKeyPointsComponent } from './tourists-key-points/tourists-key-points.component';
-import { TourExecutionModule } from "../tour-execution/tour-execution.module";
 import { RecommendedTourCardComponent } from './recommended-tour-card/recommended-tour-card.component';
 import { RecommendedTourCardsComponent } from './recommended-tour-cards/recommended-tour-cards.component';
 import { TouristsEquipmentComponent } from './tourists-equipment/tourists-equipment.component';
+import { FormsModule } from '@angular/forms';
 
 @NgModule({
     declarations: [
@@ -61,7 +61,7 @@ import { TouristsEquipmentComponent } from './tourists-equipment/tourists-equipm
         RouterModule,
         FontAwesomeModule,
         MatDialogModule,
-        //TourExecutionModule
+        FormsModule
     ],
     exports: [
         TourComponent,
@@ -73,7 +73,7 @@ import { TouristsEquipmentComponent } from './tourists-equipment/tourists-equipm
         FacilitiesComponent,
         FacilitiesFormComponent,
         TourEquipmentFormComponent,
-        KeyPointCardComponent,
+        KeyPointCardComponent
     ],
 })
 export class TourAuthoringModule {}

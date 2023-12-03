@@ -1,3 +1,10 @@
-<h1>Position simulator</h1>
-<hr>
-<xp-map [isPositionMap]="true" [startPosition]="touristPosition" [canEdit]="true" (newLongLatEvent)="changeTouristPosition($event)"></xp-map>
+<div class="container">
+    <h1 style="color: rgba(var(--clr-text), 1)">Position simulator</h1>
+    <hr />
+    <xp-map
+        [isPositionMap]="true"
+        [startPosition]="touristPosition"
+        [canEdit]="true"
+        (newLongLatEvent)="changeTouristPosition($event)"
+    ></xp-map>
+</div>
