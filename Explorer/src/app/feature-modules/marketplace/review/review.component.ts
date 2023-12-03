@@ -61,6 +61,19 @@ export class ReviewComponent implements OnInit {
                     this.service.canTourBeRated(this.tourIdHelper).subscribe({
                         next: (result: boolean) => {
                             this.reviewExists = result;
+
+                            //dodajem provjeru dal ocjena od tog turiste vec postoji jer kad se ucita stranica, dugme je uvijek enable
+                            if (this.reviewExists)
+                                this.service
+                                    .reviewExists(
+                                        this.user.id,
+                                        this.tourIdHelper,
+                                    )
+                                    .subscribe({
+                                        next: (result: boolean) => {
+                                            this.reviewExists = !result;
+                                        },
+                                    });
                         },
                         error: errData => {
                             console.log(errData);
