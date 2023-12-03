@@ -4,10 +4,37 @@
         <div class="triangle-left"></div>
     </div>
 
-    <xp-purchased-tour-card *ngFor="let tour of purchasedTours" 
-    [tour]="tour" [hasActiveTour]="hasTourActive" [activeTourId]="activeTourId"></xp-purchased-tour-card>
+    <xp-purchased-tour-card
+        *ngFor="let tour of purchasedTours"
+        (onSelected)="onSelectedTour(tour)"
+        [tour]="tour"
+        [hasActiveTour]="hasTourActive"
+        [activeTourId]="activeTourId"
+    ></xp-purchased-tour-card>
 
     <div class="list-cards-button" id="next-button">
         <div class="triangle-right"></div>
     </div>
+</div>
+<div class="tour-card">
+    <h3>New campaign</h3>
+    <form [formGroup]="campaignForm">
+        <p>Enter the name of the campaign</p>
+        <input type="text" formControlName="campaignName" />
+        <p>Describe the campaign</p>
+        <input type="text" formControlName="campaignDescription" />
+    </form>
+
+    <div>
+        <li *ngFor="let t of selectedTours">
+            {{ t.name }}
+        </li>
+    </div>
+    <button
+        *ngIf="selectedTours.length"
+        class="btn search-button"
+        (click)="createCampaign()"
+    >
+        Create campaign
+    </button>
 </div>
