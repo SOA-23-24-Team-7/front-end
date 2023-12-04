@@ -1,0 +1,14 @@
+<div class="tour">
+    <div>
+        <h1>Enter Coupon Code</h1>
+        <br />
+    </div>
+    <form [formGroup]="couponForm">
+        <mat-form-field>
+            <mat-label>Code</mat-label>
+            <input matInput formControlName="code" type="text" />
+        </mat-form-field>
+    </form>
+    <br />
+    <button color="accent" (click)="applyDiscount()">Apply</button>
+</div>
