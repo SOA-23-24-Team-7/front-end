@@ -381,16 +381,15 @@ input[type="range"] {
     height: 2rem;
     min-width: 2rem;
     border: rgba(var(--border-primary), 1) 1px solid;
-    background-color: rgba(255, 255, 255, 1);
+    background-color: rgba(var(--clr-background), 1);
     border-radius: 1rem;
-    background-color: white;
     cursor: pointer;
     margin-inline-start: 0.5rem;
     transition: background-color 0.15s;
 }
 
 .tour-search-page:hover {
-    background-color: rgba(240, 240, 240, 1);
+    background-color: rgba(var(--clr-primary-500), 0.3);
 }
 
 .tour-search-page-text {

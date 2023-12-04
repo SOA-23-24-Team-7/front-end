@@ -20,7 +20,7 @@
                     <fa-icon class="tour-filters-head-icon" [icon]="faFilter" />
                     <div class="tour-filters-head-text">Filters ({{countFilters()}})</div>
                 </div>
-                <div class="tour-filters-view" *ngIf="distance !== 0 && longitude !== -200 && latitude !== -200">
+                <div class="tour-filters-view" *ngIf="searchFilter.distance !== 0 && searchFilter.longitude !== -200 && searchFilter.latitude !== -200">
                     <fa-icon class="tour-filter-x" [icon]="faXmark" (click)="resetLocationFilter()"/>
                     <div class="tour-filter-view-text">Location</div>
                 </div>
@@ -66,7 +66,7 @@
                     <div class="tour-search-map-distance-labels">
                         <div class="tour-search-map-distance-min">0m</div>
                         <div class="tour-search-map-distance-value">
-                            {{ distance }}m
+                            {{ searchFilter.distance }}m
                         </div>
                         <div class="tour-search-map-distance-max">20000m</div>
                     </div>
@@ -78,7 +78,7 @@
                         max="20000"
                         value="50"
                         step="100"
-                        [(ngModel)]="distance"
+                        [(ngModel)]="searchFilter.distance"
                     />
                     <div class="tour-search-map">
                         <xp-map
