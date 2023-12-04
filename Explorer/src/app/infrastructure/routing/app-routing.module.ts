@@ -46,6 +46,7 @@ import { TouristsTourComponent } from "src/app/feature-modules/tour-authoring/to
 import { TouristsKeyPointsComponent } from "src/app/feature-modules/tour-authoring/tourists-key-points/tourists-key-points.component";
 import { TouristsEquipmentComponent } from "src/app/feature-modules/tour-authoring/tourists-equipment/tourists-equipment.component";
 import { TourPageComponent } from "src/app/feature-modules/marketplace/tour-page/tour-page.component"; 
+import { TouristsTourBlogFormComponent } from "src/app/feature-modules/blog/tourists-tour-blog-form/tourists-tour-blog-form.component";
 
 const routes: Routes = [
     { path: "home", component: HomeComponent },
@@ -238,6 +239,11 @@ const routes: Routes = [
     {
         path: "tour/:tourId",
         component: TourPageComponent,
+        canActivate: [AuthGuard],
+    },
+    {
+        path: "tourists-blog/:tourId",
+        component: TouristsTourBlogFormComponent,
         canActivate: [AuthGuard],
     } 
 ];

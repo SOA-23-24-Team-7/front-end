@@ -98,7 +98,7 @@ export class ShoppingCartComponent {
                     next: async (result: ShoppingCart) => {
                         this.shoppingCart = result;
                         for (let tour of this.data) {
-                            const result = await this.service.addToken(tour.id);
+                            const result = await this.service.addToken(tour.id, this.user.id);
                             console.log(result);
                         }
                         this.dialogRef.closeAll();

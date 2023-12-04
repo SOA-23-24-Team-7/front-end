@@ -10,8 +10,6 @@ import { Tour, TourStatus } from '../model/tour.model';
 import { TourDuration, TransportType } from '../model/tourDuration.model';
 import { PublicKeyPointsComponent } from '../public-key-points/public-key-points.component';
 import { TourAuthoringService } from '../tour-authoring.service';
-import { PagedResults } from 'src/app/shared/model/paged-results.model';
-
 
 @Component({
   selector: 'xp-tourists-key-points',
@@ -99,10 +97,6 @@ export class TouristsKeyPointsComponent implements OnInit{
         });
     }
 
-
-
-   
-
     getKeyPoints(): void {
         this.route.paramMap.subscribe({
             next: (params: ParamMap) => {
@@ -120,11 +114,10 @@ export class TouristsKeyPointsComponent implements OnInit{
                 this.service.getKeyPoints(tourId).subscribe({
                     next: (result: KeyPoint[]) => {
                         this.keyPoints = result;
-                        //console.log(this.keyPoints);
+                        
                         if(result){
                             this.getRecommendedTours();
                         }
-                        
 
                         if (this.keyPoints.length < 2) {
                             this.walkingDuration = 0;

@@ -9,6 +9,7 @@
             </div>
             <button class="abandon-button" (click)="abandonTour()" *ngIf="isTourInProgress">Abandon tour</button>
             <button class="back-button" (click)="goBack()">Go back</button>
+            <button class="create-blog-button" *ngIf="session.status == 2 && tour.status == 3" (click)="createBlog()">Create a blog</button>
         </div>
     </div>
     <div class="map-container">
