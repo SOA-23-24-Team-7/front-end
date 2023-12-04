@@ -44,14 +44,6 @@
                     <fa-icon class="tour-filter-x" [icon]="faXmark" (click)="searchFilter.maxDifficulty = 5"/>
                     <div class="tour-filter-view-text">Max. difficulty: {{searchFilter.maxDifficulty}}</div>
                 </div>
-                <div class="tour-filters-view" *ngIf="searchFilter.minDuration != 0">
-                    <fa-icon class="tour-filter-x" [icon]="faXmark" (click)="resetMinDuration()"/>
-                    <div class="tour-filter-view-text">Min. duration (min): {{searchFilter.minDuration}}</div>
-                </div>
-                <div class="tour-filters-view" *ngIf="searchFilter.maxDuration != 0">
-                    <fa-icon class="tour-filter-x" [icon]="faXmark" (click)="resetMaxDuration()"/>
-                    <div class="tour-filter-view-text">Max. duration (min): {{searchFilter.maxDuration}}</div>
-                </div>
                 <div class="tour-filters-view" *ngIf="searchFilter.minAverageRating != 0">
                     <fa-icon class="tour-filter-x" [icon]="faXmark" (click)="searchFilter.minAverageRating = 0"/>
                     <div class="tour-filter-view-text">Min. rating: {{searchFilter.minAverageRating}}</div>
@@ -121,11 +113,11 @@
                     <div class="tour-search-labels">
                         <div class="tour-search-map-distance-value">Min. price:</div>
                     </div>
-                    <input type="number" name="minPrice" min="0" step="1" [(ngModel)]="searchFilter.minPrice" (input)="validateMinPrice()" (ngModelChange)="validateMinPrice()"/>
+                    <input type="number" name="minPrice" min="0" step="1" [(ngModel)]="searchFilter.minPrice" (blur)="validateMinPrice()"/>
                     <div class="tour-search-labels">
                         <div class="tour-search-map-distance-value">Max. price:</div>
                     </div>
-                    <input type="number" name="maxPrice" min="0" step="1" [(ngModel)]="searchFilter.maxPrice" (input)="validateMaxPrice()"/>
+                    <input type="number" name="maxPrice" min="0" step="1" [(ngModel)]="searchFilter.maxPrice" (blur)="validateMaxPrice()"/>
                 </div>
             </div>
 
@@ -143,23 +135,6 @@
                         <div class="tour-search-map-distance-value">Max. difficulty: {{searchFilter.maxDifficulty}}</div>
                     </div>
                     <input type="range" name="maxDifficulty" min="0" max="5"step="1" [(ngModel)]="searchFilter.maxDifficulty" (input)="validateMaxDifficulty()"/>
-                </div>
-            </div>
-
-            <div class="tour-seach-filter-section">
-                <div class="tour-seach-filter-section-title" >
-                    <div class="tour-seach-filter-section-title-text">Duration</div>
-                    <fa-icon class="tour-seach-filter-section-title-arrow" [class.spin-arrow]="!dropped['durationDropped']" [icon]="faChevronDown" (click)="toggle('durationDropped')"/>
-                </div>
-                <div class="tour-seach-filter-section-body" [class.tour-seach-filter-section-body-dropped]="dropped['durationDropped']">
-                    <div class="tour-search-labels">
-                        <div class="tour-search-map-distance-value">Min. duration (min):</div>
-                    </div>
-                    <input type="number" name="minDuration" min="0" step="1" [(ngModel)]="searchFilter.minDuration" (input)="validateMinDuration()"/>
-                    <div class="tour-search-labels">
-                        <div class="tour-search-map-distance-value">Max. duration (min):</div>
-                    </div>
-                    <input type="number" name="maxDuration" min="0" step="1" [(ngModel)]="searchFilter.maxDuration" (input)="validateMaxDuration()"/>
                 </div>
             </div>
 
@@ -185,11 +160,11 @@
                     <div class="tour-search-labels">
                         <div class="tour-search-map-distance-value">Min. length (km):</div>
                     </div>
-                    <input type="number" name="minLength" min="0" step="1" [(ngModel)]="searchFilter.minLength" (input)="validateMinLength()"/>
+                    <input type="number" name="minLength" min="0" step="1" [(ngModel)]="searchFilter.minLength" (blur)="validateMinLength()"/>
                     <div class="tour-search-labels">
                         <div class="tour-search-map-distance-value">Max. length (km):</div>
                     </div>
-                    <input type="number" name="maxLength" min="0" step="1" [(ngModel)]="searchFilter.maxLength" (input)="validateMaxLength()"/>
+                    <input type="number" name="maxLength" min="0" step="1" [(ngModel)]="searchFilter.maxLength" (blur)="validateMaxLength()"/>
                 </div>
             </div>
         </div>
