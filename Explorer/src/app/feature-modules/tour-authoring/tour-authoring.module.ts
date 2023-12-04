@@ -26,7 +26,6 @@ import { AddTouristsTourFormComponent } from './add-tourists-tour-form/add-touri
 import { EditTouristsTourFormComponent } from './edit-tourists-tour-form/edit-tourists-tour-form.component';
 import { TouristsKeyPointsComponent } from './tourists-key-points/tourists-key-points.component';
 import { RecommendedTourCardComponent } from './recommended-tour-card/recommended-tour-card.component';
-import { RecommendedTourCardsComponent } from './recommended-tour-cards/recommended-tour-cards.component';
 import { TouristsEquipmentComponent } from './tourists-equipment/tourists-equipment.component';
 import { FormsModule } from '@angular/forms';
 
@@ -49,7 +48,6 @@ import { FormsModule } from '@angular/forms';
         EditTouristsTourFormComponent,
         TouristsKeyPointsComponent,
         RecommendedTourCardComponent,
-        RecommendedTourCardsComponent,
         TouristsEquipmentComponent,
     ],
     imports: [
