@@ -1,9 +1,11 @@
 import { Component, OnInit } from "@angular/core";
 import { AdministrationService } from "../administration.service";
 import { PagedResults } from "src/app/shared/model/paged-results.model";
-import { faUserXmark, faUserCheck } from "@fortawesome/free-solid-svg-icons";
+import { faUserXmark, faUserCheck, faMoneyBill } from "@fortawesome/free-solid-svg-icons";
 import { User } from "src/app/infrastructure/auth/model/user.model";
 import { Person } from "../../stakeholder/model/person.model";
+import { MatDialog } from "@angular/material/dialog";
+import { WalletUpdateDialogComponent } from "../wallet-update-dialog/wallet-update-dialog.component";
 
 @Component({
     selector: "xp-users-overview",
@@ -13,7 +15,7 @@ import { Person } from "../../stakeholder/model/person.model";
 export class UsersOverviewComponent implements OnInit {
     people: Person[] = [];
 
-    constructor(private service: AdministrationService) {}
+    constructor(private service: AdministrationService, public dialog: MatDialog,) {}
 
     ngOnInit(): void {
         this.getUsersByAdmin();
@@ -38,6 +40,15 @@ export class UsersOverviewComponent implements OnInit {
         });
     }
 
+    openWalletUpdateDialog(person: Person) {
+        const dialogRef = this.dialog.open(WalletUpdateDialogComponent, {
+            data: {
+                person: person,
+            },
+        });
+    }
+
     faUserXmark = faUserXmark;
     faUserCheck = faUserCheck;
+    faMoneyBill = faMoneyBill;
 }

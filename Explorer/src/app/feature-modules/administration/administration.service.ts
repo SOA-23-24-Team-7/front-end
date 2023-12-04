@@ -11,6 +11,8 @@ import { RatingUsername } from "./model/ratingWithUsername";
 import { Problem } from "../marketplace/model/problem.model";
 import { PublicKeyPointRequest } from "../tour-authoring/model/public-key-point-request.model";
 import { PublicFacilityRequest } from "../tour-authoring/model/public-facility-request.model";
+import { Wallet } from "../stakeholder/model/wallet.model";
+import { walletUpdate } from "./model/walletUpdate.model";
 
 @Injectable({
     providedIn: "root",
@@ -116,5 +118,15 @@ export class AdministrationService {
             "/" +
             comment;
         return this.http.patch<any>(route, { observe: "response" });
+    }
+    getTouristWallet(
+        toursitId: number
+    ): Observable<Wallet> {
+        return this.http.get<Wallet>(environment.apiHost + "wallet/getTourists?touristId=" + toursitId)
+    }
+    updateToursitWallet(
+        walletUpdate: walletUpdate
+    ): Observable<Wallet> {
+        return this.http.put<Wallet>(environment.apiHost + "wallet/" + walletUpdate.id, walletUpdate);
     }
 }

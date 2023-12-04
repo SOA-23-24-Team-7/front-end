@@ -1,0 +1,8 @@
+::ng-deep #map {
+    min-height: 50rem;
+}
+
+.container {
+    padding: 2rem;
+    text-align: center;
+}

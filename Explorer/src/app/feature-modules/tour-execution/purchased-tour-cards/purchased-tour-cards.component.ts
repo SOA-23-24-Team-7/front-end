@@ -14,11 +14,14 @@ export class PurchasedToursComponent implements OnInit {
   purchasedTours: Tour[] = []
   hasTourActive: boolean
   activeTourId: number
+  
   constructor(private tourExecutionService: TourExecutionService){}
+  
   ngOnInit(): void {
     this.getTours();
     this.getLiveTour();
   }
+  
   getTours(){
     this.tourExecutionService.getTours().subscribe({
       next: (result: Tour[]) =>{
@@ -29,6 +32,7 @@ export class PurchasedToursComponent implements OnInit {
       }
     })
   }
+  
   getLiveTour(){
     this.tourExecutionService.getLiveTour().subscribe({
       next: (result: TourExecutionSession) =>{

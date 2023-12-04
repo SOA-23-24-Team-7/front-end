@@ -35,12 +35,23 @@
         </div>
         <div
             class="tab"
+            *ngIf="user.role === 'tourist'"
             [ngClass]="{
                 'selected-tab': selectedTab === Tab.SHOPPINGNOTIFICATIONS
             }"
             (click)="setActiveTab(Tab.SHOPPINGNOTIFICATIONS, tabList)"
         >
             <fa-icon [icon]="faShoppingCart" /> Shopping notifications
+        </div>
+        <div
+            class="tab"
+            *ngIf="user.role === 'tourist'"
+            [ngClass]="{
+                'selected-tab': selectedTab === Tab.TRANSACTIONRECORDSNOTIFICATIONS
+            }"
+            (click)="setActiveTab(Tab.TRANSACTIONRECORDSNOTIFICATIONS, tabList)"
+        >
+            <fa-icon [icon]="faMoneyBill" [spin]="true"/> Transaction notifications
         </div>
     </div>
     <div class="tab-content">
@@ -51,6 +62,9 @@
         />
         <xp-shopping-notifications
             *ngIf="selectedTab === Tab.SHOPPINGNOTIFICATIONS"
+        />
+        <xp-transaction-records-notifications
+            *ngIf="selectedTab === Tab.TRANSACTIONRECORDSNOTIFICATIONS"
         />
     </div>
 </div>

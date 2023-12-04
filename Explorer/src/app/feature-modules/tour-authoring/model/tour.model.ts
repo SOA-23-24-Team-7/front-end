@@ -6,8 +6,8 @@ export interface Tour{
     id?: number,
     name: string,
     description: string,
-    difficulty: number,
-    tags: string[],
+    difficulty?: number,
+    tags?: string[],
     status?: TourStatus,
     price?: number,
     isDeleted?: boolean,
@@ -21,5 +21,6 @@ export interface Tour{
 export enum TourStatus {
     Draft = 0,
     Published = 1,
-    Archived = 2
+    Archived = 2,
+    Ready = 3
 }

@@ -43,8 +43,11 @@ import { UserNotificationsComponent } from "src/app/feature-modules/stakeholder/
 import { TourCardViewComponent } from "src/app/shared/tour-card-view/tour-card-view.component";
 import { ActiveEncounterViewComponent } from "src/app/feature-modules/encounter/active-encounter-view/active-encounter-view.component";
 import { TourPageComponent } from "src/app/feature-modules/marketplace/tour-page/tour-page.component";
+import { PaymentHistoryComponent } from "src/app/feature-modules/stakeholder/payment-history/payment-history.component";
+import { TouristsTourComponent } from "src/app/feature-modules/tour-authoring/tourists-tour/tourists-tour.component";
+import { TouristsKeyPointsComponent } from "src/app/feature-modules/tour-authoring/tourists-key-points/tourists-key-points.component";
+import { TouristsEquipmentComponent } from "src/app/feature-modules/tour-authoring/tourists-equipment/tourists-equipment.component";
 import { CouponsViewComponent } from "src/app/feature-modules/marketplace/coupons-view/coupons-view.component";
-
 const routes: Routes = [
     { path: "home", component: HomeComponent },
     { path: "login", component: LoginComponent },
@@ -210,7 +213,7 @@ const routes: Routes = [
     },
     {
         path: "tour-card",
-        component: TourCardViewComponent
+        component: TourCardViewComponent,
     },
     { path: "tour-details/:tourId", component: TourDetailsComponent },
     {
@@ -219,8 +222,28 @@ const routes: Routes = [
         canActivate: [AuthGuard],
     },
     {
+        path: "tourists-tour",
+        component: TouristsTourComponent,
+        canActivate: [AuthGuard],
+    },
+    {
+        path: "tour/:id/tourists-key-points",
+        component: TouristsKeyPointsComponent,
+        canActivate: [AuthGuard],
+    },
+    {
+        path:"tourists-tour/equipment/:id",
+        component: TouristsEquipmentComponent,
+        canActivate: [AuthGuard],
+    },
+    {
         path: "tour/:tourId",
         component: TourPageComponent,
+        canActivate: [AuthGuard],
+    },
+    {
+        path: "payment-history",
+        component: PaymentHistoryComponent,
         canActivate: [AuthGuard],
     },
     {
