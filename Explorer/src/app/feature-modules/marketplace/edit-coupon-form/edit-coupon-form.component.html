@@ -8,8 +8,8 @@
             <div class="edit-label">Discount:</div>
             <input class="edit-input" type="number" placeholder="Discount" formControlName="discount"/>
             <div class="edit-label">Expiration date</div>
-            <input class="edit-input" type="date" placeholder="Expiration date" required
-            min="{{ currentDate | date: 'yyyy-MM-dd' }}" formControlName="expirationDate">
+            <input class="edit-input" type="date" placeholder="Expiration date" 
+            min="{{ currentDate | date: 'MM/dd/yyyy' }}" formControlName="expirationDate">
             <label for="checkbox" class="edit-label"
                 >All</label
             >

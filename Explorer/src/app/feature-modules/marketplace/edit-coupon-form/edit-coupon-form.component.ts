@@ -41,7 +41,12 @@ export class EditCouponFormComponent {
       expirationDate: this.data.expirationDate || null,
       allFromAuthor: this.data.allFromAuthor || null
     };
-    this.editCouponForm.patchValue(couponPatch);
+    console.log(couponPatch.expirationDate);
+    this.editCouponForm.patchValue(this.data);
+    var formattedDate=formatDate(couponPatch.expirationDate!.toString().split('T')[0],'MM/dd/yyyy', 'en-US');
+    console.log(formattedDate);
+    this.editCouponForm.value.expirationDate=new Date(formattedDate);
+    
   }
   submit():void{
     const updatedData = this.editCouponForm.value;
