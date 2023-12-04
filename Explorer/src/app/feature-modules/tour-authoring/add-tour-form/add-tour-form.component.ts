@@ -67,6 +67,7 @@ export class AddTourFormComponent implements OnInit{
     };
     this.service.addTour(tour).subscribe({
       next: () => { 
+        console.log("uslo");
         this.toursUpdated.emit();
         location.reload();
         this.onClose();

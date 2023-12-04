@@ -1,0 +1,78 @@
+.container {
+    display: flex;
+    flex-direction: column;
+    padding: 20px;
+    border: rgba(var(--clr-outline)) 0.5rem solid;
+    border-radius: 1rem;
+    background-color: rgba(var(--clr-background-secondary));
+    height: 100vh;
+}
+
+.container h2 {
+    text-align: center;
+    color: rgba(var(--clr-text), 1);
+    font-family: var(--fnt-header);
+    font-weight: 600;
+    font-size: 2rem;
+    padding-bottom: 0.5rem;
+}
+
+.records-list {
+    overflow-y: auto;
+    border-radius: 1rem;
+    margin-top: 1rem;
+    max-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1rem;
+    padding: 0 1rem;
+}
+
+.records-list::-webkit-scrollbar {
+    height: 0.5em;
+}
+
+.records-list::-webkit-scrollbar-thumb {
+    background-color: rgba(var(--clr-background-secondary));
+    border-radius: 0.3rem;
+}
+
+.record-card {
+    background-color: rgba(var(--clr-background));
+    border-radius: 1rem;
+    padding: 1.2rem;
+    width: 30rem;
+    height: 8rem;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+    transition: background-color 0.1s;
+    border: rgba(var(--clr-outline)) 1px solid;
+    position: relative;
+    margin-bottom: 0;
+}
+
+.record-card:hover {
+    background-color: rgba(var(--clr-background), 0.6);
+}
+
+.record-card h3 {
+    margin-top: 0;
+    font-size: 1.2rem;
+    font-weight: bold;
+    color: rgba(var(--clr-text), 1);
+}
+
+.record-card p {
+    margin: 8px 0;
+    font-size: 1rem;
+    color: rgba(var(--clr-text), 0.8);
+}
+
+.fa-coins-icon {
+    position: absolute;
+    bottom: 0.5rem;
+    right: 1rem;
+    font-size: 2.2rem;
+    color: rgba(var(--clr-accent-500), 1);
+    opacity: 0.8;
+}

@@ -325,7 +325,6 @@ export class MarketplaceService {
                 shoppingCartId,
         );
     }
-
     addToken(tourId: number, touristId: number): Promise<TourToken | undefined> {
         return this.http
             .post<TourToken>(environment.apiHost + "token/" + tourId + "/" + touristId, {})

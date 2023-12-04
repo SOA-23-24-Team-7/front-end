@@ -1,0 +1,54 @@
+.dialog {
+    min-width: 35rem;
+    min-height: 40rem;
+    background-color: rgb(var(--clr-background-secondary));
+    color: rgb(var(--clr-text));
+    max-height: 10rem;
+    overflow: auto;
+    border-radius: 1rem;
+}
+
+.title {
+    background-color: rgb(var(--clr-background));
+    padding-block: 1.5rem;
+    text-align: center;
+}
+
+.info {
+    font-size: 25px;
+    font-family: var(--fnt-body);
+    margin: 10px;
+}
+
+.save-submit {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 25%;
+    height: 2rem;
+    background-color: rgba(var(--clr-primary-500), 1);
+    border: rgba(var(--clr-primary-500, 1)) 1px solid;
+    border-radius: 0.5rem;
+    cursor: pointer;
+    transition: background-color 0.15s;
+    margin-top: 5px;
+}
+.save-submit:hover {
+    background-color: rgba(var(--clr-primary-500), 0.9);
+}
+.save-submit-text {
+    font-family: var(--fnt-body);
+    font-weight: 500;
+    font-size: 1.25rem;
+}
+.form {
+    margin: 10px;
+}
+.coin-input {
+    width: 150px;
+    font-size: 15px;
+}
+.label {
+    font-size: 18px;
+    font-family: var(--fnt-body);
+}

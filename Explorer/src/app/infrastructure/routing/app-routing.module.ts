@@ -42,11 +42,13 @@ import { TourDetailsComponent } from "src/app/feature-modules/marketplace/tour-d
 import { UserNotificationsComponent } from "src/app/feature-modules/stakeholder/user-notifications/user-notifications.component";
 import { TourCardViewComponent } from "src/app/shared/tour-card-view/tour-card-view.component";
 import { ActiveEncounterViewComponent } from "src/app/feature-modules/encounter/active-encounter-view/active-encounter-view.component";
+import { TourPageComponent } from "src/app/feature-modules/marketplace/tour-page/tour-page.component";
+import { PaymentHistoryComponent } from "src/app/feature-modules/stakeholder/payment-history/payment-history.component";
 import { TouristsTourComponent } from "src/app/feature-modules/tour-authoring/tourists-tour/tourists-tour.component";
 import { TouristsKeyPointsComponent } from "src/app/feature-modules/tour-authoring/tourists-key-points/tourists-key-points.component";
 import { TouristsEquipmentComponent } from "src/app/feature-modules/tour-authoring/tourists-equipment/tourists-equipment.component";
-import { TourPageComponent } from "src/app/feature-modules/marketplace/tour-page/tour-page.component"; 
 import { TouristsTourBlogFormComponent } from "src/app/feature-modules/blog/tourists-tour-blog-form/tourists-tour-blog-form.component";
+ 
 
 const routes: Routes = [
     { path: "home", component: HomeComponent },
@@ -213,7 +215,7 @@ const routes: Routes = [
     },
     {
         path: "tour-card",
-        component: TourCardViewComponent
+        component: TourCardViewComponent,
     },
     { path: "tour-details/:tourId", component: TourDetailsComponent },
     {
@@ -244,6 +246,11 @@ const routes: Routes = [
     {
         path: "tourists-blog/:tourId",
         component: TouristsTourBlogFormComponent,
+        canActivate: [AuthGuard],
+    },
+    { 
+        path: "payment-history",
+        component: PaymentHistoryComponent,
         canActivate: [AuthGuard],
     } 
 ];
