@@ -382,9 +382,7 @@ export class TouristsKeyPointsComponent implements OnInit{
     } 
 
     currentTourIndex: number = 0;
-
-    // Moram namestiti da kada klikne levo a nema vise gde da ide levo ne racuna mu currentTourIndex, jer onda kada treba da ide desno
-    // moracu da kliknem jedanput vise zbog tog jednog ulevo
+    
     scrollToNextTourCard(): void {
         this.currentTourIndex++;
         if (this.currentTourIndex >= this.tourContainer.children.length) {
