@@ -1,0 +1,18 @@
+<div class="tour-card">
+    <img class="tour-image" [src]="tourImage" />
+    <div class="tour-card-details">
+        <div class="tour-name">{{ campaign.name }}</div>
+        <div>
+            Difficulty: <b>{{ campaign.averageDifficulty }}</b>
+            <br />
+            Distance: <b>{{ campaign.distance }}</b>
+        </div>
+        <button
+            class="btn search-button"
+            (click)="StartCampaign()"
+            *ngIf="!hasActiveCampaign"
+        >
+            Start Campaign
+        </button>
+    </div>
+</div>

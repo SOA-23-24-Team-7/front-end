@@ -6,5 +6,6 @@ export interface TourExecutionSession {
     tourId: number,
     nextKeyPointId: number,
     lastActivity: Date,
-    progress: number
+    progress: number,
+    isCampaign: boolean
 }

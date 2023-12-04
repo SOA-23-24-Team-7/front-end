@@ -14,6 +14,8 @@ import { latLng } from 'leaflet';
 import { MatDialog } from '@angular/material/dialog';
 import { ClickedKeyPointComponent } from '../clicked-key-point/clicked-key-point.component';
 import { environment } from 'src/env/environment';
+import { TourExecutionStart } from '../model/tour-execution-start-model';
+import { SecretPopupComponent } from '../secret-popup/secret-popup.component';
 
 @Component({
   selector: 'xp-tour-executing',
@@ -21,12 +23,13 @@ import { environment } from 'src/env/environment';
   styleUrls: ['./tour-executing.component.css']
 })
 export class TourExecutingComponent implements OnInit {
-
+  execution: TourExecutionStart = {tourId: 0, isCampaign: false}
+  isCampaign: any
   changePositionObservable: Observable<any>
   clickedKeyPoint: KeyPoint
   positionSubscription: Subscription
   touristId: number
-  session: TourExecutionSession = { id: 0, tourId: 0, status: TourExecutionSessionStatus.Started, nextKeyPointId: -1, lastActivity: null!, progress: 0 }
+  session: TourExecutionSession = { id: 0, tourId: 0, status: TourExecutionSessionStatus.Started, nextKeyPointId: -1, lastActivity: null!, progress: 0, isCampaign: false }
   tour: Tour = {
     name: '.',
     description: '.',
@@ -42,6 +45,12 @@ export class TourExecutingComponent implements OnInit {
 
   ngOnInit(): void {
     this.route.paramMap.subscribe((params) => {
+      this.isCampaign = params.get('isCampaign')!
+      if(this.isCampaign == 'false'){
+        this.session.isCampaign = false
+      }else{
+        this.session.isCampaign = true
+      }
       this.session.tourId = +params.get('tourId')!
       this.getTour()
     })
@@ -61,7 +70,7 @@ export class TourExecutingComponent implements OnInit {
   checkKeyPointCompletion() {
     if (this.session.status !== TourExecutionSessionStatus.Started) return;
     
-    this.service.checkKeyPointCompletion(this.session.tourId, this.touristPosition).subscribe((session) => {
+    this.service.checkKeyPointCompletion(this.session.tourId, this.session.isCampaign, this.touristPosition).subscribe((session) => {
       if(this.session.nextKeyPointId != -1 && this.session.nextKeyPointId != session.nextKeyPointId){
         this.showSecret(this.session.nextKeyPointId);
       }
@@ -90,20 +99,36 @@ export class TourExecutingComponent implements OnInit {
   showSecret(keyPointId: number){
     this.tour.keyPoints?.forEach(keyPoint =>{
       if(keyPoint.id == keyPointId){
-        if(keyPoint.haveSecret){
-          alert('secret unlocked: '+ keyPoint.secret?.description)
+        if(keyPoint.secret?.description != ''){
+          this.dialogRef.open(SecretPopupComponent, {
+            width: 'auto',
+            height: 'auto',
+            data: {
+              dataKey: keyPoint.secret?.description
+            }
+          });
         }
       }
     })
   }
 
   getTour() {
-    this.service.getTour(this.session.tourId).subscribe({
-      next: (result: Tour) => {
-        this.tour = result;
-        this.tourImage = environment.imageHost + this.tour.keyPoints![0].imagePath
-      }
-    });
+    if(!this.session.isCampaign){
+      this.service.getTour(this.session.tourId).subscribe({
+        next: (result: Tour) => {
+          this.tour = result;
+          this.tourImage = environment.imageHost + this.tour.keyPoints![0].imagePath
+        }
+      });
+    }else{
+      this.service.getCampaign(this.session.tourId).subscribe({
+        next: (result: Tour) => {
+          console.log(result)
+          this.tour = result;
+          this.tourImage = environment.imageHost + this.tour.keyPoints![0].imagePath
+        }
+      });
+    }
   }
 
   abandonTour() {
@@ -112,7 +137,9 @@ export class TourExecutingComponent implements OnInit {
     }
     let r = confirm('Are you sure you want to leave this tour?')
     if (r) {
-      this.service.abandonTour(this.session.tourId).subscribe({
+      this.execution.tourId = this.session.tourId
+      this.execution.isCampaign = this.session.isCampaign
+      this.service.abandonTour(this.execution).subscribe({
         next: (result: TourExecutionSession) => {
           this.router.navigate(['/purchasedtours'])
         }
