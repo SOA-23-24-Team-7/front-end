@@ -26,6 +26,7 @@ mat-card img {
 .map-container {
   width: 100%;
   margin-top: 3.1rem;
+  height: 100%;
 }
 
 .container {
@@ -132,7 +133,7 @@ mat-card img {
   border-radius: 0.5rem;
   cursor: pointer;
   transition: background-color 0.15s;
-  margin-top: 1.5rem;
+  margin-top: 2.5rem;
 }
 
 .done-submit:hover {
@@ -214,12 +215,14 @@ h2 {
   border-width: 2rem 2.2rem 2rem 0;
   border-color: transparent rgba(var(--clr-primary-500), 1) transparent
       transparent;
+  margin-top: 22rem;
 }
 
 .tour-triangle-right {
   border-width: 2rem 0 2rem 2.2rem;
   border-color: transparent transparent transparent
       rgba(var(--clr-primary-500), 1);
+  margin-top: 22rem;
 }
 
 .tour-list-cards-button {
@@ -237,5 +240,11 @@ h2 {
 }
 
 #recTourH1 {
-  margin-left: 5rem;
+  margin-left: 11rem;
+  margin-top: -2rem;
+}
+
+#recommendedToursHeader {
+  margin-bottom: 4rem;
+  margin-left: 1rem;
 }

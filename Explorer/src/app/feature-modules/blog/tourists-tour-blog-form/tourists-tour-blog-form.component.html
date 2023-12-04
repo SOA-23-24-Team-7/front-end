@@ -1,0 +1,43 @@
+<form [formGroup]="blogForm">
+  <div class="create-form">
+      <div class="form">
+          <input
+              formControlName="title"
+              type="text"
+              placeholder="Title*"
+              [readonly]="true"
+              [value]="tour.name"
+          />
+
+          <textarea
+              formControlName="description"
+              rows="8"
+              placeholder="Description"
+          ></textarea>
+      </div>
+      <div class="markup-preview">
+          <h1>Markup Preview</h1>
+          <div [innerHTML]="getMarkupPreview()" class="preview"></div>
+      </div>
+  </div>
+  <div class="button-container">
+      <button
+          mat-raised-button
+          type="submit"
+          *ngIf="!blog"
+          color="primary"
+          (click)="createBlog()"
+      >
+          Create
+      </button>
+      <button
+          mat-raised-button
+          type="submit"
+          *ngIf="blog"
+          color="primary"
+          (click)="updateBlog()"
+      >
+          Update
+      </button>
+  </div>
+</form>
