@@ -13,6 +13,7 @@ import { TourAuthoringModule } from "../tour-authoring/tour-authoring.module";
 import { TourExecutionInfoComponent } from "./tour-execution-info/tour-execution-info.component";
 import { FormsModule, ReactiveFormsModule } from "@angular/forms";
 import { CampaignCardComponent } from './campaign-card/campaign-card.component';
+import { SecretPopupComponent } from './secret-popup/secret-popup.component';
 
 @NgModule({
     declarations: [
@@ -25,6 +26,7 @@ import { CampaignCardComponent } from './campaign-card/campaign-card.component';
         KeyPointsViewComponent,
         TourExecutionInfoComponent,
         CampaignCardComponent,
+        SecretPopupComponent,
     ],
     imports: [
         CommonModule,

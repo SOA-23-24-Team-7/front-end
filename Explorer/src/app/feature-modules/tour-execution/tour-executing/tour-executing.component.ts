@@ -15,6 +15,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { ClickedKeyPointComponent } from '../clicked-key-point/clicked-key-point.component';
 import { environment } from 'src/env/environment';
 import { TourExecutionStart } from '../model/tour-execution-start-model';
+import { SecretPopupComponent } from '../secret-popup/secret-popup.component';
 
 @Component({
   selector: 'xp-tour-executing',
@@ -98,8 +99,14 @@ export class TourExecutingComponent implements OnInit {
   showSecret(keyPointId: number){
     this.tour.keyPoints?.forEach(keyPoint =>{
       if(keyPoint.id == keyPointId){
-        if(keyPoint.haveSecret){
-          alert('secret unlocked: '+ keyPoint.secret?.description)
+        if(keyPoint.secret?.description != ''){
+          this.dialogRef.open(SecretPopupComponent, {
+            width: 'auto',
+            height: 'auto',
+            data: {
+              dataKey: keyPoint.secret?.description
+            }
+          });
         }
       }
     })

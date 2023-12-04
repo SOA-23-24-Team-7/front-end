@@ -102,6 +102,7 @@ export class PurchasedToursComponent implements OnInit {
                 });
                 this.selectedTourIds = [];
                 this.selectedTours = [];
+                this.getCampaigns();
             },
         });
     }
