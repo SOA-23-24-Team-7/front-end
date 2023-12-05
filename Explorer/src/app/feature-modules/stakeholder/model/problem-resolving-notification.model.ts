@@ -2,6 +2,7 @@ import { User } from "src/app/infrastructure/auth/model/user.model";
 
 export interface ProblemResolvingNotification {
     id: number;
+    header: string;
     problemId: number;
     receiverId: number;
     senderId: number;

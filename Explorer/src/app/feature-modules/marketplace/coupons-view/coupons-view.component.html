@@ -1,0 +1,51 @@
+<div class="problems">
+    <div
+        class="card card-hover"
+        *ngFor="let coupon of coupons"
+        #problemCard
+    >
+
+        <div class="data">
+            <div class="problem-data">
+                <div class="report-data">
+                    <div class="label">Expiration date:</div>
+                    <div>
+                        {{ coupon.expirationDate| date: "dd / MM / yyyy" }}
+                    </div>
+                </div>
+                <div class="report-data">
+                    <div class="label">Tour:</div>
+                    <div>{{ coupon.tourId }}</div>
+                </div>
+            </div>
+            <div class="problem-description">
+                <div class="row">
+                    <div class="column">
+                        <div class="placeholder">
+                            <div class="label">Discount:</div>
+                            <div>{{ coupon.discount }}%</div>
+                        </div>
+                    </div>
+                    <div class="column">
+                        <div class="placeholder">
+                            <div class="label">Code:</div>
+                            <div>{{ coupon.code }}</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="column">
+                        <div class="placeholder">
+                            <div class="label">For all tours:</div>
+                            <div class="description">
+                                <div>{{ coupon.allFromAuthor }}</div>
+                            </div>
+                        </div>
+                    </div>
+                    <fa-icon class="tour-action" [icon]="faPen" (click)="onEdit(coupon)"/>
+                    <fa-icon class="tour-action" [icon]="faTrash" (click)="Delete(coupon)"/>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

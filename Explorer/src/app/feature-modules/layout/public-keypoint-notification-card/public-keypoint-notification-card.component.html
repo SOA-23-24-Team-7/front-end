@@ -1,21 +1,37 @@
-<div class="notification-card">
-    <header
-        [ngClass]="{
-            accepted: notification.isAccepted,
-            rejected: !notification.isAccepted
-        }"
-    >
-        <div class="notification-date">
-            {{ notification.created | date : "dd/MM/yyyy,  HH:mm" }}
+<div class="notification">
+    <div
+        class="marker"
+        [class.accepted]="notification.isAccepted"
+        [class.rejected]="!notification.isAccepted"
+    ></div>
+    <div class="data">
+        <div class="picture">
+            <div
+                class="sender-avatar"
+                [style.background-image]="
+                    'url(' + notification.senderPicture + ')'
+                "
+            ></div>
         </div>
-    </header>
-    <hr />
-    <div class="text">
-        <div class="notification-description">
-            <p>{{ notification.description }}</p>
+        <div class="row">
+            <div class="notification-column">
+                <div class="notification-header">{{ notification.header }}</div>
+                <div class="notification-row">
+                    <div *ngIf="notification.isAccepted">Approved by</div>
+                    <div *ngIf="!notification.isAccepted">Declined by</div>
+                    <div class="sender">@{{ notification.senderName }}</div>
+                    <div>at</div>
+                    <div
+                        [class.acceptedDate]="notification.isAccepted"
+                        [class.rejectedDate]="!notification.isAccepted"
+                    >
+                        {{ notification.created | date : "dd/MM/yyyy" }}
+                    </div>
+                </div>
+            </div>
         </div>
-        <div class="notification-comment" *ngIf="!notification.isAccepted">
-            <p>Comment: {{ notification.comment }}</p>
+        <div class="notification-content">
+            {{ notification.description }}
         </div>
     </div>
 </div>

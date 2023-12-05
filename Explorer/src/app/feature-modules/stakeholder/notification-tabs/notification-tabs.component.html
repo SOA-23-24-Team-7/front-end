@@ -1,32 +1,70 @@
-<div class="tab-list" #tabList>
-    <div
-        class="tab"
-        *ngIf="user.role === 'author'"
-        [ngClass]="{ 'selected-tab': selectedTab === Tab.KEYPOINTS }"
-        (click)="setActiveTab(Tab.KEYPOINTS, tabList)"
-    >
-        <fa-icon [icon]="faMapMarker" /> Public keypoints
+<div class="wrapper">
+    <div class="search-bar">
+        <fa-icon [icon]="faSearch" class="search-icon" />
+        <input
+            type="text"
+            class="search-input"
+            placeholder="Search notification..."
+        />
     </div>
-    <div
-        class="tab"
-        *ngIf="user.role === 'author'"
-        [ngClass]="{ 'selected-tab': selectedTab === Tab.FACILITIES }"
-        (click)="setActiveTab(Tab.FACILITIES, tabList)"
-    >
-        <fa-icon [icon]="faBuilding" /> Public facilities
+    <div class="tab-list" #tabList>
+        <div
+            class="tab"
+            *ngIf="user.role === 'author'"
+            [ngClass]="{ 'selected-tab': selectedTab === Tab.KEYPOINTS }"
+            (click)="setActiveTab(Tab.KEYPOINTS, tabList)"
+        >
+            <fa-icon [icon]="faMapMarker" /> Public keypoints
+        </div>
+        <div
+            class="tab"
+            *ngIf="user.role === 'author'"
+            [ngClass]="{ 'selected-tab': selectedTab === Tab.FACILITIES }"
+            (click)="setActiveTab(Tab.FACILITIES, tabList)"
+        >
+            <fa-icon [icon]="faBuilding" /> Public facilities
+        </div>
+        <div
+            class="tab"
+            [ngClass]="{
+                'selected-tab': selectedTab === Tab.PROBLEMRESOLVINGS
+            }"
+            (click)="setActiveTab(Tab.PROBLEMRESOLVINGS, tabList)"
+        >
+            <fa-icon [icon]="faTriangleExclamation" /> Problem resolving
+        </div>
+        <div
+            class="tab"
+            *ngIf="user.role === 'tourist'"
+            [ngClass]="{
+                'selected-tab': selectedTab === Tab.SHOPPINGNOTIFICATIONS
+            }"
+            (click)="setActiveTab(Tab.SHOPPINGNOTIFICATIONS, tabList)"
+        >
+            <fa-icon [icon]="faShoppingCart" /> Shopping notifications
+        </div>
+        <div
+            class="tab"
+            *ngIf="user.role === 'tourist'"
+            [ngClass]="{
+                'selected-tab': selectedTab === Tab.TRANSACTIONRECORDSNOTIFICATIONS
+            }"
+            (click)="setActiveTab(Tab.TRANSACTIONRECORDSNOTIFICATIONS, tabList)"
+        >
+            <fa-icon [icon]="faMoneyBill" [spin]="true"/> Transaction notifications
+        </div>
     </div>
-    <div
-        class="tab"
-        [ngClass]="{ 'selected-tab': selectedTab === Tab.PROBLEMRESOLVINGS }"
-        (click)="setActiveTab(Tab.PROBLEMRESOLVINGS, tabList)"
-    >
-        <fa-icon [icon]="faTriangleExclamation" /> Problem resolving
+    <div class="tab-content">
+        <xp-keypoints-notifications *ngIf="selectedTab === Tab.KEYPOINTS" />
+        <xp-facilities-notifications *ngIf="selectedTab === Tab.FACILITIES" />
+        <xp-problem-resolving-notifications
+            *ngIf="selectedTab === Tab.PROBLEMRESOLVINGS"
+        />
+        <xp-shopping-notifications
+            *ngIf="selectedTab === Tab.SHOPPINGNOTIFICATIONS"
+        />
+        <xp-transaction-records-notifications
+            *ngIf="selectedTab === Tab.TRANSACTIONRECORDSNOTIFICATIONS"
+        />
     </div>
-</div>
-<div class="tab-content">
-    <xp-keypoints-notifications *ngIf="selectedTab === Tab.KEYPOINTS" />
-    <xp-facilities-notifications *ngIf="selectedTab === Tab.FACILITIES" />
-    <xp-problem-resolving-notifications
-        *ngIf="selectedTab === Tab.PROBLEMRESOLVINGS"
-    />
 </div>

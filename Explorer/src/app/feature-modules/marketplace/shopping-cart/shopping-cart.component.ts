@@ -15,6 +15,8 @@ import { Observable } from "rxjs";
 import { ShoppingCart } from "../model/shopping-cart";
 import { PagedResults } from "src/app/shared/model/paged-results.model";
 import { TourToken } from "../model/tour-token.model";
+import { StakeholderService } from "../../stakeholder/stakeholder.service";
+import { CouponsModalComponent } from "../coupons-modal/coupons-modal.component";
 
 @Component({
     selector: "xp-shopping-cart",
@@ -29,7 +31,9 @@ export class ShoppingCartComponent {
 
     constructor(
         private service: MarketplaceService,
+        private stakeholderService: StakeholderService,
         public dialogRef: MatDialog,
+        public dialogRefCoupons: MatDialog,
         private authService: AuthService,
         public dialog: MatDialogRef<ShoppingCartComponent>,
         @Inject(MAT_DIALOG_DATA) public data: any,
@@ -90,24 +94,78 @@ export class ShoppingCartComponent {
         });
     }
     checkout(): void {
-        this.service.deleteShoppingKart(this.shoppingCart.id).subscribe({
-            next: () => {
-                alert("You have successfully bought tours!");
-                this.shoppingCart = {};
-                this.service.addShoppingCart(this.shoppingCart).subscribe({
-                    next: async (result: ShoppingCart) => {
-                        this.shoppingCart = result;
-                        for (let tour of this.data) {
-                            const result = await this.service.addToken(tour.id);
-                            console.log(result);
-                        }
-                        this.dialogRef.closeAll();
-                    },
-                });
-            },
+        var totalPrice = this.shoppingCart.totalPrice;
+        var storedShoppingCart = this.shoppingCart;
+        var uslo = false;
+        console.log(totalPrice);
+        this.stakeholderService.getTouristWallet().subscribe(result => {
+            var wallet = result;
+            if (wallet.adventureCoin >= (totalPrice as number)) {
+                //dobaviti order iteme
+                const orderItems = this.shoppingCart.orderItems;
+
+                this.service
+                    .deleteShoppingKart(this.shoppingCart.id)
+                    .subscribe({
+                        next: () => {
+                            this.shoppingCart = {};
+                            console.log(storedShoppingCart);
+                            this.service
+                                .addShoppingCart(this.shoppingCart)
+                                .subscribe({
+                                    next: async (result: ShoppingCart) => {
+                                        this.shoppingCart = result;
+                                        var newShoppingCart = result;
+                                        for (let tour of this.data) {
+                                            this.shoppingCart =
+                                                storedShoppingCart;
+                                            const orderItemPrice =
+                                                orderItems?.find(
+                                                    o => o.tourId == tour.id,
+                                                )?.price;
+                                            const result =
+                                                await this.service.addToken(
+                                                    tour.id,
+                                                    this.shoppingCart
+                                                        .touristId as number,
+                                                    totalPrice as number,
+                                                    orderItemPrice as number,
+                                                );
+                                            totalPrice =
+                                                (totalPrice as number) -
+                                                tour.price;
+                                            console.log(result);
+                                            alert(
+                                                "You have successfully bought tours!",
+                                            );
+                                            this.shoppingCart = newShoppingCart;
+                                        }
+                                        this.dialogRef.closeAll();
+                                    },
+                                });
+                        },
+                    });
+            } else {
+                alert("You don't have enough coins.");
+            }
         });
     }
     isEmpty(): void {
         this.isDisabled = this.data.length == 0;
+    }
+
+    openCouponModal(): void {
+        const dialogRef = this.dialogRefCoupons.open(CouponsModalComponent, {
+            //data: this.listaJavnihTacaka, // lista javnih tacaka koju dobijam u ovoj komponenti i ovim je saljem u modalni dijalog
+            height: "400px",
+            width: "300px",
+            data: {
+                shoppingCartId: this.shoppingCart.id,
+            },
+        });
+
+        dialogRef.afterClosed().subscribe(result => {
+            this.getShoppingCart(); // update the price
+        });
     }
 }

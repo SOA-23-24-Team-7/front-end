@@ -1,6 +1,8 @@
 import { NgModule } from "@angular/core";
 import { CommonModule } from "@angular/common";
 import { MaterialModule } from "src/app/infrastructure/material/material.module";
+import { MatChipsModule } from '@angular/material/chips';
+import { DragDropModule } from '@angular/cdk/drag-drop';
 import { ReactiveFormsModule } from "@angular/forms";
 import { RatingFormComponent } from "./rating-form/rating-form.component";
 import { RouterModule } from "@angular/router";
@@ -21,16 +23,25 @@ import { FontAwesomeModule } from "@fortawesome/angular-fontawesome";
 import { LayoutModule } from "src/app/feature-modules/layout/layout.module";
 import { KeypointsNotificationsComponent } from "./keypoints-notifications/keypoints-notifications.component";
 import { FacilitiesNotificationsComponent } from "./facilities-notifications/facilities-notifications.component";
-import { ShoppingCartComponent } from './shopping-cart/shopping-cart.component';
-import { MyClubInvitationsComponent } from './my-club-invitations/my-club-invitations.component';
-import { TourPreferencesComponent } from './tour-preferences/tour-preferences.component';
-import { TourPreferenceFormComponent } from './tour-preference-form/tour-preference-form.component';
-import { BrowserModule } from '@angular/platform-browser';
-import { TagInputModule } from 'ngx-chips';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { FormsModule } from '@angular/forms';
-import { PublishedToursComponent } from './tours/published-tours.component';
-import { TourDetailsComponent } from './tour-details/tour-details.component';
+import { ShoppingCartComponent } from "./shopping-cart/shopping-cart.component";
+import { MyClubInvitationsComponent } from "./my-club-invitations/my-club-invitations.component";
+import { TourPreferencesComponent } from "./tour-preferences/tour-preferences.component";
+import { TourPreferenceFormComponent } from "./tour-preference-form/tour-preference-form.component";
+import { BrowserModule } from "@angular/platform-browser";
+import { TagInputModule } from "ngx-chips";
+import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
+import { FormsModule } from "@angular/forms";
+import { PublishedToursComponent } from "./tours/published-tours.component";
+import { TourDetailsComponent } from "./tour-details/tour-details.component";
+import { FullSizeImageComponent } from "./full-size-image/full-size-image.component";
+import { TourPageComponent } from "./tour-page/tour-page.component";
+import { TourAuthoringModule } from "../tour-authoring/tour-authoring.module";
+import { TourSalesComponent } from './tour-sales/tour-sales.component';
+import { TourSaleFormComponent } from './tour-sale-form/tour-sale-form.component';
+import { CouponsComponent } from "./coupons/coupons.component";
+import { CouponsViewComponent } from "./coupons-view/coupons-view.component";
+import { EditCouponFormComponent } from "./edit-coupon-form/edit-coupon-form.component";
+import { CouponsModalComponent } from "./coupons-modal/coupons-modal.component";
 
 @NgModule({
     declarations: [
@@ -57,12 +68,21 @@ import { TourDetailsComponent } from './tour-details/tour-details.component';
         KeypointsNotificationsComponent,
         FacilitiesNotificationsComponent,
         ShoppingCartComponent,
-        TourDetailsComponent
+        TourDetailsComponent,
+        FullSizeImageComponent,
+        TourPageComponent,
+        TourSalesComponent,
+        TourSaleFormComponent,
+        CouponsComponent,
+        CouponsViewComponent,
+        EditCouponFormComponent,
+        CouponsModalComponent,
     ],
     imports: [
         CommonModule,
         RouterModule,
         MaterialModule,
+        DragDropModule,
         ReactiveFormsModule,
         FormsModule,
         CommonModule,
@@ -76,6 +96,8 @@ import { TourDetailsComponent } from './tour-details/tour-details.component';
         FontAwesomeModule,
         FormsModule,
         LayoutModule,
+        MatChipsModule,
+        TourAuthoringModule,
     ],
     exports: [
         ReviewComponent,
@@ -86,6 +108,7 @@ import { TourDetailsComponent } from './tour-details/tour-details.component';
         TourPreferenceFormComponent,
         KeypointsNotificationsComponent,
         FacilitiesNotificationsComponent,
+        CouponsModalComponent,
     ],
 })
 export class MarketplaceModule {}

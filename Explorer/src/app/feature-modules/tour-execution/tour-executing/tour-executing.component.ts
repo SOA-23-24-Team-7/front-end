@@ -2,7 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import { Tour } from '../../tour-authoring/model/tour.model';
 import { ActivatedRoute, Router } from '@angular/router';
 import { TourExecutionService } from '../tour-execution.service';
-import { TouristPositionSimulatorComponent } from '../tourist-position-simulator/tourist-position-simulator.component';
 import { Observable, Subscription, interval } from 'rxjs';
 import { AuthService } from 'src/app/infrastructure/auth/auth.service';
 import { User } from 'src/app/infrastructure/auth/model/user.model';
@@ -10,9 +9,9 @@ import { TouristPosition } from '../model/tourist-position.model';
 import { TourExecutionSessionStatus } from '../model/tour-execution-session-status.model';
 import { TourExecutionSession } from '../model/tour-execution-session-model';
 import { KeyPoint } from '../../tour-authoring/model/key-point.model';
-import { latLng } from 'leaflet';
 import { MatDialog } from '@angular/material/dialog';
 import { ClickedKeyPointComponent } from '../clicked-key-point/clicked-key-point.component';
+import { environment } from 'src/env/environment';
 
 @Component({
   selector: 'xp-tour-executing',
@@ -32,6 +31,8 @@ export class TourExecutingComponent implements OnInit {
     tags: ['.'],
     difficulty: 1
   }
+  isTourInProgress: boolean = true;
+  tourImage: string
   touristPosition: any = null;
 
   constructor(private route: ActivatedRoute, private router: Router, private authService: AuthService, 
@@ -64,6 +65,7 @@ export class TourExecutingComponent implements OnInit {
       }
       this.session = session;
       if(this.session.status == TourExecutionSessionStatus.Completed){
+        this.isTourInProgress = false;
         alert('Tour completed')
       }
     }, () => {
@@ -82,6 +84,7 @@ export class TourExecutingComponent implements OnInit {
       }
     });
   }
+
   showSecret(keyPointId: number){
     this.tour.keyPoints?.forEach(keyPoint =>{
       if(keyPoint.id == keyPointId){
@@ -91,15 +94,17 @@ export class TourExecutingComponent implements OnInit {
       }
     })
   }
+
   getTour() {
     this.service.getTour(this.session.tourId).subscribe({
       next: (result: Tour) => {
         this.tour = result;
-        console.log(this.tour)
+        this.tourImage = environment.imageHost + this.tour.keyPoints![0].imagePath
       }
     });
   }
-  abandonTour(){
+
+  abandonTour() {
     if(this.session.status != TourExecutionSessionStatus.Started){
       this.router.navigate(['/purchasedtours'])
     }
@@ -113,6 +118,14 @@ export class TourExecutingComponent implements OnInit {
     }
   }
 
+  goBack() {
+    this.router.navigate(['/purchasedtours'])
+  }
+
+  createBlog(): void {
+    this.router.navigate(['/tourists-blog/' + this.tour.id])
+  }
+
   getLiveTourExecution() {
     this.service.getLiveTour().subscribe({
       next: (result: TourExecutionSession) => {
@@ -122,6 +135,7 @@ export class TourExecutingComponent implements OnInit {
       }
     })
   }
+
   getKeyPoint(LatLng: any){
     this.tour.keyPoints?.forEach(keyPoint =>{
       if(keyPoint.latitude == LatLng.lat && keyPoint.longitude == LatLng.lng){
@@ -136,8 +150,8 @@ export class TourExecutingComponent implements OnInit {
       nextKeyPointId = this.session.nextKeyPointId
     }
     this.dialogRef.open(ClickedKeyPointComponent, {
-      width: '380px',
-      height: '420px',
+      width: 'auto',
+      height: 'auto',
       data: {
         dataKey: this.clickedKeyPoint,
         nextKeyPointId: nextKeyPointId

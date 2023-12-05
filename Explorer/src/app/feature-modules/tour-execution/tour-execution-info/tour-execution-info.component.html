@@ -1,15 +1,16 @@
-<div class="info">
-    <div class="name">{{name}}</div>
-    <div class="column">
-        <div class="row">
-            {{description}}
-        </div>
-        <div class="row">
-            {{lastActivity}}
-        </div>
-        <div class="row">
-            {{tourStatus}}
-        </div>
-    </div>
-</div>
+<mat-card class="container">
+    <mat-card-header>
+        <mat-card-title>{{name}}</mat-card-title>
+        <mat-card-subtitle>
+            <p [ngStyle]="changeColor()">{{tourExecutionStatusString}}</p>
+        </mat-card-subtitle>
+    </mat-card-header>
+    <mat-card-content>
+        <p>{{description}}</p>
+        <hr>
+    </mat-card-content>
+    <mat-card-footer>
+        <p class="last-activity">Last active: {{formatedDate}}</p>
+    </mat-card-footer>
+</mat-card>
 

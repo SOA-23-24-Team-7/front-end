@@ -1,0 +1,45 @@
+* {
+    margin: 0;
+    padding: 0;
+}
+
+.modal {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    z-index: 9999;
+    background-color: rgba(0, 0, 0, 0.7);
+    animation: fadeIn 0.5s ease-in-out;
+}
+
+.register-x {
+    top: 0;
+    left: 0;
+    color: rgba(var(--clr-primary-500), 1);
+    cursor: pointer;
+    font-size: 2rem;
+    transition: color 0.15s;
+    z-index: 2;
+    padding: 10px;
+}
+
+.register-x:hover {
+    color: rgba(var(--clr-primary-500), 0.9);
+}
+.register-head {
+    position: relative;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+}
+.image {
+    border-radius: 1rem;
+    max-width: 90%;
+    max-height: 45rem;
+    object-fit: contain;
+}

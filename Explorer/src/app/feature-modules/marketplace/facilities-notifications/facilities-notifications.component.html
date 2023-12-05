@@ -1,8 +1,7 @@
-<div class="column">
-    <div class="cards-list">
-        <xp-public-keypoint-notification-card
-            *ngFor="let n of facilityNotifications"
-            [notification]="n"
-        ></xp-public-keypoint-notification-card>
-    </div>
+<div class="cards-list">
+    <xp-public-keypoint-notification-card
+        *ngFor="let n of facilityNotifications"
+        class="notification"
+        [notification]="n"
+    ></xp-public-keypoint-notification-card>
 </div>

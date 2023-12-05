@@ -1,6 +1,12 @@
 import { Component, OnInit } from "@angular/core";
-import { faMapMarker, faBuilding } from "@fortawesome/free-solid-svg-icons";
-import { faTriangleExclamation } from "@fortawesome/free-solid-svg-icons";
+import {
+    faMapMarker,
+    faBuilding,
+    faTriangleExclamation,
+    faSearch,
+    faShoppingCart,
+    faMoneyBill,
+} from "@fortawesome/free-solid-svg-icons";
 import { AuthService } from "src/app/infrastructure/auth/auth.service";
 import { User } from "src/app/infrastructure/auth/model/user.model";
 
@@ -8,6 +14,8 @@ enum Tab {
     KEYPOINTS,
     FACILITIES,
     PROBLEMRESOLVINGS,
+    SHOPPINGNOTIFICATIONS,
+    TRANSACTIONRECORDSNOTIFICATIONS,
 }
 @Component({
     selector: "xp-notification-tabs",
@@ -15,11 +23,6 @@ enum Tab {
     styleUrls: ["./notification-tabs.component.css"],
 })
 export class NotificationTabsComponent implements OnInit {
-    //icons
-    faMapMarker = faMapMarker;
-    faBuilding = faBuilding;
-    faTriangleExclamation = faTriangleExclamation;
-
     Tab = Tab;
     selectedTab: Tab = Tab.KEYPOINTS;
     user: User;
@@ -40,4 +43,12 @@ export class NotificationTabsComponent implements OnInit {
             el.scrollIntoView({ behavior: "smooth", block: "start" });
         }, 1);
     }
+
+    //icons
+    faMapMarker = faMapMarker;
+    faBuilding = faBuilding;
+    faTriangleExclamation = faTriangleExclamation;
+    faSearch = faSearch;
+    faShoppingCart = faShoppingCart;
+    faMoneyBill = faMoneyBill;
 }

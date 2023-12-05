@@ -1,0 +1,15 @@
+<div class="cards-list">
+    <div
+        class="transaction"
+        *ngFor="let transaction of transactionRecords"
+    >
+    <div class="transaction-column">
+        <div class="transaction-header">
+            Your wallet ballance was updated to {{ transaction.amount }} <fa-icon class="fa-coins-icon" [icon]="faCoins" [spin]="true" />
+        </div>
+        <div class="transaction-row">
+            <div>Transaction occured on: {{ datePipe.transform(transaction.date, 'dd/MM/yyyy HH:mm:ss') }}</div>
+        </div>
+        
+    </div>
+</div>

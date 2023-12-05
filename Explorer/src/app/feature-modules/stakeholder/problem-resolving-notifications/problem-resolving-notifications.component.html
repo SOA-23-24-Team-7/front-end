@@ -1,31 +1,34 @@
-<div class="column">
-    <div class="cards-list">
-        <div
-            *ngFor="let notification of problemResolvingNotifications"
-            class="card"
-            (click)="setSeenStatus(notification.id, notification.problemId)"
-        >
-            <div class="notification">
-                <div class="picture">
-                    <div
-                        class="sender-avatar"
-                        [style.background-image]="
-                            'url(' + notification.sender.profilePicture + ')'
-                        "
-                    ></div>
+<div class="cards-list">
+    <div
+        class="notification"
+        *ngFor="let notification of problemResolvingNotifications"
+        (click)="setSeenStatus(notification, notification.problemId)"
+        [class.seen]="!notification.hasSeen"
+    >
+        <div class="picture">
+            <div
+                class="sender-avatar"
+                [style.background-image]="
+                    'url(' + notification.sender.profilePicture + ')'
+                "
+            ></div>
+        </div>
+        <div class="row">
+            <div class="notification-column">
+                <div class="notification-header">
+                    {{ notification.header }}
                 </div>
-                <div class="notification-column">
-                    <div class="notification-content">
-                        {{ notification.message }}
-                    </div>
-                    <div class="notification-row">
-                        <div>Sent by</div>
-                        <div class="sender">
-                            {{ notification.sender.username }}
-                        </div>
+                <div class="notification-row">
+                    <div>Sent by</div>
+                    <div class="sender">
+                        {{ notification.sender.username }}
                     </div>
                 </div>
             </div>
+            <xp-tag tagText="✨new" *ngIf="!notification.hasSeen" />
+        </div>
+        <div class="notification-content">
+            {{ notification.message }}
         </div>
     </div>
 </div>

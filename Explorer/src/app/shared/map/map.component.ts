@@ -5,6 +5,7 @@ import { KeyPoint } from 'src/app/feature-modules/tour-authoring/model/key-point
 import { Observable, Subscription } from 'rxjs';
 import { PagedResults } from '../model/paged-results.model';
 import { Facilities } from 'src/app/feature-modules/tour-authoring/model/facilities.model';
+import "leaflet-fullscreen"
 
 @Component({
   selector: 'xp-map',
@@ -30,6 +31,7 @@ export class MapComponent implements AfterViewInit, OnChanges {
   public touristPosition: [number, number];
 
   @Input() refreshEvents: Observable<number>;
+  @Input() showLegend: boolean = true;
   @Input() selectedKeyPoint: KeyPoint | null;
   @Input() canEdit = false;
   @Input() isKeyPointMap = false;
@@ -55,7 +57,7 @@ export class MapComponent implements AfterViewInit, OnChanges {
     if (value !== null && !value) return;
     if (!this.isTourExecutionMap) return;
     if (!this.touristPosition) return;
-    
+
     [...this.waypointMap.entries()].forEach(entry => {
       if (value == -1 || entry[1].order < this.waypointMap.get(value).order) {
         this.checkedPointsMap.set(entry[0], entry[1]);
@@ -78,6 +80,12 @@ export class MapComponent implements AfterViewInit, OnChanges {
     iconAnchor: [16, 32],
   });
 
+  private encounterIcon = L.icon({
+    iconUrl: 'https://cdn-icons-png.flaticon.com/512/5184/5184592.png',
+    iconSize: [42, 42],
+    iconAnchor: [16, 32],
+  });
+
   private positionIcon = L.icon({
     iconUrl: 'https://images.emojiterra.com/google/android-pie/512px/1f535.png',
     iconSize: [30, 30],
@@ -89,12 +97,20 @@ export class MapComponent implements AfterViewInit, OnChanges {
     iconSize: [46, 46],
     iconAnchor: [0, 46]
   });
+
   private publicKeyPointIcon = L.icon({
     iconUrl:
-        "https://icon-library.com/images/map-marker-icon/map-marker-icon-18.jpg",
+      "https://icon-library.com/images/map-marker-icon/map-marker-icon-18.jpg",
     iconSize: [42, 42],
     iconAnchor: [16, 32],
-});
+  });
+
+  private defaultIcon = L.icon({
+    iconUrl: 'https://icon-library.com/images/map-marker-icon/map-marker-icon-18.jpg',
+    iconSize: [46, 46],
+    iconAnchor: [26, 46],
+  });
+
   ngOnInit() {
     if (this.isTourExecutionMap) {
       this.getTourKeyPoints(this.executingTourId)
@@ -110,13 +126,7 @@ export class MapComponent implements AfterViewInit, OnChanges {
   }
 
   ngAfterViewInit(): void {
-    let DefaultIcon = L.icon({
-      iconUrl: 'https://icon-library.com/images/map-marker-icon/map-marker-icon-18.jpg',
-      iconSize: [46, 46],
-      iconAnchor: [26, 46],
-    });
-
-    L.Marker.prototype.options.icon = DefaultIcon;
+    L.Marker.prototype.options.icon = this.defaultIcon;
 
     setTimeout(() => {
       this.initMap();
@@ -161,11 +171,38 @@ export class MapComponent implements AfterViewInit, OnChanges {
     }, 100);
   }
 
+  getColor(d: any) {
+    return d === 'Position' ? this.positionIcon.options.iconUrl :
+      d === 'Key point' ? this.publicKeyPointIcon.options.iconUrl :
+        d == 'Completed key point' ? this.completedKeyPointIcon.options.iconUrl :
+          d == 'Encounter' ? this.encounterIcon.options.iconUrl :
+            d == 'Facility' ? this.facilityIcon.options.iconUrl : this.defaultIcon.options.iconUrl;
+  }
+
   private initMap(): void {
     this.map = L.map('map', {
+      fullscreenControl: true,
       center: [45.2396, 19.8227],
       zoom: 13,
     });
+    if (this.showLegend) {
+      var legend = new L.Control({ position: 'bottomleft' });
+      var outer = this;
+      legend.onAdd = function (map) {
+
+        var div = L.DomUtil.create('div', 'info legend'),
+          labels = ['<strong>Legend</strong>'],
+          categories = ['Position', 'Key point', 'Completed key point', 'Encounter', 'Facility'];
+
+        for (var i = 0; i < categories.length; i++) {
+          div.innerHTML += labels.push('<div style="display: flex; align-items: center; margin-top: 10px; pointer-events: none;"><img style="display: inline; margin: 0 5px;" width="25" height="25" src="' + outer.getColor(categories[i]) + '"></img> ' + (categories[i] ? categories[i] : '+'));
+        }
+        div.innerHTML = labels.join('</div>');
+        return div;
+      };
+      legend.addTo(this.map);
+    }
+
     const tiles = L.tileLayer(
       'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',
       {
@@ -213,7 +250,7 @@ export class MapComponent implements AfterViewInit, OnChanges {
       const marker = new L.Marker([element.lat, element.lng], { icon: this.completedKeyPointIcon });
       marker.addEventListener('click', () => {
         this.keyPointClickEvent.emit(element);
-       })
+      })
       this.markerGroup.addLayer(marker);
     });
 
@@ -236,7 +273,7 @@ export class MapComponent implements AfterViewInit, OnChanges {
         if (waypoints.length == (this.waypointMap.size + 1) && i == 0) return null;
         const marker = L.marker(waypoint.latLng, { icon: keyPointIcon });
         marker.addEventListener('click', () => {
-         this.keyPointClickEvent.emit(waypoint.latLng);
+          this.keyPointClickEvent.emit(waypoint.latLng);
         })
         return marker;
       }
@@ -325,7 +362,7 @@ export class MapComponent implements AfterViewInit, OnChanges {
         }
 
         this.createWaypoints(keyPoints);
-        if (!this.touristPosition || !this.isTourExecutionMap) {
+        if (!this.touristPosition && !this.isTourExecutionMap) {
           let waypoints = [...this.waypointMap.values()];
 
           this.setRoute(waypoints);
@@ -371,6 +408,12 @@ export class MapComponent implements AfterViewInit, OnChanges {
     this.map.setView([lat, lng], this.map.getZoom());
   }
 
+  setEncounterMarker(lat: number, lng: number): void {
+    const marker = new L.Marker([lat, lng], { icon: this.encounterIcon });
+    this.markerGroup.addLayer(marker);
+    this.map.addLayer(this.markerGroup);
+  }
+
   setMarkersForAllFacilities(lat: number, lng: number): void {
     const marker = new L.Marker([lat, lng], { icon: this.facilityIcon });
     this.markerGroup.addLayer(marker);
@@ -380,12 +423,12 @@ export class MapComponent implements AfterViewInit, OnChanges {
   }
   setMarkersForPublicKeyPoints(lat: number, long: number): void {
     const marker = new L.Marker([lat, long], {
-        icon: this.publicKeyPointIcon,
+      icon: this.publicKeyPointIcon,
     });
     this.markerGroup.addLayer(marker);
     this.map.addLayer(this.markerGroup);
 
     if (!this.isKeyPointMap)
-        this.map.setView([lat, long], this.map.getZoom());
+      this.map.setView([lat, long], this.map.getZoom());
   }
 }
