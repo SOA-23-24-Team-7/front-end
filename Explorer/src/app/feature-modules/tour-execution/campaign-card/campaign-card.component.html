@@ -9,10 +9,29 @@
         </div>
         <button
             class="btn search-button"
+        (click)="ShowEquipment()">
+            Show equipment
+        </button>
+        <button
+            class="btn search-button"
             (click)="StartCampaign()"
-            *ngIf="!hasActiveCampaign"
+            *ngIf="!hasActiveTour"
         >
             Start Campaign
+        </button>
+        <button
+            class="btn search-button"
+            (click)="ContinueCampaign()"
+            *ngIf="hasActiveTour && isCampaignActive"
+        >
+            Continue campaign
+        </button>
+        <button
+            class="btn search-button"
+            *ngIf="hasActiveTour && !isCampaignActive"
+            disabled
+        >
+            Start campaign
         </button>
     </div>
 </div>

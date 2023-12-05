@@ -32,6 +32,13 @@
     </div>
     <button
         *ngIf="selectedTours.length"
+        class="btn discard-button"
+        (click)="CancelCampaignCreating()"
+    >
+        Discard
+    </button>
+    <button
+        *ngIf="selectedTours.length"
         class="btn search-button"
         (click)="createCampaign()"
     >
@@ -47,6 +54,9 @@
     <xp-campaign-card
         *ngFor="let c of campaigns"
         [campaign]="c"
+        [hasActiveTour]="hasTourActive"
+        [activeTourId]="activeTourId"
+        [isCampaign]="isCampaign"
     ></xp-campaign-card>
 
     <div class="list-cards-button" id="next-button">

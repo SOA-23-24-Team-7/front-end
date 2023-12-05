@@ -1,7 +1,5 @@
 import { Component, Inject, OnInit } from '@angular/core';
 import {MAT_DIALOG_DATA, MatDialog, MatDialogRef} from '@angular/material/dialog';
-import { KeyPoint } from '../../tour-authoring/model/key-point.model';
-import { environment } from 'src/env/environment';
 @Component({
   selector: 'xp-secret-popup',
   templateUrl: './secret-popup.component.html',

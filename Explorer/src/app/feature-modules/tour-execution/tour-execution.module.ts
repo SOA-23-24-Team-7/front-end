@@ -14,6 +14,7 @@ import { TourExecutionInfoComponent } from "./tour-execution-info/tour-execution
 import { FormsModule, ReactiveFormsModule } from "@angular/forms";
 import { CampaignCardComponent } from './campaign-card/campaign-card.component';
 import { SecretPopupComponent } from './secret-popup/secret-popup.component';
+import { CampaignEquipmentComponent } from './campaign-equipment/campaign-equipment.component';
 
 @NgModule({
     declarations: [
@@ -27,6 +28,7 @@ import { SecretPopupComponent } from './secret-popup/secret-popup.component';
         TourExecutionInfoComponent,
         CampaignCardComponent,
         SecretPopupComponent,
+        CampaignEquipmentComponent,
     ],
     imports: [
         CommonModule,

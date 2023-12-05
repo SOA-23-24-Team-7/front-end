@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, HostListener, OnInit } from '@angular/core';
 import { Tour } from '../../tour-authoring/model/tour.model';
 import { ActivatedRoute, Router } from '@angular/router';
 import { TourExecutionService } from '../tour-execution.service';
@@ -182,5 +182,9 @@ export class TourExecutingComponent implements OnInit {
         nextKeyPointId: nextKeyPointId
       }
     });
+  }
+  @HostListener('window:beforeunload')
+  backButtonHandler() {
+    this.router.navigate(['/purchasedtours'])
   }
 }

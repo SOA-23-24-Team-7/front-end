@@ -79,14 +79,27 @@ export class PurchasedToursComponent implements OnInit {
         if (tour.id) this.selectedTourIds.push(tour.id);
         console.log(tour.name);
     }
+    CancelCampaignCreating(){
+        this.campaignForm.reset({
+            campaignDescription: "",
+            campaignName: "",
+        });
+        this.selectedTourIds.length = 0
+        this.selectedTours.length = 0
+    }
     createCampaign() {
         if (
             this.campaignForm.value.campaignDescription == "" ||
             this.campaignForm.value.campaignName == ""
         ) {
+            alert('You must fill all fields')
             return;
         }
-        if (this.selectedTourIds.length < 2) return;
+        if (this.selectedTourIds.length < 2)
+        {
+            alert('There must be at least two tours')
+             return;
+        }
         const campaign: CampaignCreate = {
             touristId: this.userId,
             description:

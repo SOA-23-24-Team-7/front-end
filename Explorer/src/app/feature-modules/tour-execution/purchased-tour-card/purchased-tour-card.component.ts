@@ -40,7 +40,7 @@ export class PurchasedTourCardComponent implements OnInit {
         });
     }
     ContinueTour() {
-        this.router.navigate(["/tour-executing/" + this.tour.id]);
+        this.router.navigate(["/tour-executing/" + this.tour.id, {isCampaign: false}]);
     }
     CheckIfTourIsActive() {
         if (this.hasActiveTour) {
