@@ -16,6 +16,7 @@ import { ShoppingCart } from "../model/shopping-cart";
 import { PagedResults } from "src/app/shared/model/paged-results.model";
 import { TourToken } from "../model/tour-token.model";
 import { StakeholderService } from "../../stakeholder/stakeholder.service";
+import { CouponsModalComponent } from "../coupons-modal/coupons-modal.component";
 
 @Component({
     selector: "xp-shopping-cart",
@@ -27,11 +28,12 @@ export class ShoppingCartComponent {
     orderItem: OrderItem;
     shoppingCart: ShoppingCart;
     isDisabled: boolean;
-    
+
     constructor(
         private service: MarketplaceService,
         private stakeholderService: StakeholderService,
         public dialogRef: MatDialog,
+        public dialogRefCoupons: MatDialog,
         private authService: AuthService,
         public dialog: MatDialogRef<ShoppingCartComponent>,
         @Inject(MAT_DIALOG_DATA) public data: any,
@@ -92,39 +94,69 @@ export class ShoppingCartComponent {
         });
     }
     checkout(): void {
-        var totalPrice=this.shoppingCart.totalPrice
-        var storedShoppingCart=this.shoppingCart
-        var uslo=false
+        var totalPrice = this.shoppingCart.totalPrice;
+        var storedShoppingCart = this.shoppingCart;
+        var uslo = false;
         this.stakeholderService.getTouristWallet().subscribe(result => {
             var wallet = result;
-            if(wallet.adventureCoin>=(totalPrice as number)){
-                this.service.deleteShoppingKart(this.shoppingCart.id).subscribe({
-                    next: () => {
-                        this.shoppingCart = {};
-                        console.log(storedShoppingCart);
-                        this.service.addShoppingCart(this.shoppingCart).subscribe({
-                            next: async (result: ShoppingCart) => {
-                                this.shoppingCart = result;
-                                var newShoppingCart=result;
-                                for (let tour of this.data) {
-                                    this.shoppingCart=storedShoppingCart;
-                                    const result = await this.service.addToken(tour.id,this.shoppingCart.touristId as number,totalPrice as number);
-                                    totalPrice=totalPrice as number-tour.price;
-                                    console.log(result);
-                                    alert("You have successfully bought tours!");
-                                    this.shoppingCart=newShoppingCart;
-                                }
-                                this.dialogRef.closeAll();
-                            }, 
-                        });
-                    }
-                })
-            }else{
-                alert("You don't have enough coins.")
+            if (wallet.adventureCoin >= (totalPrice as number)) {
+                this.service
+                    .deleteShoppingKart(this.shoppingCart.id)
+                    .subscribe({
+                        next: () => {
+                            this.shoppingCart = {};
+                            console.log(storedShoppingCart);
+                            this.service
+                                .addShoppingCart(this.shoppingCart)
+                                .subscribe({
+                                    next: async (result: ShoppingCart) => {
+                                        this.shoppingCart = result;
+                                        var newShoppingCart = result;
+                                        for (let tour of this.data) {
+                                            this.shoppingCart =
+                                                storedShoppingCart;
+                                            const result =
+                                                await this.service.addToken(
+                                                    tour.id,
+                                                    this.shoppingCart
+                                                        .touristId as number,
+                                                    totalPrice as number,
+                                                );
+                                            totalPrice =
+                                                (totalPrice as number) -
+                                                tour.price;
+                                            console.log(result);
+                                            alert(
+                                                "You have successfully bought tours!",
+                                            );
+                                            this.shoppingCart = newShoppingCart;
+                                        }
+                                        this.dialogRef.closeAll();
+                                    },
+                                });
+                        },
+                    });
+            } else {
+                alert("You don't have enough coins.");
             }
         });
     }
     isEmpty(): void {
         this.isDisabled = this.data.length == 0;
+    }
+
+    openCouponModal(): void {
+        const dialogRef = this.dialogRefCoupons.open(CouponsModalComponent, {
+            //data: this.listaJavnihTacaka, // lista javnih tacaka koju dobijam u ovoj komponenti i ovim je saljem u modalni dijalog
+            height: "400px",
+            width: "300px",
+            data: {
+                shoppingCartId: this.shoppingCart.id,
+            },
+        });
+
+        dialogRef.afterClosed().subscribe(result => {
+            this.getShoppingCart(); // update the price
+        });
     }
 }

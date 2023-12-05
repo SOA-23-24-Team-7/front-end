@@ -26,6 +26,7 @@ import { OrderItem } from "./model/order-item";
 import { TourLimitedView } from "./model/tour-limited-view.model";
 import { TourToken } from "./model/tour-token.model";
 import { Coupon } from "./model/coupon.model";
+import { CouponApplication } from "./model/coupon-applicaton.model";
 
 @Injectable({
     providedIn: "root",
@@ -326,9 +327,22 @@ export class MarketplaceService {
                 shoppingCartId,
         );
     }
-    addToken(tourId: number, touristId: number, totalPrice: number): Promise<TourToken | undefined> {
+    addToken(
+        tourId: number,
+        touristId: number,
+        totalPrice: number,
+    ): Promise<TourToken | undefined> {
         return this.http
-            .post<TourToken>(environment.apiHost + "token/" + tourId + "/" + touristId + "/" + totalPrice, {})
+            .post<TourToken>(
+                environment.apiHost +
+                    "token/" +
+                    tourId +
+                    "/" +
+                    touristId +
+                    "/" +
+                    totalPrice,
+                {},
+            )
             .toPromise();
     }
 
@@ -357,40 +371,84 @@ export class MarketplaceService {
     }
 
     searchTours(searchFilter: any): Observable<PagedResults<Tour>> {
-        let query = `?page=${searchFilter.page}&pageSize=${searchFilter.pageSize}`
-        query += searchFilter.minPrice >= 0 && searchFilter.minPrice !== "" ? `&minPrice=${searchFilter.minPrice}` : "";
-        query += searchFilter.maxPrice >= 0  && searchFilter.maxPrice !== "" ? `&maxPrice=${searchFilter.maxPrice}` : "";
-        query += searchFilter.minDifficulty >= 0  && searchFilter.minDifficulty !== "" ? `&minDifficulty=${searchFilter.minDifficulty}` : "";
-        query += searchFilter.maxDifficulty >= 0  && searchFilter.maxDifficulty !== "" ? `&maxDifficulty=${searchFilter.maxDifficulty}` : "";
-        query += searchFilter.minDuration >= 0 && searchFilter.minDuration !== "" ? `&minDuration=${searchFilter.minDuration}` : "";
-        query += searchFilter.maxDuration >= 0 && searchFilter.maxDuration !== "" ? `&maxDuration=${searchFilter.maxDuration}` : "";
-        query += searchFilter.minAverageRating >= 0 && searchFilter.minAverageRating !== "" ? `&minAverageRating=${searchFilter.minAverageRating}` : "";
-        query += searchFilter.minLength >= 0 && searchFilter.minLength !== "" ? `&minLength=${searchFilter.minLength}` : "";
-        query += searchFilter.maxLength >= 0 && searchFilter.maxLength !== "" ? `&maxLength=${searchFilter.maxLength}` : "";
-        query += searchFilter.longitude >= -180 && searchFilter.longitude !== "" ? `&longitude=${searchFilter.longitude}` : "";
-        query += searchFilter.latitude >= -180 && searchFilter.latitude !== "" ? `&latitude=${searchFilter.latitude}` : "";
-        query += searchFilter.maxDistance > 0 && searchFilter.maxDistance !== "" ? `&maxDistance=${searchFilter.maxDistance}` : "";
+        let query = `?page=${searchFilter.page}&pageSize=${searchFilter.pageSize}`;
+        query +=
+            searchFilter.minPrice >= 0 && searchFilter.minPrice !== ""
+                ? `&minPrice=${searchFilter.minPrice}`
+                : "";
+        query +=
+            searchFilter.maxPrice >= 0 && searchFilter.maxPrice !== ""
+                ? `&maxPrice=${searchFilter.maxPrice}`
+                : "";
+        query +=
+            searchFilter.minDifficulty >= 0 && searchFilter.minDifficulty !== ""
+                ? `&minDifficulty=${searchFilter.minDifficulty}`
+                : "";
+        query +=
+            searchFilter.maxDifficulty >= 0 && searchFilter.maxDifficulty !== ""
+                ? `&maxDifficulty=${searchFilter.maxDifficulty}`
+                : "";
+        query +=
+            searchFilter.minDuration >= 0 && searchFilter.minDuration !== ""
+                ? `&minDuration=${searchFilter.minDuration}`
+                : "";
+        query +=
+            searchFilter.maxDuration >= 0 && searchFilter.maxDuration !== ""
+                ? `&maxDuration=${searchFilter.maxDuration}`
+                : "";
+        query +=
+            searchFilter.minAverageRating >= 0 &&
+            searchFilter.minAverageRating !== ""
+                ? `&minAverageRating=${searchFilter.minAverageRating}`
+                : "";
+        query +=
+            searchFilter.minLength >= 0 && searchFilter.minLength !== ""
+                ? `&minLength=${searchFilter.minLength}`
+                : "";
+        query +=
+            searchFilter.maxLength >= 0 && searchFilter.maxLength !== ""
+                ? `&maxLength=${searchFilter.maxLength}`
+                : "";
+        query +=
+            searchFilter.longitude >= -180 && searchFilter.longitude !== ""
+                ? `&longitude=${searchFilter.longitude}`
+                : "";
+        query +=
+            searchFilter.latitude >= -180 && searchFilter.latitude !== ""
+                ? `&latitude=${searchFilter.latitude}`
+                : "";
+        query +=
+            searchFilter.maxDistance > 0 && searchFilter.maxDistance !== ""
+                ? `&maxDistance=${searchFilter.maxDistance}`
+                : "";
         console.log(query);
         const path = environment.apiHost + "tourist/tour/search" + query;
         return this.http.get<PagedResults<Tour>>(path);
-      }
-      addCoupon(coupon:Coupon): Observable<Coupon> {
-        return this.http.post<Coupon>(
-            environment.apiHost + "coupon/",
-            coupon,
-        );
     }
-    getCoupons(): Observable<PagedResults<Coupon>>  {
+    addCoupon(coupon: Coupon): Observable<Coupon> {
+        return this.http.post<Coupon>(environment.apiHost + "coupon/", coupon);
+    }
+    getCoupons(): Observable<PagedResults<Coupon>> {
         return this.http.get<PagedResults<Coupon>>(
             environment.apiHost + "coupon/",
         );
     }
     deleteCoupon(id: number): Observable<Coupon> {
-        return this.http.delete<Coupon>(
-            environment.apiHost + "coupon/" + id,
-        );
+        return this.http.delete<Coupon>(environment.apiHost + "coupon/" + id);
     }
     updateCoupon(coupon: Coupon): Observable<Coupon> {
-        return this.http.put<Coupon>(environment.apiHost + "coupon/" + coupon.id, coupon);
+        return this.http.put<Coupon>(
+            environment.apiHost + "coupon/" + coupon.id,
+            coupon,
+        );
+    }
+
+    applyDiscount(
+        couponAplication: CouponApplication,
+    ): Observable<ShoppingCart> {
+        return this.http.post<ShoppingCart>(
+            environment.apiHost + "tourist/shoppingCart/apply-coupon",
+            couponAplication,
+        );
     }
 }
