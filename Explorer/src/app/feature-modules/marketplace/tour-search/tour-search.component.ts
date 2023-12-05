@@ -36,9 +36,6 @@ export class TourSearchComponent implements OnInit {
     faClock = faClock; 
     dropped: { [key: string]: boolean } = {};
     @ViewChild(MapComponent, { static: false }) mapComponent: MapComponent;
-    longitude: number = -200;
-    latitude: number = -200;
-    distance: number = 0;
     searchFilter: {
         longitude: number, 
         latitude: number, 
@@ -62,7 +59,7 @@ export class TourSearchComponent implements OnInit {
     publicKeyPoints: PublicKeyPoint[] = [];
     totalCount: number = 0;
     currentPage: number = 1;
-    pageSize: number =10;
+    pageSize: number = 10;
     pages: any[] = [];
 
     constructor(private service: MarketplaceService) {}
@@ -92,8 +89,6 @@ export class TourSearchComponent implements OnInit {
         this.getPublicKeyPoints();
         this.resetMinPrice();
         this.resetMaxPrice();
-        this.resetMinDuration();
-        this.resetMaxDuration();
         this.resetMinLength();
         this.resetMaxLength();
         this.onSearch(1);
@@ -101,8 +96,8 @@ export class TourSearchComponent implements OnInit {
 
     onMapClicked(): void {
         this.mapComponent.getClickCoordinates((lat, lng) => {
-            this.latitude = lat;
-            this.longitude = lng;
+            this.searchFilter.latitude = lat;
+            this.searchFilter.longitude = lng;
         });
     }
 
@@ -117,6 +112,7 @@ export class TourSearchComponent implements OnInit {
                     this.totalCount = result.totalCount;
                     console.log(this.tours);
                     this.setPages();
+                    window.scrollTo({ top: 0, behavior: 'smooth' });
                 },
                 error: errData => {
                     console.log(errData);
@@ -125,7 +121,7 @@ export class TourSearchComponent implements OnInit {
     }
 
     onSliderChanged(): void {
-        this.distance = this.slider.value;
+        this.searchFilter.distance = this.slider.value;
     }
 
     getPublicFacilities(): void {
@@ -175,7 +171,7 @@ export class TourSearchComponent implements OnInit {
 
     countFilters(): number {
         let number = 0;
-        if(this.longitude !== -200 && this.latitude !== -200 && this.distance !== 0) number++;
+        if(this.searchFilter.longitude !== -200 && this.searchFilter.latitude !== -200 && this.searchFilter.distance !== 0) number++;
         if(this.searchFilter.name !== '') number++
         if(this.searchFilter.minPrice !== '' && +this.searchFilter.minPrice > 0) number++
         if(this.searchFilter.maxPrice !== '' && +this.searchFilter.maxPrice > 0) number++
@@ -190,9 +186,9 @@ export class TourSearchComponent implements OnInit {
     }
 
     resetLocationFilter() {
-        this.longitude = -200;
-        this.latitude = -200;
-        this.distance = 0;
+        this.searchFilter.longitude = -200;
+        this.searchFilter.latitude = -200;
+        this.searchFilter.distance = 0;
     }
 
     setPages(): void {
@@ -331,18 +327,6 @@ export class TourSearchComponent implements OnInit {
     resetMaxPrice() {
         this.searchFilter.maxPrice = "";
         var inputElement = document.getElementsByName('maxPrice')[0] as HTMLInputElement;
-        inputElement.value = "";
-    }
-
-    resetMinDuration() {
-        this.searchFilter.minDuration = "";
-        var inputElement = document.getElementsByName('minDuration')[0] as HTMLInputElement;
-        inputElement.value = "";
-    }
-
-    resetMaxDuration() {
-        this.searchFilter.maxDuration = "";
-        var inputElement = document.getElementsByName('maxDuration')[0] as HTMLInputElement;
         inputElement.value = "";
     }
 

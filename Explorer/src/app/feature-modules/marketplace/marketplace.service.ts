@@ -374,60 +374,30 @@ export class MarketplaceService {
     }
 
     searchTours(searchFilter: any): Observable<PagedResults<Tour>> {
-        let query = `?page=${searchFilter.page}&pageSize=${searchFilter.pageSize}`;
-        query +=
-            searchFilter.minPrice >= 0 && searchFilter.minPrice !== ""
-                ? `&minPrice=${searchFilter.minPrice}`
-                : "";
-        query +=
-            searchFilter.maxPrice >= 0 && searchFilter.maxPrice !== ""
-                ? `&maxPrice=${searchFilter.maxPrice}`
-                : "";
-        query +=
-            searchFilter.minDifficulty >= 0 && searchFilter.minDifficulty !== ""
-                ? `&minDifficulty=${searchFilter.minDifficulty}`
-                : "";
-        query +=
-            searchFilter.maxDifficulty >= 0 && searchFilter.maxDifficulty !== ""
-                ? `&maxDifficulty=${searchFilter.maxDifficulty}`
-                : "";
-        query +=
-            searchFilter.minDuration >= 0 && searchFilter.minDuration !== ""
-                ? `&minDuration=${searchFilter.minDuration}`
-                : "";
-        query +=
-            searchFilter.maxDuration >= 0 && searchFilter.maxDuration !== ""
-                ? `&maxDuration=${searchFilter.maxDuration}`
-                : "";
-        query +=
-            searchFilter.minAverageRating >= 0 &&
-            searchFilter.minAverageRating !== ""
-                ? `&minAverageRating=${searchFilter.minAverageRating}`
-                : "";
-        query +=
-            searchFilter.minLength >= 0 && searchFilter.minLength !== ""
-                ? `&minLength=${searchFilter.minLength}`
-                : "";
-        query +=
-            searchFilter.maxLength >= 0 && searchFilter.maxLength !== ""
-                ? `&maxLength=${searchFilter.maxLength}`
-                : "";
-        query +=
-            searchFilter.longitude >= -180 && searchFilter.longitude !== ""
-                ? `&longitude=${searchFilter.longitude}`
-                : "";
-        query +=
-            searchFilter.latitude >= -180 && searchFilter.latitude !== ""
-                ? `&latitude=${searchFilter.latitude}`
-                : "";
-        query +=
-            searchFilter.maxDistance > 0 && searchFilter.maxDistance !== ""
-                ? `&maxDistance=${searchFilter.maxDistance}`
-                : "";
+        let query = this.prepareSearchQuery(searchFilter);
         console.log(query);
         const path = environment.apiHost + "tourist/tour/search" + query;
         return this.http.get<PagedResults<Tour>>(path);
     }
+
+    prepareSearchQuery(searchFilter: any): String {
+        let query = `?page=${searchFilter.page}&pageSize=${searchFilter.pageSize}`
+        query += searchFilter.name != "" ? `&name=${searchFilter.name}` : "";
+        query += searchFilter.minPrice >= 0 && searchFilter.minPrice !== "" ? `&minPrice=${searchFilter.minPrice}` : "";
+        query += searchFilter.maxPrice >= 0  && searchFilter.maxPrice !== "" ? `&maxPrice=${searchFilter.maxPrice}` : "";
+        query += searchFilter.minDifficulty >= 0  && searchFilter.minDifficulty !== "" ? `&minDifficulty=${searchFilter.minDifficulty}` : "";
+        query += searchFilter.maxDifficulty >= 0  && searchFilter.maxDifficulty !== "" ? `&maxDifficulty=${searchFilter.maxDifficulty}` : "";
+        query += searchFilter.minDuration >= 0 && searchFilter.minDuration !== "" ? `&minDuration=${searchFilter.minDuration}` : "";
+        query += searchFilter.maxDuration >= 0 && searchFilter.maxDuration !== "" ? `&maxDuration=${searchFilter.maxDuration}` : "";
+        query += searchFilter.minAverageRating >= 0 && searchFilter.minAverageRating !== "" ? `&minAverageRating=${searchFilter.minAverageRating}` : "";
+        query += searchFilter.minLength >= 0 && searchFilter.minLength !== "" ? `&minLength=${searchFilter.minLength}` : "";
+        query += searchFilter.maxLength >= 0 && searchFilter.maxLength !== "" ? `&maxLength=${searchFilter.maxLength}` : "";
+        query += searchFilter.longitude >= -180 && searchFilter.longitude !== "" ? `&longitude=${searchFilter.longitude}` : "";
+        query += searchFilter.latitude >= -180 && searchFilter.latitude !== "" ? `&latitude=${searchFilter.latitude}` : "";
+        query += searchFilter.distance > 0 && searchFilter.distance !== "" ? `&maxDistance=${searchFilter.distance}` : "";
+        return query;
+    }
+    
     addCoupon(coupon: Coupon): Observable<Coupon> {
         return this.http.post<Coupon>(environment.apiHost + "coupon/", coupon);
     }
