@@ -23,21 +23,25 @@ import { FontAwesomeModule } from "@fortawesome/angular-fontawesome";
 import { LayoutModule } from "src/app/feature-modules/layout/layout.module";
 import { KeypointsNotificationsComponent } from "./keypoints-notifications/keypoints-notifications.component";
 import { FacilitiesNotificationsComponent } from "./facilities-notifications/facilities-notifications.component";
-import { ShoppingCartComponent } from './shopping-cart/shopping-cart.component';
-import { MyClubInvitationsComponent } from './my-club-invitations/my-club-invitations.component';
-import { TourPreferencesComponent } from './tour-preferences/tour-preferences.component';
-import { TourPreferenceFormComponent } from './tour-preference-form/tour-preference-form.component';
-import { BrowserModule } from '@angular/platform-browser';
-import { TagInputModule } from 'ngx-chips';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { FormsModule } from '@angular/forms';
-import { PublishedToursComponent } from './tours/published-tours.component';
-import { TourDetailsComponent } from './tour-details/tour-details.component';
-import { FullSizeImageComponent } from './full-size-image/full-size-image.component';
-import { TourPageComponent } from './tour-page/tour-page.component';
+import { ShoppingCartComponent } from "./shopping-cart/shopping-cart.component";
+import { MyClubInvitationsComponent } from "./my-club-invitations/my-club-invitations.component";
+import { TourPreferencesComponent } from "./tour-preferences/tour-preferences.component";
+import { TourPreferenceFormComponent } from "./tour-preference-form/tour-preference-form.component";
+import { BrowserModule } from "@angular/platform-browser";
+import { TagInputModule } from "ngx-chips";
+import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
+import { FormsModule } from "@angular/forms";
+import { PublishedToursComponent } from "./tours/published-tours.component";
+import { TourDetailsComponent } from "./tour-details/tour-details.component";
+import { FullSizeImageComponent } from "./full-size-image/full-size-image.component";
+import { TourPageComponent } from "./tour-page/tour-page.component";
 import { TourAuthoringModule } from "../tour-authoring/tour-authoring.module";
 import { TourSalesComponent } from './tour-sales/tour-sales.component';
 import { TourSaleFormComponent } from './tour-sale-form/tour-sale-form.component';
+import { CouponsComponent } from "./coupons/coupons.component";
+import { CouponsViewComponent } from "./coupons-view/coupons-view.component";
+import { EditCouponFormComponent } from "./edit-coupon-form/edit-coupon-form.component";
+import { CouponsModalComponent } from "./coupons-modal/coupons-modal.component";
 
 @NgModule({
     declarations: [
@@ -69,6 +73,10 @@ import { TourSaleFormComponent } from './tour-sale-form/tour-sale-form.component
         TourPageComponent,
         TourSalesComponent,
         TourSaleFormComponent
+        CouponsComponent,
+        CouponsViewComponent,
+        EditCouponFormComponent,
+        CouponsModalComponent,
     ],
     imports: [
         CommonModule,
@@ -89,7 +97,7 @@ import { TourSaleFormComponent } from './tour-sale-form/tour-sale-form.component
         FormsModule,
         LayoutModule,
         MatChipsModule,
-        TourAuthoringModule
+        TourAuthoringModule,
     ],
     exports: [
         ReviewComponent,
@@ -99,7 +107,8 @@ import { TourSaleFormComponent } from './tour-sale-form/tour-sale-form.component
         TourPreferencesComponent,
         TourPreferenceFormComponent,
         KeypointsNotificationsComponent,
-        FacilitiesNotificationsComponent
+        FacilitiesNotificationsComponent,
+        CouponsModalComponent,
     ],
 })
 export class MarketplaceModule {}

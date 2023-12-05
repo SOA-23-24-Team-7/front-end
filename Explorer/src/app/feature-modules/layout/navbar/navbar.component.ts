@@ -34,6 +34,9 @@ import {
     faBell,
     faCircleQuestion,
     faPercent
+    faCoins,
+    faMapLocationDot,
+    faMoneyBills
 } from "@fortawesome/free-solid-svg-icons";
 import { StakeholderService } from "../../stakeholder/stakeholder.service";
 import { interval, Subscription } from "rxjs";
@@ -150,4 +153,7 @@ export class NavbarComponent implements OnInit {
     faBell = faBell;
     faCircleQuestion = faCircleQuestion;
     faPercent = faPercent;
+    faCoins = faCoins;
+    faMapLocationDot = faMapLocationDot;
+    faMoneyBills = faMoneyBills;
 }

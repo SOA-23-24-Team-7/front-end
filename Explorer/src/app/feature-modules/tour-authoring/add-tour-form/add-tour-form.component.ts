@@ -16,23 +16,28 @@ export class AddTourFormComponent implements OnInit{
     public dialog: MatDialogRef<AddTourFormComponent>,
     @Inject(MAT_DIALOG_DATA) public data: any
   ){}
+
   @Output() toursUpdated = new EventEmitter<null>();
+
   public tour: Tour = {
     name:"",
     description: "",
     difficulty: parseInt("0"),
-    tags: []
+    tags: [],
+    price: parseInt("0"),
   };
+
   addTourForm = new FormGroup({
     name: new FormControl('',[Validators.required]),
     description: new FormControl('',[Validators.required]),
     difficulty: new FormControl('',[Validators.required]),
-    tags: new FormControl([] as string[], [Validators.required])
+    tags: new FormControl([] as string[], [Validators.required]),
+    price: new FormControl('',[Validators.required]),
   });
+
   ngOnInit() {
     
   }
- 
 
   addTag(tag: string): void {
     const tagArray = this.addTourForm.get('tags');
@@ -53,16 +58,19 @@ export class AddTourFormComponent implements OnInit{
       tagArray.setValue(tags);
     }
   }
+  
   submit():void{
     console.log(this.addTourForm.value);
     const tour: Tour = {
       name: this.addTourForm.value.name || "",
       description: this.addTourForm.value.description || "",
       difficulty: parseInt(this.addTourForm.value.difficulty || "0"),
-      tags: this.addTourForm.value.tags ? this.addTourForm.value.tags : []
+      tags: this.addTourForm.value.tags ? this.addTourForm.value.tags : [],
+      price: parseInt(this.addTourForm.value.price || "0"),
     };
     this.service.addTour(tour).subscribe({
       next: () => { 
+        console.log("uslo");
         this.toursUpdated.emit();
         location.reload();
         this.onClose();

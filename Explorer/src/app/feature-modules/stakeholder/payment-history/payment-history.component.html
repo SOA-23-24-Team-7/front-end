@@ -1,0 +1,11 @@
+<div class="container">
+    <h2 class="title">Payment history</h2>
+    <div class="records-list">
+        <div class="record-card" *ngFor="let record of records">
+            <h3>Tour: {{ record.tourName }}</h3>
+            <p>Price: {{ record.price }}€</p>
+            <p>Date: {{ record.purchasedDate | date : "MMM d, y" }}</p>
+            <fa-icon class="fa-coins-icon" [icon]="faCoins" [spin]="true" />
+        </div>
+    </div>
+</div>

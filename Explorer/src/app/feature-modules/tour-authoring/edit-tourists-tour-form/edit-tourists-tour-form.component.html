@@ -1,0 +1,18 @@
+<div class="edit-modal" [formGroup]="editTourForm" (click)="onClose()">
+  <div class="edit" (click)="$event.stopPropagation()">
+      <div class="edit-head">
+          <fa-icon class="edit-x" [icon]="faXmark" (click)="onClose()"/>
+          <div class="edit-title">Edit tour</div>
+      </div>
+      <form class="edit-form">
+          <div class="edit-label">Name:</div>
+          <input class="edit-input" type="text" placeholder="Name" formControlName="name"/>
+          <div class="edit-label">Description:</div>
+          <input class="edit-input" type="text" placeholder="Description" formControlName="description"/>
+          <button class="edit-submit" type="submit" (click)="submit()">
+              <div class="edit-submit-text">Edit</div>
+          </button>
+      </form>
+  </div>
+</div>
+

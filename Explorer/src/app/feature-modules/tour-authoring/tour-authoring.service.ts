@@ -1,4 +1,4 @@
-import { HttpClient } from "@angular/common/http";
+import { HttpClient, HttpParams } from "@angular/common/http";
 import { Injectable } from "@angular/core";
 import { PagedResults } from "src/app/shared/model/paged-results.model";
 import { Tour } from "./model/tour.model";
@@ -11,12 +11,14 @@ import { PublicKeyPointRequest } from "./model/public-key-point-request.model";
 import { PublicFacilityRequest } from "./model/public-facility-request.model";
 import { PublicKeyPoint } from "./model/public-key-point.model";
 import { Person } from "../stakeholder/model/person.model";
+import { query } from "@angular/animations";
 
 @Injectable({
     providedIn: "root",
 })
 export class TourAuthoringService {
     constructor(private http: HttpClient) {}
+    
     getTours(): Observable<PagedResults<Tour>> {
         return this.http.get<PagedResults<Tour>>(
             "https://localhost:44333/api/tour/authors",
@@ -26,6 +28,7 @@ export class TourAuthoringService {
     addTour(tour: Tour): Observable<Tour> {
         return this.http.post<Tour>(environment.apiHost + "tour", tour);
     }
+    
     deleteTour(id: number): Observable<Tour> {
         return this.http.delete<Tour>(environment.apiHost + "tour/" + id);
     }
@@ -182,9 +185,17 @@ export class TourAuthoringService {
             tour,
         );
     }
+    
     archiveTour(tour: Tour): Observable<Tour> {
         return this.http.put<Tour>(
             environment.apiHost + "tour/archive/" + tour.id,
+            tour,
+        );
+    }
+
+    markTourAsReady(tour: Tour): Observable<Tour> {
+        return this.http.put<Tour>(
+            environment.apiHost + "tour/markAsReady/" + tour.id,
             tour,
         );
     }
@@ -209,8 +220,32 @@ export class TourAuthoringService {
         );
     }
 
-    searchTours(searchFilter: any): Observable<PagedResults<Tour>> {
+    getRecommendedTours(keyPointIds: number[]): Observable<PagedResults<Tour>> {
+        const params = new HttpParams().set('keyPointIds', keyPointIds.join(','));
+
+        return this.http.get<PagedResults<Tour>>(
+            environment.apiHost + 'tour/recommended/' + params
+        );
+    }
+
+    getAllEquipment(): Observable<PagedResults<Equipment>>{
+        return this.http.get<PagedResults<Equipment>>(
+            environment.apiHost + "tourist/only_equipment"
+        );
+    }
+    
+    searchAuthorTours(searchFilter: any): Observable<PagedResults<Tour>> {
+        let query = this.prepareSearchQuery(searchFilter);
+        query += searchFilter.authorId > 0 ? `&authorId=${searchFilter.authorId}` : "";
+        console.log(query);
+        const path = environment.apiHost + "tourist/tour/author-search" + query;
+        console.log(path);
+        return this.http.get<PagedResults<Tour>>(path);
+    }
+
+    prepareSearchQuery(searchFilter: any): String {
         let query = `?page=${searchFilter.page}&pageSize=${searchFilter.pageSize}`
+        query += searchFilter.name != "" ? `&name=${searchFilter.name}` : "";
         query += searchFilter.minPrice >= 0 && searchFilter.minPrice !== "" ? `&minPrice=${searchFilter.minPrice}` : "";
         query += searchFilter.maxPrice >= 0  && searchFilter.maxPrice !== "" ? `&maxPrice=${searchFilter.maxPrice}` : "";
         query += searchFilter.minDifficulty >= 0  && searchFilter.minDifficulty !== "" ? `&minDifficulty=${searchFilter.minDifficulty}` : "";
@@ -222,12 +257,7 @@ export class TourAuthoringService {
         query += searchFilter.maxLength >= 0 && searchFilter.maxLength !== "" ? `&maxLength=${searchFilter.maxLength}` : "";
         query += searchFilter.longitude >= -180 && searchFilter.longitude !== "" ? `&longitude=${searchFilter.longitude}` : "";
         query += searchFilter.latitude >= -180 && searchFilter.latitude !== "" ? `&latitude=${searchFilter.latitude}` : "";
-        query += searchFilter.maxDistance > 0 && searchFilter.maxDistance !== "" ? `&maxDistance=${searchFilter.maxDistance}` : "";
-        query += searchFilter.authorId > 0 ? `&authorId=${searchFilter.authorId}` : "";
-        query += searchFilter.tourStatus > 0 ? `&tourStatus=${searchFilter.tourStatus}` : "";
-        console.log(query);
-        console.log(query);
-        const path = environment.apiHost + "tourist/tour/search" + query;
-        return this.http.get<PagedResults<Tour>>(path);
-      }
+        query += searchFilter.distance > 0 && searchFilter.distance !== "" ? `&maxDistance=${searchFilter.distance}` : "";
+        return query;
+    }
 }
