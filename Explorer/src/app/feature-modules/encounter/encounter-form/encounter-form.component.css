@@ -1,0 +1,28 @@
+.create-form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    margin-top: 3rem;
+}
+
+input {
+    margin: 1rem;
+    width: 13rem;
+}
+
+button {
+    margin-top: 10px;
+}
+
+.button-container {
+    text-align: center;
+    margin: 2rem;
+    display: flex;
+    justify-content: center;
+}
+
+tag {
+    background-color: rgb(var(--clr-background-secondary)) !important;
+}

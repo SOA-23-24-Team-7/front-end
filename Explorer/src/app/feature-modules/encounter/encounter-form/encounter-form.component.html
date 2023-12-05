@@ -1,0 +1,41 @@
+<form [formGroup]="encounterForm">
+    <div class="create-form">
+        <input placeholder="Title" formControlName="title" type="text" />
+        <input
+            placeholder="Description"
+            formControlName="description"
+            type="text"
+        />
+        <input
+            placeholder="Radius"
+            formControlName="radius"
+            min="1"
+            type="number"
+        />
+        <input
+            placeholder="Xp reward"
+            formControlName="xp"
+            min="1"
+            type="number"
+        />
+        <select formControlName="selectedStatus">
+            <option value="1">Social</option>
+        </select>
+        <input
+            placeholder="People number"
+            *ngIf="encounterForm.get('selectedStatus')?.value === 1"
+            min="1"
+            type="number"
+        />
+    </div>
+</form>
+<div class="button-container">
+    <button
+        mat-raised-button
+        type="submit"
+        color="primary"
+        (click)="createEncounter()"
+    >
+        Create
+    </button>
+</div>
