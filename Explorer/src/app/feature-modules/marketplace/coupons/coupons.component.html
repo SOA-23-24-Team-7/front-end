@@ -1,0 +1,28 @@
+<div class="add-modal" (click)="onClose()">
+    <div class="add" (click)="$event.stopPropagation()">
+        <div class="add-head">
+            <fa-icon class="add-x" [icon]="faXmark" (click)="onClose()"/>
+            <div class="add-title">Add coupon</div>
+        </div>
+        <form class="add-form" [formGroup]="couponForm">
+            <div class="add-label">Discount:</div>
+            <input class="add-input" type="number" placeholder="Discount" formControlName="discount"/>
+            <div class="add-label">Expiration date</div>
+            <input class="add-input" type="date" placeholder="Expiration date" required
+            min="{{ currentDate | date: 'yyyy-MM-dd' }}" formControlName="expirationDate">
+            <label for="checkbox" class="add-label"
+                >All</label
+            >
+            <input
+                id="checkbox"
+                class="checkbox"
+                formControlName="allFromAuthor"
+                type="checkbox"
+            />
+            <button class="add-submit" type="submit" (click)="submit()">
+                <div class="add-submit-text">Add</div>
+            </button>
+           
+        </form>
+    </div>
+</div>
