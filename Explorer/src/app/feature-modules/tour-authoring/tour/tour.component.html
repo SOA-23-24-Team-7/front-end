@@ -176,7 +176,7 @@
                 <div class="tour-search-results-count">Tours ({{totalCount}})</div>
             </div>
             <div class="tour-search-result-tours">
-                <xp-tour-card-view *ngFor="let tour of tours" [tour]="tour"></xp-tour-card-view>
+                <xp-tour-card-view *ngFor="let tour of tours" [tour]="tour" [refresh]="onSearch"></xp-tour-card-view>
             </div>
         </div>
     </div>

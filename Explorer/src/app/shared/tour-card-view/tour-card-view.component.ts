@@ -50,6 +50,7 @@ export class TourCardViewComponent {
   tokens: TourToken[] = [];
   shoppingCart: ShoppingCart = {};
   imageHost: string = environment.imageHost;
+  @Input() refresh: () => void;
 
   constructor(
     private authService: AuthService, 
@@ -64,6 +65,10 @@ export class TourCardViewComponent {
         this.getShoppingCart();
       }
     });
+  }
+
+  invokeRefresh() {
+    if(this.refresh) this.refresh()
   }
 
   getTour(id: number): void {
@@ -157,6 +162,7 @@ export class TourCardViewComponent {
             this.tourAuthoringService.publishTour(tour).subscribe({
               next: () => {
                   this.getTour(this.tour.id ? this.tour.id : 0);
+                  this.refresh();
               },
             })
           }
@@ -175,6 +181,7 @@ export class TourCardViewComponent {
     this.tourAuthoringService.archiveTour(tour).subscribe({
       next: () => {
         this.getTour(this.tour.id ? this.tour.id : 0);
+        this.refresh();
       },
     })
   }
