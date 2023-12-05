@@ -1,0 +1,52 @@
+<form [formGroup]="encounterForm">
+    <div class="create-form">
+        <input placeholder="Title" formControlName="title" type="text" />
+        <input
+            placeholder="Description"
+            formControlName="description"
+            type="text"
+        />
+        <input
+            placeholder="Radius"
+            formControlName="radius"
+            min="1"
+            type="number"
+        />
+        <input
+            placeholder="Xp reward"
+            formControlName="xp"
+            min="1"
+            type="number"
+        />
+        <select formControlName="selectedStatus" (change)="changeStatus()">
+            <option value="1">Social</option>
+            <option value="2">Test</option>
+        </select>
+        <div *ngIf="encounterType == 1">
+            <input
+                placeholder="People number"
+                formControlName="peopleNumber"
+                min="1"
+                type="number"
+            />
+        </div>
+        <div *ngIf="encounterType == 2">
+            <input
+                placeholder="Test"
+                formControlName="testNumber"
+                min="1"
+                type="number"
+            />
+        </div>
+    </div>
+</form>
+<div class="button-container">
+    <button
+        mat-raised-button
+        type="submit"
+        color="primary"
+        (click)="createEncounter()"
+    >
+        Create
+    </button>
+</div>

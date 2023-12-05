@@ -48,7 +48,7 @@ import { TouristsTourComponent } from "src/app/feature-modules/tour-authoring/to
 import { TouristsKeyPointsComponent } from "src/app/feature-modules/tour-authoring/tourists-key-points/tourists-key-points.component";
 import { TouristsEquipmentComponent } from "src/app/feature-modules/tour-authoring/tourists-equipment/tourists-equipment.component";
 import { TouristsTourBlogFormComponent } from "src/app/feature-modules/blog/tourists-tour-blog-form/tourists-tour-blog-form.component";
- 
+import { EncounterFormComponent } from "src/app/feature-modules/encounter/encounter-form/encounter-form.component";
 
 const routes: Routes = [
     { path: "home", component: HomeComponent },
@@ -234,7 +234,7 @@ const routes: Routes = [
         canActivate: [AuthGuard],
     },
     {
-        path:"tourists-tour/equipment/:id",
+        path: "tourists-tour/equipment/:id",
         component: TouristsEquipmentComponent,
         canActivate: [AuthGuard],
     },
@@ -248,11 +248,16 @@ const routes: Routes = [
         component: TouristsTourBlogFormComponent,
         canActivate: [AuthGuard],
     },
-    { 
+    {
         path: "payment-history",
         component: PaymentHistoryComponent,
         canActivate: [AuthGuard],
-    } 
+    },
+    {
+        path: "encounter-form",
+        component: EncounterFormComponent,
+        canActivate: [AuthGuard],
+    },
 ];
 
 @NgModule({

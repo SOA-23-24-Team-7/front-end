@@ -116,6 +116,41 @@
                 ></div>
             </div>
 
+            <!-- Encounters MENU -->
+            <div class="navbar-menu-item" *ngIf="user && user.username !== ''">
+                <div class="navbar-menu-item-content">
+                    <fa-icon
+                        class="navbar-menu-item-content-icon"
+                        [class.color-white]="isHome"
+                        [icon]="faFlag"
+                    />
+                    <div class="navbar-menu-item-content-text">Encounters</div>
+                    <fa-icon
+                        class="navbar-menu-item-content-arrow"
+                        [class.color-white]="isHome"
+                        [icon]="faChevronDown"
+                    />
+                </div>
+                <div class="navbar-submenu">
+                    <div
+                        class="navbar-submenu-item"
+                        [routerLink]="['encounter-form']"
+                    >
+                        <fa-icon
+                            class="navbar-submenu-item-icon"
+                            [icon]="faPlus"
+                        />
+                        <div class="navbar-submenu-item-text">
+                            Create encounter
+                        </div>
+                    </div>
+                </div>
+                <div
+                    class="navbar-menu-item-selected-indicator"
+                    [class.background-color-white]="isHome"
+                ></div>
+            </div>
+
             <!-- BLOG MENU -->
             <div class="navbar-menu-item" *ngIf="user && user.username !== ''">
                 <div class="navbar-menu-item-content">
@@ -263,7 +298,7 @@
                             Change position
                         </div>
                     </div>
-                
+
                     <div
                         class="navbar-submenu-item"
                         [routerLink]="['tourists-tour']"
