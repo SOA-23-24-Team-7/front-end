@@ -331,6 +331,7 @@ export class MarketplaceService {
         tourId: number,
         touristId: number,
         totalPrice: number,
+        orderItemPrice: number,
     ): Promise<TourToken | undefined> {
         return this.http
             .post<TourToken>(
@@ -340,7 +341,9 @@ export class MarketplaceService {
                     "/" +
                     touristId +
                     "/" +
-                    totalPrice,
+                    totalPrice +
+                    "/" +
+                    orderItemPrice,
                 {},
             )
             .toPromise();

@@ -97,9 +97,13 @@ export class ShoppingCartComponent {
         var totalPrice = this.shoppingCart.totalPrice;
         var storedShoppingCart = this.shoppingCart;
         var uslo = false;
+        console.log(totalPrice);
         this.stakeholderService.getTouristWallet().subscribe(result => {
             var wallet = result;
             if (wallet.adventureCoin >= (totalPrice as number)) {
+                //dobaviti order iteme
+                const orderItems = this.shoppingCart.orderItems;
+
                 this.service
                     .deleteShoppingKart(this.shoppingCart.id)
                     .subscribe({
@@ -115,12 +119,17 @@ export class ShoppingCartComponent {
                                         for (let tour of this.data) {
                                             this.shoppingCart =
                                                 storedShoppingCart;
+                                            const orderItemPrice =
+                                                orderItems?.find(
+                                                    o => o.tourId == tour.id,
+                                                )?.price;
                                             const result =
                                                 await this.service.addToken(
                                                     tour.id,
                                                     this.shoppingCart
                                                         .touristId as number,
                                                     totalPrice as number,
+                                                    orderItemPrice as number,
                                                 );
                                             totalPrice =
                                                 (totalPrice as number) -

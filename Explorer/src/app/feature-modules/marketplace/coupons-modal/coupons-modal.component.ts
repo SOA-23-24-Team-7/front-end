@@ -27,6 +27,7 @@ export class CouponsModalComponent {
         };
         this.service.applyDiscount(couponApplication).subscribe({
             next: result => {
+                console.log("prelijepo");
                 this.dialogRef.close();
             },
         });

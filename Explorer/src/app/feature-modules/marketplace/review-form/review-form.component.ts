@@ -45,6 +45,7 @@ export class ReviewFormComponent implements OnChanges, OnInit {
             this.reviewForm.patchValue(this.review);
             this.imagesList = this.review.images.slice(); //kopija, da ne obrise i slike iz review odmah
         }
+        console.log(this.reviewForm.value.tourVisitDate);
     }
     ngOnChanges(changes: SimpleChanges): void {
         this.reviewForm.reset();
