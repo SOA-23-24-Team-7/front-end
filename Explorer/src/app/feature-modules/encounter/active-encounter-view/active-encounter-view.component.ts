@@ -18,16 +18,16 @@ export class ActiveEncounterViewComponent {
 
     userPosition: UserPositionWithRange = {
         range: 6000,
-        longitude: 19.872465872081193,
-        latitude: 45.25945586799432,
+        longitude: 19.87309526440953,
+        latitude: 45.25820732167992,
     };
 
     encounter = {
         id: 1,
         title: "Dunavac",
         description: "Dunavac",
-        longitude: 19.872465872081193,
-        latitude: 45.25945586799432,
+        longitude: 19.851230184015492,
+        latitude: 45.25525290879014,
         radius: 50,
         xpReward: 30,
         status: 0,
@@ -40,6 +40,12 @@ export class ActiveEncounterViewComponent {
         this.loadEncountersInRangeOfFromCurrentLocation(this.userPosition);
         if (this.checkIfUserInEncounterRange(this.encounter)) {
             console.log("Mozes da aktiviras encounter: ", this.encounter.title);
+            // this.service
+            //     .activateEncounter(this.userPosition, this.encounter.id)
+            //     .subscribe();
+            // this.service
+            //     .completeHiddenLocationEncounter(this.userPosition, this.encounter.id)
+            //     .subscribe();
         }
     }
 

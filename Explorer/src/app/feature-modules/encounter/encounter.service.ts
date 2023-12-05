@@ -27,6 +27,27 @@ export class EncounterService {
         );
     }
 
+    activateEncounter(
+        userPositionWithRange: UserPositionWithRange,
+        encounterId: number,
+    ): Observable<PagedResults<Encounter>> {
+        return this.http.post<PagedResults<Encounter>>(
+            environment.apiHost + `tourist/encounter/${encounterId}/activate`,
+            userPositionWithRange,
+        );
+    }
+
+    completeHiddenLocationEncounter(
+        userPositionWithRange: UserPositionWithRange,
+        encounterId: number,
+    ): Observable<PagedResults<Encounter>> {
+        return this.http.post<PagedResults<Encounter>>(
+            environment.apiHost +
+                `tourist/hidden-location-encounter/${encounterId}/complete`,
+            userPositionWithRange,
+        );
+    }
+
     createSocialEncounter(socialEncounter: Encounter): Observable<Encounter> {
         return this.http.post<Encounter>(
             environment.apiHost + "author/social-encounter/create",
