@@ -1,0 +1,14 @@
+<div class="dialog">
+    <div class="title">
+        <h1>You are editing {{person.name}} {{person.surname}} wallet</h1>
+    </div>
+    <p class="info">Current ballance: {{wallet.adventureCoin}}</p>
+    <form class="form" [formGroup]="adventureCoinForm">
+        <label class="label">New ballance: </label>
+        <input class="coin-input" type="number" min="0" max="10000" formControlName="adventureCoin" required >
+
+        <button class="save-submit" type="submit" (click)="submit()">
+            <div class="save-submit-text">Save</div>
+        </button>
+    </form>
+</div>

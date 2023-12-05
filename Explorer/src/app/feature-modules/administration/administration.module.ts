@@ -11,6 +11,7 @@ import { CommentRequestFormComponent } from "./comment-request-form/comment-requ
 import { CommentKeyPointRequestFormComponent } from "./comment-keypoint-request-form/comment-keypoint-request-form.component";
 import { LayoutModule } from "../layout/layout.module";
 import { FontAwesomeModule } from "@fortawesome/angular-fontawesome";
+import { WalletUpdateDialogComponent } from './wallet-update-dialog/wallet-update-dialog.component';
 
 @NgModule({
     declarations: [
@@ -21,6 +22,7 @@ import { FontAwesomeModule } from "@fortawesome/angular-fontawesome";
         RequestViewComponent,
         CommentRequestFormComponent,
         CommentKeyPointRequestFormComponent,
+        WalletUpdateDialogComponent,
     ],
     imports: [
         CommonModule,

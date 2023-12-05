@@ -11,7 +11,8 @@ import {
   faPersonHiking,
   faTrash,
   faBoxArchive,
-  faPen
+  faPen,
+  faMoneyBills
 } from "@fortawesome/free-solid-svg-icons";
 import { TourLimitedView } from '../../feature-modules/marketplace/model/tour-limited-view.model';
 import { Tour } from '../../feature-modules/tour-authoring/model/tour.model';
@@ -23,6 +24,7 @@ import { TourAuthoringService } from '../../feature-modules/tour-authoring/tour-
 import { KeyPoint } from '../../feature-modules/tour-authoring/model/key-point.model';
 import { MatDialog } from '@angular/material/dialog';
 import { EditTourFormComponent } from 'src/app/feature-modules/tour-authoring/edit-tour-form/edit-tour-form.component';
+import { CouponsComponent } from 'src/app/feature-modules/marketplace/coupons/coupons.component';
 
 
 @Component({
@@ -40,6 +42,7 @@ export class TourCardViewComponent {
   faPen = faPen;
   faTrash = faTrash;
   faBoxArchive = faBoxArchive;
+  faMoneyBills = faMoneyBills;
   user: User;
   @Input() tour: Tour;
   addedTours: TourLimitedView[] = [];
@@ -183,5 +186,10 @@ export class TourCardViewComponent {
       
     });
   }
-  
+  onCouponClicked(tour: Tour): void{
+    this.dialogRef.open(CouponsComponent, {
+      data: tour,
+      
+    });
+  }
 }

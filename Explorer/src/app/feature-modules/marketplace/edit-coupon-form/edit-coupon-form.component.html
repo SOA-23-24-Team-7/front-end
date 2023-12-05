@@ -1,0 +1,35 @@
+<div class="edit-modal" (click)="onClose()">
+    <div class="edit" (click)="$event.stopPropagation()">
+        <div class="edit-head">
+            <fa-icon class="edit-x" [icon]="faXmark" (click)="onClose()" />
+            <div class="edit-title">Edit coupon</div>
+        </div>
+        <form class="edit-form" [formGroup]="editCouponForm">
+            <div class="edit-label">Discount:</div>
+            <input
+                class="edit-input"
+                type="number"
+                placeholder="Discount"
+                formControlName="discount"
+            />
+            <div class="edit-label">Expiration date</div>
+            <input
+                class="edit-input"
+                type="date"
+                placeholder="Expiration date"
+                min="{{ currentDate | date : 'yyyy-MM-dd' }}"
+                formControlName="expirationDate"
+            />
+            <label for="checkbox" class="edit-label">All</label>
+            <input
+                id="checkbox"
+                class="checkbox"
+                formControlName="allFromAuthor"
+                type="checkbox"
+            />
+            <button class="edit-submit" type="submit" (click)="submit()">
+                <div class="edit-submit-text">Edit</div>
+            </button>
+        </form>
+    </div>
+</div>
