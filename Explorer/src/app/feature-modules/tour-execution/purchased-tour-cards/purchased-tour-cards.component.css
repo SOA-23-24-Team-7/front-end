@@ -87,3 +87,17 @@ h6 {
     position: relative;
     color: rgb(var(--clr-text));
 }
+
+.tour-cards-container {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    width: 40rem;
+    overflow-x: hidden;
+    scroll-behavior: smooth;
+}
+
+.cards {
+    display: flex;
+    align-items: center;
+}

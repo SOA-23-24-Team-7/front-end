@@ -119,4 +119,11 @@ export class PurchasedToursComponent implements OnInit {
             },
         });
     }
+    scrollToNextCard(): void {
+
+    }
+
+    scrollToPrevCard(): void {
+
+    }
 }
