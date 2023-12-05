@@ -40,14 +40,9 @@ export class ActiveEncounterViewComponent implements AfterViewInit {
             next: location => {
                 this.userPosition.latitude = location.latitude;
                 this.userPosition.longitude = location.longitude;
-                console.log(
-                    this.userPosition.latitude,
-                    this.userPosition.longitude,
-                );
                 this.loadEncountersInRangeOfFromCurrentLocation(
                     this.userPosition,
                 );
-                console.log(this.mapComponent);
                 if (this.mapComponent) {
                     this.mapComponent.setMarker(
                         this.userPosition.latitude,
@@ -56,6 +51,33 @@ export class ActiveEncounterViewComponent implements AfterViewInit {
                 }
             },
         });
+    }
+
+    checkIfUserInEncounterRange(encounter: Encounter): boolean {
+        const userLat = this.userPosition.latitude;
+        const userLng = this.userPosition.longitude;
+        const encounterLat = encounter.latitude;
+        const encounterLng = encounter.longitude;
+        const earthRadius = 6371;
+        const toRadians = (value: number) => (value * Math.PI) / 180;
+        const haversine = (a: number, b: number) =>
+            Math.pow(Math.sin((b - a) / 2), 2);
+
+        const distance =
+            2 *
+            earthRadius *
+            Math.asin(
+                Math.sqrt(
+                    haversine(toRadians(userLat), toRadians(encounterLat)) +
+                        Math.cos(toRadians(userLat)) *
+                            Math.cos(toRadians(encounterLat)) *
+                            haversine(
+                                toRadians(userLng),
+                                toRadians(encounterLng),
+                            ),
+                ),
+            );
+        return distance <= encounter.radius;
     }
 
     loadEncountersInRangeOfFromCurrentLocation(
