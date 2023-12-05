@@ -1,35 +1,48 @@
-import { AfterViewInit, Component, ViewChild } from '@angular/core';
-import { EncounterService } from '../encounter.service';
-import { Encounter } from '../model/encounter.model';
-import { MapService } from 'src/app/shared/map/map.service';
-import { MapComponent } from 'src/app/shared/map/map.component';
+import { AfterViewInit, Component, ViewChild } from "@angular/core";
+import { EncounterService } from "../encounter.service";
+import { Encounter } from "../model/encounter.model";
+import { MapService } from "src/app/shared/map/map.service";
+import { MapComponent } from "src/app/shared/map/map.component";
+import { UserPositionWithRange } from "../model/user-position-with-range.model";
 
 @Component({
-  selector: 'xp-active-encounter-view',
-  templateUrl: './active-encounter-view.component.html',
-  styleUrls: ['./active-encounter-view.component.css']
+    selector: "xp-active-encounter-view",
+    templateUrl: "./active-encounter-view.component.html",
+    styleUrls: ["./active-encounter-view.component.css"],
 })
 export class ActiveEncounterViewComponent {
+    points: any;
+    encounters: Encounter[];
+    filteredEncounters: Encounter[];
+    @ViewChild(MapComponent, { static: false }) mapComponent: MapComponent;
 
-  points: any
-  encounters:Encounter[];
-  @ViewChild(MapComponent, { static: false }) mapComponent: MapComponent;
+    userPosition: UserPositionWithRange = {
+        range: 6000,
+        longitude: 19.84113513341626,
+        latitude: 45.260218642510154,
+    };
 
-  constructor(private service: EncounterService, private mapService:MapService) {}
+    constructor(private service: EncounterService) {}
 
-  ngOnInit(): void {
-    this.loadActiveEncounters();
-    
-  }
+    ngOnInit(): void {
+        this.loadEncountersInRangeOfFromCurrentLocation(this.userPosition);
+        this.mapComponent.setMarker(
+            this.userPosition.latitude,
+            this.userPosition.longitude,
+        );
+    }
 
-  loadActiveEncounters() {
-    this.service.getActiveEncounters().subscribe(result => {
-        this.encounters = result.results;
-        this.encounters.forEach(enc => {this.search(enc.location)});
-    });
-  }
-
-  search(location:string): void {
-    this.mapService.search(location).subscribe({next: (result)=>{this.mapComponent.setEncounterMarker(result[0].lat,result[0].lon)}})
-  }
+    loadEncountersInRangeOfFromCurrentLocation(
+        userPosition: UserPositionWithRange,
+    ) {
+        this.service.getEncountersInRangeOf(userPosition).subscribe(result => {
+            this.filteredEncounters = result.results;
+            this.filteredEncounters.forEach(enc => {
+                this.mapComponent.setEncounterMarker(
+                    enc.latitude,
+                    enc.longitude,
+                );
+            });
+        });
+    }
 }

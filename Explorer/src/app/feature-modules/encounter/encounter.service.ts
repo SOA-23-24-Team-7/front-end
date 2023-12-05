@@ -7,6 +7,7 @@ import { Encounter } from "./model/encounter.model";
 import { SocialEncounter } from "./model/social-encounter.model";
 import { HiddenEncounter } from "./model/hidden-encounter.model";
 import { MiscEncounter } from "./model/misc-encounter.model";
+import { UserPositionWithRange } from "./model/user-position-with-range.model";
 
 @Injectable({
     providedIn: "root",
@@ -17,6 +18,15 @@ export class EncounterService {
     getActiveEncounters(): Observable<PagedResults<Encounter>> {
         return this.http.get<PagedResults<Encounter>>(
             environment.apiHost + "administrator/encounter/active",
+        );
+    }
+
+    getEncountersInRangeOf(
+        userPositionWithRange: UserPositionWithRange,
+    ): Observable<PagedResults<Encounter>> {
+        return this.http.post<PagedResults<Encounter>>(
+            environment.apiHost + "tourist/encounter/in-range-of",
+            userPositionWithRange,
         );
     }
 
