@@ -1,15 +1,25 @@
-import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
-import { ActiveEncounterViewComponent } from './active-encounter-view/active-encounter-view.component';
-import { SharedModule } from 'src/app/shared/shared.module';
+import { NgModule } from "@angular/core";
+import { CommonModule } from "@angular/common";
+import { ActiveEncounterViewComponent } from "./active-encounter-view/active-encounter-view.component";
+import { SharedModule } from "src/app/shared/shared.module";
+import { KeyPointEncounterFormComponent } from "./key-point-encounter-form/key-point-encounter-form.component";
+import { MatDialogModule } from "@angular/material/dialog";
+import { FontAwesomeModule } from "@fortawesome/angular-fontawesome";
+import { ReactiveFormsModule } from "@angular/forms";
+import { MaterialModule } from "src/app/infrastructure/material/material.module";
 
 @NgModule({
-  declarations: [
-    ActiveEncounterViewComponent
-  ],
-  imports: [
-    CommonModule,
-    SharedModule
-  ]
+    declarations: [
+        ActiveEncounterViewComponent,
+        KeyPointEncounterFormComponent,
+    ],
+    imports: [
+        CommonModule,
+        SharedModule,
+        MatDialogModule,
+        FontAwesomeModule,
+        ReactiveFormsModule,
+        MaterialModule,
+    ],
 })
-export class EncounterModule { }
+export class EncounterModule {}

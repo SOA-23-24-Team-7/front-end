@@ -19,15 +19,16 @@ import { PublicKeyPointsComponent } from "./public-key-points/public-key-points.
 import { FontAwesomeModule } from "@fortawesome/angular-fontawesome";
 import { MatDialogModule } from "@angular/material/dialog";
 import { FacilityCardComponent } from "./facility-card/facility-card.component";
-import { AddTourFormComponent } from './add-tour-form/add-tour-form.component';
-import { EditTourFormComponent } from './edit-tour-form/edit-tour-form.component';
-import { TouristsTourComponent } from './tourists-tour/tourists-tour.component';
-import { AddTouristsTourFormComponent } from './add-tourists-tour-form/add-tourists-tour-form.component';
-import { EditTouristsTourFormComponent } from './edit-tourists-tour-form/edit-tourists-tour-form.component';
-import { TouristsKeyPointsComponent } from './tourists-key-points/tourists-key-points.component';
-import { RecommendedTourCardComponent } from './recommended-tour-card/recommended-tour-card.component';
-import { TouristsEquipmentComponent } from './tourists-equipment/tourists-equipment.component';
-import { FormsModule } from '@angular/forms';
+import { AddTourFormComponent } from "./add-tour-form/add-tour-form.component";
+import { EditTourFormComponent } from "./edit-tour-form/edit-tour-form.component";
+import { TouristsTourComponent } from "./tourists-tour/tourists-tour.component";
+import { AddTouristsTourFormComponent } from "./add-tourists-tour-form/add-tourists-tour-form.component";
+import { EditTouristsTourFormComponent } from "./edit-tourists-tour-form/edit-tourists-tour-form.component";
+import { TouristsKeyPointsComponent } from "./tourists-key-points/tourists-key-points.component";
+import { RecommendedTourCardComponent } from "./recommended-tour-card/recommended-tour-card.component";
+import { TouristsEquipmentComponent } from "./tourists-equipment/tourists-equipment.component";
+import { FormsModule } from "@angular/forms";
+import { EncounterModule } from "../encounter/encounter.module";
 
 @NgModule({
     declarations: [
@@ -59,7 +60,8 @@ import { FormsModule } from '@angular/forms';
         RouterModule,
         FontAwesomeModule,
         MatDialogModule,
-        FormsModule
+        FormsModule,
+        EncounterModule,
     ],
     exports: [
         TourComponent,
@@ -71,7 +73,7 @@ import { FormsModule } from '@angular/forms';
         FacilitiesComponent,
         FacilitiesFormComponent,
         TourEquipmentFormComponent,
-        KeyPointCardComponent
+        KeyPointCardComponent,
     ],
 })
 export class TourAuthoringModule {}
