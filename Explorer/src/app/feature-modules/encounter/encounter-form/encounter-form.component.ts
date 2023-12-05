@@ -14,12 +14,18 @@ export class EncounterFormComponent {
     encounterForm = new FormGroup({
         title: new FormControl(null, [Validators.required]),
         description: new FormControl(null, [Validators.required]),
-        radius: new FormControl(null, [Validators.required]),
-        xp: new FormControl(null, [Validators.required]),
+        radius: new FormControl(null, [Validators.required, Validators.min(1)]),
+        xp: new FormControl(null, [Validators.required, Validators.min(1)]),
         boatRating: new FormControl(null, [Validators.required]),
-        selectedStatus: new FormControl(1),
-        peopleNumber: new FormControl(null),
+        selectedStatus: new FormControl(),
+        peopleNumber: new FormControl(null, [Validators.min(1)]),
+        testNumber: new FormControl(null, [Validators.min(1)]),
     });
+    encounterType: number = 1;
+
+    changeStatus() {
+        this.encounterType = this.encounterForm.value.selectedStatus;
+    }
 
     createEncounter() {
         const encounter: SocialEncounter = {

@@ -18,15 +18,26 @@
             min="1"
             type="number"
         />
-        <select formControlName="selectedStatus">
+        <select formControlName="selectedStatus" (change)="changeStatus()">
             <option value="1">Social</option>
+            <option value="2">Test</option>
         </select>
-        <input
-            placeholder="People number"
-            *ngIf="encounterForm.get('selectedStatus')?.value === 1"
-            min="1"
-            type="number"
-        />
+        <div *ngIf="encounterType == 1">
+            <input
+                placeholder="People number"
+                formControlName="peopleNumber"
+                min="1"
+                type="number"
+            />
+        </div>
+        <div *ngIf="encounterType == 2">
+            <input
+                placeholder="Test"
+                formControlName="testNumber"
+                min="1"
+                type="number"
+            />
+        </div>
     </div>
 </form>
 <div class="button-container">
