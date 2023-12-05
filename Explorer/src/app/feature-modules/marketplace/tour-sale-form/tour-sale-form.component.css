@@ -9,6 +9,7 @@
     display: flex;
     justify-content: space-around;
     align-items: flex-start;
+    gap: 10px;
     padding: 20px;
     border: 1px solid #ddd;
     border-radius: 10px;
@@ -16,7 +17,7 @@
 }
 
 .left-column {
-    width: 300px;
+    width: 270px;
 }
 
 .mat-form-field {
@@ -36,14 +37,15 @@
 
 .tour-cards-scrollable {
     position: relative;
-    width: 500px;
+    width: 540px;
     height: 400px;
     overflow-y: auto;
+    overflow-x: hidden;
 }
 
 .right-column {
     background-color: rgba(var(--clr-background-secondary), 1);
-    margin-left: 16px;
+    margin: 0px;
     min-height: 390px;
     min-width: 500px;
 }

@@ -40,7 +40,7 @@ export class TourSaleFormComponent implements OnInit {
 
       this.authService.user$.subscribe(user => {
         this.authorId = user.id;
-  
+
         if (this.tourId !== 0) {
           this.service.getTourSaleById(this.tourId).subscribe(sale => {
             sale.discountPercentage *= 100;
@@ -53,8 +53,12 @@ export class TourSaleFormComponent implements OnInit {
                 } else {
                   this.availableTours.push(tour);
                 }
-              } 
+              }
             });
+          });
+        } else {
+          this.service.getPublishedToursByAuthor(this.authorId).subscribe(tours => {
+            this.availableTours = tours.results;
           });
         }
       });
