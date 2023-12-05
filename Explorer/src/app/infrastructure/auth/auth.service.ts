@@ -69,6 +69,8 @@ export class AuthService {
         this.router.navigate([""]);
         this.user$.next({ username: "", id: 0, role: "", profilePicture: "" });
         this.userLocation$.next({ longitude: 45.2, latitude: 19.8 });
+        localStorage.setItem("userLong", "45.2");
+        localStorage.setItem("userLat", "19.8");
     }
 
     checkIfUserExists(): void {
@@ -77,6 +79,7 @@ export class AuthService {
             return;
         }
         this.setUser();
+        this.loadUserPos();
     }
 
     private setUser(): void {
@@ -104,5 +107,19 @@ export class AuthService {
 
     setUserLocation(pos: LocationCoords) {
         this.userLocation$.next(pos);
+        localStorage.setItem("userLong", pos.longitude.toString());
+        localStorage.setItem("userLat", pos.latitude.toString());
+    }
+
+    loadUserPos() {
+        const long = localStorage.getItem("userLong");
+        const lat = localStorage.getItem("userLat");
+        // console.log(long, lat);
+        if (long && lat) {
+            this.setUserLocation({
+                longitude: parseFloat(long),
+                latitude: parseFloat(lat),
+            });
+        }
     }
 }

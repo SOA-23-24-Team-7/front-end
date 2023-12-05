@@ -5,6 +5,7 @@ import { SharedModule } from "src/app/shared/shared.module";
 import { EncounterFormComponent } from "./encounter-form/encounter-form.component";
 import { FormsModule, ReactiveFormsModule } from "@angular/forms";
 import { MaterialModule } from "src/app/infrastructure/material/material.module";
+import { FontAwesomeModule } from "@fortawesome/angular-fontawesome";
 
 @NgModule({
     declarations: [ActiveEncounterViewComponent, EncounterFormComponent],
@@ -14,6 +15,7 @@ import { MaterialModule } from "src/app/infrastructure/material/material.module"
         FormsModule,
         ReactiveFormsModule,
         MaterialModule,
+        FontAwesomeModule,
     ],
     exports: [EncounterFormComponent],
 })

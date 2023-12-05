@@ -1,4 +1,4 @@
-::ng-deep #map {
+::ng-deep .map-container {
     min-height: 50rem;
 }
 
