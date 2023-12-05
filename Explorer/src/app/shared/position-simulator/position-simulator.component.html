@@ -1,0 +1,8 @@
+<div class="container">
+    <xp-map
+        [isPositionMap]="true"
+        [startPosition]="position"
+        [canEdit]="true"
+        (newLongLatEvent)="changeTouristPosition($event)"
+    ></xp-map>
+</div>

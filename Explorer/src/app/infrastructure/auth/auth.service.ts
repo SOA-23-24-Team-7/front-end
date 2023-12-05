@@ -9,6 +9,7 @@ import { Login } from "./model/login.model";
 import { AuthenticationResponse } from "./model/authentication-response.model";
 import { User } from "./model/user.model";
 import { Registration } from "./model/registration.model";
+import { LocationCoords } from "src/app/shared/model/location-coords.model";
 
 @Injectable({
     providedIn: "root",
@@ -19,6 +20,10 @@ export class AuthService {
         id: 0,
         role: "",
         profilePicture: "",
+    });
+    userLocation$ = new BehaviorSubject<LocationCoords>({
+        longitude: 45.2,
+        latitude: 19.8,
     });
 
     constructor(
@@ -63,6 +68,7 @@ export class AuthService {
         this.tokenStorage.clear();
         this.router.navigate([""]);
         this.user$.next({ username: "", id: 0, role: "", profilePicture: "" });
+        this.userLocation$.next({ longitude: 45.2, latitude: 19.8 });
     }
 
     checkIfUserExists(): void {
@@ -94,5 +100,9 @@ export class AuthService {
         const decodedToken = jwtHelperService.decodeToken(accessToken);
 
         return decodedToken.id;
+    }
+
+    setUserLocation(pos: LocationCoords) {
+        this.userLocation$.next(pos);
     }
 }

@@ -5,9 +5,10 @@ import { MapComponent } from './map/map.component';
 import { TagComponent } from "./tag/tag.component";
 import { TourCardViewComponent } from './tour-card-view/tour-card-view.component';
 import { FontAwesomeModule } from "@fortawesome/angular-fontawesome";
+import { PositionSimulatorComponent } from './position-simulator/position-simulator.component';
 
 @NgModule({
-  declarations: [MapComponent, TourCardViewComponent, TagComponent],
+  declarations: [MapComponent, TourCardViewComponent, TagComponent, PositionSimulatorComponent],
   imports: [CommonModule, FontAwesomeModule, RouterModule],
   exports: [MapComponent, TourCardViewComponent, TagComponent],
 
