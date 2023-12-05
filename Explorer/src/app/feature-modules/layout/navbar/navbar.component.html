@@ -32,6 +32,16 @@
                         />
                         <div class="navbar-submenu-item-text">FAQ</div>
                     </div>
+                    <div
+                        class="navbar-submenu-item"
+                        [routerLink]="['translate']"
+                    >
+                        <fa-icon
+                            class="navbar-submenu-item-icon"
+                            [icon]="faLanguage"
+                        />
+                        <div class="navbar-submenu-item-text">Translate</div>
+                    </div>
                     <div class="navbar-submenu-item">
                         <fa-icon
                             class="navbar-submenu-item-icon"
@@ -273,8 +283,7 @@
                         <div class="navbar-submenu-item-text">
                             Change position
                         </div>
-                    </div>
-                
+                    </div>                
                     <div
                         class="navbar-submenu-item"
                         [routerLink]="['tourists-tour']"
@@ -288,7 +297,6 @@
                             Plan your tour
                         </div>
                     </div>
-
                     <div
                         class="navbar-submenu-item"
                         [routerLink]="['problem']"

@@ -40,6 +40,7 @@ import { TourSearchComponent } from "src/app/feature-modules/marketplace/tour-se
 import { NotificationTabsComponent } from "src/app/feature-modules/stakeholder/notification-tabs/notification-tabs.component";
 import { TourDetailsComponent } from "src/app/feature-modules/marketplace/tour-details/tour-details.component";
 import { UserNotificationsComponent } from "src/app/feature-modules/stakeholder/user-notifications/user-notifications.component";
+import { TranslateComponent } from "src/app/shared/translate/translate.component";
 import { TourCardViewComponent } from "src/app/shared/tour-card-view/tour-card-view.component";
 import { ActiveEncounterViewComponent } from "src/app/feature-modules/encounter/active-encounter-view/active-encounter-view.component";
 import { TourPageComponent } from "src/app/feature-modules/marketplace/tour-page/tour-page.component";
@@ -224,6 +225,10 @@ const routes: Routes = [
         path: "public-requests",
         component: RequestViewComponent,
         canActivate: [AuthGuard],
+    },
+    {
+        path: "translate",
+        component: TranslateComponent,
     },
     {
         path: "tour-card",
