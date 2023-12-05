@@ -44,6 +44,7 @@ export class TourCardViewComponent {
   faBoxArchive = faBoxArchive;
   faMoneyBills = faMoneyBills;
   user: User;
+  @Input() hideIcons: boolean = false;
   @Input() tour: Tour;
   addedTours: TourLimitedView[] = [];
   tokens: TourToken[] = [];

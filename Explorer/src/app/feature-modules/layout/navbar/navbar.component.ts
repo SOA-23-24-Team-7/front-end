@@ -33,6 +33,7 @@ import {
     faShoppingCart,
     faBell,
     faCircleQuestion,
+    faPercent
     faCoins,
     faMapLocationDot,
     faMoneyBills
@@ -151,6 +152,7 @@ export class NavbarComponent implements OnInit {
     faShoppingCart = faShoppingCart;
     faBell = faBell;
     faCircleQuestion = faCircleQuestion;
+    faPercent = faPercent;
     faCoins = faCoins;
     faMapLocationDot = faMapLocationDot;
     faMoneyBills = faMoneyBills;

@@ -43,6 +43,8 @@ import { UserNotificationsComponent } from "src/app/feature-modules/stakeholder/
 import { TourCardViewComponent } from "src/app/shared/tour-card-view/tour-card-view.component";
 import { ActiveEncounterViewComponent } from "src/app/feature-modules/encounter/active-encounter-view/active-encounter-view.component";
 import { TourPageComponent } from "src/app/feature-modules/marketplace/tour-page/tour-page.component";
+import { TourSalesComponent } from "src/app/feature-modules/marketplace/tour-sales/tour-sales.component";
+import { TourSaleFormComponent } from "src/app/feature-modules/marketplace/tour-sale-form/tour-sale-form.component";
 import { PaymentHistoryComponent } from "src/app/feature-modules/stakeholder/payment-history/payment-history.component";
 import { TouristsTourComponent } from "src/app/feature-modules/tour-authoring/tourists-tour/tourists-tour.component";
 import { TouristsKeyPointsComponent } from "src/app/feature-modules/tour-authoring/tourists-key-points/tourists-key-points.component";
@@ -87,6 +89,16 @@ const routes: Routes = [
     {
         path: "published-tours",
         component: PublishedToursComponent,
+        canActivate: [AuthGuard],
+    },
+    {
+        path: "tour-sales",
+        component: TourSalesComponent,
+        canActivate: [AuthGuard],
+    },
+    {
+        path: "tour-sale-form/:id",
+        component: TourSaleFormComponent,
         canActivate: [AuthGuard],
     },
     {
