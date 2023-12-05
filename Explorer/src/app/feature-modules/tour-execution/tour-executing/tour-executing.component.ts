@@ -2,7 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import { Tour } from '../../tour-authoring/model/tour.model';
 import { ActivatedRoute, Router } from '@angular/router';
 import { TourExecutionService } from '../tour-execution.service';
-import { TouristPositionSimulatorComponent } from '../tourist-position-simulator/tourist-position-simulator.component';
 import { Observable, Subscription, interval } from 'rxjs';
 import { AuthService } from 'src/app/infrastructure/auth/auth.service';
 import { User } from 'src/app/infrastructure/auth/model/user.model';
@@ -10,7 +9,6 @@ import { TouristPosition } from '../model/tourist-position.model';
 import { TourExecutionSessionStatus } from '../model/tour-execution-session-status.model';
 import { TourExecutionSession } from '../model/tour-execution-session-model';
 import { KeyPoint } from '../../tour-authoring/model/key-point.model';
-import { latLng } from 'leaflet';
 import { MatDialog } from '@angular/material/dialog';
 import { ClickedKeyPointComponent } from '../clicked-key-point/clicked-key-point.component';
 import { environment } from 'src/env/environment';
@@ -149,6 +147,10 @@ export class TourExecutingComponent implements OnInit {
 
   goBack() {
     this.router.navigate(['/purchasedtours'])
+  }
+
+  createBlog(): void {
+    this.router.navigate(['/tourists-blog/' + this.tour.id])
   }
 
   getLiveTourExecution() {

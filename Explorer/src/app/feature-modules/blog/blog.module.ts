@@ -14,6 +14,7 @@ import { BlogPreviewComponent } from "./blog-preview/blog-preview.component";
 import { FontAwesomeModule } from "@fortawesome/angular-fontawesome";
 import { BlogFormComponent } from "./blog-form/blog-form.component";
 import { MyBlogsComponent } from "./my-blogs/my-blogs.component";
+import { TouristsTourBlogFormComponent } from './tourists-tour-blog-form/tourists-tour-blog-form.component';
 
 @NgModule({
     declarations: [
@@ -24,6 +25,7 @@ import { MyBlogsComponent } from "./my-blogs/my-blogs.component";
         BlogPreviewComponent,
         BlogFormComponent,
         MyBlogsComponent,
+        TouristsTourBlogFormComponent,
     ],
     imports: [
         CommonModule,

@@ -2,7 +2,7 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { FormGroup, FormControl } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
 import { ActivatedRoute, Router, ParamMap } from '@angular/router';
-import { BehaviorSubject } from 'rxjs';
+import { BehaviorSubject, timeout } from 'rxjs';
 import { MapComponent } from 'src/app/shared/map/map.component';
 import { environment } from 'src/env/environment';
 import { KeyPoint } from '../model/key-point.model';
@@ -10,8 +10,6 @@ import { Tour, TourStatus } from '../model/tour.model';
 import { TourDuration, TransportType } from '../model/tourDuration.model';
 import { PublicKeyPointsComponent } from '../public-key-points/public-key-points.component';
 import { TourAuthoringService } from '../tour-authoring.service';
-import { PagedResults } from 'src/app/shared/model/paged-results.model';
-
 
 @Component({
   selector: 'xp-tourists-key-points',
@@ -99,10 +97,6 @@ export class TouristsKeyPointsComponent implements OnInit{
         });
     }
 
-
-
-   
-
     getKeyPoints(): void {
         this.route.paramMap.subscribe({
             next: (params: ParamMap) => {
@@ -117,40 +111,36 @@ export class TouristsKeyPointsComponent implements OnInit{
                     this.refreshEventsSubject.next(tourId);
                 }
 
-                this.service.getKeyPoints(tourId).subscribe({
-                    next: (result: KeyPoint[]) => {
-                        this.keyPoints = result;
-                        //console.log(this.keyPoints);
-                        if(result){
-                            this.getRecommendedTours();
-                        }
-                        
-
-                        if (this.keyPoints.length < 2) {
-                            this.walkingDuration = 0;
-                            this.bicycleRideDuration = 0;
-                            this.carRideDuration = 0;
-                        } else if (this.mapComponent.tourDistance != 0) {
-                            this.calculateDurations(
-                                this.mapComponent.tourDistance,
-                            );
-                        } else {
-                            this.service.getTour(this.tourIdTemp).subscribe({
-                                next: (result: Tour) => {
-                                    this.tour = result;
-                                    if (this.tour.distance) {
-                                        this.calculateDurations(
-                                            this.tour.distance,
-                                        );
+                setTimeout(() => {
+                    this.service.getKeyPoints(tourId).subscribe({
+                        next: (result: KeyPoint[]) => {
+                            this.keyPoints = result;
+                            
+                            if(result){
+                                this.getRecommendedTours();
+                            }
+    
+                            if (this.keyPoints.length < 2) {
+                                this.walkingDuration = 0;
+                                this.bicycleRideDuration = 0;
+                                this.carRideDuration = 0;
+                            } else if (this.mapComponent.tourDistance != 0) {
+                                this.calculateDurations(
+                                    this.mapComponent.tourDistance,
+                                );
+                                
+                                this.service.getTour(this.tourIdTemp).subscribe({
+                                    next: (result: Tour) => {
+                                        this.tour = result;
+                                          
                                         this.handleCheckBoxes(this.tour);
-                                    }
-                                },
-                            });
-                        }
-                        
-                    },
-                    error: () => {},
-                });
+                                    },
+                                });
+                            }
+                        },
+                        error: () => {},
+                    });
+                  }, 1000);
             },
         });
     }
@@ -196,11 +186,15 @@ export class TouristsKeyPointsComponent implements OnInit{
             },
         });
         const sub = dialogRef.componentInstance.onAdd.subscribe(() => {
-            this.mapComponent.createWaypoints(this.keyPoints);
-            let waypoints = [...this.mapComponent.waypointMap.values()];
-            this.mapComponent.setRoute(waypoints);
+            if (!this.refreshEventsSubject) {
+                this.refreshEventsSubject = new BehaviorSubject<number>(
+                    this.tourIdTemp,
+                );
+            } else {
+                this.refreshEventsSubject.next(this.tourIdTemp);
+            }
+
             this.getKeyPoints();
-            console.log(this.mapComponent.tourDistance);
         });
     }
 
@@ -382,9 +376,7 @@ export class TouristsKeyPointsComponent implements OnInit{
     } 
 
     currentTourIndex: number = 0;
-
-    // Moram namestiti da kada klikne levo a nema vise gde da ide levo ne racuna mu currentTourIndex, jer onda kada treba da ide desno
-    // moracu da kliknem jedanput vise zbog tog jednog ulevo
+    
     scrollToNextTourCard(): void {
         this.currentTourIndex++;
         if (this.currentTourIndex >= this.tourContainer.children.length) {
