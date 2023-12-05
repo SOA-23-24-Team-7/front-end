@@ -25,6 +25,7 @@ import { ShoppingCart } from "./model/shopping-cart";
 import { OrderItem } from "./model/order-item";
 import { TourLimitedView } from "./model/tour-limited-view.model";
 import { TourToken } from "./model/tour-token.model";
+import { TourSale } from "./model/tour-sale.model";
 import { Coupon } from "./model/coupon.model";
 import { CouponApplication } from "./model/coupon-applicaton.model";
 
@@ -374,60 +375,55 @@ export class MarketplaceService {
     }
 
     searchTours(searchFilter: any): Observable<PagedResults<Tour>> {
-        let query = `?page=${searchFilter.page}&pageSize=${searchFilter.pageSize}`;
-        query +=
-            searchFilter.minPrice >= 0 && searchFilter.minPrice !== ""
-                ? `&minPrice=${searchFilter.minPrice}`
-                : "";
-        query +=
-            searchFilter.maxPrice >= 0 && searchFilter.maxPrice !== ""
-                ? `&maxPrice=${searchFilter.maxPrice}`
-                : "";
-        query +=
-            searchFilter.minDifficulty >= 0 && searchFilter.minDifficulty !== ""
-                ? `&minDifficulty=${searchFilter.minDifficulty}`
-                : "";
-        query +=
-            searchFilter.maxDifficulty >= 0 && searchFilter.maxDifficulty !== ""
-                ? `&maxDifficulty=${searchFilter.maxDifficulty}`
-                : "";
-        query +=
-            searchFilter.minDuration >= 0 && searchFilter.minDuration !== ""
-                ? `&minDuration=${searchFilter.minDuration}`
-                : "";
-        query +=
-            searchFilter.maxDuration >= 0 && searchFilter.maxDuration !== ""
-                ? `&maxDuration=${searchFilter.maxDuration}`
-                : "";
-        query +=
-            searchFilter.minAverageRating >= 0 &&
-            searchFilter.minAverageRating !== ""
-                ? `&minAverageRating=${searchFilter.minAverageRating}`
-                : "";
-        query +=
-            searchFilter.minLength >= 0 && searchFilter.minLength !== ""
-                ? `&minLength=${searchFilter.minLength}`
-                : "";
-        query +=
-            searchFilter.maxLength >= 0 && searchFilter.maxLength !== ""
-                ? `&maxLength=${searchFilter.maxLength}`
-                : "";
-        query +=
-            searchFilter.longitude >= -180 && searchFilter.longitude !== ""
-                ? `&longitude=${searchFilter.longitude}`
-                : "";
-        query +=
-            searchFilter.latitude >= -180 && searchFilter.latitude !== ""
-                ? `&latitude=${searchFilter.latitude}`
-                : "";
-        query +=
-            searchFilter.maxDistance > 0 && searchFilter.maxDistance !== ""
-                ? `&maxDistance=${searchFilter.maxDistance}`
-                : "";
+        let query = this.prepareSearchQuery(searchFilter);
         console.log(query);
         const path = environment.apiHost + "tourist/tour/search" + query;
         return this.http.get<PagedResults<Tour>>(path);
     }
+
+    prepareSearchQuery(searchFilter: any): String {
+        let query = `?page=${searchFilter.page}&pageSize=${searchFilter.pageSize}`
+        query += searchFilter.name != "" ? `&name=${searchFilter.name}` : "";
+        query += searchFilter.minPrice >= 0 && searchFilter.minPrice !== "" ? `&minPrice=${searchFilter.minPrice}` : "";
+        query += searchFilter.maxPrice >= 0  && searchFilter.maxPrice !== "" ? `&maxPrice=${searchFilter.maxPrice}` : "";
+        query += searchFilter.minDifficulty >= 0  && searchFilter.minDifficulty !== "" ? `&minDifficulty=${searchFilter.minDifficulty}` : "";
+        query += searchFilter.maxDifficulty >= 0  && searchFilter.maxDifficulty !== "" ? `&maxDifficulty=${searchFilter.maxDifficulty}` : "";
+        query += searchFilter.minDuration >= 0 && searchFilter.minDuration !== "" ? `&minDuration=${searchFilter.minDuration}` : "";
+        query += searchFilter.maxDuration >= 0 && searchFilter.maxDuration !== "" ? `&maxDuration=${searchFilter.maxDuration}` : "";
+        query += searchFilter.minAverageRating >= 0 && searchFilter.minAverageRating !== "" ? `&minAverageRating=${searchFilter.minAverageRating}` : "";
+        query += searchFilter.minLength >= 0 && searchFilter.minLength !== "" ? `&minLength=${searchFilter.minLength}` : "";
+        query += searchFilter.maxLength >= 0 && searchFilter.maxLength !== "" ? `&maxLength=${searchFilter.maxLength}` : "";
+        query += searchFilter.longitude >= -180 && searchFilter.longitude !== "" ? `&longitude=${searchFilter.longitude}` : "";
+        query += searchFilter.latitude >= -180 && searchFilter.latitude !== "" ? `&latitude=${searchFilter.latitude}` : "";
+        query += searchFilter.distance > 0 && searchFilter.distance !== "" ? `&maxDistance=${searchFilter.distance}` : "";
+        return query;
+    }
+
+    addTourSale(tourSale: TourSale): Observable<TourSale> {
+      return this.http.post<TourSale>(environment.apiHost + "tour-sales", tourSale);
+    }
+
+    getTourSales(): Observable<TourSale[]> {
+      return this.http.get<TourSale[]>(environment.apiHost + "tour-sales");
+    }
+
+    getTourSaleById(id: number): Observable<TourSale> {
+      return this.http.get<TourSale>(environment.apiHost + "tour-sales/" + id);
+    }
+
+    updateTourSale(tourSale: TourSale): Observable<TourSale> {
+      return this.http.put<TourSale>(environment.apiHost + "tour-sales", tourSale);
+    }
+
+    deleteTourSale(id: number): Observable<void> {
+      return this.http.delete<void>(environment.apiHost + "tour-sales/" + id);
+    }
+
+    getPublishedToursByAuthor(authorId: number): Observable<PagedResults<Tour>> {
+      const path = environment.apiHost + "tourist/tour/search" + "?page=0&pageSize=0&authorId=" + authorId;
+      return this.http.get<PagedResults<Tour>>(path);
+    }
+
     addCoupon(coupon: Coupon): Observable<Coupon> {
         return this.http.post<Coupon>(environment.apiHost + "coupon/", coupon);
     }

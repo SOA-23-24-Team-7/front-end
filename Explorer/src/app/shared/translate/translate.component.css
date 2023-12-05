@@ -1,0 +1,50 @@
+.float-container {
+    padding: 10px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.float-child1 {
+    float: left;
+}
+.float-child2 {
+    float: left;
+    clear: left;
+}
+.float-child1r {
+    float: right;
+}
+.float-child2r {
+    float: right;
+    clear: right;
+}
+
+.container {
+    display: flex;
+    justify-content: center;
+    color: rgb(var(--clr-text));
+    align-items: center;
+    height: 100%;
+}
+
+.btn-translate {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 2.5rem;
+    width: 6.25rem;
+    background-color: rgba(var(--clr-neutral-300), 1);
+    border: rgba(var(--clr-primary-500), 1) 1px solid;
+    border-radius: 1.25rem;
+    margin-right: 0.25rem;
+    cursor: pointer;
+    transition: background-color 0.15s;
+}
+
+.button-text {
+    font-family: var(--fnt-body);
+    font-size: 0.9375rem;
+    font-weight: 700;
+    color: rgba(var(--clr-primary-700), 1);
+    user-select: none;
+}

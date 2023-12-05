@@ -1,0 +1,59 @@
+<div class="container">
+    <div class="float-container">
+        <div class="float-child1">
+            <select [(ngModel)]="selectedFrom">
+                <option value="ar">Arabic</option>
+                <option value="zh">Chinese</option>
+                <option value="cz">Czech</option>
+                <option value="da">Danish</option>
+                <option value="nl">Dutch</option>
+                <option value="en">English</option>
+                <option value="fr">French</option>
+                <option value="de">German</option>
+                <option value="it">Italian</option>
+                <option value="ja">Japanese</option>
+                <option value="ru">Russian</option>
+                <option value="es">Spanish</option>
+                <option value="sv">Swedish</option>
+                <option value="tr">Turkish</option>
+            </select>
+            <br /><br />
+        </div>
+        <div class="float-child2">
+            <textarea
+                rows="6"
+                cols="30"
+                [(ngModel)]="textToTranslate"
+            ></textarea>
+        </div>
+    </div>
+    <div class="btn-translate" (click)="translate()">
+        <div class="button-text">Translate</div>
+    </div>
+    <div class="float-container">
+        <div class="float-child1r">
+            <select [(ngModel)]="selectedTo">
+                <option value="ar">Arabic</option>
+                <option value="zh">Chinese</option>
+                <option value="cz">Czech</option>
+                <option value="da">Danish</option>
+                <option value="nl">Dutch</option>
+                <option value="en">English</option>
+                <option value="fr">French</option>
+                <option value="de">German</option>
+                <option value="it">Italian</option>
+                <option value="ja">Japanese</option>
+                <option value="ru">Russian</option>
+                <option value="es">Spanish</option>
+                <option value="sv">Swedish</option>
+                <option value="tr">Turkish</option>
+            </select>
+            <br /><br />
+        </div>
+        <div class="float-child2r">
+            <textarea rows="6" cols="30" readonly="true">{{
+                translatedText
+            }}</textarea>
+        </div>
+    </div>
+</div>

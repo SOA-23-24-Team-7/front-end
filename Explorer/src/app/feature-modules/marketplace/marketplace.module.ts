@@ -1,7 +1,8 @@
 import { NgModule } from "@angular/core";
 import { CommonModule } from "@angular/common";
 import { MaterialModule } from "src/app/infrastructure/material/material.module";
-import { MatChipsModule } from "@angular/material/chips";
+import { MatChipsModule } from '@angular/material/chips';
+import { DragDropModule } from '@angular/cdk/drag-drop';
 import { ReactiveFormsModule } from "@angular/forms";
 import { RatingFormComponent } from "./rating-form/rating-form.component";
 import { RouterModule } from "@angular/router";
@@ -35,6 +36,8 @@ import { TourDetailsComponent } from "./tour-details/tour-details.component";
 import { FullSizeImageComponent } from "./full-size-image/full-size-image.component";
 import { TourPageComponent } from "./tour-page/tour-page.component";
 import { TourAuthoringModule } from "../tour-authoring/tour-authoring.module";
+import { TourSalesComponent } from './tour-sales/tour-sales.component';
+import { TourSaleFormComponent } from './tour-sale-form/tour-sale-form.component';
 import { CouponsComponent } from "./coupons/coupons.component";
 import { CouponsViewComponent } from "./coupons-view/coupons-view.component";
 import { EditCouponFormComponent } from "./edit-coupon-form/edit-coupon-form.component";
@@ -68,6 +71,8 @@ import { CouponsModalComponent } from "./coupons-modal/coupons-modal.component";
         TourDetailsComponent,
         FullSizeImageComponent,
         TourPageComponent,
+        TourSalesComponent,
+        TourSaleFormComponent,
         CouponsComponent,
         CouponsViewComponent,
         EditCouponFormComponent,
@@ -77,6 +82,7 @@ import { CouponsModalComponent } from "./coupons-modal/coupons-modal.component";
         CommonModule,
         RouterModule,
         MaterialModule,
+        DragDropModule,
         ReactiveFormsModule,
         FormsModule,
         CommonModule,

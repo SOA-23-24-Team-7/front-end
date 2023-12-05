@@ -11,6 +11,11 @@ import { TourAuthoringService } from '../../tour-authoring/tour-authoring.servic
 import { environment } from 'src/env/environment';
 import { User } from 'src/app/infrastructure/auth/model/user.model';
 import { AuthService } from 'src/app/infrastructure/auth/auth.service';
+import { OrderItem } from '../model/order-item';
+import { MarketplaceService } from '../marketplace.service';
+import { ShoppingCart } from '../model/shopping-cart';
+import { TourLimitedView } from '../model/tour-limited-view.model';
+import { TourToken } from '../model/tour-token.model';
 
 @Component({
   selector: 'xp-tour-page',
@@ -21,17 +26,21 @@ export class TourPageComponent {
   faStar = faStar;
   faCoins = faCoins;
   faCartShopping = faCartShopping;
-  tour: Tour;
+  tour?: Tour;
   tourId: number;
   imageHost: string = environment.imageHost;
   user: User;
   currentIndex: number = 0;
   keyPointContainer: any;
+  shoppingCart: ShoppingCart = {};
+  addedTours: TourLimitedView[] = [];
+  tokens: TourToken[] = [];
 
   constructor(
     private authService: AuthService,
     private route: ActivatedRoute,
-    private service: TourAuthoringService
+    private service: TourAuthoringService,
+    private marketplaceService: MarketplaceService
   ) {}
 
   ngOnInit(): void {
@@ -41,6 +50,9 @@ export class TourPageComponent {
 
     this.authService.user$.subscribe(user => {
       this.user = user;
+      if (user.role.toLocaleLowerCase() === 'tourist') {
+        this.getShoppingCart();
+      }
     });
 
     this.service.getTour(this.tourId).subscribe({
@@ -81,5 +93,72 @@ scrollToPrevCard(): void {
     }
     this.keyPointContainer!.scrollLeft -=
         this.keyPointContainer.children[this.currentIndex].clientWidth;
+  }
+
+  addOrderItem(
+  ): void {
+    const orderItem: OrderItem = {
+        tourId: this.tour?.id,
+        tourName: this.tour?.name,
+        price: this.tour?.price,
+        shoppingCartId: this.shoppingCart.id,
+    };
+    console.log(orderItem);
+    if (this.addedTours.find(tr => tr.id == this.tour?.id)) {
+        alert("You have already added this item to the cart.");
+        return;
+    }
+    if (this.tokens.find(tok => tok.tourId == this.tour?.id)) {
+        alert("You have already purcheased this tour.");
+        return;
+    }
+    this.marketplaceService.addOrderItem(orderItem).subscribe({
+        next: (result: OrderItem) => {
+            this.marketplaceService.getToursInCart(this.user.id).subscribe({
+                next: result => {
+                    this.addedTours = result.results;
+                    alert("Item successfully added to cart!");
+                },
+            });
+        },
+        error: (err: any) => {
+            console.log(err);
+        },
+    });
+  }
+
+  getShoppingCart(): void {
+    this.marketplaceService.getShoppingCart(this.user.id).subscribe({
+      next: (result: ShoppingCart) => {
+          this.shoppingCart = result;
+          console.log(result);
+          this.getTokens();
+          if (result == null) {
+              this.shoppingCart = {};
+              this.marketplaceService
+                  .addShoppingCart(this.shoppingCart)
+                  .subscribe({
+                      next: (result: ShoppingCart) => {
+                          this.shoppingCart = result;
+                          this.getTokens();
+                      },
+                  });
+          } else {
+              this.marketplaceService.getToursInCart(this.user.id).subscribe({
+                  next: result => {
+                      this.addedTours = result.results;
+                  },
+              });
+          }
+      },
+    });
+  }
+
+  getTokens(): void {
+    this.marketplaceService.getTouristTokens().subscribe({
+      next: result => {
+          this.tokens = result;
+      },
+    });
   }
 }

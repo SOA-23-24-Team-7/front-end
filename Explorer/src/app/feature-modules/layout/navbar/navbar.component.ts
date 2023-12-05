@@ -32,7 +32,9 @@ import {
     faPlus,
     faShoppingCart,
     faBell,
+    faLanguage,
     faCircleQuestion,
+    faPercent,
     faCoins,
     faMapLocationDot,
     faMoneyBills
@@ -133,6 +135,7 @@ export class NavbarComponent implements OnInit {
     faMoon = faMoon;
     faGlobe = faGlobe;
     faEuroSign = faEuroSign;
+    faLanguage = faLanguage;
     faUser = faUser;
     faRightFromBracket = faRightFromBracket;
     faMountainCity = faMountainCity;
@@ -151,6 +154,7 @@ export class NavbarComponent implements OnInit {
     faShoppingCart = faShoppingCart;
     faBell = faBell;
     faCircleQuestion = faCircleQuestion;
+    faPercent = faPercent;
     faCoins = faCoins;
     faMapLocationDot = faMapLocationDot;
     faMoneyBills = faMoneyBills;

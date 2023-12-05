@@ -55,9 +55,6 @@ export class TourComponent implements OnInit {
     faClock = faClock; 
     dropped: { [key: string]: boolean } = {};
     @ViewChild(MapComponent, { static: false }) mapComponent: MapComponent;
-    longitude: number = -200;
-    latitude: number = -200;
-    distance: number = 0;
     searchFilter: {
         longitude: number, 
         latitude: number, 
@@ -116,11 +113,8 @@ export class TourComponent implements OnInit {
     // this.getPublicKeyPoints();
     this.resetMinPrice();
     this.resetMaxPrice();
-    this.resetMinDuration();
-    this.resetMaxDuration();
     this.resetMinLength();
     this.resetMaxLength();
-    // this.onSearch();
   }
 
   getTourStatusText(status: TourStatus | undefined): string {
@@ -167,6 +161,7 @@ export class TourComponent implements OnInit {
     this.tourAuthoringService.getTours().subscribe({
       next: (result: PagedResults<Tour>) =>{
         this.tours = result.results;
+        this.totalCount = this.tours.length;
       },
       error:(err: any) => {
         console.log(err);
@@ -214,14 +209,14 @@ export class TourComponent implements OnInit {
 
   onMapClicked(): void {
     this.mapComponent.getClickCoordinates((lat, lng) => {
-        this.latitude = lat;
-        this.longitude = lng;
+        this.searchFilter.latitude = lat;
+        this.searchFilter.longitude = lng;
     });
 }
 
 onSearch(): void {
     this.tourAuthoringService
-        .searchTours(this.searchFilter)
+        .searchAuthorTours(this.searchFilter)
         .subscribe({
             next: (result: PagedResults<Tour>) => {
                 this.tours = result.results;
@@ -235,7 +230,7 @@ onSearch(): void {
 }
 
   onSliderChanged(): void {
-      this.distance = this.slider.value;
+      this.searchFilter.distance = this.slider.value;
   }
 
   getPublicFacilities(): void {
@@ -285,7 +280,7 @@ onSearch(): void {
 
   countFilters(): number {
       let number = 0;
-      if(this.longitude !== -200 && this.latitude !== -200 && this.distance !== 0) number++;
+      if(this.searchFilter.longitude !== -200 && this.searchFilter.latitude !== -200 && this.searchFilter.distance !== 0) number++;
       if(this.searchFilter.name !== '') number++
       if(this.searchFilter.minPrice !== '' && +this.searchFilter.minPrice > 0) number++
       if(this.searchFilter.maxPrice !== '' && +this.searchFilter.maxPrice > 0) number++
@@ -300,9 +295,9 @@ onSearch(): void {
   }
 
   resetLocationFilter() {
-      this.longitude = -200;
-      this.latitude = -200;
-      this.distance = 0;
+      this.searchFilter.longitude = -200;
+      this.searchFilter.latitude = -200;
+      this.searchFilter.distance = 0;
   }
 
   validateMinPrice() {
@@ -417,18 +412,6 @@ onSearch(): void {
   resetMaxPrice() {
       this.searchFilter.maxPrice = "";
       var inputElement = document.getElementsByName('maxPrice')[0] as HTMLInputElement;
-      inputElement.value = "";
-  }
-
-  resetMinDuration() {
-      this.searchFilter.minDuration = "";
-      var inputElement = document.getElementsByName('minDuration')[0] as HTMLInputElement;
-      inputElement.value = "";
-  }
-
-  resetMaxDuration() {
-      this.searchFilter.maxDuration = "";
-      var inputElement = document.getElementsByName('maxDuration')[0] as HTMLInputElement;
       inputElement.value = "";
   }
 
