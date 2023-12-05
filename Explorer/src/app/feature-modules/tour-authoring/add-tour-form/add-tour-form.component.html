@@ -11,6 +11,8 @@
             <input class="add-input" type="text" placeholder="Description" formControlName="description"/>
             <div class="add-label">Difficulty</div>
             <input class="add-input" min="1" max="5"  type="number" placeholder="Difficulty" formControlName="difficulty">
+            <div class="add-label">Price</div>
+            <input class="add-input" type="number" placeholder="Price" formControlName="price">
             <div class="add-label">Tags:</div>
             <div class="add-tags">
                 <div *ngFor="let tag of addTourForm.get('tags')?.value; let i = index">

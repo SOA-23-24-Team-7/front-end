@@ -303,6 +303,19 @@
                             Problem reports
                         </div>
                     </div>
+                    <div
+                        class="navbar-submenu-item"
+                        [routerLink]="['coupons']"
+                        *ngIf="user && user.role === 'author'"
+                    >
+                        <fa-icon
+                            class="navbar-submenu-item-icon"
+                            [icon]="faMoneyBills"
+                        />
+                        <div class="navbar-submenu-item-text">
+                            Coupons
+                        </div>
+                    </div>
                 </div>
                 <div
                     class="navbar-menu-item-selected-indicator"

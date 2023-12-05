@@ -25,6 +25,8 @@ import { ShoppingCart } from "./model/shopping-cart";
 import { OrderItem } from "./model/order-item";
 import { TourLimitedView } from "./model/tour-limited-view.model";
 import { TourToken } from "./model/tour-token.model";
+import { Coupon } from "./model/coupon.model";
+import { CouponApplication } from "./model/coupon-applicaton.model";
 
 @Injectable({
     providedIn: "root",
@@ -325,9 +327,25 @@ export class MarketplaceService {
                 shoppingCartId,
         );
     }
-    addToken(tourId: number, touristId: number): Promise<TourToken | undefined> {
+    addToken(
+        tourId: number,
+        touristId: number,
+        totalPrice: number,
+        orderItemPrice: number,
+    ): Promise<TourToken | undefined> {
         return this.http
-            .post<TourToken>(environment.apiHost + "token/" + tourId + "/" + touristId, {})
+            .post<TourToken>(
+                environment.apiHost +
+                    "token/" +
+                    tourId +
+                    "/" +
+                    touristId +
+                    "/" +
+                    totalPrice +
+                    "/" +
+                    orderItemPrice,
+                {},
+            )
             .toPromise();
     }
 
@@ -380,4 +398,30 @@ export class MarketplaceService {
         return query;
     }
     
+    addCoupon(coupon: Coupon): Observable<Coupon> {
+        return this.http.post<Coupon>(environment.apiHost + "coupon/", coupon);
+    }
+    getCoupons(): Observable<PagedResults<Coupon>> {
+        return this.http.get<PagedResults<Coupon>>(
+            environment.apiHost + "coupon/",
+        );
+    }
+    deleteCoupon(id: number): Observable<Coupon> {
+        return this.http.delete<Coupon>(environment.apiHost + "coupon/" + id);
+    }
+    updateCoupon(coupon: Coupon): Observable<Coupon> {
+        return this.http.put<Coupon>(
+            environment.apiHost + "coupon/" + coupon.id,
+            coupon,
+        );
+    }
+
+    applyDiscount(
+        couponAplication: CouponApplication,
+    ): Observable<ShoppingCart> {
+        return this.http.post<ShoppingCart>(
+            environment.apiHost + "tourist/shoppingCart/apply-coupon",
+            couponAplication,
+        );
+    }
 }

@@ -47,9 +47,9 @@ import { PaymentHistoryComponent } from "src/app/feature-modules/stakeholder/pay
 import { TouristsTourComponent } from "src/app/feature-modules/tour-authoring/tourists-tour/tourists-tour.component";
 import { TouristsKeyPointsComponent } from "src/app/feature-modules/tour-authoring/tourists-key-points/tourists-key-points.component";
 import { TouristsEquipmentComponent } from "src/app/feature-modules/tour-authoring/tourists-equipment/tourists-equipment.component";
+import { CouponsViewComponent } from "src/app/feature-modules/marketplace/coupons-view/coupons-view.component";
 import { TouristsTourBlogFormComponent } from "src/app/feature-modules/blog/tourists-tour-blog-form/tourists-tour-blog-form.component";
  
-
 const routes: Routes = [
     { path: "home", component: HomeComponent },
     { path: "login", component: LoginComponent },
@@ -252,7 +252,12 @@ const routes: Routes = [
         path: "payment-history",
         component: PaymentHistoryComponent,
         canActivate: [AuthGuard],
-    } 
+    },
+    {
+        path: "coupons",
+        component: CouponsViewComponent,
+        canActivate: [AuthGuard],
+    }
 ];
 
 @NgModule({

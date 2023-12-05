@@ -92,16 +92,16 @@
     font-size: 1rem;
 }
 .fa-icon-edit {
-    font-size: 1.5rem;
+    font-size: 2rem;
     color: rgba(var(--clr-primary-500), 0.8);
     transition: color 0.15s;
     padding-right: 1rem;
 }
 .fa-icon-delete {
-    font-size: 1.5rem;
+    font-size: 2rem;
     color: rgba(var(--clr-error-500), 0.8);
     transition: color 0.15s;
-    padding-right: 0.5rem;
+    padding-right: 1rem;
 }
 
 .fa-icon-edit:hover {
@@ -133,6 +133,7 @@
 .delete-edit-buttons {
     /*padding-left: 23rem;*/
     margin-right: 0;
+    padding-right: 2rem;
 }
 
 .image-gallery {
