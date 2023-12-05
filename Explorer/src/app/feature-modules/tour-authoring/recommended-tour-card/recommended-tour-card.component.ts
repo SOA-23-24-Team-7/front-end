@@ -10,53 +10,30 @@ import { AdministrationService } from "../../administration/administration.servi
 import { AuthService } from "src/app/infrastructure/auth/auth.service";
 import { User } from "src/app/infrastructure/auth/model/user.model";
 
+
 @Component({
     selector: "xp-recommended-tour-card",
     templateUrl: "./recommended-tour-card.component.html",
     styleUrls: ["./recommended-tour-card.component.css"],
 })
 export class RecommendedTourCardComponent {
-    @Input() tour: Tour;
-    @Input() hasActiveTour: boolean;
-    @Input() activeTourId: number;
-    tourImage: string;
-    isTourActive: boolean = false;
-    user: User;
-    constructor(
-        private router: Router,
-        private service: MarketplaceService,
-        public dialogRef: MatDialog,
-        private authService: AuthService,
-    ) {}
-
-    ngOnInit(): void {
-        //this.CheckIfTourIsActive()
-        this.authService.user$.subscribe(user => {
-            this.user = user;
-        });
-        this.tourImage =
-            environment.imageHost + this.tour.keyPoints![0].imagePath;
-    }
-
-    /*StartTour(){
-    this.service.startTour(this.tour.id!).subscribe(() => {
-      this.router.navigate(['/tour-executing/' + this.tour.id]);
+  @Input() tour: Tour;
+  @Input() hasActiveTour: boolean;
+  @Input() activeTourId: number;
+  tourImage: string
+  isTourActive: boolean = false
+  user: User;
+  
+  constructor(private router: Router, private service: MarketplaceService, public dialogRef: MatDialog, private authService: AuthService){}
+  
+  ngOnInit(): void {
+    this.tourImage = environment.imageHost + this.tour.keyPoints![0].imagePath;
+    this.authService.user$.subscribe(user => {
+      this.user = user;
     });
-  }*/
-
-    /*ContinueTour(){
-    this.router.navigate(['/tour-executing/' + this.tour.id]);
-  }*/
-
-    /*CheckIfTourIsActive(){
-    if(this.hasActiveTour){
-      if(this.tour.id == this.activeTourId){
-        this.isTourActive = true
-      }
-    }
-  }*/
-
-    BuyTour(): void {
+  }
+  
+  BuyTour(): void {
         if (this.tour.id != null) {
             this.service.addToken(
                 this.tour.id,
@@ -68,11 +45,12 @@ export class RecommendedTourCardComponent {
         }
     }
 
-    ShowKeyPoints() {
-        const dialogRef = this.dialogRef.open(KeyPointsViewComponent, {
-            data: {
-                keyPoints: this.tour.keyPoints,
-            },
-        });
-    }
+  ShowKeyPoints() {
+    const dialogRef = this.dialogRef.open(KeyPointsViewComponent, {
+        data: {
+            keyPoints: this.tour.keyPoints,
+        },
+    });    
+  }
+
 }

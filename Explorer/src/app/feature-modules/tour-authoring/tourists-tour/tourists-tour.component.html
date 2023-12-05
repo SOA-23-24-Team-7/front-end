@@ -18,7 +18,7 @@
                   <button *ngIf="getTourStatusText(to.status) !== 'Ready'" color="primary" (click)="onEditClicked(to)" mat-icon-button>
                       Edit
                   </button>
-                  <button color="primary" mat-raised-button [routerLink]="['equipment',to.id]">
+                  <button *ngIf="getTourStatusText(to.status) !== 'Ready'" color="primary" mat-raised-button [routerLink]="['equipment',to.id]">
                       Manage equipment
                   </button>
                   <button *ngIf="getTourStatusText(to.status) === 'Ready'" color="primary" mat-raised-button [routerLink]="['/tour', to.id, 'tourists-key-points']" id="view-key-points-button">
