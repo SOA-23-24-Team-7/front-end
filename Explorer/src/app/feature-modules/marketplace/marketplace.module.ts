@@ -72,7 +72,7 @@ import { CouponsModalComponent } from "./coupons-modal/coupons-modal.component";
         FullSizeImageComponent,
         TourPageComponent,
         TourSalesComponent,
-        TourSaleFormComponent
+        TourSaleFormComponent,
         CouponsComponent,
         CouponsViewComponent,
         EditCouponFormComponent,

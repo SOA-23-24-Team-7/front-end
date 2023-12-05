@@ -33,7 +33,7 @@ import {
     faShoppingCart,
     faBell,
     faCircleQuestion,
-    faPercent
+    faPercent,
     faCoins,
     faMapLocationDot,
     faMoneyBills
