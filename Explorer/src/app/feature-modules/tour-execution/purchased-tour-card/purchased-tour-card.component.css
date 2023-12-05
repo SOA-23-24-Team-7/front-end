@@ -97,20 +97,18 @@ ista prica
 
 .search-button {
     border-radius: 2rem;
-    margin-left: auto;
     height: 100%;
     max-height: 100%;
     font-size: 1.05rem;
     font-weight: 500;
+    margin-top: 10px;
 }
 .key-points-button{
     border-radius: 2rem;
-    margin-right: auto;
     height: 100%;
     max-height: 100%;
     font-size: 1.05rem;
     font-weight: 500;
-    float: left;
 }
 button:disabled,
 button[disabled]{
