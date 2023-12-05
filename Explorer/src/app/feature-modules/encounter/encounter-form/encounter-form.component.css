@@ -26,3 +26,8 @@ button {
 tag {
     background-color: rgb(var(--clr-background-secondary)) !important;
 }
+
+select {
+    background-color: rgb(var(--clr-background-secondary));
+    color: rgb(var(--clr-text));
+}

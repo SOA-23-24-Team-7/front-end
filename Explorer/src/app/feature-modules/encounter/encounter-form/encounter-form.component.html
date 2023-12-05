@@ -20,7 +20,8 @@
         />
         <select formControlName="selectedStatus" (change)="changeStatus()">
             <option value="1">Social</option>
-            <option value="2">Test</option>
+            <option value="2">Hidden</option>
+            <option value="3">Misc</option>
         </select>
         <div *ngIf="encounterType == 1">
             <input
@@ -32,12 +33,36 @@
         </div>
         <div *ngIf="encounterType == 2">
             <input
-                placeholder="Test"
-                formControlName="testNumber"
-                min="1"
-                type="number"
+                placeholder="Picture url"
+                formControlName="pictureURL"
+                type="text"
             />
         </div>
+        <div *ngIf="encounterType == 2">
+            <input
+                placeholder="Picture longitude"
+                formControlName="pictureLongitude"
+                type="number"
+                min="-180"
+                max="180"
+            />
+        </div>
+        <div *ngIf="encounterType == 2">
+            <input
+                placeholder="Picture latitude"
+                formControlName="pictureLatitude"
+                type="number"
+                min="-90"
+                max="90"
+            />
+        </div>
+        <!-- <div *ngIf="encounterType == 3">
+            <input
+                placeholder="Misc field"
+                formControlName="misc"
+                type="number"
+            />
+        </div> -->
     </div>
 </form>
 <div class="button-container">

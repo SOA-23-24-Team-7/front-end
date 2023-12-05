@@ -20,6 +20,9 @@ export class EncounterFormComponent {
         selectedStatus: new FormControl(),
         peopleNumber: new FormControl(null, [Validators.min(1)]),
         testNumber: new FormControl(null, [Validators.min(1)]),
+        pictureURL: new FormControl(null, Validators.required),
+        pictureLongitude: new FormControl(null, [Validators.required]),
+        pictureLatitude: new FormControl(null, [Validators.required]),
     });
     encounterType: number = 1;
 
