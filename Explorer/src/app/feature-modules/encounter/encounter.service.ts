@@ -4,9 +4,6 @@ import { Observable } from "rxjs";
 import { PagedResults } from "src/app/shared/model/paged-results.model";
 import { environment } from "src/env/environment";
 import { Encounter } from "./model/encounter.model";
-import { SocialEncounter } from "./model/social-encounter.model";
-import { HiddenEncounter } from "./model/hidden-encounter.model";
-import { MiscEncounter } from "./model/misc-encounter.model";
 import { UserPositionWithRange } from "./model/user-position-with-range.model";
 
 @Injectable({
@@ -30,28 +27,22 @@ export class EncounterService {
         );
     }
 
-    createSocialEncounter(
-        socialEncounter: SocialEncounter,
-    ): Observable<SocialEncounter> {
-        return this.http.post<SocialEncounter>(
+    createSocialEncounter(socialEncounter: Encounter): Observable<Encounter> {
+        return this.http.post<Encounter>(
             environment.apiHost + "author/social-encounter/create",
             socialEncounter,
         );
     }
 
-    createHiddenEncounter(
-        hiddenEncounter: HiddenEncounter,
-    ): Observable<HiddenEncounter> {
-        return this.http.post<HiddenEncounter>(
+    createHiddenEncounter(hiddenEncounter: Encounter): Observable<Encounter> {
+        return this.http.post<Encounter>(
             environment.apiHost + "author/hidden-location-encounter/create",
             hiddenEncounter,
         );
     }
 
-    createMiscEncounter(
-        miscEncounter: MiscEncounter,
-    ): Observable<MiscEncounter> {
-        return this.http.post<MiscEncounter>(
+    createMiscEncounter(miscEncounter: Encounter): Observable<Encounter> {
+        return this.http.post<Encounter>(
             environment.apiHost + "author/misc-encounter/create",
             miscEncounter,
         );
