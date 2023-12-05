@@ -279,7 +279,7 @@ export class MapComponent implements AfterViewInit, OnChanges {
         if (waypoints.length == (this.waypointMap.size + 1) && i == 0) return null;
         if(i == 1){
           keyPointIcon = L.icon({
-            iconUrl: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSricRtW0UhHnycuWKxueASyMes5fnujlagv9Nv5HUoE5HSKCEh&s',
+            iconUrl: '../assets/icons/nextKeyPointIcon.png',
             iconSize: [46, 46],
             iconAnchor: [26, 46],
           });
