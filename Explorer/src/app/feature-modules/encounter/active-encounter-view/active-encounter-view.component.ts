@@ -18,18 +18,57 @@ export class ActiveEncounterViewComponent {
 
     userPosition: UserPositionWithRange = {
         range: 6000,
-        longitude: 19.84113513341626,
-        latitude: 45.260218642510154,
+        longitude: 19.872465872081193,
+        latitude: 45.25945586799432,
+    };
+
+    encounter = {
+        id: 1,
+        title: "Dunavac",
+        description: "Dunavac",
+        longitude: 19.872465872081193,
+        latitude: 45.25945586799432,
+        radius: 50,
+        xpReward: 30,
+        status: 0,
+        type: 1,
     };
 
     constructor(private service: EncounterService) {}
 
     ngOnInit(): void {
         this.loadEncountersInRangeOfFromCurrentLocation(this.userPosition);
-        this.mapComponent.setMarker(
-            this.userPosition.latitude,
-            this.userPosition.longitude,
-        );
+        if (this.checkIfUserInEncounterRange(this.encounter)) {
+            console.log("Mozes da aktiviras encounter: ", this.encounter.title);
+        }
+    }
+
+    checkIfUserInEncounterRange(encounter: Encounter): boolean {
+        const userLat = this.userPosition.latitude;
+        const userLng = this.userPosition.longitude;
+        const encounterLat = encounter.latitude;
+        const encounterLng = encounter.longitude;
+        const earthRadius = 6371;
+        const toRadians = (value: number) => (value * Math.PI) / 180;
+        const haversine = (a: number, b: number) =>
+            Math.pow(Math.sin((b - a) / 2), 2);
+
+        const distance =
+            2 *
+            earthRadius *
+            Math.asin(
+                Math.sqrt(
+                    haversine(toRadians(userLat), toRadians(encounterLat)) +
+                        Math.cos(toRadians(userLat)) *
+                            Math.cos(toRadians(encounterLat)) *
+                            haversine(
+                                toRadians(userLng),
+                                toRadians(encounterLng),
+                            ),
+                ),
+            );
+        console.log("Distanca je: ", distance);
+        return distance <= encounter.radius;
     }
 
     loadEncountersInRangeOfFromCurrentLocation(
