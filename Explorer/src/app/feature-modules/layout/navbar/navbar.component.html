@@ -211,6 +211,17 @@
                     </div>
                     <div
                         class="navbar-submenu-item"
+                        *ngIf="user && user.role === 'author'"
+                        [routerLink]="['tour-sales']"
+                    >
+                        <fa-icon
+                            class="navbar-submenu-item-icon"
+                            [icon]="faPercent"
+                        />
+                        <div class="navbar-submenu-item-text">My Tour Sales</div>
+                    </div>
+                    <div
+                        class="navbar-submenu-item"
                         *ngIf="user && user.role === 'tourist'"
                         [routerLink]="['purchasedtours']"
                     >

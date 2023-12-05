@@ -25,6 +25,7 @@ import { ShoppingCart } from "./model/shopping-cart";
 import { OrderItem } from "./model/order-item";
 import { TourLimitedView } from "./model/tour-limited-view.model";
 import { TourToken } from "./model/tour-token.model";
+import { TourSale } from "./model/tour-sale.model";
 
 @Injectable({
     providedIn: "root",
@@ -373,5 +374,29 @@ export class MarketplaceService {
         const path = environment.apiHost + "tourist/tour/search" + query;
         return this.http.get<PagedResults<Tour>>(path);
       }
-    
+
+      addTourSale(tourSale: TourSale): Observable<TourSale> {
+        return this.http.post<TourSale>(environment.apiHost + "tour-sales", tourSale);
+      }
+
+      getTourSales(): Observable<TourSale[]> {
+        return this.http.get<TourSale[]>(environment.apiHost + "tour-sales");
+      }
+
+      getTourSaleById(id: number): Observable<TourSale> {
+        return this.http.get<TourSale>(environment.apiHost + "tour-sales/" + id);
+      }
+
+      updateTourSale(tourSale: TourSale): Observable<TourSale> {
+        return this.http.put<TourSale>(environment.apiHost + "tour-sales", tourSale);
+      }
+
+      deleteTourSale(id: number): Observable<void> {
+        return this.http.delete<void>(environment.apiHost + "tour-sales/" + id);
+      }
+
+      getPublishedToursByAuthor(authorId: number): Observable<PagedResults<Tour>> {
+        const path = environment.apiHost + "tourist/tour/search" + "?page=0&pageSize=0&authorId=" + authorId;
+        return this.http.get<PagedResults<Tour>>(path);
+      }
 }

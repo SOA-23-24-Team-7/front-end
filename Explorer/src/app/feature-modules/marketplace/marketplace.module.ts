@@ -2,6 +2,7 @@ import { NgModule } from "@angular/core";
 import { CommonModule } from "@angular/common";
 import { MaterialModule } from "src/app/infrastructure/material/material.module";
 import { MatChipsModule } from '@angular/material/chips';
+import { DragDropModule } from '@angular/cdk/drag-drop';
 import { ReactiveFormsModule } from "@angular/forms";
 import { RatingFormComponent } from "./rating-form/rating-form.component";
 import { RouterModule } from "@angular/router";
@@ -35,6 +36,8 @@ import { TourDetailsComponent } from './tour-details/tour-details.component';
 import { FullSizeImageComponent } from './full-size-image/full-size-image.component';
 import { TourPageComponent } from './tour-page/tour-page.component';
 import { TourAuthoringModule } from "../tour-authoring/tour-authoring.module";
+import { TourSalesComponent } from './tour-sales/tour-sales.component';
+import { TourSaleFormComponent } from './tour-sale-form/tour-sale-form.component';
 
 @NgModule({
     declarations: [
@@ -63,12 +66,15 @@ import { TourAuthoringModule } from "../tour-authoring/tour-authoring.module";
         ShoppingCartComponent,
         TourDetailsComponent,
         FullSizeImageComponent,
-        TourPageComponent
+        TourPageComponent,
+        TourSalesComponent,
+        TourSaleFormComponent
     ],
     imports: [
         CommonModule,
         RouterModule,
         MaterialModule,
+        DragDropModule,
         ReactiveFormsModule,
         FormsModule,
         CommonModule,
