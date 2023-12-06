@@ -5,11 +5,21 @@ import { PagedResults } from "src/app/shared/model/paged-results.model";
 import { environment } from "src/env/environment";
 import { Encounter } from "./model/encounter.model";
 import { KeyPointEncounter } from "./model/key-point-encounter.model";
+import { TouristPosition } from "../tour-execution/model/tourist-position.model";
 
 @Injectable({
     providedIn: "root",
 })
 export class EncounterService {
+    getEncounterForKeyPoint(
+        keyPointId: number,
+        touristPosition: TouristPosition,
+    ): Observable<KeyPointEncounter> {
+        return this.http.post<KeyPointEncounter>(
+            environment.apiHost + "tourist/encounter/key-point/" + keyPointId,
+            touristPosition,
+        );
+    }
     createKeyPointEncounter(
         keyPointEncounter: KeyPointEncounter,
     ): Observable<KeyPointEncounter> {
