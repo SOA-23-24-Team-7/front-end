@@ -1,0 +1,86 @@
+<form [formGroup]="encounterForm">
+    <div class="create-form">
+        <input placeholder="Title" formControlName="title" type="text" />
+        <input
+            placeholder="Description"
+            formControlName="description"
+            type="text"
+        />
+        <input
+            placeholder="Radius"
+            formControlName="radius"
+            min="1"
+            type="number"
+        />
+        <input
+            placeholder="Xp reward"
+            formControlName="xp"
+            min="1"
+            type="number"
+        />
+        <div>
+            <button
+                mat-raised-button
+                color="primary"
+                (click)="selectEncounterOnMap()"
+            >
+                Select encounter
+            </button>
+            <p
+                class="coordinates"
+                *ngIf="selectedEncounter"
+                [innerHTML]="selectedEncounter"
+            ></p>
+        </div>
+        <select formControlName="selectedStatus" (change)="changeStatus()">
+            <option value="1">Social</option>
+            <option value="2">Hidden</option>
+            <option value="3">Misc</option>
+        </select>
+        <div *ngIf="encounterType == 1">
+            <input
+                placeholder="People number"
+                formControlName="peopleNumber"
+                min="1"
+                type="number"
+            />
+        </div>
+        <div *ngIf="encounterType == 2 && encounterType == 2">
+            <input
+                placeholder="Picture url"
+                formControlName="pictureURL"
+                type="text"
+            />
+        </div>
+        <button
+            *ngIf="encounterType == 2"
+            mat-raised-button
+            color="primary"
+            (click)="selectPictureOnMap()"
+        >
+            Select picture
+        </button>
+        <p
+            class="coordinates"
+            *ngIf="selectedImage && encounterType == 2"
+            [innerHTML]="selectedImage"
+        ></p>
+        <!-- <div *ngIf="encounterType == 3">
+            <input
+                placeholder="Misc field"
+                formControlName="misc"
+                type="number"
+            />
+        </div> -->
+    </div>
+</form>
+<div class="button-container">
+    <button
+        mat-raised-button
+        type="submit"
+        color="primary"
+        (click)="createEncounter()"
+    >
+        Create
+    </button>
+</div>

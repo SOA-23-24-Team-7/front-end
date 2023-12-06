@@ -9,6 +9,8 @@ import { Login } from "./model/login.model";
 import { AuthenticationResponse } from "./model/authentication-response.model";
 import { User } from "./model/user.model";
 import { Registration } from "./model/registration.model";
+import { LocationCoords } from "src/app/shared/model/location-coords.model";
+import { TouristProgress } from "./model/tourist-progress.model";
 
 @Injectable({
     providedIn: "root",
@@ -19,6 +21,10 @@ export class AuthService {
         id: 0,
         role: "",
         profilePicture: "",
+    });
+    userLocation$ = new BehaviorSubject<LocationCoords>({
+        latitude: 45.2,
+        longitude: 19.8,
     });
 
     constructor(
@@ -63,6 +69,9 @@ export class AuthService {
         this.tokenStorage.clear();
         this.router.navigate([""]);
         this.user$.next({ username: "", id: 0, role: "", profilePicture: "" });
+        this.userLocation$.next({ latitude: 45.2, longitude: 19.8 });
+        localStorage.setItem("userLat", "45.2");
+        localStorage.setItem("userLong", "19.8");
     }
 
     checkIfUserExists(): void {
@@ -71,6 +80,7 @@ export class AuthService {
             return;
         }
         this.setUser();
+        this.loadUserPos();
     }
 
     private setUser(): void {
@@ -86,6 +96,19 @@ export class AuthService {
                 jwtHelperService.decodeToken(accessToken).profilePicture,
         };
         this.user$.next(user);
+        if (user.role === "tourist") {
+            this.http
+                .get<TouristProgress>(
+                    environment.apiHost + "tourist/encounter/progress",
+                )
+                .subscribe({
+                    next: progress => {
+                        user.touristProgress = progress;
+                        this.user$.next(user);
+                    },
+                    error: () => {},
+                });
+        }
     }
 
     getCurrentUserId(): number {
@@ -94,5 +117,37 @@ export class AuthService {
         const decodedToken = jwtHelperService.decodeToken(accessToken);
 
         return decodedToken.id;
+    }
+
+    setUserLocation(pos: LocationCoords) {
+        this.userLocation$.next(pos);
+        localStorage.setItem("userLong", pos.longitude.toString());
+        localStorage.setItem("userLat", pos.latitude.toString());
+    }
+
+    loadUserPos() {
+        const long = localStorage.getItem("userLong");
+        const lat = localStorage.getItem("userLat");
+        if (long && lat) {
+            this.setUserLocation({
+                longitude: parseFloat(long),
+                latitude: parseFloat(lat),
+            });
+        }
+    }
+
+    updateXp() {
+        if (this.user$.value.role === "tourist") {
+            this.http
+                .get<TouristProgress>(
+                    environment.apiHost + "tourist/encounter/progress",
+                )
+                .subscribe({
+                    next: progress => {
+                        this.user$.value.touristProgress = progress;
+                    },
+                    error: () => {},
+                });
+        }
     }
 }

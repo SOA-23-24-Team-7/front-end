@@ -52,11 +52,11 @@ import { TouristsKeyPointsComponent } from "src/app/feature-modules/tour-authori
 import { TouristsEquipmentComponent } from "src/app/feature-modules/tour-authoring/tourists-equipment/tourists-equipment.component";
 import { CouponsViewComponent } from "src/app/feature-modules/marketplace/coupons-view/coupons-view.component";
 import { TouristsTourBlogFormComponent } from "src/app/feature-modules/blog/tourists-tour-blog-form/tourists-tour-blog-form.component";
+import { EncounterFormComponent } from "src/app/feature-modules/encounter/encounter-form/encounter-form.component";
 import { BundleCardComponent } from "src/app/feature-modules/tour-authoring/bundle-card/bundle-card.component";
 import { BundlesComponent } from "src/app/feature-modules/tour-authoring/bundles/bundles.component";
 import { ExploreBundlesComponent } from "src/app/feature-modules/marketplace/explore-bundles/explore-bundles.component";
 
- 
 const routes: Routes = [
     { path: "home", component: HomeComponent },
     { path: "login", component: LoginComponent },
@@ -255,7 +255,7 @@ const routes: Routes = [
         canActivate: [AuthGuard],
     },
     {
-        path:"tourists-tour/equipment/:id",
+        path: "tourists-tour/equipment/:id",
         component: TouristsEquipmentComponent,
         canActivate: [AuthGuard],
     },
@@ -269,9 +269,14 @@ const routes: Routes = [
         component: TouristsTourBlogFormComponent,
         canActivate: [AuthGuard],
     },
-    { 
+    {
         path: "payment-history",
         component: PaymentHistoryComponent,
+        canActivate: [AuthGuard],
+    },
+    {
+        path: "encounter-form",
+        component: EncounterFormComponent,
         canActivate: [AuthGuard],
     },
     {
@@ -293,7 +298,7 @@ const routes: Routes = [
         path: "explore-bundles",
         component: ExploreBundlesComponent,
         canActivate: [AuthGuard],
-    }
+    },
 ];
 
 @NgModule({

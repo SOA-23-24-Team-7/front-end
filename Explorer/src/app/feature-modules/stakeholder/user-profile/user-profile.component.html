@@ -80,15 +80,46 @@
                                 +
                             </div>
                         </div>
-                        <div class="row wallet" *ngIf="user.role=='tourist'">
+                        <div class="row wallet" *ngIf="user.role == 'tourist'">
                             <div>
-                                <span class="count">{{ wallet.adventureCoin }}</span>
+                                <span class="count">{{
+                                    wallet.adventureCoin
+                                }}</span>
                                 Action Coins
                             </div>
                         </div>
                     </div>
-                    <div class="btn edit-btn" (click)="toggleEditing()">
-                        Edit
+                    <div class="column" style="margin-left: auto">
+                        <div class="btn edit-btn" (click)="toggleEditing()">
+                            Edit
+                        </div>
+                        <div class="level-container">
+                            <div class="level">
+                                {{
+                                    "Level " +
+                                        user.touristProgress?.level +
+                                        " Tourist"
+                                }}
+                            </div>
+                            <div class="level-bar-border">
+                                <div
+                                    class="level-bar"
+                                    [style.width]="
+                                        user.touristProgress?.xp + '%'
+                                    "
+                                ></div>
+                            </div>
+                            <div class="xp">
+                                <div>0</div>
+                                <div>
+                                    <span class="current-xp">
+                                        {{ user.touristProgress?.xp }}
+                                    </span>
+                                    xp
+                                </div>
+                                <div>100</div>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>

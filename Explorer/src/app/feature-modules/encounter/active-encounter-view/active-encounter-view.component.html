@@ -1,1 +1,34 @@
-<xp-map></xp-map>
+<div class="wrapper">
+    <xp-map mapName="encounter_map"></xp-map>
+    <div class="simulator-btn" (click)="openSimulator()">
+        <fa-icon class="upvote" [icon]="faLocation" />
+    </div>
+    <div class="execution" *ngIf="encounter">
+        <div
+            class="img"
+            *ngIf="encounterInstance?.status === 0 && encounter?.type === 1"
+        >
+            <img [src]="image" alt="Encounter Image" width="200" height="150" />
+        </div>
+        <h3 class="title">{{ encounter.title }}</h3>
+        <div class="description">{{ encounter.description }}</div>
+        <div
+            class="btn"
+            *ngIf="!encounterInstance && encounter"
+            (click)="activateEncounter()"
+        >
+            Activate
+        </div>
+        <div
+            class="btn"
+            *ngIf="
+                encounterInstance?.status === 0 &&
+                encounter &&
+                encounter.type !== 1
+            "
+            (click)="completeEncounter()"
+        >
+            Complete
+        </div>
+    </div>
+</div>

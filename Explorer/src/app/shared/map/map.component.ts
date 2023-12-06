@@ -53,6 +53,7 @@ export class MapComponent implements AfterViewInit, OnChanges {
     @Input() isCampaign = false;
     @Input() executingTourId = 0;
     @Input() height: string = "600px";
+    @Input() mapName: string = "map";
     @Input() set startPosition(value: any) {
         if (!value) return;
         if (this.positionMarker) {
@@ -64,13 +65,19 @@ export class MapComponent implements AfterViewInit, OnChanges {
         }).addTo(this.map);
 
         if (!this.isTourExecutionMap) return;
-        let waypoints = [
-            { lng: this.touristPosition[1], lat: this.touristPosition[0] },
-            ...this.waypointMap.values(),
-        ];
-        this.setRoute(waypoints);
-        this.setCheckedPointsMarkers();
-        setTimeout(() => this.newPositionEvent.emit(), 500);
+        setTimeout(() => {
+            this.positionMarker = L.marker(this.touristPosition, {
+                icon: this.positionIcon,
+            }).addTo(this.map);
+            if (!this.isTourExecutionMap) return;
+            let waypoints = [
+                { lng: this.touristPosition[1], lat: this.touristPosition[0] },
+                ...this.waypointMap.values(),
+            ];
+            this.setRoute(waypoints);
+            this.setCheckedPointsMarkers();
+            setTimeout(() => this.newPositionEvent.emit(), 500);
+        }, 0.5);
     }
 
     @Input() set encounterPosition(value: any) {
@@ -80,6 +87,7 @@ export class MapComponent implements AfterViewInit, OnChanges {
             icon: this.encounterIcon,
         }).addTo(this.map);
     }
+
     @Input() set nextKeyPointId(value: number) {
         if (value !== null && !value) return;
         if (!this.isTourExecutionMap) return;
@@ -101,6 +109,7 @@ export class MapComponent implements AfterViewInit, OnChanges {
         this.setRoute(waypoints);
         this.setCheckedPointsMarkers();
     }
+
     @Output() keyPointClickEvent = new EventEmitter<any>();
     @Output() newLongLatEvent = new EventEmitter<[number, number]>();
     @Output() newPositionEvent = new EventEmitter<void>();
@@ -115,8 +124,20 @@ export class MapComponent implements AfterViewInit, OnChanges {
     });
 
     private encounterIcon = L.icon({
-        iconUrl: "https://cdn-icons-png.flaticon.com/512/5184/5184592.png",
-        iconSize: [42, 42],
+        iconUrl: "/assets/icons/encounter.png",
+        iconSize: [60, 60],
+        iconAnchor: [16, 32],
+    });
+
+    private encounterActiveIcon = L.icon({
+        iconUrl: "/assets/icons/encounterActive.png",
+        iconSize: [60, 60],
+        iconAnchor: [16, 32],
+    });
+
+    private encounterCompletedIcon = L.icon({
+        iconUrl: "/assets/icons/encounterCompleted.png",
+        iconSize: [60, 60],
         iconAnchor: [16, 32],
     });
 
@@ -170,9 +191,7 @@ export class MapComponent implements AfterViewInit, OnChanges {
     ngAfterViewInit(): void {
         L.Marker.prototype.options.icon = this.defaultIcon;
 
-        setTimeout(() => {
-            this.initMap();
-        }, 1);
+        this.initMap();
     }
 
     ngOnChanges(changes: SimpleChanges): void {
@@ -231,7 +250,7 @@ export class MapComponent implements AfterViewInit, OnChanges {
     }
 
     private initMap(): void {
-        this.map = L.map("map", {
+        this.map = L.map(this.mapName, {
             fullscreenControl: true,
             center: [45.2396, 19.8227],
             zoom: 13,
@@ -510,6 +529,22 @@ export class MapComponent implements AfterViewInit, OnChanges {
 
     setEncounterMarker(lat: number, lng: number): void {
         const marker = new L.Marker([lat, lng], { icon: this.encounterIcon });
+        this.markerGroup.addLayer(marker);
+        this.map.addLayer(this.markerGroup);
+    }
+
+    setEncounterActiveMarker(lat: number, lng: number): void {
+        const marker = new L.Marker([lat, lng], {
+            icon: this.encounterActiveIcon,
+        });
+        this.markerGroup.addLayer(marker);
+        this.map.addLayer(this.markerGroup);
+    }
+
+    setEncounterCompletedMarker(lat: number, lng: number): void {
+        const marker = new L.Marker([lat, lng], {
+            icon: this.encounterCompletedIcon,
+        });
         this.markerGroup.addLayer(marker);
         this.map.addLayer(this.markerGroup);
     }

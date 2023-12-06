@@ -1,14 +1,12 @@
 import { Component, Input } from "@angular/core";
 import { MatDialog } from "@angular/material/dialog";
-import { Router } from "@angular/router";
 import { environment } from "src/env/environment";
 import { KeyPointsViewComponent } from "../../tour-execution/key-points-view/key-points-view.component";
-import { TourExecutionService } from "../../tour-execution/tour-execution.service";
 import { Tour } from "../model/tour.model";
 import { MarketplaceService } from "../../marketplace/marketplace.service";
-import { AdministrationService } from "../../administration/administration.service";
 import { AuthService } from "src/app/infrastructure/auth/auth.service";
 import { User } from "src/app/infrastructure/auth/model/user.model";
+import { Router } from "@angular/router";
 
 @Component({
     selector: "xp-recommended-tour-card",

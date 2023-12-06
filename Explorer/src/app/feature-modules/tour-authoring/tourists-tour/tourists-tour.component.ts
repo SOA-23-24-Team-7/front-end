@@ -119,7 +119,6 @@ export class TouristsTourComponent implements OnInit {
     faPen = faPen;
     faPlus = faPlus;
     faTrash = faTrash;
-
     StartTour(id: number) {
         this.execution.tourId = id;
         this.execution.isCampaign = false;
