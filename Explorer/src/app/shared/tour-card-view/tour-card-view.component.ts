@@ -46,6 +46,8 @@ export class TourCardViewComponent {
   user: User;
   @Input() hideIcons: boolean = false;
   @Input() tour: Tour;
+  @Input() selectable: boolean = false;
+  @Input() selected: boolean = false;
   addedTours: TourLimitedView[] = [];
   tokens: TourToken[] = [];
   shoppingCart: ShoppingCart = {};

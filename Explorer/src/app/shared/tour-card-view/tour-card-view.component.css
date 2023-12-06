@@ -11,6 +11,14 @@
     box-shadow: 1px 2px 3px rgba(140, 140, 140, 0.2), -1px 0px 3px rgba(140, 140, 140, 0.2);
 }
 
+.selected {
+    background-color: rgba(var(--clr-primary), 0.4);
+}
+
+.selectable {
+    cursor: pointer;
+}
+
 .tour-card:hover .tour-image {
     transform: scale(1.2);
 }
