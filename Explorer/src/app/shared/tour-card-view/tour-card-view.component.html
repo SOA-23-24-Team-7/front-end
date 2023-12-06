@@ -42,10 +42,16 @@
             </div>
             <div class="tour-card-right">
                 <div class="tour-price">
-                    <div class="tour-price-value">{{tour.price}}</div>
+                    <div *ngIf="discount" class="tour-price-value"><s>{{tour.price}}</s></div>
+                    <div *ngIf="!discount" class="tour-price-value">{{tour.price}}</div>
                     <fa-icon class="tour-price-tokens" [icon]="faCoins"/>
                 </div>
-                <div class="btn add-to-cart" *ngIf="user && user.role === 'tourist'" (click)="addOrderItem(tour.id, tour.name, tour.price)">
+                <div *ngIf="discount" class="tour-price">
+                    <div class="discount">-{{discount! * 100}}%</div>
+                    <div class="tour-price-value">{{discountedPrice!}}</div>
+                    <fa-icon class="tour-price-tokens" [icon]="faCoins"/>
+                </div>
+                <div class="btn add-to-cart" *ngIf="user && user.role === 'tourist'" (click)="addOrderItem(tour.id, tour.name, discount ? discountedPrice! : tour.price)">
                     <fa-icon [icon]="faCartShopping"/>
                     <div class="add-to-cart-text">&nbsp;Add</div>
                 </div>
