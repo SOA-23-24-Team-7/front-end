@@ -81,7 +81,7 @@ export class EncounterFormComponent {
                 },
             });
         }
-        if (this.encounterType == 2) {
+        if (this.encounterType == 2 && this.checkIfPictureInEncounterRange()) {
             this.service.createHiddenEncounter(encounter).subscribe({
                 next: () => {
                     alert("Successfully created!");
@@ -90,6 +90,8 @@ export class EncounterFormComponent {
                     alert("Failed to create!");
                 },
             });
+        } else {
+            alert("Picture is not in encounter range!");
         }
         if (this.encounterType == 3) {
             this.service.createMiscEncounter(encounter).subscribe({
@@ -123,6 +125,33 @@ export class EncounterFormComponent {
         this.dialogRef.afterClosed().subscribe(result => {
             this.dialogRef = undefined;
         });
+    }
+
+    checkIfPictureInEncounterRange(): boolean {
+        const picLat = this.imageCoords.latitude;
+        const picLng = this.imageCoords.longitude;
+        const encounterLat = this.encounterCoords.latitude;
+        const encounterLng = this.encounterCoords.longitude;
+        const earthRadius = 6371;
+        const toRadians = (value: number) => (value * Math.PI) / 180;
+        const haversine = (a: number, b: number) =>
+            Math.pow(Math.sin((b - a) / 2), 2);
+
+        const distance =
+            2 *
+            earthRadius *
+            Math.asin(
+                Math.sqrt(
+                    haversine(toRadians(picLat), toRadians(encounterLat)) +
+                        Math.cos(toRadians(picLat)) *
+                            Math.cos(toRadians(encounterLat)) *
+                            haversine(
+                                toRadians(picLng),
+                                toRadians(encounterLng),
+                            ),
+                ),
+            );
+        return distance * 1000 <= this.encounterForm.value.radius!;
     }
 
     selectEncounterOnMap() {
