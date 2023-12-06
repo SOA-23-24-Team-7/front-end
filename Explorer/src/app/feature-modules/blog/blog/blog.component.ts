@@ -59,7 +59,7 @@ export class BlogComponent implements OnInit {
                 this.blogMarkdown = DOMPurify.sanitize(
                     md.parse(this.blog.description),
                 );
-                this.vote = this.getVote(this.blog);
+                this.vote = this.getVote();
             },
         });
     }
@@ -123,8 +123,8 @@ export class BlogComponent implements OnInit {
         }
     }
 
-    getVote(blog: Blog): Vote | undefined {
-        return blog.votes.find(x => x.userId == this.user?.id);
+    getVote(): Vote | undefined {
+        return this.blog.votes.find(x => x.userId == this.user?.id);
     }
 
     onUpVote(e: Event) {

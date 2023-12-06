@@ -1,15 +1,28 @@
 export interface Encounter {
     id: number;
-    title:string;
-    description:string;
-    location:string;
-    xp:number;
-    status:EncounterStatus;
+    title: string;
+    description: string;
+    longitude: number;
+    latitude: number;
+    radius: number;
+    xpReward: number;
+    status: EncounterStatus;
     type: EncounterType;
+    peopleNumber?: number;
+    picture?: string;
+    pictureLongitude?: number;
+    pictureLatitude?: number;
+    challengeDone: boolean;
 }
-export enum EncounterStatus{
-    Active, Draft, Archieved
+
+export enum EncounterType {
+    Social,
+    Hidden,
+    Misc,
+    KeyPoint,
 }
-export enum EncounterType{
-    Social, Location, Misc
+export enum EncounterStatus {
+    Active,
+    Draft,
+    Archieved,
 }

@@ -23,7 +23,7 @@ export class PurchasedToursComponent implements OnInit {
     campaigns: Campaign[] = [];
     hasTourActive: boolean;
     activeTourId: number;
-    isCampaign: boolean
+    isCampaign: boolean;
     selectedTours: Tour[] = [];
     selectedTourIds: number[] = [];
     userId: number;
@@ -42,9 +42,7 @@ export class PurchasedToursComponent implements OnInit {
             this.userId = user.id;
         });
         this.getCampaigns();
-        this.ToursContainer = document.querySelector(
-            ".container",
-        );
+        this.ToursContainer = document.querySelector(".container");
         this.CampaignsContainer = document.querySelector(
             ".container-campaigns",
         );
@@ -78,7 +76,7 @@ export class PurchasedToursComponent implements OnInit {
                 } else {
                     this.hasTourActive = true;
                     this.activeTourId = result.tourId;
-                    this.isCampaign = result.isCampaign
+                    this.isCampaign = result.isCampaign;
                 }
             },
         });
@@ -89,26 +87,25 @@ export class PurchasedToursComponent implements OnInit {
         if (tour.id) this.selectedTourIds.push(tour.id);
         console.log(tour.name);
     }
-    CancelCampaignCreating(){
+    CancelCampaignCreating() {
         this.campaignForm.reset({
             campaignDescription: "",
             campaignName: "",
         });
-        this.selectedTourIds.length = 0
-        this.selectedTours.length = 0
+        this.selectedTourIds.length = 0;
+        this.selectedTours.length = 0;
     }
     createCampaign() {
         if (
             this.campaignForm.value.campaignDescription == "" ||
             this.campaignForm.value.campaignName == ""
         ) {
-            alert('You must fill all fields')
+            alert("You must fill all fields");
             return;
         }
-        if (this.selectedTourIds.length < 2)
-        {
-            alert('There must be at least two tours')
-             return;
+        if (this.selectedTourIds.length < 2) {
+            alert("There must be at least two tours");
+            return;
         }
         const campaign: CampaignCreate = {
             touristId: this.userId,

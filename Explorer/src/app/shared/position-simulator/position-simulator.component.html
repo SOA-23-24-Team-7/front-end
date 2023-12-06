@@ -1,11 +1,9 @@
 <div class="container">
-    <h1 style="color: rgba(var(--clr-text), 1)">Position simulator</h1>
-    <hr />
     <xp-map
         [isPositionMap]="true"
-        [startPosition]="touristPosition"
+        [startPosition]="position"
         [canEdit]="true"
         (newLongLatEvent)="changeTouristPosition($event)"
-        mapName="simulator"
+        mapName="modal_map"
     ></xp-map>
 </div>

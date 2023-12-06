@@ -48,14 +48,15 @@ export class TourExecutionService {
     startTour(execution: TourExecutionStart): Observable<TourExecutionSession> {
         return this.http.post<TourExecutionSession>(
             environment.apiHost + "tourexecution/tourexecution",
-            execution
+            execution,
         );
     }
-    abandonTour(execution: TourExecutionStart): Observable<TourExecutionSession> {
+    abandonTour(
+        execution: TourExecutionStart,
+    ): Observable<TourExecutionSession> {
         return this.http.put<TourExecutionSession>(
-            environment.apiHost +
-                "tourexecution/tourexecution/abandoning",
-                execution
+            environment.apiHost + "tourexecution/tourexecution/abandoning",
+            execution,
         );
     }
     addTouristPosition(
@@ -96,7 +97,8 @@ export class TourExecutionService {
             environment.apiHost +
                 "tourexecution/tourexecution/" +
                 tourId +
-                "/"+isCampaign+
+                "/" +
+                isCampaign +
                 "/keypoint",
             touristPosition,
         );
@@ -116,7 +118,7 @@ export class TourExecutionService {
     }
     getCampaign(id: number): Observable<Tour> {
         return this.http.get<Tour>(
-            environment.apiHost + "tourist/campaign?campaignId="+id
+            environment.apiHost + "tourist/campaign?campaignId=" + id,
         );
     }
     getWheather(latitude: number, longitude: number):  Observable<any>{

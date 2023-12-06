@@ -55,6 +55,8 @@
     font-weight: 600;
     color: rgb(var(--clr-text));
     line-height: 2rem;
+    display: flex;
+    align-items: center;
 }
 
 .profile-picture {
@@ -177,4 +179,41 @@ button.show-tour-execution-history {
 button.all-notifications-button:hover,
 button.add-followers-button:hover {
     background-color: #2c3a89;
+}
+
+.level-container {
+    display: flex;
+    flex-direction: column;
+    width: 10rem;
+    font-size: 1rem;
+    margin-top: 4rem;
+    margin-right: 4rem;
+    font-size: 1.2rem;
+}
+
+.xp {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    font-size: 1.1rem;
+}
+
+.level-bar {
+    position: absolute;
+    top: 0;
+    left: 0;
+    border-bottom: 2px solid rgb(var(--clr-accent-500));
+    height: 1px;
+    box-shadow: 0 0 10px rgb(var(--clr-accent-300));
+}
+
+.level-bar-border {
+    position: relative;
+    width: 100%;
+    border-bottom: 2px solid rgb(var(--clr-primary-300));
+}
+
+.current-xp {
+    color: rgb(var(--clr-accent-700));
+    text-shadow: 0 0 10px rgb(var(--clr-accent-700));
 }

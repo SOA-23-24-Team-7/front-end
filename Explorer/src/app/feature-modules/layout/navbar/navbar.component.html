@@ -126,6 +126,60 @@
                 ></div>
             </div>
 
+            <!-- Encounters MENU -->
+            <div class="navbar-menu-item" *ngIf="user && user.username !== ''">
+                <div class="navbar-menu-item-content">
+                    <fa-icon
+                        class="navbar-menu-item-content-icon"
+                        [class.color-white]="isHome"
+                        [icon]="faFlag"
+                    />
+                    <div class="navbar-menu-item-content-text">Encounters</div>
+                    <fa-icon
+                        class="navbar-menu-item-content-arrow"
+                        [class.color-white]="isHome"
+                        [icon]="faChevronDown"
+                    />
+                </div>
+                <div class="navbar-submenu">
+                    <div
+                        *ngIf="
+                            user.role === 'author' ||
+                            (user.touristProgress &&
+                                user.touristProgress.level >= 10)
+                        "
+                        class="navbar-submenu-item"
+                        [routerLink]="['encounter-form']"
+                    >
+                        <fa-icon
+                            class="navbar-submenu-item-icon"
+                            [icon]="faPlus"
+                        />
+                        <div class="navbar-submenu-item-text">
+                            Create encounter
+                        </div>
+                    </div>
+                    <div
+                        class="navbar-submenu-item"
+                        [routerLink]="['active-encounters']"
+                        *ngIf="user.role === 'tourist'"
+                    >
+                        <fa-icon
+                            class="navbar-submenu-item-icon"
+                            [icon]="faCircleQuestion"
+                        />
+                        <div class="navbar-submenu-item-text">
+                            Active Encounters
+                        </div>
+                    </div>
+                </div>
+
+                <div
+                    class="navbar-menu-item-selected-indicator"
+                    [class.background-color-white]="isHome"
+                ></div>
+            </div>
+
             <!-- BLOG MENU -->
             <div class="navbar-menu-item" *ngIf="user && user.username !== ''">
                 <div class="navbar-menu-item-content">
@@ -250,7 +304,9 @@
                             class="navbar-submenu-item-icon"
                             [icon]="faPercent"
                         />
-                        <div class="navbar-submenu-item-text">My Tour Sales</div>
+                        <div class="navbar-submenu-item-text">
+                            My Tour Sales
+                        </div>
                     </div>
                     <div
                         class="navbar-submenu-item"
@@ -305,7 +361,8 @@
                         <div class="navbar-submenu-item-text">
                             Change position
                         </div>
-                    </div>                
+                    </div>
+
                     <div
                         class="navbar-submenu-item"
                         [routerLink]="['tourists-tour']"
@@ -353,9 +410,7 @@
                             class="navbar-submenu-item-icon"
                             [icon]="faMoneyBills"
                         />
-                        <div class="navbar-submenu-item-text">
-                            Coupons
-                        </div>
+                        <div class="navbar-submenu-item-text">Coupons</div>
                     </div>
                 </div>
                 <div
@@ -426,18 +481,6 @@
                             [icon]="faStar"
                         />
                         <div class="navbar-submenu-item-text">Ratings</div>
-                    </div>
-                    <div
-                        class="navbar-submenu-item"
-                        [routerLink]="['active-encounters']"
-                    >
-                        <fa-icon
-                            class="navbar-submenu-item-icon"
-                            [icon]="faCircleQuestion"
-                        />
-                        <div class="navbar-submenu-item-text">
-                            Active Encounters
-                        </div>
                     </div>
                 </div>
                 <div

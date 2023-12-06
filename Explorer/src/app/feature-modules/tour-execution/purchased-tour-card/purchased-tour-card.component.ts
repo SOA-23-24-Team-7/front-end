@@ -7,7 +7,7 @@ import { MatDialog } from "@angular/material/dialog";
 import { KeyPointsViewComponent } from "../key-points-view/key-points-view.component";
 import { TourExecutionStart } from "../model/tour-execution-start-model";
 import { faL } from "@fortawesome/free-solid-svg-icons";
-import { TourWheatherComponent } from '../tour-wheather/tour-wheather.component';
+import { TourWheatherComponent } from "../tour-wheather/tour-wheather.component";
 
 @Component({
     selector: "xp-purchased-tour-card",
@@ -15,7 +15,7 @@ import { TourWheatherComponent } from '../tour-wheather/tour-wheather.component'
     styleUrls: ["./purchased-tour-card.component.css"],
 })
 export class PurchasedTourCardComponent implements OnInit {
-    execution: TourExecutionStart = {tourId: 0, isCampaign: false}
+    execution: TourExecutionStart = { tourId: 0, isCampaign: false };
     @Input() tour: Tour;
     @Input() hasActiveTour: boolean;
     @Input() activeTourId: number;
@@ -34,14 +34,20 @@ export class PurchasedTourCardComponent implements OnInit {
             environment.imageHost + this.tour.keyPoints![0].imagePath;
     }
     StartTour() {
-        this.execution.tourId = this.tour.id!
-        this.execution.isCampaign = false
+        this.execution.tourId = this.tour.id!;
+        this.execution.isCampaign = false;
         this.service.startTour(this.execution).subscribe(() => {
-            this.router.navigate(["/tour-executing/" + this.tour.id, {isCampaign: false}]);
+            this.router.navigate([
+                "/tour-executing/" + this.tour.id,
+                { isCampaign: false },
+            ]);
         });
     }
     ContinueTour() {
-        this.router.navigate(["/tour-executing/" + this.tour.id, {isCampaign: false}]);
+        this.router.navigate([
+            "/tour-executing/" + this.tour.id,
+            { isCampaign: false },
+        ]);
     }
     CheckIfTourIsActive() {
         if (this.hasActiveTour) {
@@ -65,8 +71,8 @@ export class PurchasedTourCardComponent implements OnInit {
             data: {
                 longitude: this.tour.keyPoints![0].longitude,
                 latitude: this.tour.keyPoints![0].latitude,
-                tourName: this.tour.name
+                tourName: this.tour.name,
             },
         });
-      }
+    }
 }
