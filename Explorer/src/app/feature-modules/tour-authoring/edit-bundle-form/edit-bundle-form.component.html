@@ -2,7 +2,7 @@
     <div class="add" (click)="$event.stopPropagation()">
         <div class="add-head">
             <fa-icon class="add-x" [icon]="faXmark" (click)="onClose()"/>
-            <div class="add-title">Add bundle</div>
+            <div class="add-title">Edit bundle</div>
         </div>
         <form class="add-form" [formGroup]="addBundleForm">
             <div class="add-label">Name:</div>
@@ -13,12 +13,12 @@
             <div class="add-title">Select tours</div>
             <div class="tours">
                 <div *ngFor="let tour of tours">
-                    <xp-tour-card-view  [tour]="tour" *ngIf="tour.status==1" [selectable]="true" (click)="onSelect(tour.id!)" [selected]="this.bundle.tourIds.includes(tour.id!)"></xp-tour-card-view>
+                    <xp-tour-card-view  [tour]="tour" *ngIf="tour.status==1" [selectable]="true" (click)="onSelect(tour.id!)" [selected]="this.dataCopy.tourIds.includes(tour.id!)"></xp-tour-card-view>
                 </div>
             </div>
 
             <button class="add-submit" type="submit" (click)="submit()">
-                <div class="add-submit-text">Add</div>
+                <div class="add-submit-text">Edit</div>
             </button>
            
         </form>

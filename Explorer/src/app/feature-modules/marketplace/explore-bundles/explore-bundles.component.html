@@ -1,0 +1,13 @@
+<div class="bundles">
+    <div class="bundles-header">
+        <div class="bundles-header-title">Bundles</div>
+    </div>
+
+    <div class="bundles-body">
+        <div class="bundles-results">
+            <div class="bundle-card" *ngFor="let bundle of bundles">
+                <xp-bundle-card [bundle]="bundle"></xp-bundle-card>
+            </div>
+        </div>
+    </div>
+</div>

@@ -26,6 +26,7 @@ export class BundlesComponent implements OnInit {
     this.service.getBundlesForAuthor().subscribe({
       next: (result: Bundle[]) => {
         this.bundles = result;
+        console.log(this.bundles);
       }
     })
   }

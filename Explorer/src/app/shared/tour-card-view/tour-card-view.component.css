@@ -12,7 +12,7 @@
 }
 
 .selected {
-    background-color: rgba(var(--clr-primary), 0.4);
+    background-color: rgba(var(--clr-primary-500), 0.4);
 }
 
 .selectable {

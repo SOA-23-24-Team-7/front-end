@@ -31,6 +31,8 @@ import { FormsModule } from '@angular/forms';
 import { BundlesComponent } from './bundles/bundles.component';
 import { BundleCardComponent } from './bundle-card/bundle-card.component';
 import { AddBundleFormComponent } from './add-bundle-form/add-bundle-form.component';
+import { EditBundleFormComponent } from './edit-bundle-form/edit-bundle-form.component';
+import { ViewBundleToursComponent } from './view-bundle-tours/view-bundle-tours.component';
 
 @NgModule({
     declarations: [
@@ -55,6 +57,8 @@ import { AddBundleFormComponent } from './add-bundle-form/add-bundle-form.compon
         BundlesComponent,
         BundleCardComponent,
         AddBundleFormComponent,
+        EditBundleFormComponent,
+        ViewBundleToursComponent,
     ],
     imports: [
         CommonModule,
@@ -78,7 +82,8 @@ import { AddBundleFormComponent } from './add-bundle-form/add-bundle-form.compon
         FacilitiesFormComponent,
         TourEquipmentFormComponent,
         KeyPointCardComponent,
-        BundlesComponent
+        BundlesComponent,
+        BundleCardComponent
     ],
 })
 export class TourAuthoringModule {}

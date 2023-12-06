@@ -17,6 +17,7 @@ import { PagedResults } from "src/app/shared/model/paged-results.model";
 import { TourToken } from "../model/tour-token.model";
 import { StakeholderService } from "../../stakeholder/stakeholder.service";
 import { CouponsModalComponent } from "../coupons-modal/coupons-modal.component";
+import { Bundle } from "../../tour-authoring/model/bundle.model";
 
 @Component({
     selector: "xp-shopping-cart",
@@ -28,6 +29,7 @@ export class ShoppingCartComponent {
     orderItem: OrderItem;
     shoppingCart: ShoppingCart;
     isDisabled: boolean;
+    bundles: Bundle[] = [];
 
     constructor(
         private service: MarketplaceService,
@@ -45,6 +47,18 @@ export class ShoppingCartComponent {
             this.getShoppingCart();
         });
     }
+
+    getBundles() {
+        this.bundles = [];
+        this.shoppingCart.bundleOrderItems?.forEach(boi => {
+            this.service.getBundleById(boi.bundleId!).subscribe({
+                next: (result: Bundle) => {
+                    this.bundles.push(result);
+                }
+            })
+        });
+    }
+
     openDialog(input: Review[]) {
         console.log(input);
         const dialogRef = this.dialogRef.open(ReviewCardComponent, {
@@ -90,6 +104,7 @@ export class ShoppingCartComponent {
             next: (result: ShoppingCart) => {
                 this.shoppingCart = result;
                 this.isEmpty();
+                this.getBundles();
             },
         });
     }
@@ -140,6 +155,9 @@ export class ShoppingCartComponent {
                                             );
                                             this.shoppingCart = newShoppingCart;
                                         }
+                                        for (let boi of this.shoppingCart.bundleOrderItems!) {
+                                            await this.service.buyBundle(boi.bundleId!);
+                                        }
                                         this.dialogRef.closeAll();
                                     },
                                 });
@@ -150,8 +168,14 @@ export class ShoppingCartComponent {
             }
         });
     }
-    isEmpty(): void {
-        this.isDisabled = this.data.length == 0;
+
+    isEmpty(): boolean {
+        return this.data.length == 0 && this.bundles.length == 0;
+    }
+
+    removeBundleOrderItem() {
+        // this.bundles = this.bundles.filter(b => b.id != bundleId);
+        this.getShoppingCart();
     }
 
     openCouponModal(): void {

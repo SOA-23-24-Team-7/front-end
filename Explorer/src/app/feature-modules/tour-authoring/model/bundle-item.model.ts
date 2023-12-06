@@ -1,5 +1,5 @@
 export interface BundleItem {
     id?: number;
-    tourId: string;
+    tourId: number;
     bundleId: number;
 }

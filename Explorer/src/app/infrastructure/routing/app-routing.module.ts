@@ -54,6 +54,7 @@ import { CouponsViewComponent } from "src/app/feature-modules/marketplace/coupon
 import { TouristsTourBlogFormComponent } from "src/app/feature-modules/blog/tourists-tour-blog-form/tourists-tour-blog-form.component";
 import { BundleCardComponent } from "src/app/feature-modules/tour-authoring/bundle-card/bundle-card.component";
 import { BundlesComponent } from "src/app/feature-modules/tour-authoring/bundles/bundles.component";
+import { ExploreBundlesComponent } from "src/app/feature-modules/marketplace/explore-bundles/explore-bundles.component";
 
  
 const routes: Routes = [
@@ -286,6 +287,11 @@ const routes: Routes = [
     {
         path: "bundle-card",
         component: BundleCardComponent,
+        canActivate: [AuthGuard],
+    },
+    {
+        path: "explore-bundles",
+        component: ExploreBundlesComponent,
         canActivate: [AuthGuard],
     }
 ];

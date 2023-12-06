@@ -9,19 +9,34 @@ import { Tour } from '../model/tour.model';
 import { BundleCreation } from '../model/bundle-creation.model';
 
 @Component({
-  selector: 'xp-add-bundle-form',
-  templateUrl: './add-bundle-form.component.html',
-  styleUrls: ['./add-bundle-form.component.css']
+  selector: 'xp-edit-bundle-form',
+  templateUrl: './edit-bundle-form.component.html',
+  styleUrls: ['./edit-bundle-form.component.css']
 })
-export class AddBundleFormComponent implements OnInit {
+export class EditBundleFormComponent implements OnInit {
 
   faXmark = faXmark;
 
   tours: Tour[] = [];
+  dataCopy: BundleCreation;
 
   constructor(private service: TourAuthoringService,
-    public dialog: MatDialogRef<AddBundleFormComponent>,
-    @Inject(MAT_DIALOG_DATA) public data: any) {}
+    public dialog: MatDialogRef<EditBundleFormComponent>,
+    @Inject(MAT_DIALOG_DATA) public data: Bundle) {
+      this.dataCopy = {
+        name: data.name,
+        price: data.price,
+        tourIds: []
+      }
+      data.bundleItems.forEach(bi => {
+        this.dataCopy.tourIds = [...this.dataCopy.tourIds, bi.tourId];
+      });
+
+      this.addBundleForm = new FormGroup({
+        name: new FormControl(this.dataCopy.name,[Validators.required]),
+        price: new FormControl(this.dataCopy.price,[Validators.required]),
+      });
+    }
 
   public bundle: BundleCreation = {
     name: "",
@@ -29,13 +44,12 @@ export class AddBundleFormComponent implements OnInit {
     tourIds: []
   }
 
-  addBundleForm = new FormGroup({
-    name: new FormControl('',[Validators.required]),
-    price: new FormControl('',[Validators.required]),
-  });
+  addBundleForm: FormGroup
 
   ngOnInit(): void {
     this.getToursForAuthor();
+    console.log(this.dataCopy);
+    console.log(this.data.bundleItems);
   }
 
   getToursForAuthor(): void {
@@ -49,9 +63,9 @@ export class AddBundleFormComponent implements OnInit {
     })
   }
 
-  submit():void{
+  submit(): void{
     if (this.addBundleForm.value.name && this.addBundleForm.value.name !== "") {
-      this.bundle.name = this.addBundleForm.value.name;
+      this.dataCopy.name = this.addBundleForm.value.name;
     }
     else {
       alert("Fill the form correctly.");
@@ -60,7 +74,7 @@ export class AddBundleFormComponent implements OnInit {
     if (this.addBundleForm.value.price) {
       let price: number = parseInt(this.addBundleForm.value.price);
       if (price >= 0) {
-        this.bundle.price = price;
+        this.dataCopy.price = price;
       }
       else {
         alert("Price must be greater than 0.")
@@ -70,9 +84,10 @@ export class AddBundleFormComponent implements OnInit {
       alert("Fill the form correctly.");
     }
 
-    this.service.createBundle(this.bundle).subscribe({
+    this.service.editBundle(this.data.id!, this.dataCopy).subscribe({
       next: (result: Bundle) => {
-        console.log("Uspeh");
+        console.log("Uspeh edit");
+        this.data = result;
         this.onClose();
       }
     })
@@ -83,21 +98,22 @@ export class AddBundleFormComponent implements OnInit {
   }
 
   onSelect(tourId: number): void {
-    if (this.bundle.tourIds.includes(tourId)) {
-      this.bundle.tourIds = this.bundle.tourIds.filter(t => t != tourId);
+    if (this.dataCopy.tourIds.includes(tourId)) {
+      this.dataCopy.tourIds = this.dataCopy.tourIds.filter(t => t != tourId);
     }
     else {
-      this.bundle.tourIds = [...this.bundle.tourIds, tourId];
+      this.dataCopy.tourIds = [...this.dataCopy.tourIds, tourId];
     }
   }
 
   calculateTotalPrice(): number {
     let price = 0;
     this.tours.forEach(t => {
-      if (this.bundle.tourIds.includes(t.id!)) {
+      if (this.dataCopy.tourIds.includes(t.id!)) {
         price += t.price!;
       }
     });
     return price;
   }
+
 }

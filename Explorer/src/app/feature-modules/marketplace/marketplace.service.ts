@@ -22,12 +22,14 @@ import { PublicKeyPoint } from "./model/public-key-point.model";
 import { PublicFacilities } from "./model/public-facilities.model";
 import { KeyPoint } from "../tour-authoring/model/key-point.model";
 import { ShoppingCart } from "./model/shopping-cart";
-import { OrderItem } from "./model/order-item";
+import { OrderItem as any } from "./model/order-item";
 import { TourLimitedView } from "./model/tour-limited-view.model";
 import { TourToken } from "./model/tour-token.model";
 import { TourSale } from "./model/tour-sale.model";
 import { Coupon } from "./model/coupon.model";
 import { CouponApplication } from "./model/coupon-applicaton.model";
+import { Bundle } from "../tour-authoring/model/bundle.model";
+import { BundleOrderItem } from "./model/bundle-order-item.model";
 
 @Injectable({
     providedIn: "root",
@@ -290,12 +292,20 @@ export class MarketplaceService {
             shoppingCart,
         );
     }
-    addOrderItem(orderItem: OrderItem): Observable<OrderItem> {
-        return this.http.post<OrderItem>(
+    addOrderItem(orderItem: any): Observable<any> {
+        return this.http.post<any>(
             environment.apiHost + "tourist/shoppingCart/addItem/",
             orderItem,
         );
     }
+
+    addBundleOrderItem(bundleOrderItem: BundleOrderItem): Observable<any> {
+        return this.http.post<any>(
+            environment.apiHost + "tourist/shoppingCart/add-bundle/",
+            bundleOrderItem,
+        );
+    }
+
     getShoppingCart(id: number): Observable<ShoppingCart> {
         return this.http.get<ShoppingCart>(
             environment.apiHost + "tourist/shoppingCart/" + id,
@@ -307,8 +317,8 @@ export class MarketplaceService {
             environment.apiHost + "market-place/tours/inCart/" + id,
         );
     }
-    getOrderItem(tourId: number, touristId: number): Observable<OrderItem> {
-        return this.http.get<OrderItem>(
+    getOrderItem(tourId: number, touristId: number): Observable<any> {
+        return this.http.get<any>(
             environment.apiHost +
                 "tourist/shoppingCart/getItem/" +
                 tourId +
@@ -320,7 +330,7 @@ export class MarketplaceService {
         id: number | undefined,
         shoppingCartId: number | undefined,
     ): any {
-        return this.http.delete<OrderItem>(
+        return this.http.delete<any>(
             environment.apiHost +
                 "tourist/shoppingCart/removeItem/" +
                 id +
@@ -449,5 +459,26 @@ export class MarketplaceService {
             environment.apiHost + "tourist/shoppingCart/apply-coupon",
             couponAplication,
         );
+    }
+
+    getPublishedBundles(): Observable<Bundle[]> {
+        let path = environment.apiHost + "tourist/bundles";
+        return this.http.get<Bundle[]>(path);
+    }
+    
+    getBundleById(bundleId: number): Observable<Bundle> {
+        let path = environment.apiHost + "tourist/bundles/" + bundleId;
+        return this.http.get<Bundle>(path);
+    }
+    
+    removeBundleOrderItem(bundleOrderItemId: number): Observable<any> {
+        let path = environment.apiHost + "tourist/shoppingCart/remove-bundle-item/" + bundleOrderItemId;
+        return this.http.delete<any>(path);
+    }
+    
+    buyBundle(bundleId: number): Observable<any> {
+        let path = environment.apiHost + "token/bundle/" + bundleId;
+        return this.http.post<any>(path, {});
+
     }
 }
