@@ -4,13 +4,24 @@
         <fa-icon class="upvote" [icon]="faLocation" />
     </div>
     <div class="execution">
-        <div class="btn" *ngIf="canActivate" (click)="activateEncounter()">
+        <div
+            class="btn"
+            *ngIf="!encounterInstance && encounter"
+            (click)="activateEncounter()"
+        >
             Activate
         </div>
-        <div class="btn" *ngIf="canActivate" (click)="completeEncounter()">
+        <div
+            class="btn"
+            *ngIf="encounterInstance?.status === 0 && encounter"
+            (click)="completeEncounter()"
+        >
             Complete
         </div>
-        <div class="img" *ngIf="showImage">
+        <div
+            class="img"
+            *ngIf="encounterInstance?.status === 0 && encounter?.type === 1"
+        >
             <img [src]="image" alt="Encounter Image" />
         </div>
     </div>
