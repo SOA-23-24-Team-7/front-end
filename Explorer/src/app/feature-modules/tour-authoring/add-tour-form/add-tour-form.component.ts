@@ -4,6 +4,7 @@ import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { faXmark } from '@fortawesome/free-solid-svg-icons';
 import { Tour } from '../model/tour.model';
+import { Bundle } from '../model/bundle.model';
 
 @Component({
   selector: 'xp-add-tour-form',

@@ -1,0 +1,17 @@
+<div class="add-modal" (click)="onClose()">
+    <div class="add" (click)="$event.stopPropagation()">
+        <div class="add-head">
+            <fa-icon class="add-x" [icon]="faXmark" (click)="onClose()"/>
+            <div class="add-title">{{data.name}}</div>
+        </div>
+        <form class="add-form">
+            <div class="add-title">Featured tours</div>
+            <div class="tours">
+                <div class="margin" *ngFor="let tour of getTours()">
+                    <xp-tour-card-view  [tour]="tour" [hideIcons]="true" [hideAddToCart]="true"></xp-tour-card-view>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+

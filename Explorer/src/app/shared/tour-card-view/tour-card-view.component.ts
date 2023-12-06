@@ -46,7 +46,10 @@ export class TourCardViewComponent implements OnChanges {
   user: User;
   @Input() hideIcons: boolean = false;
   @Input() tour: Tour;
+  @Input() selectable: boolean = false;
+  @Input() selected: boolean = false;
   @Input() preliminaryDiscount: number | null = null;
+  @Input() hideAddToCart: boolean = false
   discount: number | null = null;
   discountedPrice: number | null = null;
   addedTours: TourLimitedView[] = [];
