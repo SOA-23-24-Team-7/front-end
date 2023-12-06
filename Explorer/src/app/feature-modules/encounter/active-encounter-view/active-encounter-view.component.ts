@@ -16,8 +16,8 @@ export class ActiveEncounterViewComponent implements AfterViewInit {
     points: any;
     encounters: Encounter[];
     filteredEncounters: Encounter[];
-    canActivate: boolean;
-    showImage: boolean;
+    canActivate: boolean = false;
+    showImage: boolean = false;
     image?: string;
     encounter?: Encounter;
     dialogRef: MatDialogRef<PositionSimulatorComponent, any> | undefined;

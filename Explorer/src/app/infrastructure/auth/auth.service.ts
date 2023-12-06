@@ -10,6 +10,7 @@ import { AuthenticationResponse } from "./model/authentication-response.model";
 import { User } from "./model/user.model";
 import { Registration } from "./model/registration.model";
 import { LocationCoords } from "src/app/shared/model/location-coords.model";
+import { TouristProgress } from "./model/tourist-progress.model";
 
 @Injectable({
     providedIn: "root",
@@ -95,6 +96,19 @@ export class AuthService {
                 jwtHelperService.decodeToken(accessToken).profilePicture,
         };
         this.user$.next(user);
+        if (user.role === "tourist") {
+            this.http
+                .get<TouristProgress>(
+                    environment.apiHost + "tourist/encounter/progress",
+                )
+                .subscribe({
+                    next: progress => {
+                        user.touristProgress = progress;
+                        this.user$.next(user);
+                    },
+                    error: () => {},
+                });
+        }
     }
 
     getCurrentUserId(): number {
@@ -114,7 +128,6 @@ export class AuthService {
     loadUserPos() {
         const long = localStorage.getItem("userLong");
         const lat = localStorage.getItem("userLat");
-        // console.log(long, lat);
         if (long && lat) {
             this.setUserLocation({
                 longitude: parseFloat(long),
