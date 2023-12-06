@@ -1,0 +1,8 @@
+<div class="container">
+    <xp-map
+        [isPositionMap]="true"
+        [canEdit]="true"
+        (newLongLatEvent)="changePosition($event)"
+        mapName="modal_map"
+    ></xp-map>
+</div>
