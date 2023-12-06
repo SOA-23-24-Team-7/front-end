@@ -152,6 +152,7 @@
                     <div
                         class="navbar-submenu-item"
                         [routerLink]="['active-encounters']"
+                        *ngIf="user.role === 'tourist'"
                     >
                         <fa-icon
                             class="navbar-submenu-item-icon"

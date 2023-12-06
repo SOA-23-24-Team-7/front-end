@@ -25,6 +25,18 @@
 .execution {
     display: flex;
     margin-block: 0.5rem;
+    position: absolute;
+    top: 3rem;
+    right: 5rem;
+    height: min-content;
+    width: 25rem;
+    z-index: 998;
+    background-color: rgb(var(--clr-background-secondary));
+    display: flex;
+    flex-direction: column;
+    color: rgb(var(--clr-text));
+    padding: 1rem;
+    align-items: center;
 }
 
 .btn {
@@ -34,11 +46,6 @@
 .simulator-btn:hover {
     cursor: pointer;
     filter: brightness(1.1);
-}
-
-.img {
-    width: 10rem;
-    height: 5rem;
 }
 
 .simulator-btn fa-icon {

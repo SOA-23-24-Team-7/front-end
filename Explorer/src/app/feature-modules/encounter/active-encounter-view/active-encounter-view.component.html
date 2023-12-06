@@ -3,7 +3,15 @@
     <div class="simulator-btn" (click)="openSimulator()">
         <fa-icon class="upvote" [icon]="faLocation" />
     </div>
-    <div class="execution">
+    <div class="execution" *ngIf="encounter">
+        <div
+            class="img"
+            *ngIf="encounterInstance?.status === 0 && encounter?.type === 1"
+        >
+            <img [src]="image" alt="Encounter Image" width="200" height="150" />
+        </div>
+        <h3 class="title">{{ encounter.title }}</h3>
+        <div class="description">{{ encounter.description }}</div>
         <div
             class="btn"
             *ngIf="!encounterInstance && encounter"
@@ -17,12 +25,6 @@
             (click)="completeEncounter()"
         >
             Complete
-        </div>
-        <div
-            class="img"
-            *ngIf="encounterInstance?.status === 0 && encounter?.type === 1"
-        >
-            <img [src]="image" alt="Encounter Image" />
         </div>
     </div>
 </div>

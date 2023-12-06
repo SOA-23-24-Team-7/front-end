@@ -7,6 +7,8 @@ import { MapModalComponent } from "src/app/shared/map-modal/map-modal.component"
 import { LocationCoords } from "src/app/shared/model/location-coords.model";
 import { User } from "src/app/infrastructure/auth/model/user.model";
 import { AuthService } from "src/app/infrastructure/auth/auth.service";
+import { NotifierService } from "angular-notifier";
+import { xpError } from "src/app/shared/model/error.model";
 
 @Component({
     selector: "xp-encounter-form",
@@ -17,6 +19,7 @@ export class EncounterFormComponent implements OnInit {
     constructor(
         private authService: AuthService,
         private service: EncounterService,
+        private notifier: NotifierService,
         public dialog: MatDialog,
     ) {
         this.encounterCoords = {
@@ -90,37 +93,65 @@ export class EncounterFormComponent implements OnInit {
                 .createSocialEncounter(encounter, this.user.role == "tourist")
                 .subscribe({
                     next: () => {
-                        alert("Successfully created!");
+                        this.notifier.notify(
+                            "success",
+                            "Successfully created encounter!",
+                        );
                     },
-                    error: () => {
-                        alert("Failed to create!");
+                    error: err => {
+                        this.notifier.notify(
+                            "error",
+                            xpError.getErrorMessage(err),
+                        );
                     },
                 });
         }
 
-        if (this.encounterType == 2 && this.checkIfPictureInEncounterRange()) {
-            this.service
-                .createHiddenEncounter(encounter, this.user.role == "tourist")
-                .subscribe({
-                    next: () => {
-                        alert("Successfully created!");
-                    },
-                    error: () => {
-                        alert("Failed to create!");
-                    },
-                });
-        } else {
-            alert("Picture is not in encounter range!");
+        if (this.encounterType == 2) {
+            if (this.checkIfPictureInEncounterRange()) {
+                this.service
+                    .createHiddenEncounter(
+                        encounter,
+                        this.user.role == "tourist",
+                    )
+                    .subscribe({
+                        next: () => {
+                            this.notifier.notify(
+                                "success",
+                                "Successfully created encounter!",
+                            );
+                        },
+                        error: err => {
+                            this.notifier.notify(
+                                "error",
+                                xpError.getErrorMessage(err),
+                            );
+                        },
+                    });
+            } else {
+                this.notifier.notify(
+                    "error",
+                    xpError.getErrorMessage(
+                        "Picture is not in encounter range!",
+                    ),
+                );
+            }
         }
         if (this.encounterType == 3) {
             this.service
                 .createMiscEncounter(encounter, this.user.role == "tourist")
                 .subscribe({
                     next: () => {
-                        alert("Successfully created!");
+                        this.notifier.notify(
+                            "success",
+                            "Successfully created encounter!",
+                        );
                     },
-                    error: () => {
-                        alert("Failed to create!");
+                    error: err => {
+                        this.notifier.notify(
+                            "error",
+                            xpError.getErrorMessage(err),
+                        );
                     },
                 });
         }

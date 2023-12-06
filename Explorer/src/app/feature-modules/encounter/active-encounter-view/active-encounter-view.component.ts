@@ -62,18 +62,6 @@ export class ActiveEncounterViewComponent implements AfterViewInit {
                         this.userPosition.longitude,
                     );
                 }
-                if (this.filteredEncounters) {
-                    this.filteredEncounters.forEach(enc => {
-                        if (this.checkIfUserInEncounterRange(enc)) {
-                            this.encounter = enc;
-                            this.getEncounterInstance(enc.id);
-                            // console.log(this.encounterInstance, enc.id);
-                            if (this.encounterInstance?.status === 0) {
-                                this.getHiddenLocationImage();
-                            }
-                        }
-                    });
-                }
             },
         });
     }
@@ -93,6 +81,7 @@ export class ActiveEncounterViewComponent implements AfterViewInit {
                         "success",
                         "Successfully activated encounter!",
                     );
+                    this.getEncounterInstance(this.encounter!.id);
                 },
                 error: err => {
                     this.notifier.notify("error", xpError.getErrorMessage(err));
@@ -125,6 +114,7 @@ export class ActiveEncounterViewComponent implements AfterViewInit {
                             "Successfully completed hidden encounter!",
                         );
                         this.authService.updateXp();
+                        this.getEncounterInstance(this.encounter!.id);
                     },
                     error: err => {
                         // console.log(err);
@@ -146,6 +136,7 @@ export class ActiveEncounterViewComponent implements AfterViewInit {
                                 " encounter!",
                         );
                         this.authService.updateXp();
+                        this.getEncounterInstance(this.encounter!.id);
                     },
                     error: err => {
                         // console.log(err);
@@ -214,6 +205,17 @@ export class ActiveEncounterViewComponent implements AfterViewInit {
                     );
                 }
             });
+            if (this.filteredEncounters) {
+                this.filteredEncounters.forEach(enc => {
+                    if (this.checkIfUserInEncounterRange(enc)) {
+                        this.encounter = enc;
+                        this.getEncounterInstance(enc.id);
+                        if (this.encounter.type === 1) {
+                            this.getHiddenLocationImage();
+                        }
+                    }
+                });
+            }
         });
     }
 
