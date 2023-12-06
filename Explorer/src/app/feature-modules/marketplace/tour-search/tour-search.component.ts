@@ -5,7 +5,9 @@ import { PagedResults } from "src/app/shared/model/paged-results.model";
 import { Tour } from "../../tour-authoring/model/tour.model";
 import { PublicFacilities } from "../model/public-facilities.model";
 import { PublicKeyPoint } from "../model/public-key-point.model";
+import { SortOption } from "../model/sort-option.model";
 import { 
+    faSort,
     faFilter,
     faXmark, 
     faChevronDown,
@@ -24,6 +26,7 @@ import {
     styleUrls: ["./tour-search.component.css"],
 })
 export class TourSearchComponent implements OnInit {
+    faSort = faSort;
     faFilter = faFilter;
     faXmark = faXmark;
     faChevronDown = faChevronDown;
@@ -36,6 +39,9 @@ export class TourSearchComponent implements OnInit {
     faClock = faClock; 
     dropped: { [key: string]: boolean } = {};
     @ViewChild(MapComponent, { static: false }) mapComponent: MapComponent;
+    longitude: number = -200;
+    latitude: number = -200;
+    distance: number = 0;
     searchFilter: {
         longitude: number, 
         latitude: number, 
@@ -43,6 +49,7 @@ export class TourSearchComponent implements OnInit {
         name: string,
         minPrice: number | string,
         maxPrice: number | string,
+        onDiscount: boolean,
         minDifficulty: number,
         maxDifficulty: number,
         minDuration: number | string,
@@ -52,14 +59,15 @@ export class TourSearchComponent implements OnInit {
         maxLength: number | string,
         page: number, 
         pageSize: number
-    } 
+    }
+    sortOption: SortOption = SortOption.NoSort;
     slider: any;
     tours: Tour[] = [];
     publicFacilities: PublicFacilities[] = [];
     publicKeyPoints: PublicKeyPoint[] = [];
     totalCount: number = 0;
     currentPage: number = 1;
-    pageSize: number = 10;
+    pageSize: number =10;
     pages: any[] = [];
 
     constructor(private service: MarketplaceService) {}
@@ -69,6 +77,7 @@ export class TourSearchComponent implements OnInit {
             name: "",
             longitude: -200, latitude: -200, distance: 0,
             minPrice: 0, maxPrice: 0, 
+            onDiscount: false,
             minDifficulty: 0, maxDifficulty: 5, 
             minDuration: 0, maxDuration: 0, 
             minAverageRating: 0,
@@ -79,6 +88,7 @@ export class TourSearchComponent implements OnInit {
             locationDropped: true, 
             nameDropped: true,
             priceDropped: true,
+            discountDropped: true,
             difficultyDropped: true,
             durationDropped: true,
             ratingDropped: true,
@@ -89,6 +99,9 @@ export class TourSearchComponent implements OnInit {
         this.getPublicKeyPoints();
         this.resetMinPrice();
         this.resetMaxPrice();
+        this.resetOnDiscount();
+        //this.resetMinDuration();
+        //this.resetMaxDuration();
         this.resetMinLength();
         this.resetMaxLength();
         this.onSearch(1);
@@ -96,8 +109,8 @@ export class TourSearchComponent implements OnInit {
 
     onMapClicked(): void {
         this.mapComponent.getClickCoordinates((lat, lng) => {
-            this.searchFilter.latitude = lat;
-            this.searchFilter.longitude = lng;
+            this.latitude = lat;
+            this.longitude = lng;
         });
     }
 
@@ -105,14 +118,13 @@ export class TourSearchComponent implements OnInit {
         this.searchFilter.page = page;
         this.currentPage = page;
         this.service
-            .searchTours(this.searchFilter)
+            .searchTours(this.searchFilter, this.sortOption)
             .subscribe({
                 next: (result: PagedResults<Tour>) => {
                     this.tours = result.results;
                     this.totalCount = result.totalCount;
                     console.log(this.tours);
                     this.setPages();
-                    window.scrollTo({ top: 0, behavior: 'smooth' });
                 },
                 error: errData => {
                     console.log(errData);
@@ -121,7 +133,7 @@ export class TourSearchComponent implements OnInit {
     }
 
     onSliderChanged(): void {
-        this.searchFilter.distance = this.slider.value;
+        this.distance = this.slider.value;
     }
 
     getPublicFacilities(): void {
@@ -171,10 +183,11 @@ export class TourSearchComponent implements OnInit {
 
     countFilters(): number {
         let number = 0;
-        if(this.searchFilter.longitude !== -200 && this.searchFilter.latitude !== -200 && this.searchFilter.distance !== 0) number++;
+        if(this.longitude !== -200 && this.latitude !== -200 && this.distance !== 0) number++;
         if(this.searchFilter.name !== '') number++
         if(this.searchFilter.minPrice !== '' && +this.searchFilter.minPrice > 0) number++
         if(this.searchFilter.maxPrice !== '' && +this.searchFilter.maxPrice > 0) number++
+        if(this.searchFilter.onDiscount) number++
         if(this.searchFilter.minDifficulty > 0) number++
         if(this.searchFilter.maxDifficulty < 5) number++
         if(this.searchFilter.minDuration !== '' && +this.searchFilter.minDuration > 0) number++
@@ -186,9 +199,9 @@ export class TourSearchComponent implements OnInit {
     }
 
     resetLocationFilter() {
-        this.searchFilter.longitude = -200;
-        this.searchFilter.latitude = -200;
-        this.searchFilter.distance = 0;
+        this.longitude = -200;
+        this.latitude = -200;
+        this.distance = 0;
     }
 
     setPages(): void {
@@ -330,6 +343,12 @@ export class TourSearchComponent implements OnInit {
         inputElement.value = "";
     }
 
+    resetOnDiscount() {
+        this.searchFilter.onDiscount = false;
+        var inputElement = document.getElementsByName('onDiscount')[0] as HTMLInputElement;
+        inputElement.value = "false";
+    }
+
     resetMinLength() {
         this.searchFilter.minLength = "";
         var inputElement = document.getElementsByName('minLength')[0] as HTMLInputElement;
@@ -339,6 +358,18 @@ export class TourSearchComponent implements OnInit {
     resetMaxLength() {
         this.searchFilter.maxLength = "";
         var inputElement = document.getElementsByName('maxLength')[0] as HTMLInputElement;
+        inputElement.value = "";
+    }
+
+    resetMinDuration() {
+        this.searchFilter.minDuration = "";
+        var inputElement = document.getElementsByName('minDuration')[0] as HTMLInputElement;
+        inputElement.value = "";
+    }
+
+    resetMaxDuration() {
+        this.searchFilter.maxDuration = "";
+        var inputElement = document.getElementsByName('maxDuration')[0] as HTMLInputElement;
         inputElement.value = "";
     }
 }
