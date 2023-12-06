@@ -7,8 +7,6 @@ import { MarketplaceService } from "../../marketplace/marketplace.service";
 import { AuthService } from "src/app/infrastructure/auth/auth.service";
 import { User } from "src/app/infrastructure/auth/model/user.model";
 import { Router } from "@angular/router";
-import { TourExecutionService } from "../../tour-execution/tour-execution.service";
-import { AdministrationService } from "../../administration/administration.service";
 
 @Component({
     selector: "xp-recommended-tour-card",

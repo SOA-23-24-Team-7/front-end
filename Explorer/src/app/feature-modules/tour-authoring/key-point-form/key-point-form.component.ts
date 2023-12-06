@@ -1,19 +1,16 @@
 import {
-    AfterViewInit,
     Component,
     EventEmitter,
     Input,
     OnChanges,
     Output,
     SimpleChanges,
-    ViewChild,
 } from "@angular/core";
 import { TourAuthoringService } from "../tour-authoring.service";
 import { FormControl, FormGroup, Validators } from "@angular/forms";
 import { ActivatedRoute, ParamMap } from "@angular/router";
 import { environment } from "src/env/environment";
 import { KeyPoint } from "../model/key-point.model";
-import { KeyPointSecret } from "../model/key-point-secret.model";
 import {
     PublicKeyPointRequest,
     PublicStatus,
@@ -22,6 +19,8 @@ import {
 import { AuthService } from "src/app/infrastructure/auth/auth.service";
 import { Person } from "../../stakeholder/model/person.model";
 import { MapService } from "src/app/shared/map/map.service";
+import { MatDialog } from "@angular/material/dialog";
+import { KeyPointEncounterFormComponent } from "../../encounter/key-point-encounter-form/key-point-encounter-form.component";
 
 @Component({
     selector: "xp-key-point-form",
@@ -35,7 +34,8 @@ export class KeyPointFormComponent implements OnChanges {
     @Input() shouldEdit: boolean = false;
     tourImage: string | null = null;
     tourImageFile: File | null = null;
-    //isPublicChecked = false;
+    hasEncounter: boolean = false;
+    isEncounterRequired: boolean = false;
     person: Person;
 
     constructor(
@@ -43,6 +43,7 @@ export class KeyPointFormComponent implements OnChanges {
         private service: TourAuthoringService,
         private authService: AuthService,
         private mapService: MapService,
+        private dialogRef: MatDialog,
     ) {}
     ngOnInit(): void {
         this.getPerson();
@@ -111,9 +112,17 @@ export class KeyPointFormComponent implements OnChanges {
                                 this.keyPointForm.value.address || "",
                             imagePath: imagePath,
                             order: 0,
-                            haveSecret: this.keyPointForm.value.haveSecret || false,
-                            secret: { images: [""],
-                                    description: this.keyPointForm.value.secretDescription || ""} || null
+                            haveSecret:
+                                this.keyPointForm.value.haveSecret || false,
+                            secret:
+                                {
+                                    images: [""],
+                                    description:
+                                        this.keyPointForm.value
+                                            .secretDescription || "",
+                                } || null,
+                            hasEncounter: this.hasEncounter,
+                            isEncounterRequired: this.isEncounterRequired,
                         };
                         // Get Key Points location address
                         this.mapService
@@ -194,8 +203,14 @@ export class KeyPointFormComponent implements OnChanges {
                     imagePath: this.keyPointForm.value.imagePath || "",
                     order: 0,
                     haveSecret: this.keyPointForm.value.haveSecret || false,
-                    secret: { images: [""],
-                            description: this.keyPointForm.value.secretDescription || ""} || null
+                    secret:
+                        {
+                            images: [""],
+                            description:
+                                this.keyPointForm.value.secretDescription || "",
+                        } || null,
+                    hasEncounter: this.hasEncounter,
+                    isEncounterRequired: this.isEncounterRequired,
                 };
 
                 if (!keyPoint.imagePath) {
@@ -294,6 +309,12 @@ export class KeyPointFormComponent implements OnChanges {
             this.service.getPerson(user.id).subscribe(result => {
                 this.person = result;
             });
+        });
+    }
+
+    addEncounter() {
+        this.dialogRef.open(KeyPointEncounterFormComponent, {
+            data: { keyPointId: this.keyPoint!.id },
         });
     }
 }

@@ -41,6 +41,8 @@ export class MapComponent implements AfterViewInit, OnChanges {
 
     public touristPosition: [number, number];
 
+    public encounterPoint: [number, number];
+
     @Input() refreshEvents: Observable<number>;
     @Input() showLegend: boolean = true;
     @Input() selectedKeyPoint: KeyPoint | null;
@@ -58,6 +60,11 @@ export class MapComponent implements AfterViewInit, OnChanges {
             this.positionMarker.remove();
         }
         this.touristPosition = [value.latitude, value.longitude];
+        this.positionMarker = L.marker(this.touristPosition, {
+            icon: this.positionIcon,
+        }).addTo(this.map);
+
+        if (!this.isTourExecutionMap) return;
         setTimeout(() => {
             this.positionMarker = L.marker(this.touristPosition, {
                 icon: this.positionIcon,
@@ -72,6 +79,15 @@ export class MapComponent implements AfterViewInit, OnChanges {
             setTimeout(() => this.newPositionEvent.emit(), 500);
         }, 0.5);
     }
+
+    @Input() set encounterPosition(value: any) {
+        if (!value) return;
+        this.encounterPoint = [value.latitude, value.longitude];
+        this.positionMarker = L.marker(this.encounterPoint, {
+            icon: this.encounterIcon,
+        }).addTo(this.map);
+    }
+
     @Input() set nextKeyPointId(value: number) {
         if (value !== null && !value) return;
         if (!this.isTourExecutionMap) return;
@@ -93,6 +109,7 @@ export class MapComponent implements AfterViewInit, OnChanges {
         this.setRoute(waypoints);
         this.setCheckedPointsMarkers();
     }
+
     @Output() keyPointClickEvent = new EventEmitter<any>();
     @Output() newLongLatEvent = new EventEmitter<[number, number]>();
     @Output() newPositionEvent = new EventEmitter<void>();
