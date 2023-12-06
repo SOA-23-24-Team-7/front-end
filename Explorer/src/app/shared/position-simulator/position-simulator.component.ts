@@ -16,6 +16,7 @@ export class PositionSimulatorComponent implements OnInit {
         this.authService.userLocation$.subscribe({
             next: (location: LocationCoords) => {
                 this.position = location;
+                // console.log(this.position);
             },
         });
     }

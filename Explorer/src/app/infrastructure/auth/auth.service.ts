@@ -23,8 +23,8 @@ export class AuthService {
         profilePicture: "",
     });
     userLocation$ = new BehaviorSubject<LocationCoords>({
-        longitude: 45.2,
-        latitude: 19.8,
+        latitude: 45.2,
+        longitude: 19.8,
     });
 
     constructor(
@@ -69,9 +69,9 @@ export class AuthService {
         this.tokenStorage.clear();
         this.router.navigate([""]);
         this.user$.next({ username: "", id: 0, role: "", profilePicture: "" });
-        this.userLocation$.next({ longitude: 45.2, latitude: 19.8 });
-        localStorage.setItem("userLong", "45.2");
-        localStorage.setItem("userLat", "19.8");
+        this.userLocation$.next({ latitude: 45.2, longitude: 19.8 });
+        localStorage.setItem("userLat", "45.2");
+        localStorage.setItem("userLong", "19.8");
     }
 
     checkIfUserExists(): void {
