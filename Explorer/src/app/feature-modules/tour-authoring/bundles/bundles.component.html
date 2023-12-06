@@ -1,18 +1,21 @@
-<div class="bundles">
+<div class="bundles" (childEvent)="getBundles()">
     <div class="bundles-header">
         <div class="bundles-header-title">Bundles</div>
-    </div>
-
-    <div class="bundles-body">
-        <div class="bundles-results">
-            <div class="bundle-card" *ngFor="let bundle of bundles">
-                <xp-bundle-card [bundle]="bundle"></xp-bundle-card>
-            </div>
+        <div class="tour-search-header-paragraph">
+            Here, your expertise takes center stage as you craft bundles of tours, each a carefully woven tapestry of exploration and discovery. Seamlessly combine multiple adventures, attractions, and cultural experiences into cohesive packages that offer travelers a comprehensive and immersive journey. Your creative freedom knows no bounds as you assemble these bundles, shaping them with your unparalleled local knowledge and personal flair. Embrace the opportunity to showcase your expertise by bundling captivating tours, providing travelers with an all-encompassing and unforgettable adventure into the heart of your destination.
         </div>
     </div>
 
-    <div class="btn fixed-button" (click)="onAddClicked()">
+    <div class="btn add" (click)="onAddClicked()">
         <fa-icon class="tour-filter-x" [icon]="faPlus"/>
         <div class="fixed-button-text">Add</div>
     </div>
+    <div class="bundles-body">
+        
+        <div class="bundles-results">
+            <div class="bundle-card" *ngFor="let bundle of getNonDeletedBundles()">
+                <xp-bundle-card  *ngIf="bundle.status != 3" [bundle]="bundle"></xp-bundle-card>
+            </div>
+        </div>
+    </div>
 </div>

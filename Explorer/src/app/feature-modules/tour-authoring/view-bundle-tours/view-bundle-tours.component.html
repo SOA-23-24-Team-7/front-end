@@ -7,8 +7,8 @@
         <form class="add-form">
             <div class="add-title">Featured tours</div>
             <div class="tours">
-                <div *ngFor="let tour of getTours()">
-                    <xp-tour-card-view  [tour]="tour" [hideIcons]="true"></xp-tour-card-view>
+                <div class="margin" *ngFor="let tour of getTours()">
+                    <xp-tour-card-view  [tour]="tour" [hideIcons]="true" [hideAddToCart]="true"></xp-tour-card-view>
                 </div>
             </div>
         </form>

@@ -20,6 +20,7 @@ import { ShoppingNotification } from "./model/shopping-notification.model";
 import { Record } from "./model/record.model";
 import { Wallet } from "./model/wallet.model";
 import { TransactionRecord } from "./model/transaction-record.model";
+import { BundleRecord } from "./model/bundle-record.model";
 
 @Injectable({
     providedIn: "root",
@@ -257,6 +258,12 @@ export class StakeholderService {
     getTouristTransactionRecords(): Observable<PagedResults<TransactionRecord>> {
         return this.http.get<PagedResults<TransactionRecord>>(
             environment.apiHost + "tourist/record/transactions",
+        );
+    }
+
+    getBundleRecords(): Observable<BundleRecord[]> {
+        return this.http.get<BundleRecord[]>(
+            environment.apiHost + "tourist/bundle-records"
         );
     }
 }

@@ -41,7 +41,7 @@
             </div>
         </div>
         <div *ngFor="let bundle of bundles">
-            <xp-bundle-card (callParentMethodEvent)="removeBundleOrderItem()" [bundle]="bundle"></xp-bundle-card>
+            <xp-bundle-card (callParentMethodEvent)="removeBundleOrderItem()" [bundle]="bundle" [showX]="true"></xp-bundle-card>
         </div>
         <div>
             <p>

@@ -210,6 +210,17 @@
                     </div>
                     <div
                         class="navbar-submenu-item"
+                        *ngIf="user && user.role === 'tourist'"
+                        [routerLink]="['explore-bundles']"
+                    >
+                        <fa-icon
+                            class="navbar-submenu-item-icon"
+                            [icon]="faBoxOpen"
+                        />
+                        <div class="navbar-submenu-item-text">Bundles</div>
+                    </div>
+                    <div
+                        class="navbar-submenu-item"
                         *ngIf="user && user.role === 'author'"
                         [routerLink]="['tours']"
                     >
@@ -218,6 +229,17 @@
                             [icon]="faUser"
                         />
                         <div class="navbar-submenu-item-text">My Tours</div>
+                    </div>
+                    <div
+                        class="navbar-submenu-item"
+                        *ngIf="user && user.role === 'author'"
+                        [routerLink]="['bundles']"
+                    >
+                        <fa-icon
+                            class="navbar-submenu-item-icon"
+                            [icon]="faBoxOpen"
+                        />
+                        <div class="navbar-submenu-item-text">My Tour Bundles</div>
                     </div>
                     <div
                         class="navbar-submenu-item"

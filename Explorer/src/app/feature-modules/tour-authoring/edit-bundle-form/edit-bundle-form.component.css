@@ -185,3 +185,7 @@
 .tours::-webkit-scrollbar-track {
     background-color: rgba(var(--clr-primary-500), 0.4);
 }
+
+.margin {
+    margin-top: 1rem;
+}

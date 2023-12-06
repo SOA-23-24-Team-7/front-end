@@ -11,7 +11,8 @@ import {
   faBoxArchive,
   faPen,
   faMoneyBills,
-  faBoxOpen
+  faBoxOpen,
+  faXmark
 } from "@fortawesome/free-solid-svg-icons";
 import { AuthService } from 'src/app/infrastructure/auth/auth.service';
 import { User } from 'src/app/infrastructure/auth/model/user.model';
@@ -43,9 +44,11 @@ export class BundleCardComponent {
   faBoxArchive = faBoxArchive
   faPen = faPen
   faMoneyBills = faMoneyBills
-  faBoxOpen =faBoxOpen
+  faBoxOpen = faBoxOpen
+  faXmark = faXmark
   @Input() hideIcons: boolean = false;
   @Input() bundle: Bundle;
+  @Input() showX: boolean = false;
   @Output() callParentMethodEvent: EventEmitter<void> = new EventEmitter<void>();
   user: User;
   shoppingCart: ShoppingCart;

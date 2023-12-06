@@ -35,4 +35,8 @@ export class BundlesComponent implements OnInit {
     this.dialogRef.open(AddBundleFormComponent, { });
   }
 
+  getNonDeletedBundles(): Bundle[] {
+    return this.bundles.filter(b => b.status != 3);
+  }
+
 }

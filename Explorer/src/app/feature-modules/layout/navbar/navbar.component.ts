@@ -37,7 +37,8 @@ import {
     faPercent,
     faCoins,
     faMapLocationDot,
-    faMoneyBills
+    faMoneyBills,
+    faBoxOpen
 } from "@fortawesome/free-solid-svg-icons";
 import { StakeholderService } from "../../stakeholder/stakeholder.service";
 import { interval, Subscription } from "rxjs";
@@ -158,4 +159,5 @@ export class NavbarComponent implements OnInit {
     faCoins = faCoins;
     faMapLocationDot = faMapLocationDot;
     faMoneyBills = faMoneyBills;
+    faBoxOpen = faBoxOpen;
 }

@@ -1,4 +1,4 @@
-import { Component, Inject, OnInit } from '@angular/core';
+import { Component, EventEmitter, Inject, OnInit, Output } from '@angular/core';
 import { TourAuthoringService } from '../tour-authoring.service';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { Bundle } from '../model/bundle.model';
@@ -19,6 +19,7 @@ export class EditBundleFormComponent implements OnInit {
 
   tours: Tour[] = [];
   dataCopy: BundleCreation;
+  @Output() callParentMethodEvent: EventEmitter<void> = new EventEmitter<void>();
 
   constructor(private service: TourAuthoringService,
     public dialog: MatDialogRef<EditBundleFormComponent>,
@@ -88,6 +89,8 @@ export class EditBundleFormComponent implements OnInit {
       next: (result: Bundle) => {
         console.log("Uspeh edit");
         this.data = result;
+        this.callParentMethod();
+        location.reload();
         this.onClose();
       }
     })
@@ -114,6 +117,10 @@ export class EditBundleFormComponent implements OnInit {
       }
     });
     return price;
+  }
+
+  callParentMethod() {
+    this.callParentMethodEvent.emit();
   }
 
 }

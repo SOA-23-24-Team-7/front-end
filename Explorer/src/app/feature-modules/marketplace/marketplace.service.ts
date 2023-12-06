@@ -484,6 +484,7 @@ export class MarketplaceService {
     }
     
     buyBundle(bundleId: number): Observable<any> {
+        console.log('6');
         let path = environment.apiHost + "token/bundle/" + bundleId;
         return this.http.post<any>(path, {});
 

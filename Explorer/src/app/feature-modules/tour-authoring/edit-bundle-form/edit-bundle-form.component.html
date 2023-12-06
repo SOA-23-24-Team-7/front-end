@@ -12,7 +12,7 @@
             
             <div class="add-title">Select tours</div>
             <div class="tours">
-                <div *ngFor="let tour of tours">
+                <div class="margin" *ngFor="let tour of tours">
                     <xp-tour-card-view  [tour]="tour" *ngIf="tour.status==1" [selectable]="true" (click)="onSelect(tour.id!)" [selected]="this.dataCopy.tourIds.includes(tour.id!)"></xp-tour-card-view>
                 </div>
             </div>
