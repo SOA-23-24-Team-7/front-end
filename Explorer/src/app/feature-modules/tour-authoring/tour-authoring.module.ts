@@ -30,6 +30,7 @@ import { TouristsEquipmentComponent } from './tourists-equipment/tourists-equipm
 import { FormsModule } from '@angular/forms';
 import { BundlesComponent } from './bundles/bundles.component';
 import { BundleCardComponent } from './bundle-card/bundle-card.component';
+import { AddBundleFormComponent } from './add-bundle-form/add-bundle-form.component';
 
 @NgModule({
     declarations: [
@@ -53,6 +54,7 @@ import { BundleCardComponent } from './bundle-card/bundle-card.component';
         TouristsEquipmentComponent,
         BundlesComponent,
         BundleCardComponent,
+        AddBundleFormComponent,
     ],
     imports: [
         CommonModule,

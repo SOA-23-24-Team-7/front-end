@@ -1,6 +1,3 @@
-<!-- <p>bundles works!</p>
-<div *ngFor="let bundle of bundles">{{bundle.name}}</div> -->
-
 <div class="bundles">
     <div class="bundles-header">
         <div class="bundles-header-title">Bundles</div>
@@ -13,4 +10,9 @@
             </div>
         </div>
     </div>
+
+    <div class="btn fixed-button" (click)="onAddClicked()">
+        <fa-icon class="tour-filter-x" [icon]="faPlus"/>
+        <div class="fixed-button-text">Add</div>
+    </div>
 </div>

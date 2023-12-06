@@ -43,3 +43,9 @@
 .bundle-card {
     width: 48%;
 }
+
+.fixed-button {
+    position: fixed;
+    bottom: 2rem;
+    right: 2rem;
+}

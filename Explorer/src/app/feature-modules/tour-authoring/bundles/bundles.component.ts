@@ -1,6 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { TourAuthoringService } from '../tour-authoring.service';
 import { Bundle } from '../model/bundle.model';
+import { faPlus } from '@fortawesome/free-solid-svg-icons';
+import { AddBundleFormComponent } from '../add-bundle-form/add-bundle-form.component';
+import { MatDialog } from '@angular/material/dialog';
 
 @Component({
   selector: 'xp-bundles',
@@ -9,9 +12,11 @@ import { Bundle } from '../model/bundle.model';
 })
 export class BundlesComponent implements OnInit {
 
+  faPlus = faPlus;
+
   bundles: Bundle[] = [];
 
-  constructor(private service: TourAuthoringService) {}
+  constructor(private service: TourAuthoringService, public dialogRef: MatDialog) {}
 
   ngOnInit(): void {
     this.getBundles();
@@ -23,6 +28,10 @@ export class BundlesComponent implements OnInit {
         this.bundles = result;
       }
     })
+  }
+
+  onAddClicked(): void {
+    this.dialogRef.open(AddBundleFormComponent, { });
   }
 
 }
