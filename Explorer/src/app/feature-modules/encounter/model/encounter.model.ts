@@ -7,10 +7,18 @@ export interface Encounter {
     radius: number;
     xpReward: number;
     status: EncounterStatus;
+    type: EncounterType;
     peopleNumber?: number;
-    pictureURL?: string;
+    picture?: string;
     pictureLongitude?: number;
     pictureLatitude?: number;
+}
+
+export enum EncounterType {
+    Social,
+    Hidden,
+    Misc,
+    KeyPoint,
 }
 export enum EncounterStatus {
     Active,

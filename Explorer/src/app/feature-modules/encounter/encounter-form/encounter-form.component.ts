@@ -46,8 +46,9 @@ export class EncounterFormComponent {
             radius: this.encounterForm.value.radius || 10,
             xpReward: this.encounterForm.value.xp || 1,
             status: 2,
+            type: 0,
             peopleNumber: this.encounterForm.value.peopleNumber || 1,
-            pictureURL: this.encounterForm.value.pictureURL || "",
+            picture: this.encounterForm.value.pictureURL || "",
             pictureLongitude: this.encounterForm.value.pictureLongitude || 0,
             pictureLatitude: this.encounterForm.value.pictureLatitude || 0,
         };

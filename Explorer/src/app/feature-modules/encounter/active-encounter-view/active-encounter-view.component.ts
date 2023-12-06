@@ -1,7 +1,6 @@
 import { AfterViewInit, Component, ViewChild } from "@angular/core";
 import { EncounterService } from "../encounter.service";
 import { Encounter } from "../model/encounter.model";
-import { MapService } from "src/app/shared/map/map.service";
 import { MapComponent } from "src/app/shared/map/map.component";
 import { UserPositionWithRange } from "../model/user-position-with-range.model";
 import { faLocationCrosshairs } from "@fortawesome/free-solid-svg-icons";
@@ -18,6 +17,8 @@ export class ActiveEncounterViewComponent implements AfterViewInit {
     encounters: Encounter[];
     filteredEncounters: Encounter[];
     canActivate: boolean;
+    showImage: boolean;
+    image?: string;
     encounter?: Encounter;
     dialogRef: MatDialogRef<PositionSimulatorComponent, any> | undefined;
 
@@ -73,15 +74,32 @@ export class ActiveEncounterViewComponent implements AfterViewInit {
         this.service
             .activateEncounter(this.userPosition, this.encounter!.id)
             .subscribe();
+        if (this.encounter!.type === 1) {
+            this.showImage = true;
+            this.getHiddenLocationImage();
+            console.log(this.image);
+        } else {
+            this.showImage = false;
+        }
     }
 
-    completeHiddenLocationEncounter() {
+    getHiddenLocationImage() {
         this.service
-            .completeHiddenLocationEncounter(
-                this.userPosition,
-                this.encounter!.id,
-            )
-            .subscribe();
+            .getHiddenLocationEncounterById(this.encounter!.id)
+            .subscribe(result => {
+                this.image = result.picture;
+            });
+    }
+
+    completeEncounter() {
+        if (this.encounter!.type === 1) {
+            this.service
+                .completeHiddenLocationEncounter(
+                    this.userPosition,
+                    this.encounter!.id,
+                )
+                .subscribe();
+        }
     }
 
     checkIfUserInEncounterRange(encounter: Encounter): boolean {
