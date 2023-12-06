@@ -29,6 +29,7 @@ import { RecommendedTourCardComponent } from './recommended-tour-card/recommende
 import { TouristsEquipmentComponent } from './tourists-equipment/tourists-equipment.component';
 import { FormsModule } from '@angular/forms';
 import { BundlesComponent } from './bundles/bundles.component';
+import { BundleCardComponent } from './bundle-card/bundle-card.component';
 
 @NgModule({
     declarations: [
@@ -51,6 +52,7 @@ import { BundlesComponent } from './bundles/bundles.component';
         RecommendedTourCardComponent,
         TouristsEquipmentComponent,
         BundlesComponent,
+        BundleCardComponent,
     ],
     imports: [
         CommonModule,

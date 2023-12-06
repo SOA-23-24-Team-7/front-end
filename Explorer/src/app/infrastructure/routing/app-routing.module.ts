@@ -52,7 +52,9 @@ import { TouristsKeyPointsComponent } from "src/app/feature-modules/tour-authori
 import { TouristsEquipmentComponent } from "src/app/feature-modules/tour-authoring/tourists-equipment/tourists-equipment.component";
 import { CouponsViewComponent } from "src/app/feature-modules/marketplace/coupons-view/coupons-view.component";
 import { TouristsTourBlogFormComponent } from "src/app/feature-modules/blog/tourists-tour-blog-form/tourists-tour-blog-form.component";
+import { BundleCardComponent } from "src/app/feature-modules/tour-authoring/bundle-card/bundle-card.component";
 import { BundlesComponent } from "src/app/feature-modules/tour-authoring/bundles/bundles.component";
+
  
 const routes: Routes = [
     { path: "home", component: HomeComponent },
@@ -279,6 +281,11 @@ const routes: Routes = [
     {
         path: "bundles",
         component: BundlesComponent,
+        canActivate: [AuthGuard],
+    },
+    {
+        path: "bundle-card",
+        component: BundleCardComponent,
         canActivate: [AuthGuard],
     }
 ];
