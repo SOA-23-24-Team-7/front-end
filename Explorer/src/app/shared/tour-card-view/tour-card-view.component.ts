@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit, Input, OnChanges, SimpleChanges, Output, EventEmitter } from '@angular/core';
 import { AuthService } from 'src/app/infrastructure/auth/auth.service';
 import { MarketplaceService } from '../../feature-modules/marketplace/marketplace.service';
 import { environment } from 'src/env/environment';
@@ -32,7 +32,7 @@ import { CouponsComponent } from 'src/app/feature-modules/marketplace/coupons/co
   templateUrl: './tour-card-view.component.html',
   styleUrls: ['./tour-card-view.component.css']
 })
-export class TourCardViewComponent {
+export class TourCardViewComponent implements OnChanges {
   faStar = faStar;
   faCoins = faCoins;
   faCartShopping = faCartShopping;
@@ -46,6 +46,12 @@ export class TourCardViewComponent {
   user: User;
   @Input() hideIcons: boolean = false;
   @Input() tour: Tour;
+  @Input() selectable: boolean = false;
+  @Input() selected: boolean = false;
+  @Input() preliminaryDiscount: number | null = null;
+  @Input() hideAddToCart: boolean = false
+  discount: number | null = null;
+  discountedPrice: number | null = null;
   addedTours: TourLimitedView[] = [];
   tokens: TourToken[] = [];
   shoppingCart: ShoppingCart = {};
@@ -58,13 +64,34 @@ export class TourCardViewComponent {
     private tourAuthoringService: TourAuthoringService,
     public dialogRef: MatDialog) {}
 
+  ngOnChanges(): void {
+    this.discount = this.preliminaryDiscount;
+    this.discountedPrice = this.tour.price! - this.tour.price! * this.discount!;
+  }
+
   ngOnInit(): void {
+    if (this.preliminaryDiscount) {
+      this.discount = this.preliminaryDiscount;
+      this.discountedPrice = this.tour.price! - this.tour.price! * this.discount!;
+    } else {
+      this.getDiscount();
+    }
+
     this.authService.user$.subscribe(user => {
       this.user = user;
       if (user.role.toLocaleLowerCase() === 'tourist') {
         this.getShoppingCart();
       }
     });
+  }
+
+  getDiscount() {
+    this.marketplaceService.getDiscountForTour(this.tour.id!).subscribe(discount => {
+      this.discount = discount;
+      if (this.discount) {
+        this.discountedPrice = this.tour.price! - this.tour.price! * discount!;
+      }
+    })
   }
 
   getTour(id: number): void {

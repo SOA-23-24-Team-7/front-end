@@ -22,12 +22,15 @@ import { PublicKeyPoint } from "./model/public-key-point.model";
 import { PublicFacilities } from "./model/public-facilities.model";
 import { KeyPoint } from "../tour-authoring/model/key-point.model";
 import { ShoppingCart } from "./model/shopping-cart";
-import { OrderItem } from "./model/order-item";
+import { OrderItem as any } from "./model/order-item";
 import { TourLimitedView } from "./model/tour-limited-view.model";
 import { TourToken } from "./model/tour-token.model";
 import { TourSale } from "./model/tour-sale.model";
 import { Coupon } from "./model/coupon.model";
 import { CouponApplication } from "./model/coupon-applicaton.model";
+import { Bundle } from "../tour-authoring/model/bundle.model";
+import { BundleOrderItem } from "./model/bundle-order-item.model";
+import { SortOption } from "./model/sort-option.model";
 
 @Injectable({
     providedIn: "root",
@@ -290,12 +293,20 @@ export class MarketplaceService {
             shoppingCart,
         );
     }
-    addOrderItem(orderItem: OrderItem): Observable<OrderItem> {
-        return this.http.post<OrderItem>(
+    addOrderItem(orderItem: any): Observable<any> {
+        return this.http.post<any>(
             environment.apiHost + "tourist/shoppingCart/addItem/",
             orderItem,
         );
     }
+
+    addBundleOrderItem(bundleOrderItem: BundleOrderItem): Observable<any> {
+        return this.http.post<any>(
+            environment.apiHost + "tourist/shoppingCart/add-bundle/",
+            bundleOrderItem,
+        );
+    }
+
     getShoppingCart(id: number): Observable<ShoppingCart> {
         return this.http.get<ShoppingCart>(
             environment.apiHost + "tourist/shoppingCart/" + id,
@@ -307,8 +318,8 @@ export class MarketplaceService {
             environment.apiHost + "market-place/tours/inCart/" + id,
         );
     }
-    getOrderItem(tourId: number, touristId: number): Observable<OrderItem> {
-        return this.http.get<OrderItem>(
+    getOrderItem(tourId: number, touristId: number): Observable<any> {
+        return this.http.get<any>(
             environment.apiHost +
                 "tourist/shoppingCart/getItem/" +
                 tourId +
@@ -320,7 +331,7 @@ export class MarketplaceService {
         id: number | undefined,
         shoppingCartId: number | undefined,
     ): any {
-        return this.http.delete<OrderItem>(
+        return this.http.delete<any>(
             environment.apiHost +
                 "tourist/shoppingCart/removeItem/" +
                 id +
@@ -374,18 +385,19 @@ export class MarketplaceService {
         return this.http.get<boolean>(route);
     }
 
-    searchTours(searchFilter: any): Observable<PagedResults<Tour>> {
-        let query = this.prepareSearchQuery(searchFilter);
+    searchTours(searchFilter: any, sortOption: SortOption): Observable<PagedResults<Tour>> {
+        let query = this.prepareSearchQuery(searchFilter, sortOption);
         console.log(query);
         const path = environment.apiHost + "tourist/tour/search" + query;
         return this.http.get<PagedResults<Tour>>(path);
     }
 
-    prepareSearchQuery(searchFilter: any): String {
+    prepareSearchQuery(searchFilter: any, sortOption: SortOption): String {
         let query = `?page=${searchFilter.page}&pageSize=${searchFilter.pageSize}`
         query += searchFilter.name != "" ? `&name=${searchFilter.name}` : "";
         query += searchFilter.minPrice >= 0 && searchFilter.minPrice !== "" ? `&minPrice=${searchFilter.minPrice}` : "";
         query += searchFilter.maxPrice >= 0  && searchFilter.maxPrice !== "" ? `&maxPrice=${searchFilter.maxPrice}` : "";
+        query += searchFilter.onDiscount != false ? `&onDiscount=${searchFilter.onDiscount}` : "";
         query += searchFilter.minDifficulty >= 0  && searchFilter.minDifficulty !== "" ? `&minDifficulty=${searchFilter.minDifficulty}` : "";
         query += searchFilter.maxDifficulty >= 0  && searchFilter.maxDifficulty !== "" ? `&maxDifficulty=${searchFilter.maxDifficulty}` : "";
         query += searchFilter.minDuration >= 0 && searchFilter.minDuration !== "" ? `&minDuration=${searchFilter.minDuration}` : "";
@@ -396,6 +408,7 @@ export class MarketplaceService {
         query += searchFilter.longitude >= -180 && searchFilter.longitude !== "" ? `&longitude=${searchFilter.longitude}` : "";
         query += searchFilter.latitude >= -180 && searchFilter.latitude !== "" ? `&latitude=${searchFilter.latitude}` : "";
         query += searchFilter.distance > 0 && searchFilter.distance !== "" ? `&maxDistance=${searchFilter.distance}` : "";
+        query += sortOption != SortOption.NoSort ? `&sortBy=${sortOption}` : "";
         return query;
     }
 
@@ -417,6 +430,10 @@ export class MarketplaceService {
 
     deleteTourSale(id: number): Observable<void> {
       return this.http.delete<void>(environment.apiHost + "tour-sales/" + id);
+    }
+
+    getDiscountForTour(tourId: number): Observable<number | null> {
+        return this.http.get<number | null>(environment.apiHost + "tour-sales/tours/" + tourId);
     }
 
     getPublishedToursByAuthor(authorId: number): Observable<PagedResults<Tour>> {
@@ -449,5 +466,27 @@ export class MarketplaceService {
             environment.apiHost + "tourist/shoppingCart/apply-coupon",
             couponAplication,
         );
+    }
+
+    getPublishedBundles(): Observable<Bundle[]> {
+        let path = environment.apiHost + "tourist/bundles";
+        return this.http.get<Bundle[]>(path);
+    }
+    
+    getBundleById(bundleId: number): Observable<Bundle> {
+        let path = environment.apiHost + "tourist/bundles/" + bundleId;
+        return this.http.get<Bundle>(path);
+    }
+    
+    removeBundleOrderItem(bundleOrderItemId: number): Observable<any> {
+        let path = environment.apiHost + "tourist/shoppingCart/remove-bundle-item/" + bundleOrderItemId;
+        return this.http.delete<any>(path);
+    }
+    
+    buyBundle(bundleId: number): Observable<any> {
+        console.log('6');
+        let path = environment.apiHost + "token/bundle/" + bundleId;
+        return this.http.post<any>(path, {});
+
     }
 }

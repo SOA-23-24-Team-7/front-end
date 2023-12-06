@@ -19,6 +19,7 @@ export class TourSaleFormComponent implements OnInit {
   chosenTours: Tour[] = [];
   authorId: number = 0;
   tourId: number = 0;
+  discount: number = 0;
 
   constructor(private authService: AuthService, private service: MarketplaceService, private cdRef: ChangeDetectorRef, private router: Router, private route: ActivatedRoute) { }
 

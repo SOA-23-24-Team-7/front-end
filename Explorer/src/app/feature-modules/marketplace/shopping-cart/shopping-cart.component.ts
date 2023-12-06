@@ -17,6 +17,7 @@ import { PagedResults } from "src/app/shared/model/paged-results.model";
 import { TourToken } from "../model/tour-token.model";
 import { StakeholderService } from "../../stakeholder/stakeholder.service";
 import { CouponsModalComponent } from "../coupons-modal/coupons-modal.component";
+import { Bundle } from "../../tour-authoring/model/bundle.model";
 
 @Component({
     selector: "xp-shopping-cart",
@@ -28,6 +29,7 @@ export class ShoppingCartComponent {
     orderItem: OrderItem;
     shoppingCart: ShoppingCart;
     isDisabled: boolean;
+    bundles: Bundle[] = [];
 
     constructor(
         private service: MarketplaceService,
@@ -45,6 +47,18 @@ export class ShoppingCartComponent {
             this.getShoppingCart();
         });
     }
+
+    getBundles() {
+        this.bundles = [];
+        this.shoppingCart.bundleOrderItems?.forEach(boi => {
+            this.service.getBundleById(boi.bundleId!).subscribe({
+                next: (result: Bundle) => {
+                    this.bundles.push(result);
+                }
+            })
+        });
+    }
+
     openDialog(input: Review[]) {
         console.log(input);
         const dialogRef = this.dialogRef.open(ReviewCardComponent, {
@@ -90,30 +104,36 @@ export class ShoppingCartComponent {
             next: (result: ShoppingCart) => {
                 this.shoppingCart = result;
                 this.isEmpty();
+                this.getBundles();
             },
         });
     }
     checkout(): void {
+        
+        console.log('1');
         var totalPrice = this.shoppingCart.totalPrice;
         var storedShoppingCart = this.shoppingCart;
         var uslo = false;
         console.log(totalPrice);
         this.stakeholderService.getTouristWallet().subscribe(result => {
+            console.log('2');
             var wallet = result;
             if (wallet.adventureCoin >= (totalPrice as number)) {
                 //dobaviti order iteme
                 const orderItems = this.shoppingCart.orderItems;
-
+                const bundleOrderItems = this.shoppingCart.bundleOrderItems;
                 this.service
                     .deleteShoppingKart(this.shoppingCart.id)
                     .subscribe({
                         next: () => {
+                            console.log('3');
                             this.shoppingCart = {};
                             console.log(storedShoppingCart);
                             this.service
                                 .addShoppingCart(this.shoppingCart)
                                 .subscribe({
                                     next: async (result: ShoppingCart) => {
+                                        console.log('4');
                                         this.shoppingCart = result;
                                         var newShoppingCart = result;
                                         for (let tour of this.data) {
@@ -140,6 +160,14 @@ export class ShoppingCartComponent {
                                             );
                                             this.shoppingCart = newShoppingCart;
                                         }
+                                        for (let boi of bundleOrderItems!) {
+                                            console.log('5');
+                                            this.service.buyBundle(boi.bundleId!).subscribe({
+                                                next: () => {
+                                                    
+                                                }
+                                            });
+                                        }
                                         this.dialogRef.closeAll();
                                     },
                                 });
@@ -150,8 +178,14 @@ export class ShoppingCartComponent {
             }
         });
     }
-    isEmpty(): void {
-        this.isDisabled = this.data.length == 0;
+
+    isEmpty(): boolean {
+        return this.data.length == 0 && this.bundles.length == 0;
+    }
+
+    removeBundleOrderItem() {
+        // this.bundles = this.bundles.filter(b => b.id != bundleId);
+        this.getShoppingCart();
     }
 
     openCouponModal(): void {

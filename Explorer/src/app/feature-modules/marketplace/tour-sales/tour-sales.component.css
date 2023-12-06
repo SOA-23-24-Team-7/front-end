@@ -69,6 +69,11 @@
     position: relative;
 }
 
+.tour-search-body {
+    display: flex;
+    flex-direction: row;
+}
+
 .tour-search-header {
     display: flex;
     flex-direction: column;
@@ -507,7 +512,7 @@ input[type="range"] {
     min-height: 130px;
 }
 
-.tour-sale-card:hover {
+.hover {
     transform: scale(1.05);
 }
 
@@ -551,4 +556,47 @@ h3 {
 
 .rounded {
     border-radius: 100px;
+}
+
+.tour-cards-scrollable {
+    position: relative;
+    width: 540px;
+    height: 300px;
+    overflow-y: auto;
+    overflow-x: hidden;
+    align-self: center;
+    padding-right: 10px;
+}
+
+.list-container {
+    gap: 20px;
+    min-width: 300px;
+    padding: 20px;
+    border-radius: 10px;
+}
+
+.list-close-icon {
+    gap: 20px;
+    color: rgb(var(--clr-primary-500));
+    font-size: 2.5rem;
+    cursor: pointer;
+}
+
+::-webkit-scrollbar {
+    width: 10px;
+}
+
+
+::-webkit-scrollbar-track {
+    background: rgb(var(--clr-background));
+}
+
+
+::-webkit-scrollbar-thumb {
+    background: rgb(var(--clr-primary-500));
+}
+
+
+::-webkit-scrollbar-thumb:hover {
+    background: rgb(var(--clr-primary-500));
 }

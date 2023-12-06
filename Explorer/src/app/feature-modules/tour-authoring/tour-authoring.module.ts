@@ -28,6 +28,11 @@ import { TouristsKeyPointsComponent } from "./tourists-key-points/tourists-key-p
 import { RecommendedTourCardComponent } from "./recommended-tour-card/recommended-tour-card.component";
 import { TouristsEquipmentComponent } from "./tourists-equipment/tourists-equipment.component";
 import { FormsModule } from "@angular/forms";
+import { BundlesComponent } from "./bundles/bundles.component";
+import { BundleCardComponent } from "./bundle-card/bundle-card.component";
+import { AddBundleFormComponent } from "./add-bundle-form/add-bundle-form.component";
+import { EditBundleFormComponent } from "./edit-bundle-form/edit-bundle-form.component";
+import { ViewBundleToursComponent } from "./view-bundle-tours/view-bundle-tours.component";
 import { EncounterModule } from "../encounter/encounter.module";
 
 @NgModule({
@@ -50,6 +55,11 @@ import { EncounterModule } from "../encounter/encounter.module";
         TouristsKeyPointsComponent,
         RecommendedTourCardComponent,
         TouristsEquipmentComponent,
+        BundlesComponent,
+        BundleCardComponent,
+        AddBundleFormComponent,
+        EditBundleFormComponent,
+        ViewBundleToursComponent,
     ],
     imports: [
         CommonModule,
@@ -74,6 +84,8 @@ import { EncounterModule } from "../encounter/encounter.module";
         FacilitiesFormComponent,
         TourEquipmentFormComponent,
         KeyPointCardComponent,
+        BundlesComponent,
+        BundleCardComponent,
     ],
 })
 export class TourAuthoringModule {}
