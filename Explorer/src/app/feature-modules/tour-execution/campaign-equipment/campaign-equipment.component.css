@@ -1,0 +1,49 @@
+.equipment-modal {
+    color: rgba(var(--clr-text), 1);
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    z-index: 9999;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    visibility: hidden;
+    opacity: 0;
+}
+
+.kp {
+    display: flex;
+    background-color: rgba(var(--clr-background-secondary), 1);
+    flex-direction: column;
+    align-items: center;
+    padding: 2rem;
+    border-radius: 1rem;
+    width: 22rem;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+    animation: fadeIn 1s ease-in-out;
+}
+
+.equipment-head {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 1rem;
+}
+
+.equipment {
+    font-weight: bold;
+}
+
+.delayed-fade-in {
+    animation: fadeIn 0.5s ease-in-out 0.1s forwards;
+}
+
+@keyframes fadeIn {
+    to {
+        visibility: visible;
+        opacity: 1;
+    }
+}

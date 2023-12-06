@@ -2,7 +2,7 @@
 <div class="tour-card">
     <div class="tour-card-left">
         <div class="tour-image-container" *ngIf="tour && tour.keyPoints && tour.keyPoints[0]">
-            <img class="tour-image" [src]="imageHost + tour.keyPoints[0].imagePath"/>
+            <img class="tour-image" [src]="imageHost + tour.keyPoints[0].imagePath" (error)="onImageError($event)">
         </div>
     </div>
     <div class="tour-card-content">

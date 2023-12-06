@@ -16,6 +16,7 @@ export class MapComponent implements AfterViewInit, OnChanges {
   private map: any;
   public waypointMap = new Map<number, any>();
   public checkedPointsMap = new Map<number, any>();
+  public nextKeyPointsMap = new Map<number, any>();
   private routeControl: L.Routing.Control;
   private refreshEventsSubscription: Subscription;
   private previousCommitted = false;
@@ -37,6 +38,7 @@ export class MapComponent implements AfterViewInit, OnChanges {
   @Input() isKeyPointMap = false;
   @Input() isPositionMap = false;
   @Input() isTourExecutionMap = false;
+  @Input() isCampaign = false;
   @Input() executingTourId = 0;
   @Input() height: string = "600px";
   @Input() set startPosition(value: any) {
@@ -113,7 +115,11 @@ export class MapComponent implements AfterViewInit, OnChanges {
 
   ngOnInit() {
     if (this.isTourExecutionMap) {
-      this.getTourKeyPoints(this.executingTourId)
+      if(this.isCampaign){
+        this.getCampaignKeyPoints(this.executingTourId)
+      }else{
+        this.getTourKeyPoints(this.executingTourId)
+      }
       return;
     }
     if (!this.isKeyPointMap) return;
@@ -271,6 +277,20 @@ export class MapComponent implements AfterViewInit, OnChanges {
     if (this.isTourExecutionMap) {
       planOptions['createMarker'] = (i: number, waypoint: any, n: number): any => {
         if (waypoints.length == (this.waypointMap.size + 1) && i == 0) return null;
+        if(i == 1){
+          keyPointIcon = L.icon({
+            iconUrl: '../assets/icons/nextKeyPointIcon.png',
+            iconSize: [46, 46],
+            iconAnchor: [26, 46],
+          });
+        }
+        else{
+          keyPointIcon = L.icon({
+            iconUrl: 'https://icon-library.com/images/map-marker-icon/map-marker-icon-18.jpg',
+            iconSize: [46, 46],
+            iconAnchor: [26, 46],
+          });
+        }
         const marker = L.marker(waypoint.latLng, { icon: keyPointIcon });
         marker.addEventListener('click', () => {
           this.keyPointClickEvent.emit(waypoint.latLng);
@@ -430,5 +450,38 @@ export class MapComponent implements AfterViewInit, OnChanges {
 
     if (!this.isKeyPointMap)
       this.map.setView([lat, long], this.map.getZoom());
+  }
+
+  getCampaignKeyPoints(campaignId: number): void {
+    this.mapService.getCampaignKeyPoints(campaignId).subscribe({
+      next: (result: any) => {
+        this.waypointMap.clear();
+
+        let keyPoints = result;
+        // da li ce order dobro raditi ovako???
+        let i = 0
+        for (const kp of keyPoints) {
+          let lng = kp.longitude;
+          let lat = kp.latitude;
+          let order = i;
+          i++;
+          this.waypointMap.set(kp.id, { lng, lat, order });
+        }
+
+        //this.createWaypoints(keyPoints);
+        if (!this.touristPosition && !this.isTourExecutionMap) {
+          let waypoints = [...this.waypointMap.values()];
+
+          this.setRoute(waypoints);
+
+          if (keyPoints.length > 0) {
+            this.panMapTo(keyPoints[0].latitude, keyPoints[0].longitude);
+          }
+        }
+      },
+      error: () => {
+        console.log('Cannot fetch keypoints for campaignId:', campaignId);
+      },
+    });
   }
 }

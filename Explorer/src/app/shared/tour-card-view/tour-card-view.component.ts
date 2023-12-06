@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, OnChanges, SimpleChanges } from '@angular/core';
+import { Component, OnInit, Input, OnChanges, SimpleChanges, Output, EventEmitter } from '@angular/core';
 import { AuthService } from 'src/app/infrastructure/auth/auth.service';
 import { MarketplaceService } from '../../feature-modules/marketplace/marketplace.service';
 import { environment } from 'src/env/environment';
@@ -53,7 +53,7 @@ export class TourCardViewComponent implements OnChanges {
   tokens: TourToken[] = [];
   shoppingCart: ShoppingCart = {};
   imageHost: string = environment.imageHost;
-  @Input() refresh: () => void;
+  @Output() notifyParent: EventEmitter<any> = new EventEmitter<any>();
 
   constructor(
     private authService: AuthService, 
@@ -80,10 +80,6 @@ export class TourCardViewComponent implements OnChanges {
         this.getShoppingCart();
       }
     });
-  }
-
-  invokeRefresh() {
-    if(this.refresh) this.refresh()
   }
 
   getDiscount() {
@@ -185,8 +181,7 @@ export class TourCardViewComponent implements OnChanges {
           if(keyPoints.length > 1 && tour.durations && tour.durations.length > 0){
             this.tourAuthoringService.publishTour(tour).subscribe({
               next: () => {
-                  this.getTour(this.tour.id ? this.tour.id : 0);
-                  this.refresh();
+                  this.tour.status = 1;
               },
             })
           }
@@ -204,8 +199,7 @@ export class TourCardViewComponent implements OnChanges {
   onArchiveClicked(tour: Tour): void{
     this.tourAuthoringService.archiveTour(tour).subscribe({
       next: () => {
-        this.getTour(this.tour.id ? this.tour.id : 0);
-        this.refresh();
+        this.tour.status = 2;
       },
     })
   }
@@ -223,5 +217,12 @@ export class TourCardViewComponent implements OnChanges {
       data: tour,
       
     });
+  }
+
+  onImageError(event: Event) {
+    const target = event.target as HTMLImageElement;
+    if (target) {
+      target.src = "https://imgs.search.brave.com/udmDGOGRJTYO6lmJ0ADA03YoW4CdO6jPKGzXWvx1XRI/rs:fit:860:0:0/g:ce/aHR0cHM6Ly90My5m/dGNkbi5uZXQvanBn/LzAyLzY4LzU1LzYw/LzM2MF9GXzI2ODU1/NjAxMl9jMVdCYUtG/TjVyalJ4UjJleVYz/M3puSzRxblllS1pq/bS5qcGc";
+    }
   }
 }

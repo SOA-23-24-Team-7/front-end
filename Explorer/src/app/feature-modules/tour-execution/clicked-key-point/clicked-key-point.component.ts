@@ -22,12 +22,15 @@ export class ClickedKeyPointComponent implements OnInit{
   this.nextKeyPointId = this.keyPoint.nextKeyPointId
   this.keyPointImage = environment.imageHost + this.keyPoint.dataKey.imagePath;
   if(this.keyPoint.dataKey.id < this.nextKeyPointId){
-    if(this.keyPoint.dataKey.haveSecret){
+    if(this.keyPoint.dataKey.secret.description != ''){
       this.secret = this.keyPoint.dataKey.secret.description
     }
     else{
       this.secret = 'No secret'
     }
+  }
+  if(this.keyPoint.dataKey.secret.description == ''){
+      this.secret = 'No secret'
   }
 }
  onClose(): void {
