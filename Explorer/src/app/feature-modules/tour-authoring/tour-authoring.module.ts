@@ -28,6 +28,7 @@ import { TouristsKeyPointsComponent } from './tourists-key-points/tourists-key-p
 import { RecommendedTourCardComponent } from './recommended-tour-card/recommended-tour-card.component';
 import { TouristsEquipmentComponent } from './tourists-equipment/tourists-equipment.component';
 import { FormsModule } from '@angular/forms';
+import { BundlesComponent } from './bundles/bundles.component';
 
 @NgModule({
     declarations: [
@@ -49,6 +50,7 @@ import { FormsModule } from '@angular/forms';
         TouristsKeyPointsComponent,
         RecommendedTourCardComponent,
         TouristsEquipmentComponent,
+        BundlesComponent,
     ],
     imports: [
         CommonModule,
@@ -71,7 +73,8 @@ import { FormsModule } from '@angular/forms';
         FacilitiesComponent,
         FacilitiesFormComponent,
         TourEquipmentFormComponent,
-        KeyPointCardComponent
+        KeyPointCardComponent,
+        BundlesComponent
     ],
 })
 export class TourAuthoringModule {}

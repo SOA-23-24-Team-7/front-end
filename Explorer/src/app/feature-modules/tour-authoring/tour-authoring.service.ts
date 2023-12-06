@@ -12,6 +12,7 @@ import { PublicFacilityRequest } from "./model/public-facility-request.model";
 import { PublicKeyPoint } from "./model/public-key-point.model";
 import { Person } from "../stakeholder/model/person.model";
 import { query } from "@angular/animations";
+import { Bundle } from "./model/bundle.model";
 
 @Injectable({
     providedIn: "root",
@@ -241,6 +242,11 @@ export class TourAuthoringService {
         const path = environment.apiHost + "tourist/tour/author-search" + query;
         console.log(path);
         return this.http.get<PagedResults<Tour>>(path);
+    }
+
+    getBundlesForAuthor(): Observable<Bundle[]> {
+        let path = environment.apiHost + "bundles/";
+        return this.http.get<Bundle[]>(path);
     }
 
     prepareSearchQuery(searchFilter: any): String {
