@@ -26,7 +26,11 @@
             >
                 Select encounter
             </button>
-            <p *ngIf="selectedEncounter" [innerHTML]="selectedEncounter"></p>
+            <p
+                class="coordinates"
+                *ngIf="selectedEncounter"
+                [innerHTML]="selectedEncounter"
+            ></p>
         </div>
         <select formControlName="selectedStatus" (change)="changeStatus()">
             <option value="1">Social</option>
@@ -57,6 +61,7 @@
             Select picture
         </button>
         <p
+            class="coordinates"
             *ngIf="selectedImage && encounterType == 2"
             [innerHTML]="selectedImage"
         ></p>

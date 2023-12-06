@@ -131,9 +131,7 @@ export class EncounterFormComponent implements OnInit {
             } else {
                 this.notifier.notify(
                     "error",
-                    xpError.getErrorMessage(
-                        "Picture is not in encounter range!",
-                    ),
+                    "Picture is not in encounter range!",
                 );
             }
         }

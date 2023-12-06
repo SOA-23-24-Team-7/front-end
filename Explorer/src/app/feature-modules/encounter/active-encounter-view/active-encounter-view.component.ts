@@ -82,6 +82,10 @@ export class ActiveEncounterViewComponent implements AfterViewInit {
                         "Successfully activated encounter!",
                     );
                     this.getEncounterInstance(this.encounter!.id);
+                    if (this.encounter!.type === 1) {
+                        let counter = 0;
+                        while (counter < 15) {}
+                    }
                 },
                 error: err => {
                     this.notifier.notify("error", xpError.getErrorMessage(err));
