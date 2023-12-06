@@ -7,6 +7,7 @@ import { faLocationCrosshairs } from "@fortawesome/free-solid-svg-icons";
 import { MatDialog, MatDialogRef } from "@angular/material/dialog";
 import { PositionSimulatorComponent } from "src/app/shared/position-simulator/position-simulator.component";
 import { AuthService } from "src/app/infrastructure/auth/auth.service";
+import { EncounterInstance } from "../model/encounter-instance.model";
 @Component({
     selector: "xp-active-encounter-view",
     templateUrl: "./active-encounter-view.component.html",
@@ -16,10 +17,9 @@ export class ActiveEncounterViewComponent implements AfterViewInit {
     points: any;
     encounters: Encounter[];
     filteredEncounters: Encounter[];
-    canActivate: boolean;
-    showImage: boolean;
     image?: string;
     encounter?: Encounter;
+    encounterInstance?: EncounterInstance;
     dialogRef: MatDialogRef<PositionSimulatorComponent, any> | undefined;
 
     @ViewChild(MapComponent, { static: false }) mapComponent: MapComponent;
@@ -41,8 +41,7 @@ export class ActiveEncounterViewComponent implements AfterViewInit {
     ngAfterViewInit(): void {
         this.authService.userLocation$.subscribe({
             next: location => {
-                this.canActivate = false;
-                // this.encounter = undefined;
+                this.encounter = undefined;
                 this.userPosition.latitude = location.latitude;
                 this.userPosition.longitude = location.longitude;
                 this.loadEncountersInRangeOfFromCurrentLocation(
@@ -57,12 +56,12 @@ export class ActiveEncounterViewComponent implements AfterViewInit {
                 if (this.filteredEncounters) {
                     this.filteredEncounters.forEach(enc => {
                         if (this.checkIfUserInEncounterRange(enc)) {
-                            this.canActivate = true;
                             this.encounter = enc;
-                            console.log(
-                                "Mozes aktivirati encounter:",
-                                enc.title,
-                            );
+                            this.getEncounterInstance(enc.id);
+                            console.log(this.encounterInstance, enc.id);
+                            if (this.encounterInstance?.status === 0) {
+                                this.getHiddenLocationImage();
+                            }
                         }
                     });
                 }
@@ -70,16 +69,18 @@ export class ActiveEncounterViewComponent implements AfterViewInit {
         });
     }
 
+    getEncounterInstance(encounterId: number) {
+        this.service
+            .getEncounterInstance(encounterId)
+            .subscribe(result => (this.encounterInstance = result));
+    }
+
     activateEncounter() {
         this.service
             .activateEncounter(this.userPosition, this.encounter!.id)
             .subscribe();
         if (this.encounter!.type === 1) {
-            this.showImage = true;
             this.getHiddenLocationImage();
-            console.log(this.image);
-        } else {
-            this.showImage = false;
         }
     }
 
