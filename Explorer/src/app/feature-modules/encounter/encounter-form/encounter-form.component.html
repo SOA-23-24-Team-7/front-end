@@ -18,6 +18,16 @@
             min="1"
             type="number"
         />
+        <div>
+            <button
+                mat-raised-button
+                color="primary"
+                (click)="selectEncounterOnMap()"
+            >
+                Select encounter
+            </button>
+            <p *ngIf="selectedEncounter" [innerHTML]="selectedEncounter"></p>
+        </div>
         <select formControlName="selectedStatus" (change)="changeStatus()">
             <option value="1">Social</option>
             <option value="2">Hidden</option>
@@ -38,24 +48,15 @@
                 type="text"
             />
         </div>
-        <div *ngIf="encounterType == 2">
-            <input
-                placeholder="Picture longitude"
-                formControlName="pictureLongitude"
-                type="number"
-                min="-180"
-                max="180"
-            />
-        </div>
-        <div *ngIf="encounterType == 2">
-            <input
-                placeholder="Picture latitude"
-                formControlName="pictureLatitude"
-                type="number"
-                min="-90"
-                max="90"
-            />
-        </div>
+        <button
+            *ngIf="encounterType == 2"
+            mat-raised-button
+            color="primary"
+            (click)="selectPictureOnMap()"
+        >
+            Select picture
+        </button>
+        <p *ngIf="selectedImage" [innerHTML]="selectedImage"></p>
         <!-- <div *ngIf="encounterType == 3">
             <input
                 placeholder="Misc field"
