@@ -30,6 +30,7 @@ import { Coupon } from "./model/coupon.model";
 import { CouponApplication } from "./model/coupon-applicaton.model";
 import { Bundle } from "../tour-authoring/model/bundle.model";
 import { BundleOrderItem } from "./model/bundle-order-item.model";
+import { SortOption } from "./model/sort-option.model";
 
 @Injectable({
     providedIn: "root",
@@ -384,18 +385,19 @@ export class MarketplaceService {
         return this.http.get<boolean>(route);
     }
 
-    searchTours(searchFilter: any): Observable<PagedResults<Tour>> {
-        let query = this.prepareSearchQuery(searchFilter);
+    searchTours(searchFilter: any, sortOption: SortOption): Observable<PagedResults<Tour>> {
+        let query = this.prepareSearchQuery(searchFilter, sortOption);
         console.log(query);
         const path = environment.apiHost + "tourist/tour/search" + query;
         return this.http.get<PagedResults<Tour>>(path);
     }
 
-    prepareSearchQuery(searchFilter: any): String {
+    prepareSearchQuery(searchFilter: any, sortOption: SortOption): String {
         let query = `?page=${searchFilter.page}&pageSize=${searchFilter.pageSize}`
         query += searchFilter.name != "" ? `&name=${searchFilter.name}` : "";
         query += searchFilter.minPrice >= 0 && searchFilter.minPrice !== "" ? `&minPrice=${searchFilter.minPrice}` : "";
         query += searchFilter.maxPrice >= 0  && searchFilter.maxPrice !== "" ? `&maxPrice=${searchFilter.maxPrice}` : "";
+        query += searchFilter.onDiscount != false ? `&onDiscount=${searchFilter.onDiscount}` : "";
         query += searchFilter.minDifficulty >= 0  && searchFilter.minDifficulty !== "" ? `&minDifficulty=${searchFilter.minDifficulty}` : "";
         query += searchFilter.maxDifficulty >= 0  && searchFilter.maxDifficulty !== "" ? `&maxDifficulty=${searchFilter.maxDifficulty}` : "";
         query += searchFilter.minDuration >= 0 && searchFilter.minDuration !== "" ? `&minDuration=${searchFilter.minDuration}` : "";
@@ -406,6 +408,7 @@ export class MarketplaceService {
         query += searchFilter.longitude >= -180 && searchFilter.longitude !== "" ? `&longitude=${searchFilter.longitude}` : "";
         query += searchFilter.latitude >= -180 && searchFilter.latitude !== "" ? `&latitude=${searchFilter.latitude}` : "";
         query += searchFilter.distance > 0 && searchFilter.distance !== "" ? `&maxDistance=${searchFilter.distance}` : "";
+        query += sortOption != SortOption.NoSort ? `&sortBy=${sortOption}` : "";
         return query;
     }
 
@@ -427,6 +430,10 @@ export class MarketplaceService {
 
     deleteTourSale(id: number): Observable<void> {
       return this.http.delete<void>(environment.apiHost + "tour-sales/" + id);
+    }
+
+    getDiscountForTour(tourId: number): Observable<number | null> {
+        return this.http.get<number | null>(environment.apiHost + "tour-sales/tours/" + tourId);
     }
 
     getPublishedToursByAuthor(authorId: number): Observable<PagedResults<Tour>> {

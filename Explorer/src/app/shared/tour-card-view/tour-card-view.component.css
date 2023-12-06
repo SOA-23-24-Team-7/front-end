@@ -52,15 +52,14 @@
 .tour-card-center {
     display: flex;
     flex-direction: column;
-    width: 70%;
+    width: 50%;
     padding-left: 1rem;
 }
 
 .tour-card-right {
     display: flex;
     flex-direction: column;
-    padding-left: 1rem;
-    width: 30%;
+    width: 50%;
 }
 
 .tour-image-container {
@@ -246,7 +245,9 @@
     margin-top: 0.5rem;
     display: flex;
     align-items: center;
-    justify-content: center;
+    justify-content: flex-end;
+    white-space: nowrap;
+    overflow: visible;
 }
 
 .tour-price-value {
@@ -262,6 +263,7 @@
 .tour-price-tokens {
     padding: 0;
     margin: 0;
+    z-index: 2;
     font-size: 1.5rem;
     color: rgba(var(--clr-accent-500), 1);
     line-height: 1.5rem;
@@ -270,11 +272,53 @@
 .add-to-cart {
     margin-top: 0.5rem;
     background-color: rgba(var(--clr-accent-500), 1);
-    width: 100%;
+    max-width: 60%;
+    min-width: 15rem;
+    margin-left: auto;
     margin-bottom: 0.5rem;
 }
 
 .view {
     margin-top: auto;
-    width: 100%;
+    max-width: 60%;
+    min-width: 15rem;
+    margin-left: auto;
 }
+
+.tour-price-info {
+    display: flex;
+    align-items: auto;
+    justify-content: right;
+}
+
+.discount {
+    display: flex; 
+    justify-content: center; 
+    align-items: center;
+    margin-right: 0.5rem;
+    font-weight: bold;
+    font-size: 1.5rem;
+    color: rgba(var(--clr-text), 1);
+}
+
+.hide-text {
+    color: rgba(0, 0, 0, 0);
+}
+
+s, strike{text-decoration:none;position:relative;}
+s::before, strike::before {
+    top: 50%;
+    background:red;
+    opacity:1;
+    content: '';
+    width: 170%;
+    position: absolute;
+    height:.1em;
+    border-radius:.1em;
+    left: -5%;
+    white-space:nowrap;
+    display: block;
+    z-index: 999;
+    transform: rotate(180deg);  
+}
+s.straight::before, strike.straight::before{transform: rotate(0deg);left:-1%;width:102%;}

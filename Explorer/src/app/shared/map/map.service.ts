@@ -36,6 +36,12 @@ export class MapService {
     );
   }
 
+  getCampaignKeyPoints(campaignId: number): Observable<any> {
+    return this.http.get<any>(
+      environment.apiHost + `market-place/${campaignId}/key-points`
+    );
+  }
+
   getAuthorsFacilities(): Observable<PagedResults<any>>{
     return this.http.get<PagedResults<any>>(environment.apiHost + 'facility/authorsFacilities');
   }

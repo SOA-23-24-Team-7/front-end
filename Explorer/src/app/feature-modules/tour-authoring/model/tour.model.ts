@@ -1,5 +1,5 @@
-import { KeyPoint } from "./key-point.model"
-import { TourDuration } from "./tourDuration.model"
+import { KeyPoint } from "./key-point.model";
+import { TourDuration } from "./tourDuration.model";
 
 export interface Tour{
     authorId?: number,

@@ -22,25 +22,25 @@
                 mat-raised-button>Done</button>
             <button *ngIf="tourId !== 0" class="form-button" type="submit" (click)="updateSale()"
                 mat-raised-button>Done</button>
-            <button class="form-button" routerLink="/tour-sales"
-                mat-raised-button>Go back</button>
+            <button class="form-button" routerLink="/tour-sales" mat-raised-button>Go back</button>
         </div>
         <div class="right-column">
-            <div cdkDropList #chosen="cdkDropList" [cdkDropListConnectedTo]="['available']" [cdkDropListData]="chosenTours" class="tour-cards-scrollable" 
-                (cdkDropListDropped)="drop($event)">
+            <div cdkDropList #chosen="cdkDropList" [cdkDropListConnectedTo]="['available']"
+                [cdkDropListData]="chosenTours" class="tour-cards-scrollable" (cdkDropListDropped)="drop($event)">
                 <div class="centered-text" *ngIf="chosenTours.length === 0">
                     <p>Drag tours for sale here</p>
                 </div>
                 <xp-tour-card-view *ngFor="let tour of chosenTours" cdkDrag [cdkDragData]="tour" [tour]="tour"
-                    [hideIcons]="true"></xp-tour-card-view>
+                    [hideIcons]="true"
+                    [preliminaryDiscount]="saleForm.value.discountPercentage && saleForm.value.discountPercentage <= 100 && saleForm.value.discountPercentage > 0 ? saleForm.value.discountPercentage / 100 : null"></xp-tour-card-view>
             </div>
         </div>
     </form>
     <div class="list-container">
-        <div #available cdkDropList [cdkDropListConnectedTo]="['chosen']" [cdkDropListData]="availableTours" class="tour-cards-scrollable" 
-                (cdkDropListDropped)="drop($event)">
-                <xp-tour-card-view *ngFor="let tour of availableTours" cdkDrag [cdkDragData]="tour" [tour]="tour"
-                    [hideIcons]="true"></xp-tour-card-view>
-            </div>
+        <div #available cdkDropList [cdkDropListConnectedTo]="['chosen']" [cdkDropListData]="availableTours"
+            class="tour-cards-scrollable" (cdkDropListDropped)="drop($event)">
+            <xp-tour-card-view *ngFor="let tour of availableTours" cdkDrag [cdkDragData]="tour" [tour]="tour"
+                [hideIcons]="true"></xp-tour-card-view>
+        </div>
     </div>
 </div>
