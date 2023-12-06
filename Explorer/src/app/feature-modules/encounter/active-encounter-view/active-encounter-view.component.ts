@@ -17,6 +17,8 @@ export class ActiveEncounterViewComponent implements AfterViewInit {
     points: any;
     encounters: Encounter[];
     filteredEncounters: Encounter[];
+    canActivate: boolean;
+    encounter?: Encounter;
     dialogRef: MatDialogRef<PositionSimulatorComponent, any> | undefined;
 
     @ViewChild(MapComponent, { static: false }) mapComponent: MapComponent;
@@ -38,6 +40,8 @@ export class ActiveEncounterViewComponent implements AfterViewInit {
     ngAfterViewInit(): void {
         this.authService.userLocation$.subscribe({
             next: location => {
+                this.canActivate = false;
+                // this.encounter = undefined;
                 this.userPosition.latitude = location.latitude;
                 this.userPosition.longitude = location.longitude;
                 this.loadEncountersInRangeOfFromCurrentLocation(
@@ -49,8 +53,35 @@ export class ActiveEncounterViewComponent implements AfterViewInit {
                         this.userPosition.longitude,
                     );
                 }
+                if (this.filteredEncounters) {
+                    this.filteredEncounters.forEach(enc => {
+                        if (this.checkIfUserInEncounterRange(enc)) {
+                            this.canActivate = true;
+                            this.encounter = enc;
+                            console.log(
+                                "Mozes aktivirati encounter:",
+                                enc.title,
+                            );
+                        }
+                    });
+                }
             },
         });
+    }
+
+    activateEncounter() {
+        this.service
+            .activateEncounter(this.userPosition, this.encounter!.id)
+            .subscribe();
+    }
+
+    completeHiddenLocationEncounter() {
+        this.service
+            .completeHiddenLocationEncounter(
+                this.userPosition,
+                this.encounter!.id,
+            )
+            .subscribe();
     }
 
     checkIfUserInEncounterRange(encounter: Encounter): boolean {
@@ -77,7 +108,8 @@ export class ActiveEncounterViewComponent implements AfterViewInit {
                             ),
                 ),
             );
-        return distance <= encounter.radius;
+        console.log(distance * 1000);
+        return distance * 1000 <= encounter.radius;
     }
 
     loadEncountersInRangeOfFromCurrentLocation(

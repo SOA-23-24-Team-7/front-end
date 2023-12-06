@@ -3,4 +3,10 @@
     <div class="simulator-btn" (click)="openSimulator()">
         <fa-icon class="upvote" [icon]="faLocation" />
     </div>
+    <div class="btn" *ngIf="canActivate" (click)="activateEncounter()">
+        Activate
+    </div>
+    <div class="btn" (click)="completeHiddenLocationEncounter()">
+        Try to complete
+    </div>
 </div>
