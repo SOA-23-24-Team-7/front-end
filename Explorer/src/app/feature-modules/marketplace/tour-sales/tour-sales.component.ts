@@ -2,7 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { 
   faPlus,
   faTrash,
-  faPen
+  faPen,
+  faXmark
 } from "@fortawesome/free-solid-svg-icons";
 import { MarketplaceService } from '../marketplace.service';
 import { TourSale } from '../model/tour-sale.model';
@@ -37,9 +38,16 @@ export class TourSalesComponent implements OnInit {
   }
 
   deleteTourSale(id: number): void {
+    this.closeTourView();
     this.service.deleteTourSale(id).subscribe(() => {
       this.tourSales = this.tourSales.filter(sale => sale.id != id)
     });
+  }
+
+  closeTourView(): void {
+    this.chosenSaleId = 0;
+    this.chosenToursDiscount = 0;
+    this.chosenToursForSale = [];
   }
 
   updateChosenTours(sale: TourSale): void {
@@ -56,4 +64,5 @@ export class TourSalesComponent implements OnInit {
   faPlus = faPlus;
   faTrash = faTrash;
   faPen = faPen;
+  faXmark = faXmark;
 }
