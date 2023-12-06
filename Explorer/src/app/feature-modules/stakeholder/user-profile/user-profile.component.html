@@ -1,5 +1,5 @@
 <ng-container *ngIf="person">
-    <div id="followers-details">
+    <!-- <div id="followers-details">
         <div>
             <br />
             <div class="float-container">
@@ -39,35 +39,93 @@
                 </div>
             </div>
         </div>
-    </div>
+    </div> -->
     <div class="container">
         <div class="card">
-            <div class="column">
-                <div class="card-header">
-                    <div class="avatar">
-                        <img
-                            src="{{ person.user.profilePicture }}"
-                            onerror="this.style.display='none'"
-                        />
+            <div class="row">
+                <div
+                    class="profile-picture"
+                    [style.background-image]="
+                        'url(' + person.user.profilePicture + ')'
+                    "
+                ></div>
+                <div class="row profile-information">
+                    <div class="column">
+                        <div class="name">
+                            {{ person.name }} {{ person.surname }}
+                        </div>
+                        <div class="username">
+                            {{ "@" + person.user.username }}
+                        </div>
+                        <div class="motto">{{ person.motto }}</div>
+                        <div class="row follows">
+                            <div
+                                class="followed"
+                                (click)="openFollowersDialog()"
+                            >
+                                <span class="count">{{ followersCount }}</span>
+                                followers
+                            </div>
+                            <div
+                                class="following"
+                                (click)="openFollowingsDialog()"
+                            >
+                                <span class="count">{{ followingsCount }}</span>
+                                following
+                            </div>
+                            <div
+                                class="follow-btn"
+                                (click)="openFollowerSearchDialog()"
+                            >
+                                +
+                            </div>
+                        </div>
+                        <div class="row wallet" *ngIf="user.role == 'tourist'">
+                            <div>
+                                <span class="count">{{
+                                    wallet.adventureCoin
+                                }}</span>
+                                Action Coins
+                            </div>
+                        </div>
                     </div>
-                    <div class="title">
-                        {{ person.name }} {{ person.surname }}
+                    <div class="column" style="margin-left: auto">
+                        <div class="btn edit-btn" (click)="toggleEditing()">
+                            Edit
+                        </div>
+                        <div class="level-container">
+                            <div class="level">
+                                {{
+                                    "Level " +
+                                        user.touristProgress?.level +
+                                        " Tourist"
+                                }}
+                            </div>
+                            <div class="level-bar-border">
+                                <div
+                                    class="level-bar"
+                                    [style.width]="
+                                        user.touristProgress?.xp + '%'
+                                    "
+                                ></div>
+                            </div>
+                            <div class="xp">
+                                <div>0</div>
+                                <div>
+                                    <span class="current-xp">
+                                        {{ user.touristProgress?.xp }}
+                                    </span>
+                                    xp
+                                </div>
+                                <div>100</div>
+                            </div>
+                        </div>
                     </div>
                 </div>
-                <div class="subtitle">
-                    <div class="username">
-                        Username: {{ person.user.username }}
-                    </div>
-                    <div class="email">Email: {{ person.email }}</div>
-                    <div class="motto">Motto: {{ person.motto }}</div>
-                </div>
-                <div class="btn" (click)="toggleEditing()">Edit</div>
             </div>
-            <div class="column">
-                <textarea class="bio" readonly="readonly" unselectable="on">
-Biography: {{ person.bio }}
-</textarea
-                >
+            <div class="row bio" *ngIf="person.bio">
+                <h1>Biography:</h1>
+                <div class="bio-text" [innerHTML]="bioMarkdown"></div>
             </div>
         </div>
     </div>

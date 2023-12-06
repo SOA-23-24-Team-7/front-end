@@ -40,6 +40,22 @@ import { TourSearchComponent } from "src/app/feature-modules/marketplace/tour-se
 import { NotificationTabsComponent } from "src/app/feature-modules/stakeholder/notification-tabs/notification-tabs.component";
 import { TourDetailsComponent } from "src/app/feature-modules/marketplace/tour-details/tour-details.component";
 import { UserNotificationsComponent } from "src/app/feature-modules/stakeholder/user-notifications/user-notifications.component";
+import { TranslateComponent } from "src/app/shared/translate/translate.component";
+import { TourCardViewComponent } from "src/app/shared/tour-card-view/tour-card-view.component";
+import { ActiveEncounterViewComponent } from "src/app/feature-modules/encounter/active-encounter-view/active-encounter-view.component";
+import { TourPageComponent } from "src/app/feature-modules/marketplace/tour-page/tour-page.component";
+import { TourSalesComponent } from "src/app/feature-modules/marketplace/tour-sales/tour-sales.component";
+import { TourSaleFormComponent } from "src/app/feature-modules/marketplace/tour-sale-form/tour-sale-form.component";
+import { PaymentHistoryComponent } from "src/app/feature-modules/stakeholder/payment-history/payment-history.component";
+import { TouristsTourComponent } from "src/app/feature-modules/tour-authoring/tourists-tour/tourists-tour.component";
+import { TouristsKeyPointsComponent } from "src/app/feature-modules/tour-authoring/tourists-key-points/tourists-key-points.component";
+import { TouristsEquipmentComponent } from "src/app/feature-modules/tour-authoring/tourists-equipment/tourists-equipment.component";
+import { CouponsViewComponent } from "src/app/feature-modules/marketplace/coupons-view/coupons-view.component";
+import { TouristsTourBlogFormComponent } from "src/app/feature-modules/blog/tourists-tour-blog-form/tourists-tour-blog-form.component";
+import { EncounterFormComponent } from "src/app/feature-modules/encounter/encounter-form/encounter-form.component";
+import { BundleCardComponent } from "src/app/feature-modules/tour-authoring/bundle-card/bundle-card.component";
+import { BundlesComponent } from "src/app/feature-modules/tour-authoring/bundles/bundles.component";
+import { ExploreBundlesComponent } from "src/app/feature-modules/marketplace/explore-bundles/explore-bundles.component";
 
 const routes: Routes = [
     { path: "home", component: HomeComponent },
@@ -78,6 +94,16 @@ const routes: Routes = [
     {
         path: "published-tours",
         component: PublishedToursComponent,
+        canActivate: [AuthGuard],
+    },
+    {
+        path: "tour-sales",
+        component: TourSalesComponent,
+        canActivate: [AuthGuard],
+    },
+    {
+        path: "tour-sale-form/:id",
+        component: TourSaleFormComponent,
         canActivate: [AuthGuard],
     },
     {
@@ -204,7 +230,75 @@ const routes: Routes = [
         component: RequestViewComponent,
         canActivate: [AuthGuard],
     },
+    {
+        path: "translate",
+        component: TranslateComponent,
+    },
+    {
+        path: "tour-card",
+        component: TourCardViewComponent,
+    },
     { path: "tour-details/:tourId", component: TourDetailsComponent },
+    {
+        path: "active-encounters",
+        component: ActiveEncounterViewComponent,
+        canActivate: [AuthGuard],
+    },
+    {
+        path: "tourists-tour",
+        component: TouristsTourComponent,
+        canActivate: [AuthGuard],
+    },
+    {
+        path: "tour/:id/tourists-key-points",
+        component: TouristsKeyPointsComponent,
+        canActivate: [AuthGuard],
+    },
+    {
+        path: "tourists-tour/equipment/:id",
+        component: TouristsEquipmentComponent,
+        canActivate: [AuthGuard],
+    },
+    {
+        path: "tour/:tourId",
+        component: TourPageComponent,
+        canActivate: [AuthGuard],
+    },
+    {
+        path: "tourists-blog/:tourId",
+        component: TouristsTourBlogFormComponent,
+        canActivate: [AuthGuard],
+    },
+    {
+        path: "payment-history",
+        component: PaymentHistoryComponent,
+        canActivate: [AuthGuard],
+    },
+    {
+        path: "encounter-form",
+        component: EncounterFormComponent,
+        canActivate: [AuthGuard],
+    },
+    {
+        path: "coupons",
+        component: CouponsViewComponent,
+        canActivate: [AuthGuard],
+    },
+    {
+        path: "bundles",
+        component: BundlesComponent,
+        canActivate: [AuthGuard],
+    },
+    {
+        path: "bundle-card",
+        component: BundleCardComponent,
+        canActivate: [AuthGuard],
+    },
+    {
+        path: "explore-bundles",
+        component: ExploreBundlesComponent,
+        canActivate: [AuthGuard],
+    },
 ];
 
 @NgModule({

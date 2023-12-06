@@ -1,0 +1,56 @@
+<div id = "equipment">
+    <h4>Managing Equipment</h4>
+    <br/>
+    <p>Equipment on tour<p>
+    <div id = "equipment-details">
+        <table>
+            <thead>
+                <tr>
+                     <th>Name</th>
+                    <th>Description</th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor = "let eq of equipment">
+                    <td>{{eq.name}}</td>
+                    <td>{{eq.description}}</td>
+                    <td>
+                        <button color="primary" (click)="onRemoveClicked(eq.id || 0)" mat-icon-button >
+                            <mat-icon>remove</mat-icon>
+                        </button> 
+                    </td>
+                </tr>
+                
+            </tbody>
+        </table>
+    </div>
+
+    <br/>
+    <br/>
+    <p>Available equipment</p>
+    <div id = "equipment-details">
+        <table>
+            <thead>
+                <tr>
+                     <th>Name</th>
+                    <th>Description</th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor = "let eq of allEquipment">
+                    <td>{{eq.name}}</td>
+                    <td>{{eq.description}}</td>
+                    <td>
+                        <button color="primary" (click)="onAddClicked(eq.id || 0)" mat-icon-button [disabled] = "checkIfAlreadyExists(eq.id || 0)">
+                            <mat-icon>add</mat-icon>
+                        </button>    
+                    <td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    
+</div>
+

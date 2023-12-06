@@ -1,0 +1,13 @@
+.tag {
+    font-size: 0.9rem;
+    padding-left: 0.3rem;
+    padding-right: 0.6rem;
+    border-radius: 0.6rem;
+    text-align: center;
+    font-weight: 600;
+    margin-left: 0.4rem;
+    max-height: 22px;
+    display: flex;
+    flex-wrap: nowrap;
+    min-width: max-content;
+}

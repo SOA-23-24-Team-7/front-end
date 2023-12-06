@@ -17,6 +17,11 @@ import { FontAwesomeModule } from "@fortawesome/angular-fontawesome";
 import { NotificationTabsComponent } from "./notification-tabs/notification-tabs.component";
 import { MarketplaceModule } from "../marketplace/marketplace.module";
 import { ProblemResolvingNotificationsComponent } from "./problem-resolving-notifications/problem-resolving-notifications.component";
+import { SharedModule } from "src/app/shared/shared.module";
+import { UserRowComponent } from "./user-row/user-row.component";
+import { PaymentHistoryComponent } from "./payment-history/payment-history.component";
+import { ShoppingNotificationsComponent } from "./shopping-notifications/shopping-notifications.component";
+import { TransactionRecordsNotificationsComponent } from './transaction-records-notifications/transaction-records-notifications.component';
 
 @NgModule({
     declarations: [
@@ -33,6 +38,10 @@ import { ProblemResolvingNotificationsComponent } from "./problem-resolving-noti
         FollowDialogComponent,
         UserNotificationsComponent,
         FollowerSearchDialogComponent,
+        UserRowComponent,
+        PaymentHistoryComponent,
+        ShoppingNotificationsComponent,
+        TransactionRecordsNotificationsComponent,
     ],
     imports: [
         CommonModule,
@@ -40,6 +49,7 @@ import { ProblemResolvingNotificationsComponent } from "./problem-resolving-noti
         FormsModule,
         FontAwesomeModule,
         MarketplaceModule,
+        SharedModule,
     ],
     exports: [
         UserProfileComponent,

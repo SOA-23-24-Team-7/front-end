@@ -16,11 +16,21 @@ import { Follower } from "./model/follower.model";
 import { Following } from "./model/following.model";
 import { FollowerCreate } from "./model/follower-create.model";
 import { UserFollow } from "./model/user-follow.model";
+import { ShoppingNotification } from "./model/shopping-notification.model";
+import { Record } from "./model/record.model";
+import { Wallet } from "./model/wallet.model";
+import { TransactionRecord } from "./model/transaction-record.model";
+import { BundleRecord } from "./model/bundle-record.model";
 
 @Injectable({
     providedIn: "root",
 })
 export class StakeholderService {
+    countNotifications(): Observable<number> {
+        return this.http.get<number>(
+            environment.apiHost + "notifications/count",
+        );
+    }
     getProblem(problemId: number, userRole: string): Observable<ProblemUser> {
         return this.http.get<ProblemUser>(
             environment.apiHost + userRole + "/problem/" + problemId,
@@ -213,6 +223,47 @@ export class StakeholderService {
         return this.http.put<Message>(
             environment.apiHost + "messages/update-status",
             updatedMessage,
+        );
+    }
+
+    getShoppingNotificationsByLoggedInUser(): Observable<
+        PagedResults<ShoppingNotification>
+    > {
+        return this.http.get<PagedResults<ShoppingNotification>>(
+            environment.apiHost + "shoppingNotifications",
+        );
+    }
+    setSeenStatusForShoppingNotification(
+        notificationId: number,
+    ): Observable<ShoppingNotification> {
+        return this.http.get<ShoppingNotification>(
+            environment.apiHost +
+                "shoppingNotifications/set-seen/" +
+                notificationId,
+        );
+    }
+
+    getTouristsPaymentHistory(): Observable<PagedResults<Record>> {
+        return this.http.get<PagedResults<Record>>(
+            environment.apiHost + "tourist/record",
+        );
+    }
+
+    getTouristWallet(): Observable<Wallet> {
+        return this.http.get<Wallet>(
+            environment.apiHost + "wallet"
+        );
+    }
+
+    getTouristTransactionRecords(): Observable<PagedResults<TransactionRecord>> {
+        return this.http.get<PagedResults<TransactionRecord>>(
+            environment.apiHost + "tourist/record/transactions",
+        );
+    }
+
+    getBundleRecords(): Observable<BundleRecord[]> {
+        return this.http.get<BundleRecord[]>(
+            environment.apiHost + "tourist/bundle-records"
         );
     }
 }

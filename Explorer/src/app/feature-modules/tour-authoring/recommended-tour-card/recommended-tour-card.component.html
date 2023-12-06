@@ -1,0 +1,20 @@
+<div class="tour-card">
+  <img class="tour-image" [src]="tourImage"/>
+  <div class="tour-card-details">
+      <div class="tour-name">{{ tour.name }}</div>
+      <div class="tour-tags">
+          <div class="tour-tag" *ngFor="let tag of tour.tags">{{ tag }}</div>
+      </div>
+      <div>
+          Difficulty: <b>{{ tour.difficulty }}</b>
+          <br>
+          Distance: <b>{{ tour.distance }}</b>
+      </div>
+      <div *ngIf="tour.keyPoints && tour.keyPoints.length > 0">
+      <div>First key point name: <b>{{tour.keyPoints[0].name}}</b></div>
+      <div>First key point description: <b>{{tour.keyPoints[0].description}}</b></div>
+      <div>First key point adress: <b>{{tour.keyPoints[0].locationAddress}}</b></div>
+      </div>
+      <button class="btn search-button" (click)="BuyTour()" >Buy</button>
+  </div>
+</div>

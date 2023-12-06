@@ -4,6 +4,8 @@
     display: flex;
     gap: 0.8rem;
     flex-direction: column;
+    background-color: rgb(var(--clr-background));
+    padding: 5px;
 }
 
 .info-container::-webkit-scrollbar {

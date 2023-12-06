@@ -65,6 +65,7 @@
 .dark-theme a {
     color: rgb(var(--clr-primary-300));
 }
+
 .dark-theme a:hover {
     filter: brightness(0.8);
 }
@@ -112,6 +113,7 @@ a {
     transition: filter 0.2s;
     text-decoration: none;
 }
+
 a:hover {
     filter: brightness(2);
 }
@@ -183,6 +185,39 @@ textarea {
 input:focus,
 textarea:focus {
     outline: 1px solid rgb(var(--clr-primary-500));
+}
+
+.mat-mdc-dialog-surface {
+    background-color: transparent !important;
+}
+
+.mdc-dialog__surface {
+    box-shadow: none !important;
+}
+
+.info {
+    padding: 6px 8px;
+    font: 14px/16px Arial, Helvetica, sans-serif;
+    background: rgb(var(--clr-background));
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
+    border-radius: 5px;
+}
+
+.info h4 {
+    margin: 0 0 5px;
+    color: rgb(var(--clr-text));
+}
+
+.legend {
+    line-height: 18px;
+    color: rgb(var(--clr-text));
+}
+
+.legend i {
+    width: 18px;
+    height: 18px;
+    float: left;
+    margin-right: 8px;
 }
 
 /* Remove all animations, transitions and smooth scroll for people that prefer not to see them */

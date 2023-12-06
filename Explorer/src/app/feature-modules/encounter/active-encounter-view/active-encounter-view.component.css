@@ -1,0 +1,55 @@
+::ng-deep #encounter_map {
+    min-height: 50rem;
+}
+
+.wrapper {
+    position: relative;
+    padding: 2rem;
+}
+
+.simulator-btn {
+    position: absolute;
+    right: 5rem;
+    bottom: 6rem;
+    background-color: rgb(var(--clr-primary-500));
+    color: white;
+    font-size: 1.8rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 1rem;
+    border-radius: 50%;
+    z-index: 999;
+}
+
+.execution {
+    display: flex;
+    margin-block: 0.5rem;
+    position: absolute;
+    top: 3rem;
+    right: 5rem;
+    height: min-content;
+    width: 25rem;
+    z-index: 998;
+    background-color: rgb(var(--clr-background-secondary));
+    display: flex;
+    flex-direction: column;
+    color: rgb(var(--clr-text));
+    padding: 1rem;
+    align-items: center;
+}
+
+.btn {
+    margin-inline: 0.5rem;
+}
+
+.simulator-btn:hover {
+    cursor: pointer;
+    filter: brightness(1.1);
+}
+
+.simulator-btn fa-icon {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}

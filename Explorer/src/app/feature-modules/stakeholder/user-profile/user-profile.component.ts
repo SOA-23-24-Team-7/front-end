@@ -11,6 +11,9 @@ import { FollowDialogComponent } from "../follow-dialog/follow-dialog.component"
 import { StakeholderService } from "../stakeholder.service";
 import { FollowerSearchDialogComponent } from "../follower-search-dialog/follower-search-dialog.component";
 import { TourExecutionHistoryComponent } from "../../tour-execution/tour-execution-history/tour-execution-history.component";
+import * as DOMPurify from "dompurify";
+import { marked } from "marked";
+import { Wallet } from "../model/wallet.model";
 
 @Component({
     selector: "xp-user-profile",
@@ -27,6 +30,8 @@ export class UserProfileComponent implements OnInit {
     followingsCount: number;
     showFollowers: boolean = false;
     showFollowings: boolean = false;
+    bioMarkdown: string;
+    wallet: Wallet;
 
     constructor(
         private authService: AuthService,
@@ -40,14 +45,20 @@ export class UserProfileComponent implements OnInit {
     }
 
     ngOnInit(): void {
+        const md = marked.setOptions({});
         this.authService.user$.subscribe(user => {
             this.user = user;
             if (!user.id) return;
             this.service.getByUserId(this.user.id).subscribe(result => {
                 this.person = result;
+                if (this.person.bio)
+                    this.bioMarkdown = DOMPurify.sanitize(
+                        md.parse(this.person.bio),
+                    );
             });
             this.loadFollowers();
             this.loadFollowings();
+            this.loadWallet();
         });
     }
     loadFollowings() {
@@ -68,12 +79,16 @@ export class UserProfileComponent implements OnInit {
             });
         });
     }
+    loadWallet() {
+        if(this.user.role !== 'tourist'){
+            return;
+        }
+        this.service.getTouristWallet().subscribe(result => {
+            this.wallet = result;
+        })
+    }
     openFollowersDialog(): void {
         const dialogRef = this.dialog.open(FollowDialogComponent, {
-            enterAnimationDuration: "700ms",
-            exitAnimationDuration: "600ms",
-            height: "500px",
-            width: "450px",
             data: {
                 followers: this.followers,
                 followings: this.followings,
@@ -88,10 +103,6 @@ export class UserProfileComponent implements OnInit {
     }
     openFollowingsDialog(): void {
         const dialogRef = this.dialog.open(FollowDialogComponent, {
-            enterAnimationDuration: "700ms",
-            exitAnimationDuration: "600ms",
-            height: "500px",
-            width: "450px",
             data: {
                 followers: this.followers,
                 followings: this.followings,
@@ -106,10 +117,6 @@ export class UserProfileComponent implements OnInit {
     }
     openFollowerSearchDialog(): void {
         const dialogRef = this.dialog.open(FollowerSearchDialogComponent, {
-            enterAnimationDuration: "500ms",
-            exitAnimationDuration: "500ms",
-            height: "500px",
-            width: "450px",
             data: {
                 userId: this.user.id,
             },
