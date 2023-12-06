@@ -92,3 +92,21 @@ h6 {
     display: flex;
     align-items: center;
 }
+
+.container {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    width: 85rem;
+    overflow-x: hidden;
+    scroll-behavior: smooth;
+}
+
+.container-campaigns {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    width: 65rem;
+    overflow-x: hidden;
+    scroll-behavior: smooth;
+}
