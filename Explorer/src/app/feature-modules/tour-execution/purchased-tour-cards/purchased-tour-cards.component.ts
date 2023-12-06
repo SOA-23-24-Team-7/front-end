@@ -15,6 +15,10 @@ import { Campaign } from "../model/campaign-info.model";
     styleUrls: ["./purchased-tour-cards.component.css"],
 })
 export class PurchasedToursComponent implements OnInit {
+    currentIndex: number = 0;
+    currentIndexCampaign: number = 0;
+    ToursContainer: any;
+    CampaignsContainer: any;
     purchasedTours: Tour[] = [];
     campaigns: Campaign[] = [];
     hasTourActive: boolean;
@@ -38,6 +42,10 @@ export class PurchasedToursComponent implements OnInit {
             this.userId = user.id;
         });
         this.getCampaigns();
+        this.ToursContainer = document.querySelector(".container");
+        this.CampaignsContainer = document.querySelector(
+            ".container-campaigns",
+        );
     }
     getTours() {
         this.tourExecutionService.getTours().subscribe({
@@ -79,14 +87,26 @@ export class PurchasedToursComponent implements OnInit {
         if (tour.id) this.selectedTourIds.push(tour.id);
         console.log(tour.name);
     }
+    CancelCampaignCreating() {
+        this.campaignForm.reset({
+            campaignDescription: "",
+            campaignName: "",
+        });
+        this.selectedTourIds.length = 0;
+        this.selectedTours.length = 0;
+    }
     createCampaign() {
         if (
             this.campaignForm.value.campaignDescription == "" ||
             this.campaignForm.value.campaignName == ""
         ) {
+            alert("You must fill all fields");
             return;
         }
-        if (this.selectedTourIds.length < 2) return;
+        if (this.selectedTourIds.length < 2) {
+            alert("There must be at least two tours");
+            return;
+        }
         const campaign: CampaignCreate = {
             touristId: this.userId,
             description:
@@ -105,5 +125,40 @@ export class PurchasedToursComponent implements OnInit {
                 this.getCampaigns();
             },
         });
+    }
+    scrollToNextCard(): void {
+        this.currentIndex++;
+        if (this.currentIndex >= this.ToursContainer.children.length) {
+            this.currentIndex = 0;
+        }
+        this.ToursContainer.scrollLeft +=
+            this.ToursContainer.children[this.currentIndex].clientWidth;
+    }
+
+    scrollToPrevCard(): void {
+        this.currentIndex--;
+        if (this.currentIndex < 0) {
+            this.currentIndex = this.ToursContainer!.children.length - 1;
+        }
+        this.ToursContainer!.scrollLeft -=
+            this.ToursContainer.children[this.currentIndex].clientWidth;
+    }
+
+    scrollToNextCampaignCard(): void {
+        this.currentIndexCampaign++;
+        if (this.currentIndex >= this.CampaignsContainer.children.length) {
+            this.currentIndex = 0;
+        }
+        this.CampaignsContainer.scrollLeft +=
+            this.CampaignsContainer.children[this.currentIndex].clientWidth;
+    }
+
+    scrollToPrevCampaignCard(): void {
+        this.currentIndexCampaign--;
+        if (this.currentIndex < 0) {
+            this.currentIndex = this.CampaignsContainer!.children.length - 1;
+        }
+        this.CampaignsContainer!.scrollLeft -=
+            this.CampaignsContainer.children[this.currentIndex].clientWidth;
     }
 }

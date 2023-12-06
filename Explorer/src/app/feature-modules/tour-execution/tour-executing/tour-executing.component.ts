@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, HostListener, OnInit } from '@angular/core';
 import { Tour } from '../../tour-authoring/model/tour.model';
 import { ActivatedRoute, Router } from '@angular/router';
 import { TourExecutionService } from '../tour-execution.service';
@@ -21,6 +21,16 @@ import { SecretPopupComponent } from '../secret-popup/secret-popup.component';
   styleUrls: ['./tour-executing.component.css']
 })
 export class TourExecutingComponent implements OnInit {
+  weather: any = {
+    wind_speed: 0,
+    temp: 0,
+    min_temp: 0,
+    max_temp: 0,
+    sunset: 0,
+    sunrise: 0,
+    cloud_pct: 0,
+    state: 'Clear'
+  }
   execution: TourExecutionStart = {tourId: 0, isCampaign: false}
   isCampaign: any
   changePositionObservable: Observable<any>
@@ -51,6 +61,7 @@ export class TourExecutingComponent implements OnInit {
       }
       this.session.tourId = +params.get('tourId')!
       this.getTour()
+      
     })
 
     this.authService.user$.subscribe({
@@ -116,6 +127,7 @@ export class TourExecutingComponent implements OnInit {
         next: (result: Tour) => {
           this.tour = result;
           this.tourImage = environment.imageHost + this.tour.keyPoints![0].imagePath
+          this.getWeather()
         }
       });
     }else{
@@ -124,6 +136,7 @@ export class TourExecutingComponent implements OnInit {
           console.log(result)
           this.tour = result;
           this.tourImage = environment.imageHost + this.tour.keyPoints![0].imagePath
+          this.getWeather()
         }
       });
     }
@@ -183,6 +196,28 @@ export class TourExecutingComponent implements OnInit {
         dataKey: this.clickedKeyPoint,
         nextKeyPointId: nextKeyPointId
       }
+    });
+  }
+  @HostListener('window:beforeunload')
+  backButtonHandler() {
+    this.router.navigate(['/purchasedtours'])
+  }
+  getWeather(){
+      this.service.getWheather(this.tour.keyPoints![0].latitude, this.tour.keyPoints![0].longitude).subscribe({
+        next: (result: any) => {
+          this.weather = result
+          this.weather.sunrise = new Date(this.weather.sunrise * 1000).toString().split(" ")[4];
+          this.weather.sunset = new Date(this.weather.sunset * 1000).toString().split(" ")[4];
+          if(this.weather.cloud_pct > 50){
+              this.weather.state = 'Cloudy'
+          }
+          else if(this.weather.cloud_pct > 30){
+            this.weather.state = 'Mostly cloudy'
+          }
+          else{
+            this.weather.state = 'Clear'
+          }
+        }
     });
   }
 }

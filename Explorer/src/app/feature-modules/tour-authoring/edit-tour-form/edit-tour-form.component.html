@@ -11,6 +11,8 @@
             <input class="edit-input" type="text" placeholder="Description" formControlName="description"/>
             <div class="edit-label">Difficulty</div>
             <input class="edit-input" min="1" max="5"  type="number" placeholder="Difficulty" formControlName="difficulty">
+            <div class="add-label">Price</div>
+            <input class="add-input" type="number" placeholder="Price" formControlName="price">
             <div class="edit-label">Tags:</div>
             <div class="edit-tags">
                 <div *ngFor="let tag of editTourForm.get('tags')?.value; let i = index">

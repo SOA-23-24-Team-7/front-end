@@ -7,6 +7,7 @@ import { MatDialog } from "@angular/material/dialog";
 import { KeyPointsViewComponent } from "../key-points-view/key-points-view.component";
 import { TourExecutionStart } from "../model/tour-execution-start-model";
 import { faL } from "@fortawesome/free-solid-svg-icons";
+import { TourWheatherComponent } from "../tour-wheather/tour-wheather.component";
 
 @Component({
     selector: "xp-purchased-tour-card",
@@ -43,7 +44,10 @@ export class PurchasedTourCardComponent implements OnInit {
         });
     }
     ContinueTour() {
-        this.router.navigate(["/tour-executing/" + this.tour.id]);
+        this.router.navigate([
+            "/tour-executing/" + this.tour.id,
+            { isCampaign: false },
+        ]);
     }
     CheckIfTourIsActive() {
         if (this.hasActiveTour) {
@@ -61,5 +65,14 @@ export class PurchasedTourCardComponent implements OnInit {
     }
     onSelectedTour(tour: Tour) {
         this.onSelected.emit(tour);
+    }
+    ShowWheather() {
+        const dialogRef = this.dialogRef.open(TourWheatherComponent, {
+            data: {
+                longitude: this.tour.keyPoints![0].longitude,
+                latitude: this.tour.keyPoints![0].latitude,
+                tourName: this.tour.name,
+            },
+        });
     }
 }

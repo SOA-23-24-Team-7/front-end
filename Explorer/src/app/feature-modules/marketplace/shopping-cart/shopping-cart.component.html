@@ -47,6 +47,13 @@
             </p>
         </div>
         <div class="tour-buttons">
+            <button
+                color="accent"
+                (click)="openCouponModal()"
+                [disabled]="isDisabled"
+            >
+                Enter Coupons
+            </button>
             <button color="accent" (click)="checkout()" [disabled]="isDisabled">
                 Checkout
             </button>

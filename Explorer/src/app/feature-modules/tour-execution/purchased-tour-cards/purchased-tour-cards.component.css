@@ -55,6 +55,17 @@ h6 {
         rgba(var(--clr-primary-500), 1);
 }
 
+
+.discard-button {
+    border-radius: 2rem;
+    margin-left: auto;
+    height: 100%;
+    max-height: 100%;
+    font-size: 1.05rem;
+    font-weight: 500;
+    background-color: red;
+}
+
 .search-button {
     border-radius: 2rem;
     margin-left: auto;
@@ -75,4 +86,27 @@ h6 {
     box-shadow: 0 0 1rem rgba(var(--clr-outline-contrast), 0.8);
     position: relative;
     color: rgb(var(--clr-text));
+}
+
+.cards {
+    display: flex;
+    align-items: center;
+}
+
+.container {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    width: 85rem;
+    overflow-x: hidden;
+    scroll-behavior: smooth;
+}
+
+.container-campaigns {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    width: 65rem;
+    overflow-x: hidden;
+    scroll-behavior: smooth;
 }

@@ -1,0 +1,23 @@
+<div class="tour-search">
+    <div class="tour-search-header">
+        <div class="tour-search-header-title">My Tour Sales</div>
+    </div>
+    <div class="tour-sales-container">
+        <div *ngFor="let sale of tourSales" class="tour-sale-card">
+          <div class="sale-info">
+            <h3 class="sale-info-top">
+                {{ sale.name }}
+                <div>
+                    <fa-icon [ngClass]="isStartDateAfterToday(sale) ? 'icon' : 'icon-disabled'" [icon]="faPen" [routerLink]="['/tour-sale-form/', sale.id]"/>
+                    <fa-icon [ngClass]="isStartDateAfterToday(sale) ? 'icon' : 'icon-disabled'" [icon]="faTrash" (click)="deleteTourSale(sale.id!)"/>
+                </div>
+            </h3>
+            <p class="date-range">{{ sale.startDate | date:'MMM d, y' }} - {{ sale.endDate | date:'MMM d, y' }}</p>
+            <p class="discount">{{ sale.tourIds.length }} Tour{{ sale.tourIds.length == 1 ? '' : 's' }} at {{ sale.discountPercentage * 100 }}% off</p>
+          </div>
+        </div>
+      </div>
+    <div class="btn fixed-button rounded" routerLink="/tour-sale-form/0">
+        <fa-icon [icon]="faPlus" />
+    </div>
+</div>

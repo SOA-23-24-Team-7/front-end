@@ -45,6 +45,7 @@ export class ReviewFormComponent implements OnChanges, OnInit {
             this.reviewForm.patchValue(this.review);
             this.imagesList = this.review.images.slice(); //kopija, da ne obrise i slike iz review odmah
         }
+        console.log(this.reviewForm.value.tourVisitDate);
     }
     ngOnChanges(changes: SimpleChanges): void {
         this.reviewForm.reset();
@@ -85,7 +86,7 @@ export class ReviewFormComponent implements OnChanges, OnInit {
                     this.imagesList = Array<string>();
                     //this.reviewAdded.emit(true);
 
-                    this.dialog.close([true, false]); //review Added, review Updated
+                    this.dialog.close([false, false]); //review not Added, review Updated
                 },
             });
         } else alert("Please enter valid data. All fields are required.");

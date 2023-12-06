@@ -10,6 +10,7 @@ import { AddTouristsTourFormComponent } from "../add-tourists-tour-form/add-tour
 import { MarketplaceService } from "../../marketplace/marketplace.service";
 import { TourExecutionService } from "../../tour-execution/tour-execution.service";
 import { Router } from "@angular/router";
+import { TourExecutionStart } from "../../tour-execution/model/tour-execution-start-model";
 
 @Component({
     selector: "xp-tourists-tour",
@@ -17,6 +18,7 @@ import { Router } from "@angular/router";
     styleUrls: ["./tourists-tour.component.css"],
 })
 export class TouristsTourComponent implements OnInit {
+    execution: TourExecutionStart = { tourId: 0, isCampaign: false };
     tour: Tour[] = [];
     selectedTour: Tour;
     shouldRenderTourForm: boolean = false;
@@ -119,8 +121,13 @@ export class TouristsTourComponent implements OnInit {
     faTrash = faTrash;
 
     StartTour(id: number) {
-        // this.service.startTour(id).subscribe(() => {
-        //   this.router.navigate(['/tour-executing/' + id]);
-        // });
+        this.execution.tourId = id;
+        this.execution.isCampaign = false;
+        this.service.startTour(this.execution).subscribe(() => {
+            this.router.navigate([
+                "/tour-executing/" + id,
+                { isCampaign: false },
+            ]);
+        });
     }
 }

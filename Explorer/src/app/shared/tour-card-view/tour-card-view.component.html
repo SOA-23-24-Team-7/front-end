@@ -2,7 +2,7 @@
 <div class="tour-card">
     <div class="tour-card-left">
         <div class="tour-image-container" *ngIf="tour && tour.keyPoints && tour.keyPoints[0]">
-            <img class="tour-image" [src]="imageHost + tour.keyPoints[0].imagePath"/>
+            <img class="tour-image" [src]="imageHost + tour.keyPoints[0].imagePath" (error)="onImageError($event)">
         </div>
     </div>
     <div class="tour-card-content">
@@ -10,13 +10,14 @@
             <div class="tour-tags">
                 <div class="tour-tag" *ngFor="let tag of tour.tags">{{tag}}</div>
             </div>
-            <div class="tour-actions" *ngIf="user && user.role === 'author'">
+            <div class="tour-actions" *ngIf="user && (user.role === 'author' && !hideIcons)">
                 <fa-icon class="tour-action" *ngIf="tour.status == 2 || tour.status == 0" [icon]="faTrash"/>
                 <fa-icon class="tour-action" *ngIf="tour.status == 2 || tour.status == 0" (click)="onEditClicked()" [icon]="faPen"/>
                 <fa-icon class="tour-action" [icon]="faPersonHiking" [routerLink]="['/tours/equipment', tour.id]"/>
                 <fa-icon class="tour-action" [icon]="faMapLocation" [routerLink]="['/tour', tour.id, 'key-points']"/>
                 <fa-icon class="tour-action" *ngIf="tour.status == 2 || tour.status == 0" [icon]="faShareNodes" (click)="onPublishClicked(tour)"/>
                 <fa-icon class="tour-action" *ngIf="tour.status == 1" [icon]="faBoxArchive" (click)="onArchiveClicked(tour)"/>
+                <fa-icon class="tour-action" *ngIf="tour.status == 2 || tour.status == 0" [icon]="faMoneyBills" (click)="onCouponClicked(tour)"/>
             </div>
         </div>
         <div class="tour-card-information">
@@ -41,7 +42,6 @@
             </div>
             <div class="tour-card-right">
                 <div class="tour-price">
-                    <div class="tour-price-label">Price:</div>
                     <div class="tour-price-value">{{tour.price}}</div>
                     <fa-icon class="tour-price-tokens" [icon]="faCoins"/>
                 </div>
@@ -49,7 +49,7 @@
                     <fa-icon [icon]="faCartShopping"/>
                     <div class="add-to-cart-text">&nbsp;Add</div>
                 </div>
-                <div class="btn view" [routerLink]="['/tour/',tour.id]">View tour</div>
+                <div class="btn view" [routerLink]="['/tour/',tour.id]" *ngIf="!hideIcons">View tour</div>
             </div>
         </div>
     </div>

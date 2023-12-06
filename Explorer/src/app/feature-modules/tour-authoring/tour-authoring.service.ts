@@ -11,6 +11,7 @@ import { PublicKeyPointRequest } from "./model/public-key-point-request.model";
 import { PublicFacilityRequest } from "./model/public-facility-request.model";
 import { PublicKeyPoint } from "./model/public-key-point.model";
 import { Person } from "../stakeholder/model/person.model";
+import { query } from "@angular/animations";
 
 @Injectable({
     providedIn: "root",
@@ -233,8 +234,18 @@ export class TourAuthoringService {
         );
     }
     
-    searchTours(searchFilter: any): Observable<PagedResults<Tour>> {
+    searchAuthorTours(searchFilter: any): Observable<PagedResults<Tour>> {
+        let query = this.prepareSearchQuery(searchFilter);
+        query += searchFilter.authorId > 0 ? `&authorId=${searchFilter.authorId}` : "";
+        console.log(query);
+        const path = environment.apiHost + "tourist/tour/author-search" + query;
+        console.log(path);
+        return this.http.get<PagedResults<Tour>>(path);
+    }
+
+    prepareSearchQuery(searchFilter: any): String {
         let query = `?page=${searchFilter.page}&pageSize=${searchFilter.pageSize}`
+        query += searchFilter.name != "" ? `&name=${searchFilter.name}` : "";
         query += searchFilter.minPrice >= 0 && searchFilter.minPrice !== "" ? `&minPrice=${searchFilter.minPrice}` : "";
         query += searchFilter.maxPrice >= 0  && searchFilter.maxPrice !== "" ? `&maxPrice=${searchFilter.maxPrice}` : "";
         query += searchFilter.minDifficulty >= 0  && searchFilter.minDifficulty !== "" ? `&minDifficulty=${searchFilter.minDifficulty}` : "";
@@ -246,12 +257,7 @@ export class TourAuthoringService {
         query += searchFilter.maxLength >= 0 && searchFilter.maxLength !== "" ? `&maxLength=${searchFilter.maxLength}` : "";
         query += searchFilter.longitude >= -180 && searchFilter.longitude !== "" ? `&longitude=${searchFilter.longitude}` : "";
         query += searchFilter.latitude >= -180 && searchFilter.latitude !== "" ? `&latitude=${searchFilter.latitude}` : "";
-        query += searchFilter.maxDistance > 0 && searchFilter.maxDistance !== "" ? `&maxDistance=${searchFilter.maxDistance}` : "";
-        query += searchFilter.authorId > 0 ? `&authorId=${searchFilter.authorId}` : "";
-        query += searchFilter.tourStatus > 0 ? `&tourStatus=${searchFilter.tourStatus}` : "";
-        console.log(query);
-        console.log(query);
-        const path = environment.apiHost + "tourist/tour/search" + query;
-        return this.http.get<PagedResults<Tour>>(path);
-      }
+        query += searchFilter.distance > 0 && searchFilter.distance !== "" ? `&maxDistance=${searchFilter.distance}` : "";
+        return query;
+    }
 }
