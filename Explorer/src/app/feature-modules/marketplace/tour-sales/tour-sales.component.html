@@ -22,13 +22,14 @@
                 </div>
             </div>
         </div>
-        <div class="list-container">
+        <div *ngIf="chosenSaleId != 0" class="list-container">
             <div class="tour-cards-scrollable">
                 <xp-tour-card-view *ngFor="let tour of chosenToursForSale" [tour]="tour"
                     [hideIcons]="true"
                     [preliminaryDiscount]="chosenToursDiscount && chosenToursDiscount <= 1.0 && chosenToursDiscount > 0 ? chosenToursDiscount : null"></xp-tour-card-view>
             </div>
         </div>
+        <fa-icon *ngIf="chosenSaleId != 0" class="list-close-icon" [icon]="faXmark" (click)="closeTourView()"></fa-icon>
     </div>
     <div class="btn fixed-button rounded" routerLink="/tour-sale-form/0">
         <fa-icon [icon]="faPlus" />
