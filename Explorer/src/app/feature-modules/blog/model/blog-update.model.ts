@@ -5,4 +5,5 @@ export interface UpdateBlog {
     date: string;
     status: number;
     authorId: number;
+    visibilityPolicy: number;
 }

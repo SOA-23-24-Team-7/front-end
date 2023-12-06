@@ -7,6 +7,8 @@ import { User } from "src/app/infrastructure/auth/model/user.model";
 import { AuthService } from "src/app/infrastructure/auth/auth.service";
 import { Pipe, PipeTransform } from "@angular/core";
 import { UpdateBlog } from "../model/blog-update.model";
+import { Following } from "../../stakeholder/model/following.model";
+import { StakeholderService } from "../../stakeholder/stakeholder.service";
 
 @Component({
     selector: "xp-blogs",
@@ -16,18 +18,46 @@ import { UpdateBlog } from "../model/blog-update.model";
 export class BlogsComponent implements OnInit {
     blogs: Blog[] = [];
     user: User | undefined;
+    followings: Following[] = [];
     selectedStatus: number = 5;
 
     constructor(
         private service: BlogService,
         private authService: AuthService,
+        private serviceUsers: StakeholderService,
     ) {}
 
     ngOnInit(): void {
         this.authService.user$.subscribe(user => {
             this.user = user;
         });
+        this.loadFollowings();
         this.getBlogs();
+    }
+
+    loadFollowings(): void {
+        this.serviceUsers
+            .getFollowings(this.user?.id || 0)
+            .subscribe(result => {
+                this.followings = result.results;
+            });
+    }
+
+    checkIfFollowing(authorId: number): any {
+        var found = false;
+        this.followings.forEach(function (value) {
+            if (value.following.id == authorId) found = true;
+        });
+        return found;
+    }
+
+    removePrivates(): void {
+        this.blogs = this.blogs.filter(
+            b =>
+                b.visibilityPolicy == 0 ||
+                b.authorId == this.user?.id ||
+                this.checkIfFollowing(b.authorId),
+        );
     }
 
     filterByStatus(status: number) {
@@ -39,6 +69,7 @@ export class BlogsComponent implements OnInit {
         this.service.getBlogs().subscribe({
             next: (result: PagedResults<Blog>) => {
                 this.blogs = result.results;
+                this.removePrivates();
             },
             error: () => {},
         });
