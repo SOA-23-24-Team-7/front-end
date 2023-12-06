@@ -133,7 +133,11 @@
                 </div>
                 <div class="navbar-submenu">
                     <div
-                        *ngIf="user.role === 'author'"
+                        *ngIf="
+                            user.role === 'author' ||
+                            (user.touristProgress &&
+                                user.touristProgress.level >= 10)
+                        "
                         class="navbar-submenu-item"
                         [routerLink]="['encounter-form']"
                     >
@@ -148,6 +152,7 @@
                     <div
                         class="navbar-submenu-item"
                         [routerLink]="['active-encounters']"
+                        *ngIf="user.role === 'tourist'"
                     >
                         <fa-icon
                             class="navbar-submenu-item-icon"

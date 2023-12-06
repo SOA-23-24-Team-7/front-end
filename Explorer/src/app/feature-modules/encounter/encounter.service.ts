@@ -84,23 +84,35 @@ export class EncounterService {
         );
     }
 
-    createSocialEncounter(socialEncounter: Encounter): Observable<Encounter> {
+    createSocialEncounter(
+        socialEncounter: Encounter,
+        isTourist: Boolean,
+    ): Observable<Encounter> {
+        const role = isTourist ? "tourist" : "author";
         return this.http.post<Encounter>(
-            environment.apiHost + "author/social-encounter/create",
+            environment.apiHost + role + "/social-encounter/create",
             socialEncounter,
         );
     }
 
-    createHiddenEncounter(hiddenEncounter: Encounter): Observable<Encounter> {
+    createHiddenEncounter(
+        hiddenEncounter: Encounter,
+        isTourist: Boolean,
+    ): Observable<Encounter> {
+        const role = isTourist ? "tourist" : "author";
         return this.http.post<Encounter>(
-            environment.apiHost + "author/hidden-location-encounter/create",
+            environment.apiHost + role + "/hidden-location-encounter/create",
             hiddenEncounter,
         );
     }
 
-    createMiscEncounter(miscEncounter: Encounter): Observable<Encounter> {
+    createMiscEncounter(
+        miscEncounter: Encounter,
+        isTourist: Boolean,
+    ): Observable<Encounter> {
+        const role = isTourist ? "tourist" : "author";
         return this.http.post<Encounter>(
-            environment.apiHost + "author/misc-encounter/createMisc",
+            environment.apiHost + role + "/misc-encounter/createMisc",
             miscEncounter,
         );
     }

@@ -212,3 +212,8 @@ button.add-followers-button:hover {
     width: 100%;
     border-bottom: 2px solid rgb(var(--clr-primary-300));
 }
+
+.current-xp {
+    color: rgb(var(--clr-accent-700));
+    text-shadow: 0 0 10px rgb(var(--clr-accent-700));
+}
