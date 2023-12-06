@@ -106,8 +106,20 @@ export class MapComponent implements AfterViewInit, OnChanges {
     });
 
     private encounterIcon = L.icon({
-        iconUrl: "https://cdn-icons-png.flaticon.com/512/5184/5184592.png",
-        iconSize: [42, 42],
+        iconUrl: "/assets/icons/encounter.png",
+        iconSize: [60, 60],
+        iconAnchor: [16, 32],
+    });
+
+    private encounterActiveIcon = L.icon({
+        iconUrl: "/assets/icons/encounterActive.png",
+        iconSize: [60, 60],
+        iconAnchor: [16, 32],
+    });
+
+    private encounterCompletedIcon = L.icon({
+        iconUrl: "/assets/icons/encounterCompleted.png",
+        iconSize: [60, 60],
         iconAnchor: [16, 32],
     });
 
@@ -485,6 +497,22 @@ export class MapComponent implements AfterViewInit, OnChanges {
 
     setEncounterMarker(lat: number, lng: number): void {
         const marker = new L.Marker([lat, lng], { icon: this.encounterIcon });
+        this.markerGroup.addLayer(marker);
+        this.map.addLayer(this.markerGroup);
+    }
+
+    setEncounterActiveMarker(lat: number, lng: number): void {
+        const marker = new L.Marker([lat, lng], {
+            icon: this.encounterActiveIcon,
+        });
+        this.markerGroup.addLayer(marker);
+        this.map.addLayer(this.markerGroup);
+    }
+
+    setEncounterCompletedMarker(lat: number, lng: number): void {
+        const marker = new L.Marker([lat, lng], {
+            icon: this.encounterCompletedIcon,
+        });
         this.markerGroup.addLayer(marker);
         this.map.addLayer(this.markerGroup);
     }
