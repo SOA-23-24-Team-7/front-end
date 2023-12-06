@@ -25,6 +25,7 @@ export class ActiveEncounterViewComponent implements AfterViewInit {
     encounterInstance?: EncounterInstance;
     loadEncounterInstance?: EncounterInstance;
     dialogRef: MatDialogRef<PositionSimulatorComponent, any> | undefined;
+    hiddenEncounterCheck: boolean = false;
 
     private readonly notifier: NotifierService;
 
@@ -66,16 +67,6 @@ export class ActiveEncounterViewComponent implements AfterViewInit {
         });
     }
 
-    async checkIfUserInCompletionRange() {
-        const result = await this.service
-            .checkIfUserInCompletionRange(this.userPosition, this.encounter!.id)
-            .toPromise();
-
-        if (result) {
-            alert("User je u picture rangeu ostani tu 30 sek");
-        }
-    }
-
     getEncounterInstance(encounterId: number) {
         this.service
             .getEncounterInstance(encounterId)
@@ -88,13 +79,13 @@ export class ActiveEncounterViewComponent implements AfterViewInit {
             .subscribe({
                 next: () => {
                     this.notifier.notify(
-                        "success",
+                        "info",
                         "Successfully activated encounter!",
                     );
                     this.getEncounterInstance(this.encounter!.id);
                     if (this.encounter!.type === 1) {
-                        let counter = 0;
-                        while (counter < 15) {}
+                        this.hiddenEncounterCheck = true;
+                        this.handleHiddenLocationCompletion();
                     }
                 },
                 error: err => {
@@ -104,6 +95,44 @@ export class ActiveEncounterViewComponent implements AfterViewInit {
         if (this.encounter!.type === 1) {
             this.getHiddenLocationImage();
         }
+    }
+
+    handleHiddenLocationCompletion() {
+        let counter = 0;
+        const currentEncounterId = this.encounter?.id;
+        console.log("Testing hidden location...");
+        const interval = setInterval(() => {
+            if (!this.encounter) {
+                clearInterval(interval);
+                return;
+            }
+            this.service
+                .checkIfUserInCompletionRange(
+                    this.userPosition,
+                    this.encounter!.id,
+                )
+                .subscribe({
+                    next: result => {
+                        this.hiddenEncounterCheck = result;
+                        if (this.hiddenEncounterCheck == false) {
+                            clearInterval(interval);
+                            return;
+                        }
+                        counter++;
+                        if (counter >= 4) {
+                            if (
+                                this.hiddenEncounterCheck &&
+                                currentEncounterId == this.encounter?.id &&
+                                this.encounterInstance?.status == 0
+                            ) {
+                                console.log("Test passed, completing...");
+                                this.completeEncounter();
+                            }
+                            clearInterval(interval);
+                        }
+                    },
+                });
+        }, 2000);
     }
 
     getHiddenLocationImage() {
@@ -226,6 +255,12 @@ export class ActiveEncounterViewComponent implements AfterViewInit {
                         this.getEncounterInstance(enc.id);
                         if (this.encounter.type === 1) {
                             this.getHiddenLocationImage();
+                            if (this.encounterInstance) {
+                                if (this.encounterInstance.status == 0) {
+                                    this.hiddenEncounterCheck = true;
+                                    this.handleHiddenLocationCompletion();
+                                }
+                            }
                         }
                     }
                 });

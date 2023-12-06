@@ -21,17 +21,14 @@
         </div>
         <div
             class="btn"
-            *ngIf="encounterInstance?.status === 0 && encounter"
+            *ngIf="
+                encounterInstance?.status === 0 &&
+                encounter &&
+                encounter.type !== 1
+            "
             (click)="completeEncounter()"
         >
             Complete
-        </div>
-        <div
-            class="btn"
-            *ngIf="encounterInstance?.status === 0 && encounter"
-            (click)="checkIfUserInCompletionRange()"
-        >
-            Proveri range
         </div>
     </div>
 </div>
