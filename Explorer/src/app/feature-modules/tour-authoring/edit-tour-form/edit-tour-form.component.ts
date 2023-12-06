@@ -22,13 +22,15 @@ export class EditTourFormComponent implements OnInit{
     name:"",
     description: "",
     difficulty: parseInt("0"),
-    tags: []
+    tags: [],
+    price: parseInt("0"),
   };
   editTourForm = new FormGroup({
     name: new FormControl('',[Validators.required]),
     description: new FormControl('',[Validators.required]),
     difficulty: new FormControl('',[Validators.required]),
-    tags: new FormControl([] as string[], [Validators.required])
+    tags: new FormControl([] as string[], [Validators.required]),
+    price: new FormControl('',[Validators.required])
   });
   ngOnInit() {
     console.log(this.data);
@@ -37,7 +39,8 @@ export class EditTourFormComponent implements OnInit{
       name: this.data.name || null,
       description: this.data.description || null,
       difficulty: this.data.difficulty.toString() || null,
-      tags: this.data.tags || null
+      tags: this.data.tags || null,
+      price: this.data.price.toString() || null,
     };
     this.editTourForm.patchValue(tourPatch);
   }
@@ -69,13 +72,15 @@ export class EditTourFormComponent implements OnInit{
       name: this.editTourForm.value.name || "",
       description: this.editTourForm.value.description || "",
       difficulty: parseInt(this.editTourForm.value.difficulty || "0"),
-      tags: this.editTourForm.value.tags ? this.editTourForm.value.tags : []
+      tags: this.editTourForm.value.tags ? this.editTourForm.value.tags : [],
+      price: parseInt(this.editTourForm.value.price || "0"),
     };
     
     this.data.name=tour.name;
     this.data.description=tour.description;
     this.data.difficulty=tour.difficulty;
     this.data.tags=tour.tags;
+    this.data.price=tour.price;
     console.log(this.data.id);
     this.service.updateTour(this.data).subscribe({
       next: () => { 

@@ -63,6 +63,7 @@ export class BlogFormComponent implements OnInit {
             date: new Date().toISOString(),
             status: 0,
             authorId: 0,
+            visibilityPolicy: 0,
         };
 
         if (blog.title != "" && blog.title != null)
@@ -71,8 +72,7 @@ export class BlogFormComponent implements OnInit {
                     this.router.navigate(["/my-blogs"]);
                 },
             });
-        else
-            alert("Must enter title!");
+        else alert("Must enter title!");
     }
 
     updateBlog(): void {
@@ -83,6 +83,7 @@ export class BlogFormComponent implements OnInit {
             status: 0,
             id: this.blog.id,
             authorId: 0,
+            visibilityPolicy: this.blog.visibilityPolicy,
         };
 
         if (blog.title != "" && blog.title != null)

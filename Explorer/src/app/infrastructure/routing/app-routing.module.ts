@@ -40,13 +40,17 @@ import { TourSearchComponent } from "src/app/feature-modules/marketplace/tour-se
 import { NotificationTabsComponent } from "src/app/feature-modules/stakeholder/notification-tabs/notification-tabs.component";
 import { TourDetailsComponent } from "src/app/feature-modules/marketplace/tour-details/tour-details.component";
 import { UserNotificationsComponent } from "src/app/feature-modules/stakeholder/user-notifications/user-notifications.component";
+import { TranslateComponent } from "src/app/shared/translate/translate.component";
 import { TourCardViewComponent } from "src/app/shared/tour-card-view/tour-card-view.component";
 import { ActiveEncounterViewComponent } from "src/app/feature-modules/encounter/active-encounter-view/active-encounter-view.component";
 import { TourPageComponent } from "src/app/feature-modules/marketplace/tour-page/tour-page.component";
+import { TourSalesComponent } from "src/app/feature-modules/marketplace/tour-sales/tour-sales.component";
+import { TourSaleFormComponent } from "src/app/feature-modules/marketplace/tour-sale-form/tour-sale-form.component";
 import { PaymentHistoryComponent } from "src/app/feature-modules/stakeholder/payment-history/payment-history.component";
 import { TouristsTourComponent } from "src/app/feature-modules/tour-authoring/tourists-tour/tourists-tour.component";
 import { TouristsKeyPointsComponent } from "src/app/feature-modules/tour-authoring/tourists-key-points/tourists-key-points.component";
 import { TouristsEquipmentComponent } from "src/app/feature-modules/tour-authoring/tourists-equipment/tourists-equipment.component";
+import { CouponsViewComponent } from "src/app/feature-modules/marketplace/coupons-view/coupons-view.component";
 import { TouristsTourBlogFormComponent } from "src/app/feature-modules/blog/tourists-tour-blog-form/tourists-tour-blog-form.component";
 import { EncounterFormComponent } from "src/app/feature-modules/encounter/encounter-form/encounter-form.component";
 
@@ -87,6 +91,16 @@ const routes: Routes = [
     {
         path: "published-tours",
         component: PublishedToursComponent,
+        canActivate: [AuthGuard],
+    },
+    {
+        path: "tour-sales",
+        component: TourSalesComponent,
+        canActivate: [AuthGuard],
+    },
+    {
+        path: "tour-sale-form/:id",
+        component: TourSaleFormComponent,
         canActivate: [AuthGuard],
     },
     {
@@ -214,6 +228,10 @@ const routes: Routes = [
         canActivate: [AuthGuard],
     },
     {
+        path: "translate",
+        component: TranslateComponent,
+    },
+    {
         path: "tour-card",
         component: TourCardViewComponent,
     },
@@ -256,6 +274,11 @@ const routes: Routes = [
     {
         path: "encounter-form",
         component: EncounterFormComponent,
+        canActivate: [AuthGuard],
+    },
+    {
+        path: "coupons",
+        component: CouponsViewComponent,
         canActivate: [AuthGuard],
     },
 ];

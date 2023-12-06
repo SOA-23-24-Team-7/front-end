@@ -1,0 +1,13 @@
+h1 {
+    margin-left: 2.4rem;
+    font-size: 1.2rem;
+    color: rgb(var(--clr-text));
+}
+
+.tour {
+    background-color: rgb(var(--clr-background-secondary));
+}
+
+.tour-rectangles {
+    background-color: rgb(var(--clr-background-secondary));
+}

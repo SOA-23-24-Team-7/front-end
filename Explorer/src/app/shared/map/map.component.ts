@@ -26,6 +26,7 @@ export class MapComponent implements AfterViewInit, OnChanges {
     private map: any;
     public waypointMap = new Map<number, any>();
     public checkedPointsMap = new Map<number, any>();
+    public nextKeyPointsMap = new Map<number, any>();
     private routeControl: L.Routing.Control;
     private refreshEventsSubscription: Subscription;
     private previousCommitted = false;
@@ -343,6 +344,20 @@ export class MapComponent implements AfterViewInit, OnChanges {
             ): any => {
                 if (waypoints.length == this.waypointMap.size + 1 && i == 0)
                     return null;
+                if (i == 1) {
+                    keyPointIcon = L.icon({
+                        iconUrl: "../assets/icons/nextKeyPointIcon.png",
+                        iconSize: [46, 46],
+                        iconAnchor: [26, 46],
+                    });
+                } else {
+                    keyPointIcon = L.icon({
+                        iconUrl:
+                            "https://icon-library.com/images/map-marker-icon/map-marker-icon-18.jpg",
+                        iconSize: [46, 46],
+                        iconAnchor: [26, 46],
+                    });
+                }
                 const marker = L.marker(waypoint.latLng, {
                     icon: keyPointIcon,
                 });

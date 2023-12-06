@@ -32,6 +32,16 @@
                         />
                         <div class="navbar-submenu-item-text">FAQ</div>
                     </div>
+                    <div
+                        class="navbar-submenu-item"
+                        [routerLink]="['translate']"
+                    >
+                        <fa-icon
+                            class="navbar-submenu-item-icon"
+                            [icon]="faLanguage"
+                        />
+                        <div class="navbar-submenu-item-text">Translate</div>
+                    </div>
                     <div class="navbar-submenu-item">
                         <fa-icon
                             class="navbar-submenu-item-icon"
@@ -265,6 +275,19 @@
                     </div>
                     <div
                         class="navbar-submenu-item"
+                        *ngIf="user && user.role === 'author'"
+                        [routerLink]="['tour-sales']"
+                    >
+                        <fa-icon
+                            class="navbar-submenu-item-icon"
+                            [icon]="faPercent"
+                        />
+                        <div class="navbar-submenu-item-text">
+                            My Tour Sales
+                        </div>
+                    </div>
+                    <div
+                        class="navbar-submenu-item"
                         *ngIf="user && user.role === 'tourist'"
                         [routerLink]="['purchasedtours']"
                     >
@@ -331,7 +354,6 @@
                             Plan your tour
                         </div>
                     </div>
-
                     <div
                         class="navbar-submenu-item"
                         [routerLink]="['problem']"
@@ -356,6 +378,17 @@
                         <div class="navbar-submenu-item-text">
                             Problem reports
                         </div>
+                    </div>
+                    <div
+                        class="navbar-submenu-item"
+                        [routerLink]="['coupons']"
+                        *ngIf="user && user.role === 'author'"
+                    >
+                        <fa-icon
+                            class="navbar-submenu-item-icon"
+                            [icon]="faMoneyBills"
+                        />
+                        <div class="navbar-submenu-item-text">Coupons</div>
                     </div>
                 </div>
                 <div

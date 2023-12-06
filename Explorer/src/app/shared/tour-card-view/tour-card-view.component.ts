@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, OnChanges, SimpleChanges, Output, EventEmitter } from '@angular/core';
 import { AuthService } from 'src/app/infrastructure/auth/auth.service';
 import { MarketplaceService } from '../../feature-modules/marketplace/marketplace.service';
 import { environment } from 'src/env/environment';
@@ -11,7 +11,8 @@ import {
   faPersonHiking,
   faTrash,
   faBoxArchive,
-  faPen
+  faPen,
+  faMoneyBills
 } from "@fortawesome/free-solid-svg-icons";
 import { TourLimitedView } from '../../feature-modules/marketplace/model/tour-limited-view.model';
 import { Tour } from '../../feature-modules/tour-authoring/model/tour.model';
@@ -23,6 +24,7 @@ import { TourAuthoringService } from '../../feature-modules/tour-authoring/tour-
 import { KeyPoint } from '../../feature-modules/tour-authoring/model/key-point.model';
 import { MatDialog } from '@angular/material/dialog';
 import { EditTourFormComponent } from 'src/app/feature-modules/tour-authoring/edit-tour-form/edit-tour-form.component';
+import { CouponsComponent } from 'src/app/feature-modules/marketplace/coupons/coupons.component';
 
 
 @Component({
@@ -30,7 +32,7 @@ import { EditTourFormComponent } from 'src/app/feature-modules/tour-authoring/ed
   templateUrl: './tour-card-view.component.html',
   styleUrls: ['./tour-card-view.component.css']
 })
-export class TourCardViewComponent {
+export class TourCardViewComponent implements OnChanges {
   faStar = faStar;
   faCoins = faCoins;
   faCartShopping = faCartShopping;
@@ -40,12 +42,18 @@ export class TourCardViewComponent {
   faPen = faPen;
   faTrash = faTrash;
   faBoxArchive = faBoxArchive;
+  faMoneyBills = faMoneyBills;
   user: User;
+  @Input() hideIcons: boolean = false;
   @Input() tour: Tour;
+  @Input() preliminaryDiscount: number | null = null;
+  discount: number | null = null;
+  discountedPrice: number | null = null;
   addedTours: TourLimitedView[] = [];
   tokens: TourToken[] = [];
   shoppingCart: ShoppingCart = {};
   imageHost: string = environment.imageHost;
+  @Output() notifyParent: EventEmitter<any> = new EventEmitter<any>();
 
   constructor(
     private authService: AuthService, 
@@ -53,13 +61,34 @@ export class TourCardViewComponent {
     private tourAuthoringService: TourAuthoringService,
     public dialogRef: MatDialog) {}
 
+  ngOnChanges(): void {
+    this.discount = this.preliminaryDiscount;
+    this.discountedPrice = this.tour.price! - this.tour.price! * this.discount!;
+  }
+
   ngOnInit(): void {
+    if (this.preliminaryDiscount) {
+      this.discount = this.preliminaryDiscount;
+      this.discountedPrice = this.tour.price! - this.tour.price! * this.discount!;
+    } else {
+      this.getDiscount();
+    }
+
     this.authService.user$.subscribe(user => {
       this.user = user;
       if (user.role.toLocaleLowerCase() === 'tourist') {
         this.getShoppingCart();
       }
     });
+  }
+
+  getDiscount() {
+    this.marketplaceService.getDiscountForTour(this.tour.id!).subscribe(discount => {
+      this.discount = discount;
+      if (this.discount) {
+        this.discountedPrice = this.tour.price! - this.tour.price! * discount!;
+      }
+    })
   }
 
   getTour(id: number): void {
@@ -152,7 +181,7 @@ export class TourCardViewComponent {
           if(keyPoints.length > 1 && tour.durations && tour.durations.length > 0){
             this.tourAuthoringService.publishTour(tour).subscribe({
               next: () => {
-                  this.getTour(this.tour.id ? this.tour.id : 0);
+                  this.tour.status = 1;
               },
             })
           }
@@ -170,7 +199,7 @@ export class TourCardViewComponent {
   onArchiveClicked(tour: Tour): void{
     this.tourAuthoringService.archiveTour(tour).subscribe({
       next: () => {
-        this.getTour(this.tour.id ? this.tour.id : 0);
+        this.tour.status = 2;
       },
     })
   }
@@ -183,5 +212,17 @@ export class TourCardViewComponent {
       
     });
   }
-  
+  onCouponClicked(tour: Tour): void{
+    this.dialogRef.open(CouponsComponent, {
+      data: tour,
+      
+    });
+  }
+
+  onImageError(event: Event) {
+    const target = event.target as HTMLImageElement;
+    if (target) {
+      target.src = "https://imgs.search.brave.com/udmDGOGRJTYO6lmJ0ADA03YoW4CdO6jPKGzXWvx1XRI/rs:fit:860:0:0/g:ce/aHR0cHM6Ly90My5m/dGNkbi5uZXQvanBn/LzAyLzY4LzU1LzYw/LzM2MF9GXzI2ODU1/NjAxMl9jMVdCYUtG/TjVyalJ4UjJleVYz/M3puSzRxblllS1pq/bS5qcGc";
+    }
+  }
 }
