@@ -41,7 +41,7 @@
                 type="number"
             />
         </div>
-        <div *ngIf="encounterType == 2">
+        <div *ngIf="encounterType == 2 && encounterType == 2">
             <input
                 placeholder="Picture url"
                 formControlName="pictureURL"
@@ -56,7 +56,10 @@
         >
             Select picture
         </button>
-        <p *ngIf="selectedImage" [innerHTML]="selectedImage"></p>
+        <p
+            *ngIf="selectedImage && encounterType == 2"
+            [innerHTML]="selectedImage"
+        ></p>
         <!-- <div *ngIf="encounterType == 3">
             <input
                 placeholder="Misc field"

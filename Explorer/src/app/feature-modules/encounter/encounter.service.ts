@@ -72,7 +72,7 @@ export class EncounterService {
 
     createMiscEncounter(miscEncounter: Encounter): Observable<Encounter> {
         return this.http.post<Encounter>(
-            environment.apiHost + "author/misc-encounter/create",
+            environment.apiHost + "author/misc-encounter/createMisc",
             miscEncounter,
         );
     }

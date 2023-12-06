@@ -12,6 +12,7 @@ export interface Encounter {
     picture?: string;
     pictureLongitude?: number;
     pictureLatitude?: number;
+    challengeDone: boolean;
 }
 
 export enum EncounterType {

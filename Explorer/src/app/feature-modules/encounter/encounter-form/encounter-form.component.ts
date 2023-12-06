@@ -68,6 +68,7 @@ export class EncounterFormComponent {
             picture: this.encounterForm.value.pictureURL || "",
             pictureLongitude: this.imageCoords.longitude || 0,
             pictureLatitude: this.imageCoords.latitude || 0,
+            challengeDone: false,
         };
 
         if (this.encounterType == 1) {
