@@ -5,6 +5,7 @@ import { PagedResults } from "src/app/shared/model/paged-results.model";
 import { environment } from "src/env/environment";
 import { Encounter } from "./model/encounter.model";
 import { UserPositionWithRange } from "./model/user-position-with-range.model";
+import { EncounterInstance } from "./model/encounter-instance.model";
 
 @Injectable({
     providedIn: "root",
@@ -15,6 +16,12 @@ export class EncounterService {
     getActiveEncounters(): Observable<PagedResults<Encounter>> {
         return this.http.get<PagedResults<Encounter>>(
             environment.apiHost + "administrator/encounter/active",
+        );
+    }
+
+    getEncounterInstance(encounterId: number): Observable<EncounterInstance> {
+        return this.http.get<EncounterInstance>(
+            environment.apiHost + `tourist/encounter/${encounterId}/instance`,
         );
     }
 
@@ -48,10 +55,20 @@ export class EncounterService {
     completeHiddenLocationEncounter(
         userPositionWithRange: UserPositionWithRange,
         encounterId: number,
-    ): Observable<PagedResults<Encounter>> {
-        return this.http.post<PagedResults<Encounter>>(
+    ): Observable<Encounter> {
+        return this.http.post<Encounter>(
             environment.apiHost +
                 `tourist/hidden-location-encounter/${encounterId}/complete`,
+            userPositionWithRange,
+        );
+    }
+
+    completeEncounter(
+        userPositionWithRange: UserPositionWithRange,
+        encounterId: number,
+    ): Observable<Encounter> {
+        return this.http.post<Encounter>(
+            environment.apiHost + `tourist/encounter/${encounterId}/complete`,
             userPositionWithRange,
         );
     }
