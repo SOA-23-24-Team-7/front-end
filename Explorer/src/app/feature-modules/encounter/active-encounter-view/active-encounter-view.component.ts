@@ -1,6 +1,6 @@
 import { AfterViewInit, Component, ViewChild } from "@angular/core";
 import { EncounterService } from "../encounter.service";
-import { Encounter } from "../model/encounter.model";
+import { Encounter, EncounterType } from "../model/encounter.model";
 import { MapComponent } from "src/app/shared/map/map.component";
 import { UserPositionWithRange } from "../model/user-position-with-range.model";
 import { faLocationCrosshairs } from "@fortawesome/free-solid-svg-icons";
@@ -8,6 +8,9 @@ import { MatDialog, MatDialogRef } from "@angular/material/dialog";
 import { PositionSimulatorComponent } from "src/app/shared/position-simulator/position-simulator.component";
 import { AuthService } from "src/app/infrastructure/auth/auth.service";
 import { EncounterInstance } from "../model/encounter-instance.model";
+import { NotifierService } from "angular-notifier";
+import { xpError } from "src/app/shared/model/error.model";
+
 @Component({
     selector: "xp-active-encounter-view",
     templateUrl: "./active-encounter-view.component.html",
@@ -22,6 +25,8 @@ export class ActiveEncounterViewComponent implements AfterViewInit {
     encounterInstance?: EncounterInstance;
     dialogRef: MatDialogRef<PositionSimulatorComponent, any> | undefined;
 
+    private readonly notifier: NotifierService;
+
     @ViewChild(MapComponent, { static: false }) mapComponent: MapComponent;
 
     faLocation = faLocationCrosshairs;
@@ -35,8 +40,11 @@ export class ActiveEncounterViewComponent implements AfterViewInit {
     constructor(
         private service: EncounterService,
         private authService: AuthService,
+        notifierService: NotifierService,
         public dialog: MatDialog,
-    ) {}
+    ) {
+        this.notifier = notifierService;
+    }
 
     ngAfterViewInit(): void {
         this.authService.userLocation$.subscribe({
@@ -58,7 +66,7 @@ export class ActiveEncounterViewComponent implements AfterViewInit {
                         if (this.checkIfUserInEncounterRange(enc)) {
                             this.encounter = enc;
                             this.getEncounterInstance(enc.id);
-                            console.log(this.encounterInstance, enc.id);
+                            // console.log(this.encounterInstance, enc.id);
                             if (this.encounterInstance?.status === 0) {
                                 this.getHiddenLocationImage();
                             }
@@ -78,7 +86,17 @@ export class ActiveEncounterViewComponent implements AfterViewInit {
     activateEncounter() {
         this.service
             .activateEncounter(this.userPosition, this.encounter!.id)
-            .subscribe();
+            .subscribe({
+                next: () => {
+                    this.notifier.notify(
+                        "success",
+                        "Successfully activated encounter!",
+                    );
+                },
+                error: err => {
+                    this.notifier.notify("error", xpError.getErrorMessage(err));
+                },
+            });
         if (this.encounter!.type === 1) {
             this.getHiddenLocationImage();
         }
@@ -99,11 +117,43 @@ export class ActiveEncounterViewComponent implements AfterViewInit {
                     this.userPosition,
                     this.encounter!.id,
                 )
-                .subscribe();
+                .subscribe({
+                    next: () => {
+                        this.notifier.notify(
+                            "success",
+                            "Successfully completed hidden encounter!",
+                        );
+                        this.authService.updateXp();
+                    },
+                    error: err => {
+                        // console.log(err);
+                        this.notifier.notify(
+                            "error",
+                            xpError.getErrorMessage(err),
+                        );
+                    },
+                });
         } else {
             this.service
                 .completeEncounter(this.userPosition, this.encounter!.id)
-                .subscribe();
+                .subscribe({
+                    next: () => {
+                        this.notifier.notify(
+                            "success",
+                            "Successfully completed " +
+                                EncounterType[this.encounter!.type] +
+                                " encounter!",
+                        );
+                        this.authService.updateXp();
+                    },
+                    error: err => {
+                        // console.log(err);
+                        this.notifier.notify(
+                            "error",
+                            xpError.getErrorMessage(err),
+                        );
+                    },
+                });
         }
     }
 
@@ -131,7 +181,7 @@ export class ActiveEncounterViewComponent implements AfterViewInit {
                             ),
                 ),
             );
-        console.log(distance * 1000);
+        // console.log(distance * 1000);
         return distance * 1000 <= encounter.radius;
     }
 

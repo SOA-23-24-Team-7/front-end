@@ -135,4 +135,19 @@ export class AuthService {
             });
         }
     }
+
+    updateXp() {
+        if (this.user$.value.role === "tourist") {
+            this.http
+                .get<TouristProgress>(
+                    environment.apiHost + "tourist/encounter/progress",
+                )
+                .subscribe({
+                    next: progress => {
+                        this.user$.value.touristProgress = progress;
+                    },
+                    error: () => {},
+                });
+        }
+    }
 }

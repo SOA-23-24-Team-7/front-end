@@ -22,8 +22,50 @@ import { NgxGoogleAnalyticsModule } from "ngx-google-analytics";
 import { MessageDialogComponent } from "./feature-modules/stakeholder/message-dialog/message-dialog/message-dialog.component";
 import { UserProfileComponent } from "./feature-modules/stakeholder/user-profile/user-profile.component";
 import { StakeholderModule } from "./feature-modules/stakeholder/stakeholder.module";
-import {MatCardModule} from '@angular/material/card';
+import { MatCardModule } from "@angular/material/card";
 import { EncounterModule } from "./feature-modules/encounter/encounter.module";
+import { NotifierModule, NotifierOptions } from "angular-notifier";
+
+const notifierConfig: NotifierOptions = {
+    position: {
+        horizontal: {
+            position: "right",
+            distance: 12,
+        },
+        vertical: {
+            position: "bottom",
+            distance: 12,
+            gap: 10,
+        },
+    },
+    theme: "material",
+    behaviour: {
+        autoHide: 5000,
+        onClick: false,
+        onMouseover: "pauseAutoHide",
+        showDismissButton: true,
+        stacking: 4,
+    },
+    animations: {
+        enabled: true,
+        show: {
+            preset: "slide",
+            speed: 300,
+            easing: "ease",
+        },
+        hide: {
+            preset: "fade",
+            speed: 300,
+            easing: "ease",
+            offset: 50,
+        },
+        shift: {
+            speed: 300,
+            easing: "ease",
+        },
+        overlap: 150,
+    },
+};
 
 @NgModule({
     declarations: [AppComponent],
@@ -51,6 +93,7 @@ import { EncounterModule } from "./feature-modules/encounter/encounter.module";
         NgxGoogleAnalyticsModule.forRoot("G-YF6NHGD2NQ"),
         MatCardModule,
         EncounterModule,
+        NotifierModule.withConfig(notifierConfig),
     ],
     providers: [
         {
