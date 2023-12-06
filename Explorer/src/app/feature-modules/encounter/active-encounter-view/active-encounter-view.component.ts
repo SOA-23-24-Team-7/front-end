@@ -20,6 +20,7 @@ export class ActiveEncounterViewComponent implements AfterViewInit {
     image?: string;
     encounter?: Encounter;
     encounterInstance?: EncounterInstance;
+    loadEncounterInstance?: EncounterInstance;
     dialogRef: MatDialogRef<PositionSimulatorComponent, any> | undefined;
 
     @ViewChild(MapComponent, { static: false }) mapComponent: MapComponent;
@@ -141,10 +142,27 @@ export class ActiveEncounterViewComponent implements AfterViewInit {
         this.service.getEncountersInRangeOf(userPosition).subscribe(result => {
             this.filteredEncounters = result.results;
             this.filteredEncounters.forEach(enc => {
-                this.mapComponent.setEncounterMarker(
-                    enc.latitude,
-                    enc.longitude,
-                );
+                this.service.getEncounterInstance(enc.id).subscribe(result => {
+                    this.loadEncounterInstance = result;
+                });
+                if (this.loadEncounterInstance?.status === 0) {
+                    this.mapComponent.setEncounterActiveMarker(
+                        enc.latitude,
+                        enc.longitude,
+                    );
+                }
+                if (this.loadEncounterInstance?.status === 1) {
+                    this.mapComponent.setEncounterCompletedMarker(
+                        enc.latitude,
+                        enc.longitude,
+                    );
+                }
+                if (!this.loadEncounterInstance) {
+                    this.mapComponent.setEncounterMarker(
+                        enc.latitude,
+                        enc.longitude,
+                    );
+                }
             });
         });
     }
