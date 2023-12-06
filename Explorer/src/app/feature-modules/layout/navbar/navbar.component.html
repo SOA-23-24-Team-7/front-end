@@ -133,6 +133,7 @@
                 </div>
                 <div class="navbar-submenu">
                     <div
+                        *ngIf="user.role === 'author'"
                         class="navbar-submenu-item"
                         [routerLink]="['encounter-form']"
                     >
