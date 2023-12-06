@@ -1,0 +1,35 @@
+
+<div class="tour-card">
+    <div class="tour-card-left">
+        <div class="tour-image-container" >
+            <fa-icon class="tour-image" [icon]="faBoxOpen"/>
+        </div>
+    </div>
+    <div class="tour-card-content">
+        <div class="tour-card-top">
+            <div class="tour-actions">
+                <fa-icon class="tour-action red" [icon]="faTrash" *ngIf="bundle.status == 0 || bundle.status == 2 && !hideIcons && user && (user.role === 'author')" (click)="delete()"/>
+                <fa-icon class="tour-action" [icon]="faPen"*ngIf="bundle.status == 0 || bundle.status == 2 && !hideIcons && user && (user.role === 'author')" (click)="onEditClicked()"/>
+                <fa-icon class="tour-action green" [icon]="faShareNodes" *ngIf="bundle.status == 0 || bundle.status == 2 && !hideIcons && user && (user.role === 'author')" (click)="publish()"/>
+                <fa-icon class="tour-action" [icon]="faBoxArchive" *ngIf="bundle.status == 1 && !hideIcons && user && (user.role === 'author')" (click)="archive()"/>
+                <fa-icon class="tour-action red" [icon]="faXmark" *ngIf="showX" (click)="removeBundle()"/>
+            </div>
+        </div>
+        <div class="tour-card-information">
+            <div class="tour-card-center">
+                <div class="tour-title">{{bundle.name}} <span class="link" (click)="viewTours()">({{bundle.bundleItems?.length}} tour{{bundle.bundleItems.length == 1 ? '' : 's'}})</span></div>
+            </div>
+            <div class="tour-card-right">
+                <div class="tour-price">
+                    <div class="tour-price-value">{{bundle.price}}</div>
+                    <fa-icon class="tour-price-tokens" [icon]="faCoins"/>
+                </div>
+                <div class="btn add-to-cart" *ngIf="user && user.role === 'tourist' && !showX" (click)="addBundleOrderItem()">
+                    <fa-icon [icon]="faCartShopping"/>
+                    <div class="add-to-cart-text">&nbsp;Add</div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+

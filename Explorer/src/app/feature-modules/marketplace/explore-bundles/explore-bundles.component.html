@@ -1,0 +1,18 @@
+<div class="bundles">
+    <div class="bundles-header">
+        <div class="bundles-header-title">Bundles</div>
+        <div class="tour-search-header-paragraph">
+            Explore a curated collection of meticulously crafted tour bundles, each a captivating blend of discovery and excitement. Browse through an array of thoughtfully designed packages, meticulously assembled by expert guides, offering a kaleidoscope of experiences tailored to enchant every traveler. Easily peruse these enticing bundles, each a gateway to immersive cultural adventures and breathtaking sights. Select the perfect combination of tours that resonates with your wanderlust and add them to your shopping cart effortlessly, turning dreams of exploration into a reality. Embark on a seamless journey of discovery as you compile your ideal itinerary, step by step, and prepare for an unforgettable adventure ahead!
+        </div>
+    </div>
+
+    <div class="bundles-body">
+        <div class="bundles-results">
+            <div class="bundle-card" *ngFor="let bundle of bundles">
+                <xp-bundle-card [bundle]="bundle"></xp-bundle-card>
+            </div>
+        </div>
+    </div>
+</div>
+
+

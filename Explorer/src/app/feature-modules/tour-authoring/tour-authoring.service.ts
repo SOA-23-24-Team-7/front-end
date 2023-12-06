@@ -12,6 +12,8 @@ import { PublicFacilityRequest } from "./model/public-facility-request.model";
 import { PublicKeyPoint } from "./model/public-key-point.model";
 import { Person } from "../stakeholder/model/person.model";
 import { query } from "@angular/animations";
+import { Bundle } from "./model/bundle.model";
+import { BundleCreation } from "./model/bundle-creation.model";
 
 @Injectable({
     providedIn: "root",
@@ -241,6 +243,36 @@ export class TourAuthoringService {
         const path = environment.apiHost + "tourist/tour/author-search" + query;
         console.log(path);
         return this.http.get<PagedResults<Tour>>(path);
+    }
+
+    getBundlesForAuthor(): Observable<Bundle[]> {
+        let path = environment.apiHost + "bundles/";
+        return this.http.get<Bundle[]>(path);
+    }
+    
+    createBundle(bundleCreation: BundleCreation): Observable<Bundle> {
+        let path = environment.apiHost + "bundles/";
+        return this.http.post<Bundle>(path, bundleCreation);
+    }
+    
+    editBundle(bundleId: number, bundleCreation: BundleCreation): Observable<Bundle> {
+        let path = environment.apiHost + "bundles/" + bundleId;
+        return this.http.put<Bundle>(path, bundleCreation);
+    }
+    
+    publishBundle(bundleId: number): Observable<Bundle> {
+        let path = environment.apiHost + "bundles/publish/" + bundleId;
+        return this.http.patch<Bundle>(path, {});
+    }
+    
+    archiveBundle(bundleId: number): Observable<Bundle> {
+        let path = environment.apiHost + "bundles/archive/" + bundleId;
+        return this.http.patch<Bundle>(path, {});
+    }
+    
+    deleteBundle(bundleId: number): Observable<Bundle> {
+        let path = environment.apiHost + "bundles/" + bundleId;
+        return this.http.delete<Bundle>(path);
     }
 
     prepareSearchQuery(searchFilter: any): String {

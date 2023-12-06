@@ -42,6 +42,7 @@ import { CouponsComponent } from "./coupons/coupons.component";
 import { CouponsViewComponent } from "./coupons-view/coupons-view.component";
 import { EditCouponFormComponent } from "./edit-coupon-form/edit-coupon-form.component";
 import { CouponsModalComponent } from "./coupons-modal/coupons-modal.component";
+import { ExploreBundlesComponent } from './explore-bundles/explore-bundles.component';
 
 @NgModule({
     declarations: [
@@ -77,6 +78,7 @@ import { CouponsModalComponent } from "./coupons-modal/coupons-modal.component";
         CouponsViewComponent,
         EditCouponFormComponent,
         CouponsModalComponent,
+        ExploreBundlesComponent,
     ],
     imports: [
         CommonModule,

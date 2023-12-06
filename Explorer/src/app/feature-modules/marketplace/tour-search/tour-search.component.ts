@@ -111,6 +111,8 @@ export class TourSearchComponent implements OnInit {
         this.mapComponent.getClickCoordinates((lat, lng) => {
             this.latitude = lat;
             this.longitude = lng;
+            this.searchFilter.longitude = lng;
+            this.searchFilter.latitude = lat;
         });
     }
 
