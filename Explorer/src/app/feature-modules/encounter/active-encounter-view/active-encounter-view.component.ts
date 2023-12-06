@@ -1,7 +1,6 @@
 import { AfterViewInit, Component, ViewChild } from "@angular/core";
 import { EncounterService } from "../encounter.service";
 import { Encounter } from "../model/encounter.model";
-import { MapService } from "src/app/shared/map/map.service";
 import { MapComponent } from "src/app/shared/map/map.component";
 import { UserPositionWithRange } from "../model/user-position-with-range.model";
 import { faLocationCrosshairs } from "@fortawesome/free-solid-svg-icons";
@@ -17,6 +16,10 @@ export class ActiveEncounterViewComponent implements AfterViewInit {
     points: any;
     encounters: Encounter[];
     filteredEncounters: Encounter[];
+    canActivate: boolean;
+    showImage: boolean;
+    image?: string;
+    encounter?: Encounter;
     dialogRef: MatDialogRef<PositionSimulatorComponent, any> | undefined;
 
     @ViewChild(MapComponent, { static: false }) mapComponent: MapComponent;
@@ -38,6 +41,8 @@ export class ActiveEncounterViewComponent implements AfterViewInit {
     ngAfterViewInit(): void {
         this.authService.userLocation$.subscribe({
             next: location => {
+                this.canActivate = false;
+                // this.encounter = undefined;
                 this.userPosition.latitude = location.latitude;
                 this.userPosition.longitude = location.longitude;
                 this.loadEncountersInRangeOfFromCurrentLocation(
@@ -49,8 +54,52 @@ export class ActiveEncounterViewComponent implements AfterViewInit {
                         this.userPosition.longitude,
                     );
                 }
+                if (this.filteredEncounters) {
+                    this.filteredEncounters.forEach(enc => {
+                        if (this.checkIfUserInEncounterRange(enc)) {
+                            this.canActivate = true;
+                            this.encounter = enc;
+                            console.log(
+                                "Mozes aktivirati encounter:",
+                                enc.title,
+                            );
+                        }
+                    });
+                }
             },
         });
+    }
+
+    activateEncounter() {
+        this.service
+            .activateEncounter(this.userPosition, this.encounter!.id)
+            .subscribe();
+        if (this.encounter!.type === 1) {
+            this.showImage = true;
+            this.getHiddenLocationImage();
+            console.log(this.image);
+        } else {
+            this.showImage = false;
+        }
+    }
+
+    getHiddenLocationImage() {
+        this.service
+            .getHiddenLocationEncounterById(this.encounter!.id)
+            .subscribe(result => {
+                this.image = result.picture;
+            });
+    }
+
+    completeEncounter() {
+        if (this.encounter!.type === 1) {
+            this.service
+                .completeHiddenLocationEncounter(
+                    this.userPosition,
+                    this.encounter!.id,
+                )
+                .subscribe();
+        }
     }
 
     checkIfUserInEncounterRange(encounter: Encounter): boolean {
@@ -77,7 +126,8 @@ export class ActiveEncounterViewComponent implements AfterViewInit {
                             ),
                 ),
             );
-        return distance <= encounter.radius;
+        console.log(distance * 1000);
+        return distance * 1000 <= encounter.radius;
     }
 
     loadEncountersInRangeOfFromCurrentLocation(
