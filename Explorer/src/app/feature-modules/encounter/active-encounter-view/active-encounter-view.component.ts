@@ -66,6 +66,16 @@ export class ActiveEncounterViewComponent implements AfterViewInit {
         });
     }
 
+    async checkIfUserInCompletionRange() {
+        const result = await this.service
+            .checkIfUserInCompletionRange(this.userPosition, this.encounter!.id)
+            .toPromise();
+
+        if (result) {
+            alert("User je u picture rangeu ostani tu 30 sek");
+        }
+    }
+
     getEncounterInstance(encounterId: number) {
         this.service
             .getEncounterInstance(encounterId)

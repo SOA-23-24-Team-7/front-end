@@ -26,5 +26,12 @@
         >
             Complete
         </div>
+        <div
+            class="btn"
+            *ngIf="encounterInstance?.status === 0 && encounter"
+            (click)="checkIfUserInCompletionRange()"
+        >
+            Proveri range
+        </div>
     </div>
 </div>

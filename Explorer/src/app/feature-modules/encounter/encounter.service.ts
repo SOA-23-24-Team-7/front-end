@@ -44,6 +44,17 @@ export class EncounterService {
         );
     }
 
+    checkIfUserInCompletionRange(
+        userPositionWithRange: UserPositionWithRange,
+        encounterId: number,
+    ): Observable<boolean> {
+        return this.http.post<boolean>(
+            environment.apiHost +
+                `tourist/hidden-location-encounter/${encounterId}/check-range`,
+            userPositionWithRange,
+        );
+    }
+
     getHiddenLocationEncounterById(encounterId: number): Observable<Encounter> {
         return this.http.get<Encounter>(
             environment.apiHost +
