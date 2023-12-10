@@ -14,7 +14,8 @@ import { BlogPreviewComponent } from "./blog-preview/blog-preview.component";
 import { FontAwesomeModule } from "@fortawesome/angular-fontawesome";
 import { BlogFormComponent } from "./blog-form/blog-form.component";
 import { MyBlogsComponent } from "./my-blogs/my-blogs.component";
-import { TouristsTourBlogFormComponent } from './tourists-tour-blog-form/tourists-tour-blog-form.component';
+import { TouristsTourBlogFormComponent } from "./tourists-tour-blog-form/tourists-tour-blog-form.component";
+import { QuillModule } from "ngx-quill";
 
 @NgModule({
     declarations: [
@@ -36,6 +37,7 @@ import { TouristsTourBlogFormComponent } from './tourists-tour-blog-form/tourist
         MatDialogModule,
         FontAwesomeModule,
         ReactiveFormsModule,
+        QuillModule.forRoot(),
     ],
 })
 export class BlogModule implements OnInit {

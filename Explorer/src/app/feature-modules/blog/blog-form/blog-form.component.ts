@@ -5,7 +5,6 @@ import { Blog } from "../model/blog.model";
 import { ActivatedRoute, Router } from "@angular/router";
 import { CreateBlog } from "../model/blog-create.model";
 import { UpdateBlog } from "../model/blog-update.model";
-import { Pipe, PipeTransform } from "@angular/core";
 import * as DOMPurify from "dompurify";
 import { marked } from "marked";
 
@@ -30,6 +29,29 @@ export class BlogFormComponent implements OnInit {
             this.getBlog();
         }
     }
+
+    modules = {
+        toolbar: [
+            ["bold", "italic", "underline", "strike"],
+            ["blockquote", "code-block"],
+
+            [{ header: 1 }, { header: 2 }],
+            [{ list: "ordered" }, { list: "bullet" }],
+            [{ script: "sub" }, { script: "super" }],
+            [{ indent: "-1" }, { indent: "+1" }],
+
+            [{ size: ["small", false, "large", "huge"] }],
+            [{ header: [1, 2, 3, 4, 5, 6, false] }],
+
+            [{ color: [] }, { background: [] }],
+            [{ font: [] }],
+            [{ align: [] }],
+
+            ["clean"],
+
+            ["link", "video"],
+        ],
+    };
 
     blogForm = new FormGroup({
         title: new FormControl("", [Validators.required]),

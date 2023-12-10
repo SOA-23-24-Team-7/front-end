@@ -50,7 +50,12 @@
             </div>
             <span class="blog-date">{{ blog.date | date : "mediumDate" }}</span>
         </div>
-        <div class="blog-description" [innerHTML]="blogMarkdown"></div>
+        <div class="blog-description">
+            <quill-view-html
+                [content]="blogMarkdown"
+                theme="snow"
+            ></quill-view-html>
+        </div>
         <div class="bottom-bar">
             <div class="comments bottom-bar-button" *ngIf="blog.status != 0">
                 <fa-icon [icon]="faComment" />{{ blog.comments.length }}

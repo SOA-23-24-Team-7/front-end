@@ -34,7 +34,11 @@
                             "./node_modules/angular-notifier/styles/types/type-error.css",
                             "./node_modules/angular-notifier/styles/types/type-info.css",
                             "./node_modules/angular-notifier/styles/types/type-success.css",
-                            "./node_modules/angular-notifier/styles/types/type-warning.css"
+                            "./node_modules/angular-notifier/styles/types/type-warning.css",
+                            "./node_modules/quill/dist/quill.core.css",
+                            "./node_modules/quill/dist/quill.bubble.css",
+                            "./node_modules/quill/dist/quill.snow.css",
+                            "src/styles.css"
                         ],
                         "scripts": []
                     },

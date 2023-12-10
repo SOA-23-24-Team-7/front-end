@@ -26,6 +26,7 @@ import { SharedModule } from "./shared/shared.module";
 import { MatCardModule } from "@angular/material/card";
 import { EncounterModule } from "./feature-modules/encounter/encounter.module";
 import { NotifierModule, NotifierOptions } from "angular-notifier";
+import { QuillModule } from "ngx-quill";
 
 const notifierConfig: NotifierOptions = {
     position: {
@@ -95,6 +96,7 @@ const notifierConfig: NotifierOptions = {
         MatCardModule,
         EncounterModule,
         NotifierModule.withConfig(notifierConfig),
+        QuillModule,
     ],
     providers: [
         {
