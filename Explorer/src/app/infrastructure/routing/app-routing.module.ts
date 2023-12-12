@@ -56,6 +56,7 @@ import { EncounterFormComponent } from "src/app/feature-modules/encounter/encoun
 import { BundleCardComponent } from "src/app/feature-modules/tour-authoring/bundle-card/bundle-card.component";
 import { BundlesComponent } from "src/app/feature-modules/tour-authoring/bundles/bundles.component";
 import { ExploreBundlesComponent } from "src/app/feature-modules/marketplace/explore-bundles/explore-bundles.component";
+import { PageNotFoundComponent } from "src/app/feature-modules/layout/page-not-found/page-not-found.component";
 
 const routes: Routes = [
     { path: "home", component: HomeComponent },
@@ -299,6 +300,7 @@ const routes: Routes = [
         component: ExploreBundlesComponent,
         canActivate: [AuthGuard],
     },
+    { path: "**", pathMatch: "full", component: PageNotFoundComponent },
 ];
 
 @NgModule({
