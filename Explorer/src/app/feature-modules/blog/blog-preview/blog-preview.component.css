@@ -20,6 +20,10 @@
     padding-inline: 0.3rem;
     margin: 0;
     text-wrap: nowrap;
+    max-width: 17ch;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
 }
 
 .blog:hover {
@@ -34,6 +38,7 @@
 .blog-header {
     display: flex;
     align-items: center;
+    overflow: hidden;
 }
 
 .blog-date {
@@ -43,6 +48,7 @@
 
 .blog-description {
     max-height: 20rem;
+    overflow: hidden;
 }
 
 .bottom-bar {
@@ -96,6 +102,8 @@
 
 .blog-content {
     width: 100%;
+    display: flex;
+    flex-direction: column;
 }
 
 .blog-description {
@@ -193,4 +201,8 @@
 
 .famous-tag {
     background-color: rgba(var(--clr-information-500));
+}
+
+::ng-deep .ql-editor {
+    overflow-y: hidden;
 }

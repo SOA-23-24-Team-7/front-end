@@ -1,55 +1,41 @@
-<form [formGroup]="blogForm" class="form">
-    <div class="create-form">
-        <div class="left-section">
-            <div class="input-container">
-                <input
-                    formControlName="title"
-                    type="text"
-                    placeholder="Title*"
-                    [ngClass]="{
-                        error: blogForm.get('title')?.value == ''
-                    }"
-                />
-            </div>
-            <div class="quill-area">
-                <quill-editor
-                    class="quill"
-                    formControlName="description"
-                    [modules]="modules"
-                    [sanitize]="true"
-                    [maxLength]="200"
-                ></quill-editor>
-            </div>
+<form [formGroup]="blogForm">
+    <div class="form">
+        <div class="input-container">
+            <input
+                formControlName="title"
+                type="text"
+                placeholder="Title*"
+                [ngClass]="{
+                    error: blogForm.get('title')?.value == ''
+                }"
+            />
         </div>
-        <div class="right-section">
-            <div class="markup-preview">
-                <h1>Preview</h1>
-                <div [innerHTML]="" class="preview"></div>
-                <quill-view-html
-                    [content]="getMarkupPreview()"
-                    theme="snow"
-                ></quill-view-html>
-            </div>
+        <quill-editor
+            class="quill-area"
+            formControlName="description"
+            [modules]="modules"
+            [sanitize]="true"
+            [maxLength]="200"
+        ></quill-editor>
+        <div class="button-container">
+            <button
+                mat-raised-button
+                type="submit"
+                *ngIf="!blog"
+                color="primary"
+                (click)="createBlog()"
+            >
+                Create
+            </button>
+            <button
+                mat-raised-button
+                type="submit"
+                *ngIf="blog"
+                color="primary"
+                (click)="updateBlog()"
+            >
+                Update
+            </button>
         </div>
-    </div>
-    <div class="button-container">
-        <button
-            mat-raised-button
-            type="submit"
-            *ngIf="!blog"
-            color="primary"
-            (click)="createBlog()"
-        >
-            Create
-        </button>
-        <button
-            mat-raised-button
-            type="submit"
-            *ngIf="blog"
-            color="primary"
-            (click)="updateBlog()"
-        >
-            Update
-        </button>
     </div>
 </form>

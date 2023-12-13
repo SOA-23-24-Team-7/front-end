@@ -1,54 +1,34 @@
-.create-form {
-    width: 70%;
-    height: 100%;
-    margin: auto;
-    display: flex;
-    flex-direction: row;
-}
-
-.left-section {
-    width: 50%;
-    height: 100%;
+.form {
     display: flex;
     flex-direction: column;
-}
-
-.right-section {
-    width: 50%;
-    height: 100%;
-}
-
-.form {
+    justify-content: center;
     align-items: center;
-    text-align: center;
-    height: 30rem;
+    margin: 1rem;
 }
 
 .input-container {
-    width: 100%;
-    margin-bottom: 3rem;
+    display: flex;
+    margin-bottom: 1rem;
 }
 
 .quill-area {
-    height: 80%;
+    display: flex;
+    flex-direction: column;
+    width: 40rem;
+    min-width: 20rem;
+    color: rgba(var(--clr-text));
+    min-height: 30rem;
+    height: 35rem;
+}
+
+::ng-deep .ql-container {
+    flex-grow: 1;
+    border-radius: 0.5rem;
     overflow-y: auto;
 }
 
-.markup-preview {
-    text-align: left;
-    background-color: rgb(var(--clr-background-secondary));
-    border-radius: 0.45rem;
-    border: 1px solid rgb(var(--clr-outline));
-    color: rgba(var(--clr-text));
-    backdrop-filter: blur(10px);
-    height: 100%;
-    overflow-wrap: break-word;
-    overflow-x: auto;
-}
-
-.quill {
-    width: 100%;
-    height: 100%;
+::ng-deep .ql-toolbar {
+    border-radius: 0.5rem;
 }
 
 h1 {
@@ -56,6 +36,7 @@ h1 {
 }
 
 .button-container {
+    display: flex;
     align-items: center;
     text-align: center;
     margin: 1rem;
@@ -63,4 +44,8 @@ h1 {
 
 .error {
     border-color: red;
+}
+
+input {
+    width: 17rem;
 }
