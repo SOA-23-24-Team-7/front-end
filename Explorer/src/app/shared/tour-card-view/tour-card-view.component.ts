@@ -56,6 +56,7 @@ export class TourCardViewComponent implements OnChanges {
   tokens: TourToken[] = [];
   shoppingCart: ShoppingCart = {};
   imageHost: string = environment.imageHost;
+  images: string[] = [];
   @Output() notifyParent: EventEmitter<any> = new EventEmitter<any>();
 
   constructor(
@@ -70,6 +71,7 @@ export class TourCardViewComponent implements OnChanges {
   }
 
   ngOnInit(): void {
+    this.images = this.tour.keyPoints!.map(kp => this.imageHost + kp.imagePath);
     if (this.preliminaryDiscount) {
       this.discount = this.preliminaryDiscount;
       this.discountedPrice = this.tour.price! - this.tour.price! * this.discount!;
