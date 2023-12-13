@@ -5,7 +5,7 @@ import { LoginComponent } from "../auth/login/login.component";
 import { EquipmentComponent } from "src/app/feature-modules/administration/equipment/equipment.component";
 import { TourPreferencesComponent } from "src/app/feature-modules/marketplace/tour-preferences/tour-preferences.component";
 import { TourPreferenceFormComponent } from "src/app/feature-modules/marketplace/tour-preference-form/tour-preference-form.component";
-import { AuthGuard } from "../auth/auth.guard";
+import { AdminGuard, AuthGuard } from "../auth/auth.guard";
 import { RegistrationComponent } from "../auth/registration/registration.component";
 import { BlogsComponent } from "src/app/feature-modules/blog/blogs/blogs.component";
 import { BlogComponent } from "src/app/feature-modules/blog/blog/blog.component";
@@ -56,6 +56,7 @@ import { EncounterFormComponent } from "src/app/feature-modules/encounter/encoun
 import { BundleCardComponent } from "src/app/feature-modules/tour-authoring/bundle-card/bundle-card.component";
 import { BundlesComponent } from "src/app/feature-modules/tour-authoring/bundles/bundles.component";
 import { ExploreBundlesComponent } from "src/app/feature-modules/marketplace/explore-bundles/explore-bundles.component";
+import { PageNotFoundComponent } from "src/app/feature-modules/layout/page-not-found/page-not-found.component";
 
 const routes: Routes = [
     { path: "home", component: HomeComponent },
@@ -65,7 +66,7 @@ const routes: Routes = [
     {
         path: "equipment",
         component: EquipmentComponent,
-        canActivate: [AuthGuard],
+        canActivate: [AdminGuard],
     },
     { path: "", component: HomeComponent },
     { path: "ratings", component: RatingComponent, canActivate: [AuthGuard] },
@@ -299,6 +300,7 @@ const routes: Routes = [
         component: ExploreBundlesComponent,
         canActivate: [AuthGuard],
     },
+    { path: "**", pathMatch: "full", component: PageNotFoundComponent },
 ];
 
 @NgModule({

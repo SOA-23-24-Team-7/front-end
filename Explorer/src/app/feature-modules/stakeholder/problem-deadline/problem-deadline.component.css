@@ -1,14 +1,14 @@
+:host {
+    border-radius: 1rem !important;
+}
+
 .deadline-modal {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100vw;
-    height: 100vh;
     display: flex;
     align-items: center;
     justify-content: center;
-    animation: fadeIn 0.5s ease-in-out;
     color: rgba(var(--clr-text));
+    pointer-events: none;
+    border-radius: 1rem;
 }
 
 .btn {

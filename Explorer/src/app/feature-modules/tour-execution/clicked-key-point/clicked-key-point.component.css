@@ -1,16 +1,16 @@
+:host {
+    border-radius: 1rem !important;
+}
+
 .keypoint-modal {
     color: rgba(var(--clr-text), 1);
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100vw;
-    height: 100vh;
-    z-index: 9999;
     display: flex;
     align-items: center;
     justify-content: center;
     visibility: hidden;
     opacity: 0;
+    pointer-events: none;
+    border-radius: 1rem;
 }
 
 .kp {
@@ -22,7 +22,7 @@
     border-radius: 1rem;
     width: 22rem;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
-    animation: fadeIn 1s ease-in-out;
+    pointer-events: all;
 }
 
 .keypoint-head {
