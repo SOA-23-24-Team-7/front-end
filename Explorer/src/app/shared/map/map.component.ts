@@ -66,10 +66,6 @@ export class MapComponent implements AfterViewInit, OnChanges {
 
         if (!this.isTourExecutionMap) return;
         setTimeout(() => {
-            this.positionMarker = L.marker(this.touristPosition, {
-                icon: this.positionIcon,
-            }).addTo(this.map);
-            if (!this.isTourExecutionMap) return;
             let waypoints = [
                 { lng: this.touristPosition[1], lat: this.touristPosition[0] },
                 ...this.waypointMap.values(),
