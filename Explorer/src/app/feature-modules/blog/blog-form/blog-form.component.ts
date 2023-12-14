@@ -1,4 +1,4 @@
-import { Component, OnInit } from "@angular/core";
+import { Component, ElementRef, OnInit, ViewChild } from "@angular/core";
 import { FormControl, FormGroup, Validators } from "@angular/forms";
 import { BlogService } from "../blog.service";
 import { Blog } from "../model/blog.model";
@@ -7,6 +7,7 @@ import { CreateBlog } from "../model/blog-create.model";
 import { UpdateBlog } from "../model/blog-update.model";
 import * as DOMPurify from "dompurify";
 import { marked } from "marked";
+import Quill from "quill";
 
 @Component({
     selector: "xp-blog-form",
@@ -16,6 +17,8 @@ import { marked } from "marked";
 export class BlogFormComponent implements OnInit {
     blog: Blog;
     blogId: number;
+
+    @ViewChild("editor") editorElement: ElementRef;
 
     constructor(
         private service: BlogService,
@@ -31,27 +34,47 @@ export class BlogFormComponent implements OnInit {
     }
 
     modules = {
-        toolbar: [
-            ["bold", "italic", "underline", "strike"],
-            ["blockquote", "code-block"],
-
-            [{ header: 1 }, { header: 2 }],
-            [{ list: "ordered" }, { list: "bullet" }],
-            [{ script: "sub" }, { script: "super" }],
-            [{ indent: "-1" }, { indent: "+1" }],
-
-            [{ size: ["small", false, "large", "huge"] }],
-            [{ header: [1, 2, 3, 4, 5, 6, false] }],
-
-            [{ color: [] }, { background: [] }],
-            [{ font: [] }],
-            [{ align: [] }],
-
-            ["clean"],
-
-            ["link", "video"],
-        ],
+        toolbar: {
+            container: [
+                ["bold", "italic", "underline", "strike"],
+                ["blockquote", "code-block"],
+                [{ header: 1 }, { header: 2 }],
+                [{ list: "ordered" }, { list: "bullet" }],
+                [{ script: "sub" }, { script: "super" }],
+                [{ indent: "-1" }, { indent: "+1" }],
+                [{ size: ["small", false, "large", "huge"] }],
+                [{ header: [1, 2, 3, 4, 5, 6, false] }],
+                [{ color: [] }, { background: [] }],
+                [{ font: [] }],
+                [{ align: [] }],
+                ["clean"],
+                ["link", "video", "image"],
+            ],
+            handlers: {
+                image: this.imageHandler,
+            },
+        },
     };
+
+    imageHandler(this: any) {
+        const tooltip = this.quill.theme.tooltip;
+        const originalSave = tooltip.save;
+        const originalHide = tooltip.hide;
+        tooltip.save = function (this: any) {
+            const range = this.quill.getSelection(true);
+            const value = this.textbox.value;
+            if (value) {
+                this.quill.insertEmbed(range.index, "image", value, "user");
+            }
+        };
+        tooltip.hide = function (this: any) {
+            tooltip.save = originalSave;
+            tooltip.hide = originalHide;
+            tooltip.hide();
+        };
+        tooltip.edit("image");
+        tooltip.textbox.placeholder = "Embed URL";
+    }
 
     blogForm = new FormGroup({
         title: new FormControl("", [Validators.required]),

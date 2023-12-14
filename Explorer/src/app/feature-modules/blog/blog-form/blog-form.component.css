@@ -31,6 +31,14 @@
     border-radius: 0.5rem;
 }
 
+/* ::ng-deep .ql-snow.ql-toolbar button svg {
+    background-color: rgba(var(--clr-text), 0.7);
+} */
+/* .ql-snow .ql-toolbar button svg ::ng-deep p {
+    color: rgba(var(--clr-text));
+    border-radius: 0.5rem;
+} */
+
 h1 {
     text-align: center;
 }
@@ -48,4 +56,8 @@ h1 {
 
 input {
     width: 17rem;
+}
+
+::ng-deep ql-editor p {
+    color: rgba(var(--clr-text)) !important;
 }

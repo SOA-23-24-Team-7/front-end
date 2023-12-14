@@ -11,8 +11,10 @@
             />
         </div>
         <quill-editor
+            id="editor"
             class="quill-area"
             formControlName="description"
+            placeholder="Insert text here..."
             [modules]="modules"
             [sanitize]="true"
             [maxLength]="200"
