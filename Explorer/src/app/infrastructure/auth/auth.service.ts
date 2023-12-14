@@ -150,4 +150,7 @@ export class AuthService {
                 });
         }
     }
+    getPosition(){
+        return { "longitude": this.userLocation$.value.longitude, "latitude": this.userLocation$.value.latitude, }
+    }
 }

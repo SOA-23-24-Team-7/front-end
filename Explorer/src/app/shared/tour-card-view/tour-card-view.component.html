@@ -9,6 +9,8 @@
         <div class="tour-card-top">
             <div class="tour-tags">
                 <div class="tour-tag" *ngFor="let tag of tour.tags">{{tag}}</div>
+                <div class="tour-tag" *ngIf="tour.recommended" style="background-color: olivedrab; color: white;">Recommended</div>
+                <div class="tour-tag" *ngIf="tour.active" style="background-color: orange; color: white;">Active</div>
             </div>
             <div class="tour-actions" *ngIf="user && (user.role === 'author' && !hideIcons && !selectable)">
                 <fa-icon class="tour-action red" *ngIf="tour.status == 2 || tour.status == 0" [icon]="faTrash"/>

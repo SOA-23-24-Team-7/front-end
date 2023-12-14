@@ -19,6 +19,8 @@ import {
     faStar,
     faClock
 } from "@fortawesome/free-solid-svg-icons";
+import { AuthService } from "src/app/infrastructure/auth/auth.service";
+import { LocationCoords } from "src/app/shared/model/location-coords.model";
 
 @Component({
     selector: "xp-tour-search",
@@ -63,6 +65,8 @@ export class TourSearchComponent implements OnInit {
     sortOption: SortOption = SortOption.NoSort;
     slider: any;
     tours: Tour[] = [];
+    recommendedTours: Tour[] = [];
+    activeTours: Tour[] = [];
     publicFacilities: PublicFacilities[] = [];
     publicKeyPoints: PublicKeyPoint[] = [];
     totalCount: number = 0;
@@ -70,7 +74,7 @@ export class TourSearchComponent implements OnInit {
     pageSize: number =10;
     pages: any[] = [];
 
-    constructor(private service: MarketplaceService) {}
+    constructor(private service: MarketplaceService, private authService: AuthService) {}
 
     ngOnInit(): void {
         this.searchFilter = {
@@ -105,6 +109,8 @@ export class TourSearchComponent implements OnInit {
         this.resetMinLength();
         this.resetMaxLength();
         this.onSearch(1);
+        this.getActiveTours();
+        this.getRecommendedTours();
     }
 
     onMapClicked(): void {
@@ -127,6 +133,8 @@ export class TourSearchComponent implements OnInit {
                     this.totalCount = result.totalCount;
                     console.log(this.tours);
                     this.setPages();
+                    this.setActiveTag();
+                    this.setRecommendedTag();
                 },
                 error: errData => {
                     console.log(errData);
@@ -373,5 +381,52 @@ export class TourSearchComponent implements OnInit {
         this.searchFilter.maxDuration = "";
         var inputElement = document.getElementsByName('maxDuration')[0] as HTMLInputElement;
         inputElement.value = "";
+    }
+
+    getActiveTours(): void {
+        this.service
+            .getActiveTours()
+            .subscribe({
+                next: (result: PagedResults<Tour>) => {
+                    this.activeTours = result.results;
+                    this.setActiveTag()
+                },
+                error: errData => {
+                    console.log(errData);
+                },
+            });
+    }
+    getRecommendedTours(): void {
+        this.service
+            .getActiveTours()
+            .subscribe({
+                next: (result: PagedResults<Tour>) => {
+                    this.recommendedTours = result.results;  
+                    this.setRecommendedTag()
+                },
+                error: errData => {
+                    console.log(errData);
+                },
+            });
+    }
+    setRecommendedTag(){
+        this.tours.forEach((tour)=>{
+            for(let i = 0; i < this.recommendedTours.length; i++){
+                if(tour.id == this.recommendedTours[i].id){
+                    tour.recommended = true    
+                    break;
+                }
+            }
+        })
+    }
+    setActiveTag(){
+        this.tours.forEach((tour)=>{
+            for(let i = 0; i < this.activeTours.length; i++){
+                if(tour.id == this.activeTours[i].id){
+                    tour.active = true
+                    break;
+                }
+            }
+        })
     }
 }

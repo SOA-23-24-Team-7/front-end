@@ -489,4 +489,10 @@ export class MarketplaceService {
         return this.http.post<any>(path, {});
 
     }
+    getActiveTours(): Observable<PagedResults<Tour>> {
+        return this.http.get<PagedResults<Tour>>(environment.apiHost+'tourist/tourrecommenders/activetours');
+    }
+    getRecommendedTours(): Observable<PagedResults<Tour>> {
+        return this.http.get<PagedResults<Tour>>(environment.apiHost+'tourist/tourrecommenders/recommendedtours');
+    }
 }
