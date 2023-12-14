@@ -127,7 +127,14 @@
             </div>
 
             <!-- Encounters MENU -->
-            <div class="navbar-menu-item" *ngIf="user && user.username !== ''">
+            <div
+                class="navbar-menu-item"
+                *ngIf="
+                    user &&
+                    user.username !== '' &&
+                    user.role !== 'administrator'
+                "
+            >
                 <div class="navbar-menu-item-content">
                     <fa-icon
                         class="navbar-menu-item-content-icon"
@@ -293,7 +300,9 @@
                             class="navbar-submenu-item-icon"
                             [icon]="faBoxOpen"
                         />
-                        <div class="navbar-submenu-item-text">My Tour Bundles</div>
+                        <div class="navbar-submenu-item-text">
+                            My Tour Bundles
+                        </div>
                     </div>
                     <div
                         class="navbar-submenu-item"

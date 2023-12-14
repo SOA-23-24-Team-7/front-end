@@ -85,7 +85,7 @@ export class TourExecutingComponent implements OnInit {
                 this.touristId = result.id;
 
                 this.getTouristPosition();
-                this.positionSubscription = interval(1000000).subscribe(() => {
+                this.positionSubscription = interval(10000).subscribe(() => {
                     this.getTouristPosition();
                 });
             },
