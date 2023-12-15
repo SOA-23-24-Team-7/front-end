@@ -95,6 +95,7 @@ const notifierConfig: NotifierOptions = {
         MatCardModule,
         EncounterModule,
         NotifierModule.withConfig(notifierConfig),
+        MarketplaceModule,
     ],
     providers: [
         {
