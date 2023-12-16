@@ -1,14 +1,20 @@
-import { Component, OnInit } from "@angular/core";
+import { Component, Inject, OnInit, ViewChild } from "@angular/core";
 import { FormControl, FormGroup, Validators } from "@angular/forms";
 import { EncounterService } from "../encounter.service";
 import { Encounter } from "../model/encounter.model";
-import { MatDialog, MatDialogRef } from "@angular/material/dialog";
+import {
+    MAT_DIALOG_DATA,
+    MatDialog,
+    MatDialogRef,
+} from "@angular/material/dialog";
 import { MapModalComponent } from "src/app/shared/map-modal/map-modal.component";
 import { LocationCoords } from "src/app/shared/model/location-coords.model";
 import { User } from "src/app/infrastructure/auth/model/user.model";
 import { AuthService } from "src/app/infrastructure/auth/auth.service";
 import { NotifierService } from "angular-notifier";
 import { xpError } from "src/app/shared/model/error.model";
+import { MapComponent } from "src/app/shared/map/map.component";
+import { Equipment } from "../../administration/model/equipment.model";
 
 @Component({
     selector: "xp-encounter-form",
@@ -31,6 +37,7 @@ export class EncounterFormComponent implements OnInit {
             latitude: 0,
         };
     }
+
     dialogRef: MatDialogRef<MapModalComponent, any> | undefined;
     imageCoords: LocationCoords;
     encounterCoords: LocationCoords;
@@ -183,7 +190,11 @@ export class EncounterFormComponent implements OnInit {
             this.dialogRef.close();
             return;
         }
-        this.dialogRef = this.dialog.open(MapModalComponent);
+        this.dialogRef = this.dialog.open(MapModalComponent, {
+            data: {
+                encounterCoords: this.encounterCoords,
+            },
+        });
         this.dialogRef.componentInstance.positionChanged.subscribe(
             (result: LocationCoords) => {
                 this.imageCoords = result;
@@ -232,6 +243,7 @@ export class EncounterFormComponent implements OnInit {
             this.dialogRef.close();
             return;
         }
+
         this.dialogRef = this.dialog.open(MapModalComponent);
         this.dialogRef.componentInstance.positionChanged.subscribe(
             (result: LocationCoords) => {
