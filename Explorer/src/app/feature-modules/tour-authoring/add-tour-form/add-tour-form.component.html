@@ -9,14 +9,14 @@
             <input
                 class="add-input"
                 type="text"
-                placeholder="Name"
+                placeholder="New Tour"
                 formControlName="name"
             />
             <div class="add-label">Description:</div>
             <input
                 class="add-input"
                 type="text"
-                placeholder="Description"
+                placeholder="A short description of this tour"
                 formControlName="description"
             />
             <div class="add-label">Difficulty</div>
@@ -25,37 +25,41 @@
                 min="1"
                 max="5"
                 type="number"
-                placeholder="Difficulty"
+                placeholder="3"
                 formControlName="difficulty"
             />
             <div class="add-label">Price</div>
             <input
                 class="add-input"
                 type="number"
-                placeholder="Price"
+                placeholder="100"
                 formControlName="price"
             />
             <div class="add-label">Tags:</div>
             <div class="add-tags">
-                <div
-                    *ngFor="
-                        let tag of addTourForm.get('tags')?.value;
-                        let i = index
-                    "
-                >
-                    <button class="remove-submit" (click)="removeTag(i)">
-                        Remove</button
-                    >&nbsp; <span>{{ tag }}</span
-                    ><br /><br />
-                </div>
+                <mat-chip-grid #chipGrid>
+                    <mat-chip-row
+                        *ngFor="let tag of addTourForm.get('tags')?.value"
+                        (removed)="remove(tag)"
+                    >
+                        {{ tag }}
+                        <button
+                            matChipRemove
+                            [attr.aria-label]="'remove ' + tag"
+                        >
+                            <mat-icon>cancel</mat-icon>
+                        </button>
+                    </mat-chip-row>
+                </mat-chip-grid>
+                <input
+                    class="add-input"
+                    placeholder="Culture, Architecture, Nature..."
+                    #fruitInput
+                    [matChipInputFor]="chipGrid"
+                    [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
+                    (matChipInputTokenEnd)="add($event)"
+                />
             </div>
-            <input class="add-input" placeholder="Tags" #tagInput type="text" />
-            <button
-                class="add-submit"
-                (click)="addTag(tagInput.value); tagInput.value = ''"
-            >
-                <div class="add-submit-text">Add tag</div></button
-            ><br />
             <button class="add-submit" type="submit" (click)="submit()">
                 <div class="add-submit-text">Add</div>
             </button>

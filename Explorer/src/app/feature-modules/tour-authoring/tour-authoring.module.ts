@@ -34,6 +34,7 @@ import { AddBundleFormComponent } from "./add-bundle-form/add-bundle-form.compon
 import { EditBundleFormComponent } from "./edit-bundle-form/edit-bundle-form.component";
 import { ViewBundleToursComponent } from "./view-bundle-tours/view-bundle-tours.component";
 import { EncounterModule } from "../encounter/encounter.module";
+import { MatChipsModule } from "@angular/material/chips";
 
 @NgModule({
     declarations: [
@@ -72,6 +73,7 @@ import { EncounterModule } from "../encounter/encounter.module";
         MatDialogModule,
         FormsModule,
         EncounterModule,
+        MatChipsModule,
     ],
     exports: [
         TourComponent,
