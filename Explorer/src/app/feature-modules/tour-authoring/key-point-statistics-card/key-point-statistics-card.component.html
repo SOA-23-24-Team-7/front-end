@@ -8,5 +8,11 @@
       <div class="key-point-statistic">
           Visit %: {{ statistic }}
       </div>
+      <div *ngIf="encounterStatistic" class="key-point-statistic">
+          Encounter %: {{ encounterStatistic }}
+      </div>
+      <div *ngIf="!encounterStatistic" class="key-point-statistic">
+        Encounter %: No data
+        </div>
   </div>
 </div>

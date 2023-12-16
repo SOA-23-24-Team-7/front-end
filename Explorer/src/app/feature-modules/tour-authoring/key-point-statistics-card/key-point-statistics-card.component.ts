@@ -10,7 +10,8 @@ import { PublicKeyPoint } from '../model/public-key-point.model';
 })
 export class KeyPointStatisticsCardComponent {
   @Input() keyPoint: KeyPoint | PublicKeyPoint;
-  @Input() statistic: number;
+  @Input() statistic: number;  
+  @Input() encounterStatistic: number;
   keyPointImage: string;
 
   ngOnInit(): void {

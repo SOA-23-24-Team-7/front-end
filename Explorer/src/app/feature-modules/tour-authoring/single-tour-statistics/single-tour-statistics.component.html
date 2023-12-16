@@ -34,6 +34,7 @@
               <xp-key-point-statistics-card 
                                   [keyPoint]="keyPoints[i]"
                                   [statistic]="statistics[i]"
+                                  [encounterStatistic]="encounterStatistics[keyPoints[i].id || 0] || encounterStatisticsNull[0]"
               > </xp-key-point-statistics-card>
           </div>
       </div>

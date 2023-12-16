@@ -18,6 +18,8 @@ export class SingleTourStatisticsComponent implements OnInit{
   keyPointContainer: any;
 
   statistics: number[] = [];
+  encounterStatistics: {[key: number]: number } = {};
+  encounterStatisticsNull: {[key: number]: number } = {[0]: 0};
 
   constructor(private service: TourAuthoringService,
               private route: ActivatedRoute){ }
@@ -51,6 +53,21 @@ export class SingleTourStatisticsComponent implements OnInit{
         this.service.getKeyPointVisitPercentage(Number(param)).subscribe({
           next: (result: number[]) =>{
             this.statistics = result;
+          }
+        });
+
+        this.service.getKeyPointEncounterCompletionPercentage(Number(param)).subscribe({
+          next: (result: {[key: number]: number }) =>{
+            this.encounterStatistics = result;
+            
+            if (this.encounterStatistics == null) {
+              this.encounterStatistics = {};
+            
+              for (let kp of this.keyPoints) {
+                this.encounterStatistics[kp.id!] = 0;
+              }
+            }
+            
           }
         });
       }

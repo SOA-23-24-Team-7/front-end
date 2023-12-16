@@ -340,4 +340,10 @@ export class TourAuthoringService {
             environment.apiHost + "tour/statistics/keyPointVisitPercentage/" + tourId,
         );
     }
+
+    getKeyPointEncounterCompletionPercentage(tourId: number): Observable<{[key: number]: number }>{
+        return this.http.get<{[key: number]: number }>(
+            environment.apiHost + "tour/statistics/keyPointEncounterCompletionPercentage/" + tourId,
+        );
+    }
 }
