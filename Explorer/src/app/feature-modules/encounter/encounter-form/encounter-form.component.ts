@@ -36,6 +36,8 @@ export class EncounterFormComponent implements OnInit {
     encounterCoords: LocationCoords;
     selectedEncounter: string;
     selectedImage: string;
+    encounterImage: File;
+    picturePath: string;
 
     user: User;
 
@@ -82,7 +84,7 @@ export class EncounterFormComponent implements OnInit {
             status: 0,
             type: this.encounterForm.value.selectedStatus,
             peopleNumber: this.encounterForm.value.peopleNumber || 1,
-            picture: this.encounterForm.value.pictureURL || "",
+            picture: this.picturePath || "",
             pictureLongitude: this.imageCoords.longitude || 0,
             pictureLatitude: this.imageCoords.latitude || 0,
             challengeDone: false,
@@ -109,25 +111,32 @@ export class EncounterFormComponent implements OnInit {
 
         if (this.encounterType == 2) {
             if (this.checkIfPictureInEncounterRange()) {
-                this.service
-                    .createHiddenEncounter(
-                        encounter,
-                        this.user.role == "tourist",
-                    )
-                    .subscribe({
-                        next: () => {
-                            this.notifier.notify(
-                                "success",
-                                "Successfully created encounter!",
-                            );
-                        },
-                        error: err => {
-                            this.notifier.notify(
-                                "error",
-                                xpError.getErrorMessage(err),
-                            );
+                if (this.encounterImage) {
+                    this.service.uploadImage(this.encounterImage).subscribe({
+                        next: result => {
+                            encounter.picture = result;
+                            this.service
+                                .createHiddenEncounter(
+                                    encounter,
+                                    this.user.role == "tourist",
+                                )
+                                .subscribe({
+                                    next: () => {
+                                        this.notifier.notify(
+                                            "success",
+                                            "Successfully created encounter!",
+                                        );
+                                    },
+                                    error: err => {
+                                        this.notifier.notify(
+                                            "error",
+                                            xpError.getErrorMessage(err),
+                                        );
+                                    },
+                                });
                         },
                     });
+                }
             } else {
                 this.notifier.notify(
                     "error",
@@ -152,6 +161,20 @@ export class EncounterFormComponent implements OnInit {
                         );
                     },
                 });
+        }
+    }
+
+    onSelectImage(event: Event) {
+        const element = event.currentTarget as HTMLInputElement;
+        if (element.files && element.files[0]) {
+            this.encounterImage = element.files[0];
+
+            const reader = new FileReader();
+
+            reader.readAsDataURL(this.encounterImage);
+            reader.onload = (e: ProgressEvent<FileReader>) => {
+                this.picturePath = reader.result as string;
+            };
         }
     }
 

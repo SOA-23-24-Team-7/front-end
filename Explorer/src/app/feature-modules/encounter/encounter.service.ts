@@ -136,4 +136,12 @@ export class EncounterService {
             miscEncounter,
         );
     }
+
+    uploadImage(image: File): Observable<string> {
+        let formData = new FormData();
+        formData.append("image", image);
+        return this.http.post(environment.apiHost + "images", formData, {
+            responseType: "text",
+        });
+    }
 }

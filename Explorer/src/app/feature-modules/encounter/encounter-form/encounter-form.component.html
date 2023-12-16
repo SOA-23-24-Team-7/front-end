@@ -1,86 +1,84 @@
-<form [formGroup]="encounterForm">
-    <div class="create-form">
-        <input placeholder="Title" formControlName="title" type="text" />
-        <input
-            placeholder="Description"
-            formControlName="description"
-            type="text"
-        />
-        <input
-            placeholder="Radius"
-            formControlName="radius"
-            min="1"
-            type="number"
-        />
-        <input
-            placeholder="Xp reward"
-            formControlName="xp"
-            min="1"
-            type="number"
-        />
-        <div>
-            <button
-                mat-raised-button
-                color="primary"
-                (click)="selectEncounterOnMap()"
-            >
-                Select encounter
-            </button>
-            <p
-                class="coordinates"
-                *ngIf="selectedEncounter"
-                [innerHTML]="selectedEncounter"
-            ></p>
+<div class="container">
+    <form [formGroup]="encounterForm">
+        <div class="form">
+            <h1>Add Encounter</h1>
+            <div class="column">
+                <div class="field">
+                    <select
+                        class="select"
+                        formControlName="selectedStatus"
+                        (change)="changeStatus()"
+                        required
+                    >
+                        <option value="1">Social</option>
+                        <option value="2">Hidden</option>
+                        <option value="3">Misc</option>
+                    </select>
+                    <label>Type</label>
+                </div>
+                <div class="field">
+                    <input formControlName="title" type="text" required />
+                    <label>Title</label>
+                </div>
+                <div class="field">
+                    <input formControlName="description" type="text" required />
+                    <label>Description</label>
+                </div>
+                <div class="field">
+                    <input
+                        formControlName="radius"
+                        min="1"
+                        type="number"
+                        required
+                    />
+                    <label>Radius</label>
+                </div>
+                <div class="field">
+                    <input
+                        formControlName="xp"
+                        min="1"
+                        type="number"
+                        required
+                    />
+                    <label>Xp reward</label>
+                </div>
+                <div *ngIf="encounterType == 1">
+                    <div class="field">
+                        <input
+                            formControlName="peopleNumber"
+                            min="1"
+                            type="number"
+                            required
+                        />
+                        <label>People number</label>
+                    </div>
+                </div>
+                <div *ngIf="encounterType == 2 && encounterType == 2">
+                    <div class="field">
+                        <input
+                            id="file-upload"
+                            accept="image/*"
+                            type="file"
+                            [(ngModel)]="picturePath"
+                            required
+                            (change)="onSelectImage($event)"
+                        />
+                        <label>Picture</label>
+                    </div>
+                </div>
+                <!-- <img [src]="picturePath" /> -->
+                <div class="btn" (click)="selectEncounterOnMap()">
+                    Select encounter
+                </div>
+                <div
+                    *ngIf="encounterType == 2"
+                    class="btn"
+                    (click)="selectPictureOnMap()"
+                >
+                    Select hidden location
+                </div>
+            </div>
+            <div class="btn" (click)="createEncounter()">Create</div>
         </div>
-        <select formControlName="selectedStatus" (change)="changeStatus()">
-            <option value="1">Social</option>
-            <option value="2">Hidden</option>
-            <option value="3">Misc</option>
-        </select>
-        <div *ngIf="encounterType == 1">
-            <input
-                placeholder="People number"
-                formControlName="peopleNumber"
-                min="1"
-                type="number"
-            />
-        </div>
-        <div *ngIf="encounterType == 2 && encounterType == 2">
-            <input
-                placeholder="Picture url"
-                formControlName="pictureURL"
-                type="text"
-            />
-        </div>
-        <button
-            *ngIf="encounterType == 2"
-            mat-raised-button
-            color="primary"
-            (click)="selectPictureOnMap()"
-        >
-            Select picture
-        </button>
-        <p
-            class="coordinates"
-            *ngIf="selectedImage && encounterType == 2"
-            [innerHTML]="selectedImage"
-        ></p>
-        <!-- <div *ngIf="encounterType == 3">
-            <input
-                placeholder="Misc field"
-                formControlName="misc"
-                type="number"
-            />
-        </div> -->
-    </div>
-</form>
-<div class="button-container">
-    <button
-        mat-raised-button
-        type="submit"
-        color="primary"
-        (click)="createEncounter()"
-    >
-        Create
-    </button>
+    </form>
 </div>

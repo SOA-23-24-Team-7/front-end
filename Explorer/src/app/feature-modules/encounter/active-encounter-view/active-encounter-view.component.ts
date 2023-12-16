@@ -10,6 +10,7 @@ import { AuthService } from "src/app/infrastructure/auth/auth.service";
 import { EncounterInstance } from "../model/encounter-instance.model";
 import { NotifierService } from "angular-notifier";
 import { xpError } from "src/app/shared/model/error.model";
+import { environment } from "src/env/environment";
 
 @Component({
     selector: "xp-active-encounter-view",
@@ -139,7 +140,8 @@ export class ActiveEncounterViewComponent implements AfterViewInit {
         this.service
             .getHiddenLocationEncounterById(this.encounter!.id)
             .subscribe(result => {
-                this.image = result.picture;
+                this.image = environment.imageHost + result.picture;
+                console.log(this.image);
             });
     }
 
