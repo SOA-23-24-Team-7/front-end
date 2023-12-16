@@ -6,7 +6,10 @@
             [blog]="blog"
             [user]="user"
             [vote]="getVote(blog)"
-            [routerLink]="blog.status == 0 ? '/blog-form/' + blog.id : '/blog/ '+ blog.id"
+            [routerLink]="
+                blog.status == 0 ? '/blog-form/' + blog.id : '/blog/ ' + blog.id
+            "
+            [@fadeIn]
             (upvote)="upVoteBlog($event)"
             (downvote)="downVoteBlog($event)"
             (publish)="publishBlogAndRefresh($event)"

@@ -14,11 +14,14 @@
 .quill-area {
     display: flex;
     flex-direction: column;
-    width: 40rem;
-    min-width: 20rem;
+    max-width: 50rem;
+    min-width: 15rem;
     color: rgba(var(--clr-text));
-    min-height: 30rem;
-    height: 35rem;
+    height: 25rem;
+    /* min-height: 25rem; */
+    max-height: 45rem;
+    overflow: auto;
+    overflow-x: hidden;
 }
 
 ::ng-deep .ql-container {
@@ -27,17 +30,47 @@
     overflow-y: auto;
 }
 
+::ng-deep .ql-editor {
+    overflow-y: auto;
+    position: relative;
+}
+
 ::ng-deep .ql-toolbar {
     border-radius: 0.5rem;
 }
 
-/* ::ng-deep .ql-snow.ql-toolbar button svg {
-    background-color: rgba(var(--clr-text), 0.7);
-} */
-/* .ql-snow .ql-toolbar button svg ::ng-deep p {
+::ng-deep .ql-editor.ql-blank::before {
+    color: rgba(var(--clr-text), 0.6) !important;
+}
+
+::ng-deep .ql-snow .ql-tooltip {
+    background-color: rgba(var(--clr-secondary-background)) !important;
+}
+
+::ng-deep .ql-snow .ql-stroke {
+    stroke: rgba(var(--clr-text), 0.6);
+}
+
+::ng-deep .ql-snow .ql-fill {
+    fill: rgba(var(--clr-text), 0.6);
+}
+
+::ng-deep .ql-toolbar.ql-snow .ql-picker-label {
+    color: rgba(var(--clr-text), 0.6);
+}
+
+::ng-deep .ql-snow .ql-tooltip::before {
+    content: "Insert image link: ";
     color: rgba(var(--clr-text));
-    border-radius: 0.5rem;
-} */
+}
+
+::ng-deep .ql-snow .ql-tooltip {
+    position: absolute;
+    top: 0% !important;
+    left: 50% !important;
+    width: 50%;
+    transform: translateX(-50%);
+}
 
 h1 {
     text-align: center;
@@ -56,8 +89,4 @@ h1 {
 
 input {
     width: 17rem;
-}
-
-::ng-deep ql-editor p {
-    color: rgba(var(--clr-text)) !important;
 }

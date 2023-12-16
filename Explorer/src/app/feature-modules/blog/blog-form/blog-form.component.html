@@ -1,14 +1,7 @@
 <form [formGroup]="blogForm">
     <div class="form">
         <div class="input-container">
-            <input
-                formControlName="title"
-                type="text"
-                placeholder="Title*"
-                [ngClass]="{
-                    error: blogForm.get('title')?.value == ''
-                }"
-            />
+            <input formControlName="title" type="text" placeholder="Title*" />
         </div>
         <quill-editor
             id="editor"

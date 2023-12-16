@@ -7,7 +7,8 @@ import { CreateBlog } from "../model/blog-create.model";
 import { UpdateBlog } from "../model/blog-update.model";
 import * as DOMPurify from "dompurify";
 import { marked } from "marked";
-import Quill from "quill";
+import { NotifierService } from "angular-notifier";
+import { xpError } from "src/app/shared/model/error.model";
 
 @Component({
     selector: "xp-blog-form",
@@ -24,6 +25,7 @@ export class BlogFormComponent implements OnInit {
         private service: BlogService,
         private router: Router,
         private route: ActivatedRoute,
+        private notifier: NotifierService,
     ) {}
     ngOnInit(): void {
         const param = this.route.snapshot.paramMap.get("blogId");
@@ -44,11 +46,10 @@ export class BlogFormComponent implements OnInit {
                 [{ indent: "-1" }, { indent: "+1" }],
                 [{ size: ["small", false, "large", "huge"] }],
                 [{ header: [1, 2, 3, 4, 5, 6, false] }],
-                [{ color: [] }, { background: [] }],
                 [{ font: [] }],
                 [{ align: [] }],
                 ["clean"],
-                ["link", "video", "image"],
+                ["link", "image"],
             ],
             handlers: {
                 image: this.imageHandler,
@@ -81,14 +82,6 @@ export class BlogFormComponent implements OnInit {
         description: new FormControl("", [Validators.required]),
     });
 
-    getMarkupPreview() {
-        const md = marked.setOptions({});
-        var description = DOMPurify.sanitize(
-            md.parse(this.blogForm.get("description")?.value || ""),
-        );
-        return description;
-    }
-
     getBlog(): void {
         this.service.getBlog(this.blogId).subscribe({
             next: (result: Blog) => {
@@ -110,17 +103,38 @@ export class BlogFormComponent implements OnInit {
             authorId: 0,
             visibilityPolicy: 0,
         };
-
-        if (blog.title != "" && blog.title != null)
-            this.service.saveBlog(blog).subscribe({
-                next: _ => {
-                    this.router.navigate(["/my-blogs"]);
-                },
-            });
-        else alert("Must enter title!");
+        if (
+            this.blogForm.value.description == "" ||
+            this.blogForm.value.description == null
+        ) {
+            this.notifier.notify("error", "Description must not be empty.");
+            return;
+        }
+        this.service.saveBlog(blog).subscribe({
+            next: _ => {
+                this.notifier.notify("success", "Successfully created blog!");
+                this.router.navigate(["/my-blogs"]);
+            },
+            error: err => {
+                this.notifier.notify("error", xpError.getErrorMessage(err));
+            },
+        });
     }
 
     updateBlog(): void {
+        if (this.blogForm.value.title == "") {
+            this.notifier.notify("error", "Title must not be empty.");
+            return;
+        }
+
+        if (
+            this.blogForm.value.description == "" ||
+            this.blogForm.value.description == null
+        ) {
+            this.notifier.notify("error", "Description must not be empty.");
+            return;
+        }
+
         const blog: UpdateBlog = {
             title: this.blogForm.value.title || "",
             description: this.blogForm.value.description || "",
@@ -134,7 +148,14 @@ export class BlogFormComponent implements OnInit {
         if (blog.title != "" && blog.title != null)
             this.service.updateBlog(blog).subscribe({
                 next: _ => {
+                    this.notifier.notify(
+                        "success",
+                        "Successfully updated blog!",
+                    );
                     this.router.navigate(["/my-blogs"]);
+                },
+                error: err => {
+                    this.notifier.notify("error", xpError.getErrorMessage(err));
                 },
             });
     }
