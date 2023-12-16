@@ -43,7 +43,7 @@ export class PublishedToursComponent implements OnInit {
         else this.publishedTours = this.inputTours;
         this.authService.user$.subscribe(user => {
             this.user = user;
-            this.service.getShoppingCart(this.user.id).subscribe({
+            this.service.cart$.subscribe({
                 next: (result: ShoppingCart) => {
                     this.shoppingCart = result;
                     console.log(result);
@@ -95,6 +95,7 @@ export class PublishedToursComponent implements OnInit {
             },
         });
     }
+
     addOrderItem(
         tourId: number | undefined,
         name: string,
@@ -139,7 +140,7 @@ export class PublishedToursComponent implements OnInit {
 
         dialogRef.afterClosed().subscribe(result => {
             console.log("Zatvoren dijalog", result);
-            this.service.getShoppingCart(this.user.id).subscribe({
+            this.service.cart$.subscribe({
                 next: (result: ShoppingCart) => {
                     this.shoppingCart = result;
                     this.service.getToursInCart(this.user.id).subscribe({

@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Inject, Input, Output } from "@angular/core";
+import { Component, Inject } from "@angular/core";
 import { TourLimitedView } from "../../marketplace/model/tour-limited-view.model";
 import { MarketplaceService } from "../../marketplace/marketplace.service";
 import {
@@ -11,10 +11,8 @@ import { Review } from "../../marketplace/model/review.model";
 import { ReviewCardComponent } from "../../layout/review-cards/review-card.component";
 import { User } from "src/app/infrastructure/auth/model/user.model";
 import { OrderItem } from "../model/order-item";
-import { Observable } from "rxjs";
 import { ShoppingCart } from "../model/shopping-cart";
 import { PagedResults } from "src/app/shared/model/paged-results.model";
-import { TourToken } from "../model/tour-token.model";
 import { StakeholderService } from "../../stakeholder/stakeholder.service";
 import { CouponsModalComponent } from "../coupons-modal/coupons-modal.component";
 import { Bundle } from "../../tour-authoring/model/bundle.model";
@@ -54,8 +52,8 @@ export class ShoppingCartComponent {
             this.service.getBundleById(boi.bundleId!).subscribe({
                 next: (result: Bundle) => {
                     this.bundles.push(result);
-                }
-            })
+                },
+            });
         });
     }
 
@@ -70,6 +68,7 @@ export class ShoppingCartComponent {
             },
         });
     }
+
     removeOrderItem(tourId: number): void {
         this.service.getOrderItem(tourId, this.user.id).subscribe({
             next: (result: OrderItem) => {
@@ -109,14 +108,13 @@ export class ShoppingCartComponent {
         });
     }
     checkout(): void {
-        
-        console.log('1');
+        console.log("1");
         var totalPrice = this.shoppingCart.totalPrice;
         var storedShoppingCart = this.shoppingCart;
         var uslo = false;
         console.log(totalPrice);
         this.stakeholderService.getTouristWallet().subscribe(result => {
-            console.log('2');
+            console.log("2");
             var wallet = result;
             if (wallet.adventureCoin >= (totalPrice as number)) {
                 //dobaviti order iteme
@@ -126,14 +124,14 @@ export class ShoppingCartComponent {
                     .deleteShoppingKart(this.shoppingCart.id)
                     .subscribe({
                         next: () => {
-                            console.log('3');
+                            console.log("3");
                             this.shoppingCart = {};
                             console.log(storedShoppingCart);
                             this.service
                                 .addShoppingCart(this.shoppingCart)
                                 .subscribe({
                                     next: async (result: ShoppingCart) => {
-                                        console.log('4');
+                                        console.log("4");
                                         this.shoppingCart = result;
                                         var newShoppingCart = result;
                                         for (let tour of this.data) {
@@ -161,12 +159,12 @@ export class ShoppingCartComponent {
                                             this.shoppingCart = newShoppingCart;
                                         }
                                         for (let boi of bundleOrderItems!) {
-                                            console.log('5');
-                                            this.service.buyBundle(boi.bundleId!).subscribe({
-                                                next: () => {
-                                                    
-                                                }
-                                            });
+                                            console.log("5");
+                                            this.service
+                                                .buyBundle(boi.bundleId!)
+                                                .subscribe({
+                                                    next: () => {},
+                                                });
                                         }
                                         this.dialogRef.closeAll();
                                     },

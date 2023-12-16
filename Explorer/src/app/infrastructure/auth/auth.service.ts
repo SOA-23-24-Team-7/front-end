@@ -11,6 +11,7 @@ import { User } from "./model/user.model";
 import { Registration } from "./model/registration.model";
 import { LocationCoords } from "src/app/shared/model/location-coords.model";
 import { TouristProgress } from "./model/tourist-progress.model";
+import { MarketplaceService } from "src/app/feature-modules/marketplace/marketplace.service";
 
 @Injectable({
     providedIn: "root",
@@ -31,6 +32,7 @@ export class AuthService {
         private http: HttpClient,
         private tokenStorage: TokenStorage,
         private router: Router,
+        private marketPlaceService: MarketplaceService,
     ) {}
 
     login(login: Login): Observable<AuthenticationResponse> {
@@ -108,6 +110,7 @@ export class AuthService {
                     },
                     error: () => {},
                 });
+            this.marketPlaceService.getShoppingCart(user.id).subscribe();
         }
     }
 

@@ -1,16 +1,14 @@
 import { HttpClient, HttpResponse } from "@angular/common/http";
 import { Injectable } from "@angular/core";
 import { Rating } from "../administration/model/rating.model";
-import { Observable } from "rxjs";
+import { BehaviorSubject, Observable, tap } from "rxjs";
 import { environment } from "src/env/environment";
-import { Router } from "@angular/router";
 import { PagedResults } from "src/app/shared/model/paged-results.model";
 import { Club } from "./model/club.model";
 import { MyClubJoinRequest } from "./model/my-club-join-request.model";
 import { ClubJoinRequest } from "./model/club-join-request.model copy";
 import { ClubMember } from "./model/club-member.model";
 import { ClubInvitationUsername } from "./model/club-invitation-username.model";
-import { ClubInvitation } from "./model/club-invitation.model";
 import { ClubInvitationWithClubAndOwnerName } from "./model/club-invitation-with-club-and-owner-name.model";
 import { Review } from "./model/review.model";
 import { Problem } from "./model/problem.model";
@@ -22,7 +20,6 @@ import { PublicKeyPoint } from "./model/public-key-point.model";
 import { PublicFacilities } from "./model/public-facilities.model";
 import { KeyPoint } from "../tour-authoring/model/key-point.model";
 import { ShoppingCart } from "./model/shopping-cart";
-import { OrderItem as any } from "./model/order-item";
 import { TourLimitedView } from "./model/tour-limited-view.model";
 import { TourToken } from "./model/tour-token.model";
 import { TourSale } from "./model/tour-sale.model";
@@ -36,6 +33,15 @@ import { SortOption } from "./model/sort-option.model";
     providedIn: "root",
 })
 export class MarketplaceService {
+    cart$ = new BehaviorSubject<ShoppingCart>({
+        id: 0,
+        touristId: 0,
+        totalPrice: 0,
+        isPurchased: false,
+        orderItems: [],
+        bundleOrderItems: [],
+    });
+
     constructor(private http: HttpClient) {}
 
     getTourPreference(): Observable<TourPreference> {
@@ -287,18 +293,6 @@ export class MarketplaceService {
                 "/first-key-point",
         );
     }
-    addShoppingCart(shoppingCart: ShoppingCart): Observable<ShoppingCart> {
-        return this.http.post<ShoppingCart>(
-            environment.apiHost + "tourist/shoppingCart/",
-            shoppingCart,
-        );
-    }
-    addOrderItem(orderItem: any): Observable<any> {
-        return this.http.post<any>(
-            environment.apiHost + "tourist/shoppingCart/addItem/",
-            orderItem,
-        );
-    }
 
     addBundleOrderItem(bundleOrderItem: BundleOrderItem): Observable<any> {
         return this.http.post<any>(
@@ -307,9 +301,34 @@ export class MarketplaceService {
         );
     }
 
+    addShoppingCart(shoppingCart: ShoppingCart): Observable<ShoppingCart> {
+        return this.http.post<ShoppingCart>(
+            environment.apiHost + "tourist/shoppingCart/",
+            shoppingCart,
+        );
+    }
+
     getShoppingCart(id: number): Observable<ShoppingCart> {
-        return this.http.get<ShoppingCart>(
-            environment.apiHost + "tourist/shoppingCart/" + id,
+        return this.http
+            .get<ShoppingCart>(
+                environment.apiHost + "tourist/shoppingCart/" + id,
+            )
+            .pipe(
+                tap(shoppingCart => {
+                    this.setCart(shoppingCart);
+                }),
+            );
+    }
+
+    setCart(shoppingCart: ShoppingCart) {
+        this.cart$.next(shoppingCart);
+        localStorage.setItem("shoppingCart", JSON.stringify(shoppingCart));
+    }
+
+    addOrderItem(orderItem: any): Observable<any> {
+        return this.http.post<any>(
+            environment.apiHost + "tourist/shoppingCart/addItem/",
+            orderItem,
         );
     }
 
@@ -385,7 +404,10 @@ export class MarketplaceService {
         return this.http.get<boolean>(route);
     }
 
-    searchTours(searchFilter: any, sortOption: SortOption): Observable<PagedResults<Tour>> {
+    searchTours(
+        searchFilter: any,
+        sortOption: SortOption,
+    ): Observable<PagedResults<Tour>> {
         let query = this.prepareSearchQuery(searchFilter, sortOption);
         console.log(query);
         const path = environment.apiHost + "tourist/tour/search" + query;
@@ -393,52 +415,108 @@ export class MarketplaceService {
     }
 
     prepareSearchQuery(searchFilter: any, sortOption: SortOption): String {
-        let query = `?page=${searchFilter.page}&pageSize=${searchFilter.pageSize}`
+        let query = `?page=${searchFilter.page}&pageSize=${searchFilter.pageSize}`;
         query += searchFilter.name != "" ? `&name=${searchFilter.name}` : "";
-        query += searchFilter.minPrice >= 0 && searchFilter.minPrice !== "" ? `&minPrice=${searchFilter.minPrice}` : "";
-        query += searchFilter.maxPrice >= 0  && searchFilter.maxPrice !== "" ? `&maxPrice=${searchFilter.maxPrice}` : "";
-        query += searchFilter.onDiscount != false ? `&onDiscount=${searchFilter.onDiscount}` : "";
-        query += searchFilter.minDifficulty >= 0  && searchFilter.minDifficulty !== "" ? `&minDifficulty=${searchFilter.minDifficulty}` : "";
-        query += searchFilter.maxDifficulty >= 0  && searchFilter.maxDifficulty !== "" ? `&maxDifficulty=${searchFilter.maxDifficulty}` : "";
-        query += searchFilter.minDuration >= 0 && searchFilter.minDuration !== "" ? `&minDuration=${searchFilter.minDuration}` : "";
-        query += searchFilter.maxDuration >= 0 && searchFilter.maxDuration !== "" ? `&maxDuration=${searchFilter.maxDuration}` : "";
-        query += searchFilter.minAverageRating >= 0 && searchFilter.minAverageRating !== "" ? `&minAverageRating=${searchFilter.minAverageRating}` : "";
-        query += searchFilter.minLength >= 0 && searchFilter.minLength !== "" ? `&minLength=${searchFilter.minLength}` : "";
-        query += searchFilter.maxLength >= 0 && searchFilter.maxLength !== "" ? `&maxLength=${searchFilter.maxLength}` : "";
-        query += searchFilter.longitude >= -180 && searchFilter.longitude !== "" ? `&longitude=${searchFilter.longitude}` : "";
-        query += searchFilter.latitude >= -180 && searchFilter.latitude !== "" ? `&latitude=${searchFilter.latitude}` : "";
-        query += searchFilter.distance > 0 && searchFilter.distance !== "" ? `&maxDistance=${searchFilter.distance}` : "";
+        query +=
+            searchFilter.minPrice >= 0 && searchFilter.minPrice !== ""
+                ? `&minPrice=${searchFilter.minPrice}`
+                : "";
+        query +=
+            searchFilter.maxPrice >= 0 && searchFilter.maxPrice !== ""
+                ? `&maxPrice=${searchFilter.maxPrice}`
+                : "";
+        query +=
+            searchFilter.onDiscount != false
+                ? `&onDiscount=${searchFilter.onDiscount}`
+                : "";
+        query +=
+            searchFilter.minDifficulty >= 0 && searchFilter.minDifficulty !== ""
+                ? `&minDifficulty=${searchFilter.minDifficulty}`
+                : "";
+        query +=
+            searchFilter.maxDifficulty >= 0 && searchFilter.maxDifficulty !== ""
+                ? `&maxDifficulty=${searchFilter.maxDifficulty}`
+                : "";
+        query +=
+            searchFilter.minDuration >= 0 && searchFilter.minDuration !== ""
+                ? `&minDuration=${searchFilter.minDuration}`
+                : "";
+        query +=
+            searchFilter.maxDuration >= 0 && searchFilter.maxDuration !== ""
+                ? `&maxDuration=${searchFilter.maxDuration}`
+                : "";
+        query +=
+            searchFilter.minAverageRating >= 0 &&
+            searchFilter.minAverageRating !== ""
+                ? `&minAverageRating=${searchFilter.minAverageRating}`
+                : "";
+        query +=
+            searchFilter.minLength >= 0 && searchFilter.minLength !== ""
+                ? `&minLength=${searchFilter.minLength}`
+                : "";
+        query +=
+            searchFilter.maxLength >= 0 && searchFilter.maxLength !== ""
+                ? `&maxLength=${searchFilter.maxLength}`
+                : "";
+        query +=
+            searchFilter.longitude >= -180 && searchFilter.longitude !== ""
+                ? `&longitude=${searchFilter.longitude}`
+                : "";
+        query +=
+            searchFilter.latitude >= -180 && searchFilter.latitude !== ""
+                ? `&latitude=${searchFilter.latitude}`
+                : "";
+        query +=
+            searchFilter.distance > 0 && searchFilter.distance !== ""
+                ? `&maxDistance=${searchFilter.distance}`
+                : "";
         query += sortOption != SortOption.NoSort ? `&sortBy=${sortOption}` : "";
         return query;
     }
 
     addTourSale(tourSale: TourSale): Observable<TourSale> {
-      return this.http.post<TourSale>(environment.apiHost + "tour-sales", tourSale);
+        return this.http.post<TourSale>(
+            environment.apiHost + "tour-sales",
+            tourSale,
+        );
     }
 
     getTourSales(): Observable<TourSale[]> {
-      return this.http.get<TourSale[]>(environment.apiHost + "tour-sales");
+        return this.http.get<TourSale[]>(environment.apiHost + "tour-sales");
     }
 
     getTourSaleById(id: number): Observable<TourSale> {
-      return this.http.get<TourSale>(environment.apiHost + "tour-sales/" + id);
+        return this.http.get<TourSale>(
+            environment.apiHost + "tour-sales/" + id,
+        );
     }
 
     updateTourSale(tourSale: TourSale): Observable<TourSale> {
-      return this.http.put<TourSale>(environment.apiHost + "tour-sales", tourSale);
+        return this.http.put<TourSale>(
+            environment.apiHost + "tour-sales",
+            tourSale,
+        );
     }
 
     deleteTourSale(id: number): Observable<void> {
-      return this.http.delete<void>(environment.apiHost + "tour-sales/" + id);
+        return this.http.delete<void>(environment.apiHost + "tour-sales/" + id);
     }
 
     getDiscountForTour(tourId: number): Observable<number | null> {
-        return this.http.get<number | null>(environment.apiHost + "tour-sales/tours/" + tourId);
+        return this.http.get<number | null>(
+            environment.apiHost + "tour-sales/tours/" + tourId,
+        );
     }
 
-    getPublishedToursByAuthor(authorId: number): Observable<PagedResults<Tour>> {
-      const path = environment.apiHost + "tourist/tour/search" + "?page=0&pageSize=0&authorId=" + authorId;
-      return this.http.get<PagedResults<Tour>>(path);
+    getPublishedToursByAuthor(
+        authorId: number,
+    ): Observable<PagedResults<Tour>> {
+        const path =
+            environment.apiHost +
+            "tourist/tour/search" +
+            "?page=0&pageSize=0&authorId=" +
+            authorId;
+        return this.http.get<PagedResults<Tour>>(path);
     }
 
     addCoupon(coupon: Coupon): Observable<Coupon> {
@@ -472,21 +550,23 @@ export class MarketplaceService {
         let path = environment.apiHost + "tourist/bundles";
         return this.http.get<Bundle[]>(path);
     }
-    
+
     getBundleById(bundleId: number): Observable<Bundle> {
         let path = environment.apiHost + "tourist/bundles/" + bundleId;
         return this.http.get<Bundle>(path);
     }
-    
+
     removeBundleOrderItem(bundleOrderItemId: number): Observable<any> {
-        let path = environment.apiHost + "tourist/shoppingCart/remove-bundle-item/" + bundleOrderItemId;
+        let path =
+            environment.apiHost +
+            "tourist/shoppingCart/remove-bundle-item/" +
+            bundleOrderItemId;
         return this.http.delete<any>(path);
     }
-    
+
     buyBundle(bundleId: number): Observable<any> {
-        console.log('6');
+        console.log("6");
         let path = environment.apiHost + "token/bundle/" + bundleId;
         return this.http.post<any>(path, {});
-
     }
 }
