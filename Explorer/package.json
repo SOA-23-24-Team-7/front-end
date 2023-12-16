@@ -30,6 +30,7 @@
     "@types/leaflet-fullscreen": "^1.0.9",
     "@types/leaflet-routing-machine": "^3.2.6",
     "angular-notifier": "^14.0.0",
+    "chart.js": "^4.4.1",
     "dompurify": "^3.0.6",
     "jwt-decode": "^4.0.0",
     "leaflet": "^1.9.4",

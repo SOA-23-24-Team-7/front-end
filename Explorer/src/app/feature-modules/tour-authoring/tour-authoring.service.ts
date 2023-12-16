@@ -292,4 +292,46 @@ export class TourAuthoringService {
         query += searchFilter.distance > 0 && searchFilter.distance !== "" ? `&maxDistance=${searchFilter.distance}` : "";
         return query;
     }
+
+    getSoldToursNumber(): Observable<number> {
+        return this.http.get<number>(
+            environment.apiHost + "tour/statistics/bought"
+        );
+    }
+
+    getStartedToursNumber(): Observable<number> {
+        return this.http.get<number>(
+            environment.apiHost + "tour/statistics/started"
+        );
+    }
+
+    getCompletedToursNumber(): Observable<number> {
+        return this.http.get<number>(
+            environment.apiHost + "tour/statistics/completed"
+        );
+    }
+
+    getSalesNumber(tourId: number): Observable<number> {
+        return this.http.get<number>(
+            environment.apiHost + "ovdeIdePutanjaKATourAuthoringItoNmp" + tourId,
+        );
+    }
+
+    getStartsNumber(tourId: number): Observable<number> {
+        return this.http.get<number>(
+            environment.apiHost + "ovdeIdePutanjaKATourAuthoringItoNmp" + tourId,
+        );
+    }
+
+    getCompletionNumber(tourId: number): Observable<number> {
+        return this.http.get<number>(
+            environment.apiHost + "ovdeIdePutanjaKATourAuthoringItoNmp" + tourId,
+        );
+    }
+
+    getCompletionPercentages(): Observable<number[]>{
+        return this.http.get<number[]>(
+            environment.apiHost + "tour/statistics/distribution"
+        );
+    }
 }
