@@ -313,19 +313,19 @@ export class TourAuthoringService {
 
     getSalesNumber(tourId: number): Observable<number> {
         return this.http.get<number>(
-            environment.apiHost + "ovdeIdePutanjaKATourAuthoringItoNmp" + tourId,
+            environment.apiHost + "tour/statistics/bought/" + tourId,
         );
     }
 
     getStartsNumber(tourId: number): Observable<number> {
         return this.http.get<number>(
-            environment.apiHost + "ovdeIdePutanjaKATourAuthoringItoNmp" + tourId,
+            environment.apiHost + "tour/statistics/started/" + tourId,
         );
     }
 
     getCompletionNumber(tourId: number): Observable<number> {
         return this.http.get<number>(
-            environment.apiHost + "ovdeIdePutanjaKATourAuthoringItoNmp" + tourId,
+            environment.apiHost + "tour/statistics/completed/" + tourId,
         );
     }
 

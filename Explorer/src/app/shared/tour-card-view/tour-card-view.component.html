@@ -17,7 +17,7 @@
                 <fa-icon class="tour-action" [icon]="faPersonHiking" [routerLink]="['/tours/equipment', tour.id]"/>
                 <fa-icon class="tour-action" [icon]="faMapLocation" [routerLink]="['/tour', tour.id, 'key-points']"/>
                 <fa-icon class="tour-action" *ngIf="tour.status == 2 || tour.status == 0" [icon]="faMoneyBills" (click)="onCouponClicked(tour)"/>
-                <fa-icon class="tour-action" [icon]="faBarChart" [routerLink]="['/tour-statistics', tour.id]"/>
+                <fa-icon class="tour-action" *ngIf="tour.status == 1 || tour.status == 2" [icon]="faBarChart" [routerLink]="['/tour-statistics', tour.id]"/>
                 <fa-icon class="tour-action green" *ngIf="tour.status == 2 || tour.status == 0" [icon]="faShareNodes" (click)="onPublishClicked(tour)"/>
                 <fa-icon class="tour-action" *ngIf="tour.status == 1" [icon]="faBoxArchive" (click)="onArchiveClicked(tour)"/>
             </div>
