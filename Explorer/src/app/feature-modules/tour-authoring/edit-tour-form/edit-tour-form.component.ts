@@ -15,6 +15,8 @@ import { TourAuthoringService } from "../tour-authoring.service";
 import { faXmark } from "@fortawesome/free-solid-svg-icons";
 import { COMMA, ENTER } from "@angular/cdk/keycodes";
 import { MatChipInputEvent } from "@angular/material/chips";
+import { NotifierService } from "angular-notifier";
+import { xpError } from "src/app/shared/model/error.model";
 
 @Component({
     selector: "xp-edit-tour-form",
@@ -47,6 +49,7 @@ export class EditTourFormComponent implements OnInit {
     constructor(
         private service: TourAuthoringService,
         public dialog: MatDialogRef<EditTourFormComponent>,
+        private notifier: NotifierService,
         @Inject(MAT_DIALOG_DATA) public data: any,
     ) {}
 
@@ -84,27 +87,31 @@ export class EditTourFormComponent implements OnInit {
     }
     submit(): void {
         const updatedData = this.editTourForm.value;
-        console.log(updatedData);
+        // console.log(updatedData);
         const tour: Tour = {
-            name: this.editTourForm.value.name || "",
-            description: this.editTourForm.value.description || "",
-            difficulty: parseInt(this.editTourForm.value.difficulty || "0"),
-            tags: this.editTourForm.value.tags
-                ? this.editTourForm.value.tags
-                : [],
-            price: parseInt(this.editTourForm.value.price || "0"),
+            id: this.data.id,
+            name: updatedData.name || "",
+            description: updatedData.description || "",
+            difficulty: parseInt(updatedData.difficulty || "0"),
+            tags: updatedData.tags ? updatedData.tags : [],
+            price: parseInt(updatedData.price || "0"),
+            durations: this.data.durations,
         };
 
-        this.data.name = tour.name;
-        this.data.description = tour.description;
-        this.data.difficulty = tour.difficulty;
-        this.data.tags = tour.tags;
-        this.data.price = tour.price;
-        console.log(this.data.id);
-        this.service.updateTour(this.data).subscribe({
+        // console.log(this.data.id);
+        this.service.updateTour(tour).subscribe({
             next: () => {
+                this.data.name = tour.name;
+                this.data.description = tour.description;
+                this.data.difficulty = tour.difficulty;
+                this.data.tags = tour.tags;
+                this.data.price = tour.price;
                 this.toursUpdated.emit();
                 this.onClose();
+                this.notifier.notify("success", "Successfully updated tour!");
+            },
+            error: err => {
+                this.notifier.notify("error", xpError.getErrorMessage(err));
             },
         });
     }

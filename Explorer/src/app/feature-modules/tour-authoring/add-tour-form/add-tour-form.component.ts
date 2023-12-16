@@ -7,6 +7,8 @@ import { Tour } from "../model/tour.model";
 import { Bundle } from "../model/bundle.model";
 import { COMMA, ENTER } from "@angular/cdk/keycodes";
 import { MatChipInputEvent } from "@angular/material/chips";
+import { NotifierService } from "angular-notifier";
+import { xpError } from "src/app/shared/model/error.model";
 @Component({
     selector: "xp-add-tour-form",
     templateUrl: "./add-tour-form.component.html",
@@ -36,6 +38,7 @@ export class AddTourFormComponent {
     constructor(
         private service: TourAuthoringService,
         public dialog: MatDialogRef<AddTourFormComponent>,
+        private notifier: NotifierService,
         @Inject(MAT_DIALOG_DATA) public data: any,
     ) {}
 
@@ -72,10 +75,14 @@ export class AddTourFormComponent {
         };
         this.service.addTour(tour).subscribe({
             next: () => {
-                console.log("uslo");
+                // console.log("uslo");
                 this.toursUpdated.emit();
-                location.reload();
+                // location.reload();
                 this.onClose();
+                this.notifier.notify("success", "Successfully created tour!");
+            },
+            error: err => {
+                this.notifier.notify("error", xpError.getErrorMessage(err));
             },
         });
     }
@@ -86,7 +93,6 @@ export class AddTourFormComponent {
     add(event: MatChipInputEvent): void {
         const value = (event.value || "").trim();
 
-        // Add our fruit
         if (value) {
             this.addTag(value);
         }

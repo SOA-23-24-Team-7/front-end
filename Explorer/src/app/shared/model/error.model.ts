@@ -10,6 +10,10 @@ export class xpError {
     }
 
     static getErrorMessage(error: any): string {
-        return error.error.detail.slice(20, -3);
+        console.log(error);
+        if (!error.error || !error.error.detail)
+            return "Unknown error (anlaki back-end, ne salje error kako treba 😔 )";
+        const detail = error.error.detail;
+        return detail.slice(detail.lastIndexOf("Message='") + 9, -3);
     }
 }

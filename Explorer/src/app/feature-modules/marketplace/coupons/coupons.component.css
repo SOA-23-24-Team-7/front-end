@@ -1,21 +1,21 @@
+:host {
+    border-radius: 1rem !important;
+}
+
 * {
     margin: 0;
     padding: 0;
 }
 
 .add-modal {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100vw;
-    height: 100vh;
-    z-index: 9999;
     display: flex;
     align-items: center;
     justify-content: center;
     background-color: rgba(0, 0, 0, 0.7);
     animation: fadeIn 0.5s ease-in-out;
     overflow-y: auto;
+    pointer-events: none;
+    border-radius: 1rem;
 }
 
 .add {
@@ -28,6 +28,7 @@
     border-radius: 1rem;
     width: 32rem;
     overflow-y: auto;
+    pointer-events: all;
 }
 
 .add-head {
@@ -82,7 +83,6 @@
     color: rgba(var(--clr-text), 1);
 }
 
-
 .add-input {
     margin-top: 0.25rem;
     margin-bottom: 1rem;
@@ -114,7 +114,6 @@
     font-size: 1rem;
     display: inline-block;
 }
-
 
 .add-submit {
     display: flex;
@@ -161,5 +160,4 @@
     font-family: var(--fnt-body);
     font-weight: 400;
     font-size: 1rem;
-
 }
