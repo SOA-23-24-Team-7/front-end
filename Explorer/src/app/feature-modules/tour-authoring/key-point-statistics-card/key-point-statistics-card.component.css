@@ -1,0 +1,69 @@
+.key-point-card {
+  width: 12rem;
+  height: 12rem;
+  border: rgba(var(--clr-outline-contrast), 1) 1px solid;
+  border-radius: 1rem;
+  box-shadow: 0 0 1rem rgba(var(--clr-outline-contrast), 0.8);
+  margin: 20px;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  position: relative;
+  color: rgb(var(--clr-text));
+  transition: transform 0.2s;
+}
+.key-point-card:hover {
+  transform: scale(1.05);
+}
+.key-point-image {
+  width: 100%;
+  height: 100%;
+  opacity: 0.55;
+}
+
+.key-point-name {
+  text-align: center;
+  color: rgb(--clr-neutral-900);
+  font-weight: bold;
+  font-size: 1.2rem;
+  position: sticky;
+  top: 0;
+}
+
+.key-point-description {
+  padding: 1rem;
+  padding-top: 0;
+  text-align: left;
+  word-wrap: break-word;
+  overflow-y: scroll;
+  width: 95%;
+  height: 80%;
+  margin-top: 0.5rem;
+}
+
+.key-point-statistic {
+  padding: 1rem;
+  padding-top: 0;
+  text-align: left;
+  word-wrap: break-word;
+  overflow-y: scroll;
+  font-weight: bold;
+  width: 95%;
+  height: 80%;
+  margin-top: 0.5rem;
+}
+
+.key-point-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+}

@@ -36,6 +36,7 @@ import { ViewBundleToursComponent } from "./view-bundle-tours/view-bundle-tours.
 import { EncounterModule } from "../encounter/encounter.module";
 import { TourStatisticsComponent } from './tour-statistics/tour-statistics.component';
 import { SingleTourStatisticsComponent } from './single-tour-statistics/single-tour-statistics.component';
+import { KeyPointStatisticsCardComponent } from './key-point-statistics-card/key-point-statistics-card.component';
 
 @NgModule({
     declarations: [
@@ -64,6 +65,7 @@ import { SingleTourStatisticsComponent } from './single-tour-statistics/single-t
         ViewBundleToursComponent,
         TourStatisticsComponent,
         SingleTourStatisticsComponent,
+        KeyPointStatisticsCardComponent,
     ],
     imports: [
         CommonModule,
