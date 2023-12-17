@@ -45,7 +45,6 @@ export class EncounterFormComponent implements OnInit {
     selectedImage: string;
     encounterImage: File;
     picturePath: string;
-
     user: User;
 
     encounterForm = new FormGroup({
@@ -86,11 +85,11 @@ export class EncounterFormComponent implements OnInit {
             description: this.encounterForm.value.description || "",
             longitude: this.encounterCoords.longitude || 0,
             latitude: this.encounterCoords.latitude || 0,
-            radius: this.encounterForm.value.radius || 10,
-            xpReward: this.encounterForm.value.xp || 1,
+            radius: this.encounterForm.value.radius || 0,
+            xpReward: this.encounterForm.value.xp || 0,
             status: 0,
             type: this.encounterForm.value.selectedStatus,
-            peopleNumber: this.encounterForm.value.peopleNumber || 1,
+            peopleNumber: this.encounterForm.value.peopleNumber || 0,
             picture: this.picturePath || "",
             pictureLongitude: this.imageCoords.longitude || 0,
             pictureLatitude: this.imageCoords.latitude || 0,
@@ -98,26 +97,45 @@ export class EncounterFormComponent implements OnInit {
         };
 
         if (this.encounterType == 1) {
-            this.service
-                .createSocialEncounter(encounter, this.user.role == "tourist")
-                .subscribe({
-                    next: () => {
-                        this.notifier.notify(
-                            "success",
-                            "Successfully created encounter!",
-                        );
-                    },
-                    error: err => {
-                        this.notifier.notify(
-                            "error",
-                            xpError.getErrorMessage(err),
-                        );
-                    },
-                });
+            if (
+                this.encounterCoords.longitude > 0 &&
+                this.encounterCoords.latitude > 0
+            ) {
+                this.service
+                    .createSocialEncounter(
+                        encounter,
+                        this.user.role == "tourist",
+                    )
+                    .subscribe({
+                        next: () => {
+                            this.notifier.notify(
+                                "success",
+                                "Successfully created encounter!",
+                            );
+                        },
+                        error: err => {
+                            this.notifier.notify(
+                                "error",
+                                xpError.getErrorMessage(err),
+                            );
+                        },
+                    });
+            } else {
+                this.notifier.notify(
+                    "error",
+                    "Encounter location not selected!",
+                );
+            }
         }
 
         if (this.encounterType == 2) {
-            if (this.checkIfPictureInEncounterRange()) {
+            if (
+                this.checkIfPictureInEncounterRange() &&
+                this.imageCoords.longitude > 0 &&
+                this.imageCoords.latitude > 0 &&
+                this.encounterCoords.longitude > 0 &&
+                this.encounterCoords.latitude > 0
+            ) {
                 if (this.encounterImage) {
                     this.service.uploadImage(this.encounterImage).subscribe({
                         next: result => {
@@ -147,7 +165,7 @@ export class EncounterFormComponent implements OnInit {
             } else {
                 this.notifier.notify(
                     "error",
-                    "Picture is not in encounter range!",
+                    "Picture is not in encounter range or location not selected!",
                 );
             }
         }

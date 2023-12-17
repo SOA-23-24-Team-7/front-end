@@ -71,7 +71,11 @@
                     Select encounter
                 </div>
                 <div
-                    *ngIf="encounterType == 2"
+                    *ngIf="
+                        encounterType == 2 &&
+                        encounterCoords.latitude > 0 &&
+                        encounterCoords.longitude > 0
+                    "
                     class="btn"
                     (click)="selectPictureOnMap()"
                 >
