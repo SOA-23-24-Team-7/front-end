@@ -72,6 +72,16 @@
     left: 50% !important;
     width: 50%;
     transform: translateX(-50%);
+    background-color: rgba(var(--clr-background)) !important;
+
+    z-index: 9999999999;
+}
+
+::ng-deep .ql-tooltip .ql-editing {
+    /* left: unset !important; */
+    z-index: 9999999999;
+    background-color: black !important;
+    /* background-color: rgba(var(--clr-secondary-background)) !important; */
 }
 
 h1 {
