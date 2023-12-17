@@ -7,7 +7,9 @@
             [user]="user"
             [vote]="getVote(blog)"
             [routerLink]="
-                blog.status == 0 ? '/blog-form/' + blog.id : '/blog/ ' + blog.id
+                blog.status == 0
+                    ? '/my-blogs/blog-form/' + blog.id
+                    : '/blog/ ' + blog.id
             "
             [@fadeIn]
             (upvote)="upVoteBlog($event)"
