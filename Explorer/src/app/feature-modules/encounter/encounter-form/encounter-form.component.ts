@@ -170,22 +170,32 @@ export class EncounterFormComponent implements OnInit {
             }
         }
         if (this.encounterType == 3) {
-            this.service
-                .createMiscEncounter(encounter, this.user.role == "tourist")
-                .subscribe({
-                    next: () => {
-                        this.notifier.notify(
-                            "success",
-                            "Successfully created encounter!",
-                        );
-                    },
-                    error: err => {
-                        this.notifier.notify(
-                            "error",
-                            xpError.getErrorMessage(err),
-                        );
-                    },
-                });
+            if (
+                this.encounterCoords.longitude > 0 &&
+                this.encounterCoords.latitude > 0
+            ) {
+                this.service
+                    .createMiscEncounter(encounter, this.user.role == "tourist")
+                    .subscribe({
+                        next: () => {
+                            this.notifier.notify(
+                                "success",
+                                "Successfully created encounter!",
+                            );
+                        },
+                        error: err => {
+                            this.notifier.notify(
+                                "error",
+                                xpError.getErrorMessage(err),
+                            );
+                        },
+                    });
+            } else {
+                this.notifier.notify(
+                    "error",
+                    "Encounter location not selected!",
+                );
+            }
         }
     }
 
