@@ -235,3 +235,12 @@ textarea:focus {
         scroll-behavior: auto !important;
     }
 }
+
+::-webkit-scrollbar {
+    width: 0.5em;
+}
+
+::-webkit-scrollbar-thumb {
+    background-color: rgba(var(--clr-background));
+    border-radius: 0.3rem;
+}

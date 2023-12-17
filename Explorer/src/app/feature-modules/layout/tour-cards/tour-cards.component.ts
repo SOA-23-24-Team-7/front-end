@@ -1,11 +1,133 @@
-import { Component, Input } from "@angular/core";
-
+import { Component, Input, OnInit } from "@angular/core";
+import { LayoutService } from "../layout.services";
+import { Tour } from "../../tour-authoring/model/tour.model";
+import { PagedResults } from "src/app/shared/model/paged-results.model";
+import { Blog } from "../../blog/model/blog.model";
+import { faCoins } from "@fortawesome/free-solid-svg-icons";
 @Component({
     selector: "xp-tour-cards",
     templateUrl: "./tour-cards.component.html",
     styleUrls: ["./tour-cards.component.css"],
 })
-export class TourCardsComponent {
+export class TourCardsComponent implements OnInit {
+    adventureTours:Tour[]
+    culturalTours:Tour[]
+    familyTours:Tour[]
+    cruiseTours:Tour[]
+    faCoins=faCoins;
+    adventureContainer:any
+    cruiseContainer:any
+    familyContainer:any
+    culturalContainer:any
+    constructor(private service: LayoutService){}
+    ngOnInit(): void {
+        this.adventureContainer = document.querySelector(
+            ".adventure-card-container",
+        );
+        this.familyContainer = document.querySelector(
+            ".family-card-container",
+        );
+        this.cruiseContainer = document.querySelector(
+            ".cruise-card-container",
+        );
+        this.culturalContainer = document.querySelector(
+            ".cultural-card-container",
+        );
+        this.service.getAdventureTours().subscribe({
+            next:(result: PagedResults<Tour>)=>{
+                this.adventureTours=result.results
+                //console.log(this.adventureTours)
+                this.service.getCruiseTours().subscribe({
+                    next:(result: PagedResults<Tour>)=>{
+                        this.cruiseTours=result.results
+                        //console.log(this.adventureTours)
+                        this.service.getCulturalTours().subscribe({
+                            next:(result: PagedResults<Tour>)=>{
+                                this.culturalTours=result.results
+                                //console.log(this.adventureTours)
+                                this.service.getFamilyTours().subscribe({
+                                    next:(result: PagedResults<Tour>)=>{
+                                        this.familyTours=result.results
+                                        //console.log(this.adventureTours)
+                                        
+                                    }
+                                })
+                            }
+                        })
+                    }
+                })
+            }
+        })
+    }
+    currentIndex1: number = 0;
+    currentIndex2: number = 0;
+    currentIndex3: number = 0;
+    currentIndex4: number = 0;
+    scrollToNextCulturalCard(): void {
+        this.currentIndex1++;
+        if (this.currentIndex1 >= this.culturalContainer.children.length) {
+            this.currentIndex1 = 0;
+        }
+        this.culturalContainer.scrollLeft +=
+            this.culturalContainer.children[this.currentIndex1].clientWidth;
+    }
+
+    scrollToPrevCulturalCard(): void {
+        this.currentIndex1--;
+        if (this.currentIndex1 < 0) {
+            this.currentIndex1 = this.culturalContainer!.children.length - 1;
+        }
+        this.culturalContainer!.scrollLeft -=
+            this.culturalContainer.children[this.currentIndex1].clientWidth;
+    }
+    scrollToNextCruiseCard() {
+        this.currentIndex2++;
+        if (this.currentIndex2 >= this.cruiseContainer.children.length) {
+            this.currentIndex2 = 0;
+        }
+        this.cruiseContainer.scrollLeft +=
+            this.cruiseContainer.children[this.currentIndex2].clientWidth;
+    }
+    scrollToPrevCruiseCard() {
+        this.currentIndex2--;
+        if (this.currentIndex2 < 0) {
+            this.currentIndex2 = this.cruiseContainer!.children.length - 1;
+        }
+        this.cruiseContainer!.scrollLeft -=
+            this.cruiseContainer.children[this.currentIndex2].clientWidth;
+    }
+    scrollToNextFamilyCard() {
+        this.currentIndex3++;
+        if (this.currentIndex3 >= this.familyContainer.children.length) {
+            this.currentIndex3 = 0;
+        }
+        this.familyContainer.scrollLeft +=
+            this.familyContainer.children[this.currentIndex3].clientWidth;
+    }
+    scrollToPrevFamilyCard() {
+        this.currentIndex3--;
+        if (this.currentIndex3 < 0) {
+            this.currentIndex3 = this.familyContainer!.children.length - 1;
+        }
+        this.familyContainer!.scrollLeft -=
+            this.familyContainer.children[this.currentIndex3].clientWidth;
+    }
+    scrollToPrevAdventureCard() {
+        this.currentIndex4--;
+        if (this.currentIndex4 < 0) {
+            this.currentIndex4 = this.adventureContainer!.children.length - 1;
+        }
+        this.adventureContainer!.scrollLeft -=
+            this.adventureContainer.children[this.currentIndex4].clientWidth;
+    }
+    scrollToNextAdventureCard() {
+        this.currentIndex4++;
+        if (this.currentIndex4 >= this.adventureContainer.children.length) {
+            this.currentIndex4 = 0;
+        }
+        this.adventureContainer.scrollLeft +=
+            this.adventureContainer.children[this.currentIndex4].clientWidth;
+    }
     toursList = [
         {
             hasDiscount: true,
@@ -16,6 +138,8 @@ export class TourCardsComponent {
                 "Dolmabahce Palace",
                 "Galata Tower",
                 "Topkapi Palace",
+                "jhsjhajh",
+                "jsahja"
             ],
             averageRating: 4.5,
             price: "From €500",

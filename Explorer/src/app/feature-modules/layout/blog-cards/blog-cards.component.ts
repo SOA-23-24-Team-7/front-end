@@ -1,11 +1,25 @@
-import { Component } from "@angular/core";
+import { Component, OnInit } from "@angular/core";
+import { LayoutService } from "../layout.services";
+import { Blog } from "../../blog/model/blog.model";
+import { PagedResults } from "src/app/shared/model/paged-results.model";
 
 @Component({
     selector: "xp-blog-cards",
     templateUrl: "./blog-cards.component.html",
     styleUrls: ["./blog-cards.component.css"],
 })
-export class BlogCardsComponent {
+export class BlogCardsComponent implements OnInit{
+    popularBlogs:Blog[]
+    constructor(private service:LayoutService){}
+    ngOnInit(): void {
+        this.service.getPopularBlogs().subscribe({
+            next:(result: PagedResults<Blog>)=>{
+                this.popularBlogs=result.results
+                //console.log(this.adventureTours)
+            }
+        })
+    }
+    
     blogsList = [
         {
             date: "02/02/2020",
