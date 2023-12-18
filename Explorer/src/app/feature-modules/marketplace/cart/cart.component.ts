@@ -12,6 +12,12 @@ import { OrderItem } from "../model/order-item";
 import { PagedResults } from "src/app/shared/model/paged-results.model";
 import { TourLimitedView } from "../model/tour-limited-view.model";
 import { CouponsModalComponent } from "../coupons-modal/coupons-modal.component";
+import {
+    faXmark,
+    faCoins,
+    faShoppingCart,
+} from "@fortawesome/free-solid-svg-icons";
+import { environment } from "src/env/environment";
 
 @Component({
     selector: "xp-cart",
@@ -25,6 +31,7 @@ export class CartComponent implements OnInit {
     orderItem: OrderItem;
     isDisabled: boolean;
     data: TourLimitedView[] = [];
+    imageHost: string = environment.imageHost;
 
     constructor(
         private service: MarketplaceService,
@@ -42,18 +49,34 @@ export class CartComponent implements OnInit {
 
         this.authService.user$.subscribe(user => {
             this.user = user;
-            this.getShoppingCart();
+            this.getToursInCart();
+        });
+
+        this.service.cart$.subscribe(_ => {
+            this.getToursInCart();
         });
     }
 
-    showReviews(input: Review[]) {
-        console.log(input);
-        const dialogRef = this.dialogRef.open(ReviewCardComponent, {
-            //data: this.listaJavnihTacaka, // lista javnih tacaka koju dobijam u ovoj komponenti i ovim je saljem u modalni dijalog
-            height: "400px",
-            width: "600px",
-            data: {
-                reviews: input,
+    getDiscount() {
+        for (const tour of this.data) {
+            this.service.getDiscountForTour(tour.id!).subscribe(discount => {
+                console.log(discount);
+                if (discount) {
+                    console.log("test:", discount);
+                    tour.discount = discount;
+                    tour.discountedPrice =
+                        tour.price! - tour.price! * discount!;
+                }
+            });
+        }
+    }
+
+    getToursInCart() {
+        this.service.getToursInCart(this.user.id).subscribe({
+            next: (result: PagedResults<TourLimitedView>) => {
+                this.data = result.results;
+                this.getShoppingCart(); // update the price
+                this.getDiscount();
             },
         });
     }
@@ -71,18 +94,21 @@ export class CartComponent implements OnInit {
                         next: () => {
                             alert("Item successfully removed from cart!");
 
-                            this.service
-                                .getToursInCart(this.user.id)
-                                .subscribe({
-                                    next: (
-                                        result: PagedResults<TourLimitedView>,
-                                    ) => {
-                                        this.data = result.results;
-                                        this.getShoppingCart(); // update the price
-                                    },
-                                });
+                            this.getToursInCart();
                         },
                     });
+            },
+        });
+    }
+
+    showReviews(input: Review[]) {
+        console.log(input);
+        const dialogRef = this.dialogRef.open(ReviewCardComponent, {
+            //data: this.listaJavnihTacaka, // lista javnih tacaka koju dobijam u ovoj komponenti i ovim je saljem u modalni dijalog
+            height: "400px",
+            width: "600px",
+            data: {
+                reviews: input,
             },
         });
     }
@@ -91,7 +117,7 @@ export class CartComponent implements OnInit {
         this.service.cart$.subscribe(cart => {
             this.shoppingCart = cart;
             this.getBundles();
-            console.log(this.shoppingCart);
+            console.log("cart:", this.shoppingCart);
         });
     }
 
@@ -107,7 +133,7 @@ export class CartComponent implements OnInit {
     }
 
     checkout(): void {
-        console.log("1");
+        if (this.isEmpty()) return;
         let totalPrice = this.shoppingCart.totalPrice;
         let storedShoppingCart = this.shoppingCart;
         let uslo = false;
@@ -191,7 +217,16 @@ export class CartComponent implements OnInit {
         });
     }
 
-    // isEmpty(): boolean {
-    //     return this.data.length === 0 && this.bundles.length === 0;
-    // }
+    removeBundleOrderItem() {
+        // this.bundles = this.bundles.filter(b => b.id != bundleId);
+        this.getShoppingCart();
+    }
+
+    isEmpty(): boolean {
+        return this.data.length == 0 && this.bundles.length == 0;
+    }
+
+    faXmark = faXmark;
+    faCoins = faCoins;
+    faShoppingCart = faShoppingCart;
 }

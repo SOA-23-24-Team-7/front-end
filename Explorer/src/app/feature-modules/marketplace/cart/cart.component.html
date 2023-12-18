@@ -1,13 +1,73 @@
 <div id="sidebar" class="sidebar">
-    <div class="header">Shopping car:</div>
-    <div class="items-container"></div>
-    <div class="checkout">
-        <div class="column">
-            <button>Checkout</button>
+    <div class="header">Shopping cart:</div>
+    <div class="items-container">
+        <div class="order-card" *ngFor="let item of data">
+            <div class="delete">
+                <fa-icon
+                    [icon]="faXmark"
+                    (click)="removeOrderItem(item.id!)"
+                ></fa-icon>
+            </div>
+            <div class="card-info">
+                <div class="row">
+                    <div
+                        class="image"
+                        [style.background-image]="
+                            'url(' + imageHost + item.keyPoint!.imagePath + ')'
+                        "
+                    ></div>
+                    <div class="column">
+                        <div class="name">{{ item.name }}</div>
+                        <div class="tags">
+                            <div class="tag" *ngFor="let tag of item.tags">
+                                {{ tag }}
+                            </div>
+                        </div>
+                        <div>{{ item.distance }}km</div>
+                    </div>
+                    <div class="column bottom">
+                        <div class="row">
+                            <div class="column">
+                                <div class="row">
+                                    <s *ngIf="item.discount"
+                                        ><fa-icon [icon]="faCoins"></fa-icon
+                                    ></s>
+                                    <fa-icon
+                                        [icon]="faCoins"
+                                        *ngIf="!item.discount"
+                                    ></fa-icon>
+                                    <div *ngIf="item.discount">
+                                        <s>{{ item.price }}</s>
+                                    </div>
+                                    <div *ngIf="!item.discount">
+                                        {{ item.price }}
+                                    </div>
+                                </div>
+                                <div class="row" *ngIf="item.discount">
+                                    <fa-icon
+                                        class="tour-price-tokens"
+                                        [icon]="faCoins"
+                                    />
+                                    <div class="tour-price-value">
+                                        {{ item.discountedPrice! }}
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="description">{{ item.description }}</div>
+            </div>
         </div>
+    </div>
+    <div class="checkout">
+        <div id="btn" class="btn" (click)="checkout()">Checkout</div>
         <div class="column">
             <div>Total price:</div>
-            <div>Placeholder</div>
+            <div class="price">
+                <fa-icon [icon]="faCoins"></fa-icon>
+                {{ shoppingCart?.totalPrice }}
+            </div>
         </div>
     </div>
 </div>
