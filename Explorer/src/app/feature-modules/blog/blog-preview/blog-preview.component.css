@@ -224,5 +224,5 @@
 }
 
 ::ng-deep .ql-editor {
-    overflow-y: hidden;
+    overflow: hidden !important;
 }

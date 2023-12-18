@@ -1,4 +1,4 @@
-<div class="blogs-container">
+<div class="blogs-container" [@fadeIn]>
     <h1 class="blogs-title">MY BLOGS</h1>
     <ng-container *ngIf="blogs && user">
         <xp-blog-preview
@@ -11,7 +11,6 @@
                     ? '/my-blogs/blog-form/' + blog.id
                     : '/blog/ ' + blog.id
             "
-            [@fadeIn]
             (upvote)="upVoteBlog($event)"
             (downvote)="downVoteBlog($event)"
             (publish)="publishBlogAndRefresh($event)"
