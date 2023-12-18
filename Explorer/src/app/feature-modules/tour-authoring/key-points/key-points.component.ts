@@ -21,21 +21,20 @@ import { PagedResults } from "src/app/shared/model/paged-results.model";
 import { Tour, TourStatus } from "../model/tour.model";
 import { FormControl, FormGroup } from "@angular/forms";
 import { TourDuration, TransportType } from "../model/tourDuration.model";
-
+import { faCoins } from "@fortawesome/free-solid-svg-icons";
 @Component({
     selector: "xp-key-points",
     templateUrl: "./key-points.component.html",
     styleUrls: ["./key-points.component.css"],
 })
 export class KeyPointsComponent implements OnInit {
-    tour: Tour | null = null;
+    tour?: Tour;
     keyPoints: KeyPoint[] = [];
     selectedKeyPoint: KeyPoint | null = null;
     mapLongLat: [number, number];
     mapLocationAddress: string;
     shouldRenderKeyPointForm: boolean = true;
     shouldEdit: boolean = false;
-    refreshEventsSubject: BehaviorSubject<number>;
     tourIdTemp: number = 0;
     areButtonsEnabled: boolean = true;
     @ViewChild(MapComponent, { static: false }) mapComponent: MapComponent;
@@ -49,6 +48,9 @@ export class KeyPointsComponent implements OnInit {
     checkedBicycleRideDuration: boolean = false;
     checkedCarRideDuration: boolean = false;
     keyPointContainer: any;
+
+    faCoins = faCoins;
+
     constructor(
         private route: ActivatedRoute,
         private service: TourAuthoringService,
@@ -67,21 +69,48 @@ export class KeyPointsComponent implements OnInit {
         this.keyPointContainer = document.querySelector(
             ".key-point-cards-container",
         );
-        this.getKeyPoints();
-        this.enableButtons();
+
+        const param = this.route.snapshot.paramMap.get("id");
+        if (param) {
+            this.service.getTour(Number(param)).subscribe({
+                next: result => {
+                    this.tour = result;
+                    this.getKeyPoints();
+                    this.enableButtons();
+                },
+            });
+        }
     }
 
     enableButtons(): void {
-        this.service
-            .getTour(this.tourIdTemp)
-            .subscribe((tourResult: Tour | undefined) => {
-                if (tourResult?.status == TourStatus.Published) {
-                    this.areButtonsEnabled = false;
-                    this.getDurationInfo(tourResult);
+        if (this.tour?.status == TourStatus.Published) {
+            this.areButtonsEnabled = false;
+            this.getDurationInfo(this.tour);
+        } else {
+            this.areButtonsEnabled = true;
+        }
+    }
+
+    getKeyPoints(): void {
+        this.service.getKeyPoints(this.tour?.id!).subscribe({
+            next: (result: KeyPoint[]) => {
+                this.keyPoints = result;
+
+                if (this.keyPoints.length < 2) {
+                    this.walkingDuration = 0;
+                    this.bicycleRideDuration = 0;
+                    this.carRideDuration = 0;
+                } else if (this.mapComponent.tourDistance != 0) {
+                    this.calculateDurations(this.mapComponent.tourDistance);
                 } else {
-                    this.areButtonsEnabled = true;
+                    if (this.tour?.distance) {
+                        this.calculateDurations(this.tour.distance);
+                        this.handleCheckBoxes(this.tour);
+                    }
                 }
-            });
+            },
+            error: () => {},
+        });
     }
 
     getImagePath(imageName: string): string {
@@ -95,52 +124,6 @@ export class KeyPointsComponent implements OnInit {
                     next: () => {
                         this.getKeyPoints();
                     },
-                });
-            },
-        });
-    }
-
-    getKeyPoints(): void {
-        this.route.paramMap.subscribe({
-            next: (params: ParamMap) => {
-                let tourId = +params.get("id")!;
-                this.tourIdTemp = tourId;
-
-                if (!this.refreshEventsSubject) {
-                    this.refreshEventsSubject = new BehaviorSubject<number>(
-                        tourId,
-                    );
-                } else {
-                    this.refreshEventsSubject.next(tourId);
-                }
-
-                this.service.getKeyPoints(tourId).subscribe({
-                    next: (result: KeyPoint[]) => {
-                        this.keyPoints = result;
-
-                        if (this.keyPoints.length < 2) {
-                            this.walkingDuration = 0;
-                            this.bicycleRideDuration = 0;
-                            this.carRideDuration = 0;
-                        } else if (this.mapComponent.tourDistance != 0) {
-                            this.calculateDurations(
-                                this.mapComponent.tourDistance,
-                            );
-                        } else {
-                            this.service.getTour(this.tourIdTemp).subscribe({
-                                next: (result: Tour) => {
-                                    this.tour = result;
-                                    if (this.tour.distance) {
-                                        this.calculateDurations(
-                                            this.tour.distance,
-                                        );
-                                        this.handleCheckBoxes(this.tour);
-                                    }
-                                },
-                            });
-                        }
-                    },
-                    error: () => {},
                 });
             },
         });

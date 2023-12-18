@@ -1,4 +1,98 @@
-mat-card img {
+.tour-info {
+    display: flex;
+    outline: 2px solid red;
+    max-height: 30rem;
+}
+
+.information {
+    display: flex;
+    flex-direction: column;
+    outline: 2px solid blue;
+    padding: 2rem;
+    min-width: 20rem;
+    width: 25%;
+    max-width: 30rem;
+}
+
+.btn-done {
+    margin-top: auto;
+    margin-inline: auto;
+}
+
+.map {
+    position: relative;
+    outline: 2px solid green;
+    width: 100%;
+    flex-grow: 1;
+}
+
+::ng-deep #keypointMap {
+    height: 30rem !important;
+}
+
+.keypoints {
+    width: 100%;
+    min-height: 22rem;
+    outline: 2px solid purple;
+    display: flex;
+    align-items: center;
+}
+
+.key-point-cards-container {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    width: 70rem;
+    overflow-x: hidden;
+    scroll-behavior: smooth;
+}
+
+.list-cards-button:hover .triangle-left {
+    border-color: transparent rgba(var(--clr-primary-500), 0.95) transparent
+        transparent;
+}
+.list-cards-button:hover .triangle-right {
+    border-color: transparent transparent transparent
+        rgba(var(--clr-primary-500), 0.95);
+}
+
+.list-cards-button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    margin: 1.5rem;
+}
+
+.triangle-left,
+.triangle-right {
+    width: 0;
+    height: 0;
+    border-style: solid;
+}
+
+.triangle-left {
+    border-width: 2rem 2.2rem 2rem 0;
+    border-color: transparent rgba(var(--clr-primary-500), 1) transparent
+        transparent;
+}
+
+.triangle-right {
+    border-width: 2rem 0 2rem 2.2rem;
+    border-color: transparent transparent transparent
+        rgba(var(--clr-primary-500), 1);
+}
+
+.cards-buttons-container {
+    display: flex;
+    align-items: center;
+}
+
+#next-button {
+    margin-left: auto;
+}
+
+/* mat-card img {
     object-fit: contain;
     width: 100%;
     height: 100%;
@@ -8,10 +102,6 @@ mat-card img {
     align-self: center;
 }
 
-.cards-buttons-container {
-    display: flex;
-    align-items: center;
-}
 .buttons-container {
     display: flex;
     flex-direction: column;
@@ -65,50 +155,7 @@ mat-card img {
     background-color: rgba(var(--clr-background-secondary));
 }
 
-.key-point-cards-container {
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    width: 70rem;
-    overflow-x: hidden;
-    scroll-behavior: smooth;
-}
 
-.list-cards-button:hover .triangle-left {
-    border-color: transparent rgba(var(--clr-primary-500), 0.95) transparent
-        transparent;
-}
-.list-cards-button:hover .triangle-right {
-    border-color: transparent transparent transparent
-        rgba(var(--clr-primary-500), 0.95);
-}
-
-.list-cards-button {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    cursor: pointer;
-    margin: 1.5rem;
-}
-
-.triangle-left,
-.triangle-right {
-    width: 0;
-    height: 0;
-    border-style: solid;
-}
-
-.triangle-left {
-    border-width: 2rem 2.2rem 2rem 0;
-    border-color: transparent rgba(var(--clr-primary-500), 1) transparent
-        transparent;
-}
-
-.triangle-right {
-    border-width: 2rem 0 2rem 2.2rem;
-    border-color: transparent transparent transparent
-        rgba(var(--clr-primary-500), 1);
-}
 
 .add-enable {
     padding-bottom: 0;
@@ -170,4 +217,4 @@ h2 {
     color: rgb(var(--clr-text));
     flex-direction: column;
     justify-content: space-between;
-}
+} */
