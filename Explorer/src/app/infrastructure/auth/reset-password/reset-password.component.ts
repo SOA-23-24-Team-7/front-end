@@ -2,6 +2,7 @@ import { Component } from "@angular/core";
 import { FormControl, FormGroup, Validators } from "@angular/forms";
 import { Router } from "@angular/router";
 import { NotifierService } from "angular-notifier";
+import { AuthService } from "../auth.service";
 
 @Component({
     selector: "xp-reset-password",
@@ -15,20 +16,27 @@ export class ResetPasswordComponent {
         email: new FormControl("", [Validators.required]),
     });
 
-    constructor(private router: Router, private notifier: NotifierService) {
+    constructor(
+        private authService: AuthService,
+        private router: Router,
+        private notifier: NotifierService,
+    ) {
         this.errors = {
             email: "",
         };
     }
 
     onClick() {
+        this.resetErrors();
         let email = this.resetPasswordForm.value.email || "";
         if (this.validate(email)) {
-            this.router.navigate(["/"]);
-            this.notifier.notify(
-                "success",
-                "If your email address exists in our database, you will receive a password recovery link at your email address in a few minutes.",
-            );
+            this.authService.generateResetPasswordToken(email).subscribe(() => {
+                this.router.navigate(["/"]);
+                this.notifier.notify(
+                    "success",
+                    "If your email address exists in our database, you will receive a password recovery link at your email address in a few minutes.",
+                );
+            });
         }
     }
 
@@ -41,5 +49,9 @@ export class ResetPasswordComponent {
         }
 
         return true;
+    }
+
+    resetErrors() {
+        this.errors.email = "";
     }
 }

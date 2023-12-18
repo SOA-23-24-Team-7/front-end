@@ -58,6 +58,7 @@ import { BundlesComponent } from "src/app/feature-modules/tour-authoring/bundles
 import { ExploreBundlesComponent } from "src/app/feature-modules/marketplace/explore-bundles/explore-bundles.component";
 import { PageNotFoundComponent } from "src/app/feature-modules/layout/page-not-found/page-not-found.component";
 import { ResetPasswordComponent } from "../auth/reset-password/reset-password.component";
+import { ResetPasswordEditComponent } from "../auth/reset-password-edit/reset-password-edit.component";
 
 const routes: Routes = [
     { path: "home", component: HomeComponent },
@@ -302,6 +303,7 @@ const routes: Routes = [
         canActivate: [AuthGuard],
     },
     { path: "reset-password", component: ResetPasswordComponent },
+    { path: "reset-password-edit", component: ResetPasswordEditComponent },
     { path: "**", pathMatch: "full", component: PageNotFoundComponent },
 ];
 

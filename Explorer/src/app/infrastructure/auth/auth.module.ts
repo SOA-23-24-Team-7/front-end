@@ -8,6 +8,7 @@ import { FontAwesomeModule } from "@fortawesome/angular-fontawesome";
 import { MatDialogModule } from '@angular/material/dialog';
 import { ResetPasswordComponent } from './reset-password/reset-password.component';
 import { AppRoutingModule } from '../routing/app-routing.module';
+import { ResetPasswordEditComponent } from './reset-password-edit/reset-password-edit.component';
 
 
 
@@ -15,7 +16,8 @@ import { AppRoutingModule } from '../routing/app-routing.module';
   declarations: [
     LoginComponent,
     RegistrationComponent,
-    ResetPasswordComponent
+    ResetPasswordComponent,
+    ResetPasswordEditComponent
   ],
   imports: [
     CommonModule,

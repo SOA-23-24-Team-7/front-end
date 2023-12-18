@@ -150,4 +150,19 @@ export class AuthService {
                 });
         }
     }
+
+    generateResetPasswordToken(email: string): Observable<any> {
+        // TODO: generate reset password token
+        throw new Error('Method not implemented.');
+    }
+
+    checkResetPasswordToken(): Observable<any> {
+        // TODO: check if token is valid
+        throw new Error('Method not implemented.');
+    }
+
+    resetPassword(password: string): Observable<any> {
+        // TODO: reset password
+        throw new Error('Method not implemented.');
+    }
 }
