@@ -6,20 +6,24 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { RegistrationComponent } from './registration/registration.component';
 import { FontAwesomeModule } from "@fortawesome/angular-fontawesome";
 import { MatDialogModule } from '@angular/material/dialog';
+import { ResetPasswordComponent } from './reset-password/reset-password.component';
+import { AppRoutingModule } from '../routing/app-routing.module';
 
 
 
 @NgModule({
   declarations: [
     LoginComponent,
-    RegistrationComponent
+    RegistrationComponent,
+    ResetPasswordComponent
   ],
   imports: [
     CommonModule,
     MaterialModule,
     ReactiveFormsModule,
     FontAwesomeModule,
-    MatDialogModule
+    MatDialogModule,
+    AppRoutingModule
   ],
   exports: [
     LoginComponent
