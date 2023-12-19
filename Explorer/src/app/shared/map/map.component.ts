@@ -194,7 +194,7 @@ export class MapComponent implements AfterViewInit, OnChanges {
 
     ngOnDestroy() {
         if (!this.isKeyPointMap) return;
-        this.refreshEventsSubscription.unsubscribe();
+        this.refreshEventsSubscription?.unsubscribe();
     }
 
     ngAfterViewInit(): void {
