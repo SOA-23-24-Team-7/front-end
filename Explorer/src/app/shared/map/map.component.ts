@@ -160,10 +160,21 @@ export class MapComponent implements AfterViewInit, OnChanges {
     });
 
     private defaultIcon = L.icon({
-        iconUrl:
-            "https://icon-library.com/images/map-marker-icon/map-marker-icon-18.jpg",
-        iconSize: [46, 46],
-        iconAnchor: [26, 46],
+        iconUrl: "../assets/icons/keyPointIcon.png",
+        iconSize: [64, 64],
+        iconAnchor: [26, 60],
+    });
+
+    private finalKeyPoint = L.icon({
+        iconUrl: "../assets/icons/finalKeyPoint.png",
+        iconSize: [64, 64],
+        iconAnchor: [26, 60],
+    });
+
+    private currentKeyPoint = L.icon({
+        iconUrl: "../assets/icons/nextKeyPointIcon.png",
+        iconSize: [64, 64],
+        iconAnchor: [26, 60],
     });
 
     ngOnInit() {
@@ -346,12 +357,7 @@ export class MapComponent implements AfterViewInit, OnChanges {
     }
 
     setRoute(waypoints: any[]): void {
-        let keyPointIcon = L.icon({
-            iconUrl:
-                "https://icon-library.com/images/map-marker-icon/map-marker-icon-18.jpg",
-            iconSize: [46, 46],
-            iconAnchor: [26, 46],
-        });
+        let keyPointIcon = this.defaultIcon;
         const planOptions: Record<string, any> = {
             addWaypoints: false,
             draggableWaypoints: false,
@@ -387,6 +393,27 @@ export class MapComponent implements AfterViewInit, OnChanges {
                 });
                 return marker;
             };
+        } else {
+            planOptions["createMarker"] = (
+                i: number,
+                waypoint: any,
+                n: number,
+            ): any => {
+                keyPointIcon = this.defaultIcon;
+                if (i === 0) {
+                    keyPointIcon = this.currentKeyPoint;
+                }
+                if (i === waypoints.length - 1) {
+                    keyPointIcon = this.finalKeyPoint;
+                }
+                const marker = L.marker(waypoint.latLng, {
+                    icon: keyPointIcon,
+                });
+                marker.addEventListener("click", () => {
+                    this.keyPointClickEvent.emit(waypoint.latLng);
+                });
+                return marker;
+            };
         }
 
         const plan = new L.Routing.Plan(waypoints, planOptions);
@@ -403,7 +430,7 @@ export class MapComponent implements AfterViewInit, OnChanges {
                 styles: [
                     {
                         color: "#4f7ef9",
-                        weight: 5,
+                        weight: 4,
                     },
                 ],
                 addWaypoints: false,

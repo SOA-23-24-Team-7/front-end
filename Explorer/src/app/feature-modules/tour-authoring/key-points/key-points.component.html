@@ -33,25 +33,10 @@
         <div class="triangle-left"></div>
     </div>
     <div class="key-point-cards-container">
+        <xp-key-point-card [isAddNew]="true"> </xp-key-point-card>
+        <xp-key-point-card [isAddNewPublic]="true"> </xp-key-point-card>
         <div *ngFor="let kp of keyPoints" class="cards-buttons-container">
             <xp-key-point-card [keyPoint]="kp"> </xp-key-point-card>
-            <div class="buttons-container">
-                <button
-                    *ngIf="areButtonsEnabled"
-                    (click)="deleteKeyPoint(kp.id || 0)"
-                    mat-icon-button
-                >
-                    <mat-icon>delete</mat-icon>
-                </button>
-                <button
-                    *ngIf="areButtonsEnabled"
-                    color="primary"
-                    (click)="onEditClicked(kp)"
-                    mat-icon-button
-                >
-                    <mat-icon>edit</mat-icon>
-                </button>
-            </div>
         </div>
     </div>
     <div

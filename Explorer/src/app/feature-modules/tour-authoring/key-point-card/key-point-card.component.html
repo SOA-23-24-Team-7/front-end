@@ -11,12 +11,48 @@
     </div>
 </div-->
 
-<div class="key-point-card">
-    <img class="key-point-image" [src]="keyPointImage" />
-    <div class="key-point-overlay">
+<div
+    class="key-point-card"
+    [ngClass]="{
+        'add-new': isAddNew || isAddNewPublic
+    }"
+>
+    <div class="add-new-kp" *ngIf="isAddNew">
+        <fa-stack class="icon-stack">
+            <fa-icon class="icon" [icon]="faNew" stackItemSize="1x" />
+            <fa-icon
+                class="icon small-icon"
+                [icon]="faPlus"
+                stackItemSize="1x"
+            />
+        </fa-stack>
+        <div>Add a new keypoint.</div>
+    </div>
+    <div class="add-new-public" *ngIf="isAddNewPublic">
+        <fa-stack class="icon-stack">
+            <fa-icon class="icon" [icon]="faPublic" stackItemSize="1x" />
+            <fa-icon
+                class="icon small-icon"
+                [icon]="faPlus"
+                stackItemSize="1x"
+            />
+        </fa-stack>
+        <div>Add a public keypoint.</div>
+    </div>
+    <div
+        *ngIf="!isAddNew && !isAddNewPublic"
+        class="key-point-image"
+        [style.background-image]="'url(' + keyPointImage + ')'"
+    ></div>
+    <div class="key-point-overlay" *ngIf="!isAddNew && !isAddNewPublic">
         <div class="key-point-name">{{ keyPoint.name }}</div>
         <div class="key-point-description">
-            {{ keyPoint.description }}
+            <div class="description">
+                {{ keyPoint.description }}
+            </div>
         </div>
+    </div>
+    <div class="delete-button" *ngIf="!isAddNew && !isAddNewPublic">
+        <fa-icon [icon]="faCross" />
     </div>
 </div>
