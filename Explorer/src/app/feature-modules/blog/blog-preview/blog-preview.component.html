@@ -17,7 +17,12 @@
             (click)="onUpVote($event)"
             *ngIf="blog.status != 0"
         >
-            <fa-icon class="upvote" [icon]="faCircleUp" />
+            <fa-icon
+                class="upvote"
+                [icon]="faCircleUp"
+                tooltipPosition="left"
+                pTooltip="Upvote"
+            />
         </div>
         <div class="vote-count" *ngIf="blog.status != 0">
             {{ blog.voteCount }}
@@ -30,7 +35,12 @@
             (click)="onDownVote($event)"
             *ngIf="blog.status != 0"
         >
-            <fa-icon class="downvote" [icon]="faCircleDown" />
+            <fa-icon
+                class="downvote"
+                [icon]="faCircleDown"
+                tooltipPosition="left"
+                pTooltip="Downvote"
+            />
         </div>
     </div>
     <div class="blog-content">

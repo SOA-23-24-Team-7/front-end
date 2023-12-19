@@ -16,6 +16,7 @@ import { BlogFormComponent } from "./blog-form/blog-form.component";
 import { MyBlogsComponent } from "./my-blogs/my-blogs.component";
 import { TouristsTourBlogFormComponent } from "./tourists-tour-blog-form/tourists-tour-blog-form.component";
 import { QuillModule } from "ngx-quill";
+import { TooltipModule } from "primeng/tooltip";
 
 @NgModule({
     declarations: [
@@ -38,6 +39,7 @@ import { QuillModule } from "ngx-quill";
         FontAwesomeModule,
         ReactiveFormsModule,
         QuillModule.forRoot(),
+        TooltipModule,
     ],
 })
 export class BlogModule implements OnInit {
