@@ -400,6 +400,12 @@ export class MapComponent implements AfterViewInit, OnChanges {
                 { profile: "mapbox/walking" },
             ),
             lineOptions: {
+                styles: [
+                    {
+                        color: "#4f7ef9",
+                        weight: 5,
+                    },
+                ],
                 addWaypoints: false,
                 extendToWaypoints: false,
                 missingRouteTolerance: 0,
