@@ -9,9 +9,14 @@ import { PagedResults } from "src/app/shared/model/paged-results.model";
     styleUrls: ["./blog-cards.component.css"],
 })
 export class BlogCardsComponent implements OnInit{
+    currentIndex=0
     popularBlogs:Blog[]
+    blogContainer:any;
     constructor(private service:LayoutService){}
     ngOnInit(): void {
+        this.blogContainer = document.querySelector(
+            ".blog-container",
+        );
         this.service.getPopularBlogs().subscribe({
             next:(result: PagedResults<Blog>)=>{
                 this.popularBlogs=result.results
@@ -19,7 +24,22 @@ export class BlogCardsComponent implements OnInit{
             }
         })
     }
-    
+    scrollToPrev() {
+        this.currentIndex--;
+        if (this.currentIndex < 0) {
+            this.currentIndex = this.blogContainer!.children.length - 1;
+        }
+        this.blogContainer!.scrollLeft -=
+            this.blogContainer.children[this.currentIndex].clientWidth;
+    }
+    scrollToNext() {
+        this.currentIndex++;
+        if (this.currentIndex >= this.blogContainer.children.length) {
+            this.currentIndex = 0;
+        }
+        this.blogContainer.scrollLeft +=
+            this.blogContainer.children[this.currentIndex].clientWidth;
+    }
     blogsList = [
         {
             date: "02/02/2020",

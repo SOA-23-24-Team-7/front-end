@@ -8,4 +8,9 @@ import { Blog } from "../../blog/model/blog.model";
 })
 export class BlogCardComponent {
     @Input() blog: Blog;
+    ngOnInit(): void {
+    }
+    toggleShowMore(blog: Blog) {
+        blog.showMore = !blog.showMore;
+    }
 }

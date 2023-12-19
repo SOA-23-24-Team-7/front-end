@@ -8,7 +8,7 @@
     border-radius: 1rem;
     padding: 0.625rem;
     width: 18rem;
-    height: 8rem;
+    height: 18rem;
     margin: 1.3rem;
     box-shadow: 0 0 1rem rgba(var(--clr-outline-contrast), 0.8);
     color: rgb(var(--clr-text));
@@ -40,9 +40,33 @@
     margin-top: 0.5rem;
     align-self: flex-start;
 }
+.blog-description {
+    font-size: 1rem;
+    margin-top: 0.5rem;
+    align-self: flex-start;
+    
+    overflow-y:auto;
+    position: relative;
+}
 
 .blog-author:hover {
     color: rgba(var(--clr-primary-500), 1);
     text-decoration: underline;
     cursor: pointer;
+}
+
+.show-more-button {
+    font-size: 1rem;
+    font-weight: 600;
+    color: rgba(var(--clr-primary-500), 1);
+    cursor: pointer;
+    padding: 8px 0;
+    align-self: flex-start;
+
+    background-color: transparent;
+    border: none;
+}
+
+.show-more-button:hover {
+    text-decoration: underline;
 }

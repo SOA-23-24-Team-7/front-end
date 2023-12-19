@@ -4,8 +4,16 @@
     justify-content: center;
     align-items: center;
     width: 100%;
+    margin-bottom: 3rem;
 }
-
+.blog-container{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    width: 82rem;
+    overflow-x: hidden;
+    scroll-behavior: smooth;
+}
 .list-cards-button:hover .triangle-left {
     border-color: transparent rgba(var(--clr-primary-500), 0.95) transparent
         transparent;
