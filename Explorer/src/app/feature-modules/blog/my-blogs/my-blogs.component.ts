@@ -7,11 +7,23 @@ import { UpdateBlog } from "../model/blog-update.model";
 import { PagedResults } from "src/app/shared/model/paged-results.model";
 import { Vote } from "../model/vote.model";
 import { Router } from "@angular/router";
+import { animate, style, transition, trigger } from "@angular/animations";
 
 @Component({
     selector: "xp-my-blogs",
     templateUrl: "./my-blogs.component.html",
     styleUrls: ["./my-blogs.component.css"],
+    animations: [
+        trigger("fadeIn", [
+            transition(":enter", [
+                style({ opacity: 0, transform: "translateX(-40px)" }),
+                animate(
+                    "0.5s ease",
+                    style({ opacity: 1, transform: "translateX(0)" }),
+                ),
+            ]),
+        ]),
+    ],
 })
 export class MyBlogsComponent implements OnInit {
     blogs: Blog[] = [];

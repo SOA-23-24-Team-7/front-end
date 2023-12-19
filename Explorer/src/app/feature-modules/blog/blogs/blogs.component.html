@@ -21,6 +21,7 @@
         [routerLink]="['/blog/' + blog.id]"
         (upvote)="upVoteBlog($event)"
         (downvote)="downVoteBlog($event)"
+        [@fadeIn]
         [style.display]="
             (selectedStatus == 5 && blog.status != 0) ||
             blog.status == selectedStatus
