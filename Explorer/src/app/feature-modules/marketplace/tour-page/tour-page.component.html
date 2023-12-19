@@ -1,7 +1,7 @@
 <div class="tour-page">
     <div class="tour-page-left">
         <div class="image-container">
-            <img class="image" [src]="imageHost" (error)="onImageError($event)" *ngIf="tour"/>
+            <xp-carousel *ngIf="tour" [slides]="images"></xp-carousel>
         </div>
 
         <div class="title">

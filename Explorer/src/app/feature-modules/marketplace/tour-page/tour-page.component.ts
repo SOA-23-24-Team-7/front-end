@@ -29,6 +29,7 @@ export class TourPageComponent {
   tour?: Tour;
   tourId: number;
   imageHost: string = environment.imageHost;
+  images: string[] = [];
   user: User;
   currentIndex: number = 0;
   keyPointContainer: any;
@@ -58,7 +59,7 @@ export class TourPageComponent {
     this.service.getTour(this.tourId).subscribe({
       next: (result: Tour) => {
           this.tour = result;
-          if(this.tour.keyPoints) this.imageHost += this.tour.keyPoints[0].imagePath;
+          if(this.tour.keyPoints) this.images = this.tour.keyPoints.map(kp => this.imageHost + kp.imagePath);
       },
     });
 
