@@ -30,6 +30,7 @@ export class MapComponent implements AfterViewInit, OnChanges {
     private routeControl: L.Routing.Control;
     private refreshEventsSubscription: Subscription;
     private previousCommitted = false;
+    private showKeyPointsDuringTourAuthoring: boolean = false;
 
     private positionMarker: L.Marker;
     private markerGroup = L.layerGroup();
@@ -43,6 +44,7 @@ export class MapComponent implements AfterViewInit, OnChanges {
 
     public encounterPoint: [number, number];
 
+    @Input() keyPoints?: KeyPoint[];
     @Input() refreshEvents: Observable<number>;
     @Input() showLegend: boolean = true;
     @Input() selectedKeyPoint: KeyPoint | null;
@@ -174,7 +176,7 @@ export class MapComponent implements AfterViewInit, OnChanges {
             return;
         }
         if (!this.isKeyPointMap) return;
-        this.refreshEventsSubscription = this.refreshEvents.subscribe(tourId =>
+        this.refreshEventsSubscription = this.refreshEvents?.subscribe(tourId =>
             this.getTourKeyPoints(tourId),
         );
     }
@@ -192,6 +194,10 @@ export class MapComponent implements AfterViewInit, OnChanges {
 
     ngOnChanges(changes: SimpleChanges): void {
         if (!this.isKeyPointMap) return;
+
+        if (this.showKeyPointsDuringTourAuthoring && changes["keyPoints"]) {
+            this.showKeyPointsOnTourAuthoringMap();
+        }
 
         if (this.waypointMap.delete(Number.POSITIVE_INFINITY)) {
             let waypoints = [...this.waypointMap.values()];
@@ -305,6 +311,8 @@ export class MapComponent implements AfterViewInit, OnChanges {
                 },
                 error: () => {},
             });
+            this.showKeyPointsDuringTourAuthoring = true;
+            if (this.keyPoints) this.showKeyPointsOnTourAuthoringMap();
         }
     }
 
@@ -391,6 +399,11 @@ export class MapComponent implements AfterViewInit, OnChanges {
                 "pk.eyJ1IjoiY2Vrc29uIiwiYSI6ImNsbnl2YTAwdzAxNnoya2xxcG8wMm56ZjAifQ.23pAV3nrCN0BBo-1F8j8gg",
                 { profile: "mapbox/walking" },
             ),
+            lineOptions: {
+                addWaypoints: false,
+                extendToWaypoints: false,
+                missingRouteTolerance: 0,
+            },
         }).addTo(this.map);
 
         this.routeControl.on("routesfound", e => {
@@ -601,5 +614,31 @@ export class MapComponent implements AfterViewInit, OnChanges {
                 );
             },
         });
+    }
+
+    showKeyPointsOnTourAuthoringMap(): void {
+        this.waypointMap.clear();
+
+        for (const kp of this.keyPoints!) {
+            let lng = kp.longitude;
+            let lat = kp.latitude;
+            let order = kp.order;
+
+            this.waypointMap.set(kp.id!, { lng, lat, order });
+        }
+
+        this.createWaypoints(this.keyPoints);
+        if (!this.touristPosition && !this.isTourExecutionMap) {
+            let waypoints = [...this.waypointMap.values()];
+
+            this.setRoute(waypoints);
+
+            if (this.keyPoints!.length > 0) {
+                this.panMapTo(
+                    this.keyPoints![0].latitude,
+                    this.keyPoints![0].longitude,
+                );
+            }
+        }
     }
 }

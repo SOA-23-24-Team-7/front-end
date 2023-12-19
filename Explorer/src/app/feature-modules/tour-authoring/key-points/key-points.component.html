@@ -1,16 +1,27 @@
 <div class="tour-info">
     <div class="information">
-        <div class="tour-name">{{ tour?.name }}</div>
-        <div class="tour-tags">{{ tour?.tags }}</div>
-        <div class="tour-description">{{ tour?.description }}</div>
+        <div class="tour-name">
+            <div class="name">
+                {{ tour?.name }}
+            </div>
+        </div>
         <div class="tour-price">
-            {{ "Price " + tour?.price }}
+            {{ tour?.price }}
             <fa-icon class="tour-price-tokens" [icon]="faCoins" />
         </div>
+        <div class="tour-tags">
+            <xp-tag *ngFor="let tag of tour?.tags" tagText="{{ tag }}" />
+        </div>
+        <div class="tour-description">{{ tour?.description }}</div>
         <div class="btn btn-done">Done</div>
     </div>
     <div class="map">
-        <xp-map mapName="keypointMap"></xp-map>
+        <xp-map
+            mapName="keypointMap"
+            [showLegend]="false"
+            [isKeyPointMap]="true"
+            [keyPoints]="keyPoints"
+        ></xp-map>
     </div>
 </div>
 <div class="keypoints">

@@ -37,6 +37,7 @@ export class KeyPointsComponent implements OnInit {
     shouldEdit: boolean = false;
     tourIdTemp: number = 0;
     areButtonsEnabled: boolean = true;
+
     @ViewChild(MapComponent, { static: false }) mapComponent: MapComponent;
 
     public distance: number;
