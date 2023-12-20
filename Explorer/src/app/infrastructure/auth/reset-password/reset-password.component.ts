@@ -30,13 +30,25 @@ export class ResetPasswordComponent {
         this.resetErrors();
         let email = this.resetPasswordForm.value.email || "";
         if (this.validate(email)) {
-            this.authService.generateResetPasswordToken(email).subscribe(() => {
-                this.router.navigate(["/"]);
-                this.notifier.notify(
-                    "success",
-                    "If your email address exists in our database, you will receive a password recovery link at your email address in a few minutes.",
-                );
-            });
+            this.authService.generateResetPasswordToken(email).subscribe(
+                result => {
+                    console.log(result);
+                    this.router.navigate(["/"]);
+                    this.notifier.notify(
+                        "success",
+                        "You will receive a password recovery link at your email address shortly.",
+                    );
+                },
+                error => {
+                    // Handle the error here
+                    console.error("Error occurred:", error);
+                    // You can show an error notification or handle the error in other ways
+                    this.notifier.notify(
+                        "error",
+                        "Your email doesn't exist in our database.",
+                    );
+                },
+            );
         }
     }
 
