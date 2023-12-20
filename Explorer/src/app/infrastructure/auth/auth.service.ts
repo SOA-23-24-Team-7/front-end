@@ -11,6 +11,7 @@ import { User } from "./model/user.model";
 import { Registration } from "./model/registration.model";
 import { LocationCoords } from "src/app/shared/model/location-coords.model";
 import { TouristProgress } from "./model/tourist-progress.model";
+import { RegistrationResponse } from "./model/registration-response.model";
 
 @Injectable({
     providedIn: "root",
@@ -49,20 +50,20 @@ export class AuthService {
             );
     }
 
-    register(registration: Registration): Observable<AuthenticationResponse> {
+    register(registration: Registration): Observable<RegistrationResponse> {
         return this.http
-            .post<AuthenticationResponse>(
+            .post<RegistrationResponse>(
                 environment.apiHost + "users",
                 registration,
             )
-            .pipe(
+            /*.pipe(
                 tap(authenticationResponse => {
                     this.tokenStorage.saveAccessToken(
-                        authenticationResponse.accessToken,
+                        authenticationResponse.registrationConfirmationToken,
                     );
                     this.setUser();
                 }),
-            );
+            );*/
     }
 
     logout(): void {
