@@ -8,11 +8,11 @@
     border-radius: 1rem;
     padding: 0.625rem;
     width: 18rem;
-    height: 18rem;
     margin: 1.3rem;
     box-shadow: 0 0 1rem rgba(var(--clr-outline-contrast), 0.8);
     color: rgb(var(--clr-text));
     transition: transform 0.2s;
+    height: 23.8rem;
 }
 .blog-card:hover {
     transform: scale(1.05); /* Uvećanje kartice kada se miš nalazi iznad nje */
@@ -42,9 +42,9 @@
 }
 .blog-description {
     font-size: 1rem;
-    margin-top: 0.5rem;
+    margin-top: 0.1rem;
     align-self: flex-start;
-    
+    height: 15rem;
     overflow-y:auto;
     position: relative;
 }

@@ -1,6 +1,11 @@
 <div class="tour-card">
     <div *ngIf="tour.hasDiscount" class="discount-badge">-50% OFF</div>
-    <div class="card" [routerLink]="['/tour/',tour.id]"><img class="tour-image" [ngClass]="{'transition': currentIndex !== 0}"  [src]="getImagePath()"/></div>
+    <div class="card" [routerLink]="['/tour/',tour.id]">
+        <ng-container *ngFor="let image of images; let i = index">
+            <img *ngIf="i === currentIndex" [src]="image" class="tour-image" @carouselAnimation/>
+        </ng-container>
+    </div>
+    
     <div class="tour-card-details">
         <div class="tour-name" [routerLink]="['/tour/',tour.id]">{{ tour.name }}</div>
         <div class="tour-tags">

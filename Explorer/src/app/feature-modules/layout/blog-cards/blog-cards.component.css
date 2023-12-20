@@ -1,3 +1,10 @@
+h1 {
+    color: rgba(var(--clr-text), 1);
+    font-family: var(--fnt-header);
+    font-weight: 900;
+    font-size: 2rem;
+    padding-left: 2rem;
+}
 .blog-cards-container {
     display: flex;
     flex-direction: row;

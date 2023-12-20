@@ -263,7 +263,6 @@ const routes: Routes = [
     {
         path: "tour/:tourId",
         component: TourPageComponent,
-        canActivate: [AuthGuard],
     },
     {
         path: "tourists-blog/:tourId",

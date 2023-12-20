@@ -12,9 +12,10 @@
     width: 18rem;
     margin: 1.3rem;
     box-shadow: 0 0 1rem rgba(var(--clr-outline-contrast), 0.8);
-    position: relative;
     color: rgb(var(--clr-text));
     transition: transform 0.2s;
+    display: flex;
+    flex-direction: column;
 }
 .tour-card:hover {
     transform: scale(1.05); /* Uvećanje kartice kada se miš nalazi iznad nje */
@@ -26,33 +27,19 @@
     margin: 0 auto;
     z-index: 1;
     cursor: pointer;
-
     background-size: cover;
-  background-position: center;
-  transition: background-image 2s linear;}
-
-.transition {
-  animation: fadeInOut 2s normal; /* Trajanje animacije i funkcija ublažavanja (easing) */
+    background-position: center;
+    position: absolute;
+    transition: transform 150ms cubic-bezier(0.25, 0.46, 0.45, 0.84);
 }
+
+
 /* tour-card.component.css */
 
-@keyframes fadeInOut {
-    0%{
-        opacity: 0;
-    }
-    100%{
-        opacity: 1;
-    }
-  }
-  
-  
-  .active {
-    opacity: 1 !important;
-    animation: none !important; /* Isključite animaciju za trenutnu sliku */
-  }
+
 
 .tour-card-details {
-    margin-top: 0.625rem;
+    margin-top: 12rem;
 }
 
 .tour-name {
@@ -140,9 +127,7 @@
     text-decoration: underline;
 }
 .fa-coins-icon {
-    position: absolute;
     bottom: 0.65rem;
-    left:2rem;
     color: rgba(var(--clr-accent-500), 1);
     opacity: 1;
 }
