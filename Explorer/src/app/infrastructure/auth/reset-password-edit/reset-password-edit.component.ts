@@ -48,7 +48,12 @@ export class ResetPasswordEditComponent implements OnInit {
     }
 
     resetPassword(newPassword: string): void {
-        this.authService.resetPassword(newPassword);
+        this.authService
+            .resetPassword(this.token, newPassword)
+            .subscribe(() => {
+                this.notifier.notify("success", "Password reset successful!");
+                this.router.navigate(["/"]);
+            });
     }
 
     onClick() {
@@ -57,11 +62,7 @@ export class ResetPasswordEditComponent implements OnInit {
         let repeatedPassword =
             this.newPasswordForm.value.repeatedPassword || "";
         if (this.validate(newPassword, repeatedPassword)) {
-            this.router.navigate(["/"]);
-            this.notifier.notify(
-                "success",
-                "If your email address exists in our database, you will receive a password recovery link at your email address in a few minutes.",
-            );
+            this.resetPassword(newPassword);
         }
     }
 
