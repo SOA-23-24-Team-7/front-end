@@ -43,6 +43,7 @@ import {
 } from "@fortawesome/free-solid-svg-icons";
 import { StakeholderService } from "../../stakeholder/stakeholder.service";
 import { interval, Subscription } from "rxjs";
+import { RatingFormComponent } from "../../marketplace/rating-form/rating-form.component";
 //import { } from "@fortawesome/free-regular-svg-icons";
 
 @Component({
@@ -118,6 +119,10 @@ export class NavbarComponent implements OnInit {
 
     getTheme(): string {
         return this.themeService.getTheme();
+    }
+
+    onRateApp(): void {
+        const dialogRef = this.dialogRef.open(RatingFormComponent, { autoFocus: false });
     }
 
     ngOnDestroy() {

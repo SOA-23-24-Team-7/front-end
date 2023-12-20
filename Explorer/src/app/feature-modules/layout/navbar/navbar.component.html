@@ -614,7 +614,7 @@
                     </div>
                     <div
                         class="navbar-submenu-item"
-                        [routerLink]="['rating-form']"
+                        (click)="onRateApp()"
                         *ngIf="
                             user &&
                             (user.role === 'tourist' || user.role === 'author')
