@@ -27,6 +27,7 @@ import { MatCardModule } from "@angular/material/card";
 import { EncounterModule } from "./feature-modules/encounter/encounter.module";
 import { NotifierModule, NotifierOptions } from "angular-notifier";
 import { QuillModule } from "ngx-quill";
+import { StarRatingModule } from "angular-star-rating";
 
 const notifierConfig: NotifierOptions = {
     position: {
@@ -97,6 +98,7 @@ const notifierConfig: NotifierOptions = {
         EncounterModule,
         NotifierModule.withConfig(notifierConfig),
         QuillModule,
+        StarRatingModule.forRoot(),
     ],
     providers: [
         {

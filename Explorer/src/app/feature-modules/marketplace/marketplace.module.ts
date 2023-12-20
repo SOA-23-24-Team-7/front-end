@@ -43,6 +43,7 @@ import { CouponsViewComponent } from "./coupons-view/coupons-view.component";
 import { EditCouponFormComponent } from "./edit-coupon-form/edit-coupon-form.component";
 import { CouponsModalComponent } from "./coupons-modal/coupons-modal.component";
 import { ExploreBundlesComponent } from './explore-bundles/explore-bundles.component';
+import { StarRatingModule } from 'angular-star-rating';
 
 @NgModule({
     declarations: [
@@ -100,6 +101,7 @@ import { ExploreBundlesComponent } from './explore-bundles/explore-bundles.compo
         LayoutModule,
         MatChipsModule,
         TourAuthoringModule,
+        StarRatingModule.forRoot(),
     ],
     exports: [
         ReviewComponent,

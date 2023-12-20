@@ -1,10 +1,10 @@
-import { Component, Input, OnChanges, OnInit } from "@angular/core";
+import { Component, OnInit } from "@angular/core";
 import { FormControl, FormGroup, Validators } from "@angular/forms";
 import { Rating } from "../../administration/model/rating.model";
-import { AdministrationService } from "../../administration/administration.service";
 import { AuthService } from "src/app/infrastructure/auth/auth.service";
 import { MarketplaceService } from "../marketplace.service";
-import { Router } from "@angular/router";
+import { MatDialogRef } from "@angular/material/dialog";
+import { NotifierService } from 'angular-notifier';
 
 @Component({
     selector: "xp-rating-form",
@@ -13,19 +13,16 @@ import { Router } from "@angular/router";
 })
 export class RatingFormComponent implements OnInit {
     rating: Rating;
-    canDelete: boolean = true;
-    canEdit: boolean = true;
-    isEditing: boolean = false;
-    canAdd: boolean = false;
 
     constructor(
         private marketplaceService: MarketplaceService,
         private authService: AuthService,
-        private router: Router,
+        private dialogRef: MatDialogRef<RatingFormComponent>,
+        private notifier: NotifierService
     ) {}
 
     ratingForm = new FormGroup({
-        grade: new FormControl(5, [Validators.required]),
+        grade: new FormControl(0, [Validators.min(1), Validators.max(5)]),
         comment: new FormControl("", []),
     });
 
@@ -40,13 +37,6 @@ export class RatingFormComponent implements OnInit {
                 next: (result: Rating) => {
                     this.rating = result;
                     this.ratingForm.patchValue(result);
-                    this.ratingForm.disable();
-                    if (this.rating == null) {
-                        this.canDelete = false;
-                        this.canEdit = false;
-                        this.canAdd = true;
-                        this.ratingForm.enable();
-                    }
                 },
                 error: () => {},
             });
@@ -58,19 +48,15 @@ export class RatingFormComponent implements OnInit {
 
     addRating(): void {
         const rating: Rating = {
-            grade: this.ratingForm.value.grade || 5,
+            grade: this.ratingForm.value.grade || 0,
             comment: this.ratingForm.value.comment || "",
             dateTime: new Date(),
             userId: this.authService.user$.getValue().id,
         };
         this.marketplaceService.addRating(rating).subscribe({
             next: (result: Rating) => {
-                this.canDelete = true;
-                this.canEdit = true;
-                this.canAdd = false;
-                //this.router.navigate(['../home'])
-                this.ratingForm.disable();
-                this.rating = result;
+                this.notifier.notify('success', 'Thank you for your feedback!');
+                this.closeForm();
             },
         });
     }
@@ -78,15 +64,15 @@ export class RatingFormComponent implements OnInit {
     deleteRating(id: number): void {
         this.marketplaceService.deleteRating(id).subscribe({
             next: () => {
-                this.ratingForm.reset({ grade: 5 });
-                this.getRating();
+                this.notifier.notify('success', 'Rating successfully removed.');
+                this.closeForm();
             },
         });
     }
 
     updateRating(): void {
         const rating: Rating = {
-            grade: this.ratingForm.value.grade || 5,
+            grade: this.ratingForm.value.grade || 0,
             comment: this.ratingForm.value.comment || "",
             dateTime: new Date(),
             userId: this.authService.user$.getValue().id,
@@ -94,15 +80,27 @@ export class RatingFormComponent implements OnInit {
         rating.id = this.rating.id;
         this.marketplaceService.updateRating(rating).subscribe({
             next: (result: Rating) => {
-                this.rating = result;
-                this.isEditing = false;
-                this.ratingForm.disable();
+                this.notifier.notify('success', 'Thank you for your feedback!');
+                this.closeForm();
             },
         });
     }
 
-    onUpdateClicked(): void {
-        this.isEditing = true;
-        this.ratingForm.enable();
+    onSubmit(): void {
+        if (!this.ratingForm.valid) return;
+        
+        if (this.rating) {
+            this.updateRating();
+        } else {
+            this.addRating();
+        }
+    }
+
+    onDelete(): void {
+        this.deleteRating(this.rating.id!);
+    }
+
+    closeForm(): void {
+        this.dialogRef.close();
     }
 }
