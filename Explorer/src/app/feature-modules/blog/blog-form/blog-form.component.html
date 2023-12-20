@@ -1,42 +1,36 @@
 <form [formGroup]="blogForm">
-    <div class="create-form">
-        <div class="form">
-            <input
-                formControlName="title"
-                type="text"
-                placeholder="Title*"
-                [ngClass]="{ error: blogForm.get('title')?.value == '' }"
-            />
-
-            <textarea
-                formControlName="description"
-                rows="8"
-                placeholder="Description"
-            ></textarea>
+    <div class="form">
+        <div class="input-container">
+            <input formControlName="title" type="text" placeholder="Title*" />
         </div>
-        <div class="markup-preview">
-            <h1>Markup Preview</h1>
-            <div [innerHTML]="getMarkupPreview()" class="preview"></div>
+        <quill-editor
+            id="editor"
+            class="quill-area"
+            formControlName="description"
+            placeholder="Insert text here..."
+            [modules]="modules"
+            [sanitize]="true"
+            [maxLength]="200"
+        ></quill-editor>
+        <div class="button-container">
+            <button
+                mat-raised-button
+                type="submit"
+                *ngIf="!blog"
+                color="primary"
+                (click)="createBlog()"
+            >
+                Create
+            </button>
+            <button
+                mat-raised-button
+                type="submit"
+                *ngIf="blog"
+                color="primary"
+                (click)="updateBlog()"
+            >
+                Update
+            </button>
         </div>
-    </div>
-    <div class="button-container">
-        <button
-            mat-raised-button
-            type="submit"
-            *ngIf="!blog"
-            color="primary"
-            (click)="createBlog()"
-        >
-            Create
-        </button>
-        <button
-            mat-raised-button
-            type="submit"
-            *ngIf="blog"
-            color="primary"
-            (click)="updateBlog()"
-        >
-            Update
-        </button>
     </div>
 </form>

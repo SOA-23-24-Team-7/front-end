@@ -9,13 +9,17 @@ import { TouristPosition } from "../model/tourist-position.model";
 import { TourExecutionSessionStatus } from "../model/tour-execution-session-status.model";
 import { TourExecutionSession } from "../model/tour-execution-session-model";
 import { KeyPoint } from "../../tour-authoring/model/key-point.model";
-import { MatDialog } from "@angular/material/dialog";
+import { MatDialog, MatDialogRef } from "@angular/material/dialog";
 import { ClickedKeyPointComponent } from "../clicked-key-point/clicked-key-point.component";
 import { environment } from "src/env/environment";
 import { TourExecutionStart } from "../model/tour-execution-start-model";
 import { SecretPopupComponent } from "../secret-popup/secret-popup.component";
 import { EncounterService } from "../../encounter/encounter.service";
 import { KeyPointEncounter } from "../../encounter/model/key-point-encounter.model";
+import { faLocation } from "@fortawesome/free-solid-svg-icons";
+import { PositionSimulatorComponent } from "src/app/shared/position-simulator/position-simulator.component";
+import { UserPositionWithRange } from "../../encounter/model/user-position-with-range.model";
+import { MapComponent } from "src/app/shared/map/map.component";
 
 @Component({
     selector: "xp-tour-executing",
@@ -58,6 +62,11 @@ export class TourExecutingComponent implements OnInit {
     tourImage: string;
     touristPosition: any = null;
     encounterPoint: KeyPointEncounter;
+    matDialogRef: MatDialogRef<PositionSimulatorComponent, any> | undefined;
+    faLocation = faLocation;
+    donutColor: string = "#ff0000";
+
+    @ViewChild(MapComponent, { static: false }) mapComponent: MapComponent;
 
     constructor(
         private route: ActivatedRoute,
@@ -88,6 +97,27 @@ export class TourExecutingComponent implements OnInit {
                 this.positionSubscription = interval(10000).subscribe(() => {
                     this.getTouristPosition();
                 });
+            },
+        });
+    }
+
+    userPosition: UserPositionWithRange = {
+        range: 200,
+        longitude: 19.84113513341626,
+        latitude: 45.260218642510154,
+    };
+
+    ngAfterViewInit(): void {
+        this.authService.userLocation$.subscribe({
+            next: location => {
+                this.userPosition.latitude = location.latitude;
+                this.userPosition.longitude = location.longitude;
+                if (this.mapComponent) {
+                    this.mapComponent.setMarker(
+                        this.userPosition.latitude,
+                        this.userPosition.longitude,
+                    );
+                }
             },
         });
     }
@@ -281,5 +311,24 @@ export class TourExecutingComponent implements OnInit {
                     }
                 },
             });
+    }
+
+    openSimulator() {
+        if (this.matDialogRef) {
+            this.matDialogRef.close();
+            return;
+        }
+        this.matDialogRef = this.dialogRef.open(PositionSimulatorComponent);
+        this.matDialogRef.afterClosed().subscribe(result => {
+            this.matDialogRef = undefined;
+        });
+    }
+
+    onImageError(event: Event) {
+        const target = event.target as HTMLImageElement;
+        if (target) {
+            target.src =
+                "https://imgs.search.brave.com/udmDGOGRJTYO6lmJ0ADA03YoW4CdO6jPKGzXWvx1XRI/rs:fit:860:0:0/g:ce/aHR0cHM6Ly90My5m/dGNkbi5uZXQvanBn/LzAyLzY4LzU1LzYw/LzM2MF9GXzI2ODU1/NjAxMl9jMVdCYUtG/TjVyalJ4UjJleVYz/M3puSzRxblllS1pq/bS5qcGc";
+        }
     }
 }

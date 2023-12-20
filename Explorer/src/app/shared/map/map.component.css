@@ -1,4 +1,6 @@
 .map-container {
     width: 100%;
     align-self: center;
+    position: relative;
+    z-index: 1;
 }
