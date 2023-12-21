@@ -168,6 +168,7 @@
     flex-direction: column;
     justify-content: center;
     align-items: center;
+    user-select: none;
 }
 
 .add-new fa-icon {
@@ -201,4 +202,15 @@
 
 .add-new-kp .small-icon {
     left: 3.2rem;
+}
+
+.public {
+    border: rgba(var(--clr-outline-contrast), 1) 2px solid;
+    box-shadow: 0 0 0.5rem rgba(var(--clr-outline-contrast), 0.6);
+    transition: border 0.3s ease, box-shadow 0.3s ease;
+}
+
+.public:hover {
+    border: rgba(var(--clr-primary-500), 1) 2px solid;
+    box-shadow: 0 0 0.5rem rgba(var(--clr-primary-500), 0.6);
 }

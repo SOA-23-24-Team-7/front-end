@@ -34,9 +34,17 @@
     </div>
     <div class="key-point-cards-container">
         <xp-key-point-card [isAddNew]="true"> </xp-key-point-card>
-        <xp-key-point-card [isAddNewPublic]="true"> </xp-key-point-card>
+        <xp-key-point-card
+            [isAddNewPublic]="true"
+            (click)="openPublicKeyPointsDialog()"
+        >
+        </xp-key-point-card>
         <div *ngFor="let kp of keyPoints" class="cards-buttons-container">
-            <xp-key-point-card [keyPoint]="kp"> </xp-key-point-card>
+            <xp-key-point-card
+                [keyPoint]="kp"
+                (deleteClicked)="deleteKeyPoint($event)"
+            >
+            </xp-key-point-card>
         </div>
     </div>
     <div

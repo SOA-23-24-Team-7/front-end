@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from "@angular/core";
+import { Component, EventEmitter, Input, OnInit, Output } from "@angular/core";
 import { KeyPoint } from "../model/key-point.model";
 import { environment } from "src/env/environment";
 import { PublicKeyPoint } from "../model/public-key-point.model";
@@ -18,6 +18,8 @@ export class KeyPointCardComponent implements OnInit {
     @Input() keyPoint: KeyPoint | PublicKeyPoint;
     @Input() isAddNew: boolean = false;
     @Input() isAddNewPublic: boolean = false;
+    @Input() isPublic: boolean = false;
+    @Output() deleteClicked = new EventEmitter<number>();
     keyPointImage: string;
     faCross = faXmark;
     faPlus = faPlus;
@@ -30,5 +32,9 @@ export class KeyPointCardComponent implements OnInit {
                 ? this.keyPoint.imagePath
                 : environment.imageHost + this.keyPoint.imagePath;
         }
+    }
+
+    delete() {
+        this.deleteClicked.emit(this.keyPoint.id!);
     }
 }

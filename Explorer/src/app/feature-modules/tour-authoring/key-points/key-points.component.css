@@ -92,6 +92,7 @@
     /* outline: 2px solid purple; */
     display: flex;
     align-items: center;
+    padding-inline: 1rem;
 }
 
 .key-point-cards-container {
@@ -117,7 +118,6 @@
     align-items: center;
     justify-content: center;
     cursor: pointer;
-    margin: 1.5rem;
 }
 
 .triangle-left,

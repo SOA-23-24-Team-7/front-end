@@ -22,6 +22,8 @@ import { Tour, TourStatus } from "../model/tour.model";
 import { FormControl, FormGroup } from "@angular/forms";
 import { TourDuration, TransportType } from "../model/tourDuration.model";
 import { faCoins } from "@fortawesome/free-solid-svg-icons";
+import { NotifierService } from "angular-notifier";
+import { xpError } from "src/app/shared/model/error.model";
 @Component({
     selector: "xp-key-points",
     templateUrl: "./key-points.component.html",
@@ -57,6 +59,7 @@ export class KeyPointsComponent implements OnInit {
         private service: TourAuthoringService,
         private mapService: MapService,
         public dialogRef: MatDialog,
+        private notifier: NotifierService,
         private router: Router,
     ) {}
 
@@ -125,6 +128,12 @@ export class KeyPointsComponent implements OnInit {
                     next: () => {
                         this.getKeyPoints();
                     },
+                    error: (err: any) => {
+                        this.notifier.notify(
+                            "error",
+                            xpError.getErrorMessage(err),
+                        );
+                    },
                 });
             },
         });
@@ -162,11 +171,11 @@ export class KeyPointsComponent implements OnInit {
             this.keyPointContainer.children[this.currentIndex].clientWidth;
     }
 
-    openDialog() {
+    openPublicKeyPointsDialog() {
         const dialogRef = this.dialogRef.open(PublicKeyPointsComponent, {
             //data: this.listaJavnihTacaka, // lista javnih tacaka koju dobijam u ovoj komponenti i ovim je saljem u modalni dijalog
             data: {
-                tourId: this.tourIdTemp,
+                tourId: this.tour?.id!,
                 keyPoints: this.keyPoints,
             },
         });

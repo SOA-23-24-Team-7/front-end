@@ -361,6 +361,7 @@ export class MapComponent implements AfterViewInit, OnChanges {
         const planOptions: Record<string, any> = {
             addWaypoints: false,
             draggableWaypoints: false,
+            segment: {},
         };
 
         if (this.isTourExecutionMap) {
@@ -429,7 +430,7 @@ export class MapComponent implements AfterViewInit, OnChanges {
             lineOptions: {
                 styles: [
                     {
-                        color: "#4f7ef9",
+                        color: "#7C9DF0",
                         weight: 4,
                     },
                 ],

@@ -8,6 +8,8 @@ import { MatDialogRef } from "@angular/material/dialog";
 import { MAT_DIALOG_DATA } from "@angular/material/dialog";
 import { Inject, Output, EventEmitter } from "@angular/core";
 import { KeyPoint } from "../model/key-point.model";
+import { NotifierService } from "angular-notifier";
+import { xpError } from "src/app/shared/model/error.model";
 
 @Component({
     selector: "xp-public-key-points",
@@ -24,12 +26,13 @@ export class PublicKeyPointsComponent implements OnInit {
     constructor(
         private service: TourAuthoringService,
         public dialog: MatDialogRef<PublicKeyPointsComponent>,
+        private notifier: NotifierService,
         @Inject(MAT_DIALOG_DATA) public data: any,
     ) {}
 
     ngOnInit(): void {
         this.keyPointContainer = document.querySelector(
-            ".public-key-point-cards-container",
+            ".key-point-cards-container",
         );
         this.keyPoints = this.data.keyPoints;
         this.getPublicKeyPoints();
@@ -78,15 +81,18 @@ export class PublicKeyPointsComponent implements OnInit {
             .addPublicKeyPoint(this.data.tourId, publicKeyPointId)
             .subscribe({
                 next: _ => {
-                    console.log("USAO U METODU");
+                    // console.log("USAO U METODU");
                     this.onAdd.emit();
                     let idx = this.publicKeyPoints.findIndex(
                         d => d.id == publicKeyPointId,
                     );
                     this.publicKeyPoints.splice(idx, 1);
+                    this.onClose();
+                    this.notifier.notify("success", "Added a public keypoint.");
                 },
                 error: (err: any) => {
-                    console.log(err);
+                    // console.log(err);
+                    this.notifier.notify("error", xpError.getErrorMessage(err));
                 },
             });
     }

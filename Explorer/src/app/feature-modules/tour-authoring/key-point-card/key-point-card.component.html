@@ -14,7 +14,8 @@
 <div
     class="key-point-card"
     [ngClass]="{
-        'add-new': isAddNew || isAddNewPublic
+        'add-new': isAddNew || isAddNewPublic,
+        public: isPublic
     }"
 >
     <div class="add-new-kp" *ngIf="isAddNew">
@@ -52,7 +53,11 @@
             </div>
         </div>
     </div>
-    <div class="delete-button" *ngIf="!isAddNew && !isAddNewPublic">
+    <div
+        class="delete-button"
+        *ngIf="!isAddNew && !isAddNewPublic && !isPublic"
+        (click)="delete()"
+    >
         <fa-icon [icon]="faCross" />
     </div>
 </div>
