@@ -24,6 +24,7 @@ import { TourDuration, TransportType } from "../model/tourDuration.model";
 import { faCoins } from "@fortawesome/free-solid-svg-icons";
 import { NotifierService } from "angular-notifier";
 import { xpError } from "src/app/shared/model/error.model";
+import { PublishTourModalComponent } from "../publish-tour-modal/publish-tour-modal.component";
 @Component({
     selector: "xp-key-points",
     templateUrl: "./key-points.component.html",
@@ -39,6 +40,7 @@ export class KeyPointsComponent implements OnInit {
     shouldEdit: boolean = false;
     tourIdTemp: number = 0;
     areButtonsEnabled: boolean = true;
+    mapDistance: number = 0;
 
     @ViewChild(MapComponent, { static: false }) mapComponent: MapComponent;
 
@@ -63,12 +65,6 @@ export class KeyPointsComponent implements OnInit {
         private router: Router,
     ) {}
 
-    checkBoxForm = new FormGroup({
-        onFootChecked: new FormControl<boolean>(false),
-        bicycleRideChecked: new FormControl<boolean>(false),
-        carRideChecked: new FormControl<boolean>(false),
-    });
-
     ngOnInit(): void {
         this.keyPointContainer = document.querySelector(
             ".key-point-cards-container",
@@ -86,6 +82,18 @@ export class KeyPointsComponent implements OnInit {
         }
     }
 
+    openPublishModal() {
+        this.dialogRef.open(PublishTourModalComponent, {
+            data: {
+                tour: this.tour,
+                walkingDuration: this.walkingDuration,
+                bicycleDuration: this.bicycleRideDuration,
+                carDuration: this.carRideDuration,
+                distance: this.mapDistance,
+            },
+        });
+    }
+
     enableButtons(): void {
         if (this.tour?.status == TourStatus.Published) {
             this.areButtonsEnabled = false;
@@ -99,22 +107,25 @@ export class KeyPointsComponent implements OnInit {
         this.service.getKeyPoints(this.tour?.id!).subscribe({
             next: (result: KeyPoint[]) => {
                 this.keyPoints = result;
-
-                if (this.keyPoints.length < 2) {
-                    this.walkingDuration = 0;
-                    this.bicycleRideDuration = 0;
-                    this.carRideDuration = 0;
-                } else if (this.mapComponent.tourDistance != 0) {
-                    this.calculateDurations(this.mapComponent.tourDistance);
-                } else {
-                    if (this.tour?.distance) {
-                        this.calculateDurations(this.tour.distance);
-                        this.handleCheckBoxes(this.tour);
-                    }
-                }
             },
             error: () => {},
         });
+    }
+
+    distanceChanged(distance: number) {
+        this.mapDistance = distance;
+        if (this.keyPoints.length < 2) {
+            this.walkingDuration = 0;
+            this.bicycleRideDuration = 0;
+            this.carRideDuration = 0;
+        } else if (distance != 0) {
+            this.calculateDurations(distance);
+        } else {
+            if (this.tour?.distance) {
+                this.calculateDurations(this.tour.distance);
+                // this.handleCheckBoxes(this.tour);
+            }
+        }
     }
 
     getImagePath(imageName: string): string {
@@ -126,7 +137,11 @@ export class KeyPointsComponent implements OnInit {
             next: (params: ParamMap) => {
                 this.service.deleteKeyPoint(+params.get("id")!, id).subscribe({
                     next: () => {
-                        this.getKeyPoints();
+                        this.tour!.keyPoints = this.tour?.keyPoints?.filter(
+                            x => x.id != id,
+                        );
+                        this.keyPoints = this.keyPoints.filter(x => x.id != id);
+                        // this.getKeyPoints();
                     },
                     error: (err: any) => {
                         this.notifier.notify(
@@ -184,82 +199,82 @@ export class KeyPointsComponent implements OnInit {
             let waypoints = [...this.mapComponent.waypointMap.values()];
             this.mapComponent.setRoute(waypoints);
             this.getKeyPoints();
-            console.log(this.mapComponent.tourDistance);
+            // console.log(this.mapComponent.tourDistance);
         });
     }
 
-    async onBackClicked(): Promise<void> {
-        if (this.mapComponent) {
-            try {
-                const result: Tour | undefined = await this.service
-                    .getTour(this.tourIdTemp)
-                    .toPromise();
-                if (result) {
-                    this.tour = result;
-                    if (this.mapComponent.waypointMap.size > 1) {
-                        this.tour.distance =
-                            Math.round(this.mapComponent.tourDistance * 100) /
-                            100;
-                        this.distance =
-                            Math.round(this.mapComponent.tourDistance * 100) /
-                            100;
-                    } else {
-                        this.tour.distance = 0;
-                    }
+    // async onBackClicked(): Promise<void> {
+    //     if (this.mapComponent) {
+    //         try {
+    //             const result: Tour | undefined = await this.service
+    //                 .getTour(this.tour?.id!)
+    //                 .toPromise();
+    //             if (result) {
+    //                 this.tour = result;
+    //                 if (this.mapComponent.waypointMap.size > 1) {
+    //                     this.tour.distance =
+    //                         Math.round(this.mapComponent.tourDistance * 100) /
+    //                         100;
+    //                     this.distance =
+    //                         Math.round(this.mapComponent.tourDistance * 100) /
+    //                         100;
+    //                 } else {
+    //                     this.tour.distance = 0;
+    //                 }
 
-                    if (this.checkBoxForm.value.onFootChecked) {
-                        const tourDuration: TourDuration = {
-                            duration: this.walkingDuration,
-                            transportType: TransportType.Walking,
-                        };
+    //                 if (this.checkBoxForm.value.onFootChecked) {
+    //                     const tourDuration: TourDuration = {
+    //                         duration: this.walkingDuration,
+    //                         transportType: TransportType.Walking,
+    //                     };
 
-                        this.handleCheckedDurations(this.tour, tourDuration);
-                    } else {
-                        this.handleUncheckedDurations(
-                            this.tour,
-                            TransportType.Walking,
-                        );
-                    }
+    //                     this.handleCheckedDurations(this.tour, tourDuration);
+    //                 } else {
+    //                     this.handleUncheckedDurations(
+    //                         this.tour,
+    //                         TransportType.Walking,
+    //                     );
+    //                 }
 
-                    if (this.checkBoxForm.value.bicycleRideChecked) {
-                        const tourDuration: TourDuration = {
-                            duration: this.bicycleRideDuration,
-                            transportType: TransportType.Bicycle,
-                        };
+    //                 if (this.checkBoxForm.value.bicycleRideChecked) {
+    //                     const tourDuration: TourDuration = {
+    //                         duration: this.bicycleRideDuration,
+    //                         transportType: TransportType.Bicycle,
+    //                     };
 
-                        this.handleCheckedDurations(this.tour, tourDuration);
-                    } else {
-                        this.handleUncheckedDurations(
-                            this.tour,
-                            TransportType.Bicycle,
-                        );
-                    }
+    //                     this.handleCheckedDurations(this.tour, tourDuration);
+    //                 } else {
+    //                     this.handleUncheckedDurations(
+    //                         this.tour,
+    //                         TransportType.Bicycle,
+    //                     );
+    //                 }
 
-                    if (this.checkBoxForm.value.carRideChecked) {
-                        const tourDuration: TourDuration = {
-                            duration: this.carRideDuration,
-                            transportType: TransportType.Car,
-                        };
+    //                 if (this.checkBoxForm.value.carRideChecked) {
+    //                     const tourDuration: TourDuration = {
+    //                         duration: this.carRideDuration,
+    //                         transportType: TransportType.Car,
+    //                     };
 
-                        this.handleCheckedDurations(this.tour, tourDuration);
-                    } else {
-                        this.handleUncheckedDurations(
-                            this.tour,
-                            TransportType.Car,
-                        );
-                    }
+    //                     this.handleCheckedDurations(this.tour, tourDuration);
+    //                 } else {
+    //                     this.handleUncheckedDurations(
+    //                         this.tour,
+    //                         TransportType.Car,
+    //                     );
+    //                 }
 
-                    await this.service.updateTour(this.tour).toPromise();
-                } else {
-                    console.error("Result is undefined");
-                }
-            } catch (err) {
-                console.error(err);
-            }
-        }
+    //                 await this.service.updateTour(this.tour).toPromise();
+    //             } else {
+    //                 console.error("Result is undefined");
+    //             }
+    //         } catch (err) {
+    //             console.error(err);
+    //         }
+    //     }
 
-        this.router.navigate(["/tours"]);
-    }
+    //     this.router.navigate(["/tours"]);
+    // }
 
     calculateDurations(distance: number): void {
         this.walkingDuration =
@@ -284,60 +299,20 @@ export class KeyPointsComponent implements OnInit {
         }
     }
 
-    handleCheckBoxes(tour: Tour): void {
-        // Tick all necessary checkboxes
-        if (tour.durations) {
-            for (let t of tour.durations) {
-                if (t.transportType == TransportType.Walking) {
-                    this.checkBoxForm.get("onFootChecked")?.patchValue(true);
-                } else if (t.transportType == TransportType.Bicycle) {
-                    this.checkBoxForm
-                        .get("bicycleRideChecked")
-                        ?.patchValue(true);
-                } else if (t.transportType == TransportType.Car) {
-                    this.checkBoxForm.get("carRideChecked")?.patchValue(true);
-                }
-            }
-        }
-    }
-
-    handleCheckedDurations(tour: Tour, tourDuration: TourDuration): void {
-        let shouldPush = true;
-        if (tour.durations) {
-            let counter = 0;
-            for (let t of tour.durations) {
-                if (
-                    t.transportType == tourDuration.transportType &&
-                    t.duration == tourDuration.duration
-                ) {
-                    shouldPush = false;
-                    break;
-                } else if (
-                    t.transportType == tourDuration.transportType &&
-                    t.duration != tourDuration.duration
-                ) {
-                    tour.durations.splice(counter, 1);
-                    break;
-                }
-                counter++;
-            }
-        }
-
-        if (shouldPush) {
-            tour.durations?.push(tourDuration);
-        }
-    }
-
-    handleUncheckedDurations(tour: Tour, type: TransportType): void {
-        if (tour.durations) {
-            let counter = 0;
-            for (let t of tour.durations) {
-                if (t.transportType == type) {
-                    tour.durations.splice(counter, 1);
-                    break;
-                }
-                counter++;
-            }
-        }
-    }
+    // handleCheckBoxes(tour: Tour): void {
+    //     // Tick all necessary checkboxes
+    //     if (tour.durations) {
+    //         for (let t of tour.durations) {
+    //             if (t.transportType == TransportType.Walking) {
+    //                 this.checkBoxForm.get("onFootChecked")?.patchValue(true);
+    //             } else if (t.transportType == TransportType.Bicycle) {
+    //                 this.checkBoxForm
+    //                     .get("bicycleRideChecked")
+    //                     ?.patchValue(true);
+    //             } else if (t.transportType == TransportType.Car) {
+    //                 this.checkBoxForm.get("carRideChecked")?.patchValue(true);
+    //             }
+    //         }
+    //     }
+    // }
 }

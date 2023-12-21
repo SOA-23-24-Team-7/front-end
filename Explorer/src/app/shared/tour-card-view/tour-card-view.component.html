@@ -2,7 +2,11 @@
     class="tour-card"
     [class.selectable]="selectable"
     [class.selected]="selected && selectable"
-    [routerLink]="['/tour/', tour.id]"
+    [routerLink]="
+        tour.status == 0 || tour.status == 2
+            ? ['/tour/', tour.id, 'key-points']
+            : ['/tour/', tour.id]
+    "
 >
     <div class="tour-card-left">
         <div class="tour-image-container">
@@ -37,14 +41,20 @@
                 />
                 <fa-icon
                     class="tour-action"
-                    *ngIf="tour.status == 2 || tour.status == 0"
-                    (click)="onEditClicked()"
-                    [icon]="faPen"
+                    [icon]="faPersonHiking"
+                    [routerLink]="['/tours/equipment', tour.id]"
                 />
                 <fa-icon
                     class="tour-action"
-                    [icon]="faPersonHiking"
-                    [routerLink]="['/tours/equipment', tour.id]"
+                    *ngIf="tour.status == 2 || tour.status == 0"
+                    [icon]="faMoneyBills"
+                    (click)="onCouponClicked(tour); $event.stopPropagation()"
+                />
+                <fa-icon
+                    class="tour-action"
+                    *ngIf="tour.status == 1"
+                    [icon]="faBoxArchive"
+                    (click)="onArchiveClicked(tour); $event.stopPropagation()"
                 />
                 <fa-icon
                     class="tour-action"
@@ -54,20 +64,8 @@
                 <fa-icon
                     class="tour-action"
                     *ngIf="tour.status == 2 || tour.status == 0"
-                    [icon]="faMoneyBills"
-                    (click)="onCouponClicked(tour)"
-                />
-                <fa-icon
-                    class="tour-action green"
-                    *ngIf="tour.status == 2 || tour.status == 0"
-                    [icon]="faShareNodes"
-                    (click)="onPublishClicked(tour)"
-                />
-                <fa-icon
-                    class="tour-action"
-                    *ngIf="tour.status == 1"
-                    [icon]="faBoxArchive"
-                    (click)="onArchiveClicked(tour)"
+                    (click)="onEditClicked(); $event.stopPropagation()"
+                    [icon]="faPen"
                 />
             </div>
         </div>

@@ -1,0 +1,26 @@
+<div class="container" [formGroup]="publishForm">
+    <div class="title">Choose type of transport:</div>
+    <div class="row">
+        <div class="option-name">
+            <fa-icon [icon]="faWalk" />
+            {{ " Walking (" + data.walkingDuration + " minutes)" }}
+        </div>
+        <input type="radio" formControlName="transportType" value="walk" />
+    </div>
+    <div class="row">
+        <div class="option-name">
+            <fa-icon [icon]="faBicycle" />
+            {{ " Bicycle (" + data.bicycleDuration + " minutes)" }}
+        </div>
+        <input type="radio" formControlName="transportType" value="bicycle" />
+    </div>
+    <div class="row">
+        <div class="option-name">
+            <fa-icon [icon]="faCar" />
+            {{ " Car (" + data.carDuration + " minutes)" }}
+        </div>
+        <input type="radio" formControlName="transportType" value="car" />
+    </div>
+
+    <div class="btn" (click)="publishTour()">Publish</div>
+</div>

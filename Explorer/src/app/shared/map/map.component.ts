@@ -112,6 +112,8 @@ export class MapComponent implements AfterViewInit, OnChanges {
     @Output() newLongLatEvent = new EventEmitter<[number, number]>();
     @Output() newPositionEvent = new EventEmitter<void>();
 
+    @Output() tourDistanceChangedEvent = new EventEmitter<number>();
+
     constructor(private mapService: MapService) {}
 
     private facilityIcon = L.icon({
@@ -445,6 +447,7 @@ export class MapComponent implements AfterViewInit, OnChanges {
             if (routes.length > 0) {
                 const summary = routes[0].summary;
                 this.tourDistance = summary.totalDistance / 1000; // Total distance is in meters, tourDistance in km
+                this.tourDistanceChangedEvent.emit(this.tourDistance);
             }
         });
     }

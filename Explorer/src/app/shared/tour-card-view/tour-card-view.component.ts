@@ -33,6 +33,8 @@ import { KeyPoint } from "../../feature-modules/tour-authoring/model/key-point.m
 import { MatDialog } from "@angular/material/dialog";
 import { EditTourFormComponent } from "src/app/feature-modules/tour-authoring/edit-tour-form/edit-tour-form.component";
 import { CouponsComponent } from "src/app/feature-modules/marketplace/coupons/coupons.component";
+import { NotifierService } from "angular-notifier";
+import { xpError } from "../model/error.model";
 
 @Component({
     selector: "xp-tour-card-view",
@@ -71,6 +73,7 @@ export class TourCardViewComponent implements OnChanges {
         private marketplaceService: MarketplaceService,
         private tourAuthoringService: TourAuthoringService,
         public dialogRef: MatDialog,
+        private notifier: NotifierService,
     ) {}
 
     ngOnChanges(): void {
@@ -229,6 +232,13 @@ export class TourCardViewComponent implements OnChanges {
         this.tourAuthoringService.archiveTour(tour).subscribe({
             next: () => {
                 this.tour.status = 2;
+                this.notifier.notify("success", "Tour archived.");
+            },
+            error: err => {
+                this.notifier.notify(
+                    "error",
+                    "Failed to archive tour. " + xpError.getErrorMessage(err),
+                );
             },
         });
     }

@@ -13,7 +13,13 @@
             <xp-tag *ngFor="let tag of tour?.tags" tagText="{{ tag }}" />
         </div>
         <div class="tour-description">{{ tour?.description }}</div>
-        <div class="btn btn-done">Done</div>
+        <div
+            class="btn btn-done"
+            (click)="openPublishModal()"
+            *ngIf="tour?.status == 2 || tour?.status == 0"
+        >
+            Done
+        </div>
     </div>
     <div class="map">
         <xp-map
@@ -21,6 +27,7 @@
             [showLegend]="false"
             [isKeyPointMap]="true"
             [keyPoints]="keyPoints"
+            (tourDistanceChangedEvent)="distanceChanged($event)"
         ></xp-map>
     </div>
 </div>
@@ -33,12 +40,15 @@
         <div class="triangle-left"></div>
     </div>
     <div class="key-point-cards-container">
-        <xp-key-point-card [isAddNew]="true"> </xp-key-point-card>
+        <xp-key-point-card
+            [isAddNew]="true"
+            *ngIf="tour?.status == 2 || tour?.status == 0"
+        />
         <xp-key-point-card
             [isAddNewPublic]="true"
+            *ngIf="tour?.status == 2 || tour?.status == 0"
             (click)="openPublicKeyPointsDialog()"
-        >
-        </xp-key-point-card>
+        />
         <div *ngFor="let kp of keyPoints" class="cards-buttons-container">
             <xp-key-point-card
                 [keyPoint]="kp"
