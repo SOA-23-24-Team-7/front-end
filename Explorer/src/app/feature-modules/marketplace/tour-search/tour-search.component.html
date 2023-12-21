@@ -212,6 +212,20 @@
             </div>
         </div>
         <div class="tour-search-results">
+            <div style="text-align: center;">
+            <div style="display: inline-block; vertical-align: middle;">
+            <label class="container">Recommended
+                <input type="checkbox" [(ngModel)]="isRecommendedChecked" (change)="onRecommendedCheckBoxClicked();">
+                <span class="checkmark"></span>
+              </label>
+            </div>
+            <div style="display: inline-block; vertical-align: middle; margin-left: 20px;">
+              <label class="container">Active
+                <input type="checkbox" [(ngModel)]="isActiveChecked" (change)="onActiveCheckBoxClicked();">
+                <span class="checkmark"></span>
+              </label>
+            </div>
+            </div>
             <div class="tour-search-results-header">
                 <div class="tour-search-results-count">Tours ({{totalCount}})</div>
             </div>

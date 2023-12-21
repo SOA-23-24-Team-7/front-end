@@ -111,7 +111,6 @@ export class TourCardViewComponent implements OnChanges {
     this.marketplaceService.getShoppingCart(this.user.id).subscribe({
       next: (result: ShoppingCart) => {
           this.shoppingCart = result;
-          console.log(result);
           this.getTokens();
           if (result == null) {
               this.shoppingCart = {};

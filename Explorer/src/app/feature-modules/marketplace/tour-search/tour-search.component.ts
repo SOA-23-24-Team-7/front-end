@@ -65,8 +65,11 @@ export class TourSearchComponent implements OnInit {
     sortOption: SortOption = SortOption.NoSort;
     slider: any;
     tours: Tour[] = [];
+    toursBackup: Tour[] = [];
     recommendedTours: Tour[] = [];
     activeTours: Tour[] = [];
+    isRecommendedChecked: boolean = false
+    isActiveChecked: boolean = false
     publicFacilities: PublicFacilities[] = [];
     publicKeyPoints: PublicKeyPoint[] = [];
     totalCount: number = 0;
@@ -108,9 +111,13 @@ export class TourSearchComponent implements OnInit {
         //this.resetMaxDuration();
         this.resetMinLength();
         this.resetMaxLength();
-        this.onSearch(1);
-        this.getActiveTours();
         this.getRecommendedTours();
+        setTimeout(() => {
+            this.getActiveTours();
+          }, 100);
+          setTimeout(() => {
+            this.onSearch(1);
+          }, 1000);
     }
 
     onMapClicked(): void {
@@ -123,23 +130,66 @@ export class TourSearchComponent implements OnInit {
     }
 
     onSearch(page: number): void {
+        if(this.countFilters() == 0){
         this.searchFilter.page = page;
         this.currentPage = page;
         this.service
             .searchTours(this.searchFilter, this.sortOption)
             .subscribe({
                 next: (result: PagedResults<Tour>) => {
-                    this.tours = result.results;
+                    this.setRecommendedTours()
+                    this.setActiveTours()
+                    this.setTours(result.results)
                     this.totalCount = result.totalCount;
-                    console.log(this.tours);
+                    this.setPages();
+                    this.toursBackup = []
+                    for (const obj of this.tours) {
+                        this.toursBackup.push(obj);
+                    }
+                },
+                error: errData => {
+                    console.log(errData);
+                },
+            });    
+        }
+        else{
+        this.searchFilter.page = page;
+        this.currentPage = page;
+        this.service
+            .searchTours(this.searchFilter, this.sortOption)
+            .subscribe({
+                next: (result: PagedResults<Tour>) => {
+                    this.tours = result.results
+                    this.totalCount = result.totalCount;
                     this.setPages();
                     this.setActiveTag();
                     this.setRecommendedTag();
+                    this.toursBackup = []
+                    for (const obj of this.tours) {
+                        this.toursBackup.push(obj);
+                    }
                 },
                 error: errData => {
                     console.log(errData);
                 },
             });
+        }
+    }
+
+    setTours(result: Tour[]){
+        let add
+        result.forEach((tour)=>{
+            add = true 
+            this.tours.forEach((el) =>{
+                if(el.id == tour.id){
+                    add = false
+                }
+            })
+            if(add){
+                this.tours.push(tour)
+            }
+        })
+        console.log(this.tours)
     }
 
     onSliderChanged(): void {
@@ -389,7 +439,7 @@ export class TourSearchComponent implements OnInit {
             .subscribe({
                 next: (result: PagedResults<Tour>) => {
                     this.activeTours = result.results;
-                    this.setActiveTag()
+                    this.setActiveTours()
                 },
                 error: errData => {
                     console.log(errData);
@@ -402,12 +452,34 @@ export class TourSearchComponent implements OnInit {
             .subscribe({
                 next: (result: PagedResults<Tour>) => {
                     this.recommendedTours = result.results;  
-                    this.setRecommendedTag()
+                    this.setRecommendedTours()
                 },
                 error: errData => {
                     console.log(errData);
                 },
             });
+    }
+    setRecommendedTours(){
+        this.tours = []
+        for (const obj of this.recommendedTours) {
+            this.tours.push(obj);
+        }
+        this.tours.forEach((el)=>{el.recommended = true;})
+    }
+    setActiveTours(){
+        let add
+        this.activeTours.forEach((active)=>{
+            add = true 
+            this.tours.forEach((el) =>{
+                if(el.id == active.id){
+                    el.active = true
+                    add = false
+                }
+            })
+            if(add){
+                this.tours.push(active)
+            }
+        })
     }
     setRecommendedTag(){
         this.tours.forEach((tour)=>{
@@ -428,5 +500,29 @@ export class TourSearchComponent implements OnInit {
                 }
             }
         })
+    }
+    onRecommendedCheckBoxClicked(){
+        this.setView()
+    }
+    onActiveCheckBoxClicked(){
+        this.setView()
+    }
+    setView(){
+        if(this.isRecommendedChecked && this.isActiveChecked){
+            this.tours = this.toursBackup.filter((tour) => tour.recommended && tour.active);
+        }
+        else if(this.isRecommendedChecked && !this.isActiveChecked){
+            this.tours = this.toursBackup.filter((tour) => tour.recommended);
+        }
+        else if(!this.isRecommendedChecked && this.isActiveChecked){
+            this.tours = this.toursBackup.filter((tour) => tour.active);
+        }
+        else{
+            this.tours = []
+            for (const obj of this.toursBackup) {
+                this.tours.push(obj);
+            }
+        }
+        this.totalCount = this.tours.length
     }
 }
