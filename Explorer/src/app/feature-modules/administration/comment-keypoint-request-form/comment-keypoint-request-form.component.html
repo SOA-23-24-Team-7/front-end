@@ -1,19 +1,20 @@
 <div class="modal">
-    <div (click)="$event.stopPropagation()">
+    <div class="add" (click)="$event.stopPropagation()">
         <div class="register-head">
             <fa-icon class="register-x" [icon]="faXmark" (click)="onClose()" />
-            <form [formGroup]="commentKeyPointRequestForm">
-                <div class="register-label">Add comment for rejection:</div>
-                <textarea
-                    class="comment-input"
-                    formControlName="comment"
-                    placeholder="Leave your comment"
-                    required
-                ></textarea>
-                <button class="submit" type="submit" (click)="submit()">
-                    <div class="submit-text">Submit</div>
-                </button>
-            </form>
+            <div class="register-title">Request rejection</div>
         </div>
+        <form class="register-form" [formGroup]="commentKeyPointRequestForm">
+            <div class="register-label">Add comment:</div>
+            <textarea
+                class="comment-input"
+                formControlName="comment"
+                placeholder="Leave your comment"
+                required
+            ></textarea>
+            <button class="submit" type="submit" (click)="submit()">
+                <div class="submit-text">Submit</div>
+            </button>
+        </form>
     </div>
 </div>
