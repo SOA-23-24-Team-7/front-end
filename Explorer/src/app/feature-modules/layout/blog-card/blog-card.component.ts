@@ -1,4 +1,5 @@
 import { Component, Input } from "@angular/core";
+import { Blog } from "../../blog/model/blog.model";
 
 @Component({
     selector: "xp-blog-card",
@@ -6,5 +7,10 @@ import { Component, Input } from "@angular/core";
     styleUrls: ["./blog-card.component.css"],
 })
 export class BlogCardComponent {
-    @Input() blog: any;
+    @Input() blog: Blog;
+    ngOnInit(): void {
+    }
+    toggleShowMore(blog: Blog) {
+        blog.showMore = !blog.showMore;
+    }
 }

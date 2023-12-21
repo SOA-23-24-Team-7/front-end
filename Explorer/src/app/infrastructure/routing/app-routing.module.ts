@@ -94,7 +94,6 @@ const routes: Routes = [
     {
         path: "tour-sales",
         component: TourSalesComponent,
-        canActivate: [AuthGuard],
     },
     {
         path: "tour-sale-form/:id",
@@ -257,7 +256,6 @@ const routes: Routes = [
     {
         path: "tour/:tourId",
         component: TourPageComponent,
-        canActivate: [AuthGuard],
     },
     {
         path: "tourists-blog/:tourId",

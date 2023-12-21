@@ -1,3 +1,11 @@
+.card{
+    background-size: cover;
+    background-position: center;
+    position: relative;
+}
+p{
+    font-size: 1.125rem;
+}
 .tour-card {
     background-color: rgba(var(--clr-background-secondary), 1);
     border-radius: 1rem;
@@ -6,13 +14,21 @@
     padding: 0.625rem;
     width: 18rem;
     margin: 1.3rem;
+    height:26.4rem;
     box-shadow: 0 0 1rem rgba(var(--clr-outline-contrast), 0.8);
-    position: relative;
     color: rgb(var(--clr-text));
     transition: transform 0.2s;
+    display: flex;
+    flex-direction: column;
 }
 .tour-card:hover {
     transform: scale(1.05); /* Uvećanje kartice kada se miš nalazi iznad nje */
+}
+.tour-rating-star {
+    font-family: var(--fnt-body);
+    font-size: 1rem;
+    color: rgba(var(--clr-accent-500), 1);
+    margin-left: 0.2rem;
 }
 .tour-image {
     height: 11rem;
@@ -20,12 +36,20 @@
     border-radius: 1rem;
     margin: 0 auto;
     z-index: 1;
-    position: relative;
     cursor: pointer;
+    background-size: cover;
+    background-position: center;
+    position: absolute;
+    transition: transform 150ms cubic-bezier(0.25, 0.46, 0.45, 0.84);
 }
 
+
+/* tour-card.component.css */
+
+
+
 .tour-card-details {
-    margin-top: 0.625rem;
+    margin-top: 12rem;
 }
 
 .tour-name {
@@ -42,6 +66,10 @@
 .tour-tags {
     display: flex;
     flex-wrap: wrap;
+    height: 5.5rem;
+    overflow-y:auto;
+    position: relative;
+
 }
 
 .tour-tag {
@@ -55,10 +83,13 @@
     flex: 0 1 auto;
     margin-top: 0.5rem;
     color: rgb(var(--clr-neutral-900));
+    font-size: 15px;
+    height: 2rem;
 }
 
 .tour-review {
     margin-right: 5px;
+    font-size: 1.125rem;
 }
 
 .tour-review-content {
@@ -71,10 +102,6 @@
     height: 1.2rem;
 }
 
-.tour-price {
-    margin-top: 0.5rem;
-    font-size: 1.125rem;
-}
 
 .discount-badge {
     top: 1rem;
@@ -94,3 +121,85 @@
     font-weight: 600;
     text-shadow: rgba(var(--clr-accent-500)) 1px 0 0.625rem;
 }
+.show-more-button {
+    font-size: 1rem;
+    font-weight: 600;
+    color: rgba(var(--clr-primary-500), 1);
+    cursor: pointer;
+    background-color: transparent;
+    border: none;
+}
+
+.show-more-button:hover {
+    text-decoration: underline;
+}
+.fa-coins-icon {
+    bottom: 0.65rem;
+    color: rgba(var(--clr-accent-500), 1);
+    opacity: 1;
+}
+.tour-price {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    white-space: nowrap;
+    overflow: visible;
+    margin-top: 0.5rem;
+    font-size: 1.5rem;
+}
+
+.tour-price-discount {
+    display: flex;
+    align-items: center;
+    white-space: nowrap;
+    overflow: visible;
+    font-size: 1.125rem;
+}
+
+.tour-price-value {
+    padding: 0;
+    margin: 0;
+    font-family: var(--fnt-body);
+    color: rgba(var(--clr-accent-500), 1);
+    line-height: 1.5rem;
+    margin-right: 0.25rem;
+    font-size:1.5rem;
+}
+
+.tour-price-tokens {
+    padding: 0;
+    margin: 0;
+    z-index: 2;
+    color: rgba(var(--clr-accent-500), 1);
+    line-height: 1.5rem;
+}
+.discount {
+    display: flex; 
+    justify-content: center; 
+    align-items: center;
+    margin-right: 0.5rem;
+    font-weight: bold;
+    font-size: 1.125rem;
+    color: rgba(var(--clr-text), 1);
+    margin-left: 6rem;
+    color:red;
+}
+
+s, strike{text-decoration:none;position:relative;}
+s::before, strike::before {
+    top: 50%;
+    background:red;
+    opacity:1;
+    content: '';
+    width: 170%;
+    position: absolute;
+    height:.1em;
+    border-radius:.1em;
+    left: -5%;
+    white-space:nowrap;
+    display: block;
+    z-index: 999;
+    transform: rotate(180deg);  
+}
+s.straight::before, strike.straight::before{transform: rotate(0deg);left:-1%;width:102%;}
+
