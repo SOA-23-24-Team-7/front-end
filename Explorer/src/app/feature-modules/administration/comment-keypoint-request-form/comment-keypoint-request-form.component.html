@@ -1,7 +1,19 @@
-<form [formGroup]="commentKeyPointRequestForm">
-    <mat-form-field>
-        <mat-label>Leave a comment:</mat-label>
-        <input matInput type="text" formControlName="comment">
-        <button color="primary" mat-button (click)="submit()">Submit</button>
-    </mat-form-field>
-</form>
+<div class="modal">
+    <div (click)="$event.stopPropagation()">
+        <div class="register-head">
+            <fa-icon class="register-x" [icon]="faXmark" (click)="onClose()" />
+            <form [formGroup]="commentKeyPointRequestForm">
+                <div class="register-label">Add comment for rejection:</div>
+                <textarea
+                    class="comment-input"
+                    formControlName="comment"
+                    placeholder="Leave your comment"
+                    required
+                ></textarea>
+                <button class="submit" type="submit" (click)="submit()">
+                    <div class="submit-text">Submit</div>
+                </button>
+            </form>
+        </div>
+    </div>
+</div>

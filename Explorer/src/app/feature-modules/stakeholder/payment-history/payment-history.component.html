@@ -5,13 +5,13 @@
             <h3>Tour: {{ record.tourName }}</h3>
             <p>Price: {{ record.price }}€</p>
             <p>Date: {{ record.purchasedDate | date : "MMM d, y" }}</p>
-            <fa-icon class="fa-coins-icon" [icon]="faCoins" [spin]="true" />
+            <fa-icon class="fa-coins-icon" [icon]="faCoins"/>
         </div>
         <div class="record-card" *ngFor="let record of bundleRecords">
             <h3>Bundle: {{ record.bundleName }}</h3>
             <p>Price: {{ record.price }}€</p>
             <p>Date: {{ record.purchasedDate | date : "MMM d, y" }}</p>
-            <fa-icon class="fa-coins-icon" [icon]="faCoins" [spin]="true" />
+            <fa-icon class="fa-coins-icon" [icon]="faCoins" />
         </div>
     </div>
 </div>
