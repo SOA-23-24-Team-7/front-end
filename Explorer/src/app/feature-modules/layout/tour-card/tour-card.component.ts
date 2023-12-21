@@ -1,8 +1,9 @@
 import { Component, Input, OnInit } from "@angular/core";
 import { Tour } from "../../tour-authoring/model/tour.model";
 import { environment } from "src/env/environment";
-import { faC, faCoins } from "@fortawesome/free-solid-svg-icons";
+import { faC, faCoins, faStar } from "@fortawesome/free-solid-svg-icons";
 import { trigger, transition, style, animate } from "@angular/animations";
+import { MarketplaceService } from "../../marketplace/marketplace.service";
 @Component({
     selector: "xp-tour-card",
     templateUrl: "./tour-card.component.html",
@@ -21,6 +22,7 @@ import { trigger, transition, style, animate } from "@angular/animations";
 })
 export class TourCardComponent implements OnInit{
     @Input() tour: any;
+    faStar = faStar;
     visibleTags:[];
     remainingTags:[];
     showMore:boolean;
@@ -30,6 +32,9 @@ export class TourCardComponent implements OnInit{
     interval:any;
     faCoins=faCoins;
     image:string="";
+    discount: number | null = null;
+    discountedPrice: number | null = null;
+    constructor(private marketplaceService:MarketplaceService){}
     ngOnInit(): void {
         this.visibleTags = this.tour.tags.slice(0, 3);
         this.remainingTags = this.tour.tags.slice(3);
@@ -38,7 +43,15 @@ export class TourCardComponent implements OnInit{
         this.getImagePath();
         this.image=this.images[0]
         this.startImageChangeInterval();
-
+        this.getDiscount();
+    }
+    getDiscount() {
+      this.marketplaceService.getDiscountForTour(this.tour.id!).subscribe(discount => {
+        this.discount = discount;
+        if (this.discount) {
+          this.discountedPrice = this.tour.price! - this.tour.price! * discount!;
+        }
+      })
     }
     toggleShowMore() {
         this.showMore = !this.showMore;

@@ -12,7 +12,7 @@
     box-shadow: 0 0 1rem rgba(var(--clr-outline-contrast), 0.8);
     color: rgb(var(--clr-text));
     transition: transform 0.2s;
-    height: 23.8rem;
+    height: 25.8rem;
 }
 .blog-card:hover {
     transform: scale(1.05); /* Uvećanje kartice kada se miš nalazi iznad nje */

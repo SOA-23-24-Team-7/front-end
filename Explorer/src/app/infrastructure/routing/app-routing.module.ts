@@ -100,7 +100,6 @@ const routes: Routes = [
     {
         path: "tour-sales",
         component: TourSalesComponent,
-        canActivate: [AuthGuard],
     },
     {
         path: "tour-sale-form/:id",
