@@ -149,12 +149,20 @@ hr {
     background-color: rgba(var(--clr-error-700), 0.8);
 }
 
+.rejected {
+    background-color: rgba(var(--clr-error-700), 0.8);
+}
+
 .acceptedDate {
     color: rgba(var(--clr-success-700), 0.8);
 }
 
 .rejectedDate {
     color: rgba(var(--clr-error-700), 0.8);
+}
+
+.pendingDate {
+    color: rgba(var(--clr-neutral-500, 1));
 }
 
 .marker {

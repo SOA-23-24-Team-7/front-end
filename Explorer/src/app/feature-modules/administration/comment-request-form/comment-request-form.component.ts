@@ -8,6 +8,7 @@ import {
 import { AuthService } from "src/app/infrastructure/auth/auth.service";
 import { AdministrationService } from "../administration.service";
 import { PublicFacilityRequest } from "../../tour-authoring/model/public-facility-request.model";
+import { faXmark } from "@fortawesome/free-solid-svg-icons";
 
 @Component({
     selector: "xp-comment-request-form",
@@ -20,6 +21,8 @@ export class CommentRequestFormComponent {
         public dialog: MatDialogRef<CommentRequestFormComponent>,
         @Inject(MAT_DIALOG_DATA) public data: any,
     ) {}
+
+    faXmark = faXmark;
     commentRequestForm = new FormGroup({
         comment: new FormControl("", [Validators.required]),
     });
@@ -32,5 +35,8 @@ export class CommentRequestFormComponent {
             this.dialog.close(this.data);
             location.reload();
         }
+    }
+    onClose(): void {
+        this.dialog.close();
     }
 }
