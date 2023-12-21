@@ -16,15 +16,13 @@
 }
 
 .register-x {
-    top: 0;
+    position: absolute;
     left: 0;
+    justify-self: left;
     color: rgba(var(--clr-primary-500), 1);
     cursor: pointer;
     font-size: 2rem;
     transition: color 0.15s;
-    z-index: 2;
-    pointer-events: all;
-    padding: 10px;
 }
 
 .register-x:hover {
@@ -35,6 +33,12 @@
     width: 100%;
     display: flex;
     justify-content: center;
+}
+.register-title {
+    color: rgba(var(--clr-text), 1);
+    font-family: var(--fnt-header);
+    font-weight: 600;
+    font-size: 2rem;
 }
 
 .register-label {
@@ -63,7 +67,18 @@
     font-weight: 400;
     font-size: 1rem;
 }
-
+.add {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding-inline: 2rem;
+    padding-block: 1.5rem;
+    background-color: rgba(var(--clr-background, 1));
+    border-radius: 1rem;
+    width: 32rem;
+    overflow-y: auto;
+    pointer-events: all;
+}
 .submit {
     display: flex;
     align-items: center;
@@ -86,4 +101,10 @@
     font-family: var(--fnt-body);
     font-weight: 500;
     font-size: 1.25rem;
+}
+.register-form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 2.5rem;
 }
