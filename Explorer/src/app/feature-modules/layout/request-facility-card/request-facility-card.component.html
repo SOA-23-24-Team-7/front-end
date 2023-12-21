@@ -23,3 +23,44 @@
         </div>
     </div>
 </div>
+
+<div class="notification">
+    <div
+        class="marker"
+        [class.pending]="request.status == 0"
+        [class.accepted]="request.status == 1"
+        [class.rejected]="request.status == 2"
+    ></div>
+    <!--div class="data">
+        <div class="picture">
+            <div
+                class="sender-avatar"
+                [style.background-image]="
+                    'url(' + notification.senderPicture + ')'
+                "
+            ></div>
+        </div>
+        <div class="row">
+            <div class="notification-column">
+                <div class="notification-header">{{ notification.header }}</div>
+                <div class="notification-row">
+                    <div *ngIf="notification.isAccepted">Approved by</div>
+                    <div *ngIf="!notification.isAccepted">Declined by</div>
+                    <div class="sender">
+                        {{ "@" + notification.senderName }}
+                    </div>
+                    <div>at</div>
+                    <div
+                        [class.acceptedDate]="notification.isAccepted"
+                        [class.rejectedDate]="!notification.isAccepted"
+                    >
+                        {{ notification.created | date : "dd/MM/yyyy" }}
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="notification-content">
+            {{ notification.description }}
+        </div>
+    </div-->
+</div>
