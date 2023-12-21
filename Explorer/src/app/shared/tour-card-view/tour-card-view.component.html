@@ -2,6 +2,7 @@
     class="tour-card"
     [class.selectable]="selectable"
     [class.selected]="selected && selectable"
+    [routerLink]="['/tour/', tour.id]"
 >
     <div class="tour-card-left">
         <div class="tour-image-container">
