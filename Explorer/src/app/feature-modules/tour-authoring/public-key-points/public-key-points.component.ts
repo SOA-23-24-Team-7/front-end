@@ -37,7 +37,7 @@ export class PublicKeyPointsComponent implements OnInit {
         this.keyPoints = this.data.keyPoints;
         this.getPublicKeyPoints();
 
-        console.log(this.publicKeyPoints);
+        // console.log(this.publicKeyPoints);
     }
 
     getPublicKeyPoints(): void {

@@ -57,6 +57,8 @@
         class="delete-button"
         *ngIf="!isAddNew && !isAddNewPublic && !isPublic"
         (click)="delete()"
+        tooltipPosition="bottom"
+        pTooltip="Delete"
     >
         <fa-icon [icon]="faCross" />
     </div>

@@ -35,7 +35,9 @@ import { EditBundleFormComponent } from "./edit-bundle-form/edit-bundle-form.com
 import { ViewBundleToursComponent } from "./view-bundle-tours/view-bundle-tours.component";
 import { EncounterModule } from "../encounter/encounter.module";
 import { MatChipsModule } from "@angular/material/chips";
-import { PublishTourModalComponent } from './publish-tour-modal/publish-tour-modal.component';
+import { PublishTourModalComponent } from "./publish-tour-modal/publish-tour-modal.component";
+import { KeyPointModalComponent } from "./key-point-modal/key-point-modal.component";
+import { TooltipModule } from "primeng/tooltip";
 
 @NgModule({
     declarations: [
@@ -63,6 +65,7 @@ import { PublishTourModalComponent } from './publish-tour-modal/publish-tour-mod
         EditBundleFormComponent,
         ViewBundleToursComponent,
         PublishTourModalComponent,
+        KeyPointModalComponent,
     ],
     imports: [
         CommonModule,
@@ -76,6 +79,7 @@ import { PublishTourModalComponent } from './publish-tour-modal/publish-tour-mod
         FormsModule,
         EncounterModule,
         MatChipsModule,
+        TooltipModule,
     ],
     exports: [
         TourComponent,
