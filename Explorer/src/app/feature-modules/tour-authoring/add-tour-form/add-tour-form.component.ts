@@ -3,7 +3,7 @@ import { TourAuthoringService } from '../tour-authoring.service';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { faXmark } from '@fortawesome/free-solid-svg-icons';
-import { Tour } from '../model/tour.model';
+import { Tour, TourCategory } from '../model/tour.model';
 import { Bundle } from '../model/bundle.model';
 
 @Component({
@@ -26,7 +26,9 @@ export class AddTourFormComponent implements OnInit{
     difficulty: parseInt("0"),
     tags: [],
     price: parseInt("0"),
+    category: TourCategory.Adventure
   };
+
 
   addTourForm = new FormGroup({
     name: new FormControl('',[Validators.required]),
@@ -34,6 +36,7 @@ export class AddTourFormComponent implements OnInit{
     difficulty: new FormControl('',[Validators.required]),
     tags: new FormControl([] as string[], [Validators.required]),
     price: new FormControl('',[Validators.required]),
+    category: new FormControl('',[Validators.required])
   });
 
   ngOnInit() {
@@ -62,12 +65,26 @@ export class AddTourFormComponent implements OnInit{
   
   submit():void{
     console.log(this.addTourForm.value);
+    var categ = TourCategory.Adventure
+
+    if(this.addTourForm.value.category == 'Adventure')
+      categ = TourCategory.Adventure
+    else if(this.addTourForm.value.category == 'FamilyTrips')
+      categ = TourCategory.FamilyTrips
+    else if(this.addTourForm.value.category == 'Cruise')
+      categ = TourCategory.Cruise
+    else
+      categ = TourCategory.Cultural
+
+
+
     const tour: Tour = {
       name: this.addTourForm.value.name || "",
       description: this.addTourForm.value.description || "",
       difficulty: parseInt(this.addTourForm.value.difficulty || "0"),
       tags: this.addTourForm.value.tags ? this.addTourForm.value.tags : [],
       price: parseInt(this.addTourForm.value.price || "0"),
+      category: categ || TourCategory.Adventure
     };
     this.service.addTour(tour).subscribe({
       next: () => { 
