@@ -38,6 +38,14 @@
                     class="tour-action red"
                     *ngIf="tour.status == 2 || tour.status == 0"
                     [icon]="faTrash"
+                    tooltipPosition="bottom"
+                    pTooltip="Enter your username"
+                />
+                <fa-icon
+                    class="tour-action"
+                    *ngIf="tour.status == 2 || tour.status == 0"
+                    (click)="onEditClicked()"
+                    [icon]="faPen"
                 />
                 <fa-icon
                     class="tour-action"

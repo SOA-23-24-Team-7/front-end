@@ -10,7 +10,7 @@ export class xpError {
     }
 
     static getErrorMessage(error: any): string {
-        console.log(error);
+        // console.log(error);
         if (!error.error || !error.error.detail)
             return "Unknown error (anlaki back-end, ne salje error kako treba 😔 )";
         const detail = error.error.detail;
