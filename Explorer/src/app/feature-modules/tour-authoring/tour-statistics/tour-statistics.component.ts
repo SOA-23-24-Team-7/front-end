@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { TourAuthoringService } from '../tour-authoring.service';
-import Chart from 'chart.js/auto';
+import Chart, { Colors } from 'chart.js/auto';
 
 @Component({
   selector: 'xp-tour-statistics',

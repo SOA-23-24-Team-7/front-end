@@ -6,13 +6,13 @@
           {{ keyPoint.description }}
       </div>
       <div class="key-point-statistic">
-          Visit %: {{ statistic }}
+          Visit %: <br> {{ statistic }} %
       </div>
       <div *ngIf="encounterStatistic" class="key-point-statistic">
-          Encounter %: {{ encounterStatistic }}
+          Encounter %: <br> {{ encounterStatistic }} %
       </div>
       <div *ngIf="!encounterStatistic" class="key-point-statistic">
-        Encounter %: No data
+        Encounter %: <br> No data
         </div>
   </div>
 </div>

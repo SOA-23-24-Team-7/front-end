@@ -37,7 +37,7 @@
   padding-top: 0;
   text-align: left;
   word-wrap: break-word;
-  overflow-y: scroll;
+  /*overflow-y: scroll;*/
   width: 95%;
   height: 80%;
   margin-top: 0.5rem;
@@ -48,7 +48,7 @@
   padding-top: 0;
   text-align: left;
   word-wrap: break-word;
-  overflow-y: scroll;
+  /*overflow-y: scroll;*/
   font-weight: bold;
   width: 95%;
   height: 80%;

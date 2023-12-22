@@ -10,7 +10,6 @@ body {
 }
 
 #dashboard {
-  background-color: #fff;
   border-radius: 0.5rem;
   box-shadow: 0 0.25rem 0.5rem rgba(0, 0, 0, 0.1);
   padding: 1.25rem;
@@ -28,14 +27,14 @@ h2 {
 }
 
 p {
-  color: #777;
+  color: rgb(var(--clr-text));
   margin: 0.3125rem 0;
 }
 
 .stat-value {
   font-size: 1.5rem;
   font-weight: bold;
-  color: #007bff;
+  color: #3f51b5;
 }
 
 mat-card img {
@@ -93,14 +92,14 @@ mat-card img {
 
 .column-separated {
   flex: 0.5;
-  padding: 10px;
+  padding: 0.625rem;
   margin-right: 4rem;
   margin-left: 4rem;
   margin-bottom: 2.5rem;
   margin-top: 4rem;
   padding-left: 1.6rem;
   padding-top: 1.5rem;
-  border: rgba(var(--clr-outline), 0.5) 1px solid;
+  border: rgba(var(--clr-outline), 0.5) 0.063 solid;
   border-radius: 1rem;
   background-color: rgba(var(--clr-background-secondary));
 }
@@ -112,6 +111,7 @@ mat-card img {
   width: 70rem;
   overflow-x: hidden;
   scroll-behavior: smooth;
+  margin-top: 1rem;
 }
 
 .list-cards-button:hover .triangle-left {
@@ -152,7 +152,7 @@ mat-card img {
 
 .add-enable {
   padding-bottom: 0;
-  border: rgba(var(--clr-outline-contrast, 1)) 1px solid;
+  border: rgba(var(--clr-outline-contrast, 1)) 0.063rem solid;
   border-radius: 0.5rem;
   cursor: pointer;
 }
@@ -164,7 +164,7 @@ mat-card img {
   width: 14rem;
   height: 2rem;
   background-color: rgba(var(--clr-primary-500), 1);
-  border: rgba(var(--clr-primary-500, 1)) 1px solid;
+  border: rgba(var(--clr-primary-500, 1)) 0.063rem solid;
   border-radius: 0.5rem;
   cursor: pointer;
   transition: background-color 0.15s;
@@ -181,6 +181,7 @@ mat-card img {
   font-weight: 500;
   font-size: 1.25rem;
 }
+
 .enable-text {
   color: rgb(var(--clr-text));
   font-family: var(--fnt-body);
@@ -198,6 +199,7 @@ mat-card img {
 
 .text {
   font-size: 20px;
+  color: rgb(var(--clr-text));
 }
 
 h2 {
@@ -212,6 +214,13 @@ h2 {
   justify-content: space-between;
 }
 
-h3 {
-  margin-left: 40rem;
+#help-text {
+  margin-left: 0.75rem;
+  color: rgb(var(--clr-text));
+}
+
+#key-point-title {
+  color: rgb(var(--clr-text));
+  margin-left: 50.4rem;
+  margin-top: -1rem;
 }
