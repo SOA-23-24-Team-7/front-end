@@ -12,7 +12,6 @@ import { BlogComponent } from "src/app/feature-modules/blog/blog/blog.component"
 import { UsersOverviewComponent } from "src/app/feature-modules/administration/users-overview/users-overview.component";
 import { UserProfileComponent } from "src/app/feature-modules/stakeholder/user-profile/user-profile.component";
 import { RatingComponent } from "src/app/feature-modules/administration/rating/rating.component";
-import { RatingFormComponent } from "src/app/feature-modules/marketplace/rating-form/rating-form.component";
 import { ReviewComponent } from "src/app/feature-modules/marketplace/review/review.component";
 import { ProblemComponent } from "src/app/feature-modules/marketplace/problem/problem.component";
 import { TourComponent } from "src/app/feature-modules/tour-authoring/tour/tour.component";
@@ -72,11 +71,6 @@ const routes: Routes = [
     },
     { path: "", component: HomeComponent },
     { path: "ratings", component: RatingComponent, canActivate: [AuthGuard] },
-    {
-        path: "rating-form",
-        component: RatingFormComponent,
-        canActivate: [AuthGuard],
-    },
     {
         path: "review/:tourId",
         component: ReviewComponent,
