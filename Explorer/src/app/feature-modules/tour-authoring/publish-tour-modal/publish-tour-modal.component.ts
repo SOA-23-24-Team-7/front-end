@@ -147,4 +147,10 @@ export class PublishTourModalComponent {
             }
         }
     }
+
+    setType(type: string) {
+        this.publishForm.setValue({
+            transportType: type,
+        });
+    }
 }
