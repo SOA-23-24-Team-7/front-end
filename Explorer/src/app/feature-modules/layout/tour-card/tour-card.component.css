@@ -12,7 +12,7 @@
     transition: transform 0.2s;
 }
 .tour-card:hover {
-    transform: scale(1.05); /* Uvećanje kartice kada se miš nalazi iznad nje */
+    transform: scale(1.05);
 }
 .tour-image {
     height: 11rem;

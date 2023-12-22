@@ -89,8 +89,14 @@ export class RequestViewComponent implements OnInit {
     }
 
     rejectPublicKeyPointRequest(request: PublicKeyPointRequest): void {
-        this.dialogRef.open(CommentKeyPointRequestFormComponent, {
-            data: request,
+        const dialogRef = this.dialogRef.open(
+            CommentKeyPointRequestFormComponent,
+            {
+                data: request,
+            },
+        );
+        dialogRef.afterClosed().subscribe(result => {
+            this.getRequests(); // update the price
         });
     }
     getPublicStatusText(status: PublicStatus | undefined): string {

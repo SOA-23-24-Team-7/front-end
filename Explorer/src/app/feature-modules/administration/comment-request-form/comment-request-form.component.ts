@@ -31,9 +31,13 @@ export class CommentRequestFormComponent {
         if (this.data.id != undefined && updatedData.comment != null) {
             this.service
                 .rejectPublicFacilityRequest(this.data.id, updatedData.comment)
-                .subscribe();
-            this.dialog.close(this.data);
-            location.reload();
+                .subscribe({
+                    next: () => {
+                        this.dialog.close(this.data);
+                    },
+                });
+
+            //location.reload();
         }
     }
     onClose(): void {
