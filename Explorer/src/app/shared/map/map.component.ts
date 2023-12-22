@@ -375,18 +375,12 @@ export class MapComponent implements AfterViewInit, OnChanges {
                 if (waypoints.length == this.waypointMap.size + 1 && i == 0)
                     return null;
                 if (i == 1) {
-                    keyPointIcon = L.icon({
-                        iconUrl: "../assets/icons/nextKeyPointIcon.png",
-                        iconSize: [46, 46],
-                        iconAnchor: [26, 46],
-                    });
+                    keyPointIcon = this.currentKeyPoint;
                 } else {
-                    keyPointIcon = L.icon({
-                        iconUrl:
-                            "https://icon-library.com/images/map-marker-icon/map-marker-icon-18.jpg",
-                        iconSize: [46, 46],
-                        iconAnchor: [26, 46],
-                    });
+                    keyPointIcon = this.defaultIcon;
+                }
+                if (i == n - 1) {
+                    keyPointIcon = this.finalKeyPoint;
                 }
                 const marker = L.marker(waypoint.latLng, {
                     icon: keyPointIcon,
