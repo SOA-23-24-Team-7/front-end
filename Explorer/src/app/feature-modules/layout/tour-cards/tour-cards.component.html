@@ -1,3 +1,15 @@
+<h1>Recommended For You</h1>
+<div class="tour-cards-container">
+    <div class="list-cards-button" id="prev-button" (click)="scrollToPrevRecommendedTours()">
+        <div class="triangle-left"></div>
+    </div>
+
+    <div class="recommended-card-container"><xp-tour-card *ngFor="let tour of recommendedTours" [tour]="tour" class="tour-details"></xp-tour-card></div>
+
+    <div class="list-cards-button" id="next-button" (click)="scrollToNextRecommendedTours()">
+        <div class="triangle-right"></div>
+    </div>
+</div>
 <h1>Adventure Essentials: Must-Visit Stops</h1>
 <div class="tour-cards-container">
     <div class="list-cards-button" id="prev-button" (click)="scrollToPrevAdventureCard()">

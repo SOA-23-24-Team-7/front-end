@@ -14,11 +14,13 @@ export class TourCardsComponent implements OnInit {
     culturalTours:Tour[]
     familyTours:Tour[]
     cruiseTours:Tour[]
+    recommendedTours:Tour[]
     faCoins=faCoins;
     adventureContainer:any
     cruiseContainer:any
     familyContainer:any
     culturalContainer:any
+    recommendedContainer:any
     constructor(private service: LayoutService){}
     ngOnInit(): void {
         this.adventureContainer = document.querySelector(
@@ -33,6 +35,9 @@ export class TourCardsComponent implements OnInit {
         this.culturalContainer = document.querySelector(
             ".cultural-card-container",
         );
+        this.recommendedContainer = document.querySelector(
+            ".recommended-card-container"
+        )
         this.service.getAdventureTours().subscribe({
             next:(result: PagedResults<Tour>)=>{
                 this.adventureTours=result.results
@@ -50,7 +55,12 @@ export class TourCardsComponent implements OnInit {
                                     next:(result: PagedResults<Tour>)=>{
                                         this.familyTours=result.results
                                         this.familyTours=this.familyTours.filter(a=>a.averageRating as number>4)
-                                        
+                                        this.service.getAdventureTours().subscribe({
+                                            next:(result: PagedResults<Tour>)=>{
+                                                this.recommendedTours=result.results
+                                                
+                                            }
+                                        })
                                     }
                                 })
                             }
@@ -64,6 +74,7 @@ export class TourCardsComponent implements OnInit {
     currentIndex2: number = 0;
     currentIndex3: number = 0;
     currentIndex4: number = 0;
+    currentIndex5: number = 0;
     scrollToNextCulturalCard(): void {
         this.currentIndex1++;
         if (this.currentIndex1 >= this.culturalContainer.children.length) {
@@ -128,6 +139,22 @@ export class TourCardsComponent implements OnInit {
         }
         this.adventureContainer.scrollLeft +=
             this.adventureContainer.children[this.currentIndex4].clientWidth;
+    }
+    scrollToPrevRecommendedTours() {
+        this.currentIndex5--;
+        if (this.currentIndex5 < 0) {
+            this.currentIndex5 = this.adventureContainer!.children.length - 1;
+        }
+        this.adventureContainer!.scrollLeft -=
+            this.adventureContainer.children[this.currentIndex5].clientWidth;
+    }
+    scrollToNextRecommendedTours() {
+        this.currentIndex5++;
+        if (this.currentIndex5 >= this.adventureContainer.children.length) {
+            this.currentIndex5 = 0;
+        }
+        this.adventureContainer.scrollLeft +=
+            this.adventureContainer.children[this.currentIndex5].clientWidth;
     }
     toursList = [
         {

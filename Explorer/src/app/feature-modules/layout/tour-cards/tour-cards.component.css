@@ -73,6 +73,14 @@ h1 {
     overflow-x: hidden;
     scroll-behavior: smooth;
 }
+.recommended-card-container{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    width: 82rem;
+    overflow-x: hidden;
+    scroll-behavior: smooth;
+}
 .cruise-card-container{
     display: flex;
     flex-direction: row;
