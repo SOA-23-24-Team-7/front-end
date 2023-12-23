@@ -12,6 +12,7 @@ mat-card img {
     display: flex;
     align-items: center;
 }
+
 .buttons-container {
     display: flex;
     flex-direction: column;
@@ -31,9 +32,11 @@ mat-card img {
     display: flex;
     flex-direction: column;
 }
+
 .cards {
     margin-top: 3rem;
 }
+
 .row-1 {
     display: flex;
     justify-content: center;
@@ -41,6 +44,7 @@ mat-card img {
     border-radius: 1rem;
     box-shadow: 0 0 1rem rgba(var(--clr-outline-contrast), 0.2);
 }
+
 .row-2 {
     display: flex;
     justify-content: center;
@@ -78,6 +82,7 @@ mat-card img {
     border-color: transparent rgba(var(--clr-primary-500), 0.95) transparent
         transparent;
 }
+
 .list-cards-button:hover .triangle-right {
     border-color: transparent transparent transparent
         rgba(var(--clr-primary-500), 0.95);
@@ -141,11 +146,13 @@ mat-card img {
     font-weight: 500;
     font-size: 1.25rem;
 }
+
 .enable-text {
     color: rgb(var(--clr-text));
     font-family: var(--fnt-body);
     font-weight: 500;
 }
+
 .checkbox-group div {
     display: flex;
     align-items: center;

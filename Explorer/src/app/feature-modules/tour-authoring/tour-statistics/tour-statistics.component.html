@@ -1,0 +1,24 @@
+<div id="dashboard">
+  <h2>Tour Statistics</h2>
+
+  <div class="stat-container">
+    <p id="soldToursNumberText">Sold Tours: </p>
+    <p class="stat-value">{{ soldToursNumber }}</p>
+  </div>
+
+  <div class="stat-container">
+    <p id="startedToursNumberText">Started Tours: </p>
+    <p class="stat-value">{{ startedToursNumber }}</p>
+  </div>
+
+  <div class="stat-container">
+    <p id="completedToursNumberText">Completed Tours: </p>
+    <p class="stat-value">{{ completedToursNumber }}</p>
+  </div>
+  
+  <br>
+  
+  <div class="canvas">
+    <canvas id="canvas">{{chart}}</canvas>
+  </div>
+</div>

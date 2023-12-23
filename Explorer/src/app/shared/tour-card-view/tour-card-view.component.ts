@@ -12,7 +12,8 @@ import {
   faTrash,
   faBoxArchive,
   faPen,
-  faMoneyBills
+  faMoneyBills,
+  faBarChart
 } from "@fortawesome/free-solid-svg-icons";
 import { TourLimitedView } from '../../feature-modules/marketplace/model/tour-limited-view.model';
 import { Tour } from '../../feature-modules/tour-authoring/model/tour.model';
@@ -43,6 +44,7 @@ export class TourCardViewComponent implements OnChanges {
   faTrash = faTrash;
   faBoxArchive = faBoxArchive;
   faMoneyBills = faMoneyBills;
+  faBarChart = faBarChart;
   user: User;
   @Input() hideIcons: boolean = false;
   @Input() tour: Tour;
@@ -217,6 +219,7 @@ export class TourCardViewComponent implements OnChanges {
       
     });
   }
+  
   onCouponClicked(tour: Tour): void{
     this.dialogRef.open(CouponsComponent, {
       data: tour,

@@ -292,4 +292,58 @@ export class TourAuthoringService {
         query += searchFilter.distance > 0 && searchFilter.distance !== "" ? `&maxDistance=${searchFilter.distance}` : "";
         return query;
     }
+
+    getSoldToursNumber(): Observable<number> {
+        return this.http.get<number>(
+            environment.apiHost + "tour/statistics/bought"
+        );
+    }
+
+    getStartedToursNumber(): Observable<number> {
+        return this.http.get<number>(
+            environment.apiHost + "tour/statistics/started"
+        );
+    }
+
+    getCompletedToursNumber(): Observable<number> {
+        return this.http.get<number>(
+            environment.apiHost + "tour/statistics/completed"
+        );
+    }
+
+    getSalesNumber(tourId: number): Observable<number> {
+        return this.http.get<number>(
+            environment.apiHost + "tour/statistics/bought/" + tourId,
+        );
+    }
+
+    getStartsNumber(tourId: number): Observable<number> {
+        return this.http.get<number>(
+            environment.apiHost + "tour/statistics/started/" + tourId,
+        );
+    }
+
+    getCompletionNumber(tourId: number): Observable<number> {
+        return this.http.get<number>(
+            environment.apiHost + "tour/statistics/completed/" + tourId,
+        );
+    }
+
+    getCompletionPercentages(): Observable<number[]>{
+        return this.http.get<number[]>(
+            environment.apiHost + "tour/statistics/distribution"
+        );
+    }
+
+    getKeyPointVisitPercentage(tourId: number): Observable<number[]>{
+        return this.http.get<number[]>(
+            environment.apiHost + "tour/statistics/keyPointVisitPercentage/" + tourId,
+        );
+    }
+
+    getKeyPointEncounterCompletionPercentage(tourId: number): Observable<{[key: number]: number }>{
+        return this.http.get<{[key: number]: number }>(
+            environment.apiHost + "tour/statistics/keyPointEncounterCompletionPercentage/" + tourId,
+        );
+    }
 }
