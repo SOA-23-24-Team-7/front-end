@@ -40,38 +40,54 @@ export class PublishTourModalComponent {
     ) {}
 
     publishForm = new FormGroup({
-        transportType: new FormControl<string>("walk"),
+        onFootChecked: new FormControl<boolean>(true),
+        bicycleRideChecked: new FormControl<boolean>(false),
+        carRideChecked: new FormControl<boolean>(false),
     });
 
     publishTour() {
         const tour = this.data.tour;
         tour.distance = Math.round(this.data.distance * 100) / 100;
-        switch (this.publishForm.value.transportType) {
-            case "walk":
-                this.handleCheckedDurations(tour, {
-                    duration: this.data.walkingDuration,
-                    transportType: TransportType.Walking,
-                });
-                this.handleUncheckedDurations(tour, TransportType.Bicycle);
-                this.handleUncheckedDurations(tour, TransportType.Car);
-                break;
-            case "bicycle":
-                this.handleCheckedDurations(tour, {
-                    duration: this.data.bicycleDuration,
-                    transportType: TransportType.Bicycle,
-                });
-                this.handleUncheckedDurations(tour, TransportType.Walking);
-                this.handleUncheckedDurations(tour, TransportType.Car);
-                break;
-            case "car":
-                this.handleCheckedDurations(tour, {
-                    duration: this.data.carDuration,
-                    transportType: TransportType.Car,
-                });
-                this.handleUncheckedDurations(tour, TransportType.Walking);
-                this.handleUncheckedDurations(tour, TransportType.Bicycle);
-                break;
+
+        if (this.publishForm.value.onFootChecked) {
+            const tourDuration: TourDuration = {
+                duration: this.data.walkingDuration,
+                transportType: TransportType.Walking,
+            };
+
+            this.handleCheckedDurations(this.data.tour, tourDuration);
+        } else {
+            this.handleUncheckedDurations(
+                this.data.tour,
+                TransportType.Walking,
+            );
         }
+
+        if (this.publishForm.value.bicycleRideChecked) {
+            const tourDuration: TourDuration = {
+                duration: this.data.bicycleDuration,
+                transportType: TransportType.Bicycle,
+            };
+
+            this.handleCheckedDurations(this.data.tour, tourDuration);
+        } else {
+            this.handleUncheckedDurations(
+                this.data.tour,
+                TransportType.Bicycle,
+            );
+        }
+
+        if (this.publishForm.value.carRideChecked) {
+            const tourDuration: TourDuration = {
+                duration: this.data.carDuration,
+                transportType: TransportType.Car,
+            };
+
+            this.handleCheckedDurations(this.data.tour, tourDuration);
+        } else {
+            this.handleUncheckedDurations(this.data.tour, TransportType.Car);
+        }
+
         this.service.updateTour(tour).subscribe({
             next: () => {
                 if (
@@ -148,9 +164,21 @@ export class PublishTourModalComponent {
         }
     }
 
-    setType(type: string) {
-        this.publishForm.setValue({
-            transportType: type,
-        });
+    toggleWalking() {
+        this.publishForm.controls["onFootChecked"].setValue(
+            !this.publishForm.value["onFootChecked"],
+        );
+    }
+
+    toggleBicycle() {
+        this.publishForm.controls["bicycleRideChecked"].setValue(
+            !this.publishForm.value.bicycleRideChecked,
+        );
+    }
+
+    toggleCar() {
+        this.publishForm.controls["carRideChecked"].setValue(
+            !this.publishForm.value.carRideChecked,
+        );
     }
 }

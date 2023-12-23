@@ -25,6 +25,7 @@ import { faCoins } from "@fortawesome/free-solid-svg-icons";
 import { NotifierService } from "angular-notifier";
 import { xpError } from "src/app/shared/model/error.model";
 import { PublishTourModalComponent } from "../publish-tour-modal/publish-tour-modal.component";
+import { KeyPointModalComponent } from "../key-point-modal/key-point-modal.component";
 @Component({
     selector: "xp-key-points",
     templateUrl: "./key-points.component.html",
@@ -106,7 +107,12 @@ export class KeyPointsComponent implements OnInit {
     getKeyPoints(): void {
         this.service.getKeyPoints(this.tour?.id!).subscribe({
             next: (result: KeyPoint[]) => {
-                this.keyPoints = result;
+                this.keyPoints = result.sort((x, y) => {
+                    return x.order < y.order ? -1 : 1;
+                });
+                this.tour!.keyPoints = this.tour!.keyPoints?.sort((x, y) => {
+                    return x.order < y.order ? -1 : 1;
+                });
             },
             error: () => {},
         });
@@ -141,7 +147,7 @@ export class KeyPointsComponent implements OnInit {
                             x => x.id != id,
                         );
                         this.keyPoints = this.keyPoints.filter(x => x.id != id);
-                        // this.getKeyPoints();
+                        this.notifier.notify("success", "Removed keypoint.");
                     },
                     error: (err: any) => {
                         this.notifier.notify(
@@ -200,6 +206,37 @@ export class KeyPointsComponent implements OnInit {
             this.mapComponent.setRoute(waypoints);
             this.getKeyPoints();
             // console.log(this.mapComponent.tourDistance);
+        });
+    }
+
+    openNewKeyPointDialog() {
+        const dialogRef = this.dialogRef.open(KeyPointModalComponent, {
+            data: {
+                tour: this.tour,
+                isUpdateForm: false,
+            },
+        });
+
+        dialogRef.componentInstance.keyPointCreated.subscribe(keyPoint => {
+            this.keyPoints.push(keyPoint);
+            this.tour?.keyPoints?.push(keyPoint);
+        });
+    }
+    openEditKeyPointDialog(kp: KeyPoint) {
+        const dialogRef = this.dialogRef.open(KeyPointModalComponent, {
+            data: {
+                tour: this.tour,
+                isUpdateForm: true,
+                keyPoint: kp,
+            },
+        });
+
+        dialogRef.componentInstance.keyPointUpdated.subscribe(keyPoint => {
+            let index = this.keyPoints.findIndex(x => x.id == keyPoint.id);
+            this.keyPoints[index] = keyPoint;
+
+            index = this.tour!.keyPoints!.findIndex(x => x.id == keyPoint.id);
+            this.tour!.keyPoints![index] = keyPoint;
         });
     }
 

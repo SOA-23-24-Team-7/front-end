@@ -12,6 +12,7 @@ import { MapModalComponent } from "./map-modal/map-modal.component";
 import { CarouselComponent } from "./carousel/carousel.component";
 import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
 import { TooltipModule } from "primeng/tooltip";
+import { MatDialogModule } from "@angular/material/dialog";
 
 @NgModule({
     declarations: [
@@ -30,6 +31,7 @@ import { TooltipModule } from "primeng/tooltip";
         FormsModule,
         BrowserAnimationsModule,
         TooltipModule,
+        MatDialogModule,
     ],
     exports: [
         MapComponent,

@@ -43,6 +43,7 @@
         <xp-key-point-card
             [isAddNew]="true"
             *ngIf="tour?.status == 2 || tour?.status == 0"
+            (click)="openNewKeyPointDialog()"
         />
         <xp-key-point-card
             [isAddNewPublic]="true"
@@ -53,6 +54,7 @@
             <xp-key-point-card
                 [keyPoint]="kp"
                 (deleteClicked)="deleteKeyPoint($event)"
+                (click)="openEditKeyPointDialog(kp)"
             >
             </xp-key-point-card>
         </div>

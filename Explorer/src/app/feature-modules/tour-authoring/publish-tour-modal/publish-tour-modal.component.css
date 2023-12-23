@@ -60,7 +60,7 @@ input:hover,
     cursor: pointer;
 }
 
-input[type="radio"] {
+input[type="checkbox"] {
     box-sizing: border-box;
     width: 20px;
     height: 20px;
@@ -74,7 +74,7 @@ input[type="radio"] {
     transition: border 0.3s ease, background-color 0.3s ease;
 }
 
-input[type="radio"]:not(:disabled):checked {
+input[type="checkbox"]:not(:disabled):checked {
     border-color: rgb(var(--clr-primary-500));
     background-color: rgb(var(--clr-primary-500));
     background-clip: content-box;
@@ -88,6 +88,6 @@ input[type="radio"]:not(:disabled):checked {
     );
 }
 
-input[type="radio"]:not(:disabled):checked + .option-name {
+input[type="checkbox"]:not(:disabled):checked + .option-name {
     color: rgb(var(--clr-primary-500));
 }
