@@ -16,6 +16,7 @@ import {
     faXmark,
     faCoins,
     faShoppingCart,
+    faCashRegister,
 } from "@fortawesome/free-solid-svg-icons";
 import { environment } from "src/env/environment";
 
@@ -44,6 +45,7 @@ export class CartComponent implements OnInit {
     ngOnInit(): void {
         const navHeight = document.querySelector(".navbar")!.clientHeight + 1;
         const newHeight = window.innerHeight - navHeight;
+        console.log("pizdarija: ", navHeight);
 
         document.getElementById("sidebar")!.style.height = `${newHeight}px`;
 
@@ -60,9 +62,7 @@ export class CartComponent implements OnInit {
     getDiscount() {
         for (const tour of this.data) {
             this.service.getDiscountForTour(tour.id!).subscribe(discount => {
-                console.log(discount);
                 if (discount) {
-                    console.log("test:", discount);
                     tour.discount = discount;
                     tour.discountedPrice =
                         tour.price! - tour.price! * discount!;
@@ -94,6 +94,14 @@ export class CartComponent implements OnInit {
                         next: () => {
                             alert("Item successfully removed from cart!");
 
+                            this.shoppingCart.orderItems?.splice(
+                                this.shoppingCart.orderItems?.findIndex(
+                                    x => x.id === this.orderItem.id,
+                                ),
+                                1,
+                            );
+                            this.shoppingCart.totalPrice! -=
+                                this.orderItem.price!;
                             this.getToursInCart();
                         },
                     });
@@ -102,7 +110,6 @@ export class CartComponent implements OnInit {
     }
 
     showReviews(input: Review[]) {
-        console.log(input);
         const dialogRef = this.dialogRef.open(ReviewCardComponent, {
             //data: this.listaJavnihTacaka, // lista javnih tacaka koju dobijam u ovoj komponenti i ovim je saljem u modalni dijalog
             height: "400px",
@@ -117,7 +124,6 @@ export class CartComponent implements OnInit {
         this.service.cart$.subscribe(cart => {
             this.shoppingCart = cart;
             this.getBundles();
-            console.log("cart:", this.shoppingCart);
         });
     }
 
@@ -137,9 +143,7 @@ export class CartComponent implements OnInit {
         let totalPrice = this.shoppingCart.totalPrice;
         let storedShoppingCart = this.shoppingCart;
         let uslo = false;
-        console.log(totalPrice);
         this.stakeholderService.getTouristWallet().subscribe(result => {
-            console.log("2");
             var wallet = result;
             if (wallet.adventureCoin >= (totalPrice as number)) {
                 //dobaviti order iteme
@@ -149,14 +153,11 @@ export class CartComponent implements OnInit {
                     .deleteShoppingKart(this.shoppingCart.id)
                     .subscribe({
                         next: () => {
-                            console.log("3");
                             this.shoppingCart = {};
-                            console.log(storedShoppingCart);
                             this.service
                                 .addShoppingCart(this.shoppingCart)
                                 .subscribe({
                                     next: async (result: ShoppingCart) => {
-                                        console.log("4");
                                         this.shoppingCart = result;
                                         var newShoppingCart = result;
                                         for (let tour of this.data) {
@@ -177,14 +178,12 @@ export class CartComponent implements OnInit {
                                             totalPrice =
                                                 (totalPrice as number) -
                                                 tour.price!;
-                                            console.log(result);
                                             alert(
                                                 "You have successfully bought tours!",
                                             );
                                             this.shoppingCart = newShoppingCart;
                                         }
                                         for (let boi of bundleOrderItems!) {
-                                            console.log("5");
                                             this.service
                                                 .buyBundle(boi.bundleId!)
                                                 .subscribe({
@@ -229,4 +228,5 @@ export class CartComponent implements OnInit {
     faXmark = faXmark;
     faCoins = faCoins;
     faShoppingCart = faShoppingCart;
+    faCashRegister = faCashRegister;
 }

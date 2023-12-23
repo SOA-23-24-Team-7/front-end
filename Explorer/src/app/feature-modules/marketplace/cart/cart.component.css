@@ -63,6 +63,7 @@
 
 .name {
     font-size: 0.5rem;
+    width: 8.3rem;
 }
 
 .bottom {
@@ -96,7 +97,6 @@
 .row {
     display: flex;
     gap: 0.5rem;
-    flex: 0 1 0;
 }
 
 .column {
@@ -130,6 +130,9 @@
 
 .name {
     font-size: 1.5rem;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
 }
 
 .order-card .delete {
@@ -203,6 +206,7 @@ strike.straight::before {
 }
 
 .btn {
-    background-color: rgba(var(--clr-accent-500), 1);
+    background-color: rgba(var(--clr-primary-500), 1);
     margin-bottom: 0.4rem;
+    gap: 0.4rem;
 }

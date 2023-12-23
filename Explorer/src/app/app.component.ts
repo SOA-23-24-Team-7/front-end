@@ -32,7 +32,6 @@ export class AppComponent implements OnInit {
         document.addEventListener("click", e => {
             let sidebar = document.getElementById("sidebar");
             let cart = document.getElementById("cart");
-            console.log(e.target);
             let button = document.getElementById("btn");
             if (sidebar === null || cart === null || button === null) {
                 return;
@@ -63,6 +62,7 @@ export class AppComponent implements OnInit {
             document.getElementById(
                 "sidebar",
             )!.style.marginTop = `${navHeight}px`;
+            console.log(navHeight);
         } else {
             document.getElementById("sidebar")!.style.marginTop = `0`;
         }

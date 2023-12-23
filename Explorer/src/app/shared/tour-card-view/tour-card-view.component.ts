@@ -33,6 +33,7 @@ import { KeyPoint } from "../../feature-modules/tour-authoring/model/key-point.m
 import { MatDialog } from "@angular/material/dialog";
 import { EditTourFormComponent } from "src/app/feature-modules/tour-authoring/edit-tour-form/edit-tour-form.component";
 import { CouponsComponent } from "src/app/feature-modules/marketplace/coupons/coupons.component";
+import { PagedResults } from "../model/paged-results.model";
 
 @Component({
     selector: "xp-tour-card-view",
@@ -97,6 +98,17 @@ export class TourCardViewComponent implements OnChanges {
                 this.getShoppingCart();
             }
         });
+
+        this.marketplaceService.cart$.subscribe(cart => {
+            this.marketplaceService.getToursInCart(this.user.id).subscribe({
+                next: (result: PagedResults<TourLimitedView>) => {
+                    this.addedTours = result.results;
+                    console.log(this.addedTours);
+                    this.getShoppingCart(); // update the price
+                    this.getDiscount();
+                },
+            });
+        });
     }
 
     getDiscount() {
@@ -126,7 +138,6 @@ export class TourCardViewComponent implements OnChanges {
         this.marketplaceService.cart$.subscribe({
             next: (result: ShoppingCart) => {
                 this.shoppingCart = result;
-                console.log(result);
                 this.getTokens();
                 if (result == null) {
                     this.shoppingCart = {};
@@ -170,7 +181,6 @@ export class TourCardViewComponent implements OnChanges {
             price: price,
             shoppingCartId: this.shoppingCart.id,
         };
-        console.log(orderItem);
         if (this.addedTours.find(tr => tr.id == tourId)) {
             alert("You have already added this item to the cart.");
             return;

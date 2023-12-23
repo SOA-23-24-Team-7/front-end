@@ -272,11 +272,16 @@
 
 .add-to-cart {
     margin-top: 0.5rem;
+    font-weight: 700;
     background-color: rgba(var(--clr-accent-500), 1);
     max-width: 60%;
     min-width: 15rem;
     margin-left: auto;
     margin-bottom: 0.5rem;
+}
+
+.add-to-cart:hover {
+    filter: brightness(1.08);
 }
 
 .view {

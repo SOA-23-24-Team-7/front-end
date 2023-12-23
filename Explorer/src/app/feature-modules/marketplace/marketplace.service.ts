@@ -350,6 +350,11 @@ export class MarketplaceService {
         id: number | undefined,
         shoppingCartId: number | undefined,
     ): any {
+        this.cart$.value.orderItems?.splice(
+            this.cart$.value.orderItems?.findIndex(x => x.id === id),
+            1,
+        );
+        this.setCart(this.cart$.value);
         return this.http.delete<any>(
             environment.apiHost +
                 "tourist/shoppingCart/removeItem/" +

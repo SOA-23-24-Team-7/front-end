@@ -136,7 +136,6 @@ export class TourSearchComponent implements OnInit {
             next: (result: PagedResults<Tour>) => {
                 this.tours = result.results;
                 this.totalCount = result.totalCount;
-                console.log(this.tours);
                 this.setPages();
             },
             error: errData => {
@@ -167,7 +166,6 @@ export class TourSearchComponent implements OnInit {
         this.service.getPublicKeyPoints().subscribe({
             next: (result: PagedResults<PublicKeyPoint>) => {
                 this.publicKeyPoints = result.results;
-                console.log(this.publicKeyPoints);
                 for (let pkp of this.publicKeyPoints) {
                     this.mapComponent.setMarkersForPublicKeyPoints(
                         pkp.latitude,
