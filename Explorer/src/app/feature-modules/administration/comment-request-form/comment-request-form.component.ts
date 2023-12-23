@@ -34,6 +34,7 @@ export class CommentRequestFormComponent {
                 .subscribe({
                     next: () => {
                         this.dialog.close(this.data);
+                        //location.reload();
                     },
                 });
 

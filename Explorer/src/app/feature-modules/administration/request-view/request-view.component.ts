@@ -128,8 +128,11 @@ export class RequestViewComponent implements OnInit {
     }
 
     rejectPublicFacilityRequest(request: PublicFacilityRequest): void {
-        this.dialogRef.open(CommentRequestFormComponent, {
+        const dialogRef=this.dialogRef.open(CommentRequestFormComponent, {
             data: request,
+        });
+        dialogRef.afterClosed().subscribe(result => {
+            this.getRequests(); // update the price
         });
     }
 }

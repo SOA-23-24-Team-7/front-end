@@ -24,7 +24,7 @@ export class CommentKeyPointRequestFormComponent {
     if(this.data.id!=undefined && updatedData.comment!=null){
       this.service.rejectPublicKeyPointRequest(this.data.id,updatedData.comment).subscribe()
         this.dialog.close(this.data);
-        location.reload()
+        //location.reload()
     } 
   }
   onClose(): void {
