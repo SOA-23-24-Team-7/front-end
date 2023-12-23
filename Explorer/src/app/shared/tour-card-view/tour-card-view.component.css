@@ -8,7 +8,17 @@
     border-radius: 0.625rem;
     background-color: rgba(var(--clr-background), 1);
     transition: background-color 0.15s;
-    box-shadow: 1px 2px 3px rgba(140, 140, 140, 0.2), -1px 0px 3px rgba(140, 140, 140, 0.2);
+    box-shadow: 1px 2px 3px rgba(140, 140, 140, 0.2),
+        -1px 0px 3px rgba(140, 140, 140, 0.2);
+    transition: 0.3s ease;
+}
+
+.tour-card:hover {
+    transform: scale(1.01);
+    cursor: pointer;
+    border: rgba(var(--clr-primary-500), 1) 1px solid;
+    box-shadow: 1px 2px 3px rgba(var(--clr-primary-500), 0.2),
+        -1px 0px 3px rgba(var(--clr-primary-500), 0.2);
 }
 
 .selected {
@@ -213,7 +223,7 @@
 }
 
 .tour-keypoints > *:not(:last-child):not(.tour-keypoints-label)::after {
-    content: ',';
+    content: ",";
 }
 
 .tour-distance {
@@ -263,7 +273,7 @@
 .tour-price-tokens {
     padding: 0;
     margin: 0;
-    z-index: 2;
+    /* z-index: 2; */
     font-size: 1.5rem;
     color: rgba(var(--clr-accent-500), 1);
     line-height: 1.5rem;
@@ -292,8 +302,8 @@
 }
 
 .discount {
-    display: flex; 
-    justify-content: center; 
+    display: flex;
+    justify-content: center;
     align-items: center;
     margin-right: 0.5rem;
     font-weight: bold;
@@ -305,23 +315,33 @@
     color: rgba(0, 0, 0, 0);
 }
 
-s, strike{text-decoration:none;position:relative;}
-s::before, strike::before {
+s,
+strike {
+    text-decoration: none;
+    position: relative;
+}
+s::before,
+strike::before {
     top: 50%;
-    background:red;
-    opacity:1;
-    content: '';
+    background: red;
+    opacity: 1;
+    content: "";
     width: 170%;
     position: absolute;
-    height:.1em;
-    border-radius:.1em;
+    height: 0.1em;
+    border-radius: 0.1em;
     left: -5%;
-    white-space:nowrap;
+    white-space: nowrap;
     display: block;
     z-index: 999;
-    transform: rotate(180deg);  
+    transform: rotate(180deg);
 }
-s.straight::before, strike.straight::before{transform: rotate(0deg);left:-1%;width:102%;}
+s.straight::before,
+strike.straight::before {
+    transform: rotate(0deg);
+    left: -1%;
+    width: 102%;
+}
 
 .red {
     color: red;

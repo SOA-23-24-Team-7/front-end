@@ -1,111 +1,65 @@
-<div id="facilities">
-  <h2 class="title">Add new facility</h2>
-  <div id="facilities-details">
-    <div>
-    <!--table>
-      <thead>
-        <tr>
-          <th>Name</th>
-          <th>Description</th>
-          <th>Category</th>
-          <th>Image</th>
-          <th></th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr *ngFor="let f of facilities" (click)="onTableRowClicked(f)" [class.selected-row]="selectedFacility === f">
-          <td>{{f.name}}</td>
-          <td>{{f.description}}</td>
-          <td *ngIf="f.category == 0">Restaurant</td>
-          <td *ngIf="f.category == 1">Parking Lot</td>
-          <td *ngIf="f.category == 2">Toilet</td>
-          <td *ngIf="f.category == 3">Hospital</td>
-          <td *ngIf="f.category == 4">Cafe</td>
-          <td *ngIf="f.category == 5">Pharmacy</td>
-          <td *ngIf="f.category == 6">Exchange Office</td>
-          <td *ngIf="f.category == 7">Bus Stop</td>
-          <td *ngIf="f.category == 8">Shop</td>
-          <td *ngIf="f.category == 9">Other</td>
-          <td>
-            <img [src]="f.imagePath" alt="Facility Image" width="100" height="100">
-          </td>
-          <td>
-            <button (click)="onDeleteClicked(f)" color="accent" mat-icon-button>
-              <mat-icon>delete</mat-icon>
-            </button>
-            <button (click)="onEditClicked(f)" color="primary" mat-icon-button>
-              <mat-icon>edit</mat-icon>
-            </button>
-          </td>
-        </tr>
-        <tr>
-            <button (click)="onAddClicked()" color="primary" mat-icon-button>
-              <mat-icon>add</mat-icon>
-            </button>
-        </tr>
-      </tbody>
-    </table-->
-    </div>
-    <div>
-      <div class="facility-form">
-      <xp-facilities-form 
-                          (facilitesUpdated)="getFacilities()" 
-                          [facility]="selectedFacility" 
-                          [shouldEdit]="shouldEdit">
-      </xp-facilities-form>
-    </div>
-      <button id="closeButton" 
-              *ngIf="shouldRenderFacilitiesForm" 
-              (click)="onCloseClicked()" 
-              color="primary" 
-              class="done-submit"
-              mat-raised-button
-              ><div class="done-submit-text">Close</div>
-      </button>
-    </div>
-    <xp-map (click)="onMapClicked()" [canEdit]="true"></xp-map>
-  </div>
-  <br><br>
-  <hr/>
-  <div class="cards">
-    <div class="row">
-        <div
-            class="list-cards-button"
-            id="prev-button"
-            (click)="scrollToPrevCard()"
-        >
-            <div class="triangle-left"></div>
+<div class="tour-search">
+    <div class="tour-search-header">
+        <div class="tour-search-header-title">Facilities</div>
+        <div class="tour-search-header-paragraph">
+            Welcome to tour facilities page, tailored just for you! Whether
+            you're eager to explore cultural gems, indulge in local cuisine,
+            locate a restroom, or find a pharmacy, here's how you can fully
+            leverage your journey: Museums: Immerse yourself in cultural
+            heritage through visits to museums on our tours. Discover
+            fascinating history and artistic treasures at the destinations we
+            explore. Check opening hours and recommendations to make the most of
+            your visit. Restaurants: Explore the local culinary scene through
+            our recommended restaurants. Find delicious specialties and
+            authentic local delicacies. Learn about options for vegetarians,
+            vegans, or special dietary needs. Restrooms: We provide information
+            about restroom facilities along the tour to ensure your comfort
+            throughout the journey.
         </div>
-        <div class="facility-cards-container">
+        <div class="tour-search-header-paragraph">
+            Check the locations of restrooms along your route and learn about
+            any additional amenities. Pharmacies: Your safety is our priority,
+            so we offer information on the nearest pharmacies. Take note of
+            pharmacy locations for easy access to basic health supplies. These
+            details are here to help you make the most of every moment during
+            your tour. If you have additional questions or specific requests,
+            feel free to contact us. Enjoy your journey!
+        </div>
+    </div>
+    <div class="tour-search-body">
+        <div class="keypoints">
             <div
-                *ngFor="let f of facilities"
-                class="cards-buttons-container"
+                class="list-cards-button"
+                id="prev-button"
+                (click)="scrollToPrevCard()"
             >
-                <xp-facility-card [facility]="f"> </xp-facility-card>
-                <div class="buttons-container">
-                    <button
-                        (click)="onDeleteClicked(f)"
-                        mat-icon-button
+                <div class="triangle-left"></div>
+            </div>
+            <div class="key-point-cards-container">
+                <xp-facility-card
+                    [isAddNew]="true"
+                    (click)="openNewFacilityDialog()"
+                />
+
+                <div
+                    *ngFor="let f of facilities"
+                    class="cards-buttons-container"
+                >
+                    <xp-facility-card
+                        [facility]="f"
+                        (deleteClicked)="deleteFacility($event)"
+                        (click)="openEditFacilityDialog(f)"
                     >
-                        <mat-icon>delete</mat-icon>
-                    </button>
-                    <button
-                        color="primary"
-                        (click)="onEditClicked(f)"
-                        mat-icon-button
-                    >
-                        <mat-icon>edit</mat-icon>
-                    </button>
+                    </xp-facility-card>
                 </div>
             </div>
+            <div
+                class="list-cards-button"
+                id="next-button"
+                (click)="scrollToNextCard()"
+            >
+                <div class="triangle-right"></div>
+            </div>
         </div>
-        <div
-            class="list-cards-button"
-            id="next-button"
-            (click)="scrollToNextCard()"
-        >
-            <div class="triangle-right"></div>
-        </div>
-        </div>
-        
+    </div>
 </div>

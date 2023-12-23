@@ -9,8 +9,10 @@ import { TourCardViewComponent } from "./tour-card-view/tour-card-view.component
 import { FontAwesomeModule } from "@fortawesome/angular-fontawesome";
 import { PositionSimulatorComponent } from "./position-simulator/position-simulator.component";
 import { MapModalComponent } from "./map-modal/map-modal.component";
-import { CarouselComponent } from './carousel/carousel.component';
+import { CarouselComponent } from "./carousel/carousel.component";
 import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
+import { TooltipModule } from "primeng/tooltip";
+import { MatDialogModule } from "@angular/material/dialog";
 
 @NgModule({
     declarations: [
@@ -20,9 +22,22 @@ import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
         TagComponent,
         PositionSimulatorComponent,
         MapModalComponent,
-        CarouselComponent
+        CarouselComponent,
     ],
-    imports: [CommonModule, FontAwesomeModule, RouterModule, FormsModule, BrowserAnimationsModule],
-    exports: [MapComponent, TourCardViewComponent, TagComponent, CarouselComponent],
+    imports: [
+        CommonModule,
+        FontAwesomeModule,
+        RouterModule,
+        FormsModule,
+        BrowserAnimationsModule,
+        TooltipModule,
+        MatDialogModule,
+    ],
+    exports: [
+        MapComponent,
+        TourCardViewComponent,
+        TagComponent,
+        CarouselComponent,
+    ],
 })
 export class SharedModule {}

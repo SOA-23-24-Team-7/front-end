@@ -20,7 +20,7 @@ import { BundleCreation } from "./model/bundle-creation.model";
 })
 export class TourAuthoringService {
     constructor(private http: HttpClient) {}
-    
+
     getTours(): Observable<PagedResults<Tour>> {
         return this.http.get<PagedResults<Tour>>(
             "https://localhost:44333/api/tour/authors",
@@ -30,7 +30,7 @@ export class TourAuthoringService {
     addTour(tour: Tour): Observable<Tour> {
         return this.http.post<Tour>(environment.apiHost + "tour", tour);
     }
-    
+
     deleteTour(id: number): Observable<Tour> {
         return this.http.delete<Tour>(environment.apiHost + "tour/" + id);
     }
@@ -122,9 +122,9 @@ export class TourAuthoringService {
         );
     }
 
-    deleteFacility(facility: Facilities): Observable<Facilities> {
+    deleteFacility(id: number): Observable<Facilities> {
         return this.http.delete<Facilities>(
-            environment.apiHost + "facility/" + facility.id,
+            environment.apiHost + "facility/" + id,
         );
     }
 
@@ -172,7 +172,9 @@ export class TourAuthoringService {
     }
 
     getTour(tourId: number): Observable<Tour> {
-        return this.http.get<Tour>(environment.apiHost + "market-place/tours/" + tourId);
+        return this.http.get<Tour>(
+            environment.apiHost + "market-place/tours/" + tourId,
+        );
     }
 
     getPublicKeyPoints(): Observable<PagedResults<PublicKeyPoint>> {
@@ -187,7 +189,7 @@ export class TourAuthoringService {
             tour,
         );
     }
-    
+
     archiveTour(tour: Tour): Observable<Tour> {
         return this.http.put<Tour>(
             environment.apiHost + "tour/archive/" + tour.id,
@@ -223,22 +225,28 @@ export class TourAuthoringService {
     }
 
     getRecommendedTours(keyPointIds: number[]): Observable<PagedResults<Tour>> {
-        const params = new HttpParams().set('keyPointIds', keyPointIds.join(','));
+        const params = new HttpParams().set(
+            "keyPointIds",
+            keyPointIds.join(","),
+        );
 
         return this.http.get<PagedResults<Tour>>(
-            environment.apiHost + 'tour/recommended/' + params
+            environment.apiHost + "tour/recommended/" + params,
         );
     }
 
-    getAllEquipment(): Observable<PagedResults<Equipment>>{
+    getAllEquipment(): Observable<PagedResults<Equipment>> {
         return this.http.get<PagedResults<Equipment>>(
-            environment.apiHost + "tourist/only_equipment"
+            environment.apiHost + "tourist/only_equipment",
         );
     }
-    
+
     searchAuthorTours(searchFilter: any): Observable<PagedResults<Tour>> {
         let query = this.prepareSearchQuery(searchFilter);
-        query += searchFilter.authorId > 0 ? `&authorId=${searchFilter.authorId}` : "";
+        query +=
+            searchFilter.authorId > 0
+                ? `&authorId=${searchFilter.authorId}`
+                : "";
         console.log(query);
         const path = environment.apiHost + "tourist/tour/author-search" + query;
         console.log(path);
@@ -249,47 +257,87 @@ export class TourAuthoringService {
         let path = environment.apiHost + "bundles/";
         return this.http.get<Bundle[]>(path);
     }
-    
+
     createBundle(bundleCreation: BundleCreation): Observable<Bundle> {
         let path = environment.apiHost + "bundles/";
         return this.http.post<Bundle>(path, bundleCreation);
     }
-    
-    editBundle(bundleId: number, bundleCreation: BundleCreation): Observable<Bundle> {
+
+    editBundle(
+        bundleId: number,
+        bundleCreation: BundleCreation,
+    ): Observable<Bundle> {
         let path = environment.apiHost + "bundles/" + bundleId;
         return this.http.put<Bundle>(path, bundleCreation);
     }
-    
+
     publishBundle(bundleId: number): Observable<Bundle> {
         let path = environment.apiHost + "bundles/publish/" + bundleId;
         return this.http.patch<Bundle>(path, {});
     }
-    
+
     archiveBundle(bundleId: number): Observable<Bundle> {
         let path = environment.apiHost + "bundles/archive/" + bundleId;
         return this.http.patch<Bundle>(path, {});
     }
-    
+
     deleteBundle(bundleId: number): Observable<Bundle> {
         let path = environment.apiHost + "bundles/" + bundleId;
         return this.http.delete<Bundle>(path);
     }
 
     prepareSearchQuery(searchFilter: any): String {
-        let query = `?page=${searchFilter.page}&pageSize=${searchFilter.pageSize}`
+        let query = `?page=${searchFilter.page}&pageSize=${searchFilter.pageSize}`;
         query += searchFilter.name != "" ? `&name=${searchFilter.name}` : "";
-        query += searchFilter.minPrice >= 0 && searchFilter.minPrice !== "" ? `&minPrice=${searchFilter.minPrice}` : "";
-        query += searchFilter.maxPrice >= 0  && searchFilter.maxPrice !== "" ? `&maxPrice=${searchFilter.maxPrice}` : "";
-        query += searchFilter.minDifficulty >= 0  && searchFilter.minDifficulty !== "" ? `&minDifficulty=${searchFilter.minDifficulty}` : "";
-        query += searchFilter.maxDifficulty >= 0  && searchFilter.maxDifficulty !== "" ? `&maxDifficulty=${searchFilter.maxDifficulty}` : "";
-        query += searchFilter.minDuration >= 0 && searchFilter.minDuration !== "" ? `&minDuration=${searchFilter.minDuration}` : "";
-        query += searchFilter.maxDuration >= 0 && searchFilter.maxDuration !== "" ? `&maxDuration=${searchFilter.maxDuration}` : "";
-        query += searchFilter.minAverageRating >= 0 && searchFilter.minAverageRating !== "" ? `&minAverageRating=${searchFilter.minAverageRating}` : "";
-        query += searchFilter.minLength >= 0 && searchFilter.minLength !== "" ? `&minLength=${searchFilter.minLength}` : "";
-        query += searchFilter.maxLength >= 0 && searchFilter.maxLength !== "" ? `&maxLength=${searchFilter.maxLength}` : "";
-        query += searchFilter.longitude >= -180 && searchFilter.longitude !== "" ? `&longitude=${searchFilter.longitude}` : "";
-        query += searchFilter.latitude >= -180 && searchFilter.latitude !== "" ? `&latitude=${searchFilter.latitude}` : "";
-        query += searchFilter.distance > 0 && searchFilter.distance !== "" ? `&maxDistance=${searchFilter.distance}` : "";
+        query +=
+            searchFilter.minPrice >= 0 && searchFilter.minPrice !== ""
+                ? `&minPrice=${searchFilter.minPrice}`
+                : "";
+        query +=
+            searchFilter.maxPrice >= 0 && searchFilter.maxPrice !== ""
+                ? `&maxPrice=${searchFilter.maxPrice}`
+                : "";
+        query +=
+            searchFilter.minDifficulty >= 0 && searchFilter.minDifficulty !== ""
+                ? `&minDifficulty=${searchFilter.minDifficulty}`
+                : "";
+        query +=
+            searchFilter.maxDifficulty >= 0 && searchFilter.maxDifficulty !== ""
+                ? `&maxDifficulty=${searchFilter.maxDifficulty}`
+                : "";
+        query +=
+            searchFilter.minDuration >= 0 && searchFilter.minDuration !== ""
+                ? `&minDuration=${searchFilter.minDuration}`
+                : "";
+        query +=
+            searchFilter.maxDuration >= 0 && searchFilter.maxDuration !== ""
+                ? `&maxDuration=${searchFilter.maxDuration}`
+                : "";
+        query +=
+            searchFilter.minAverageRating >= 0 &&
+            searchFilter.minAverageRating !== ""
+                ? `&minAverageRating=${searchFilter.minAverageRating}`
+                : "";
+        query +=
+            searchFilter.minLength >= 0 && searchFilter.minLength !== ""
+                ? `&minLength=${searchFilter.minLength}`
+                : "";
+        query +=
+            searchFilter.maxLength >= 0 && searchFilter.maxLength !== ""
+                ? `&maxLength=${searchFilter.maxLength}`
+                : "";
+        query +=
+            searchFilter.longitude >= -180 && searchFilter.longitude !== ""
+                ? `&longitude=${searchFilter.longitude}`
+                : "";
+        query +=
+            searchFilter.latitude >= -180 && searchFilter.latitude !== ""
+                ? `&latitude=${searchFilter.latitude}`
+                : "";
+        query +=
+            searchFilter.distance > 0 && searchFilter.distance !== ""
+                ? `&maxDistance=${searchFilter.distance}`
+                : "";
         return query;
     }
 }

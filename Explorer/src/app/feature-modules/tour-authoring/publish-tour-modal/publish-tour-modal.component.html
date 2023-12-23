@@ -1,0 +1,27 @@
+<div class="container" [formGroup]="publishForm">
+    <div class="title">Publish tour</div>
+    <div class="sub-title">Choose type of transport:</div>
+    <div class="row" (click)="toggleWalking()">
+        <input type="checkbox" formControlName="onFootChecked" />
+        <div class="option-name">
+            <fa-icon [icon]="faWalk" />
+            {{ " Walking (" + data.walkingDuration + " minutes)" }}
+        </div>
+    </div>
+    <div class="row" (click)="toggleBicycle()">
+        <input type="checkbox" formControlName="bicycleRideChecked" />
+        <div class="option-name">
+            <fa-icon [icon]="faBicycle" />
+            {{ " Bicycle (" + data.bicycleDuration + " minutes)" }}
+        </div>
+    </div>
+    <div class="row" (click)="toggleCar()">
+        <input type="checkbox" formControlName="carRideChecked" />
+        <div class="option-name">
+            <fa-icon [icon]="faCar" />
+            {{ " Car (" + data.carDuration + " minutes)" }}
+        </div>
+    </div>
+
+    <div class="btn" (click)="publishTour()">Publish</div>
+</div>
