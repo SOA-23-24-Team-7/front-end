@@ -6,4 +6,5 @@ export interface Coupon {
     allFromAuthor: boolean;
     tourId?: number;
     tourName?: string;
+    authorId?: number;
 }

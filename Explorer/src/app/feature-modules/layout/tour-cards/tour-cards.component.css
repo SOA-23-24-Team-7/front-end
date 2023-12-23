@@ -4,6 +4,7 @@ h1 {
     font-weight: 900;
     font-size: 2rem;
     padding-left: 2rem;
+    margin-left: 5.5rem;
 }
 .tour-cards-container {
     display: flex;
