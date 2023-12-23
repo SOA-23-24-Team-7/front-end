@@ -68,8 +68,7 @@ export class TourSearchComponent implements OnInit {
     toursBackup: Tour[] = [];
     recommendedTours: Tour[] = [];
     activeTours: Tour[] = [];
-    isRecommendedChecked: boolean = false
-    isActiveChecked: boolean = false
+    radioButtonSelected: number = 1;
     publicFacilities: PublicFacilities[] = [];
     publicKeyPoints: PublicKeyPoint[] = [];
     totalCount: number = 0;
@@ -118,6 +117,7 @@ export class TourSearchComponent implements OnInit {
           setTimeout(() => {
             this.onSearch(1);
           }, 1000);
+          this.radioButtonSelected = 0
     }
 
     onMapClicked(): void {
@@ -130,6 +130,7 @@ export class TourSearchComponent implements OnInit {
     }
 
     onSearch(page: number): void {
+        this.radioButtonSelected = 0
         if(this.countFilters() == 0){
         this.searchFilter.page = page;
         this.currentPage = page;
@@ -448,10 +449,11 @@ export class TourSearchComponent implements OnInit {
     }
     getRecommendedTours(): void {
         this.service
-            .getActiveTours()
+            .getRecommendedTours()
             .subscribe({
                 next: (result: PagedResults<Tour>) => {
                     this.recommendedTours = result.results;  
+                    console.log(this.recommendedTours)
                     this.setRecommendedTours()
                 },
                 error: errData => {
@@ -501,21 +503,27 @@ export class TourSearchComponent implements OnInit {
             }
         })
     }
-    onRecommendedCheckBoxClicked(){
-        this.setView()
-    }
-    onActiveCheckBoxClicked(){
-        this.setView()
+    onRadioBoxClicked(){
+        setTimeout(() => {
+            this.setView()
+          }, 200);
     }
     setView(){
-        if(this.isRecommendedChecked && this.isActiveChecked){
-            this.tours = this.toursBackup.filter((tour) => tour.recommended && tour.active);
-        }
-        else if(this.isRecommendedChecked && !this.isActiveChecked){
+        if(this.radioButtonSelected == 1){
             this.tours = this.toursBackup.filter((tour) => tour.recommended);
         }
-        else if(!this.isRecommendedChecked && this.isActiveChecked){
-            this.tours = this.toursBackup.filter((tour) => tour.active);
+        else if(this.radioButtonSelected == 2){
+            if(this.countFilters() != 0){
+                this.tours = this.toursBackup.filter((tour) => tour.active);
+            }
+            else{
+                this.tours = []
+                for (const obj of this.activeTours) {
+                    obj.active = true
+                    this.tours.push(obj);
+                }
+                this.setRecommendedTag()
+            }
         }
         else{
             this.tours = []

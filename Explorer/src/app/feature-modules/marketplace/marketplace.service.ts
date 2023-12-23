@@ -40,26 +40,26 @@ export class MarketplaceService {
 
     getTourPreference(): Observable<TourPreference> {
         return this.http.get<TourPreference>(
-            environment.apiHost + "tourist/tour-preferences",
+            environment.apiHost + "tourist/preferences",
         );
     }
 
     addPreference(tourPreference: TourPreference): Observable<TourPreference> {
         return this.http.post<TourPreference>(
-            environment.apiHost + "tourist/tour-preferences/create",
+            environment.apiHost + "tourist/preferences/create",
             tourPreference,
         );
     }
 
     deletePreference(id: number): Observable<TourPreference> {
         return this.http.delete<TourPreference>(
-            environment.apiHost + "tourist/tour-preferences/" + id,
+            environment.apiHost + "tourist/preferences/" + id,
         );
     }
 
     updatePreference(preference: TourPreference): Observable<TourPreference> {
         return this.http.put<TourPreference>(
-            environment.apiHost + "tourist/tour-preferences",
+            environment.apiHost + "tourist/preferences",
             preference,
         );
     }
