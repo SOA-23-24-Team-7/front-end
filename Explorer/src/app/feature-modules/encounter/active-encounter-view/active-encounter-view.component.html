@@ -6,9 +6,8 @@
     <div class="execution" *ngIf="encounter">
         <div
             class="img"
-            *ngIf="encounterInstance?.status === 0 && encounter?.type === 1"
         >
-            <img [src]="image" alt="Encounter Image" width="200" height="150" />
+            <img [src]="encounter.picture" alt="Encounter Image" width="200" height="150" />
         </div>
         <h3 class="title">{{ encounter.title }}</h3>
         <div class="description">{{ encounter.description }}</div>

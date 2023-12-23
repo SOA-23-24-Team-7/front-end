@@ -21,7 +21,6 @@ export class ActiveEncounterViewComponent implements AfterViewInit {
     points: any;
     encounters: Encounter[];
     filteredEncounters: Encounter[];
-    image?: string;
     encounter?: Encounter;
     encounterInstance?: EncounterInstance;
     loadEncounterInstance?: EncounterInstance;
@@ -93,9 +92,6 @@ export class ActiveEncounterViewComponent implements AfterViewInit {
                     this.notifier.notify("error", xpError.getErrorMessage(err));
                 },
             });
-        if (this.encounter!.type === 1) {
-            this.getHiddenLocationImage();
-        }
     }
 
     handleHiddenLocationCompletion() {
@@ -134,15 +130,6 @@ export class ActiveEncounterViewComponent implements AfterViewInit {
                     },
                 });
         }, 2000);
-    }
-
-    getHiddenLocationImage() {
-        this.service
-            .getHiddenLocationEncounterById(this.encounter!.id)
-            .subscribe(result => {
-                this.image = environment.imageHost + result.picture;
-                console.log(this.image);
-            });
     }
 
     completeEncounter() {
@@ -227,7 +214,9 @@ export class ActiveEncounterViewComponent implements AfterViewInit {
     ) {
         this.service.getEncountersInRangeOf(userPosition).subscribe(result => {
             this.filteredEncounters = result.results;
-            this.filteredEncounters.forEach(enc => {
+            this.filteredEncounters.forEach((enc, i) => {
+                this.filteredEncounters[i].picture =
+                    environment.imageHost + enc.picture;
                 this.service.getEncounterInstance(enc.id).subscribe(result => {
                     this.loadEncounterInstance = result;
                 });
@@ -256,7 +245,6 @@ export class ActiveEncounterViewComponent implements AfterViewInit {
                         this.encounter = enc;
                         this.getEncounterInstance(enc.id);
                         if (this.encounter.type === 1) {
-                            this.getHiddenLocationImage();
                             if (this.encounterInstance) {
                                 if (this.encounterInstance.status == 0) {
                                     this.hiddenEncounterCheck = true;

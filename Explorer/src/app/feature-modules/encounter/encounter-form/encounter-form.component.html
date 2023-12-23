@@ -53,18 +53,16 @@
                         <label>People number</label>
                     </div>
                 </div>
-                <div *ngIf="encounterType == 2 && encounterType == 2">
-                    <div class="field">
-                        <input
-                            id="file-upload"
-                            accept="image/*"
-                            type="file"
-                            [(ngModel)]="picturePath"
-                            required
-                            (change)="onSelectImage($event)"
-                        />
-                        <label>Picture</label>
-                    </div>
+                <div class="field">
+                    <input
+                        id="file-upload"
+                        accept="image/*"
+                        type="file"
+                        [(ngModel)]="picturePath"
+                        required
+                        (change)="onSelectImage($event)"
+                    />
+                    <label>Picture</label>
                 </div>
                 <!-- <img [src]="picturePath" /> -->
                 <div class="btn" (click)="selectEncounterOnMap()">

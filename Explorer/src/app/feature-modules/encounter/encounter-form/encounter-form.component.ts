@@ -50,6 +50,7 @@ export class EncounterFormComponent implements OnInit {
     encounterForm = new FormGroup({
         title: new FormControl(undefined, [Validators.required]),
         description: new FormControl(undefined, [Validators.required]),
+        image: new FormControl(undefined, [Validators.required]),
         radius: new FormControl(undefined, [
             Validators.required,
             Validators.min(1),
@@ -83,6 +84,7 @@ export class EncounterFormComponent implements OnInit {
             id: 0,
             title: this.encounterForm.value.title || "",
             description: this.encounterForm.value.description || "",
+            picture: this.picturePath || "",
             longitude: this.encounterCoords.longitude || 0,
             latitude: this.encounterCoords.latitude || 0,
             radius: this.encounterForm.value.radius || 0,
@@ -90,7 +92,6 @@ export class EncounterFormComponent implements OnInit {
             status: 0,
             type: this.encounterForm.value.selectedStatus,
             peopleNumber: this.encounterForm.value.peopleNumber || 0,
-            picture: this.picturePath || "",
             pictureLongitude: this.imageCoords.longitude || 0,
             pictureLatitude: this.imageCoords.latitude || 0,
             challengeDone: false,
@@ -101,25 +102,32 @@ export class EncounterFormComponent implements OnInit {
                 this.encounterCoords.longitude > 0 &&
                 this.encounterCoords.latitude > 0
             ) {
-                this.service
-                    .createSocialEncounter(
-                        encounter,
-                        this.user.role == "tourist",
-                    )
-                    .subscribe({
-                        next: () => {
-                            this.notifier.notify(
-                                "success",
-                                "Successfully created encounter!",
-                            );
-                        },
-                        error: err => {
-                            this.notifier.notify(
-                                "error",
-                                xpError.getErrorMessage(err),
-                            );
+                if (this.encounterImage) {
+                    this.service.uploadImage(this.encounterImage).subscribe({
+                        next: result => {
+                            encounter.picture = result;
+                            this.service
+                                .createSocialEncounter(
+                                    encounter,
+                                    this.user.role == "tourist",
+                                )
+                                .subscribe({
+                                    next: () => {
+                                        this.notifier.notify(
+                                            "success",
+                                            "Successfully created encounter!",
+                                        );
+                                    },
+                                    error: err => {
+                                        this.notifier.notify(
+                                            "error",
+                                            xpError.getErrorMessage(err),
+                                        );
+                                    },
+                                });
                         },
                     });
+                }
             } else {
                 this.notifier.notify(
                     "error",
@@ -174,22 +182,32 @@ export class EncounterFormComponent implements OnInit {
                 this.encounterCoords.longitude > 0 &&
                 this.encounterCoords.latitude > 0
             ) {
-                this.service
-                    .createMiscEncounter(encounter, this.user.role == "tourist")
-                    .subscribe({
-                        next: () => {
-                            this.notifier.notify(
-                                "success",
-                                "Successfully created encounter!",
-                            );
-                        },
-                        error: err => {
-                            this.notifier.notify(
-                                "error",
-                                xpError.getErrorMessage(err),
-                            );
+                if (this.encounterImage) {
+                    this.service.uploadImage(this.encounterImage).subscribe({
+                        next: result => {
+                            encounter.picture = result;
+                            this.service
+                                .createMiscEncounter(
+                                    encounter,
+                                    this.user.role == "tourist",
+                                )
+                                .subscribe({
+                                    next: () => {
+                                        this.notifier.notify(
+                                            "success",
+                                            "Successfully created encounter!",
+                                        );
+                                    },
+                                    error: err => {
+                                        this.notifier.notify(
+                                            "error",
+                                            xpError.getErrorMessage(err),
+                                        );
+                                    },
+                                });
                         },
                     });
+                }
             } else {
                 this.notifier.notify(
                     "error",
