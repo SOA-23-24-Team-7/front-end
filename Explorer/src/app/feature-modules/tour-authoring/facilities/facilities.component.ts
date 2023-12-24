@@ -35,7 +35,7 @@ export class FacilitiesComponent implements OnInit {
 
     ngOnInit(): void {
         this.facilityContainer = document.querySelector(
-            ".facility-cards-container",
+            ".key-point-cards-container",
         );
         this.getFacilities();
     }
@@ -54,38 +54,6 @@ export class FacilitiesComponent implements OnInit {
             },
             error: () => {},
         });
-    }
-
-    onEditClicked(facility: Facilities): void {
-        this.shouldEdit = true;
-        this.selectedFacility = facility;
-        this.shouldRenderFacilitiesForm = true;
-
-        if (this.mapComponent) {
-            this.mapComponent.setMarker(
-                this.selectedFacility.latitude,
-                this.selectedFacility.longitude,
-            );
-            this.mapComponent.facilitiesUsed = true;
-        }
-    }
-
-    onAddClicked(): void {
-        this.shouldRenderFacilitiesForm = true;
-        this.shouldEdit = false;
-
-        if (this.mapComponent) {
-            this.mapComponent.facilitiesUsed = true;
-        }
-    }
-
-    onDeleteClicked(facility: Facilities): void {
-        /*this.service.deleteFacility(facility).subscribe({
-            next: () => {
-                this.getFacilities();
-                location.reload();
-            },
-        });*/
     }
 
     onMapClicked(): void {
