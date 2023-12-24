@@ -7,6 +7,7 @@ import { EditTourFormComponent } from "../../tour-authoring/edit-tour-form/edit-
 import { Tour } from "../../tour-authoring/model/tour.model";
 import { Coupon } from "../model/coupon.model";
 import { formatDate } from "@angular/common";
+import { NotifierService } from "angular-notifier";
 
 @Component({
     selector: "xp-edit-coupon-form",
@@ -19,6 +20,7 @@ export class EditCouponFormComponent {
         private service: MarketplaceService,
         public dialog: MatDialogRef<EditCouponFormComponent>,
         @Inject(MAT_DIALOG_DATA) public data: any,
+        private notifier: NotifierService
     ) {}
     @Output() toursUpdated = new EventEmitter<null>();
     public coupon: Coupon = {
@@ -65,6 +67,10 @@ export class EditCouponFormComponent {
         this.data.expirationDate = coupon.expirationDate;
         this.data.allFromAuthor = coupon.allFromAuthor;
         console.log(this.data.id);
+        if (!this.isValidDiscount()) {
+            this.notifier.notify("error", "Discount must be less than 100.");
+            return;
+        } 
         this.service.updateCoupon(this.data).subscribe({
             next: () => {
                 this.toursUpdated.emit();
@@ -74,6 +80,9 @@ export class EditCouponFormComponent {
     }
     onClose(): void {
         this.dialog.close();
+    }
+    isValidDiscount(): boolean {
+        return parseFloat(this.editCouponForm.value.discount!)<=100 && this.editCouponForm.value.discount!="";
     }
     faXmark = faXmark;
 }

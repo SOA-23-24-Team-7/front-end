@@ -50,7 +50,7 @@ export class FacilityModalComponent implements OnInit {
     facilityImage: string | null = null;
     facilityImageFile: File | null = null;
     person: Person;
-
+    category: string;
     faImage = faImage;
     faLocation = faMapLocationDot;
 
@@ -145,36 +145,42 @@ export class FacilityModalComponent implements OnInit {
                         parseFloat(this.facilityForm.value.latitude || "0") ||
                         0,
                 };
-
-                this.service.addFacility(facility).subscribe({
-                    next: result => {
-                        this.facilityCreated.emit(result);
-                        if (this.facilityForm.value.isPublicChecked) {
-                            const request: PublicFacilityRequest = {
-                                facilityId: result.id as number,
-                                status: PublicStatus.Pending,
-                                authorName:
-                                    this.person.name +
-                                    " " +
-                                    this.person.surname,
-                            };
-                            this.service
-                                .addPublicFacilityRequest(request)
-                                .subscribe({});
-                        }
-                        this.dialogRef.close();
-                        this.notifier.notify(
-                            "success",
-                            "Added a new facility!",
-                        );
-                    },
-                    error: err => {
-                        this.notifier.notify(
-                            "err",
-                            xpError.getErrorMessage(err),
-                        );
-                    },
-                });
+                console.log(this.category)
+                if(this.isFormValid()){
+                    this.service.addFacility(facility).subscribe({
+                        next: result => {
+                            this.facilityCreated.emit(result);
+                            if (this.facilityForm.value.isPublicChecked) {
+                                const request: PublicFacilityRequest = {
+                                    facilityId: result.id as number,
+                                    status: PublicStatus.Pending,
+                                    authorName:
+                                        this.person.name +
+                                        " " +
+                                        this.person.surname,
+                                };
+                                this.service
+                                    .addPublicFacilityRequest(request)
+                                    .subscribe({});
+                            }
+                            this.dialogRef.close();
+                            this.notifier.notify(
+                                "success",
+                                "Added a new facility!",
+                            );
+                        },
+                        error: err => {
+                            this.notifier.notify(
+                                "err",
+                                xpError.getErrorMessage(err),
+                            );
+                        },
+                    });
+                }else{
+                    this.notifier.notify("error", "Invalid facility data supplied.");
+                    return;
+                }
+                
                 // });
             },
             error: err => {
@@ -218,16 +224,21 @@ export class FacilityModalComponent implements OnInit {
                 },
             });
         } else {
-            this.service.updateFacility(facility).subscribe({
-                next: response => {
-                    this.facilityUpdated.emit(response);
-                    this.dialogRef.close();
-                    this.notifier.notify("success", "Updated facility!");
-                },
-                error: err => {
-                    this.notifier.notify("err", xpError.getErrorMessage(err));
-                },
-            });
+            if(this.isFormValid())
+                this.service.updateFacility(facility).subscribe({
+                    next: response => {
+                        this.facilityUpdated.emit(response);
+                        this.dialogRef.close();
+                        this.notifier.notify("success", "Updated facility!");
+                    },
+                    error: err => {
+                        this.notifier.notify("err", xpError.getErrorMessage(err));
+                    },
+                });
+            else{
+                this.notifier.notify("error", "Invalid facility data supplied.");
+                return;
+            }
         }
     }
 
@@ -299,5 +310,8 @@ export class FacilityModalComponent implements OnInit {
                 );
             },
         );
+    }
+    isFormValid():boolean{
+        return this.facilityForm.value.description!="" && this.facilityForm.value.name!="" && this.facilityForm.value.category!=""
     }
 }
