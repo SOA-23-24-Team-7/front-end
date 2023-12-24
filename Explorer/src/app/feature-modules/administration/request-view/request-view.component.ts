@@ -15,6 +15,8 @@ import {
     faMapMarker,
     faTimes,
     faBuilding,
+    faSquareCheck,
+    faSquareXmark
 } from "@fortawesome/free-solid-svg-icons";
 
 enum Tab {
@@ -35,6 +37,8 @@ export class RequestViewComponent implements OnInit {
     faTimes = faTimes;
     faMapMarker = faMapMarker;
     faBuilding = faBuilding;
+    faSquareCheck = faSquareCheck;
+    faSquareXmark = faSquareXmark;
     Tab = Tab;
     selectedTab: Tab = Tab.KEYPOINTS;
     constructor(

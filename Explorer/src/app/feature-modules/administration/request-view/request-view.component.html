@@ -48,16 +48,18 @@
                 <xp-request-facility-card
                     [request]="request"
                 ></xp-request-facility-card>
-                <div class="buttons-container">
+                <div class="accept">
                     <fa-icon
                         class="fa-accept"
-                        [icon]="faCheck"
+                        [icon]="faSquareCheck"
                         *ngIf="request.status == 0"
                         (click)="acceptPublicFacilityRequest(request)"
                     ></fa-icon>
+                    </div>
+                    <div class="reject">
                     <fa-icon
                         class="fa-reject"
-                        [icon]="faTimes"
+                        [icon]="faSquareXmark"
                         *ngIf="request.status == 0"
                         (click)="rejectPublicFacilityRequest(request)"
                     ></fa-icon>

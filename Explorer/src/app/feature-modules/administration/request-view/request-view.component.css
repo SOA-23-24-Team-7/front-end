@@ -29,10 +29,23 @@
 .fa-accept {
     color: rgba(var(--clr-success-500), 0.7);
     cursor: pointer;
-    font-size: 2rem;
+    font-size: 2.3rem;
     transition: color 0.15s;
 }
-
+.accept{
+    display: flex;
+    position: absolute;
+    transform: translateY(-50%);
+    right: 0;
+    top: 1.2rem;
+}
+.reject{
+    display: flex;
+    position: absolute;
+    top: 3.5rem;
+    transform: translateY(-50%);
+    right: 0;
+}
 .fa-accept:hover {
     color: rgba(var(--clr-success-500), 0.9);
 }
@@ -40,7 +53,7 @@
 .fa-reject {
     color: rgba(var(--clr-error-500), 0.7);
     cursor: pointer;
-    font-size: 2rem;
+    font-size: 2.3rem;
     transition: color 0.15s;
 }
 
