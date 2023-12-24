@@ -6,6 +6,7 @@ import { AuthService } from '../auth.service';
 import { Login } from '../model/login.model';
 import { faXmark, faEye, faEyeSlash } from "@fortawesome/free-solid-svg-icons";
 import { RegistrationComponent } from "src/app/infrastructure/auth/registration/registration.component";
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'xp-login',
@@ -18,7 +19,8 @@ export class LoginComponent {
   constructor(
     private authService: AuthService,
     public dialog: MatDialogRef<LoginComponent>,
-    public dialogRef: MatDialog
+    public dialogRef: MatDialog,
+    private router: Router
   ) {
     this.isPasswordVisible = false;
   }
@@ -54,6 +56,11 @@ export class LoginComponent {
 
   togglePasswordVisibility() {
     this.isPasswordVisible = !this.isPasswordVisible;
+  }
+
+  forgotPassword() {
+    this.router.navigate(['/reset-password']);
+    this.dialog.close();
   }
 
   faXmark = faXmark;

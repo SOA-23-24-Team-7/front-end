@@ -1,9 +1,12 @@
 <div class="tour-container">
     <div class="tour-card">
-        <img [src]="tourImage" alt="Tour Image" class="tour-image" />
+        <img
+            [src]="tourImage"
+            alt="Tour Image"
+            class="tour-image"
+            (error)="onImageError($event)"
+        />
         <div class="tour-details">
-            <h2>{{ tour.name }}</h2>
-            <p>{{ tour.description }}</p>
             <div class="progress-bar-container">
                 <div
                     class="progress-bar"
@@ -31,6 +34,8 @@
             </p>
             <p style="font-size: 20px">Sunrise at {{ weather.sunrise }}</p>
             <p style="font-size: 20px">Sunset at {{ weather.sunset }}</p>
+            <h2 class="margin-top">{{ tour.name }}</h2>
+            <div class="description">{{ tour.description }}</div>
         </div>
     </div>
     <div class="map-container">
@@ -43,6 +48,10 @@
             [nextKeyPointId]="session.nextKeyPointId"
             [encounterPosition]="encounterPoint"
             (keyPointClickEvent)="getKeyPoint($event)"
+            [height]="'90vh'"
         ></xp-map>
+        <div class="simulator-btn" (click)="openSimulator()">
+            <fa-icon class="upvote" [icon]="faLocation" />
+        </div>
     </div>
 </div>
