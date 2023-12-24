@@ -4,43 +4,48 @@
             <fa-icon class="x" [icon]="faXmark" (click)="onClose()" />
             <div class="title">{{ keyPoint.dataKey.name }}</div>
         </div>
-        <img
-            [src]="keyPointImage"
-            alt="Keypoint Image"
-            class="keypoint-image"
-            (error)="onImageError($event)"
-        />
-        <div class="address">
-            <fa-icon class="address-icon" [icon]="faLocationDot" />
-            <div class="address-text">
-                {{ keyPoint.dataKey.locationAddress }}
+        <div class="content">
+            <img
+                [src]="keyPointImage"
+                alt="Keypoint Image"
+                class="keypoint-image"
+                (error)="onImageError($event)"
+            />
+            <div class="address">
+                <fa-icon class="address-icon" [icon]="faLocationDot" />
+                <div class="address-text">
+                    {{ keyPoint.dataKey.locationAddress }}
+                </div>
             </div>
-        </div>
-        <div class="description">
-            Description: {{ keyPoint.dataKey.description }}
-        </div>
-        <div
-            class="keypoint-secret"
-            *ngIf="secret != '' && secret != 'Not unlocked yet.'"
-        >
-            <div
-                class="keypoint-secret-text"
-                [class.keypoint-secret-text-revealed]="!hidden"
-            >
-                Secret: {{ secret }}
+            <div class="description">
+                <b>Description:</b> {{ keyPoint.dataKey.description }}
             </div>
             <div
-                class="keypoint-secret-hider"
-                (click)="reveal()"
-                [class.keypoint-secret-hider-revealed]="!hidden"
+                class="keypoint-secret"
+                *ngIf="secret != '' && secret != 'Not unlocked yet.'"
             >
-                <fa-icon
-                    class="keypoint-secret-hider-mask"
-                    [icon]="faMask"
-                    [class.keypoint-secret-hider-mask-revealed]="!hidden"
-                />
-                <div class="instruction" [class.instruction-revealed]="!hidden">
-                    Click to reveal secret
+                <div
+                    class="keypoint-secret-text"
+                    [class.keypoint-secret-text-revealed]="!hidden"
+                >
+                    <b>Secret:</b> {{ secret }}
+                </div>
+                <div
+                    class="keypoint-secret-hider"
+                    (click)="reveal()"
+                    [class.keypoint-secret-hider-revealed]="!hidden"
+                >
+                    <fa-icon
+                        class="keypoint-secret-hider-mask"
+                        [icon]="faMask"
+                        [class.keypoint-secret-hider-mask-revealed]="!hidden"
+                    />
+                    <div
+                        class="instruction"
+                        [class.instruction-revealed]="!hidden"
+                    >
+                        Click to reveal secret
+                    </div>
                 </div>
             </div>
         </div>

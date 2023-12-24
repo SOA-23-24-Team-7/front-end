@@ -157,3 +157,41 @@
         opacity: 1;
     }
 }
+
+.content {
+    overflow-y: auto;
+    overflow-x: hidden;
+    max-height: 70vh;
+    padding-right: 0.5rem;
+}
+
+::-webkit-scrollbar {
+    width: 12px;
+}
+
+::-webkit-scrollbar-thumb {
+    background-color: rgba(var(--clr-primary-500), 1);
+    border-radius: 6px;
+}
+
+::-webkit-scrollbar-track {
+    background-color: rgba(var(--clr-primary-500), 0.4);
+}
+
+/* For Firefox */
+/* You can customize these styles as needed */
+.content {
+    scrollbar-width: thin;
+    scrollbar-color: rgba(var(--clr-primary-500), 1)
+        rgba(var(--clr-primary-500), 0.4);
+}
+
+/* Optional: Adjust the styles for the track and thumb in Firefox */
+.content::-webkit-scrollbar-thumb {
+    background-color: #3498db;
+    background-color: rgba(var(--clr-primary-500), 1);
+}
+
+.content::-webkit-scrollbar-track {
+    background-color: rgba(var(--clr-primary-500), 0.4);
+}

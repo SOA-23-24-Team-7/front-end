@@ -2,6 +2,8 @@
     display: flex;
     justify-content: space-between;
     padding: 1.25rem;
+    height: 90vh;
+    margin-bottom: 3rem;
 }
 
 .tour-card {
@@ -13,6 +15,9 @@
     box-shadow: 0 0.25rem 0.5rem rgba(0, 0, 0, 0.1);
     overflow: hidden;
     color: rgba(var(--clr-text), 1);
+    height: 90vh;
+    max-height: 90vh;
+    overflow: auto;
 }
 
 .tour-image {
@@ -107,11 +112,12 @@
 
 .map-container {
     width: 65%;
-    min-height: 75vh;
+    height: 100vh;
     border: 1px solid #ccc;
     border-radius: 0.5rem;
     overflow: hidden;
     position: relative;
+    height: 90vh;
 }
 
 .progress-bar-container {
@@ -159,4 +165,49 @@
     display: flex;
     justify-content: center;
     align-items: center;
+}
+
+.description {
+    margin-top: 2rem;
+    overflow-y: auto;
+    overflow-x: hidden;
+    padding-right: 0.5rem;
+}
+
+::-webkit-scrollbar {
+    width: 12px;
+}
+
+::-webkit-scrollbar-thumb {
+    background-color: rgba(var(--clr-primary-500), 1);
+    border-radius: 6px;
+}
+
+::-webkit-scrollbar-track {
+    background-color: rgba(var(--clr-primary-500), 0.4);
+}
+
+/* For Firefox */
+/* You can customize these styles as needed */
+.description {
+    flex-shrink: 0;
+    scrollbar-width: thin;
+    scrollbar-color: rgba(var(--clr-primary-500), 1)
+        rgba(var(--clr-primary-500), 0.4);
+    margin-bottom: 2rem;
+    max-height: fit-content;
+}
+
+/* Optional: Adjust the styles for the track and thumb in Firefox */
+.description::-webkit-scrollbar-thumb {
+    background-color: #3498db;
+    background-color: rgba(var(--clr-primary-500), 1);
+}
+
+.description::-webkit-scrollbar-track {
+    background-color: rgba(var(--clr-primary-500), 0.4);
+}
+
+.margin-top {
+    margin-top: 2rem;
 }

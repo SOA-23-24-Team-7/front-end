@@ -20,6 +20,8 @@ import { faLocation } from "@fortawesome/free-solid-svg-icons";
 import { PositionSimulatorComponent } from "src/app/shared/position-simulator/position-simulator.component";
 import { UserPositionWithRange } from "../../encounter/model/user-position-with-range.model";
 import { MapComponent } from "src/app/shared/map/map.component";
+import { NotifierService } from "angular-notifier";
+import { TourCompletedPopupComponent } from "../tour-completed-popup/tour-completed-popup.component";
 
 @Component({
     selector: "xp-tour-executing",
@@ -75,6 +77,7 @@ export class TourExecutingComponent implements OnInit {
         private service: TourExecutionService,
         private encounterService: EncounterService,
         public dialogRef: MatDialog,
+        private notifier: NotifierService,
     ) {}
 
     ngOnInit(): void {
@@ -159,7 +162,7 @@ export class TourExecutingComponent implements OnInit {
                         TourExecutionSessionStatus.Completed
                     ) {
                         this.isTourInProgress = false;
-                        alert("Tour completed");
+                        this.dialogRef.open(TourCompletedPopupComponent);
                     }
                 },
                 // () => {
