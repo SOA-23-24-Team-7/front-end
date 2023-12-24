@@ -145,7 +145,7 @@ export class KeyPointModalComponent implements OnInit {
                 this.mapService
                     .reverseSearch(keyPoint.latitude, keyPoint.longitude)
                     .subscribe((res: { display_name: string }) => {
-                        const addressInfo = {
+                        let addressInfo = {
                             number: "",
                             street: "",
                             city: "",
@@ -155,7 +155,10 @@ export class KeyPointModalComponent implements OnInit {
 
                         let addressParts = res.display_name.split(",");
 
-                        this.setAddressInfo(addressInfo, addressParts);
+                        addressInfo = this.setAddressInfo(
+                            addressInfo,
+                            addressParts,
+                        );
                         let concatenatedAddress =
                             addressInfo.number +
                             " " +
@@ -193,7 +196,7 @@ export class KeyPointModalComponent implements OnInit {
                             },
                             error: err => {
                                 this.notifier.notify(
-                                    "err",
+                                    "error",
                                     xpError.getErrorMessage(err),
                                 );
                             },
@@ -252,7 +255,7 @@ export class KeyPointModalComponent implements OnInit {
             this.mapService
                 .reverseSearch(keyPoint.latitude, keyPoint.longitude)
                 .subscribe(res => {
-                    const addressInfo = {
+                    let addressInfo = {
                         number: "",
                         street: "",
                         city: "",
@@ -262,7 +265,10 @@ export class KeyPointModalComponent implements OnInit {
 
                     let addressParts = res.display_name.split(",");
 
-                    this.setAddressInfo(addressInfo, addressParts);
+                    addressInfo = this.setAddressInfo(
+                        addressInfo,
+                        addressParts,
+                    );
                     let concatenatedAddress =
                         addressInfo.number +
                         " " +
@@ -287,7 +293,7 @@ export class KeyPointModalComponent implements OnInit {
                         },
                         error: err => {
                             this.notifier.notify(
-                                "err",
+                                "error",
                                 xpError.getErrorMessage(err),
                             );
                         },
@@ -316,7 +322,7 @@ export class KeyPointModalComponent implements OnInit {
         });
     }
 
-    setAddressInfo(addressInfo: any, addressParts: any): void {
+    setAddressInfo(addressInfo: any, addressParts: any): any {
         if (addressParts.length == 10) {
             addressInfo.number = addressParts[0];
             addressInfo.street = addressParts[1];
@@ -342,6 +348,7 @@ export class KeyPointModalComponent implements OnInit {
             addressInfo.postalCode = addressParts[5];
             addressInfo.country = addressParts[6];
         }
+        return addressInfo;
     }
 
     selectLocation() {

@@ -42,7 +42,7 @@
                 <fa-icon
                     class="tour-action"
                     *ngIf="tour.status == 2 || tour.status == 0"
-                    (click)="onEditClicked()"
+                    (click)="onEditClicked(); $event.stopPropagation()"
                     [icon]="faPen"
                 />
                 <fa-icon
