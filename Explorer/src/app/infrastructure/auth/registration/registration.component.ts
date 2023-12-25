@@ -43,6 +43,7 @@ export class RegistrationComponent {
     if (this.registrationForm.valid) {
       this.authService.register(registration).subscribe({
         next: () => {
+          alert('Please check your email to confirm your registration.')
           this.onClose();
         },
       });
