@@ -1,9 +1,42 @@
-<div class="facility-card">
-    <img class="facility-image" [src]="facilityImage" />
-    <div class="facility-overlay">
-        <div class="facility-name">{{ facility.name }}</div>
-        <div class="facility-description">
-            {{ facility.description }}
+<div
+    class="key-point-card"
+    [ngClass]="{
+        'add-new': isAddNew,
+        public: isPublic
+    }"
+>
+    <div class="add-new-kp" *ngIf="isAddNew">
+        <fa-stack class="icon-stack">
+            <fa-icon class="icon" [icon]="faNew" stackItemSize="1x" />
+            <fa-icon
+                class="icon small-icon"
+                [icon]="faPlus"
+                stackItemSize="1x"
+            />
+        </fa-stack>
+        <div>Add a new facility.</div>
+    </div>
+
+    <div
+        *ngIf="!isAddNew"
+        class="key-point-image"
+        [style.background-image]="'url(' + facilityImage + ')'"
+    ></div>
+    <div class="key-point-overlay" *ngIf="!isAddNew">
+        <div class="key-point-name">{{ facility.name }}</div>
+        <div class="key-point-description">
+            <div class="description">
+                {{ facility.description }}
+            </div>
         </div>
+    </div>
+    <div
+        class="delete-button"
+        *ngIf="!isAddNew && !isPublic"
+        (click)="delete(); $event.stopPropagation()"
+        tooltipPosition="bottom"
+        pTooltip="Delete"
+    >
+        <fa-icon [icon]="faCross" />
     </div>
 </div>

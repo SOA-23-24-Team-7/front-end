@@ -64,6 +64,13 @@
                 />
                 <fa-icon
                     class="tour-action"
+                    *ngIf="tour.status == 1 || tour.status == 2"
+                    [icon]="faBarChart"
+                    [routerLink]="['/tour-statistics', tour.id]"
+                />
+
+                <fa-icon
+                    class="tour-action"
                     [icon]="faMapLocation"
                     [routerLink]="['/tour', tour.id, 'key-points']"
                 />

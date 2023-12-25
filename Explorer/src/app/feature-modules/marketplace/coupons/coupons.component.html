@@ -1,4 +1,4 @@
-<div class="add-modal">
+<div class="add-modal" (click)="onClose()">
     <div class="add" (click)="$event.stopPropagation()">
         <div class="add-head">
             <fa-icon class="add-x" [icon]="faXmark" (click)="onClose()" />
@@ -21,13 +21,18 @@
                 min="{{ currentDate | date : 'yyyy-MM-dd' }}"
                 formControlName="expirationDate"
             />
-            <label for="checkbox" class="add-label">All</label>
-            <input
-                id="checkbox"
-                class="checkbox"
-                formControlName="allFromAuthor"
-                type="checkbox"
-            />
+            <div class="checkbox">
+                <input
+                    id="is-public-checkbox"
+                    class="is-public-checkbox"
+                    formControlName="allFromAuthor"
+                    type="checkbox"
+                />
+                <label for="is-public-checkbox" class="is-public-label"
+                    >Author-wide validity</label
+                >
+            </div>
+
             <button class="add-submit" type="submit" (click)="submit()">
                 <div class="add-submit-text">Add</div>
             </button>

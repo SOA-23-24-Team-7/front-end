@@ -503,9 +503,9 @@ export class MarketplaceService {
     addCoupon(coupon: Coupon): Observable<Coupon> {
         return this.http.post<Coupon>(environment.apiHost + "coupon/", coupon);
     }
-    getCoupons(): Observable<PagedResults<Coupon>> {
+    getCouponsById(authorId: number): Observable<PagedResults<Coupon>> {
         return this.http.get<PagedResults<Coupon>>(
-            environment.apiHost + "coupon/",
+            environment.apiHost + "coupon/"+authorId,
         );
     }
     deleteCoupon(id: number): Observable<Coupon> {

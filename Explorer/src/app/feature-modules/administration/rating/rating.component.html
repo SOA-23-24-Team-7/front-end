@@ -1,26 +1,38 @@
-<div id="rating">
-    <p>Ratings</p>
-    <hr />
-    <div id="rating-details">
-        <div>
-            <table>
-                <thead>
-                    <tr>
-                        <th>Grade</th>
-                        <th>Comment</th>
-                        <th>Date and time</th>
-                        <th>User</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr *ngFor="let r of ratings">
-                        <td>{{ r.grade }}</td>
-                        <td>{{ r.comment }}</td>
-                        <td>{{ r.dateTime | date : "medium" }}</td>
-                        <td>{{ r.userName }}</td>
-                    </tr>
-                </tbody>
-            </table>
+<div class="rating-page-container">
+    <div class="title">
+        <h1>Ratings</h1>
+    </div>
+    <div class="rating-stats-container">
+        <div class="rating-numbers">
+            <div class="average-rating">{{(averageRating * 100 / 100).toFixed(1)}}</div>
+            <div class="stars-landing" id="stars-box" style="--rating: {{averageRating}}; --star-size: 2.25rem;"></div>
+            <div class="review-count">
+                {{ratings.length}} rating{{ratings.length !== 1 ? 's' : ''}}
+            </div>
+        </div>
+        <div class="stats-bar-item">
+            <div class="rating-bar-rows" *ngFor="let grade of [5, 4, 3, 2, 1];">
+                <div class="rating-bar-row">
+                    <div>{{grade}}</div>
+                    <div class="rating-bar-container">
+                        <div class="rating-bar" [style.width]="ratingHistogram[grade - 1] + '%'"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="ratings-container">
+        <div class="rating-card" *ngFor="let rating of ratings;">
+            <div class="user-info">
+                <img class="profile-picture" [src]="rating.profilePicture"> {{rating.userName}}
+            </div>
+            <div class="rating-basic-info">
+                <div class="stars-landing" style="--rating: {{rating.grade}}; --star-size: 1.5em;"></div>
+                <div class="rating-date">{{formatDate(rating.dateTime)}}</div>
+            </div>
+            <div class="rating-description">
+                {{rating.comment}}
+            </div>
         </div>
     </div>
 </div>

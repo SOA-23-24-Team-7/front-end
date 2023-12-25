@@ -1,11 +1,62 @@
+<h1>Recommended For You</h1>
 <div class="tour-cards-container">
-    <div class="list-cards-button" id="prev-button">
+    <div class="list-cards-button" id="prev-button" (click)="scrollToPrevRecommendedTours()">
         <div class="triangle-left"></div>
     </div>
 
-    <xp-tour-card *ngFor="let tour of toursList" [tour]="tour"></xp-tour-card>
+    <div class="recommended-card-container"><xp-tour-card *ngFor="let tour of recommendedTours" [tour]="tour" class="tour-details"></xp-tour-card></div>
 
-    <div class="list-cards-button" id="next-button">
+    <div class="list-cards-button" id="next-button" (click)="scrollToNextRecommendedTours()">
         <div class="triangle-right"></div>
     </div>
 </div>
+<h1>Adventure Essentials: Must-Visit Stops</h1>
+<div class="tour-cards-container">
+    <div class="list-cards-button" id="prev-button" (click)="scrollToPrevAdventureCard()">
+        <div class="triangle-left"></div>
+    </div>
+
+    <div class="adventure-card-container"><xp-tour-card *ngFor="let tour of adventureTours" [tour]="tour" class="tour-details"></xp-tour-card></div>
+
+    <div class="list-cards-button" id="next-button" (click)="scrollToNextAdventureCard()">
+        <div class="triangle-right"></div>
+    </div>
+</div>
+<h1>Family Trips: Unforgettable Journeys Together</h1>
+<div class="tour-cards-container">
+    <div class="list-cards-button" id="prev-button" (click)="scrollToPrevFamilyCard()">
+        <div class="triangle-left"></div>
+    </div>
+
+    <div class="family-card-container"><xp-tour-card *ngFor="let tour of familyTours" [tour]="tour" class="tour-details"></xp-tour-card></div>
+
+    <div class="list-cards-button" id="next-button" (click)="scrollToNextFamilyCard()">
+        <div class="triangle-right"></div>
+    </div>
+</div>
+
+<h1>Captivating Cruise Stops</h1>
+<div class="tour-cards-container">
+    <div class="list-cards-button" id="prev-button" (click)="scrollToPrevCruiseCard()">
+        <div class="triangle-left"></div>
+    </div>
+
+    <div class="cruise-card-container"><xp-tour-card *ngFor="let tour of cruiseTours" [tour]="tour" class="tour-details"></xp-tour-card></div>
+
+    <div class="list-cards-button" id="next-button" (click)="scrollToNextCruiseCard()">
+        <div class="triangle-right"></div>
+    </div>
+</div>
+<h1>Top Cultural Sights You Can't Miss</h1>
+<div class="tour-cards-container">
+    <div class="list-cards-button" id="prev-button" (click)="scrollToPrevCulturalCard()">
+        <div class="triangle-left"></div>
+    </div>
+
+    <div class="cultural-card-container"><xp-tour-card *ngFor="let tour of culturalTours" [tour]="tour" class="tour-details"></xp-tour-card></div>
+
+    <div class="list-cards-button" id="next-button" (click)="scrollToNextCulturalCard()">
+        <div class="triangle-right"></div>
+    </div>
+</div>
+<xp-blog-cards></xp-blog-cards>

@@ -1,32 +1,19 @@
-<form [formGroup]="ratingForm">
-    <h2>Rate our app</h2>
-    <h3>Your oppinion is important to us</h3>
-    <div>
-        <mat-form-field>
-            <mat-label>Grade</mat-label>
-            <input matInput formControlName="grade" min="1" max="5" type="number"/>
-        </mat-form-field>
-        <mat-form-field>
-          <mat-label>Comment</mat-label>
-          <textarea matInput
-          cdkTextareaAutosize
-          cdkAutosizeMinRows="1"
-          formControlName="comment"
-          cdkAutosizeMaxRows="5"></textarea>
-        </mat-form-field>
-        <div style="display: inline-block; text-align: center;">
-            <button *ngIf="canAdd" color="primary" type="submit" (click)="addRating()" mat-icon-button>
-                <mat-icon>add</mat-icon>
-            </button>
-            <button *ngIf="canEdit && !isEditing" color="accent" (click)="onUpdateClicked()" mat-icon-button>
-                <mat-icon>edit</mat-icon>
-            </button>
-            <button *ngIf="isEditing" color="accent" (click)="updateRating()" mat-icon-button>
-                <mat-icon>save</mat-icon>
-            </button>
-            <button *ngIf="canDelete && !isEditing" color="accent" (click)="deleteRating(this.rating.id || 0)" mat-icon-button>
-                <mat-icon>delete</mat-icon>
-            </button>
-        </div>
+<div class="rating-form-container">
+    <div class="rating-form-header">
+        <h2>Your opinion matters to us</h2>
     </div>
-</form>
+    <form class="rating-form" [formGroup]="ratingForm">
+        <div class="center-text bold-text">
+            How do you like the app?
+        </div>
+        <div class="star-rating">
+            <star-rating-control [starType]="'svg'" [size]="'large'" [space]="'between'" [hoverEnabled]="true" formControlName="grade"></star-rating-control>
+        </div>
+        <textarea cols="35" rows="5" formControlName="comment" [value]="ratingForm.value.comment" placeholder="Leave a comment if you'd like" resize="none"></textarea>
+        <div class="btn" [ngClass]="{'disabled-btn': !ratingForm.valid}" (click)="onSubmit()">Submit</div>
+        <div class="btn" *ngIf="rating" (click)="onDelete()">Delete</div>
+    </form>
+    <div class="rating-form-footer">
+        <a class="clickable-text" (click)="closeForm()">Maybe later</a>
+    </div>
+</div>

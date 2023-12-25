@@ -41,6 +41,8 @@
 
     --fnt-header: "Playfair Display", serif;
 
+    --star-background: rgb(var(--clr-primary-300));
+
     font-family: var(--fnt-body);
     background-color: rgb(var(--clr-background));
     color: var(--clr-text);
@@ -234,6 +236,17 @@ textarea:focus {
         transition-duration: 0.01ms !important;
         scroll-behavior: auto !important;
     }
+}
+
+@import "~css-star-rating/css/star-rating.min.css";
+
+::-webkit-scrollbar {
+    width: 0.5em;
+}
+
+::-webkit-scrollbar-thumb {
+    background-color: rgba(var(--clr-background));
+    border-radius: 0.3rem;
 }
 
 .p-tooltip .p-tooltip-text {

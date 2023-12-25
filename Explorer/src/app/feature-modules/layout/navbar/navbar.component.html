@@ -421,6 +421,20 @@
                         />
                         <div class="navbar-submenu-item-text">Coupons</div>
                     </div>
+
+                    <div
+                        class="navbar-submenu-item"
+                        [routerLink]="['tour-statistics']"
+                        *ngIf="user && user.role === 'author'"
+                    >
+                        <fa-icon
+                            class="navbar-submenu-item-icon"
+                            [icon]="faBarChart"
+                        />
+                        <div class="navbar-submenu-item-text">
+                            Statistics
+                        </div>
+                    </div>
                 </div>
                 <div
                     class="navbar-menu-item-selected-indicator"
@@ -614,7 +628,7 @@
                     </div>
                     <div
                         class="navbar-submenu-item"
-                        [routerLink]="['rating-form']"
+                        (click)="onRateApp()"
                         *ngIf="
                             user &&
                             (user.role === 'tourist' || user.role === 'author')
@@ -637,19 +651,6 @@
                         />
                         <div class="navbar-submenu-item-text">
                             My notifications
-                        </div>
-                    </div>
-                    <div
-                        class="navbar-submenu-item"
-                        [routerLink]="['payment-history']"
-                        *ngIf="user && user.role == 'tourist'"
-                    >
-                        <fa-icon
-                            class="navbar-submenu-item-icon"
-                            [icon]="faCoins"
-                        />
-                        <div class="navbar-submenu-item-text">
-                            Payments history
                         </div>
                     </div>
                     <div
