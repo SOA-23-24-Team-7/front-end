@@ -31,7 +31,6 @@ import { ProblemAnswerComponent } from "src/app/feature-modules/stakeholder/prob
 import { TouristPositionSimulatorComponent } from "src/app/feature-modules/tour-execution/tourist-position-simulator/tourist-position-simulator.component";
 import { RequestViewComponent } from "src/app/feature-modules/administration/request-view/request-view.component";
 import { PurchasedToursComponent } from "src/app/feature-modules/tour-execution/purchased-tour-cards/purchased-tour-cards.component";
-import { PublishedToursComponent } from "src/app/feature-modules/marketplace/tours/published-tours.component";
 import { TourExecutingComponent } from "src/app/feature-modules/tour-execution/tour-executing/tour-executing.component";
 import { BlogFormComponent } from "src/app/feature-modules/blog/blog-form/blog-form.component";
 import { MyBlogsComponent } from "src/app/feature-modules/blog/my-blogs/my-blogs.component";
@@ -88,11 +87,6 @@ const routes: Routes = [
     {
         path: "purchasedtours",
         component: PurchasedToursComponent,
-        canActivate: [AuthGuard],
-    },
-    {
-        path: "published-tours",
-        component: PublishedToursComponent,
         canActivate: [AuthGuard],
     },
     {
