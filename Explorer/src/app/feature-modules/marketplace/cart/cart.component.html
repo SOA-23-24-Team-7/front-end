@@ -61,8 +61,16 @@
         </div>
     </div>
     <div class="checkout">
-        <div id="btn" class="btn" (click)="checkout()">
-            <fa-icon [icon]="faCashRegister"></fa-icon> Checkout
+        <div class="column">
+            <fa-icon
+                class="coupon"
+                [icon]="faMoneyBill"
+                (click)="openCouponModal()"
+            ></fa-icon>
+            <div id="btn" class="btn" (click)="checkout()">
+                <fa-icon [icon]="faCashRegister"></fa-icon>
+                Checkout
+            </div>
         </div>
         <div class="column">
             <div>Total price:</div>

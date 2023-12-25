@@ -17,6 +17,7 @@ import {
     faCoins,
     faShoppingCart,
     faCashRegister,
+    faMoneyBill,
 } from "@fortawesome/free-solid-svg-icons";
 import { environment } from "src/env/environment";
 
@@ -229,4 +230,5 @@ export class CartComponent implements OnInit {
     faCoins = faCoins;
     faShoppingCart = faShoppingCart;
     faCashRegister = faCashRegister;
+    faMoneyBill = faMoneyBill;
 }

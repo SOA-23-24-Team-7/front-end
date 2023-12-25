@@ -3,6 +3,7 @@
     width: 350px;
     background-color: rgb(var(--clr-background-secondary));
     border-radius: 0.5rem;
+    border: 1px solid rgb(var(--clr-background));
     right: -350px;
     transition: right 0.7s;
     z-index: 100;
@@ -189,8 +190,8 @@ strike.straight::before {
 .checkout {
     display: flex;
     height: 12%;
-    font-size: 1.5rem;
     width: 100%;
+    font-size: 1.5rem;
     justify-content: space-between;
     align-items: flex-end;
     margin-top: auto;
@@ -203,6 +204,15 @@ strike.straight::before {
     border-top-left-radius: 0rem;
     border-top-right-radius: 0rem;
     border: 1px solid rgb(var(--clr-background-secondary));
+}
+
+.coupon {
+    color: gold;
+}
+
+.coupon:hover {
+    cursor: pointer;
+    filter: brightness(1.2);
 }
 
 .btn {
