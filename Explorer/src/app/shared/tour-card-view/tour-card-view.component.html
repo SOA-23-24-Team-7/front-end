@@ -28,7 +28,6 @@
                     {{ tag }}
                 </div>
             </div>
-<<<<<<< HEAD
             <div
                 class="tour-actions"
                 *ngIf="
@@ -74,7 +73,7 @@
                     (click)="onEditClicked(); $event.stopPropagation()"
                     [icon]="faPen"
                 />
-=======
+
             <div class="tour-actions" *ngIf="user && (user.role === 'author' && !hideIcons && !selectable)">
                 <fa-icon class="tour-action red" *ngIf="tour.status == 2 || tour.status == 0" [icon]="faTrash"/>
                 <fa-icon class="tour-action" *ngIf="tour.status == 2 || tour.status == 0" (click)="onEditClicked()" [icon]="faPen"/>
@@ -84,7 +83,7 @@
                 <fa-icon class="tour-action" *ngIf="tour.status == 1 || tour.status == 2" [icon]="faBarChart" [routerLink]="['/tour-statistics', tour.id]"/>
                 <fa-icon class="tour-action green" *ngIf="tour.status == 2 || tour.status == 0" [icon]="faShareNodes" (click)="onPublishClicked(tour)"/>
                 <fa-icon class="tour-action" *ngIf="tour.status == 1" [icon]="faBoxArchive" (click)="onArchiveClicked(tour)"/>
->>>>>>> development
+
             </div>
         </div>
         <div class="tour-card-information">
