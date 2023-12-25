@@ -28,7 +28,7 @@ import { KeyPointEncounterFormComponent } from "../../encounter/key-point-encoun
     styleUrls: ["./key-point-form.component.css"],
 })
 export class KeyPointFormComponent implements OnChanges {
-    @Output() keyPointUpdated = new EventEmitter<null>();
+    @Output() keyPointUpdated = new EventEmitter<KeyPoint>();
     @Input() keyPoint: KeyPoint | null;
     @Input() longLat: [number, number];
     @Input() shouldEdit: boolean = false;
@@ -157,7 +157,7 @@ export class KeyPointFormComponent implements OnChanges {
 
                                 this.service.addKeyPoint(keyPoint).subscribe({
                                     next: result => {
-                                        this.keyPointUpdated.emit();
+                                        this.keyPointUpdated.emit(keyPoint);
                                         if (
                                             this.keyPointForm.value
                                                 .isPublicChecked

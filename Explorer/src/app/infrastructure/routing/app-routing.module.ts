@@ -98,7 +98,6 @@ const routes: Routes = [
     {
         path: "tour-sales",
         component: TourSalesComponent,
-        canActivate: [AuthGuard],
     },
     {
         path: "tour-sale-form/:id",
@@ -261,7 +260,6 @@ const routes: Routes = [
     {
         path: "tour/:tourId",
         component: TourPageComponent,
-        canActivate: [AuthGuard],
     },
     {
         path: "tourists-blog/:tourId",
@@ -315,7 +313,9 @@ const routes: Routes = [
 ];
 
 @NgModule({
-    imports: [RouterModule.forRoot(routes)],
+    imports: [
+        RouterModule.forRoot(routes, { scrollPositionRestoration: "enabled" }),
+    ],
     exports: [RouterModule],
 })
 export class AppRoutingModule {}

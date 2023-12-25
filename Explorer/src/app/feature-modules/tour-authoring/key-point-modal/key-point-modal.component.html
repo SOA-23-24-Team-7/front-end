@@ -1,0 +1,88 @@
+<div class="container" [formGroup]="keyPointForm">
+    <div
+        class="title"
+        [style.background-color]="
+            tourImage != null ? 'rgba(0, 0, 0, 0.6)' : 'none'
+        "
+    >
+        {{
+            keyPointForm.get("name")!.value
+                ? keyPointForm.get("name")!.value
+                : "New keypoint"
+        }}
+    </div>
+    <div
+        class="header"
+        [style.background-image]="'url(' + tourImage + ')'"
+    ></div>
+    <div class="wrapper">
+        <div class="row vertical">
+            <div class="option-name">Name:</div>
+            <input
+                matInput
+                formControlName="name"
+                type="text"
+                placeholder="Dunavski park"
+            />
+        </div>
+        <div class="row vertical">
+            <div class="option-name">Description:</div>
+            <textarea
+                cols="50"
+                rows="4"
+                resize="none"
+                formControlName="description"
+                placeholder="Short description of this keypoint..."
+            ></textarea>
+        </div>
+        <div class="row buttons">
+            <label class="custom-file-upload btn">
+                <fa-icon [icon]="faImage" />
+                Upload image
+                <input
+                    id="file-upload"
+                    accept="image/*"
+                    type="file"
+                    class="upload-input"
+                    (change)="onSelectImage($event)"
+                />
+            </label>
+            <div class="btn" (click)="selectLocation()">
+                <fa-icon [icon]="faLocation" />
+                Set location
+            </div>
+        </div>
+        <div class="row vertical">
+            <div class="option-name">Secret: (Optional)</div>
+            <textarea
+                cols="50"
+                rows="4"
+                resize="none"
+                formControlName="secretDescription"
+                placeholder="Short description of this keypoint's secret..."
+            ></textarea>
+        </div>
+        <div class="row checkbox-row" *ngIf="!isUpdateForm">
+            <div class="option-name">Public keypoint:</div>
+            <input
+                id="is-public-checkbox"
+                class="is-public-checkbox"
+                formControlName="isPublicChecked"
+                type="checkbox"
+            />
+        </div>
+        <div class="row" *ngIf="isUpdateForm">
+            <div class="done-submit-text btn" (click)="addEncounter()">
+                Add encounter
+            </div>
+        </div>
+        <div class="row">
+            <div
+                class="done-submit-text btn"
+                (click)="isUpdateForm ? updateKeyPoint() : addKeyPoint()"
+            >
+                Done
+            </div>
+        </div>
+    </div>
+</div>

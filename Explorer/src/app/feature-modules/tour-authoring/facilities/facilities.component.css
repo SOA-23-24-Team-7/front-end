@@ -1,171 +1,127 @@
-#facilities {
-  margin-top: 20px;
-  margin-left: 20px;
+::ng-deep .tag {
+    margin-left: 0 !important;
+    padding-right: 0.3rem !important;
 }
 
-#facilities-details {
-  display: flex;
-  flex-direction: row;
-  gap: 50px;
-  align-items: flex-start;
-  
-}
-.facility-form {
-  width: 90%;
-  display: flex;
-}
-mat-card img {
-  object-fit: contain;
-  width: 100%;
-  height: 100%;
-  width: 45rem;
-  height: 45rem;
-  background-color: #4054b4;
-  align-self: center;
-}
-p {
-  font-size: 20px;
+.btn-done {
+    margin-inline: auto;
 }
 
-table {
-  border-collapse: collapse;
-  font-size: 0.9em;
-  font-family: sans-serif;
-  min-width: 300px;
-  box-shadow: 0 0 20px rgba(0, 0, 0, 0.15); 
+.map {
+    position: relative;
+    width: 100%;
+    flex-grow: 1;
+    border-top-right-radius: 1rem;
+    border-bottom-right-radius: 1rem;
+    overflow: hidden;
 }
 
-thead tr {
-  background-color: #3f51b5;
-  color: #ffffff;
-  text-align: left;
+::ng-deep #keypointMap {
+    height: 30rem !important;
 }
 
-th, td {
-  padding: 12px 15px;
+.keypoints {
+    width: 100%;
+    min-height: 22rem;
+    /* outline: 2px solid purple; */
+    display: flex;
+    align-items: center;
 }
 
-tbody tr {
-  border-bottom: 1px solid #dddddd;
-}
-/*
-tbody tr:nth-of-type(even) {
-  background-color: #f3f3f3;
-} */
-
-tbody tr:last-of-type {
-  border-bottom: 2px solid #3f51b5;
-}
-
-tbody tr.active-row {
-  font-weight: bold;
-  color: #3f51b5;
-}
-
-xp-map {
-  height: 300px;
-  width: 600px;
-}
-
-#closeButton {
-  width: 288px;
-  display: flex;
-  gap: 20px;
-  flex-direction: column;
-}
-
-.selected-row {
-  background-color: #45b058;
-}
-.done-submit {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  width: 18rem;
-  height: 2rem;
-  background-color: rgba(var(--clr-primary-500), 1);
-  border: rgba(var(--clr-primary-500, 1)) 1px solid;
-  border-radius: 0.5rem;
-  cursor: pointer;
-  transition: background-color 0.15s;
-}
-.done-submit:hover {
-  background-color: rgba(var(--clr-primary-500), 0.9);
-}
-
-.done-submit-text {
-  color: rgba(255, 255, 255, 1);
-  font-family: var(--fnt-body);
-  font-weight: 500;
-  font-size: 1.25rem;
-}
-
-.cards {
-  margin-top: 3rem;
-}
-.row {
-  display: flex;
-  justify-content: center;
-}
-
-.column {
-  flex: 1;
-  padding: 10px;
-  margin: 5px;
-}
-
-.facility-cards-container {
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  width: 70rem;
-  overflow-x: hidden;
-  scroll-behavior: smooth;
+.key-point-cards-container {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    width: 100%;
+    overflow-x: hidden;
+    scroll-behavior: smooth;
 }
 
 .list-cards-button:hover .triangle-left {
-  border-color: transparent rgba(var(--clr-primary-500), 0.95) transparent
-      transparent;
+    border-color: transparent rgba(var(--clr-primary-500), 0.95) transparent
+        transparent;
 }
 .list-cards-button:hover .triangle-right {
-  border-color: transparent transparent transparent
-      rgba(var(--clr-primary-500), 0.95);
+    border-color: transparent transparent transparent
+        rgba(var(--clr-primary-500), 0.95);
 }
 
 .list-cards-button {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  cursor: pointer;
-  margin: 1.5rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
 }
 
 .triangle-left,
 .triangle-right {
-  width: 0;
-  height: 0;
-  border-style: solid;
+    width: 0;
+    height: 0;
+    border-style: solid;
 }
 
 .triangle-left {
-  border-width: 2rem 2.2rem 2rem 0;
-  border-color: transparent rgba(var(--clr-primary-500), 1) transparent
-      transparent;
+    border-width: 2rem 2.2rem 2rem 0;
+    border-color: transparent rgba(var(--clr-primary-500), 1) transparent
+        transparent;
 }
 
 .triangle-right {
-  border-width: 2rem 0 2rem 2.2rem;
-  border-color: transparent transparent transparent
-      rgba(var(--clr-primary-500), 1);
+    border-width: 2rem 0 2rem 2.2rem;
+    border-color: transparent transparent transparent
+        rgba(var(--clr-primary-500), 1);
 }
-.buttons-container {
-  display: flex;
-  flex-direction: column;
-}
+
 .cards-buttons-container {
-  display: flex;
-  align-items: center;
+    display: flex;
+    align-items: center;
 }
-.title{
-  color: rgb(var(--clr-text));
+
+#next-button {
+    margin-left: auto;
+}
+
+.tour-search {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding-left: 2rem;
+    padding-right: 2rem;
+}
+
+.tour-search-header {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    border-bottom: rgba(var(--border-primary), 1) 1px solid;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.tour-search-header-title {
+    color: rgba(var(--clr-text), 1);
+    transition: color 0.15s;
+    font-family: var(--fnt-header);
+    font-size: 2.5rem;
+    margin-top: 3rem;
+    margin-right: auto;
+}
+
+.tour-search-header-paragraph {
+    font-family: var(--fnt-body);
+    margin-top: 0.5rem;
+    font-size: 1.25rem;
+    font-weight: 400;
+    color: rgba(var(--clr-text), 1);
+    transition: color 0.15s;
+    margin-bottom: 1rem;
+    line-height: 1.5;
+}
+
+.tour-search-body {
+    display: flex;
+    width: 100%;
+    min-height: 500px;
+    margin-bottom: 2rem;
 }

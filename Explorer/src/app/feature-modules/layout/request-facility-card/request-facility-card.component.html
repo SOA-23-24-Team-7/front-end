@@ -1,25 +1,44 @@
-<div class="request-key-point-card">
-    <header
-        [ngClass]="{
-            pending: request.status == 0,
-            accepted: request.status == 1,
-            rejected: request.status == 2
-        }"
-    >
-        <div class="request-status">
-            {{ getPublicStatusText(request.status) }}
+<div class="notification">
+    <div
+        class="marker"
+        [class.pending]="request.status == 0"
+        [class.accepted]="request.status == 1"
+        [class.rejected]="request.status == 2"
+    ></div>
+    <div class="data">
+        <div class="picture">
+            <div
+                class="sender-avatar"
+                [style.background-image]="
+                    'url(' + request.author!.profilePicture + ')'
+                "
+            ></div>
         </div>
-        <div class="request-date">
-            {{ request.created | date : "dd/MM/yyyy,  HH:mm" }}
-        </div>
-    </header>
-    <hr />
-    <div class="text">
-        <div class="request-author">
-            <p>Requested by: {{ request.authorName }}</p>
-        </div>
-        <div class="request-keypoint">
-            <p>Facility: {{ request.facilityName || "" }}</p>
+        <div class="row">
+            <div class="notification-column">
+                <div class="notification-header">
+                    <span>{{ getPublicStatusText(request.status) }} </span>
+                    request for publishing {{ request.facilityName || "" }}
+                </div>
+                <div class="notification-row">
+                    <div>Sent by</div>
+
+                    <div class="sender">
+                        {{ "@" + request.author!.username }}
+                    </div>
+                    <div>on</div>
+                    <div
+                        [class.acceptedDate]="request.status == 1"
+                        [class.rejectedDate]="request.status == 2"
+                        [class.pendingDate]="request.status == 0"
+                    >
+                        {{ request.created | date : "dd/MM/yyyy,  HH:mm" }}
+                    </div>
+                </div>
+            </div>
+            <!--div class="notification-content">
+            {{ notification.description }}
+            </div-->
         </div>
     </div>
 </div>

@@ -14,4 +14,5 @@ export interface Blog {
     authorId: number;
     author: User;
     visibilityPolicy: number;
+    showMore?: boolean;
 }

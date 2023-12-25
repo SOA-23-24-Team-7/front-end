@@ -5,4 +5,6 @@ export interface Coupon {
     expirationDate: Date;
     allFromAuthor: boolean;
     tourId?: number;
+    tourName?: string;
+    authorId?: number;
 }
