@@ -50,7 +50,7 @@ export class PurchasedToursComponent implements OnInit {
     getTours() {
         this.tourExecutionService.getTours().subscribe({
             next: (result: Tour[]) => {
-                this.purchasedTours = result;
+                this.purchasedTours = result.concat(result).concat(result).concat(result);
             },
             error: (err: any) => {
                 console.log(err);

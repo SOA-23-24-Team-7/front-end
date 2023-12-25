@@ -2,27 +2,96 @@
 ista prica
 */
 .tour-card {
+    width: 15rem;
+    height: 20rem;
     background-color: rgba(var(--clr-background-secondary), 1);
-    border-radius: 1rem;
-    border: rgba(var(--clr-outline-contrast), 1) 1px solid;
-    border-radius: 1rem;
-    padding: 0.625rem;
-    width: 18rem;
-    margin: 1.3rem;
-    box-shadow: 0 0 1rem rgba(var(--clr-outline-contrast), 0.8);
+    border-radius: 0.5rem;
     position: relative;
     color: rgb(var(--clr-text));
+    overflow: hidden;
 }
 
-.tour-image {
-    height: 11rem;
-    width: 17rem;
-    border-radius: 1rem;
-    margin: 0 auto;
-    z-index: 1;
-    position: relative;
-    cursor: pointer;
+.overlay {
+    position: absolute;
+    background: rgba(57, 57, 57, 0.1);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    color: white;
 }
+
+.overlay_4 {
+    left: 0;
+    bottom: 100%;
+    height: 0;
+    width: 100%;
+    overflow: hidden;
+    backdrop-filter: blur(8px) brightness(80%);
+    transition: all .3s ease-in-out;
+  }
+
+  .image_wrapper:hover .overlay_4 {
+    bottom: 0;
+    height: 100%;
+  }
+
+  .image_wrapper {
+    position: relative;
+  }
+  
+  img {
+    display: block;
+    object-fit: cover;
+    width: 100%;
+    height: 100%;
+  }
+
+  .flip-card {
+    background-color: transparent;
+    width: 300px;
+    height: 200px;
+    border: 1px solid #f1f1f1;
+    perspective: 1000px; /* Remove this if you don't want the 3D effect */
+  }
+  
+  /* This container is needed to position the front and back side */
+  .flip-card-inner {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    text-align: center;
+    transition: transform 0.8s;
+    transform-style: preserve-3d;
+  }
+  
+  /* Do an horizontal flip when you move the mouse over the flip box container */
+  .flip-card-click .flip-card-inner {
+    transform: rotateY(180deg);
+  }
+  
+  /* Position the front and back side */
+  .flip-card-front, .flip-card-back {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    -webkit-backface-visibility: hidden; /* Safari */
+    backface-visibility: hidden;
+  }
+  
+  /* Style the front side (fallback if image is missing) */
+  .flip-card-front {
+    background-color: #bbb;
+    color: black;
+  }
+  
+  /* Style the back side */
+  .flip-card-back {
+    background-color: dodgerblue;
+    color: white;
+    transform: rotateY(180deg);
+  }
+
 
 .tour-card-details {
     margin-top: 0.625rem;
@@ -87,6 +156,7 @@ ista prica
     position: absolute;
     font-weight: 600;
 }
+
 .tour-discounted-price {
     color: rgba(var(--clr-accent-700), 1);
     margin-top: 0.5rem;
@@ -103,14 +173,16 @@ ista prica
     font-weight: 500;
     margin-top: 10px;
 }
-.key-points-button{
+
+.key-points-button {
     border-radius: 2rem;
     height: 100%;
     max-height: 100%;
     font-size: 1.05rem;
     font-weight: 500;
 }
-.key-point-button{
+
+.key-point-button {
     border-radius: 2rem;
     height: 100%;
     max-height: 100%;
@@ -119,9 +191,10 @@ ista prica
     float: left;
     margin-right: 10px;
 }
+
 button:disabled,
-button[disabled]{
-  border: 1px solid #999999;
-  background-color: #cccccc;
-  color: #666666;
+button[disabled] {
+    border: 1px solid #999999;
+    background-color: #cccccc;
+    color: #666666;
 }

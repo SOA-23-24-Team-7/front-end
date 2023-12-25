@@ -1,5 +1,5 @@
 import { animate, style, transition, trigger } from '@angular/animations';
-import { Component, Input } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 
 @Component({
   selector: 'xp-carousel',
@@ -17,12 +17,16 @@ import { Component, Input } from '@angular/core';
     ])
   ]
 })
-export class CarouselComponent {
+export class CarouselComponent implements OnInit {
   @Input() slides: string[];
 
   currentSlide = 0;
 
   constructor() {
+  }
+
+  ngOnInit(): void {
+    setInterval(() => this.onNextClick(), 3000)
   }
 
   onPreviousClick() {

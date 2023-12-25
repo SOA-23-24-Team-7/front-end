@@ -15,7 +15,6 @@ import { TourWheatherComponent } from "../tour-wheather/tour-wheather.component"
     styleUrls: ["./purchased-tour-card.component.css"],
 })
 export class PurchasedTourCardComponent implements OnInit {
-    execution: TourExecutionStart = { tourId: 0, isCampaign: false };
     @Input() tour: Tour;
     @Input() hasActiveTour: boolean;
     @Input() activeTourId: number;
@@ -23,15 +22,20 @@ export class PurchasedTourCardComponent implements OnInit {
     @Output() onSelected = new EventEmitter<any>();
     tourImage: string;
     isTourActive: boolean = false;
+    execution: TourExecutionStart = { tourId: 0, isCampaign: false };
+    isClicked: boolean = false;
+
     constructor(
         private router: Router,
         private service: TourExecutionService,
         public dialogRef: MatDialog,
     ) {}
+
     ngOnInit(): void {
         this.CheckIfTourIsActive();
         this.tourImage =
-            environment.imageHost + this.tour.keyPoints![0].imagePath;
+        
+        environment.imageHost + this.tour.keyPoints![0].imagePath;
     }
     StartTour() {
         this.execution.tourId = this.tour.id!;
@@ -43,12 +47,14 @@ export class PurchasedTourCardComponent implements OnInit {
             ]);
         });
     }
+
     ContinueTour() {
         this.router.navigate([
             "/tour-executing/" + this.tour.id,
             { isCampaign: false },
         ]);
     }
+
     CheckIfTourIsActive() {
         if (this.hasActiveTour) {
             if (this.tour.id == this.activeTourId && !this.isCampaign) {
@@ -56,6 +62,7 @@ export class PurchasedTourCardComponent implements OnInit {
             }
         }
     }
+
     ShowKeyPoints() {
         const dialogRef = this.dialogRef.open(KeyPointsViewComponent, {
             data: {
@@ -63,9 +70,11 @@ export class PurchasedTourCardComponent implements OnInit {
             },
         });
     }
+
     onSelectedTour(tour: Tour) {
         this.onSelected.emit(tour);
     }
+
     ShowWheather() {
         const dialogRef = this.dialogRef.open(TourWheatherComponent, {
             data: {
@@ -75,4 +84,11 @@ export class PurchasedTourCardComponent implements OnInit {
             },
         });
     }
+
+    onImageError(event: Event) {
+        const target = event.target as HTMLImageElement;
+        if (target) {
+          target.src = "https://imgs.search.brave.com/udmDGOGRJTYO6lmJ0ADA03YoW4CdO6jPKGzXWvx1XRI/rs:fit:860:0:0/g:ce/aHR0cHM6Ly90My5m/dGNkbi5uZXQvanBn/LzAyLzY4LzU1LzYw/LzM2MF9GXzI2ODU1/NjAxMl9jMVdCYUtG/TjVyalJ4UjJleVYz/M3puSzRxblllS1pq/bS5qcGc";
+        }
+      }
 }

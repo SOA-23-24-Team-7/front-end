@@ -1,37 +1,3 @@
 <div class="tour-card">
-    <img class="tour-image" [src]="tourImage" />
-    <div class="tour-card-details">
-        <div class="tour-name">{{ campaign.name }}</div>
-        <div>
-            Difficulty: <b>{{ campaign.averageDifficulty }}</b>
-            <br />
-            Distance: <b>{{ campaign.distance }}</b>
-        </div>
-        <button
-            class="btn search-button"
-        (click)="ShowEquipment()">
-            Show equipment
-        </button>
-        <button
-            class="btn search-button"
-            (click)="StartCampaign()"
-            *ngIf="!hasActiveTour"
-        >
-            Start Campaign
-        </button>
-        <button
-            class="btn search-button"
-            (click)="ContinueCampaign()"
-            *ngIf="hasActiveTour && isCampaignActive"
-        >
-            Continue campaign
-        </button>
-        <button
-            class="btn search-button"
-            *ngIf="hasActiveTour && !isCampaignActive"
-            disabled
-        >
-            Start campaign
-        </button>
-    </div>
+    <img class="tour-image" [src]="tourImage"/>
 </div>
