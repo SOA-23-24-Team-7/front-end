@@ -11,11 +11,12 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    background-color: rgba(0, 0, 0, 0.7);
-    animation: fadeIn 0.5s ease-in-out;
-    overflow-y: auto;
     pointer-events: none;
     border-radius: 1rem;
+    height: 100vh;
+    z-index: 9999;
+    overflow: auto;
+    padding: 1rem;
 }
 
 .edit {
@@ -138,3 +139,14 @@
 .edit-tags .edit-input {
     margin-left: 0 !important;
 }
+.edit-modal::-webkit-scrollbar {
+    width: 0.5em;
+    visibility: hidden;
+}
+
+.edit-modal::-webkit-scrollbar-thumb {
+    background-color: rgba(var(--clr-background-secondary));
+    border-radius: None;
+    visibility: hidden;
+}
+

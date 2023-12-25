@@ -30,4 +30,5 @@ export enum TourCategory {
     FamilyTrips = 1,
     Cruise = 2,
     Cultural = 3,
+    Undefined = 4
 }

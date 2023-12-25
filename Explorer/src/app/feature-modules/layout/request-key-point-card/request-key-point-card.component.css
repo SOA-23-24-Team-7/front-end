@@ -132,7 +132,7 @@ hr {
 
 .row {
     display: flex;
-    width: 20rem;
+    width: 100%;
 }
 
 .notification-row {

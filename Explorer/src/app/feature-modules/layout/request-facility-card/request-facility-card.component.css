@@ -132,13 +132,14 @@ hr {
 
 .row {
     display: flex;
-    width: 20rem;
+    width: 100%;
 }
 
 .notification-row {
     display: flex;
     gap: 0.3rem;
     font-weight: 300;
+    
 }
 
 .accepted {

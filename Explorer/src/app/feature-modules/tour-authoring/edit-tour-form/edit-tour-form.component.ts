@@ -99,6 +99,10 @@ export class EditTourFormComponent implements OnInit {
         };
 
         // console.log(this.data.id);
+        if(!this.isValidForm()){
+            this.notifier.notify("error", "Please enter valid data.");
+            return;
+        }
         this.service.updateTour(tour).subscribe({
             next: () => {
                 this.data.name = tour.name;
@@ -138,4 +142,8 @@ export class EditTourFormComponent implements OnInit {
             this.removeTag(index);
         }
     }
+    isValidForm():boolean{
+        return this.editTourForm.value.description!="" && this.editTourForm.value.name!="" && this.editTourForm.value.price!="" && this.editTourForm.value.difficulty!="" && parseInt(this.editTourForm.value.price!)>=0 && parseInt(this.editTourForm.value.difficulty!)>=1 && parseInt(this.editTourForm.value.difficulty!)<=5
+     }
+    
 }
