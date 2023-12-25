@@ -1,0 +1,27 @@
+.confetti-container {
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    overflow: hidden;
+}
+
+.confetti-wrapper {
+    position: absolute;
+}
+
+.confetti {
+    width: 10px;
+    height: 10px;
+    animation: fall 5s ease infinite;
+}
+
+@keyframes fall {
+    0% {
+        transform: translateY(-100vh);
+    }
+    100% {
+        transform: translateY(100vh) rotateZ(720deg);
+    }
+}

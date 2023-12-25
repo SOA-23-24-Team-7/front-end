@@ -21,6 +21,8 @@ import {
     faBoxArchive,
     faPen,
     faMoneyBills,
+    faBarChart
+
 } from "@fortawesome/free-solid-svg-icons";
 import { TourLimitedView } from "../../feature-modules/marketplace/model/tour-limited-view.model";
 import { Tour } from "../../feature-modules/tour-authoring/model/tour.model";
@@ -52,6 +54,7 @@ export class TourCardViewComponent implements OnChanges {
     faTrash = faTrash;
     faBoxArchive = faBoxArchive;
     faMoneyBills = faMoneyBills;
+    faBarChart = faBarChart;
     user: User;
     @Input() hideIcons: boolean = false;
     @Input() tour: Tour;
@@ -243,24 +246,27 @@ export class TourCardViewComponent implements OnChanges {
         });
     }
 
-    onEditClicked(): void {
-        //this.shouldEdit = false;
-        //this.shouldRenderTourForm = true;
-        this.dialogRef.open(EditTourFormComponent, {
-            data: this.tour,
-        });
-    }
-    onCouponClicked(tour: Tour): void {
-        this.dialogRef.open(CouponsComponent, {
-            data: tour,
-        });
-    }
+  onEditClicked(): void {
+    //this.shouldEdit = false;
+    //this.shouldRenderTourForm = true;
+    this.dialogRef.open(EditTourFormComponent, {
+      data: this.tour,
+      
+    });
+  }
+  
+  onCouponClicked(tour: Tour): void{
+    this.dialogRef.open(CouponsComponent, {
+      data: tour,
+      
+    });
+  }
 
-    onImageError(event: Event) {
-        const target = event.target as HTMLImageElement;
-        if (target) {
-            target.src =
-                "https://imgs.search.brave.com/udmDGOGRJTYO6lmJ0ADA03YoW4CdO6jPKGzXWvx1XRI/rs:fit:860:0:0/g:ce/aHR0cHM6Ly90My5m/dGNkbi5uZXQvanBn/LzAyLzY4LzU1LzYw/LzM2MF9GXzI2ODU1/NjAxMl9jMVdCYUtG/TjVyalJ4UjJleVYz/M3puSzRxblllS1pq/bS5qcGc";
-        }
+  onImageError(event: Event) {
+    const target = event.target as HTMLImageElement;
+    if (target) {
+      target.src = "https://imgs.search.brave.com/udmDGOGRJTYO6lmJ0ADA03YoW4CdO6jPKGzXWvx1XRI/rs:fit:860:0:0/g:ce/aHR0cHM6Ly90My5m/dGNkbi5uZXQvanBn/LzAyLzY4LzU1LzYw/LzM2MF9GXzI2ODU1/NjAxMl9jMVdCYUtG/TjVyalJ4UjJleVYz/M3puSzRxblllS1pq/bS5qcGc";
     }
+}
+
 }

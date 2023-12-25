@@ -1,6 +1,6 @@
 import { Injectable } from "@angular/core";
 import { BehaviorSubject, Observable, tap } from "rxjs";
-import { HttpClient } from "@angular/common/http";
+import { HttpClient, HttpHeaders } from "@angular/common/http";
 import { Router } from "@angular/router";
 import { TokenStorage } from "./jwt/token.service";
 import { environment } from "src/env/environment";
@@ -11,6 +11,7 @@ import { User } from "./model/user.model";
 import { Registration } from "./model/registration.model";
 import { LocationCoords } from "src/app/shared/model/location-coords.model";
 import { TouristProgress } from "./model/tourist-progress.model";
+import { ResetPassword } from "./model/reset-password.model";
 
 @Injectable({
     providedIn: "root",
@@ -149,5 +150,30 @@ export class AuthService {
                     error: () => {},
                 });
         }
+    }
+
+    generateResetPasswordToken(email: string): Observable<any> {
+        // TODO: generate reset password token
+        // throw new Error('Method not implemented.');
+        const body = {
+            email: email,
+        };
+        const path = environment.apiHost + "users/reset-password";
+        return this.http.post<any>(path, body);
+    }
+
+    checkResetPasswordToken(): Observable<any> {
+        // TODO: check if token is valid
+        throw new Error("Method not implemented.");
+    }
+
+    resetPassword(token: string, password: string): Observable<any> {
+        // TODO: reset password
+        const body: ResetPassword = {
+            newPassword: password,
+            token: token,
+        };
+        const path = environment.apiHost + "users/reset-password/new";
+        return this.http.patch<any>(path, body);
     }
 }

@@ -1,0 +1,14 @@
+<div class="confetti-container" *ngIf="animationRunning">
+    <div
+        *ngFor="let confetti of confettiArray"
+        class="confetti-wrapper"
+        [style.left]="confetti.left"
+        [style.top]="confetti.top"
+    >
+        <div
+            class="confetti"
+            [style.transform]="'rotate(' + confetti.rotation + 'deg)'"
+            [style.background-color]="confetti.color"
+        ></div>
+    </div>
+</div>

@@ -39,6 +39,9 @@ import { PublishTourModalComponent } from "./publish-tour-modal/publish-tour-mod
 import { KeyPointModalComponent } from "./key-point-modal/key-point-modal.component";
 import { TooltipModule } from "primeng/tooltip";
 import { FacilityModalComponent } from './facility-modal/facility-modal.component';
+import { TourStatisticsComponent } from './tour-statistics/tour-statistics.component';
+import { SingleTourStatisticsComponent } from './single-tour-statistics/single-tour-statistics.component';
+import { KeyPointStatisticsCardComponent } from './key-point-statistics-card/key-point-statistics-card.component';
 
 @NgModule({
     declarations: [
@@ -68,6 +71,9 @@ import { FacilityModalComponent } from './facility-modal/facility-modal.componen
         PublishTourModalComponent,
         KeyPointModalComponent,
         FacilityModalComponent,
+        TourStatisticsComponent,
+        SingleTourStatisticsComponent,
+        KeyPointStatisticsCardComponent,
     ],
     imports: [
         CommonModule,
@@ -96,6 +102,7 @@ import { FacilityModalComponent } from './facility-modal/facility-modal.componen
         KeyPointCardComponent,
         BundlesComponent,
         BundleCardComponent,
+        TourStatisticsComponent,
     ],
 })
 export class TourAuthoringModule {}

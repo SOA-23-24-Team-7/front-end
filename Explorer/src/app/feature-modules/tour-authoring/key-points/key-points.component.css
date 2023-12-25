@@ -158,6 +158,14 @@
     align-self: center;
 }
 
+<<<<<<< HEAD
+=======
+.cards-buttons-container {
+    display: flex;
+    align-items: center;
+}
+
+>>>>>>> development
 .buttons-container {
     display: flex;
     flex-direction: column;
@@ -177,9 +185,11 @@
     display: flex;
     flex-direction: column;
 }
+
 .cards {
     margin-top: 3rem;
 }
+
 .row-1 {
     display: flex;
     justify-content: center;
@@ -187,6 +197,7 @@
     border-radius: 1rem;
     box-shadow: 0 0 1rem rgba(var(--clr-outline-contrast), 0.2);
 }
+
 .row-2 {
     display: flex;
     justify-content: center;
@@ -212,6 +223,45 @@
 }
 
 
+<<<<<<< HEAD
+=======
+.list-cards-button:hover .triangle-left {
+    border-color: transparent rgba(var(--clr-primary-500), 0.95) transparent
+        transparent;
+}
+
+.list-cards-button:hover .triangle-right {
+    border-color: transparent transparent transparent
+        rgba(var(--clr-primary-500), 0.95);
+}
+
+.list-cards-button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    margin: 1.5rem;
+}
+
+.triangle-left,
+.triangle-right {
+    width: 0;
+    height: 0;
+    border-style: solid;
+}
+
+.triangle-left {
+    border-width: 2rem 2.2rem 2rem 0;
+    border-color: transparent rgba(var(--clr-primary-500), 1) transparent
+        transparent;
+}
+
+.triangle-right {
+    border-width: 2rem 0 2rem 2.2rem;
+    border-color: transparent transparent transparent
+        rgba(var(--clr-primary-500), 1);
+}
+>>>>>>> development
 
 .add-enable {
     padding-bottom: 0;
@@ -244,11 +294,13 @@
     font-weight: 500;
     font-size: 1.25rem;
 }
+
 .enable-text {
     color: rgb(var(--clr-text));
     font-family: var(--fnt-body);
     font-weight: 500;
 }
+
 .checkbox-group div {
     display: flex;
     align-items: center;

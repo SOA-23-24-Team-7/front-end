@@ -13,6 +13,7 @@ import { CarouselComponent } from "./carousel/carousel.component";
 import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
 import { TooltipModule } from "primeng/tooltip";
 import { MatDialogModule } from "@angular/material/dialog";
+import { ConfettiComponent } from "./confetti/confetti.component";
 
 @NgModule({
     declarations: [
@@ -23,6 +24,7 @@ import { MatDialogModule } from "@angular/material/dialog";
         PositionSimulatorComponent,
         MapModalComponent,
         CarouselComponent,
+        ConfettiComponent,
     ],
     imports: [
         CommonModule,
@@ -32,12 +34,14 @@ import { MatDialogModule } from "@angular/material/dialog";
         BrowserAnimationsModule,
         TooltipModule,
         MatDialogModule,
+
     ],
     exports: [
         MapComponent,
         TourCardViewComponent,
         TagComponent,
         CarouselComponent,
+        ConfettiComponent,
     ],
 })
 export class SharedModule {}
