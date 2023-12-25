@@ -1,4 +1,4 @@
-<div id="club">
+<!-- <div id="club">
     <p>Clubs</p>
     <hr>
     <div id="club-details">
@@ -35,6 +35,39 @@
     <div *ngIf="shouldShowImage">
         <img [src]="imgSrc" width="400px" height="400px"/>
     </div>
+    </div>
+</div> -->
+
+<div class="clubs">
+    <div class="clubs-header">
+        <div class="clubs-header-title">Clubs</div>
+        <div class="clubs-header-paragraph">
+            Welcome to our vibrant community of travel enthusiasts!
+            Dive into a world of shared experiences and boundless 
+            wanderlust on our Clubs page. Here, fellow travelers 
+            converge to form unique clubs, each dedicated to exploring
+            specific tours and destinations. Whether you're a solo 
+            adventurer seeking like-minded companions or a group 
+            looking to expand your circle, our clubs provide a platform
+            to discuss, plan, and share the excitement of upcoming
+            journeys.
+        </div>
+    </div>
+    <div class="separator"></div>
+    <div class="search-bar">
+        <fa-icon [icon]="faSearch" class="search-icon" />
+        <input
+            type="text"
+            class="search-input"
+            placeholder="Search clubs..."
+            [(ngModel)]="searchString"
+            (input)="search()"
+        />
+    </div>
+    <div class="clubs-wrapper">
+        <div class="club-wrapper" *ngFor="let club of displayClubs">
+            <xp-club-card [club]="club"></xp-club-card >
+        </div>
     </div>
 </div>
 

@@ -60,6 +60,7 @@ import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
         TourCardComponent,
         ReviewCardComponent,
         PublicKeypointNotificationCardComponent,
+        ClubCardComponent
     ],
 })
 export class LayoutModule {}
