@@ -46,9 +46,11 @@ import {
     faFlag,
     faMoneyBills,
     faBoxOpen,
+    faBarChart
 } from "@fortawesome/free-solid-svg-icons";
 import { StakeholderService } from "../../stakeholder/stakeholder.service";
 import { interval, Subscription } from "rxjs";
+import { RatingFormComponent } from "../../marketplace/rating-form/rating-form.component";
 //import { } from "@fortawesome/free-regular-svg-icons";
 
 @Component({
@@ -132,6 +134,10 @@ export class NavbarComponent implements OnInit {
         return this.themeService.getTheme();
     }
 
+    onRateApp(): void {
+        const dialogRef = this.dialogRef.open(RatingFormComponent, { autoFocus: false });
+    }
+
     ngOnDestroy() {
         this.unsubscribe();
     }
@@ -174,4 +180,5 @@ export class NavbarComponent implements OnInit {
     faFlag = faFlag;
     faMoneyBills = faMoneyBills;
     faBoxOpen = faBoxOpen;
+    faBarChart = faBarChart;
 }

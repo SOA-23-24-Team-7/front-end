@@ -12,7 +12,6 @@ import { BlogComponent } from "src/app/feature-modules/blog/blog/blog.component"
 import { UsersOverviewComponent } from "src/app/feature-modules/administration/users-overview/users-overview.component";
 import { UserProfileComponent } from "src/app/feature-modules/stakeholder/user-profile/user-profile.component";
 import { RatingComponent } from "src/app/feature-modules/administration/rating/rating.component";
-import { RatingFormComponent } from "src/app/feature-modules/marketplace/rating-form/rating-form.component";
 import { ReviewComponent } from "src/app/feature-modules/marketplace/review/review.component";
 import { ProblemComponent } from "src/app/feature-modules/marketplace/problem/problem.component";
 import { TourComponent } from "src/app/feature-modules/tour-authoring/tour/tour.component";
@@ -57,6 +56,10 @@ import { BundleCardComponent } from "src/app/feature-modules/tour-authoring/bund
 import { BundlesComponent } from "src/app/feature-modules/tour-authoring/bundles/bundles.component";
 import { ExploreBundlesComponent } from "src/app/feature-modules/marketplace/explore-bundles/explore-bundles.component";
 import { PageNotFoundComponent } from "src/app/feature-modules/layout/page-not-found/page-not-found.component";
+import { TourStatisticsComponent } from "src/app/feature-modules/tour-authoring/tour-statistics/tour-statistics.component";
+import { SingleTourStatisticsComponent } from "src/app/feature-modules/tour-authoring/single-tour-statistics/single-tour-statistics.component";
+import { ResetPasswordComponent } from "../auth/reset-password/reset-password.component";
+import { ResetPasswordEditComponent } from "../auth/reset-password-edit/reset-password-edit.component";
 
 const routes: Routes = [
     { path: "home", component: HomeComponent },
@@ -70,11 +73,6 @@ const routes: Routes = [
     },
     { path: "", component: HomeComponent },
     { path: "ratings", component: RatingComponent, canActivate: [AuthGuard] },
-    {
-        path: "rating-form",
-        component: RatingFormComponent,
-        canActivate: [AuthGuard],
-    },
     {
         path: "review/:tourId",
         component: ReviewComponent,
@@ -300,6 +298,19 @@ const routes: Routes = [
         component: ExploreBundlesComponent,
         canActivate: [AuthGuard],
     },
+    {
+        path: "tour-statistics",
+        component: TourStatisticsComponent,
+        canActivate: [AuthGuard],
+    },
+    {
+        path: "tour-statistics/:id",
+        component: SingleTourStatisticsComponent,
+        canActivate: [AuthGuard],
+    },
+    { path: "**", pathMatch: "full", component: PageNotFoundComponent },
+    { path: "reset-password", component: ResetPasswordComponent },
+    { path: "reset-password-edit", component: ResetPasswordEditComponent },
     { path: "**", pathMatch: "full", component: PageNotFoundComponent },
 ];
 

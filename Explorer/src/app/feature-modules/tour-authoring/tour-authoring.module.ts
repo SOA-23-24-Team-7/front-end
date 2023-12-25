@@ -34,6 +34,9 @@ import { AddBundleFormComponent } from "./add-bundle-form/add-bundle-form.compon
 import { EditBundleFormComponent } from "./edit-bundle-form/edit-bundle-form.component";
 import { ViewBundleToursComponent } from "./view-bundle-tours/view-bundle-tours.component";
 import { EncounterModule } from "../encounter/encounter.module";
+import { TourStatisticsComponent } from './tour-statistics/tour-statistics.component';
+import { SingleTourStatisticsComponent } from './single-tour-statistics/single-tour-statistics.component';
+import { KeyPointStatisticsCardComponent } from './key-point-statistics-card/key-point-statistics-card.component';
 
 @NgModule({
     declarations: [
@@ -60,6 +63,9 @@ import { EncounterModule } from "../encounter/encounter.module";
         AddBundleFormComponent,
         EditBundleFormComponent,
         ViewBundleToursComponent,
+        TourStatisticsComponent,
+        SingleTourStatisticsComponent,
+        KeyPointStatisticsCardComponent,
     ],
     imports: [
         CommonModule,
@@ -86,6 +92,7 @@ import { EncounterModule } from "../encounter/encounter.module";
         KeyPointCardComponent,
         BundlesComponent,
         BundleCardComponent,
+        TourStatisticsComponent,
     ],
 })
 export class TourAuthoringModule {}

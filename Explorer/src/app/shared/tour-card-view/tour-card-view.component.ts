@@ -1,16 +1,4 @@
 import {
-    Component,
-    OnInit,
-    Input,
-    OnChanges,
-    SimpleChanges,
-    Output,
-    EventEmitter,
-} from "@angular/core";
-import { AuthService } from "src/app/infrastructure/auth/auth.service";
-import { MarketplaceService } from "../../feature-modules/marketplace/marketplace.service";
-import { environment } from "src/env/environment";
-import {
     faStar,
     faCoins,
     faCartShopping,
@@ -21,6 +9,7 @@ import {
     faBoxArchive,
     faPen,
     faMoneyBills,
+    faBarChart,
 } from "@fortawesome/free-solid-svg-icons";
 import { TourLimitedView } from "../../feature-modules/marketplace/model/tour-limited-view.model";
 import { Tour } from "../../feature-modules/tour-authoring/model/tour.model";
@@ -34,6 +23,16 @@ import { MatDialog } from "@angular/material/dialog";
 import { EditTourFormComponent } from "src/app/feature-modules/tour-authoring/edit-tour-form/edit-tour-form.component";
 import { CouponsComponent } from "src/app/feature-modules/marketplace/coupons/coupons.component";
 import { PagedResults } from "../model/paged-results.model";
+import {
+    Component,
+    EventEmitter,
+    Input,
+    OnChanges,
+    Output,
+} from "@angular/core";
+import { AuthService } from "src/app/infrastructure/auth/auth.service";
+import { MarketplaceService } from "src/app/feature-modules/marketplace/marketplace.service";
+import { environment } from "src/env/environment";
 
 @Component({
     selector: "xp-tour-card-view",
@@ -51,6 +50,7 @@ export class TourCardViewComponent implements OnChanges {
     faTrash = faTrash;
     faBoxArchive = faBoxArchive;
     faMoneyBills = faMoneyBills;
+    faBarChart = faBarChart;
     user: User;
     @Input() hideIcons: boolean = false;
     @Input() tour: Tour;
