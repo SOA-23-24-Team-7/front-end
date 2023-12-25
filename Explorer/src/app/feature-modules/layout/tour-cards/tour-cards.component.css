@@ -3,8 +3,7 @@ h1 {
     font-family: var(--fnt-header);
     font-weight: 900;
     font-size: 2rem;
-    padding-left: 2rem;
-    margin-left: 5.5rem;
+    margin-left: 1.3rem;
 }
 .tour-cards-container {
     display: flex;
@@ -13,6 +12,11 @@ h1 {
     align-items: center;
     width: 100%;
     margin-bottom: 3rem;
+}
+
+.wrapper {
+    display: flex;
+    flex-direction: column;
 }
 
 .list-cards-button:hover .triangle-left {
@@ -50,7 +54,7 @@ h1 {
     border-color: transparent transparent transparent
         rgba(var(--clr-primary-500), 1);
 }
-.cultural-card-container{
+.cultural-card-container {
     display: flex;
     flex-direction: row;
     align-items: center;
@@ -58,7 +62,7 @@ h1 {
     overflow-x: hidden;
     scroll-behavior: smooth;
 }
-.family-card-container{
+.family-card-container {
     display: flex;
     flex-direction: row;
     align-items: center;
@@ -66,7 +70,7 @@ h1 {
     overflow-x: hidden;
     scroll-behavior: smooth;
 }
-.adventure-card-container{
+.adventure-card-container {
     display: flex;
     flex-direction: row;
     align-items: center;
@@ -74,7 +78,7 @@ h1 {
     overflow-x: hidden;
     scroll-behavior: smooth;
 }
-.recommended-card-container{
+.recommended-card-container {
     display: flex;
     flex-direction: row;
     align-items: center;
@@ -82,7 +86,7 @@ h1 {
     overflow-x: hidden;
     scroll-behavior: smooth;
 }
-.cruise-card-container{
+.cruise-card-container {
     display: flex;
     flex-direction: row;
     align-items: center;
@@ -90,6 +94,6 @@ h1 {
     overflow-x: hidden;
     scroll-behavior: smooth;
 }
-.tour-details:hover{
+.tour-details:hover {
     cursor: pointer;
 }
