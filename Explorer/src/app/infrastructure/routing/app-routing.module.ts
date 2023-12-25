@@ -306,7 +306,6 @@ const routes: Routes = [
         component: SingleTourStatisticsComponent,
         canActivate: [AuthGuard],
     },
-    { path: "**", pathMatch: "full", component: PageNotFoundComponent },
     { path: "reset-password", component: ResetPasswordComponent },
     { path: "reset-password-edit", component: ResetPasswordEditComponent },
     { path: "**", pathMatch: "full", component: PageNotFoundComponent },
