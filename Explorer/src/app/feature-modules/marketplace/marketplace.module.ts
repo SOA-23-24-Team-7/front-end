@@ -44,6 +44,8 @@ import { EditCouponFormComponent } from "./edit-coupon-form/edit-coupon-form.com
 import { CouponsModalComponent } from "./coupons-modal/coupons-modal.component";
 import { ExploreBundlesComponent } from './explore-bundles/explore-bundles.component';
 import { StarRatingModule } from 'angular-star-rating';
+import { TouristsWishlistComponent } from './tourists-wishlist/tourists-wishlist.component';
+import { WishlistComponent } from './wishlist/wishlist.component';
 
 @NgModule({
     declarations: [
@@ -80,6 +82,8 @@ import { StarRatingModule } from 'angular-star-rating';
         EditCouponFormComponent,
         CouponsModalComponent,
         ExploreBundlesComponent,
+        TouristsWishlistComponent,
+        WishlistComponent,
     ],
     imports: [
         CommonModule,
