@@ -319,6 +319,7 @@ export class MarketplaceService {
             environment.apiHost + "market-place/tours/inCart/" + id,
         );
     }
+    
     getOrderItem(tourId: number, touristId: number): Observable<any> {
         return this.http.get<any>(
             environment.apiHost +
@@ -556,6 +557,8 @@ export class MarketplaceService {
     }
 
     addTourToWishlist(tourId: number): Observable<Wishlist>{
-        return this.http.post<Wishlist>(environment.apiHost + "wishlist/", tourId);
+        return this.http.post<Wishlist>(environment.apiHost + "wishlist/" + tourId, tourId);
     }
+
+    
 }

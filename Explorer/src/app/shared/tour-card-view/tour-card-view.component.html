@@ -115,7 +115,7 @@
                 </div>
             </div>
             <div class="tour-card-right">
-                <div class="tour-price">
+                <div class="tour-price" *ngIf="user && user.role !== 'tourist'">
                     <div *ngIf="discount" class="tour-price-value">
                         <s>{{ tour.price }}</s>
                     </div>
@@ -125,6 +125,21 @@
                     <fa-icon class="tour-price-tokens" [icon]="faCoins" />
                 </div>
                 <div *ngIf="discount" class="tour-price">
+                    <div class="discount">-{{ discount! * 100 }}%</div>
+                    <div class="tour-price-value">{{ discountedPrice! }}</div>
+                    <fa-icon class="tour-price-tokens" [icon]="faCoins" />
+                </div>
+
+                <div class="tour-price-tourist" *ngIf="user && user.role === 'tourist'">
+                    <div *ngIf="discount" class="tour-price-value">
+                        <s>{{ tour.price }}</s>
+                    </div>
+                    <div *ngIf="!discount" class="tour-price-value">
+                        {{ tour.price }}
+                    </div>
+                    <fa-icon class="tour-price-tokens" [icon]="faCoins" />
+                </div>
+                <div *ngIf="discount" class="tour-price-tourist">
                     <div class="discount">-{{ discount! * 100 }}%</div>
                     <div class="tour-price-value">{{ discountedPrice! }}</div>
                     <fa-icon class="tour-price-tokens" [icon]="faCoins" />
