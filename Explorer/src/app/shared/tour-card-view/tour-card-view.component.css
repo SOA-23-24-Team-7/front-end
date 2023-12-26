@@ -252,7 +252,7 @@
 }
 
 .tour-price {
-    margin-top: 0.5rem;
+    margin-top: -1.5rem;
     display: flex;
     align-items: center;
     justify-content: flex-end;
@@ -282,6 +282,14 @@
 .add-to-cart {
     margin-top: 0.5rem;
     background-color: rgba(var(--clr-accent-500), 1);
+    max-width: 60%;
+    min-width: 15rem;
+    margin-left: auto;
+    margin-bottom: 0.5rem;
+}
+
+.add-to-wishlist {
+    margin-top: 0rem;
     max-width: 60%;
     min-width: 15rem;
     margin-left: auto;
@@ -320,6 +328,7 @@ strike {
     text-decoration: none;
     position: relative;
 }
+
 s::before,
 strike::before {
     top: 50%;
@@ -336,6 +345,7 @@ strike::before {
     z-index: 999;
     transform: rotate(180deg);
 }
+
 s.straight::before,
 strike.straight::before {
     transform: rotate(0deg);

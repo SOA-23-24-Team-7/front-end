@@ -21,7 +21,9 @@ import {
     faBoxArchive,
     faPen,
     faMoneyBills,
-    faBarChart
+    faBarChart,
+    faBookmark,
+    faMap
 
 } from "@fortawesome/free-solid-svg-icons";
 import { TourLimitedView } from "../../feature-modules/marketplace/model/tour-limited-view.model";
@@ -55,6 +57,8 @@ export class TourCardViewComponent implements OnChanges {
     faBoxArchive = faBoxArchive;
     faMoneyBills = faMoneyBills;
     faBarChart = faBarChart;
+    faBookmark = faBookmark;
+    faMap = faMap;
     user: User;
     @Input() hideIcons: boolean = false;
     @Input() tour: Tour;
@@ -267,6 +271,20 @@ export class TourCardViewComponent implements OnChanges {
     if (target) {
       target.src = "https://imgs.search.brave.com/udmDGOGRJTYO6lmJ0ADA03YoW4CdO6jPKGzXWvx1XRI/rs:fit:860:0:0/g:ce/aHR0cHM6Ly90My5m/dGNkbi5uZXQvanBn/LzAyLzY4LzU1LzYw/LzM2MF9GXzI2ODU1/NjAxMl9jMVdCYUtG/TjVyalJ4UjJleVYz/M3puSzRxblllS1pq/bS5qcGc";
     }
-}
+  }
+
+  onAddToWishlistClicked(tourId: number){
+    this.marketplaceService.addTourToWishlist(tourId).subscribe({
+        next: () => {
+            this.notifier.notify("success", "Added to wishlist.");
+        },
+        error: err => {
+            this.notifier.notify(
+                "error",
+                "Failed to add tour to wishlist. " + xpError.getErrorMessage(err),
+            );
+        },
+    });
+  }
 
 }
