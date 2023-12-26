@@ -154,15 +154,15 @@
 }
 
 .delete {
-    color: rgba(var(--clr-error-300), 0.9);
+    color: rgba(var(--clr-error-300), 0.7);
 }
 
 .edit {
-    color: rgba(var(--clr-primary-500), 0.8);
+    color: rgba(var(--clr-primary-500), 0.6);
 }
 
 .publish {
-    color: rgba(var(--clr-success-500), 0.8);
+    color: rgba(var(--clr-success-500), 0.6);
 }
 
 .draft {
