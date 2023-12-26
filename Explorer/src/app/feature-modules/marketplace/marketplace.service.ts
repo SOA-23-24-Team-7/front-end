@@ -520,7 +520,7 @@ export class MarketplaceService {
     }
     getCouponsById(authorId: number): Observable<PagedResults<Coupon>> {
         return this.http.get<PagedResults<Coupon>>(
-            environment.apiHost + "coupon/"+authorId,
+            environment.apiHost + "coupon/" + authorId,
         );
     }
     deleteCoupon(id: number): Observable<Coupon> {
@@ -564,5 +564,11 @@ export class MarketplaceService {
         console.log("6");
         let path = environment.apiHost + "token/bundle/" + bundleId;
         return this.http.post<any>(path, {});
+    }
+
+    getMailingListSubscribeStatus(userId: number): Observable<Subscription> {
+        const path =
+            environment.apiHost + "tourist/subscriber/by-user/" + userId;
+        return this.http.get<Subscription>(path);
     }
 }

@@ -7,6 +7,7 @@ import { faPlus } from "@fortawesome/free-solid-svg-icons";
 import { Subscriber } from "rxjs";
 import { User } from "src/app/infrastructure/auth/model/user.model";
 import { Person } from "../../stakeholder/model/person.model";
+import { NotifierService } from "angular-notifier";
 
 @Component({
     selector: "xp-tour-preferences",
@@ -16,6 +17,7 @@ import { Person } from "../../stakeholder/model/person.model";
 export class TourPreferencesComponent implements OnInit {
     isEditing: Boolean = false;
     selectedFrequency: number = 1;
+    user: User;
 
     preference: TourPreference = {
         id: -1,
@@ -38,6 +40,7 @@ export class TourPreferencesComponent implements OnInit {
     constructor(
         private service: MarketplaceService,
         private authService: AuthService,
+        private notifier: NotifierService,
     ) {}
 
     ngOnInit(): void {
@@ -49,6 +52,8 @@ export class TourPreferencesComponent implements OnInit {
         });
         this.authService.user$.subscribe(user => {
             if (!user.id) return;
+            this.user = user;
+            this.getMailingListSubscribeStatus(user.id);
             this.service
                 .getByUserId(this.authService.user$.getValue().id)
                 .subscribe(result => {
@@ -56,6 +61,16 @@ export class TourPreferencesComponent implements OnInit {
                     this.subscriber.emailAddress = result.email;
                     this.subscriber.touristId = result.userId;
                 });
+        });
+    }
+
+    getMailingListSubscribeStatus(userId: number) {
+        this.service.getMailingListSubscribeStatus(userId).subscribe(result => {
+            if (result == null) {
+                this.selectedFrequency = 0;
+            } else {
+                this.selectedFrequency = result.frequency;
+            }
         });
     }
 
@@ -97,7 +112,27 @@ export class TourPreferencesComponent implements OnInit {
         console.log(this.subscriber);
         this.service.addSub(this.subscriber).subscribe({
             next: (result: Subscription) => {
-                console.log(result);
+                // console.log(result);
+                if (result.frequency != 0) {
+                    let freq_message: string = "every ";
+                    if (result.frequency == 1) {
+                        freq_message += "day";
+                    } else {
+                        freq_message += `${result.frequency} days`;
+                    }
+                    this.notifier.notify(
+                        "success",
+                        `You have subscribed to the mailing list (${freq_message}) successfully!`,
+                    );
+                } else {
+                    this.notifier.notify(
+                        "info",
+                        "You have unsubscribed from the mailing list.",
+                    );
+                }
+            },
+            error: () => {
+                this.notifier.notify("error", "Error: subscription failure.");
             },
         });
     }
