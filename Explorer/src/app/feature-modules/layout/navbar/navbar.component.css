@@ -137,6 +137,7 @@
     visibility: collapse;
     opacity: 0;
     transition: opacity 0.15s, background-color 0.15s;
+    z-index: 100;
 }
 
 .navbar-submenu:first-child {

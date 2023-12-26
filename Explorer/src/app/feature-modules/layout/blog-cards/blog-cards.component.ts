@@ -1,11 +1,45 @@
-import { Component } from "@angular/core";
+import { Component, OnInit } from "@angular/core";
+import { LayoutService } from "../layout.services";
+import { Blog } from "../../blog/model/blog.model";
+import { PagedResults } from "src/app/shared/model/paged-results.model";
 
 @Component({
     selector: "xp-blog-cards",
     templateUrl: "./blog-cards.component.html",
     styleUrls: ["./blog-cards.component.css"],
 })
-export class BlogCardsComponent {
+export class BlogCardsComponent implements OnInit{
+    currentIndex=0
+    popularBlogs:Blog[]
+    blogContainer:any;
+    constructor(private service:LayoutService){}
+    ngOnInit(): void {
+        this.blogContainer = document.querySelector(
+            ".blog-container",
+        );
+        this.service.getPopularBlogs().subscribe({
+            next:(result: PagedResults<Blog>)=>{
+                this.popularBlogs=result.results
+                //console.log(this.adventureTours)
+            }
+        })
+    }
+    scrollToPrev() {
+        this.currentIndex--;
+        if (this.currentIndex < 0) {
+            this.currentIndex = this.blogContainer!.children.length - 1;
+        }
+        this.blogContainer!.scrollLeft -=
+            this.blogContainer.children[this.currentIndex].clientWidth;
+    }
+    scrollToNext() {
+        this.currentIndex++;
+        if (this.currentIndex >= this.blogContainer.children.length) {
+            this.currentIndex = 0;
+        }
+        this.blogContainer.scrollLeft +=
+            this.blogContainer.children[this.currentIndex].clientWidth;
+    }
     blogsList = [
         {
             date: "02/02/2020",

@@ -159,3 +159,19 @@
     color: rgba(var(--clr-primary-500), 0.9);
     text-decoration: underline;
 }
+
+.login-forgot-password {
+    margin-left: auto;
+    margin-bottom: 1rem;
+    color: rgba(var(--clr-primary-500), 1);
+    font-family: var(--fnt-body);
+    font-weight: 400;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: color 0.15s;
+}
+
+.login-forgot-password:hover {
+    color: rgba(var(--clr-primary-500), 0.9);
+    text-decoration: underline;
+}

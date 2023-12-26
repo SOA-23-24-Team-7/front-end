@@ -1,4 +1,18 @@
 .map-container {
     width: 100%;
     align-self: center;
+    position: relative;
+    z-index: 1;
+}
+
+::ng-deep .leaflet-right.leaflet-top {
+    z-index: 900 !important;
+    color: rgb(var(--clr-text)) !important;
+    /* background-color: rgb(var(--clr-background-secondary)) !important; */
+}
+
+::ng-deep .leaflet-routing-container {
+    background-color: rgb(var(--clr-background-secondary)) !important;
+    font-family: var(--fnt-body) !important;
+    /* color: rgb(var(--clr-text)) !important; */
 }

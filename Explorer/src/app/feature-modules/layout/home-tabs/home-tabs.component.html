@@ -1,5 +1,5 @@
 <div class="tab-list" #tabList>
-    <div
+    <!--<div
         class="tab"
         [ngClass]="{ 'selected-tab': selectedTab === Tab.TOURS }"
         (click)="setActiveTab(Tab.TOURS, tabList)"
@@ -12,14 +12,14 @@
         (click)="setActiveTab(Tab.BLOGS, tabList)"
     >
         <fa-icon [icon]="faNewspaper" /> Blogs
-    </div>
-    <div
+    </div>-->
+    <!--<div
         class="tab"
         [ngClass]="{ 'selected-tab': selectedTab === Tab.CLUBS }"
         (click)="setActiveTab(Tab.CLUBS, tabList)"
     >
         <fa-icon [icon]="faUsers" /> Clubs
-    </div>
+    </div>-->
 </div>
 <div class="tab-content">
     <xp-tour-cards *ngIf="selectedTab === Tab.TOURS" />

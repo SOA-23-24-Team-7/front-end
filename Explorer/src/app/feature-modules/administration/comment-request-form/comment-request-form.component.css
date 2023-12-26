@@ -1,0 +1,110 @@
+:host {
+    border-radius: 1rem !important;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+}
+
+.modal {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    pointer-events: none;
+    border-radius: 1rem;
+}
+
+.register-x {
+    position: absolute;
+    left: 0;
+    justify-self: left;
+    color: rgba(var(--clr-primary-500), 1);
+    cursor: pointer;
+    font-size: 2rem;
+    transition: color 0.15s;
+}
+
+.register-x:hover {
+    color: rgba(var(--clr-primary-500), 0.9);
+}
+.register-head {
+    position: relative;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+}
+.register-title {
+    color: rgba(var(--clr-text), 1);
+    font-family: var(--fnt-header);
+    font-weight: 600;
+    font-size: 2rem;
+}
+
+.register-label {
+    margin-right: auto;
+    color: rgba(var(--clr-text), 1);
+    font-family: var(--fnt-body);
+    font-weight: 500;
+    font-size: 1.25rem;
+}
+
+.comment-input {
+    height: 8rem;
+    text-wrap: wrap;
+    resize: none;
+
+    margin-top: 0.25rem;
+    margin-bottom: 1rem;
+    width: 20rem;
+    background-color: rgba(var(--clr-background-secondary, 1));
+    border: rgba(var(--clr-background-secondary, 1)) 1px solid;
+    border-radius: 0.5rem;
+    padding-inline: 0.5rem;
+    vertical-align: middle;
+    color: rgba(var(--clr-text), 1);
+    font-family: var(--fnt-body);
+    font-weight: 400;
+    font-size: 1rem;
+}
+.add {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding-inline: 2rem;
+    padding-block: 1.5rem;
+    background-color: rgba(var(--clr-background, 1));
+    border-radius: 1rem;
+    width: 32rem;
+    overflow-y: auto;
+    pointer-events: all;
+}
+.submit {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    height: 2rem;
+    background-color: rgba(var(--clr-primary-500), 1);
+    border: rgba(var(--clr-primary-500, 1)) 1px solid;
+    border-radius: 0.5rem;
+    cursor: pointer;
+    transition: background-color 0.15s;
+}
+
+.submit:hover {
+    background-color: rgba(var(--clr-primary-500), 0.9);
+}
+
+.submit-text {
+    color: rgba(255, 255, 255, 1);
+    font-family: var(--fnt-body);
+    font-weight: 500;
+    font-size: 1.25rem;
+}
+.register-form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 2.5rem;
+}

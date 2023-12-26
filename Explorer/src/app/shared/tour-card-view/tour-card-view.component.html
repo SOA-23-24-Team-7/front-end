@@ -1,64 +1,162 @@
-
-<div class="tour-card" [class.selectable]="selectable" [class.selected]="selected && selectable">
+<div
+    class="tour-card"
+    [class.selectable]="selectable"
+    [class.selected]="selected && selectable"
+    [routerLink]="
+        tour.status == 0 || tour.status == 2
+            ? ['/tour/', tour.id, 'key-points']
+            : ['/tour/', tour.id]
+    "
+>
     <div class="tour-card-left">
-        <div class="tour-image-container" *ngIf="tour && tour.keyPoints && tour.keyPoints[0]">
-            <xp-carousel [slides]="images"></xp-carousel>
-            <!--img class="tour-image" [src]="imageHost + tour.keyPoints[0].imagePath" (error)="onImageError($event)"-->
+        <div class="tour-image-container">
+            <xp-carousel
+                *ngIf="tour && tour.keyPoints && tour.keyPoints[0]"
+                [slides]="images"
+            ></xp-carousel>
+            <img
+                class="tour-image"
+                *ngIf="!tour || !tour.keyPoints || !tour.keyPoints[0]"
+                src="https://imgs.search.brave.com/udmDGOGRJTYO6lmJ0ADA03YoW4CdO6jPKGzXWvx1XRI/rs:fit:860:0:0/g:ce/aHR0cHM6Ly90My5m/dGNkbi5uZXQvanBn/LzAyLzY4LzU1LzYw/LzM2MF9GXzI2ODU1/NjAxMl9jMVdCYUtG/TjVyalJ4UjJleVYz/M3puSzRxblllS1pq/bS5qcGc"
+            />
         </div>
     </div>
     <div class="tour-card-content">
         <div class="tour-card-top">
             <div class="tour-tags">
-                <div class="tour-tag" *ngFor="let tag of tour.tags">{{tag}}</div>
                 <div class="tour-tag" *ngIf="tour.recommended" style="background-color: olivedrab; color: white;">Recommended</div>
                 <div class="tour-tag" *ngIf="tour.active" style="background-color: orange; color: white;">Active</div>
+                <div class="tour-tag" *ngFor="let tag of tour.tags">
+                    {{ tag }}
+                </div>
             </div>
-            <div class="tour-actions" *ngIf="user && (user.role === 'author' && !hideIcons && !selectable)">
-                <fa-icon class="tour-action red" *ngIf="tour.status == 2 || tour.status == 0" [icon]="faTrash"/>
-                <fa-icon class="tour-action" *ngIf="tour.status == 2 || tour.status == 0" (click)="onEditClicked()" [icon]="faPen"/>
-                <fa-icon class="tour-action" [icon]="faPersonHiking" [routerLink]="['/tours/equipment', tour.id]"/>
-                <fa-icon class="tour-action" [icon]="faMapLocation" [routerLink]="['/tour', tour.id, 'key-points']"/>
-                <fa-icon class="tour-action" *ngIf="tour.status == 2 || tour.status == 0" [icon]="faMoneyBills" (click)="onCouponClicked(tour)"/>
-                <fa-icon class="tour-action green" *ngIf="tour.status == 2 || tour.status == 0" [icon]="faShareNodes" (click)="onPublishClicked(tour)"/>
-                <fa-icon class="tour-action" *ngIf="tour.status == 1" [icon]="faBoxArchive" (click)="onArchiveClicked(tour)"/>
+            <div
+                class="tour-actions"
+                *ngIf="
+                    user && user.role === 'author' && !hideIcons && !selectable
+                "
+            >
+                <fa-icon
+                    class="tour-action red"
+                    *ngIf="tour.status == 2 || tour.status == 0"
+                    [icon]="faTrash"
+                />
+                <fa-icon
+                    class="tour-action"
+                    *ngIf="tour.status == 2 || tour.status == 0"
+                    (click)="onEditClicked(); $event.stopPropagation()"
+                    [icon]="faPen"
+                />
+                <fa-icon
+                    class="tour-action"
+                    [icon]="faPersonHiking"
+                    [routerLink]="['/tours/equipment', tour.id]"
+                />
+                <fa-icon
+                    class="tour-action"
+                    *ngIf="tour.status == 2 || tour.status == 0"
+                    [icon]="faMoneyBills"
+                    (click)="onCouponClicked(tour); $event.stopPropagation()"
+                />
+                <fa-icon
+                    class="tour-action"
+                    *ngIf="tour.status == 1"
+                    [icon]="faBoxArchive"
+                    (click)="onArchiveClicked(tour); $event.stopPropagation()"
+                />
+                <fa-icon
+                    class="tour-action"
+                    *ngIf="tour.status == 1 || tour.status == 2"
+                    [icon]="faBarChart"
+                    [routerLink]="['/tour-statistics', tour.id]"
+                />
+
+                <fa-icon
+                    class="tour-action"
+                    [icon]="faMapLocation"
+                    [routerLink]="['/tour', tour.id, 'key-points']"
+                />
+                <fa-icon
+                    class="tour-action"
+                    *ngIf="tour.status == 2 || tour.status == 0"
+                    (click)="onEditClicked(); $event.stopPropagation()"
+                    [icon]="faPen"
+                />
             </div>
         </div>
         <div class="tour-card-information">
             <div class="tour-card-center">
-                <div class="tour-title">{{tour.name}}</div>
+                <div class="tour-title">{{ tour.name }}</div>
                 <div class="tour-rating">
-                    <fa-icon class="tour-rating-star" [icon]="faStar"/>
-                    <div class="tour-rating-average">{{tour.averageRating}}</div>
+                    <fa-icon class="tour-rating-star" [icon]="faStar" />
+                    <div class="tour-rating-average">
+                        {{ tour.averageRating }}
+                    </div>
                     <div class="tour-rating-count">(17 reviews)</div>
                 </div>
                 <div class="tour-description">
-                    {{tour.description}}
+                    {{ tour.description }}
                 </div>
-                <div class="tour-keypoints" *ngIf="tour && tour.keyPoints && tour.keyPoints[0]">
+                <div
+                    class="tour-keypoints"
+                    *ngIf="tour && tour.keyPoints && tour.keyPoints[0]"
+                >
                     <div class="tour-keypoints-label">Keypoints:</div>
-                    <div class="tour-keypoint" *ngFor="let keyPoint of tour.keyPoints">{{keyPoint.name}}</div>
+                    <div
+                        class="tour-keypoint"
+                        *ngFor="let keyPoint of tour.keyPoints"
+                    >
+                        {{ keyPoint.name }}
+                    </div>
                 </div>
                 <div class="tour-distance">
                     <div class="tour-distance-label">Distance:</div>
-                    <div class="tour-distance-value">{{tour.distance}} km</div>
+                    <div class="tour-distance-value">
+                        {{ tour.distance }} km
+                    </div>
                 </div>
             </div>
             <div class="tour-card-right">
                 <div class="tour-price">
-                    <div *ngIf="discount" class="tour-price-value"><s>{{tour.price}}</s></div>
-                    <div *ngIf="!discount" class="tour-price-value">{{tour.price}}</div>
-                    <fa-icon class="tour-price-tokens" [icon]="faCoins"/>
+                    <div *ngIf="discount" class="tour-price-value">
+                        <s>{{ tour.price }}</s>
+                    </div>
+                    <div *ngIf="!discount" class="tour-price-value">
+                        {{ tour.price }}
+                    </div>
+                    <fa-icon class="tour-price-tokens" [icon]="faCoins" />
                 </div>
                 <div *ngIf="discount" class="tour-price">
-                    <div class="discount">-{{discount! * 100}}%</div>
-                    <div class="tour-price-value">{{discountedPrice!}}</div>
-                    <fa-icon class="tour-price-tokens" [icon]="faCoins"/>
+                    <div class="discount">-{{ discount! * 100 }}%</div>
+                    <div class="tour-price-value">{{ discountedPrice! }}</div>
+                    <fa-icon class="tour-price-tokens" [icon]="faCoins" />
                 </div>
-                <div class="btn add-to-cart" *ngIf="user && user.role === 'tourist' && !selectable && !hideAddToCart" (click)="addOrderItem(tour.id, tour.name, discount ? discountedPrice! : tour.price)">
-                    <fa-icon [icon]="faCartShopping"/>
+                <div
+                    class="btn add-to-cart"
+                    *ngIf="
+                        user &&
+                        user.role === 'tourist' &&
+                        !selectable &&
+                        !hideAddToCart
+                    "
+                    (click)="
+                        addOrderItem(
+                            tour.id,
+                            tour.name,
+                            discount ? discountedPrice! : tour.price
+                        )
+                    "
+                >
+                    <fa-icon [icon]="faCartShopping" />
                     <div class="add-to-cart-text">&nbsp;Add</div>
                 </div>
-                <div class="btn view" [routerLink]="['/tour/',tour.id]" *ngIf="!hideIcons && !selectable">View tour</div>
+                <div
+                    class="btn view"
+                    [routerLink]="['/tour/', tour.id]"
+                    *ngIf="!hideIcons && !selectable"
+                >
+                    View tour
+                </div>
             </div>
         </div>
     </div>

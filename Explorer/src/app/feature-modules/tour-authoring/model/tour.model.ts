@@ -17,7 +17,8 @@ export interface Tour {
     keyPoints?: KeyPoint[];
     averageRating?: number;
     recommended?: boolean;
-    active?: boolean
+    active?: boolean;
+    category?: TourCategory;
 }
 
 export enum TourStatus {
@@ -25,4 +26,11 @@ export enum TourStatus {
     Published = 1,
     Archived = 2,
     Ready = 3,
+}
+export enum TourCategory {
+    Adventure = 0,
+    FamilyTrips = 1,
+    Cruise = 2,
+    Cultural = 3,
+    Undefined = 4
 }

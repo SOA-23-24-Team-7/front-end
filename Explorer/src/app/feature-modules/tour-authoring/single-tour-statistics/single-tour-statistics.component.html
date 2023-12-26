@@ -1,0 +1,51 @@
+<div id="dashboard">
+  <h2>Tour Statistics</h2>
+
+  <div class="stat-container">
+    <p id="soldToursNumberText">Number of sales: </p>
+    <p class="stat-value">{{ salesNumber }}</p>
+  </div>
+
+  <div class="stat-container">
+    <p id="startedToursNumberText">Number of starts: </p>
+    <p class="stat-value">{{ startNumber }}</p>
+  </div>
+
+  <div class="stat-container">
+    <p id="completedToursNumberText">Number of completions: </p>
+    <p class="stat-value">{{ completionNumber }}</p>
+  </div>
+</div>
+<div class="cards">
+  <h2 id="key-point-title">Key Point visit percentages:</h2>
+  <p id="help-text">*Visit %: Percentage of tourists that have visited the key point</p>
+  <p id="help-text">*Encounter %: Percentage of tourists that have successfully completed the encounter on the key point</p>
+  <div class="row-2">
+      <div
+          class="list-cards-button"
+          id="prev-button"
+          (click)="scrollToPrevCard()"
+      >
+          <div class="triangle-left"></div>
+      </div>
+      <div class="key-point-cards-container">
+          <div
+          *ngFor="let item of keyPoints; let i = index"
+          class="cards-buttons-container"
+          >
+              <xp-key-point-statistics-card 
+                                  [keyPoint]="keyPoints[i]"
+                                  [statistic]="statistics[i]"
+                                  [encounterStatistic]="encounterStatistics[keyPoints[i].id || 0] || encounterStatisticsNull[0]"
+              > </xp-key-point-statistics-card>
+          </div>
+      </div>
+      <div
+          class="list-cards-button"
+          id="next-button"
+          (click)="scrollToNextCard()"
+      >
+          <div class="triangle-right"></div>
+      </div>
+  </div>
+</div>

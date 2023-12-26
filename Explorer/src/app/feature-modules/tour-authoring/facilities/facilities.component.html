@@ -1,111 +1,65 @@
-<div id="facilities">
-  <h2 class="title">Add new facility</h2>
-  <div id="facilities-details">
-    <div>
-    <!--table>
-      <thead>
-        <tr>
-          <th>Name</th>
-          <th>Description</th>
-          <th>Category</th>
-          <th>Image</th>
-          <th></th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr *ngFor="let f of facilities" (click)="onTableRowClicked(f)" [class.selected-row]="selectedFacility === f">
-          <td>{{f.name}}</td>
-          <td>{{f.description}}</td>
-          <td *ngIf="f.category == 0">Restaurant</td>
-          <td *ngIf="f.category == 1">Parking Lot</td>
-          <td *ngIf="f.category == 2">Toilet</td>
-          <td *ngIf="f.category == 3">Hospital</td>
-          <td *ngIf="f.category == 4">Cafe</td>
-          <td *ngIf="f.category == 5">Pharmacy</td>
-          <td *ngIf="f.category == 6">Exchange Office</td>
-          <td *ngIf="f.category == 7">Bus Stop</td>
-          <td *ngIf="f.category == 8">Shop</td>
-          <td *ngIf="f.category == 9">Other</td>
-          <td>
-            <img [src]="f.imagePath" alt="Facility Image" width="100" height="100">
-          </td>
-          <td>
-            <button (click)="onDeleteClicked(f)" color="accent" mat-icon-button>
-              <mat-icon>delete</mat-icon>
-            </button>
-            <button (click)="onEditClicked(f)" color="primary" mat-icon-button>
-              <mat-icon>edit</mat-icon>
-            </button>
-          </td>
-        </tr>
-        <tr>
-            <button (click)="onAddClicked()" color="primary" mat-icon-button>
-              <mat-icon>add</mat-icon>
-            </button>
-        </tr>
-      </tbody>
-    </table-->
-    </div>
-    <div>
-      <div class="facility-form">
-      <xp-facilities-form 
-                          (facilitesUpdated)="getFacilities()" 
-                          [facility]="selectedFacility" 
-                          [shouldEdit]="shouldEdit">
-      </xp-facilities-form>
-    </div>
-      <button id="closeButton" 
-              *ngIf="shouldRenderFacilitiesForm" 
-              (click)="onCloseClicked()" 
-              color="primary" 
-              class="done-submit"
-              mat-raised-button
-              ><div class="done-submit-text">Close</div>
-      </button>
-    </div>
-    <xp-map (click)="onMapClicked()" [canEdit]="true"></xp-map>
-  </div>
-  <br><br>
-  <hr/>
-  <div class="cards">
-    <div class="row">
-        <div
-            class="list-cards-button"
-            id="prev-button"
-            (click)="scrollToPrevCard()"
-        >
-            <div class="triangle-left"></div>
+<div class="tour-search">
+    <div class="tour-search-header">
+        <div class="tour-search-header-title">Facilities</div>
+        <div class="tour-search-header-paragraph">
+            Welcome to the realm of fascination, where every step crafts a
+            narrative and each object weaves into the tapestry of your travel
+            dreams. The world of Facilities opens doors to diversity, wonders,
+            and experiences born from your passion and dedication to
+            exploration. This space isn't just a catalog of locations; it's a
+            testament to your vision, where each object bears the imprint of
+            your desire to share unique encounters. Every detail here mirrors
+            your enthusiasm, whether they're museums steeped in knowledge and
+            artistry, hidden corners of history, or natural marvels you've
+            chosen to unveil to others.
         </div>
-        <div class="facility-cards-container">
+        <div class="tour-search-header-paragraph">
+            The Facilities showcased here aren't mere visitation spots; they are
+            the fruits of your labor, time, and dedication poured into shaping
+            experiences. Beyond practical information, this is a canvas painted
+            with your passion for travel, where every piece of advice is a
+            stroke in the broader picture you've crafted. This collection of
+            Facilities beckons exploration into your passion and creativity.
+            Each object carries your indelible mark, reminding all of your
+            unique role in crafting the experiences of travel and discovery.
+            This is your stage, your story — and each object here is a window
+            into the world of fascinating possibilities you've crafted.
+        </div>
+    </div>
+    <div class="tour-search-body">
+        <div class="keypoints">
             <div
-                *ngFor="let f of facilities"
-                class="cards-buttons-container"
+                class="list-cards-button"
+                id="prev-button"
+                (click)="scrollToPrevCard()"
             >
-                <xp-facility-card [facility]="f"> </xp-facility-card>
-                <div class="buttons-container">
-                    <button
-                        (click)="onDeleteClicked(f)"
-                        mat-icon-button
+                <div class="triangle-left"></div>
+            </div>
+            <div class="key-point-cards-container">
+                <xp-facility-card
+                    [isAddNew]="true"
+                    (click)="openNewFacilityDialog()"
+                />
+
+                <div
+                    *ngFor="let f of facilities"
+                    class="cards-buttons-container"
+                >
+                    <xp-facility-card
+                        [facility]="f"
+                        (deleteClicked)="deleteFacility($event)"
+                        (click)="openEditFacilityDialog(f)"
                     >
-                        <mat-icon>delete</mat-icon>
-                    </button>
-                    <button
-                        color="primary"
-                        (click)="onEditClicked(f)"
-                        mat-icon-button
-                    >
-                        <mat-icon>edit</mat-icon>
-                    </button>
+                    </xp-facility-card>
                 </div>
             </div>
+            <div
+                class="list-cards-button"
+                id="next-button"
+                (click)="scrollToNextCard()"
+            >
+                <div class="triangle-right"></div>
+            </div>
         </div>
-        <div
-            class="list-cards-button"
-            id="next-button"
-            (click)="scrollToNextCard()"
-        >
-            <div class="triangle-right"></div>
-        </div>
-        </div>
-        
+    </div>
 </div>
