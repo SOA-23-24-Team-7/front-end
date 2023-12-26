@@ -47,6 +47,17 @@ export class TourPageComponent {
     ngOnInit(): void {
         this.route.params.subscribe(params => {
             this.tourId = params["tourId"];
+            this.service.getTour(this.tourId).subscribe({
+                next: (result: Tour) => {
+                    this.tour = result;
+                    if (this.tour.keyPoints)
+                        this.images = this.tour.keyPoints.map(kp =>
+                            kp.imagePath.startsWith("http")
+                                ? kp.imagePath
+                                : environment.imageHost + kp.imagePath,
+                        );
+                },
+            });
         });
 
         this.authService.user$.subscribe(user => {
@@ -54,16 +65,6 @@ export class TourPageComponent {
             if (user.role.toLocaleLowerCase() === "tourist") {
                 this.getShoppingCart();
             }
-        });
-
-        this.service.getTour(this.tourId).subscribe({
-            next: (result: Tour) => {
-                this.tour = result;
-                if (this.tour.keyPoints)
-                    this.images = this.tour.keyPoints.map(
-                        kp => this.imageHost + kp.imagePath,
-                    );
-            },
         });
 
         this.keyPointContainer = document.querySelector(

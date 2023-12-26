@@ -80,7 +80,7 @@
 
 .row {
     display: flex;
-    width:10rem;
+    width: 100%;
 }
 
 .notification-row {

@@ -1,4 +1,16 @@
 import {
+    Component,
+    OnInit,
+    Input,
+    OnChanges,
+    SimpleChanges,
+    Output,
+    EventEmitter,
+} from "@angular/core";
+import { AuthService } from "src/app/infrastructure/auth/auth.service";
+import { MarketplaceService } from "../../feature-modules/marketplace/marketplace.service";
+import { environment } from "src/env/environment";
+import {
     faStar,
     faCoins,
     faCartShopping,
@@ -23,16 +35,8 @@ import { MatDialog } from "@angular/material/dialog";
 import { EditTourFormComponent } from "src/app/feature-modules/tour-authoring/edit-tour-form/edit-tour-form.component";
 import { CouponsComponent } from "src/app/feature-modules/marketplace/coupons/coupons.component";
 import { PagedResults } from "../model/paged-results.model";
-import {
-    Component,
-    EventEmitter,
-    Input,
-    OnChanges,
-    Output,
-} from "@angular/core";
-import { AuthService } from "src/app/infrastructure/auth/auth.service";
-import { MarketplaceService } from "src/app/feature-modules/marketplace/marketplace.service";
-import { environment } from "src/env/environment";
+import { NotifierService } from "angular-notifier";
+import { xpError } from "../model/error.model";
 
 @Component({
     selector: "xp-tour-card-view",
@@ -72,6 +76,7 @@ export class TourCardViewComponent implements OnChanges {
         private marketplaceService: MarketplaceService,
         private tourAuthoringService: TourAuthoringService,
         public dialogRef: MatDialog,
+        private notifier: NotifierService,
     ) {}
 
     ngOnChanges(): void {
@@ -81,8 +86,10 @@ export class TourCardViewComponent implements OnChanges {
     }
 
     ngOnInit(): void {
-        this.images = this.tour.keyPoints!.map(
-            kp => this.imageHost + kp.imagePath,
+        this.images = this.tour.keyPoints!.map(kp =>
+            kp.imagePath.startsWith("http")
+                ? kp.imagePath
+                : environment.imageHost + kp.imagePath,
         );
         if (this.preliminaryDiscount) {
             this.discount = this.preliminaryDiscount;
@@ -239,6 +246,13 @@ export class TourCardViewComponent implements OnChanges {
         this.tourAuthoringService.archiveTour(tour).subscribe({
             next: () => {
                 this.tour.status = 2;
+                this.notifier.notify("success", "Tour archived.");
+            },
+            error: err => {
+                this.notifier.notify(
+                    "error",
+                    "Failed to archive tour. " + xpError.getErrorMessage(err),
+                );
             },
         });
     }

@@ -11,6 +11,8 @@ import { PositionSimulatorComponent } from "./position-simulator/position-simula
 import { MapModalComponent } from "./map-modal/map-modal.component";
 import { CarouselComponent } from "./carousel/carousel.component";
 import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
+import { TooltipModule } from "primeng/tooltip";
+import { MatDialogModule } from "@angular/material/dialog";
 import { ConfettiComponent } from "./confetti/confetti.component";
 
 @NgModule({
@@ -30,6 +32,9 @@ import { ConfettiComponent } from "./confetti/confetti.component";
         RouterModule,
         FormsModule,
         BrowserAnimationsModule,
+        TooltipModule,
+        MatDialogModule,
+
     ],
     exports: [
         MapComponent,

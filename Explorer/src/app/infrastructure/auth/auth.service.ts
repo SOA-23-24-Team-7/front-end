@@ -13,6 +13,7 @@ import { LocationCoords } from "src/app/shared/model/location-coords.model";
 import { TouristProgress } from "./model/tourist-progress.model";
 import { MarketplaceService } from "src/app/feature-modules/marketplace/marketplace.service";
 import { ResetPassword } from "./model/reset-password.model";
+import { RegistrationResponse } from "./model/registration-response.model";
 
 @Injectable({
     providedIn: "root",
@@ -52,20 +53,19 @@ export class AuthService {
             );
     }
 
-    register(registration: Registration): Observable<AuthenticationResponse> {
-        return this.http
-            .post<AuthenticationResponse>(
-                environment.apiHost + "users",
-                registration,
-            )
-            .pipe(
+    register(registration: Registration): Observable<RegistrationResponse> {
+        return this.http.post<RegistrationResponse>(
+            environment.apiHost + "users",
+            registration,
+        );
+        /*.pipe(
                 tap(authenticationResponse => {
                     this.tokenStorage.saveAccessToken(
-                        authenticationResponse.accessToken,
+                        authenticationResponse.registrationConfirmationToken,
                     );
                     this.setUser();
                 }),
-            );
+            );*/
     }
 
     logout(): void {
@@ -154,7 +154,9 @@ export class AuthService {
                 });
         }
     }
-
+    getPosition(){
+        return { "longitude": this.userLocation$.value.longitude, "latitude": this.userLocation$.value.latitude, }
+    }
     generateResetPasswordToken(email: string): Observable<any> {
         // TODO: generate reset password token
         // throw new Error('Method not implemented.');

@@ -59,11 +59,11 @@
 */
 /*treba se dodati stil za scroll!*/
 .key-point-card {
-    width: 12rem;
-    height: 12rem;
-    border: rgba(var(--clr-outline-contrast), 1) 1px solid;
-    border-radius: 1rem;
-    box-shadow: 0 0 1rem rgba(var(--clr-outline-contrast), 0.8);
+    width: 15rem;
+    height: 20rem;
+    border: rgba(var(--clr-primary-500), 1) 2px solid;
+    border-radius: 0.8rem;
+    box-shadow: 0 0 0.5rem rgba(var(--clr-primary-500), 0.6);
     margin: 20px;
     overflow: hidden;
     display: flex;
@@ -76,30 +76,60 @@
 }
 .key-point-card:hover {
     transform: scale(1.05);
+    cursor: pointer;
 }
+
+.key-point-card:hover .key-point-image {
+    height: 30%;
+}
+.key-point-card:hover .key-point-name {
+    height: calc(30% + 3px);
+}
+
+.key-point-card:hover .key-point-description {
+    height: calc(70% - 3px);
+}
+
 .key-point-image {
     width: 100%;
-    height: 100%;
-    opacity: 0.55;
+    height: 70%;
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+    filter: blur(3px);
+    transition: height 0.3s ease-in-out;
 }
 .key-point-name {
     text-align: center;
-    color: rgb(--clr-neutral-900);
+    color: rgb(var(--clr-neutral-100));
     font-weight: bold;
     font-size: 1.2rem;
-    position: sticky;
-    top: 0;
+    width: 100%;
+    height: calc(70% + 3px);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: height 0.3s ease-in-out;
+    background-color: rgba(0, 0, 0, 0.6);
 }
 
 .key-point-description {
-    padding: 1rem;
-    padding-top: 0;
+    padding: 0.2rem;
+    width: 100%;
+    height: calc(30% - 3px);
+    transition: height 0.3s ease-in-out;
+    background-color: rgb(var(--clr-background-secondary));
+}
+.description {
     text-align: left;
     word-wrap: break-word;
     overflow-y: scroll;
-    width: 95%;
-    height: 80%;
-    margin-top: 0.5rem;
+    background: rgb(var(--clr-background));
+    padding-inline: 0.6rem;
+    padding-block: 0.4rem;
+    line-height: 1.2;
+    border-radius: 5px;
+    height: 100%;
 }
 
 .key-point-overlay {
@@ -113,4 +143,74 @@
     justify-content: center;
     align-items: center;
     text-align: center;
+}
+
+.delete-button {
+    position: absolute;
+    top: 0;
+    right: 0.5rem;
+    display: flex;
+    z-index: 20;
+    font-size: 1.4rem;
+    justify-content: center;
+    align-items: center;
+    color: rgb(var(--clr-error-700));
+    transition: font-size 0.1s ease-in;
+}
+.delete-button:hover {
+    font-size: 1.6rem;
+}
+
+.add-new {
+    border: rgba(var(--clr-outline-contrast), 1) 2px solid;
+    box-shadow: 0 0 0.5rem rgba(var(--clr-outline-contrast), 0.6);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    user-select: none;
+}
+
+.add-new fa-icon {
+    font-size: 4rem;
+}
+
+.add-new div {
+    font-size: 1.2rem;
+}
+
+.icon-stack {
+    position: relative !important;
+    width: 5rem !important;
+    height: 5rem !important;
+}
+
+.icon {
+    position: absolute !important;
+    width: 100% !important;
+    height: 100% !important;
+    z-index: 1 !important;
+    display: flex;
+}
+
+.small-icon {
+    z-index: 2 !important;
+    font-size: 1.8rem !important;
+    left: 3rem;
+    top: 1.5rem;
+}
+
+.add-new-kp .small-icon {
+    left: 3.2rem;
+}
+
+.public {
+    border: rgba(var(--clr-outline-contrast), 1) 2px solid;
+    box-shadow: 0 0 0.5rem rgba(var(--clr-outline-contrast), 0.6);
+    transition: border 0.3s ease, box-shadow 0.3s ease, transform 0.2s;
+}
+
+.public:hover {
+    border: rgba(var(--clr-primary-500), 1) 2px solid;
+    box-shadow: 0 0 0.5rem rgba(var(--clr-primary-500), 0.6);
 }

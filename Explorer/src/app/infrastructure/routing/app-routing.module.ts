@@ -92,7 +92,6 @@ const routes: Routes = [
     {
         path: "tour-sales",
         component: TourSalesComponent,
-        canActivate: [AuthGuard],
     },
     {
         path: "tour-sale-form/:id",
@@ -255,7 +254,6 @@ const routes: Routes = [
     {
         path: "tour/:tourId",
         component: TourPageComponent,
-        canActivate: [AuthGuard],
     },
     {
         path: "tourists-blog/:tourId",
@@ -302,14 +300,15 @@ const routes: Routes = [
         component: SingleTourStatisticsComponent,
         canActivate: [AuthGuard],
     },
-    { path: "**", pathMatch: "full", component: PageNotFoundComponent },
     { path: "reset-password", component: ResetPasswordComponent },
     { path: "reset-password-edit", component: ResetPasswordEditComponent },
     { path: "**", pathMatch: "full", component: PageNotFoundComponent },
 ];
 
 @NgModule({
-    imports: [RouterModule.forRoot(routes)],
+    imports: [
+        RouterModule.forRoot(routes, { scrollPositionRestoration: "enabled" }),
+    ],
     exports: [RouterModule],
 })
 export class AppRoutingModule {}

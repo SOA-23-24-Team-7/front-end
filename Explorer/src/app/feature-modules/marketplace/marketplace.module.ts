@@ -42,6 +42,7 @@ import { EditCouponFormComponent } from "./edit-coupon-form/edit-coupon-form.com
 import { CouponsModalComponent } from "./coupons-modal/coupons-modal.component";
 import { CartComponent } from "./cart/cart.component";
 import { ExploreBundlesComponent } from "./explore-bundles/explore-bundles.component";
+import { MatRadioModule } from "@angular/material/radio";
 import { StarRatingModule } from "angular-star-rating";
 
 @NgModule({
@@ -99,6 +100,7 @@ import { StarRatingModule } from "angular-star-rating";
         LayoutModule,
         MatChipsModule,
         TourAuthoringModule,
+        MatRadioModule,
         StarRatingModule.forRoot(),
     ],
     exports: [

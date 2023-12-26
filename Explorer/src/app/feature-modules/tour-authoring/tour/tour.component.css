@@ -1,9 +1,8 @@
-
 .tour-rectangles {
     display: flex;
     flex-direction: column;
     gap: 2rem;
-    flex:1.5;
+    flex: 1.5;
 }
 
 .tour-rectangle {
@@ -23,7 +22,7 @@
     font: inherit;
 }
 
-.tour-buttons{
+.tour-buttons {
     display: flex;
     gap: 10px;
     margin-top: 10px;
@@ -50,7 +49,7 @@
 .container {
     display: flex;
 }
-  
+
 .right-column {
     flex: 0.5;
     display: flex;
@@ -58,11 +57,11 @@
     align-items: top;
 }
 
-.text{
+.text {
     font: inherit;
 }
 
-.tour-search{
+.tour-search {
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -100,7 +99,7 @@
     line-height: 1.5;
 }
 
-.tour-search-body{
+.tour-search-body {
     display: flex;
     width: 100%;
     min-height: 500px;
@@ -225,7 +224,7 @@
     height: 1.5rem;
     color: rgba(var(--clr-text), 1);
     font-size: 1rem;
-    border:rgba(var(--border-primary), 1) 1px solid;
+    border: rgba(var(--border-primary), 1) 1px solid;
     border-radius: 0.3125rem;
     font-weight: 500;
 }
@@ -235,9 +234,9 @@ input[type="range"] {
     outline: none;
     padding: 0;
     margin-bottom: 0.5rem;
-  }
+}
 
-.tour-filter-margin{
+.tour-filter-margin {
     margin-bottom: 1rem;
 }
 
@@ -340,7 +339,7 @@ input[type="range"] {
     margin-bottom: 0.5rem;
     width: 6rem;
     background-color: rgba(var(--clr-primary-500), 1);
-    border: rgba(var(--border-primary), 1) 1px solid; 
+    border: rgba(var(--border-primary), 1) 1px solid;
     color: rgba(var(--clr-text), 1);
     font-size: 1.5rem;
     border-radius: 0.3125rem;
@@ -402,7 +401,7 @@ input[type="range"] {
 }
 
 .tour-sort-options > *:not(:last-child) {
-    border-bottom: rgba(var(--border-primary), 1) 1px solid;  
+    border-bottom: rgba(var(--border-primary), 1) 1px solid;
 }
 
 .tour-sort-option {
@@ -532,7 +531,7 @@ input[type="range"] {
 }
 
 .star {
-    color: rgba(255,255,0, 1);
+    color: rgba(255, 255, 0, 1);
 }
 
 .tour-image {
@@ -549,7 +548,6 @@ input[type="range"] {
     position: relative;
     width: 100%;
 }
-
 
 .tour-search-map-distance-min {
     font-family: var(--fnt-body);
@@ -597,4 +595,11 @@ input[type="range"] {
     position: fixed;
     bottom: 2rem;
     right: 2rem;
+    font-size: 1.5rem;
+    padding: 1.5rem;
+    box-shadow: rgba(var(--clr-outline-contrast), 0.3) 0px 0px 15px;
+}
+
+.fixed-button .tour-filter-x {
+    font-size: 1.5rem;
 }

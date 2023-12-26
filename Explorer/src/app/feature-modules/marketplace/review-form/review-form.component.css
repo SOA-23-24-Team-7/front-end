@@ -240,6 +240,7 @@ input[type="radio"]:not(:checked):hover + label {
     background-color: rgba(var(--clr-background, 1));
     border-radius: 1rem;
     width: 32rem;
+    pointer-events: all;
 }
 
 .register-head {
@@ -343,19 +344,14 @@ input[type="radio"]:not(:checked):hover + label {
 }
 
 .modal {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100vw;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    pointer-events: none;
+    border-radius: 1rem;
     height: 100vh;
     z-index: 9999;
-    display: flex;
-    align-items: flex-start;
-    justify-content: center;
-    background-color: rgba(0, 0, 0, 0.7);
-    animation: fadeIn 0.5s ease-in-out;
     overflow: auto;
-    box-sizing: border-box; /* Dodato */
     padding: 1rem;
 }
 
