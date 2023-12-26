@@ -17,8 +17,8 @@ import { xpError } from "src/app/shared/model/error.model";
 })
 export class AddTourFormComponent {
     separatorKeysCodes: number[] = [ENTER, COMMA];
-    category:number;
-    @Output() toursUpdated = new EventEmitter<null>();
+    category: number;
+    @Output() toursUpdated = new EventEmitter<Tour>();
     public tour: Tour = {
         name: "",
         description: "",
@@ -68,7 +68,7 @@ export class AddTourFormComponent {
 
     submit(): void {
         //var categ = TourCategory.Adventure;
-        
+
         if (this.addTourForm.value.category == "Adventure")
             var categ = TourCategory.Adventure;
         else if (this.addTourForm.value.category == "FamilyTrips")
@@ -77,11 +77,10 @@ export class AddTourFormComponent {
             var categ = TourCategory.Cruise;
         else if (this.addTourForm.value.category == "Cultural")
             var categ = TourCategory.Cultural;
-        else
-            var categ=TourCategory.Undefined
+        else var categ = TourCategory.Undefined;
         // console.log(this.addTourForm.value);
-        console.log(categ)
-        this.category=categ
+        console.log(categ);
+        this.category = categ;
         const tour: Tour = {
             name: this.addTourForm.value.name || "",
             description: this.addTourForm.value.description || "",
@@ -92,18 +91,18 @@ export class AddTourFormComponent {
             price: parseInt(this.addTourForm.value.price || "0"),
             category: categ,
         };
-        if(!this.isValidForm()){
+        if (!this.isValidForm()) {
             this.notifier.notify("error", "Please enter valid data.");
             return;
         }
-        if(!this.isValidCategory()){
+        if (!this.isValidCategory()) {
             this.notifier.notify("error", "Please select category.");
             return;
         }
         this.service.addTour(tour).subscribe({
             next: () => {
                 // console.log("uslo");
-                this.toursUpdated.emit();
+                this.toursUpdated.emit(tour);
                 // location.reload();
                 this.onClose();
                 this.notifier.notify("success", "Successfully created tour!");
@@ -135,10 +134,18 @@ export class AddTourFormComponent {
             this.removeTag(index);
         }
     }
-    isValidForm():boolean{
-        return this.addTourForm.value.description!="" && this.addTourForm.value.name!="" && this.addTourForm.value.price!="" && this.addTourForm.value.difficulty!="" && parseInt(this.addTourForm.value.price!)>=0 && parseInt(this.addTourForm.value.difficulty!)>=1 && parseInt(this.addTourForm.value.difficulty!)<=5
-     }
-    isValidCategory():boolean{
-        return this.category!=4
+    isValidForm(): boolean {
+        return (
+            this.addTourForm.value.description != "" &&
+            this.addTourForm.value.name != "" &&
+            this.addTourForm.value.price != "" &&
+            this.addTourForm.value.difficulty != "" &&
+            parseInt(this.addTourForm.value.price!) >= 0 &&
+            parseInt(this.addTourForm.value.difficulty!) >= 1 &&
+            parseInt(this.addTourForm.value.difficulty!) <= 5
+        );
+    }
+    isValidCategory(): boolean {
+        return this.category != 4;
     }
 }
