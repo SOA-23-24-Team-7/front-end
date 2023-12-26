@@ -344,7 +344,6 @@ export class MapComponent implements AfterViewInit, OnChanges {
 
     setCheckedPointsMarkers(): void {
         this.checkedPointMarkerGroup.clearLayers();
-
         [...this.checkedPointsMap.values()].forEach(element => {
             const marker = new L.Marker([element.lat, element.lng], {
                 icon: this.completedKeyPointIcon,
@@ -379,7 +378,7 @@ export class MapComponent implements AfterViewInit, OnChanges {
                 } else {
                     keyPointIcon = this.defaultIcon;
                 }
-                if (i == n - 1) {
+                if (i == n - 1 && n > 1) {
                     keyPointIcon = this.finalKeyPoint;
                 }
                 const marker = L.marker(waypoint.latLng, {
@@ -400,7 +399,7 @@ export class MapComponent implements AfterViewInit, OnChanges {
                 if (i === 0) {
                     keyPointIcon = this.currentKeyPoint;
                 }
-                if (i === waypoints.length - 1) {
+                if (i === waypoints.length - 1 && waypoints.length > 1) {
                     keyPointIcon = this.finalKeyPoint;
                 }
                 const marker = L.marker(waypoint.latLng, {
