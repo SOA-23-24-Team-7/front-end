@@ -21,8 +21,7 @@ import {
     faBoxArchive,
     faPen,
     faMoneyBills,
-    faBarChart
-
+    faBarChart,
 } from "@fortawesome/free-solid-svg-icons";
 import { TourLimitedView } from "../../feature-modules/marketplace/model/tour-limited-view.model";
 import { Tour } from "../../feature-modules/tour-authoring/model/tour.model";
@@ -37,11 +36,23 @@ import { EditTourFormComponent } from "src/app/feature-modules/tour-authoring/ed
 import { CouponsComponent } from "src/app/feature-modules/marketplace/coupons/coupons.component";
 import { NotifierService } from "angular-notifier";
 import { xpError } from "../model/error.model";
+import { animate, style, transition, trigger } from "@angular/animations";
 
 @Component({
     selector: "xp-tour-card-view",
     templateUrl: "./tour-card-view.component.html",
     styleUrls: ["./tour-card-view.component.css"],
+    animations: [
+        trigger("fadeIn", [
+            transition(":enter", [
+                style({ opacity: 0, transform: "translateX(-40px)" }),
+                animate(
+                    "0.5s ease",
+                    style({ opacity: 1, transform: "translateX(0)" }),
+                ),
+            ]),
+        ]),
+    ],
 })
 export class TourCardViewComponent implements OnChanges {
     faStar = faStar;
@@ -246,27 +257,25 @@ export class TourCardViewComponent implements OnChanges {
         });
     }
 
-  onEditClicked(): void {
-    //this.shouldEdit = false;
-    //this.shouldRenderTourForm = true;
-    this.dialogRef.open(EditTourFormComponent, {
-      data: this.tour,
-      
-    });
-  }
-  
-  onCouponClicked(tour: Tour): void{
-    this.dialogRef.open(CouponsComponent, {
-      data: tour,
-      
-    });
-  }
-
-  onImageError(event: Event) {
-    const target = event.target as HTMLImageElement;
-    if (target) {
-      target.src = "https://imgs.search.brave.com/udmDGOGRJTYO6lmJ0ADA03YoW4CdO6jPKGzXWvx1XRI/rs:fit:860:0:0/g:ce/aHR0cHM6Ly90My5m/dGNkbi5uZXQvanBn/LzAyLzY4LzU1LzYw/LzM2MF9GXzI2ODU1/NjAxMl9jMVdCYUtG/TjVyalJ4UjJleVYz/M3puSzRxblllS1pq/bS5qcGc";
+    onEditClicked(): void {
+        //this.shouldEdit = false;
+        //this.shouldRenderTourForm = true;
+        this.dialogRef.open(EditTourFormComponent, {
+            data: this.tour,
+        });
     }
-}
 
+    onCouponClicked(tour: Tour): void {
+        this.dialogRef.open(CouponsComponent, {
+            data: tour,
+        });
+    }
+
+    onImageError(event: Event) {
+        const target = event.target as HTMLImageElement;
+        if (target) {
+            target.src =
+                "https://imgs.search.brave.com/udmDGOGRJTYO6lmJ0ADA03YoW4CdO6jPKGzXWvx1XRI/rs:fit:860:0:0/g:ce/aHR0cHM6Ly90My5m/dGNkbi5uZXQvanBn/LzAyLzY4LzU1LzYw/LzM2MF9GXzI2ODU1/NjAxMl9jMVdCYUtG/TjVyalJ4UjJleVYz/M3puSzRxblllS1pq/bS5qcGc";
+        }
+    }
 }

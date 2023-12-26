@@ -8,6 +8,7 @@ import { FontAwesomeModule } from "@fortawesome/angular-fontawesome";
 import { FormsModule, ReactiveFormsModule } from "@angular/forms";
 import { MaterialModule } from "src/app/infrastructure/material/material.module";
 import { EncounterFormComponent } from "./encounter-form/encounter-form.component";
+import { TooltipModule } from "primeng/tooltip";
 
 @NgModule({
     declarations: [
@@ -23,6 +24,7 @@ import { EncounterFormComponent } from "./encounter-form/encounter-form.componen
         ReactiveFormsModule,
         FormsModule,
         MaterialModule,
+        TooltipModule,
     ],
 
     exports: [EncounterFormComponent],

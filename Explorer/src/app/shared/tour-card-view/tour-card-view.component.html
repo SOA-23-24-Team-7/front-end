@@ -7,6 +7,7 @@
             ? ['/tour/', tour.id, 'key-points']
             : ['/tour/', tour.id]
     "
+    [@fadeIn]
 >
     <div class="tour-card-left">
         <div class="tour-image-container">
@@ -38,47 +39,63 @@
                     class="tour-action red"
                     *ngIf="tour.status == 2 || tour.status == 0"
                     [icon]="faTrash"
+                    tooltipPosition="bottom"
+                    pTooltip="delete"
                 />
                 <fa-icon
                     class="tour-action"
                     *ngIf="tour.status == 2 || tour.status == 0"
                     (click)="onEditClicked(); $event.stopPropagation()"
                     [icon]="faPen"
+                    tooltipPosition="bottom"
+                    pTooltip="edit"
                 />
                 <fa-icon
                     class="tour-action"
                     [icon]="faPersonHiking"
                     [routerLink]="['/tours/equipment', tour.id]"
+                    tooltipPosition="bottom"
+                    pTooltip="select equipment"
                 />
                 <fa-icon
                     class="tour-action"
                     *ngIf="tour.status == 2 || tour.status == 0"
                     [icon]="faMoneyBills"
                     (click)="onCouponClicked(tour); $event.stopPropagation()"
+                    tooltipPosition="bottom"
+                    pTooltip="select coupon"
                 />
                 <fa-icon
                     class="tour-action"
                     *ngIf="tour.status == 1"
                     [icon]="faBoxArchive"
                     (click)="onArchiveClicked(tour); $event.stopPropagation()"
+                    tooltipPosition="bottom"
+                    pTooltip="archive"
                 />
                 <fa-icon
                     class="tour-action"
                     *ngIf="tour.status == 1 || tour.status == 2"
                     [icon]="faBarChart"
                     [routerLink]="['/tour-statistics', tour.id]"
+                    tooltipPosition="bottom"
+                    pTooltip="statistics"
                 />
 
                 <fa-icon
                     class="tour-action"
                     [icon]="faMapLocation"
                     [routerLink]="['/tour', tour.id, 'key-points']"
+                    tooltipPosition="bottom"
+                    pTooltip="select keypoints"
                 />
                 <fa-icon
                     class="tour-action"
                     *ngIf="tour.status == 2 || tour.status == 0"
                     (click)="onEditClicked(); $event.stopPropagation()"
                     [icon]="faPen"
+                    tooltipPosition="bottom"
+                    pTooltip="edit"
                 />
             </div>
         </div>
