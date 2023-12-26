@@ -1,4 +1,4 @@
-<form [formGroup]="clubForm">
+<!-- <form [formGroup]="clubForm">
     <div>
         <mat-form-field>
             <mat-label>Name</mat-label>
@@ -19,4 +19,38 @@
     <button *ngIf="!shouldEdit" color="primary" type="submit" (click)="addClub()" mat-raised-button>Done</button>
     <button *ngIf="shouldEdit" color="primary" type="submit" (click)="updateClub()" mat-raised-button>Done</button>
     </div>
-</form>
+</form> -->
+
+<div class="container">
+    <form [formGroup]="clubForm">
+        <div class="form">
+            <h1 *ngIf="shouldEdit">Update Club</h1>
+            <h1 *ngIf="!shouldEdit">Add Club</h1>
+            <div class="column">
+                <div class="field">
+                    <input formControlName="name" type="text" required />
+                    <label>Name</label>
+                </div>
+                <div class="field">
+                    <input formControlName="description" type="text" required />
+                    <label>Description</label>
+                </div>
+                <div class="field">
+                    <input
+                        id="file-upload"
+                        accept="image/*"
+                        type="file"
+                        [(ngModel)]="imagePath"
+                        required
+                        (change)="onSelectImage($event)"
+                    />
+                    <label>Picture</label>
+                </div>
+            </div>
+            <div class="btn" *ngIf="!shouldEdit" (click)="addClub()">Add</div>
+            <div class="btn" *ngIf="shouldEdit" (click)="updateClub()">
+                Update
+            </div>
+        </div>
+    </form>
+</div>

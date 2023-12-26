@@ -8,10 +8,8 @@
     box-shadow: 0 0 1rem rgba(var(--clr-outline-contrast), 0.8);
     position: relative;
     color: rgb(var(--clr-text));
-    transition: transform 0.2s,
-                background-color 0.15s,
-                box-shadow 0.15s,
-                border 0.15s;
+    transition: transform 0.2s, background-color 0.15s, box-shadow 0.15s,
+        border 0.15s;
 }
 
 .club-card:hover {
@@ -125,4 +123,50 @@
     color: rgba(255, 255, 255, 1);
     font-size: 1.3rem;
     margin-left: 0.5rem;
+}
+
+.edit-icon {
+    color: rgba(255, 255, 255, 1);
+    font-size: 1.3rem;
+}
+
+.edit-text {
+    color: rgba(255, 255, 255, 1);
+    font-size: 1.3rem;
+    margin-left: 0.5rem;
+}
+
+.club-edit {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding-inline: 0.5rem;
+    height: 2rem;
+    border-radius: 0.5rem;
+    background-color: #0090d3;
+    cursor: pointer;
+    transition: background-color 0.15s;
+}
+
+.delete-icon {
+    color: rgba(255, 255, 255, 1);
+    font-size: 1.3rem;
+}
+
+.delete-text {
+    color: rgba(255, 255, 255, 1);
+    font-size: 1.3rem;
+    margin-left: 0.5rem;
+}
+
+.club-delete {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding-inline: 0.5rem;
+    height: 2rem;
+    border-radius: 0.5rem;
+    background-color: #d30000;
+    cursor: pointer;
+    transition: background-color 0.15s;
 }
