@@ -148,12 +148,27 @@
                     <fa-icon [icon]="faCartShopping" />
                     <div class="add-to-cart-text">&nbsp;Add</div>
                 </div>
+                
+                <div
+                    class="btn add-to-wishlist"
+                    *ngIf="
+                        user &&
+                        user.role === 'tourist' &&
+                        !selectable &&
+                        !hideAddToCart"
+                    (click)="onAddToWishlistClicked(tour.id!); $event.stopPropagation()"
+                >
+                    <fa-icon [icon]="faBookmark" />
+                    &nbsp;Add to wishlist
+                </div>
+
                 <div
                     class="btn view"
                     [routerLink]="['/tour/', tour.id]"
                     *ngIf="!hideIcons && !selectable"
                 >
-                    View tour
+                    <fa-icon [icon]="faMap" />
+                    &nbsp;View tour
                 </div>
             </div>
         </div>

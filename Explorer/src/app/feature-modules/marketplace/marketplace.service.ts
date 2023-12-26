@@ -31,6 +31,7 @@ import { CouponApplication } from "./model/coupon-applicaton.model";
 import { Bundle } from "../tour-authoring/model/bundle.model";
 import { BundleOrderItem } from "./model/bundle-order-item.model";
 import { SortOption } from "./model/sort-option.model";
+import { Wishlist } from "./model/wishlist.model";
 
 @Injectable({
     providedIn: "root",
@@ -503,14 +504,17 @@ export class MarketplaceService {
     addCoupon(coupon: Coupon): Observable<Coupon> {
         return this.http.post<Coupon>(environment.apiHost + "coupon/", coupon);
     }
+
     getCouponsById(authorId: number): Observable<PagedResults<Coupon>> {
         return this.http.get<PagedResults<Coupon>>(
             environment.apiHost + "coupon/"+authorId,
         );
     }
+
     deleteCoupon(id: number): Observable<Coupon> {
         return this.http.delete<Coupon>(environment.apiHost + "coupon/" + id);
     }
+
     updateCoupon(coupon: Coupon): Observable<Coupon> {
         return this.http.put<Coupon>(
             environment.apiHost + "coupon/" + coupon.id,
@@ -549,5 +553,9 @@ export class MarketplaceService {
         console.log("6");
         let path = environment.apiHost + "token/bundle/" + bundleId;
         return this.http.post<any>(path, {});
+    }
+
+    addTourToWishlist(tourId: number): Observable<Wishlist>{
+        return this.http.post<Wishlist>(environment.apiHost + "wishlist/", tourId);
     }
 }
