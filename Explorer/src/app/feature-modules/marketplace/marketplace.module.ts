@@ -44,6 +44,7 @@ import { EditCouponFormComponent } from "./edit-coupon-form/edit-coupon-form.com
 import { CouponsModalComponent } from "./coupons-modal/coupons-modal.component";
 import { ExploreBundlesComponent } from './explore-bundles/explore-bundles.component';
 import { StarRatingModule } from 'angular-star-rating';
+import { ClubPageComponent } from './club-page/club-page.component';
 
 @NgModule({
     declarations: [
@@ -80,6 +81,7 @@ import { StarRatingModule } from 'angular-star-rating';
         EditCouponFormComponent,
         CouponsModalComponent,
         ExploreBundlesComponent,
+        ClubPageComponent,
     ],
     imports: [
         CommonModule,

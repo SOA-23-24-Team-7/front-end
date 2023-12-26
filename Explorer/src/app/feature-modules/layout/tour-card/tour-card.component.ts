@@ -59,9 +59,18 @@ export class TourCardComponent implements OnInit{
     }
     getImagePath(): string {
         for(let kp of this.tour.keyPoints){
-            this.images.push(environment.imageHost +kp.imagePath);
+            if(kp.imagePath.startsWith("http")){
+              console.log(kp.imagePath)
+              this.images.push(kp.imagePath)
+            }
+              
+            else
+              this.images.push(environment.imageHost +kp.imagePath);
         }
-        return this.images.length > 0 ? this.images[this.currentIndex] :  environment.imageHost +this.tour.keyPoints[0].imagePath;
+        var firstImage=this.tour.keyPoints[0].imagePath
+        if(!firstImage.startsWith("http"))
+          firstImage=environment.imageHost +firstImage;
+        return this.images.length > 0 ? this.images[this.currentIndex] :  firstImage
         //return environment.imageHost +this.tour.keyPoints[0].imagePath ;
     }
     // tour-card.component.ts

@@ -141,6 +141,11 @@ export class MarketplaceService {
             environment.apiHost + "tourist/problem/",
         );
     }
+    getClubById(id: number): Observable<Club> {
+        return this.http.get<Club>(
+            environment.apiHost + "tourist/club/" + id,
+        );
+    }
     getClubs(): Observable<PagedResults<Club>> {
         return this.http.get<PagedResults<Club>>(
             environment.apiHost + "tourist/club",

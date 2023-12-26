@@ -60,6 +60,7 @@ import { TourStatisticsComponent } from "src/app/feature-modules/tour-authoring/
 import { SingleTourStatisticsComponent } from "src/app/feature-modules/tour-authoring/single-tour-statistics/single-tour-statistics.component";
 import { ResetPasswordComponent } from "../auth/reset-password/reset-password.component";
 import { ResetPasswordEditComponent } from "../auth/reset-password-edit/reset-password-edit.component";
+import { ClubPageComponent } from "src/app/feature-modules/marketplace/club-page/club-page.component";
 
 const routes: Routes = [
     { path: "home", component: HomeComponent },
@@ -305,6 +306,11 @@ const routes: Routes = [
         path: "tour-statistics/:id",
         component: SingleTourStatisticsComponent,
         canActivate: [AuthGuard],
+    },
+    { 
+        path: "club/:clubId", 
+        component: ClubPageComponent,
+        canActivate: [AuthGuard]
     },
     { path: "reset-password", component: ResetPasswordComponent },
     { path: "reset-password-edit", component: ResetPasswordEditComponent },

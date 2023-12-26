@@ -1,0 +1,22 @@
+<div class="club-page">
+    <div class="club">
+        <img class="club-image" [src]="club.image" (error)="onImageError($event)"/>
+        <div class="club-title" lang="en-US">{{club.name}}</div>
+        <div class="club-text">{{club.description}}</div>
+        <div class="separator"></div>
+        <div class="club-title" lang="en-US">Moderator</div>
+        <div class="moderator">
+            <xp-user-card [user]="getOwner()" [shield]="true"></xp-user-card>
+        </div>
+        <div class="separator"></div>
+        <div class="club-title" lang="en-US">Members ({{getMemberCount()}})</div>
+        <div class="members">
+            <xp-user-card [user]="getOwner()" [shield]="true"></xp-user-card>
+            <div *ngFor="let member of getRegularMembers()">
+                <xp-user-card [user]="member" [ban]="isOwner()" [clubMemberId]="member.membershipId" *ngIf="!member.kicked"></xp-user-card>
+            </div>
+        </div>
+    </div>
+
+    <div class="blogs"></div>
+</div>

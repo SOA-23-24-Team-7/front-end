@@ -43,6 +43,8 @@
     max-width: 50%;
     overflow: hidden;
     text-overflow: ellipsis;
+    max-lines: 1;
+    white-space: nowrap;
 }
 
 .club-name:hover {
