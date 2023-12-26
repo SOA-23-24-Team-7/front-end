@@ -1,0 +1,54 @@
+.user-card {
+    height: 6rem;
+    width: 100%;
+    background-color: rgba(var(--clr-background), 1);
+    transition: background-color 0.15s;
+    border-radius: 0.3125rem;
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+    padding-inline: 1rem;
+}
+
+.pfp {
+    height: 4rem;
+    width: 4rem;
+    overflow: hidden;
+    border-radius: 2rem;
+    z-index: 1;
+    position: relative;
+    object-fit: cover;
+}
+
+.user-info {
+    display: flex;
+    flex-direction: column;
+    margin-left: 1rem;
+}
+
+.name-surname {
+    color: rgba(var(--clr-text), 1);
+    transition: color 0.15s;
+    font-family: var(--fnt-body);
+    font-size: 1.5rem;
+    line-height: 1.5rem;
+}
+
+.username {
+    color: rgba(var(--clr-primary-500), 1);
+    font-family: var(--fnt-body);
+    font-size: 1.5rem;
+    line-height: 1.5rem;
+}
+
+.shield {
+    color: rgba(var(--clr-primary-500), 1);
+    font-size: 2rem;
+    margin-left: auto;
+}
+
+.ban {
+    color: red;
+    font-size: 2rem;
+    margin-left: auto;
+}

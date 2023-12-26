@@ -72,7 +72,7 @@ export class ClubCardComponent {
     }
 
     isMember(): boolean {
-        return this.members.some(member => member.id === this.user.id) || (this.club.ownerId == this.user.id);
+        return this.members.some(member => member.userId === this.user.id) || (this.club.ownerId == this.user.id);
     }
 
     sendJoinRequest(): void {

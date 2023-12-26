@@ -1,7 +1,7 @@
 <div class="club-card">
-    <img class="club-image" [src]="club.image" (error)="onImageError($event)"/>
+    <img class="club-image" [src]="club.image" (error)="onImageError($event)" [routerLink]="['/club/', club.id]"/>
     <div class="club-card-details">
-        <div class="club-name">{{ club.name }}</div>
+        <div class="club-name" [routerLink]="['/club/', club.id]">{{ club.name }}</div>
         <div class="club-button" (click)="sendJoinRequest()" *ngIf="canSendJoinRequest() && !isMember()">
             <fa-icon class="club-button-icon" [icon]="faDoorOpen"/>
             <div class="club-button-text">Join</div>
