@@ -71,7 +71,7 @@ export class AddTourFormComponent {
         
         if (this.addTourForm.value.category == "Adventure")
             var categ = TourCategory.Adventure;
-        else if (this.addTourForm.value.category == "FamilyTrips")
+        else if (this.addTourForm.value.category == "Family trips")
             var categ = TourCategory.FamilyTrips;
         else if (this.addTourForm.value.category == "Cruise")
             var categ = TourCategory.Cruise;
