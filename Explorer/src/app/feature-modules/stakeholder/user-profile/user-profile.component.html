@@ -93,7 +93,10 @@
                         <div class="btn edit-btn" (click)="toggleEditing()">
                             Edit
                         </div>
-                        <div class="level-container">
+                        <div
+                            class="level-container"
+                            *ngIf="user.role == 'tourist'"
+                        >
                             <div class="level">
                                 {{
                                     "Level " +

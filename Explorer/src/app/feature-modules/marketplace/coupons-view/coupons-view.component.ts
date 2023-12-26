@@ -35,9 +35,10 @@ export class CouponsViewComponent {
     getCoupons(): void {
         this.authService.user$.subscribe(user => {
             this.user = user;
-            this.service.getCoupons().subscribe({
+            this.service.getCouponsById(this.user.id).subscribe({
               next: (result: PagedResults<Coupon>) => {
                 this.coupons = result.results;
+                console.log(this.coupons)
               }
             })
         });   
@@ -51,7 +52,7 @@ export class CouponsViewComponent {
     Delete(coupon: Coupon) {
       this.service.deleteCoupon(coupon.id as number).subscribe({
         next:() => {
-          this.service.getCoupons().subscribe({
+          this.service.getCouponsById(this.user.id).subscribe({
             next: (result: PagedResults<Coupon>) => {
               this.coupons = result.results;
             }

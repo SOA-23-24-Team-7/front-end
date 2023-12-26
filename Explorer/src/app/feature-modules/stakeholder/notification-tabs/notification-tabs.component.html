@@ -51,7 +51,17 @@
             }"
             (click)="setActiveTab(Tab.TRANSACTIONRECORDSNOTIFICATIONS, tabList)"
         >
-            <fa-icon [icon]="faMoneyBill" [spin]="true"/> Transaction notifications
+            <fa-icon [icon]="faMoneyBill"/> Transaction notifications
+        </div>
+        <div
+            class="tab"
+            *ngIf="user.role === 'tourist'"
+            [ngClass]="{
+                'selected-tab': selectedTab === Tab.PAYMENTSHISTORY
+            }"
+            (click)="setActiveTab(Tab.PAYMENTSHISTORY, tabList)"
+        >
+            <fa-icon [icon]="faCoins"/> Payments history
         </div>
     </div>
     <div class="tab-content">
@@ -65,6 +75,9 @@
         />
         <xp-transaction-records-notifications
             *ngIf="selectedTab === Tab.TRANSACTIONRECORDSNOTIFICATIONS"
+        />
+        <xp-payment-history
+            *ngIf="selectedTab === Tab.PAYMENTSHISTORY"
         />
     </div>
 </div>

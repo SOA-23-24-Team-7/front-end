@@ -13,6 +13,7 @@ import { MarketplaceService } from "../marketplace.service";
 import { Review } from "../model/review.model";
 import { MAT_DIALOG_DATA, MatDialogRef } from "@angular/material/dialog";
 import { faXmark } from "@fortawesome/free-solid-svg-icons";
+import { NotifierService } from "angular-notifier";
 
 @Component({
     selector: "xp-review-form",
@@ -34,6 +35,7 @@ export class ReviewFormComponent implements OnChanges, OnInit {
         private service: MarketplaceService,
         public dialog: MatDialogRef<ReviewFormComponent>,
         @Inject(MAT_DIALOG_DATA) public data: any,
+        private notifier: NotifierService
     ) {}
 
     ngOnInit(): void {
@@ -89,7 +91,11 @@ export class ReviewFormComponent implements OnChanges, OnInit {
                     this.dialog.close([false, false]); //review not Added, review Updated
                 },
             });
-        } else alert("Please enter valid data. All fields are required.");
+        } 
+        if (!this.isFormValid()) {
+            this.notifier.notify("error", "Please enter valid data. All fields are required.");
+            return;
+          } 
     }
 
     updateReview(): void {
@@ -112,7 +118,11 @@ export class ReviewFormComponent implements OnChanges, OnInit {
                     this.dialog.close([false, true]); //review Added, review Updated
                 },
             });
-        } else alert("Please enter valid data. All fields are required.");
+        }
+        if (!this.isFormValid()) {
+            this.notifier.notify("error", "Please enter valid data. All fields are required.");
+            return;
+        }  
     }
 
     onFileSelected(event: any): void {

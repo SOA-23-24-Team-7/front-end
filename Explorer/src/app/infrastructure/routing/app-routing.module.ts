@@ -58,6 +58,8 @@ import { ExploreBundlesComponent } from "src/app/feature-modules/marketplace/exp
 import { PageNotFoundComponent } from "src/app/feature-modules/layout/page-not-found/page-not-found.component";
 import { TourStatisticsComponent } from "src/app/feature-modules/tour-authoring/tour-statistics/tour-statistics.component";
 import { SingleTourStatisticsComponent } from "src/app/feature-modules/tour-authoring/single-tour-statistics/single-tour-statistics.component";
+import { ResetPasswordComponent } from "../auth/reset-password/reset-password.component";
+import { ResetPasswordEditComponent } from "../auth/reset-password-edit/reset-password-edit.component";
 
 const routes: Routes = [
     { path: "home", component: HomeComponent },
@@ -96,7 +98,6 @@ const routes: Routes = [
     {
         path: "tour-sales",
         component: TourSalesComponent,
-        canActivate: [AuthGuard],
     },
     {
         path: "tour-sale-form/:id",
@@ -259,7 +260,6 @@ const routes: Routes = [
     {
         path: "tour/:tourId",
         component: TourPageComponent,
-        canActivate: [AuthGuard],
     },
     {
         path: "tourists-blog/:tourId",
@@ -306,11 +306,15 @@ const routes: Routes = [
         component: SingleTourStatisticsComponent,
         canActivate: [AuthGuard],
     },
-    { path: "**", pathMatch: "full", component: PageNotFoundComponent }
+    { path: "reset-password", component: ResetPasswordComponent },
+    { path: "reset-password-edit", component: ResetPasswordEditComponent },
+    { path: "**", pathMatch: "full", component: PageNotFoundComponent },
 ];
 
 @NgModule({
-    imports: [RouterModule.forRoot(routes)],
+    imports: [
+        RouterModule.forRoot(routes, { scrollPositionRestoration: "enabled" }),
+    ],
     exports: [RouterModule],
 })
 export class AppRoutingModule {}
