@@ -17,7 +17,12 @@
             (click)="onUpVote($event)"
             *ngIf="blog.status != 0"
         >
-            <fa-icon class="upvote" [icon]="faCircleUp" />
+            <fa-icon
+                class="upvote"
+                [icon]="faCircleUp"
+                tooltipPosition="left"
+                pTooltip="Upvote"
+            />
         </div>
         <div class="vote-count" *ngIf="blog.status != 0">
             {{ blog.voteCount }}
@@ -30,7 +35,12 @@
             (click)="onDownVote($event)"
             *ngIf="blog.status != 0"
         >
-            <fa-icon class="downvote" [icon]="faCircleDown" />
+            <fa-icon
+                class="downvote"
+                [icon]="faCircleDown"
+                tooltipPosition="left"
+                pTooltip="Downvote"
+            />
         </div>
     </div>
     <div class="blog-content">
@@ -50,7 +60,13 @@
             </div>
             <span class="blog-date">{{ blog.date | date : "mediumDate" }}</span>
         </div>
-        <div class="blog-description" [innerHTML]="blogMarkdown"></div>
+        <div class="blog-description">
+            <quill-view-html
+                [content]="blogMarkdown"
+                theme="bubble"
+                [ariaReadOnly]="true"
+            ></quill-view-html>
+        </div>
         <div class="bottom-bar">
             <div class="comments bottom-bar-button" *ngIf="blog.status != 0">
                 <fa-icon [icon]="faComment" />{{ blog.comments.length }}

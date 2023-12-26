@@ -10,7 +10,19 @@ import { PublicFacilityRequest } from "../../tour-authoring/model/public-facilit
 import { CommentRequestFormComponent } from "../comment-request-form/comment-request-form.component";
 import { MatDialog, MatDialogRef } from "@angular/material/dialog";
 import { CommentKeyPointRequestFormComponent } from "../comment-keypoint-request-form/comment-keypoint-request-form.component";
-import { faCheck, faTimes } from "@fortawesome/free-solid-svg-icons";
+import {
+    faCheck,
+    faMapMarker,
+    faTimes,
+    faBuilding,
+    faSquareCheck,
+    faSquareXmark
+} from "@fortawesome/free-solid-svg-icons";
+
+enum Tab {
+    KEYPOINTS,
+    FACILITIES,
+}
 @Component({
     selector: "xp-request-view",
     templateUrl: "./request-view.component.html",
@@ -23,10 +35,18 @@ export class RequestViewComponent implements OnInit {
     isVisible: boolean = false;
     faCheck = faCheck;
     faTimes = faTimes;
+    faMapMarker = faMapMarker;
+    faBuilding = faBuilding;
+    faSquareCheck = faSquareCheck;
+    faSquareXmark = faSquareXmark;
+    Tab = Tab;
+    selectedTab: Tab = Tab.KEYPOINTS;
     constructor(
         private service: AdministrationService,
         public dialogRef: MatDialog,
-    ) {}
+    ) {
+        this.selectedTab = Tab.KEYPOINTS;
+    }
 
     ngOnInit(): void {
         this.getRequests();
@@ -34,6 +54,13 @@ export class RequestViewComponent implements OnInit {
     requestForm = new FormGroup({
         comment: new FormControl(""),
     });
+
+    setActiveTab(tab: Tab, el: HTMLElement): void {
+        this.selectedTab = tab;
+        setTimeout(() => {
+            el.scrollIntoView({ behavior: "smooth", block: "start" });
+        }, 1);
+    }
 
     getRequests(): void {
         this.service.getRequests().subscribe({
@@ -66,8 +93,14 @@ export class RequestViewComponent implements OnInit {
     }
 
     rejectPublicKeyPointRequest(request: PublicKeyPointRequest): void {
-        this.dialogRef.open(CommentKeyPointRequestFormComponent, {
-            data: request,
+        const dialogRef = this.dialogRef.open(
+            CommentKeyPointRequestFormComponent,
+            {
+                data: request,
+            },
+        );
+        dialogRef.afterClosed().subscribe(result => {
+            this.getRequests(); // update the price
         });
     }
     getPublicStatusText(status: PublicStatus | undefined): string {
@@ -99,8 +132,11 @@ export class RequestViewComponent implements OnInit {
     }
 
     rejectPublicFacilityRequest(request: PublicFacilityRequest): void {
-        this.dialogRef.open(CommentRequestFormComponent, {
+        const dialogRef=this.dialogRef.open(CommentRequestFormComponent, {
             data: request,
+        });
+        dialogRef.afterClosed().subscribe(result => {
+            this.getRequests(); // update the price
         });
     }
 }

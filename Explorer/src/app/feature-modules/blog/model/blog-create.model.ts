@@ -4,4 +4,5 @@ export interface CreateBlog {
     date: string;
     status: number;
     authorId: number;
+    visibilityPolicy: number;
 }

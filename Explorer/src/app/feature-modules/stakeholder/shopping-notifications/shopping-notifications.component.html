@@ -1,0 +1,26 @@
+<div class="cards-list">
+    <div
+        class="notification"
+        *ngFor="let notification of shoppingNotifications"
+        (click)="setSeenStatus(notification, notification.tourId)"
+        [class.seen]="!notification.hasSeen"
+    >
+    <div class="notification-column">
+        <div class="notification-header">
+            {{ notification.header }}
+        </div>
+        <div class="notification-row">
+            <div>Sent</div>
+            <div class="sender">
+                {{ notification.created | date : "medium" }}
+            </div>
+        </div>
+        
+    </div>
+    <xp-tag tagText="✨new" *ngIf="!notification.hasSeen" />
+        <div class="notification-content">
+            {{ notification.description }}
+        </div>
+        
+    </div>
+</div>

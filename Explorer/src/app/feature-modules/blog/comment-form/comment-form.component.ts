@@ -34,7 +34,6 @@ export class CommentFormComponent {
             blogId: this.data.blogId,
             text: this.commentText,
         };
-
         this.service.addComment(comment).subscribe({
             next: (result: Comment) => {
                 this.dialogRef.close({

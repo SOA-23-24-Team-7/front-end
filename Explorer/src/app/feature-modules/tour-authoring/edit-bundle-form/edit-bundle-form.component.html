@@ -1,0 +1,43 @@
+<div class="add-modal">
+    <div class="add" (click)="$event.stopPropagation()">
+        <div class="add-head">
+            <fa-icon class="add-x" [icon]="faXmark" (click)="onClose()" />
+            <div class="add-title">Edit bundle</div>
+        </div>
+        <form class="add-form" [formGroup]="addBundleForm">
+            <div class="add-label">Name:</div>
+            <input
+                class="add-input"
+                type="text"
+                placeholder="Name"
+                formControlName="name"
+            />
+            <div class="add-label">
+                Price (total price: {{ calculateTotalPrice() }}):
+            </div>
+            <input
+                class="add-input"
+                type="number"
+                placeholder="Price"
+                formControlName="price"
+            />
+
+            <div class="add-title">Select tours</div>
+            <div class="tours">
+                <div class="margin" *ngFor="let tour of tours">
+                    <xp-tour-card-view
+                        [tour]="tour"
+                        *ngIf="tour.status == 1"
+                        [selectable]="true"
+                        (click)="onSelect(tour.id!)"
+                        [selected]="this.dataCopy.tourIds.includes(tour.id!)"
+                    ></xp-tour-card-view>
+                </div>
+            </div>
+
+            <button class="add-submit" type="submit" (click)="submit()">
+                <div class="add-submit-text">Edit</div>
+            </button>
+        </form>
+    </div>
+</div>

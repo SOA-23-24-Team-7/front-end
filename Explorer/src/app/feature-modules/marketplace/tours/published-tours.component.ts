@@ -13,6 +13,7 @@ import { AuthService } from "src/app/infrastructure/auth/auth.service";
 import { User } from "src/app/infrastructure/auth/model/user.model";
 import { ShoppingCartComponent } from "../shopping-cart/shopping-cart.component";
 import { TourToken } from "../model/tour-token.model";
+import { environment } from "src/env/environment";
 
 @Component({
     selector: "xp-published-tours",
@@ -26,6 +27,7 @@ export class PublishedToursComponent implements OnInit {
     addedTours: TourLimitedView[] = [];
     disabledButton: boolean = false;
     tokens: TourToken[] = [];
+    environment = environment;
 
     constructor(
         private service: MarketplaceService,
@@ -56,6 +58,12 @@ export class PublishedToursComponent implements OnInit {
                                     this.getTokens();
                                 },
                             });
+                    } else {
+                        this.service.getToursInCart(this.user.id).subscribe({
+                            next: result => {
+                                this.addedTours = result.results;
+                            },
+                        });
                     }
                 },
             });
@@ -126,15 +134,24 @@ export class PublishedToursComponent implements OnInit {
         const dialogRef = this.dialogRef.open(ShoppingCartComponent, {
             height: "600px",
             width: "800px",
-            data: this.addedTours, // lista javnih tacaka koju dobijam u ovoj komponenti i ovim je saljem u modalni dijalog
+            data: this.addedTours,
         });
 
         dialogRef.afterClosed().subscribe(result => {
             console.log("Zatvoren dijalog", result);
-            this.service.getToursInCart(this.user.id).subscribe({
-                next: (result: PagedResults<TourLimitedView>) => {
-                    this.addedTours = result.results;
-                    this.getTokens();
+            this.service.getShoppingCart(this.user.id).subscribe({
+                next: (result: ShoppingCart) => {
+                    this.shoppingCart = result;
+                    this.service.getToursInCart(this.user.id).subscribe({
+                        next: (result: PagedResults<TourLimitedView>) => {
+                            this.addedTours = result.results;
+                            this.service.getTouristTokens().subscribe({
+                                next: result => {
+                                    this.tokens = result;
+                                },
+                            });
+                        },
+                    });
                 },
             });
         });

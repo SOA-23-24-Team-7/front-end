@@ -1,4 +1,4 @@
-<div class="blog">
+<div class="blog" *ngIf="blog">
     <div
         class="sidebar"
         [ngClass]="{
@@ -14,9 +14,14 @@
             [ngClass]="{
                 active: vote ? vote.voteType == VoteType.UPVOTE : false
             }"
-            (click)="onUpVote($event)"
+            (click)="onUpVote($event)" *ngIf="user && user.id!=0"
         >
-            <fa-icon class="upvote" [icon]="faCircleUp" />
+            <fa-icon
+                class="upvote"
+                [icon]="faCircleUp"
+                tooltipPosition="left"
+                pTooltip="Upwote"
+            />
         </div>
         <div class="vote-count">{{ blog.voteCount }}</div>
         <div
@@ -24,9 +29,14 @@
             [ngClass]="{
                 active: vote ? vote.voteType == VoteType.DOWNVOTE : false
             }"
-            (click)="onDownVote($event)"
+            (click)="onDownVote($event)" *ngIf="user && user.id!=0"
         >
-            <fa-icon class="downvote" [icon]="faCircleDown" />
+            <fa-icon
+                class="downvote"
+                [icon]="faCircleDown"
+                tooltipPosition="left"
+                pTooltip="Downvote"
+            />
         </div>
     </div>
     <div class="blog-content">
@@ -34,11 +44,11 @@
         <div class="blog-description" [innerHTML]="blogMarkdown"></div>
     </div>
 </div>
-<div *ngIf="user" class="comment-section">
+<div *ngIf="user && blog" class="comment-section">
     <div class="comments-header">
         <h1>Comments:</h1>
         <div
-            *ngIf="blog.status != 2"
+            *ngIf="blog.status != 2 && user.id!=0"
             (click)="onAddClicked()"
             class="btn new-comment-button"
         >

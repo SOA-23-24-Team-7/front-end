@@ -1,23 +1,135 @@
 <ng-container *ngIf="person">
-<div class="main">
-  <mat-card class="card">
-    <mat-card-header>
-      <div mat-card-avatar>
-        <img src = "https://upload.wikimedia.org/wikipedia/commons/thumb/7/7e/Circle-icons-profile.svg/512px-Circle-icons-profile.svg.png?20160314153816" class = "user-image">
-      </div>
-      <mat-card-title>
-        {{person.name}} {{person.surname}}
-      </mat-card-title>
-      <mat-card-subtitle>{{person.email}}</mat-card-subtitle>
-    </mat-card-header>
-    <mat-card-content>
-      <p>Username: {{user.username}}</p>
-      <p>Motto: {{person.moto}}</p>
-      <p>Bio: {{person.bio}}</p>
-    </mat-card-content>
-    <mat-card-actions>
-        <button color="primary" mat-raised-button (click)="toggleEditing()">Edit</button>
-    </mat-card-actions>
-  </mat-card>
-</div>
+    <!-- <div id="followers-details">
+        <div>
+            <br />
+            <div class="float-container">
+                <div class="float-child">
+                    <a (click)="openFollowersDialog()">
+                        {{ followersCount }} followers
+                    </a>
+                </div>
+                <div class="float-child">
+                    <a (click)="openFollowingsDialog()">
+                        {{ followingsCount }} following
+                    </a>
+                </div>
+                <div class="float-child">
+                    <button
+                        class="add-followers-button"
+                        (click)="openFollowerSearchDialog()"
+                    >
+                        Add followers
+                    </button>
+                </div>
+                <div class="float-child">
+                    <button
+                        class="all-notifications-button"
+                        (click)="goToAllNotifications()"
+                    >
+                        All messages
+                    </button>
+                </div>
+                <div class="float-child">
+                    <button
+                        class="show-tour-execution-history"
+                        (click)="openTourExecutionHistoryDialog()"
+                    >
+                        Tour execution history
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div> -->
+    <div class="container">
+        <div class="card">
+            <div class="row">
+                <div
+                    class="profile-picture"
+                    [style.background-image]="
+                        'url(' + person.user.profilePicture + ')'
+                    "
+                ></div>
+                <div class="row profile-information">
+                    <div class="column">
+                        <div class="name">
+                            {{ person.name }} {{ person.surname }}
+                        </div>
+                        <div class="username">
+                            {{ "@" + person.user.username }}
+                        </div>
+                        <div class="motto">{{ person.motto }}</div>
+                        <div class="row follows">
+                            <div
+                                class="followed"
+                                (click)="openFollowersDialog()"
+                            >
+                                <span class="count">{{ followersCount }}</span>
+                                followers
+                            </div>
+                            <div
+                                class="following"
+                                (click)="openFollowingsDialog()"
+                            >
+                                <span class="count">{{ followingsCount }}</span>
+                                following
+                            </div>
+                            <div
+                                class="follow-btn"
+                                (click)="openFollowerSearchDialog()"
+                            >
+                                +
+                            </div>
+                        </div>
+                        <div class="row wallet" *ngIf="user.role == 'tourist'">
+                            <div>
+                                <span class="count">{{
+                                    wallet.adventureCoin
+                                }}</span>
+                                Action Coins
+                            </div>
+                        </div>
+                    </div>
+                    <div class="column" style="margin-left: auto">
+                        <div class="btn edit-btn" (click)="toggleEditing()">
+                            Edit
+                        </div>
+                        <div
+                            class="level-container"
+                            *ngIf="user.role == 'tourist'"
+                        >
+                            <div class="level">
+                                {{
+                                    "Level " +
+                                        user.touristProgress?.level +
+                                        " Tourist"
+                                }}
+                            </div>
+                            <div class="level-bar-border">
+                                <div
+                                    class="level-bar"
+                                    [style.width]="
+                                        user.touristProgress?.xp + '%'
+                                    "
+                                ></div>
+                            </div>
+                            <div class="xp">
+                                <div>0</div>
+                                <div>
+                                    <span class="current-xp">
+                                        {{ user.touristProgress?.xp }}
+                                    </span>
+                                    xp
+                                </div>
+                                <div>100</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row bio" *ngIf="person.bio">
+                <h1>Biography:</h1>
+                <div class="bio-text" [innerHTML]="bioMarkdown"></div>
+            </div>
+        </div>
+    </div>
 </ng-container>

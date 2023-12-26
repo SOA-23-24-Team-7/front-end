@@ -1,0 +1,65 @@
+.user-avatar {
+    height: 4rem;
+    width: 4rem;
+    border-radius: 50%;
+    border: rgba(var(--clr-outline-contrast), 1) 2px solid;
+    background-position: center;
+    background-size: cover;
+}
+
+.user-row {
+    display: flex;
+    width: 100%;
+    justify-content: center;
+    position: relative;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.user-info {
+    display: flex;
+    font-size: 1.4rem;
+    gap: 0.2rem;
+}
+
+.column {
+    display: flex;
+    flex-direction: column;
+    line-height: 1;
+    padding-top: 0.3rem;
+    max-width: 20ch;
+    overflow: hidden;
+}
+
+.username {
+    font-weight: 500;
+    font-style: italic;
+    font-size: 1.2rem;
+    color: rgb(var(--clr-primary-500));
+}
+
+.buttons {
+    display: flex;
+    gap: 1rem;
+    justify-content: space-around;
+}
+
+.btn {
+    gap: 0.2rem;
+    font-weight: 500;
+}
+
+.message {
+    background-color: rgb(var(--clr-primary-300));
+}
+
+.follow-btn {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 0.2rem;
+}
+
+.follow-btn:hover {
+    cursor: pointer;
+}

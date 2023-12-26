@@ -1,0 +1,197 @@
+:host {
+    border-radius: 1rem !important;
+}
+
+.keypoint-modal {
+    color: rgba(var(--clr-text), 1);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    visibility: hidden;
+    opacity: 0;
+    pointer-events: none;
+    border-radius: 1rem;
+}
+
+.kp {
+    display: flex;
+    background-color: rgba(var(--clr-background-secondary), 1);
+    flex-direction: column;
+    padding: 2rem;
+    border-radius: 1rem;
+    width: 40rem;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+    pointer-events: all;
+}
+
+.keypoint-head {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 1rem;
+}
+
+.x {
+    position: absolute;
+    left: 2rem;
+    justify-self: left;
+    color: rgba(var(--clr-primary-500), 1);
+    cursor: pointer;
+    font-size: 2rem;
+    transition: color 0.15s;
+}
+
+.title {
+    color: rgba(var(--clr-text), 1);
+    font-family: var(--fnt-header);
+    font-weight: 600;
+    font-size: 2rem;
+}
+
+.keypoint-image {
+    width: 100%;
+    height: auto;
+    object-fit: cover;
+    border-radius: 0.5rem;
+    margin-bottom: 1rem;
+}
+
+.keypoint-secret-text {
+    font-family: var(---fnt-body);
+    font-size: 1.25rem;
+    filter: blur(10px);
+    transition: all 1s;
+}
+
+.keypoint-secret-text-revealed {
+    filter: none;
+}
+
+.address {
+    display: flex;
+    margin-bottom: 1rem;
+}
+
+.address-icon {
+    color: rgba(var(--clr-text), 1);
+    font-size: 1.25rem;
+    transition: color 0.15s;
+    margin-right: 0.5rem;
+}
+
+.address-text {
+    font-family: var(---fnt-body);
+    font-size: 1.25rem;
+}
+
+.description {
+    font-family: var(---fnt-body);
+    font-size: 1.25rem;
+}
+
+.keypoint-secret {
+    margin-top: 1rem;
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    width: 100%;
+    min-height: 10rem;
+    justify-content: center;
+}
+
+.keypoint-secret-hider {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: -1rem;
+    right: -1rem;
+    background-color: rgba(100, 100, 100, 0.5);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: background-color 1s;
+}
+
+.keypoint-secret-hider-revealed {
+    background-color: rgba(100, 100, 100, 0);
+    cursor: default;
+}
+
+.keypoint-secret-hider-mask {
+    color: rgba(255, 255, 255, 1);
+    font-size: 3rem;
+    transition: color 1s;
+}
+
+.keypoint-secret-hider-mask-revealed {
+    color: rgba(255, 255, 255, 0);
+}
+
+.instruction {
+    font-family: var(---fnt-body);
+    font-size: 1.5rem;
+    color: rgba(255, 255, 255, 1);
+    transition: color 1s;
+}
+
+.instruction-revealed {
+    color: rgba(255, 255, 255, 0);
+}
+
+.keypoint-location {
+    margin-top: 1rem;
+    font-style: italic;
+    background-color: rgba(var(--clr-background-secondary), 1);
+}
+
+.delayed-fade-in {
+    animation: fadeIn 0.5s ease-in-out 0.1s forwards;
+}
+
+@keyframes fadeIn {
+    to {
+        visibility: visible;
+        opacity: 1;
+    }
+}
+
+.content {
+    overflow-y: auto;
+    overflow-x: hidden;
+    max-height: 70vh;
+    padding-right: 0.5rem;
+}
+
+::-webkit-scrollbar {
+    width: 12px;
+}
+
+::-webkit-scrollbar-thumb {
+    background-color: rgba(var(--clr-primary-500), 1);
+    border-radius: 6px;
+}
+
+::-webkit-scrollbar-track {
+    background-color: rgba(var(--clr-primary-500), 0.4);
+}
+
+/* For Firefox */
+/* You can customize these styles as needed */
+.content {
+    scrollbar-width: thin;
+    scrollbar-color: rgba(var(--clr-primary-500), 1)
+        rgba(var(--clr-primary-500), 0.4);
+}
+
+/* Optional: Adjust the styles for the track and thumb in Firefox */
+.content::-webkit-scrollbar-thumb {
+    background-color: #3498db;
+    background-color: rgba(var(--clr-primary-500), 1);
+}
+
+.content::-webkit-scrollbar-track {
+    background-color: rgba(var(--clr-primary-500), 0.4);
+}

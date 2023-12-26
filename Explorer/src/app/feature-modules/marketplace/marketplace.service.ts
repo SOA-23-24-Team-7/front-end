@@ -22,9 +22,15 @@ import { PublicKeyPoint } from "./model/public-key-point.model";
 import { PublicFacilities } from "./model/public-facilities.model";
 import { KeyPoint } from "../tour-authoring/model/key-point.model";
 import { ShoppingCart } from "./model/shopping-cart";
-import { OrderItem } from "./model/order-item";
+import { OrderItem as any } from "./model/order-item";
 import { TourLimitedView } from "./model/tour-limited-view.model";
 import { TourToken } from "./model/tour-token.model";
+import { TourSale } from "./model/tour-sale.model";
+import { Coupon } from "./model/coupon.model";
+import { CouponApplication } from "./model/coupon-applicaton.model";
+import { Bundle } from "../tour-authoring/model/bundle.model";
+import { BundleOrderItem } from "./model/bundle-order-item.model";
+import { SortOption } from "./model/sort-option.model";
 
 @Injectable({
     providedIn: "root",
@@ -34,26 +40,26 @@ export class MarketplaceService {
 
     getTourPreference(): Observable<TourPreference> {
         return this.http.get<TourPreference>(
-            environment.apiHost + "tourist/tour-preferences",
+            environment.apiHost + "tourist/preferences",
         );
     }
 
     addPreference(tourPreference: TourPreference): Observable<TourPreference> {
         return this.http.post<TourPreference>(
-            environment.apiHost + "tourist/tour-preferences/create",
+            environment.apiHost + "tourist/preferences/create",
             tourPreference,
         );
     }
 
     deletePreference(id: number): Observable<TourPreference> {
         return this.http.delete<TourPreference>(
-            environment.apiHost + "tourist/tour-preferences/" + id,
+            environment.apiHost + "tourist/preferences/" + id,
         );
     }
 
     updatePreference(preference: TourPreference): Observable<TourPreference> {
         return this.http.put<TourPreference>(
-            environment.apiHost + "tourist/tour-preferences",
+            environment.apiHost + "tourist/preferences",
             preference,
         );
     }
@@ -110,27 +116,29 @@ export class MarketplaceService {
     }
     getProblem(): Observable<PagedResults<Problem>> {
         return this.http.get<PagedResults<Problem>>(
-            environment.apiHost + "problem",
+            environment.apiHost + "tourist/problem/all",
         );
     }
     addProblem(problem: Problem): Observable<Problem> {
         return this.http.post<Problem>(
-            environment.apiHost + "problem",
+            environment.apiHost + "tourist/problem",
             problem,
         );
     }
     updateProblem(problem: Problem): Observable<Problem> {
         return this.http.put<Problem>(
-            environment.apiHost + "problem/" + problem.id,
+            environment.apiHost + "tourist/problem/" + problem.id,
             problem,
         );
     }
     deleteProblem(id: number): Observable<Problem> {
-        return this.http.delete<Problem>(environment.apiHost + "problem/" + id);
+        return this.http.delete<Problem>(
+            environment.apiHost + "tourist/problem/" + id,
+        );
     }
-    getProblemByUserId(id: number): Observable<PagedResults<Problem>> {
+    getProblemByUserId(): Observable<PagedResults<Problem>> {
         return this.http.get<PagedResults<Problem>>(
-            environment.apiHost + "problem/" + id,
+            environment.apiHost + "tourist/problem/",
         );
     }
     getClubs(): Observable<PagedResults<Club>> {
@@ -285,12 +293,20 @@ export class MarketplaceService {
             shoppingCart,
         );
     }
-    addOrderItem(orderItem: OrderItem): Observable<OrderItem> {
-        return this.http.post<OrderItem>(
+    addOrderItem(orderItem: any): Observable<any> {
+        return this.http.post<any>(
             environment.apiHost + "tourist/shoppingCart/addItem/",
             orderItem,
         );
     }
+
+    addBundleOrderItem(bundleOrderItem: BundleOrderItem): Observable<any> {
+        return this.http.post<any>(
+            environment.apiHost + "tourist/shoppingCart/add-bundle/",
+            bundleOrderItem,
+        );
+    }
+
     getShoppingCart(id: number): Observable<ShoppingCart> {
         return this.http.get<ShoppingCart>(
             environment.apiHost + "tourist/shoppingCart/" + id,
@@ -302,8 +318,8 @@ export class MarketplaceService {
             environment.apiHost + "market-place/tours/inCart/" + id,
         );
     }
-    getOrderItem(tourId: number, touristId: number): Observable<OrderItem> {
-        return this.http.get<OrderItem>(
+    getOrderItem(tourId: number, touristId: number): Observable<any> {
+        return this.http.get<any>(
             environment.apiHost +
                 "tourist/shoppingCart/getItem/" +
                 tourId +
@@ -315,7 +331,7 @@ export class MarketplaceService {
         id: number | undefined,
         shoppingCartId: number | undefined,
     ): any {
-        return this.http.delete<OrderItem>(
+        return this.http.delete<any>(
             environment.apiHost +
                 "tourist/shoppingCart/removeItem/" +
                 id +
@@ -323,11 +339,26 @@ export class MarketplaceService {
                 shoppingCartId,
         );
     }
-    addToken(tourId: number | undefined): any {
-        return this.http.post<TourToken>(
-            environment.apiHost + "token/" + tourId,
-            {},
-        );
+    addToken(
+        tourId: number,
+        touristId: number,
+        totalPrice: number,
+        orderItemPrice: number,
+    ): Promise<TourToken | undefined> {
+        return this.http
+            .post<TourToken>(
+                environment.apiHost +
+                    "token/" +
+                    tourId +
+                    "/" +
+                    touristId +
+                    "/" +
+                    totalPrice +
+                    "/" +
+                    orderItemPrice,
+                {},
+            )
+            .toPromise();
     }
 
     deleteShoppingKart(shoppingKartId: number | undefined): any {
@@ -340,5 +371,189 @@ export class MarketplaceService {
         return this.http.get<Array<TourToken>>(
             environment.apiHost + "token/tourists/",
         );
+    }
+
+    getTourById(tourId: number): Observable<Tour> {
+        const route: string =
+            environment.apiHost + "market-place/tours/" + tourId;
+        return this.http.get<Tour>(route);
+    }
+
+    canTourBeRated(tourId: number): Observable<boolean> {
+        const route: string =
+            environment.apiHost + "market-place/tours/can-be-rated/" + tourId;
+        return this.http.get<boolean>(route);
+    }
+
+    searchTours(
+        searchFilter: any,
+        sortOption: SortOption,
+    ): Observable<PagedResults<Tour>> {
+        let query = this.prepareSearchQuery(searchFilter, sortOption);
+        console.log(query);
+        const path = environment.apiHost + "tourist/tour/search" + query;
+        return this.http.get<PagedResults<Tour>>(path);
+    }
+
+    prepareSearchQuery(searchFilter: any, sortOption: SortOption): String {
+        let query = `?page=${searchFilter.page}&pageSize=${searchFilter.pageSize}`;
+        query += searchFilter.name != "" ? `&name=${searchFilter.name}` : "";
+        query +=
+            searchFilter.minPrice >= 0 && searchFilter.minPrice !== ""
+                ? `&minPrice=${searchFilter.minPrice}`
+                : "";
+        query +=
+            searchFilter.maxPrice >= 0 && searchFilter.maxPrice !== ""
+                ? `&maxPrice=${searchFilter.maxPrice}`
+                : "";
+        query +=
+            searchFilter.onDiscount != false
+                ? `&onDiscount=${searchFilter.onDiscount}`
+                : "";
+        query +=
+            searchFilter.minDifficulty >= 0 && searchFilter.minDifficulty !== ""
+                ? `&minDifficulty=${searchFilter.minDifficulty}`
+                : "";
+        query +=
+            searchFilter.maxDifficulty >= 0 && searchFilter.maxDifficulty !== ""
+                ? `&maxDifficulty=${searchFilter.maxDifficulty}`
+                : "";
+        query +=
+            searchFilter.minDuration >= 0 && searchFilter.minDuration !== ""
+                ? `&minDuration=${searchFilter.minDuration}`
+                : "";
+        query +=
+            searchFilter.maxDuration >= 0 && searchFilter.maxDuration !== ""
+                ? `&maxDuration=${searchFilter.maxDuration}`
+                : "";
+        query +=
+            searchFilter.minAverageRating >= 0 &&
+            searchFilter.minAverageRating !== ""
+                ? `&minAverageRating=${searchFilter.minAverageRating}`
+                : "";
+        query +=
+            searchFilter.minLength >= 0 && searchFilter.minLength !== ""
+                ? `&minLength=${searchFilter.minLength}`
+                : "";
+        query +=
+            searchFilter.maxLength >= 0 && searchFilter.maxLength !== ""
+                ? `&maxLength=${searchFilter.maxLength}`
+                : "";
+        query +=
+            searchFilter.longitude >= -180 && searchFilter.longitude !== ""
+                ? `&longitude=${searchFilter.longitude}`
+                : "";
+        query +=
+            searchFilter.latitude >= -180 && searchFilter.latitude !== ""
+                ? `&latitude=${searchFilter.latitude}`
+                : "";
+        query +=
+            searchFilter.distance > 0 && searchFilter.distance !== ""
+                ? `&maxDistance=${searchFilter.distance}`
+                : "";
+        query += sortOption != SortOption.NoSort ? `&sortBy=${sortOption}` : "";
+        return query;
+    }
+
+    addTourSale(tourSale: TourSale): Observable<TourSale> {
+        return this.http.post<TourSale>(
+            environment.apiHost + "tour-sales",
+            tourSale,
+        );
+    }
+
+    getTourSales(): Observable<TourSale[]> {
+        return this.http.get<TourSale[]>(environment.apiHost + "tour-sales");
+    }
+
+    getTourSaleById(id: number): Observable<TourSale> {
+        return this.http.get<TourSale>(
+            environment.apiHost + "tour-sales/" + id,
+        );
+    }
+
+    updateTourSale(tourSale: TourSale): Observable<TourSale> {
+        return this.http.put<TourSale>(
+            environment.apiHost + "tour-sales",
+            tourSale,
+        );
+    }
+
+    deleteTourSale(id: number): Observable<void> {
+        return this.http.delete<void>(environment.apiHost + "tour-sales/" + id);
+    }
+
+    getDiscountForTour(tourId: number): Observable<number | null> {
+        return this.http.get<number | null>(
+            environment.apiHost + "tour-sales/tours/" + tourId,
+        );
+    }
+
+    getPublishedToursByAuthor(
+        authorId: number,
+    ): Observable<PagedResults<Tour>> {
+        const path =
+            environment.apiHost +
+            "tourist/tour/search" +
+            "?page=0&pageSize=0&authorId=" +
+            authorId;
+        return this.http.get<PagedResults<Tour>>(path);
+    }
+
+    addCoupon(coupon: Coupon): Observable<Coupon> {
+        return this.http.post<Coupon>(environment.apiHost + "coupon/", coupon);
+    }
+    getCouponsById(authorId: number): Observable<PagedResults<Coupon>> {
+        return this.http.get<PagedResults<Coupon>>(
+            environment.apiHost + "coupon/"+authorId,
+        );
+    }
+    deleteCoupon(id: number): Observable<Coupon> {
+        return this.http.delete<Coupon>(environment.apiHost + "coupon/" + id);
+    }
+    updateCoupon(coupon: Coupon): Observable<Coupon> {
+        return this.http.put<Coupon>(
+            environment.apiHost + "coupon/" + coupon.id,
+            coupon,
+        );
+    }
+
+    applyDiscount(
+        couponAplication: CouponApplication,
+    ): Observable<ShoppingCart> {
+        return this.http.post<ShoppingCart>(
+            environment.apiHost + "tourist/shoppingCart/apply-coupon",
+            couponAplication,
+        );
+    }
+
+    getPublishedBundles(): Observable<Bundle[]> {
+        let path = environment.apiHost + "tourist/bundles";
+        return this.http.get<Bundle[]>(path);
+    }
+
+    getBundleById(bundleId: number): Observable<Bundle> {
+        let path = environment.apiHost + "tourist/bundles/" + bundleId;
+        return this.http.get<Bundle>(path);
+    }
+
+    removeBundleOrderItem(bundleOrderItemId: number): Observable<any> {
+        let path =
+            environment.apiHost +
+            "tourist/shoppingCart/remove-bundle-item/" +
+            bundleOrderItemId;
+        return this.http.delete<any>(path);
+    }
+
+    buyBundle(bundleId: number): Observable<any> {
+        console.log("6");
+        let path = environment.apiHost + "token/bundle/" + bundleId;
+        return this.http.post<any>(path, {});
+    }
+    getActiveTours(): Observable<PagedResults<Tour>> {
+        return this.http.get<PagedResults<Tour>>(environment.apiHost+'tourist/tourrecommenders/activetours');
+    }
+    getRecommendedTours(): Observable<PagedResults<Tour>> {
+        return this.http.get<PagedResults<Tour>>(environment.apiHost+'tourist/tourrecommenders/recommendedtours');
     }
 }

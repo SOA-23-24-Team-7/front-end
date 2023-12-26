@@ -1,11 +1,219 @@
-.card{
-  width: 60%;
-  max-width: 60%;
-  height: 15rem;
+.container {
+    display: flex;
+    justify-content: center;
+    color: rgb(var(--clr-text));
+    align-items: center;
+    height: 100%;
 }
 
-.main{
-  display: flex;
-  width: 100%;
-  justify-content: center;
+.card {
+    display: flex;
+    flex-direction: column;
+    background-color: rgb(var(--clr-background-secondary));
+    width: 55rem;
+    padding: 2rem;
+    margin: 1rem;
+    border-radius: 0.5rem;
+    border: rgba(var(--clr-primary-500), 1) 1px solid;
+    box-shadow: 0 0 0.5rem rgba(var(--clr-primary-500), 0.8);
+    justify-content: space-between;
+    gap: 2rem;
+}
+
+.column {
+    display: flex;
+    flex-direction: column;
+}
+
+.row {
+    display: flex;
+    align-items: flex-start;
+    flex-grow: 1;
+}
+
+.profile-information {
+    font-size: 1.5rem;
+    margin-left: 1.5rem;
+    padding-block: 2.5rem;
+}
+
+.profile-information .column {
+    gap: 0.2rem;
+}
+
+.motto {
+    font-style: italic;
+    font-size: 1rem;
+}
+
+.username {
+    color: rgb(var(--clr-primary-500));
+}
+
+.name {
+    font-size: 2.5rem;
+    font-weight: 600;
+    color: rgb(var(--clr-text));
+    line-height: 2rem;
+    display: flex;
+    align-items: center;
+}
+
+.profile-picture {
+    width: 15rem;
+    height: 15rem;
+    border-radius: 50%;
+    border: rgba(var(--clr-primary-500), 1) 2px solid;
+    box-shadow: 0 0 0.5rem rgba(var(--clr-primary-500), 0.8);
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+.follows {
+    gap: 1rem;
+    font-size: 1.1rem;
+    font-weight: 300;
+    display: flex;
+    align-items: center;
+}
+
+.wallet {
+    gap: 1rem;
+    font-size: 1.1rem;
+    font-weight: 300;
+    display: flex;
+    align-items: center;
+}
+
+.follow-btn {
+    font-weight: 600;
+    color: rgb(var(--clr-primary-500));
+}
+
+.follow-btn:hover {
+    cursor: pointer;
+}
+
+.following:hover {
+    cursor: pointer;
+}
+
+.followed:hover {
+    cursor: pointer;
+}
+
+.count {
+    font-weight: 600;
+    font-size: 1.3rem;
+}
+
+.bio {
+    font-size: 1.1rem;
+    width: 100%;
+    padding-block: 1rem;
+    padding-inline: 1.2rem;
+    color: rgb(var(--clr-text));
+    line-height: 1.3;
+    background-color: rgb(var(--clr-background));
+    border-radius: 2rem;
+    display: flex;
+    flex-direction: column;
+    padding-bottom: 3rem;
+}
+
+.bio-text {
+    display: flex;
+    flex-direction: column;
+    gap: 1.4rem;
+}
+
+.edit-btn {
+    font-size: 1rem;
+    margin-left: auto;
+}
+
+.main {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    position: relative;
+}
+
+#followers-details {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    position: relative;
+}
+
+.float-container {
+    padding: 10px;
+    min-width: 440px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.float-child {
+    padding: 10px;
+    text-align: center;
+}
+
+a {
+    cursor: pointer;
+    color: rgb(var(--clr-text));
+}
+
+button.all-notifications-button,
+button.add-followers-button,
+button.show-tour-execution-history {
+    color: white;
+    background-color: #4054b4;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+button.all-notifications-button:hover,
+button.add-followers-button:hover {
+    background-color: #2c3a89;
+}
+
+.level-container {
+    display: flex;
+    flex-direction: column;
+    width: 10rem;
+    font-size: 1rem;
+    margin-top: 4rem;
+    margin-right: 4rem;
+    font-size: 1.2rem;
+}
+
+.xp {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    font-size: 1.1rem;
+}
+
+.level-bar {
+    position: absolute;
+    top: 0;
+    left: 0;
+    border-bottom: 2px solid rgb(var(--clr-accent-500));
+    height: 1px;
+    box-shadow: 0 0 10px rgb(var(--clr-accent-300));
+}
+
+.level-bar-border {
+    position: relative;
+    width: 100%;
+    border-bottom: 2px solid rgb(var(--clr-primary-300));
+}
+
+.current-xp {
+    color: rgb(var(--clr-accent-700));
+    text-shadow: 0 0 10px rgb(var(--clr-accent-700));
 }

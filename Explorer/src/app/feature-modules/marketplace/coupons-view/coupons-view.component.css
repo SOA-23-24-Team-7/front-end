@@ -1,0 +1,177 @@
+.main-design {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding-left: 2rem;
+    padding-right: 2rem;
+}
+.header {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    border-bottom: rgba(var(--border-primary), 1) 1px solid;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.header-title {
+    color: rgba(var(--clr-text), 1);
+    transition: color 0.15s;
+    font-family: var(--fnt-header);
+    font-size: 2.5rem;
+    margin-top: 3rem;
+    margin-right: auto;
+}
+
+.header-paragraph {
+    font-family: var(--fnt-body);
+    margin-top: 0.5rem;
+    font-size: 1.25rem;
+    font-weight: 400;
+    color: rgba(var(--clr-text), 1);
+    transition: color 0.15s;
+    margin-bottom: 1rem;
+    line-height: 1.5;
+}
+
+.problems {
+    max-width: 100%;
+    width: fit-content;
+    height: 100%;
+    display: flex;
+    padding-inline: 3rem;
+    overflow: auto;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+.header-title {
+    color: rgba(var(--clr-text), 1);
+    transition: color 0.15s;
+    font-family: var(--fnt-header);
+    font-size: 2.5rem;
+    margin-top: 3rem;
+    margin-right: auto;
+}
+.problems::-webkit-scrollbar {
+    width: 0.5em;
+}
+
+.problems::-webkit-scrollbar-thumb {
+    background-color: rgba(var(--clr-background));
+    border-radius: 0.3rem;
+}
+
+.card {
+    display: flex;
+    flex-direction: column;
+    background-color: rgb(var(--clr-background-secondary));
+    width: 34rem;
+    height: 100%;
+    margin: 1.5rem;
+    border-radius: 0.5rem;
+    border: rgba(var(--clr-outline-contrast), 1) 1px solid;
+    color: rgb(var(--clr-text));
+    transition: 0.3s;
+    box-shadow: 0 0 0.5rem rgba(var(--clr-outline-contrast), 0.8);
+    gap: 0.5rem;
+}
+
+.card-hover:hover {
+    transform: scale(1.05);
+    cursor: pointer;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+.coupon {
+    padding: 1.2rem;
+    color: rgb(var(--clr-text));
+    font-family: var(--fnt-body);
+    position: relative;
+    height: 10rem;
+    display: flex;
+    flex-direction: column;
+}
+
+.coupon-header {
+    display: flex;
+    justify-content: space-between;
+    color: rgb(var(--clr-text));
+    font-family: var(--fnt-body);
+    align-items: flex-start;
+    position: relative;
+}
+.coupon-info {
+    position: relative;
+}
+.icons {
+    display: flex;
+    position: absolute;
+    bottom: 1rem;
+    right: 0.8rem;
+}
+
+.coupon-details {
+    margin-top: 1.5rem;
+    margin-top: auto;
+}
+.coupon-details p {
+    font-size: 1rem;
+    color: rgb(var(--clr-text));
+    font-family: var(--fnt-body);
+}
+
+p span {
+    font-weight: 600;
+}
+
+.coupon-details p {
+    color: rgb(var(--clr-text));
+    font-family: var(--fnt-body);
+}
+
+.discount {
+    font-size: 1.6rem;
+    font-weight: 900;
+    margin-right: 5px;
+    color: rgb(var(--clr-accent-500));
+    font-family: var(--fnt-body);
+}
+.fa-icon-edit {
+    font-size: 1rem;
+    color: rgba(var(--clr-primary-500), 0.8);
+    transition: color 0.15s;
+    padding-right: 1rem;
+    margin-top: 1rem;
+}
+.fa-icon-delete {
+    font-size: 1rem;
+    color: rgba(var(--clr-error-500), 0.8);
+    transition: color 0.15s;
+    padding-right: 1rem;
+    margin-top: 1rem;
+}
+
+.fa-icon-edit:hover {
+    cursor: pointer;
+    color: rgba(var(--clr-primary-500), 1);
+}
+.fa-icon-delete:hover {
+    cursor: pointer;
+    color: rgba(var(--clr-error-500), 1);
+}
+
+.all {
+    color: rgba(var(--clr-primary-500));
+    font-weight: 500;
+    font-family: var(--fnt-body);
+    position: absolute;
+    text-wrap: nowrap;
+    right: 0;
+    margin-top: -0.4rem;
+}

@@ -1,0 +1,93 @@
+:host {
+    border-radius: 1rem !important;
+}
+.container {
+    display: flex;
+    align-items: center;
+    background-color: rgb(var(--clr-background));
+    border-radius: 1rem;
+    color: rgb(var(--clr-text));
+    flex-direction: column;
+    padding-inline: 4rem;
+    padding-block: 3rem;
+}
+
+.row {
+    display: flex;
+    justify-content: flex-start;
+    width: 100%;
+    gap: 1rem;
+    margin-block: 0.5rem;
+    font-size: 1.2rem;
+}
+
+.row fa-icon {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 20px;
+}
+.option-name {
+    display: flex;
+    gap: 0.25rem;
+    user-select: none;
+    align-items: center;
+    transition: color 0.3s ease;
+}
+
+.title {
+    font-family: var(--fnt-header);
+    font-weight: 600;
+    font-size: 2rem;
+}
+
+.sub-title {
+    font-weight: 600;
+    font-size: 1.4rem;
+    margin-top: 1rem;
+}
+
+.btn {
+    margin-top: 1rem;
+}
+
+input:focus {
+    outline: none;
+}
+
+input:hover,
+.option-name:hover {
+    cursor: pointer;
+}
+
+input[type="checkbox"] {
+    box-sizing: border-box;
+    width: 20px;
+    height: 20px;
+    margin: 6px;
+    padding: 0;
+    border: 2px solid rgb(var(--clr-text));
+    border-radius: 50%;
+    appearance: none;
+    background-color: transparent;
+    outline: none;
+    transition: border 0.3s ease, background-color 0.3s ease;
+}
+
+input[type="checkbox"]:not(:disabled):checked {
+    border-color: rgb(var(--clr-primary-500));
+    background-color: rgb(var(--clr-primary-500));
+    background-clip: content-box;
+    padding: 2px;
+    background-image: radial-gradient(
+        circle,
+        rgb(var(--clr-primary-500)) 0%,
+        rgb(var(--clr-primary-500)) 50%,
+        transparent 60%,
+        transparent 100%
+    );
+}
+
+input[type="checkbox"]:not(:disabled):checked + .option-name {
+    color: rgb(var(--clr-primary-500));
+}

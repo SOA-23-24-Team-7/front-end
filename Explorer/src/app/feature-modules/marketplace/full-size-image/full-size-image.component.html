@@ -1,0 +1,8 @@
+<div class="modal">
+    <div (click)="$event.stopPropagation()">
+        <div class="register-head">
+            <fa-icon class="register-x" [icon]="faXmark" (click)="onClose()" />
+            <img [src]="imagePath" class="image" alt="Review Image" />
+        </div>
+    </div>
+</div>

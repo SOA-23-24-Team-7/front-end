@@ -1,7 +1,74 @@
-<button class="add-enable" (click)="onAddClicked()" mat-button>
-    <div class="enable-text">Enable map</div>
-</button>
-<button class="add-enable" (click)="openDialog()" mat-button>
+<div class="tour-info">
+    <div class="information">
+        <div class="tour-name">
+            <div class="name">
+                {{ tour?.name }}
+            </div>
+        </div>
+        <div class="tour-price">
+            {{ tour?.price }}
+            <fa-icon class="tour-price-tokens" [icon]="faCoins" />
+        </div>
+        <div class="tour-tags">
+            <xp-tag *ngFor="let tag of tour?.tags" tagText="{{ tag }}" />
+        </div>
+        <div class="tour-description">{{ tour?.description }}</div>
+        <div
+            class="btn btn-done"
+            (click)="openPublishModal()"
+            *ngIf="tour?.status == 2 || tour?.status == 0"
+        >
+            Done
+        </div>
+    </div>
+    <div class="map">
+        <xp-map
+            mapName="keypointMap"
+            [showLegend]="false"
+            [isKeyPointMap]="true"
+            [keyPoints]="keyPoints"
+            (tourDistanceChangedEvent)="distanceChanged($event)"
+        ></xp-map>
+    </div>
+</div>
+<div class="keypoints">
+    <div
+        class="list-cards-button"
+        id="prev-button"
+        (click)="scrollToPrevCard()"
+    >
+        <div class="triangle-left"></div>
+    </div>
+    <div class="key-point-cards-container">
+        <xp-key-point-card
+            [isAddNew]="true"
+            *ngIf="tour?.status == 2 || tour?.status == 0"
+            (click)="openNewKeyPointDialog()"
+        />
+        <xp-key-point-card
+            [isAddNewPublic]="true"
+            *ngIf="tour?.status == 2 || tour?.status == 0"
+            (click)="openPublicKeyPointsDialog()"
+        />
+        <div *ngFor="let kp of keyPoints" class="cards-buttons-container">
+            <xp-key-point-card
+                [keyPoint]="kp"
+                (deleteClicked)="deleteKeyPoint($event)"
+                (click)="openEditKeyPointDialog(kp)"
+            >
+            </xp-key-point-card>
+        </div>
+    </div>
+    <div
+        class="list-cards-button"
+        id="next-button"
+        (click)="scrollToNextCard()"
+    >
+        <div class="triangle-right"></div>
+    </div>
+</div>
+
+<!-- <button class="add-enable" (click)="openDialog()" mat-button>
     <div class="enable-text">Add public key-point</div>
 </button>
 
@@ -151,4 +218,4 @@
             </div>
         </div>
     </div>
-</div>
+</div> -->

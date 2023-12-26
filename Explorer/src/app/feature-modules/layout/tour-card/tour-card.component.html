@@ -1,21 +1,59 @@
 <div class="tour-card">
     <div *ngIf="tour.hasDiscount" class="discount-badge">-50% OFF</div>
-    <img class="tour-image" [src]="tour.image" />
+    <div class="card" [routerLink]="['/tour/',tour.id]">
+        <ng-container *ngFor="let image of images; let i = index">
+            <img *ngIf="i === currentIndex" [src]="image" class="tour-image" @carouselAnimation/>
+        </ng-container>
+    </div>
+    
     <div class="tour-card-details">
-        <div class="tour-name">{{ tour.name }}</div>
+        <div class="tour-name" [routerLink]="['/tour/',tour.id]">{{ tour.name }}</div>
         <div class="tour-tags">
-            <div class="tour-tag" *ngFor="let tag of tour.tags">{{ tag }}</div>
+        
+            <div *ngFor="let tag of displayedTags" class="tour-tag">{{ tag }}</div>
+            
+            <button 
+                    *ngIf="tour.tags.length>3"
+                    class="show-more-button"
+                    (click)="toggleShowMore()"
+                >
+                {{ showMore ? 'Hide' : '+' }}{{ showMore ? '' : tour.tags.length-3 + ' More' }}
+                </button>
         </div>
+
         <div class="tour-review-content">
-            <div class="tour-review">{{ tour.review }}</div>
-            <img class="tour-review-icon" [src]="'/assets/icons/star.svg'" />
+            <p>Rating:</p> <!--<img class="tour-review-icon" [src]="'/assets/icons/star.svg'" /> -->
+            <fa-icon class="tour-rating-star" [icon]="faStar"/>
+            <div class="tour-review"> {{ tour.averageRating }}</div>
+            
+            
         </div>
+        
         <div
-            [ngClass]="
-                tour.hasDiscount ? 'tour-discounted-price' : 'tour-price'
-            "
+            class="tour-price"
         >
-            {{ tour.price }}
+        
+        
+        
+        <!--<div class="tour-card-right">
+            <div *ngIf="discount" class="tour-price-value"><s>{{tour.price}}</s></div>
+            <div *ngIf="!discount" class="tour-price-value">{{tour.price}}</div>
+            <fa-icon class="tour-price-tokens" [icon]="faCoins"/>
+        </div>-->
+        <p>From:</p>
+        </div><div *ngIf="!discount" class="tour-price-value">{{tour.price}}
+            <fa-icon class="tour-price-tokens" [icon]="faCoins"/>
         </div>
+        <div *ngIf="discount" class="tour-price-discount">
+            <div class="tour-price-value">{{discountedPrice!}}</div>
+            <fa-icon class="tour-price-tokens" [icon]="faCoins"/>
+            <div class="discount">-{{discount! * 100}}%</div>
+            <div *ngIf="discount" class="tour-price-value"><s>{{tour.price}}</s>
+                
+            </div>
+            <fa-icon class="tour-price-tokens" [icon]="faCoins"/>
+            
+        </div>
+        
     </div>
 </div>

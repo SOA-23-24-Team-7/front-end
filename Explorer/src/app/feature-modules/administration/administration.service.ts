@@ -4,12 +4,14 @@ import { Equipment } from "./model/equipment.model";
 import { environment } from "src/env/environment";
 import { Observable } from "rxjs";
 import { PagedResults } from "src/app/shared/model/paged-results.model";
+import { Person } from "../stakeholder/model/person.model";
 import { User } from "src/app/infrastructure/auth/model/user.model";
-import { Rating } from "./model/rating.model";
-import { RatingUsername } from "./model/ratingWithUsername";
+import { UserRating } from "./model/user-rating.model";
 import { Problem } from "../marketplace/model/problem.model";
 import { PublicKeyPointRequest } from "../tour-authoring/model/public-key-point-request.model";
 import { PublicFacilityRequest } from "../tour-authoring/model/public-facility-request.model";
+import { Wallet } from "../stakeholder/model/wallet.model";
+import { walletUpdate } from "./model/walletUpdate.model";
 
 @Injectable({
     providedIn: "root",
@@ -17,9 +19,9 @@ import { PublicFacilityRequest } from "../tour-authoring/model/public-facility-r
 export class AdministrationService {
     constructor(private http: HttpClient) {}
 
-    getUsersByAdmin(): Observable<PagedResults<User>> {
-        return this.http.get<PagedResults<User>>(
-            environment.apiHost + "administration/users",
+    getUsersByAdmin(): Observable<PagedResults<Person>> {
+        return this.http.get<PagedResults<Person>>(
+            environment.apiHost + "administration/people",
         );
     }
 
@@ -35,8 +37,8 @@ export class AdministrationService {
         );
     }
 
-    getRatings(): Observable<PagedResults<RatingUsername>> {
-        return this.http.get<PagedResults<RatingUsername>>(
+    getRatings(): Observable<PagedResults<UserRating>> {
+        return this.http.get<PagedResults<UserRating>>(
             environment.apiHost + "rating/ratings",
         );
     }
@@ -115,5 +117,15 @@ export class AdministrationService {
             "/" +
             comment;
         return this.http.patch<any>(route, { observe: "response" });
+    }
+    getTouristWallet(
+        toursitId: number
+    ): Observable<Wallet> {
+        return this.http.get<Wallet>(environment.apiHost + "wallet/getTourists?touristId=" + toursitId)
+    }
+    updateToursitWallet(
+        walletUpdate: walletUpdate
+    ): Observable<Wallet> {
+        return this.http.put<Wallet>(environment.apiHost + "wallet/" + walletUpdate.id, walletUpdate);
     }
 }

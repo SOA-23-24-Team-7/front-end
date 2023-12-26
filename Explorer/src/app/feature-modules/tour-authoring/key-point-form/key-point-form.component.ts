@@ -1,12 +1,10 @@
 import {
-    AfterViewInit,
     Component,
     EventEmitter,
     Input,
     OnChanges,
     Output,
     SimpleChanges,
-    ViewChild,
 } from "@angular/core";
 import { TourAuthoringService } from "../tour-authoring.service";
 import { FormControl, FormGroup, Validators } from "@angular/forms";
@@ -21,6 +19,8 @@ import {
 import { AuthService } from "src/app/infrastructure/auth/auth.service";
 import { Person } from "../../stakeholder/model/person.model";
 import { MapService } from "src/app/shared/map/map.service";
+import { MatDialog } from "@angular/material/dialog";
+import { KeyPointEncounterFormComponent } from "../../encounter/key-point-encounter-form/key-point-encounter-form.component";
 
 @Component({
     selector: "xp-key-point-form",
@@ -28,13 +28,14 @@ import { MapService } from "src/app/shared/map/map.service";
     styleUrls: ["./key-point-form.component.css"],
 })
 export class KeyPointFormComponent implements OnChanges {
-    @Output() keyPointUpdated = new EventEmitter<null>();
+    @Output() keyPointUpdated = new EventEmitter<KeyPoint>();
     @Input() keyPoint: KeyPoint | null;
     @Input() longLat: [number, number];
     @Input() shouldEdit: boolean = false;
     tourImage: string | null = null;
     tourImageFile: File | null = null;
-    //isPublicChecked = false;
+    hasEncounter: boolean = false;
+    isEncounterRequired: boolean = false;
     person: Person;
 
     constructor(
@@ -42,6 +43,7 @@ export class KeyPointFormComponent implements OnChanges {
         private service: TourAuthoringService,
         private authService: AuthService,
         private mapService: MapService,
+        private dialogRef: MatDialog,
     ) {}
     ngOnInit(): void {
         this.getPerson();
@@ -72,6 +74,9 @@ export class KeyPointFormComponent implements OnChanges {
         address: new FormControl<string>("", [Validators.required]),
         imagePath: new FormControl<string>("", [Validators.required]),
         isPublicChecked: new FormControl<boolean>(false),
+        haveSecret: new FormControl<boolean>(false),
+        secretDescription: new FormControl<string>(""),
+        secretImages: new FormControl<string>(""),
     });
 
     onSelectImage(event: Event) {
@@ -107,6 +112,17 @@ export class KeyPointFormComponent implements OnChanges {
                                 this.keyPointForm.value.address || "",
                             imagePath: imagePath,
                             order: 0,
+                            haveSecret:
+                                this.keyPointForm.value.haveSecret || false,
+                            secret:
+                                {
+                                    images: [""],
+                                    description:
+                                        this.keyPointForm.value
+                                            .secretDescription || "",
+                                } || null,
+                            hasEncounter: this.hasEncounter,
+                            isEncounterRequired: this.isEncounterRequired,
                         };
                         // Get Key Points location address
                         this.mapService
@@ -141,7 +157,7 @@ export class KeyPointFormComponent implements OnChanges {
 
                                 this.service.addKeyPoint(keyPoint).subscribe({
                                     next: result => {
-                                        this.keyPointUpdated.emit();
+                                        this.keyPointUpdated.emit(keyPoint);
                                         if (
                                             this.keyPointForm.value
                                                 .isPublicChecked
@@ -186,6 +202,15 @@ export class KeyPointFormComponent implements OnChanges {
                     locationAddress: this.keyPointForm.value.address || "",
                     imagePath: this.keyPointForm.value.imagePath || "",
                     order: 0,
+                    haveSecret: this.keyPointForm.value.haveSecret || false,
+                    secret:
+                        {
+                            images: [""],
+                            description:
+                                this.keyPointForm.value.secretDescription || "",
+                        } || null,
+                    hasEncounter: this.hasEncounter,
+                    isEncounterRequired: this.isEncounterRequired,
                 };
 
                 if (!keyPoint.imagePath) {
@@ -284,6 +309,12 @@ export class KeyPointFormComponent implements OnChanges {
             this.service.getPerson(user.id).subscribe(result => {
                 this.person = result;
             });
+        });
+    }
+
+    addEncounter() {
+        this.dialogRef.open(KeyPointEncounterFormComponent, {
+            data: { keyPointId: this.keyPoint!.id },
         });
     }
 }

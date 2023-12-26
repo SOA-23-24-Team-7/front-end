@@ -1,0 +1,61 @@
+<div class="modal">
+    <div class="weather" (click)="$event.stopPropagation()">
+        <div class="modal-head">
+            <fa-icon class="modal-x" [icon]="faXmark" (click)="onClose()" />
+            <br />
+            <div class="modal-title">
+                Current weather on {{ data.tourName }}
+            </div>
+            <br />
+            <div style="font-size: 20px">
+                <p style="font-size: 35px">{{ weather.temp }}°C</p>
+                <p style="font-size: 30px">{{ weather.state }}</p>
+                <p>
+                    min/max: {{ weather.min_temp }}°C | {{ weather.max_temp }}°C
+                </p>
+                <br />
+                <p>
+                    <img
+                        src="https://cdn-icons-png.flaticon.com/512/54/54298.png"
+                        style="
+                            width: 20px;
+                            height: 20px;
+                            float: left;
+                            margin-right: 10px;
+                            margin-top: 3px;
+                        "
+                    />
+                    {{ weather.wind_speed }}km/h
+                </p>
+                <p>
+                    Sunrise at
+                    <img
+                        src="https://cdn-icons-png.flaticon.com/512/8179/8179067.png"
+                        style="
+                            width: 20px;
+                            height: 20px;
+                            float: left;
+                            margin-right: 10px;
+                            margin-top: 3px;
+                        "
+                    />
+                    {{ weather.sunrise }}
+                </p>
+                <p>
+                    Sunset at
+                    <img
+                        src="data:image/png;base64,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"
+                        style="
+                            width: 20px;
+                            height: 20px;
+                            float: left;
+                            margin-right: 10px;
+                            margin-top: 3px;
+                        "
+                    />
+                    {{ weather.sunset }}
+                </p>
+            </div>
+        </div>
+    </div>
+</div>

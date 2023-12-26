@@ -1,17 +1,29 @@
-import { Component, OnInit } from '@angular/core';
-import { Blog } from '../model/blog.model';
-import { User } from 'src/app/infrastructure/auth/model/user.model';
-import { BlogService } from '../blog.service';
-import { AuthService } from 'src/app/infrastructure/auth/auth.service';
-import { UpdateBlog } from '../model/blog-update.model';
-import { PagedResults } from 'src/app/shared/model/paged-results.model';
-import { Vote } from '../model/vote.model';
-import { Router } from '@angular/router';
+import { Component, OnInit } from "@angular/core";
+import { Blog } from "../model/blog.model";
+import { User } from "src/app/infrastructure/auth/model/user.model";
+import { BlogService } from "../blog.service";
+import { AuthService } from "src/app/infrastructure/auth/auth.service";
+import { UpdateBlog } from "../model/blog-update.model";
+import { PagedResults } from "src/app/shared/model/paged-results.model";
+import { Vote } from "../model/vote.model";
+import { Router } from "@angular/router";
+import { animate, style, transition, trigger } from "@angular/animations";
 
 @Component({
-  selector: 'xp-my-blogs',
-  templateUrl: './my-blogs.component.html',
-  styleUrls: ['./my-blogs.component.css']
+    selector: "xp-my-blogs",
+    templateUrl: "./my-blogs.component.html",
+    styleUrls: ["./my-blogs.component.css"],
+    animations: [
+        trigger("fadeIn", [
+            transition(":enter", [
+                style({ opacity: 0, transform: "translateX(-40px)" }),
+                animate(
+                    "0.5s ease",
+                    style({ opacity: 1, transform: "translateX(0)" }),
+                ),
+            ]),
+        ]),
+    ],
 })
 export class MyBlogsComponent implements OnInit {
     blogs: Blog[] = [];
@@ -21,7 +33,7 @@ export class MyBlogsComponent implements OnInit {
     constructor(
         private service: BlogService,
         private authService: AuthService,
-        private router: Router
+        private router: Router,
     ) {}
 
     ngOnInit(): void {
@@ -39,11 +51,13 @@ export class MyBlogsComponent implements OnInit {
         if (!this.user) {
             return;
         }
-        
+
         this.service.getBlogs().subscribe({
             next: (result: PagedResults<Blog>) => {
                 if (this.user && result.results) {
-                    this.blogs = result.results.filter(blog => blog.authorId === this.user?.id);
+                    this.blogs = result.results.filter(
+                        blog => blog.authorId === this.user?.id,
+                    );
                 }
             },
             error: () => {},
@@ -57,20 +71,21 @@ export class MyBlogsComponent implements OnInit {
             description: blog.description,
             date: new Date().toISOString(),
             status: 1,
-            authorId: 0
+            authorId: 0,
+            visibilityPolicy: blog.visibilityPolicy,
         };
         this.service.publishBlog(updateBlog).subscribe({
-            next: (_) => {
+            next: _ => {
                 this.getBlogs();
-              }
-        })
+            },
+        });
     }
 
     deleteBlogAndRefresh(id: number) {
         this.service.deleteBlog(id).subscribe({
-            next: (_) => {
+            next: _ => {
                 this.getBlogs();
-            }
+            },
         });
     }
 

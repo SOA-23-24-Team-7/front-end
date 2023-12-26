@@ -1,0 +1,57 @@
+<div class="tour-container">
+    <div class="tour-card">
+        <img
+            [src]="tourImage"
+            alt="Tour Image"
+            class="tour-image"
+            (error)="onImageError($event)"
+        />
+        <div class="tour-details">
+            <div class="progress-bar-container">
+                <div
+                    class="progress-bar"
+                    [style.width]="session.progress + '%'"
+                ></div>
+            </div>
+            <button
+                class="abandon-button"
+                (click)="abandonTour()"
+                *ngIf="isTourInProgress"
+            >
+                Abandon tour
+            </button>
+            <button class="back-button" (click)="goBack()">Go back</button>
+            <button
+                class="create-blog-button"
+                *ngIf="session.status == 2 && tour.status == 3"
+                (click)="createBlog()"
+            >
+                Create a blog
+            </button>
+
+            <p style="font-size: 25px; margin-top: 30px">
+                {{ weather.temp }}°C {{ weather.state }}
+            </p>
+            <p style="font-size: 20px">Sunrise at {{ weather.sunrise }}</p>
+            <p style="font-size: 20px">Sunset at {{ weather.sunset }}</p>
+            <h2 class="margin-top">{{ tour.name }}</h2>
+            <div class="description">{{ tour.description }}</div>
+        </div>
+    </div>
+    <div class="map-container">
+        <xp-map
+            [isTourExecutionMap]="true"
+            (newPositionEvent)="checkKeyPointCompletion()"
+            [executingTourId]="session.tourId"
+            [isCampaign]="session.isCampaign"
+            [startPosition]="touristPosition"
+            [nextKeyPointId]="session.nextKeyPointId"
+            [encounterPosition]="encounterPoint"
+            (keyPointClickEvent)="getKeyPoint($event)"
+            [height]="'90vh'"
+        ></xp-map>
+        <div class="simulator-btn" (click)="openSimulator()">
+            <fa-icon class="upvote" [icon]="faLocation" />
+        </div>
+    </div>
+</div>

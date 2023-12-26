@@ -40,8 +40,24 @@
                 </button>
             </div>
         </div>
+        <div *ngFor="let bundle of bundles">
+            <xp-bundle-card (callParentMethodEvent)="removeBundleOrderItem()" [bundle]="bundle" [showX]="true"></xp-bundle-card>
+        </div>
+        <div>
+            <p>
+                <strong>Total price:</strong>
+                {{ shoppingCart ? shoppingCart.totalPrice : 0 }}
+            </p>
+        </div>
         <div class="tour-buttons">
-            <button color="accent" (click)="checkout()" [disabled]="isDisabled">
+            <button
+                color="accent"
+                (click)="openCouponModal()"
+                [disabled]="isEmpty()"
+            >
+                Enter Coupons
+            </button>
+            <button color="accent" (click)="checkout()" [disabled]="isEmpty()">
                 Checkout
             </button>
         </div>

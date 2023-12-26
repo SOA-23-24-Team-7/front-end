@@ -1,0 +1,46 @@
+<div class="container" cdkDropListGroup>
+    <form [formGroup]="saleForm" class="form-container">
+        <div class="left-column">
+            <mat-form-field [style.width.px]=260>
+                <mat-label>Name</mat-label>
+                <input matInput formControlName="name" type="text" />
+            </mat-form-field>
+            <mat-form-field [style.width.px]=260>
+                <mat-label>Date range</mat-label>
+                <mat-date-range-input [rangePicker]="picker">
+                    <input matStartDate placeholder="Start date" formControlName="startDate" minDate="todayDate">
+                    <input matEndDate placeholder="End date" formControlName="endDate" minDate="todayDate">
+                </mat-date-range-input>
+                <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
+                <mat-date-range-picker #picker></mat-date-range-picker>
+            </mat-form-field>
+            <mat-form-field [style.width.px]=260>
+                <mat-label>Discount percentage</mat-label>
+                <input matInput type="number" min="1" max="100" formControlName="discountPercentage">
+            </mat-form-field>
+            <button *ngIf="tourId === 0" class="form-button" type="submit" (click)="addSale()"
+                mat-raised-button>Done</button>
+            <button *ngIf="tourId !== 0" class="form-button" type="submit" (click)="updateSale()"
+                mat-raised-button>Done</button>
+            <button class="form-button" routerLink="/tour-sales" mat-raised-button>Go back</button>
+        </div>
+        <div class="right-column">
+            <div cdkDropList #chosen="cdkDropList" [cdkDropListConnectedTo]="['available']"
+                [cdkDropListData]="chosenTours" class="tour-cards-scrollable" (cdkDropListDropped)="drop($event)">
+                <div class="centered-text" *ngIf="chosenTours.length === 0">
+                    <p>Drag tours for sale here</p>
+                </div>
+                <xp-tour-card-view *ngFor="let tour of chosenTours" cdkDrag [cdkDragData]="tour" [tour]="tour"
+                    [hideIcons]="true"
+                    [preliminaryDiscount]="saleForm.value.discountPercentage && saleForm.value.discountPercentage <= 100 && saleForm.value.discountPercentage > 0 ? saleForm.value.discountPercentage / 100 : null"></xp-tour-card-view>
+            </div>
+        </div>
+    </form>
+    <div class="list-container">
+        <div #available cdkDropList [cdkDropListConnectedTo]="['chosen']" [cdkDropListData]="availableTours"
+            class="tour-cards-scrollable" (cdkDropListDropped)="drop($event)">
+            <xp-tour-card-view *ngFor="let tour of availableTours" cdkDrag [cdkDragData]="tour" [tour]="tour"
+                [hideIcons]="true"></xp-tour-card-view>
+        </div>
+    </div>
+</div>

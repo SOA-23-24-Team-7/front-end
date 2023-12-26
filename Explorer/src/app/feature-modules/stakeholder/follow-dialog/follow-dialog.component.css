@@ -1,0 +1,31 @@
+:host {
+    border-radius: 1rem !important;
+}
+
+.dialog {
+    min-width: 35rem;
+    min-height: 40rem;
+    background-color: rgb(var(--clr-background-secondary));
+    color: rgb(var(--clr-text));
+    max-height: 45rem;
+    overflow: auto;
+    border-radius: 1rem;
+}
+
+h1 {
+    text-align: center;
+}
+
+.user-container {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    min-height: min-content;
+    padding-inline: 1rem;
+    padding-block: 1rem;
+}
+
+.title {
+    background-color: rgb(var(--clr-background));
+    padding-block: 1.5rem;
+}

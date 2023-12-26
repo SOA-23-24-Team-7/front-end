@@ -1,0 +1,64 @@
+.button {
+    font-size: 2rem;
+    align-self: center;
+    margin-right: 0.5rem;
+    transition: 0.3s;
+}
+
+.button:hover {
+    color: rgb(var(--clr-primary-300));
+    cursor: pointer;
+}
+
+.field {
+    display: flex;
+    position: relative;
+    border: rgba(var(--clr-outline-contrast), 1) 2px solid;
+    border-radius: 0.5rem;
+    color: rgb(var(--clr-text));
+    background-color: rgb(var(--clr-background-secondary));
+}
+
+.field textarea {
+    width: 35rem;
+    min-height: 2rem;
+    height: auto;
+    font-size: 1.2;
+    padding: 1rem;
+    background: transparent;
+    border: 0px;
+    color: rgb(var(--clr-text));
+    overflow: auto;
+    text-wrap: wrap;
+}
+
+.field label {
+    position: absolute;
+    top: 20%;
+    left: 15px;
+    transform: translateY(-50%);
+    color: rgb(var(--clr-text));
+    font-size: 1.2;
+    pointer-events: none;
+    transition: 0.3s;
+}
+
+textarea:focus {
+    outline: none;
+}
+
+textarea:hover {
+    border: 2px solid #186868;
+}
+
+textarea:focus ~ label,
+textarea:valid ~ label {
+    top: 0;
+    left: 1rem;
+    font-size: 1rem;
+    background-color: rgb(var(--clr-background-secondary));
+}
+
+.center {
+    display: flex;
+}

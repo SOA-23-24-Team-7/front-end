@@ -1,6 +1,5 @@
 import { Component } from "@angular/core";
 import { PagedResults } from "src/app/shared/model/paged-results.model";
-import { FacilityNotification } from "../model/facility-notification";
 import { KeyPointNotification } from "../model/keypoint-notification";
 import { MarketplaceService } from "../marketplace.service";
 

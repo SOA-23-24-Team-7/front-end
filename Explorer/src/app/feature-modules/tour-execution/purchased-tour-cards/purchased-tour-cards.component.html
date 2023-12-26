@@ -1,0 +1,71 @@
+<h1>Purchased tours</h1>
+<div class="tour-cards-container">
+    <div class="list-cards-button" id="prev-button" (click)="scrollToPrevCard()">
+        <div class="triangle-left"></div>
+    </div>
+        <div class="container">
+            <div 
+            *ngFor="let tour of purchasedTours"
+            class="cards">
+            <xp-purchased-tour-card
+                (onSelected)="onSelectedTour(tour)"
+                [tour]="tour"
+                [hasActiveTour]="hasTourActive"
+                [activeTourId]="activeTourId"
+                [isCampaign]="isCampaign"
+            ></xp-purchased-tour-card>
+            </div>
+        </div>
+    <div class="list-cards-button" id="next-button" (click)="scrollToNextCard()">
+        <div class="triangle-right"></div>
+    </div>
+</div>
+<div class="tour-card">
+    <h3>New campaign</h3>
+    <form [formGroup]="campaignForm">
+        <p>Enter the name of the campaign</p>
+        <input type="text" formControlName="campaignName" />
+        <p>Describe the campaign</p>
+        <input type="text" formControlName="campaignDescription" />
+    </form>
+    <div>
+        <li *ngFor="let t of selectedTours">
+            {{ t.name }}
+        </li>
+    </div>
+    <button
+        *ngIf="selectedTours.length"
+        class="btn discard-button"
+        (click)="CancelCampaignCreating()"
+    >
+        Discard
+    </button>
+    <button
+        *ngIf="selectedTours.length"
+        class="btn search-button"
+        (click)="createCampaign()"
+    >
+        Create campaign
+    </button>
+</div>
+<h1>My campaigns</h1>
+<div class="tour-cards-container">
+    <div class="list-cards-button" id="prev-button" (click)="scrollToPrevCampaignCard()">
+        <div class="triangle-left"></div>
+    </div>
+    <div class="container-campaigns">
+        <div 
+        *ngFor="let c of campaigns"
+        class="cards">
+    <xp-campaign-card
+        [campaign]="c"
+        [hasActiveTour]="hasTourActive"
+        [activeTourId]="activeTourId"
+        [isCampaign]="isCampaign"
+    ></xp-campaign-card>
+    </div>
+    </div>
+    <div class="list-cards-button" id="next-button" (click)="scrollToNextCampaignCard()">
+        <div class="triangle-right"></div>
+    </div>
+</div>

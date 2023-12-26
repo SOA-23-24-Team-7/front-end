@@ -1,0 +1,56 @@
+<div class="add-modal">
+    <div class="add" (click)="$event.stopPropagation()">
+        <div class="add-head">
+            <fa-icon class="add-x" [icon]="faXmark" (click)="onClose()" />
+            <div class="add-title">Add encounter</div>
+        </div>
+        <form class="add-form" [formGroup]="addEncounterForm">
+            <div class="add-label">Title:</div>
+            <input
+                class="add-input"
+                type="text"
+                placeholder="Title"
+                formControlName="title"
+                required
+            />
+            <div class="add-label">Description:</div>
+            <input
+                class="add-input"
+                type="text"
+                placeholder="Description"
+                formControlName="description"
+                required
+            />
+            <div class="add-label">Radius</div>
+            <input
+                class="add-input"
+                min="1"
+                max="250"
+                type="number"
+                placeholder="Radius"
+                formControlName="radius"
+                required
+            />
+            <div class="add-label">Xp Reward:</div>
+            <input
+                class="add-input"
+                min="1"
+                type="number"
+                placeholder="Xp Reward"
+                formControlName="xpReward"
+                required
+            />
+            <div class="row">
+                <mat-label class="add-label">Is Required:</mat-label>
+                <input
+                    [checked]="isRequired"
+                    (change)="isRequired = !isRequired"
+                    type="checkbox"
+                />
+            </div>
+            <button class="add-submit" type="submit" (click)="submit()">
+                <div class="add-submit-text">Add</div>
+            </button>
+        </form>
+    </div>
+</div>

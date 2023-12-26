@@ -1,10 +1,70 @@
-div {
-    width: 400px;
-    display:flex;
-    gap: 20px;
-    flex-direction: column;
-}
-
 .mat-icon {
     vertical-align: middle;
+}
+
+.rating-form-container {
+    display: flex;
+    flex-direction: column;
+    color: rgb(var(--clr-text));
+    border-radius: 1rem;
+    overflow: hidden;
+}
+
+.rating-form-header {
+    background-color: rgb(var(--clr-background-secondary));
+    text-align: center;
+    padding: 1.5rem;
+}
+
+.rating-form {
+    display: flex;
+    flex-direction: column;
+    background-color: rgb(var(--clr-background));
+    padding: 1.5rem;
+    align-items: center;
+}
+
+.rating-form-footer {
+    background-color: rgb(var(--clr-background-secondary));
+    text-align: center;
+    padding: 1.5rem;
+}
+
+.clickable-text {
+    cursor: pointer;
+}
+
+.rating-form .btn {
+    width: 100%;
+}
+
+.rating-form textarea {
+    background-color: rgb(var(--clr-background-secondary));
+    color: rgb(var(--clr-text));
+    resize: none;
+}
+
+.center-text {
+    font-size: 1.25rem;
+    text-align: center;
+}
+
+.bold-text {
+    font-weight: 600;
+}
+
+.star-rating {
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+    width: 90%;
+}
+
+.btn {
+    margin-top: 1.5rem;
+    width: 100%;
+}
+
+.disabled-btn {
+    background-color: rgb(var(--clr-background-secondary)) !important;
+    color: gray !important;
 }

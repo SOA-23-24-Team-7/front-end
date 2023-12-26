@@ -122,7 +122,7 @@ export class FacilitiesFormComponent implements OnChanges {
                     this.service.addFacility(facility).subscribe({
                         next: result => {
                             this.facilitiesUpdated.emit();
-                            location.reload();
+                            //location.reload();
                             if (this.facilitiesForm.value.isPublicChecked) {
                                 const request: PublicFacilityRequest = {
                                     facilityId: result.id as number,
@@ -133,7 +133,13 @@ export class FacilitiesFormComponent implements OnChanges {
                                 };
                                 this.service
                                     .addPublicFacilityRequest(request)
-                                    .subscribe({});
+                                    .subscribe({
+                                        next: result=>{
+                                            location.reload();
+                                        }
+                                    });
+                            }else{
+                                location.reload();
                             }
                         },
                     });

@@ -32,6 +32,45 @@
                 >Public</label
             >
         </div>
+        <div
+            *ngIf="
+                keyPointForm.get('isPublicChecked') != null &&
+                keyPointForm.get('isPublicChecked')!.value === false
+            "
+            class="checkbox"
+            [class.hidden]="shouldEdit"
+        >
+            <input
+                id="have-secret-checkbox"
+                class="have-secret-checkbox"
+                formControlName="haveSecret"
+                type="checkbox"
+                [readonly]="shouldEdit"
+            />
+            <label for="have-secret-checkbox" class="have-secret-label"
+                >Key point have secret?</label
+            >
+        </div>
+        <div
+            *ngIf="
+                keyPointForm.get('isPublicChecked') != null &&
+                keyPointForm.get('isPublicChecked')!.value === false &&
+                keyPointForm.get('haveSecret') != null &&
+                keyPointForm.get('haveSecret')!.value === true
+            "
+        >
+            <mat-form-field class="description">
+                <mat-label>Secret description</mat-label>
+                <input
+                    matInput
+                    formControlName="secretDescription"
+                    type="text"
+                />
+            </mat-form-field>
+        </div>
+        <button *ngIf="shouldEdit" class="done-submit" (click)="addEncounter()">
+            <div class="done-submit-text">Add encounter</div>
+        </button>
         <button
             *ngIf="!shouldEdit"
             class="done-submit"

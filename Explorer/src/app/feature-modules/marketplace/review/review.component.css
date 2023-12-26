@@ -1,67 +1,166 @@
-#equipment {
-    margin-top: 20px;
-    margin-left: 20px;
-}
+/*novo*/
 
-#equipment-details {
+.review-list {
     display: flex;
-    flex-direction: row;
-    gap: 50px;
-    align-items: flex-start;
+    flex-direction: column;
+    width: 50rem;
 }
 
-p {
-    font-size: 20px;
+.review {
+    margin-bottom: 20px;
 }
 
-table {
-    border-collapse: collapse;
-    font-size: 0.9em;
-    font-family: sans-serif;
-    min-width: 300px;
-    box-shadow: 0 0 20px rgba(0, 0, 0, 0.15);
+.border {
+    border-bottom: rgba(var(--clr-outline-contrast), 0.5) 0.5px solid;
+    padding: 10px;
 }
 
-thead tr {
-    background-color: #3f51b5;
-    color: #ffffff;
-    text-align: left;
+.tourist-image img {
+    border-radius: 50%;
+    width: 4rem;
+    height: 4rem;
 }
 
-th, td {
-    padding: 12px 15px;
+.user-info {
+    display: flex;
+    flex-direction: column;
 }
 
-tbody tr {
-    border-bottom: 1px solid #dddddd;
+.tourist-row {
+    display: flex;
+    align-items: center;
+    margin-bottom: 5px;
 }
 
-tbody tr:nth-of-type(even) {
-    background-color: #f3f3f3;
+.user-details {
+    margin-left: 10px;
+    color: rgba(var(--clr-text), 1);
 }
 
-tbody tr:last-of-type {
-    border-bottom: 2px solid #3f51b5;
+.username {
+    margin-top: 5px;
+    font-size: 1.1rem;
+    font-weight: 600;
+    width: 100%;
 }
 
-tbody tr.active-row {
-    font-weight: bold;
-    color: #3f51b5;
+.stars {
+    margin-bottom: 5px;
+    font-size: 1rem;
 }
 
-.image-container {
-    height: 120px; /* Postavite željenu visinu kontejnera */
-    width: 180px;
-    overflow-y: scroll; /* Omogućava vertikalno skrolovanje ako je sadržaj prevelik */
-    overflow-x: hidden;
-  }
-  
-  .vertical-image {
-    display: block;
-  }
+.date {
+    margin-left: auto;
+}
 
-  img {
-    height: 118px;
-    width: 178px;
-    margin: 2px;
-  }
+.review-comment {
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    margin-bottom: 10px;
+    overflow: hidden;
+    margin-top: 1.2rem;
+    color: rgba(var(--clr-text), 1);
+    transition: max-height 0.5s ease;
+}
+.review-comment.expanded {
+    max-height: none;
+}
+.show-more-button {
+    font-size: 1rem;
+    font-weight: 600;
+    color: rgba(var(--clr-primary-500), 1);
+    cursor: pointer;
+    padding: 8px 0;
+    align-self: flex-start;
+
+    background-color: transparent;
+    border: none;
+}
+
+.show-more-button:hover {
+    text-decoration: underline;
+}
+
+.collapsed {
+    max-height: none;
+}
+
+.fa-star {
+    color: #ffd700;
+    font-size: 1rem;
+}
+.fa-icon-edit {
+    font-size: 2rem;
+    color: rgba(var(--clr-primary-500), 0.8);
+    transition: color 0.15s;
+    padding-right: 1rem;
+}
+.fa-icon-delete {
+    font-size: 2rem;
+    color: rgba(var(--clr-error-500), 0.8);
+    transition: color 0.15s;
+    padding-right: 1rem;
+}
+
+.fa-icon-edit:hover {
+    cursor: pointer;
+    color: rgba(var(--clr-primary-500), 1);
+}
+.fa-icon-delete:hover {
+    cursor: pointer;
+    color: rgba(var(--clr-error-500), 1);
+}
+
+.middot {
+    margin-left: 10px;
+    color: rgba(var(--clr-text), 1);
+}
+.comment-date {
+    margin-left: 10px;
+    font-weight: normal;
+    color: rgba(var(--clr-text), 1);
+    width: auto;
+}
+
+.trip-date {
+    font-weight: normal;
+    color: rgba(var(--clr-text), 1);
+    padding-bottom: 10px;
+    padding-top: 10px;
+}
+.delete-edit-buttons {
+    /*padding-left: 23rem;*/
+    margin-right: 0;
+    padding-right: 2rem;
+}
+
+.image-gallery {
+    display: flex;
+    overflow-x: auto;
+}
+
+.gallery-design {
+    display: flex;
+    gap: 10px;
+    overflow-x: auto;
+}
+
+.gallery-design button {
+    border: none;
+    background: none;
+    padding: 0;
+}
+
+.gallery-design img {
+    width: 7rem;
+    height: 4rem;
+    border-radius: 10px;
+    cursor: pointer;
+    min-width: 7rem;
+}
+.last-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}

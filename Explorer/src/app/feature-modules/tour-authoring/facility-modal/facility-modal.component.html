@@ -1,0 +1,85 @@
+<div class="container" [formGroup]="facilityForm">
+    <div
+        class="title"
+        [style.background-color]="
+            facilityImage != null ? 'rgba(0, 0, 0, 0.6)' : 'none'
+        "
+    >
+        {{
+            facilityForm.get("name")!.value
+                ? facilityForm.get("name")!.value
+                : "New facility"
+        }}
+    </div>
+    <div
+        class="header"
+        [style.background-image]="'url(' + facilityImage + ')'"
+    ></div>
+    <div class="wrapper">
+        <div class="row vertical">
+            <div class="option-name">Name:</div>
+            <input
+                matInput
+                formControlName="name"
+                type="text"
+                placeholder="Dunavski park"
+            />
+        </div>
+        <div class="row vertical">
+            <div class="option-name">Description:</div>
+            <textarea
+                cols="50"
+                rows="4"
+                resize="none"
+                formControlName="description"
+                placeholder="Short description of this facility..."
+            ></textarea>
+        </div>
+        <div class="row vertical">
+            <div class="option-name">Category:</div>
+            <select
+                class="add-input"
+                formControlName="category"
+                placeholder="Category"
+            >
+                <option *ngFor="let option of options" [value]="option.value">
+                    {{ option.label }}
+                </option>
+            </select>
+        </div>
+        <div class="row buttons">
+            <label class="custom-file-upload btn">
+                <fa-icon [icon]="faImage" />
+                Upload image
+                <input
+                    id="file-upload"
+                    accept="image/*"
+                    type="file"
+                    class="upload-input"
+                    (change)="onSelectImage($event)"
+                />
+            </label>
+            <div class="btn" (click)="selectLocation()">
+                <fa-icon [icon]="faLocation" />
+                Set location
+            </div>
+        </div>
+        <div class="row checkbox-row" *ngIf="!isUpdateForm">
+            <div class="option-name">Public facility:</div>
+            <input
+                id="is-public-checkbox"
+                class="is-public-checkbox"
+                formControlName="isPublicChecked"
+                type="checkbox"
+            />
+        </div>
+        <div class="row">
+            <div
+                class="done-submit-text btn"
+                (click)="isUpdateForm ? updateFacility() : addFacility()"
+            >
+                Done
+            </div>
+        </div>
+    </div>
+</div>

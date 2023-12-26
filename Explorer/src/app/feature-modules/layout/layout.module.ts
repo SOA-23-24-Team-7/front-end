@@ -19,6 +19,9 @@ import { RequestKeyPointCardComponent } from "./request-key-point-card/request-k
 import { RequestFacilityCardComponent } from "./request-facility-card/request-facility-card.component";
 import { ReviewCardComponent } from "./review-cards/review-card.component";
 import { PublicKeypointNotificationCardComponent } from "./public-keypoint-notification-card/public-keypoint-notification-card.component";
+import { SharedModule } from "src/app/shared/shared.module";
+import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
+import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
 
 @NgModule({
     declarations: [
@@ -37,6 +40,7 @@ import { PublicKeypointNotificationCardComponent } from "./public-keypoint-notif
         RequestFacilityCardComponent,
         ReviewCardComponent,
         PublicKeypointNotificationCardComponent,
+        PageNotFoundComponent,
     ],
     imports: [
         CommonModule,
@@ -44,6 +48,8 @@ import { PublicKeypointNotificationCardComponent } from "./public-keypoint-notif
         RouterModule,
         FontAwesomeModule,
         MatDialogModule,
+        SharedModule,
+        BrowserAnimationsModule,
     ],
     exports: [
         NavbarComponent,

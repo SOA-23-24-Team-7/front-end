@@ -1,0 +1,9 @@
+.container {
+    background-color: rgb(var(--clr-background-secondary));
+}
+
+.last-activity{
+    font-weight: 300;
+    text-align: right;
+    padding-right: 25px;
+}

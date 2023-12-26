@@ -13,4 +13,6 @@ export interface Blog {
     votes: Vote[];
     authorId: number;
     author: User;
+    visibilityPolicy: number;
+    showMore?: boolean;
 }

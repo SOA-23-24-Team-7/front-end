@@ -6,12 +6,12 @@ import { MaterialModule } from "src/app/infrastructure/material/material.module"
 import { ReactiveFormsModule } from "@angular/forms";
 import { UsersOverviewComponent } from "./users-overview/users-overview.component";
 import { RatingComponent } from "./rating/rating.component";
-import { ProblemViewComponent } from "./problem-view/problem-view.component";
 import { RequestViewComponent } from "./request-view/request-view.component";
 import { CommentRequestFormComponent } from "./comment-request-form/comment-request-form.component";
 import { CommentKeyPointRequestFormComponent } from "./comment-keypoint-request-form/comment-keypoint-request-form.component";
 import { LayoutModule } from "../layout/layout.module";
 import { FontAwesomeModule } from "@fortawesome/angular-fontawesome";
+import { WalletUpdateDialogComponent } from './wallet-update-dialog/wallet-update-dialog.component';
 
 @NgModule({
     declarations: [
@@ -19,10 +19,10 @@ import { FontAwesomeModule } from "@fortawesome/angular-fontawesome";
         EquipmentComponent,
         RatingComponent,
         UsersOverviewComponent,
-        ProblemViewComponent,
         RequestViewComponent,
         CommentRequestFormComponent,
         CommentKeyPointRequestFormComponent,
+        WalletUpdateDialogComponent,
     ],
     imports: [
         CommonModule,
@@ -36,7 +36,6 @@ import { FontAwesomeModule } from "@fortawesome/angular-fontawesome";
         EquipmentFormComponent,
         UsersOverviewComponent,
         RatingComponent,
-        ProblemViewComponent,
     ],
 })
 export class AdministrationModule {}

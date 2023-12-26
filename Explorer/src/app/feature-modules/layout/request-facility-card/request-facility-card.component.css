@@ -82,3 +82,92 @@ hr {
     border-radius: 5px;
     margin-top: 5px;
 }
+
+.notification {
+    display: flex;
+    background-color: rgb(var(--clr-background));
+    width: 100%;
+    gap: 0.3rem;
+    border-bottom: 1px solid;
+    color: rgb(var(--clr-text));
+}
+
+.data {
+    display: flex;
+    gap: 1rem;
+    padding-inline: 1rem;
+    padding-block: 0.7rem;
+    padding-bottom: 0.3rem;
+}
+
+.picture {
+    padding-bottom: 0.7rem;
+}
+
+.notification-content {
+    color: rgb(var(--clr-text), 0.7);
+    align-self: center;
+}
+
+.sender-avatar {
+    height: 3rem;
+    width: 3rem;
+    border-radius: 50%;
+    border: rgba(var(--clr-outline-contrast), 1) 2px solid;
+    background-position: center;
+    background-size: cover;
+}
+
+.sender {
+    color: rgb(var(--clr-primary-300));
+}
+
+.notification-column {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    gap: 0.6rem;
+    min-width: 15rem;
+}
+
+.row {
+    display: flex;
+    width: 100%;
+}
+
+.notification-row {
+    display: flex;
+    gap: 0.3rem;
+    font-weight: 300;
+    
+}
+
+.accepted {
+    background-color: rgba(var(--clr-success-700), 0.8);
+}
+
+.rejected {
+    background-color: rgba(var(--clr-error-700), 0.8);
+}
+
+.rejected {
+    background-color: rgba(var(--clr-error-700), 0.8);
+}
+
+.acceptedDate {
+    color: rgba(var(--clr-success-700), 0.8);
+}
+
+.rejectedDate {
+    color: rgba(var(--clr-error-700), 0.8);
+}
+
+.pendingDate {
+    color: rgba(var(--clr-neutral-500, 1));
+}
+
+.marker {
+    width: 0.7rem;
+    height: 4.7rem;
+    border-radius: 0.1rem;
+}
