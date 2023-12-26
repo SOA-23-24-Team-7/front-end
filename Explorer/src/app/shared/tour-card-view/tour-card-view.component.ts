@@ -103,7 +103,6 @@ export class TourCardViewComponent implements OnChanges {
             this.marketplaceService.getToursInCart(this.user.id).subscribe({
                 next: (result: PagedResults<TourLimitedView>) => {
                     this.addedTours = result.results;
-                    console.log(this.addedTours);
                     this.getShoppingCart(); // update the price
                     this.getDiscount();
                 },

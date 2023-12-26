@@ -143,7 +143,6 @@ export class CartComponent implements OnInit {
         if (this.isEmpty()) return;
         let totalPrice = this.shoppingCart.totalPrice;
         let storedShoppingCart = this.shoppingCart;
-        let uslo = false;
         this.stakeholderService.getTouristWallet().subscribe(result => {
             var wallet = result;
             if (wallet.adventureCoin >= (totalPrice as number)) {
@@ -182,6 +181,7 @@ export class CartComponent implements OnInit {
                                             alert(
                                                 "You have successfully bought tours!",
                                             );
+                                            this.data = [];
                                             this.shoppingCart = newShoppingCart;
                                         }
                                         for (let boi of bundleOrderItems!) {
