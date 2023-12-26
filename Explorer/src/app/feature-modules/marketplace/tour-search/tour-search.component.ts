@@ -130,7 +130,7 @@ export class TourSearchComponent implements OnInit {
     }
 
     onSearch(page: number): void {
-        this.radioButtonSelected = 0
+        /*this.radioButtonSelected = 0
         if(this.countFilters() == 0){
         this.searchFilter.page = page;
         this.currentPage = page;
@@ -138,9 +138,9 @@ export class TourSearchComponent implements OnInit {
             .searchTours(this.searchFilter, this.sortOption)
             .subscribe({
                 next: (result: PagedResults<Tour>) => {
-                    this.setRecommendedTours()
-                    this.setActiveTours()
-                    this.setTours(result.results)
+                    //this.setRecommendedTours()
+                    //this.setActiveTours()
+                    //this.setTours(result.results)
                     this.totalCount = result.totalCount;
                     this.setPages();
                     this.toursBackup = []
@@ -174,7 +174,24 @@ export class TourSearchComponent implements OnInit {
                     console.log(errData);
                 },
             });
-        }
+        }*/
+        this.searchFilter.page = page;
+        this.currentPage = page;
+        this.service
+            .searchTours(this.searchFilter, this.sortOption)
+            .subscribe({
+                next: (result: PagedResults<Tour>) => {
+                    this.tours = result.results;
+                    this.totalCount = result.totalCount;
+                    console.log(this.tours);
+                    this.setPages();
+                    this.setRecommendedTag()
+                    this.setActiveTag()
+                },
+                error: errData => {
+                    console.log(errData);
+                },
+            });
     }
 
     setTours(result: Tour[]){
@@ -440,7 +457,7 @@ export class TourSearchComponent implements OnInit {
             .subscribe({
                 next: (result: PagedResults<Tour>) => {
                     this.activeTours = result.results;
-                    this.setActiveTours()
+                  //  this.setActiveTours()
                 },
                 error: errData => {
                     console.log(errData);
@@ -454,7 +471,7 @@ export class TourSearchComponent implements OnInit {
                 next: (result: PagedResults<Tour>) => {
                     this.recommendedTours = result.results;  
                     console.log(this.recommendedTours)
-                    this.setRecommendedTours()
+                    //this.setRecommendedTours()
                 },
                 error: errData => {
                     console.log(errData);
@@ -510,11 +527,16 @@ export class TourSearchComponent implements OnInit {
     }
     setView(){
         if(this.radioButtonSelected == 1){
-            this.tours = this.toursBackup.filter((tour) => tour.recommended);
+           // this.tours = this.toursBackup.filter((tour) => tour.recommended);
+            this.tours=[]
+           for (const obj of this.recommendedTours) {
+            obj.recommended = true
+            this.tours.push(obj);
+            }
         }
         else if(this.radioButtonSelected == 2){
-            if(this.countFilters() != 0){
-                this.tours = this.toursBackup.filter((tour) => tour.active);
+            /*if(this.countFilters() != 0){
+                //this.tours = this.toursBackup.filter((tour) => tour.active);
             }
             else{
                 this.tours = []
@@ -523,14 +545,22 @@ export class TourSearchComponent implements OnInit {
                     this.tours.push(obj);
                 }
                 this.setRecommendedTag()
+            }*/
+            this.tours=[]
+           for (const obj of this.activeTours) {
+            obj.active = true
+            this.tours.push(obj);
             }
         }
         else{
-            this.tours = []
+            /*this.tours = []
             for (const obj of this.toursBackup) {
                 this.tours.push(obj);
             }
         }
-        this.totalCount = this.tours.length
+        this.totalCount = this.tours.length*/
+        this.onSearch(1);
+    }
+    this.totalCount = this.tours.length
     }
 }
