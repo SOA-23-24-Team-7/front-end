@@ -151,7 +151,9 @@ export class AuthService {
                 });
         }
     }
-
+    getPosition(){
+        return { "longitude": this.userLocation$.value.longitude, "latitude": this.userLocation$.value.latitude, }
+    }
     generateResetPasswordToken(email: string): Observable<any> {
         // TODO: generate reset password token
         // throw new Error('Method not implemented.');

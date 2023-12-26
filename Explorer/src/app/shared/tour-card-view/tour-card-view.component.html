@@ -24,6 +24,8 @@
     <div class="tour-card-content">
         <div class="tour-card-top">
             <div class="tour-tags">
+                <div class="tour-tag" *ngIf="tour.recommended" style="background-color: olivedrab; color: white;">Recommended</div>
+                <div class="tour-tag" *ngIf="tour.active" style="background-color: orange; color: white;">Active</div>
                 <div class="tour-tag" *ngFor="let tag of tour.tags">
                     {{ tag }}
                 </div>

@@ -19,6 +19,8 @@ import {
     faStar,
     faClock
 } from "@fortawesome/free-solid-svg-icons";
+import { AuthService } from "src/app/infrastructure/auth/auth.service";
+import { LocationCoords } from "src/app/shared/model/location-coords.model";
 
 @Component({
     selector: "xp-tour-search",
@@ -63,6 +65,10 @@ export class TourSearchComponent implements OnInit {
     sortOption: SortOption = SortOption.NoSort;
     slider: any;
     tours: Tour[] = [];
+    toursBackup: Tour[] = [];
+    recommendedTours: Tour[] = [];
+    activeTours: Tour[] = [];
+    radioButtonSelected: number = 1;
     publicFacilities: PublicFacilities[] = [];
     publicKeyPoints: PublicKeyPoint[] = [];
     totalCount: number = 0;
@@ -70,7 +76,7 @@ export class TourSearchComponent implements OnInit {
     pageSize: number =10;
     pages: any[] = [];
 
-    constructor(private service: MarketplaceService) {}
+    constructor(private service: MarketplaceService, private authService: AuthService) {}
 
     ngOnInit(): void {
         this.searchFilter = {
@@ -104,7 +110,14 @@ export class TourSearchComponent implements OnInit {
         //this.resetMaxDuration();
         this.resetMinLength();
         this.resetMaxLength();
-        this.onSearch(1);
+        this.getRecommendedTours();
+        setTimeout(() => {
+            this.getActiveTours();
+          }, 100);
+          setTimeout(() => {
+            this.onSearch(1);
+          }, 1000);
+          this.radioButtonSelected = 0
     }
 
     onMapClicked(): void {
@@ -117,21 +130,67 @@ export class TourSearchComponent implements OnInit {
     }
 
     onSearch(page: number): void {
+        this.radioButtonSelected = 0
+        if(this.countFilters() == 0){
         this.searchFilter.page = page;
         this.currentPage = page;
         this.service
             .searchTours(this.searchFilter, this.sortOption)
             .subscribe({
                 next: (result: PagedResults<Tour>) => {
-                    this.tours = result.results;
+                    this.setRecommendedTours()
+                    this.setActiveTours()
+                    this.setTours(result.results)
                     this.totalCount = result.totalCount;
-                    console.log(this.tours);
                     this.setPages();
+                    this.toursBackup = []
+                    for (const obj of this.tours) {
+                        this.toursBackup.push(obj);
+                    }
+                },
+                error: errData => {
+                    console.log(errData);
+                },
+            });    
+        }
+        else{
+        this.searchFilter.page = page;
+        this.currentPage = page;
+        this.service
+            .searchTours(this.searchFilter, this.sortOption)
+            .subscribe({
+                next: (result: PagedResults<Tour>) => {
+                    this.tours = result.results
+                    this.totalCount = result.totalCount;
+                    this.setPages();
+                    this.setActiveTag();
+                    this.setRecommendedTag();
+                    this.toursBackup = []
+                    for (const obj of this.tours) {
+                        this.toursBackup.push(obj);
+                    }
                 },
                 error: errData => {
                     console.log(errData);
                 },
             });
+        }
+    }
+
+    setTours(result: Tour[]){
+        let add
+        result.forEach((tour)=>{
+            add = true 
+            this.tours.forEach((el) =>{
+                if(el.id == tour.id){
+                    add = false
+                }
+            })
+            if(add){
+                this.tours.push(tour)
+            }
+        })
+        console.log(this.tours)
     }
 
     onSliderChanged(): void {
@@ -373,5 +432,105 @@ export class TourSearchComponent implements OnInit {
         this.searchFilter.maxDuration = "";
         var inputElement = document.getElementsByName('maxDuration')[0] as HTMLInputElement;
         inputElement.value = "";
+    }
+
+    getActiveTours(): void {
+        this.service
+            .getActiveTours()
+            .subscribe({
+                next: (result: PagedResults<Tour>) => {
+                    this.activeTours = result.results;
+                    this.setActiveTours()
+                },
+                error: errData => {
+                    console.log(errData);
+                },
+            });
+    }
+    getRecommendedTours(): void {
+        this.service
+            .getRecommendedTours()
+            .subscribe({
+                next: (result: PagedResults<Tour>) => {
+                    this.recommendedTours = result.results;  
+                    console.log(this.recommendedTours)
+                    this.setRecommendedTours()
+                },
+                error: errData => {
+                    console.log(errData);
+                },
+            });
+    }
+    setRecommendedTours(){
+        this.tours = []
+        for (const obj of this.recommendedTours) {
+            this.tours.push(obj);
+        }
+        this.tours.forEach((el)=>{el.recommended = true;})
+    }
+    setActiveTours(){
+        let add
+        this.activeTours.forEach((active)=>{
+            add = true 
+            this.tours.forEach((el) =>{
+                if(el.id == active.id){
+                    el.active = true
+                    add = false
+                }
+            })
+            if(add){
+                this.tours.push(active)
+            }
+        })
+    }
+    setRecommendedTag(){
+        this.tours.forEach((tour)=>{
+            for(let i = 0; i < this.recommendedTours.length; i++){
+                if(tour.id == this.recommendedTours[i].id){
+                    tour.recommended = true    
+                    break;
+                }
+            }
+        })
+    }
+    setActiveTag(){
+        this.tours.forEach((tour)=>{
+            for(let i = 0; i < this.activeTours.length; i++){
+                if(tour.id == this.activeTours[i].id){
+                    tour.active = true
+                    break;
+                }
+            }
+        })
+    }
+    onRadioBoxClicked(){
+        setTimeout(() => {
+            this.setView()
+          }, 200);
+    }
+    setView(){
+        if(this.radioButtonSelected == 1){
+            this.tours = this.toursBackup.filter((tour) => tour.recommended);
+        }
+        else if(this.radioButtonSelected == 2){
+            if(this.countFilters() != 0){
+                this.tours = this.toursBackup.filter((tour) => tour.active);
+            }
+            else{
+                this.tours = []
+                for (const obj of this.activeTours) {
+                    obj.active = true
+                    this.tours.push(obj);
+                }
+                this.setRecommendedTag()
+            }
+        }
+        else{
+            this.tours = []
+            for (const obj of this.toursBackup) {
+                this.tours.push(obj);
+            }
+        }
+        this.totalCount = this.tours.length
     }
 }
