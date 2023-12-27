@@ -15,7 +15,11 @@
                 class="controls"
                 *ngIf="user.role === 'tourist' && !problem.isResolved"
             >
-                <fa-icon [icon]="faPen" class="edit"></fa-icon>
+                <fa-icon
+                    [icon]="faPen"
+                    class="edit"
+                    (click)="showProblemForm(problem)"
+                ></fa-icon>
                 <fa-icon
                     [icon]="faTrash"
                     (click)="deleteProblem(problem.id)"
