@@ -19,7 +19,7 @@ import { TourEquipmentFormComponent } from "src/app/feature-modules/tour-authori
 import { EditProfileComponent } from "../../feature-modules/stakeholder/edit-profile/edit-profile.component";
 import { OwnerClubsComponent } from "src/app/feature-modules/marketplace/owner-clubs/owner-clubs.component";
 import { ClubsComponent } from "src/app/feature-modules/marketplace/clubs/clubs.component";
-import { MyClubJoinRequestsComponent } from "src/app/feature-modules/marketplace/my-club-join-requests/my-club-join-my-club-join-requests.component";
+import { MyClubJoinRequestsComponent } from "src/app/feature-modules/marketplace/my-club-join-requests/my-club-join-requests.component";
 import { ClubJoinRequestManagementComponent } from "src/app/feature-modules/marketplace/club-join-request-management/club-join-request-management.component";
 import { TouristEquipmentSelectionComponent } from "src/app/feature-modules/layout/tourist-equipment-selection/tourist-equipment-selection.component";
 import { ClubMembersManagementComponent } from "src/app/feature-modules/marketplace/club-members-management/club-members-management.component";
@@ -307,10 +307,10 @@ const routes: Routes = [
         component: SingleTourStatisticsComponent,
         canActivate: [AuthGuard],
     },
-    { 
-        path: "club/:clubId", 
+    {
+        path: "club/:clubId",
         component: ClubPageComponent,
-        canActivate: [AuthGuard]
+        canActivate: [AuthGuard],
     },
     { path: "reset-password", component: ResetPasswordComponent },
     { path: "reset-password-edit", component: ResetPasswordEditComponent },

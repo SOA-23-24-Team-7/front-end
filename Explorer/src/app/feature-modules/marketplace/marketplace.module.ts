@@ -1,15 +1,15 @@
 import { NgModule } from "@angular/core";
 import { CommonModule } from "@angular/common";
 import { MaterialModule } from "src/app/infrastructure/material/material.module";
-import { MatChipsModule } from '@angular/material/chips';
-import { DragDropModule } from '@angular/cdk/drag-drop';
+import { MatChipsModule } from "@angular/material/chips";
+import { DragDropModule } from "@angular/cdk/drag-drop";
 import { ReactiveFormsModule } from "@angular/forms";
 import { RatingFormComponent } from "./rating-form/rating-form.component";
 import { RouterModule } from "@angular/router";
 import { OwnerClubsComponent } from "./owner-clubs/owner-clubs.component";
 import { ClubFormComponent } from "./club-form/club-form.component";
 import { ClubsComponent } from "./clubs/clubs.component";
-import { MyClubJoinRequestsComponent } from "./my-club-join-requests/my-club-join-my-club-join-requests.component";
+import { MyClubJoinRequestsComponent } from "./my-club-join-requests/my-club-join-requests.component";
 import { ClubJoinRequestManagementComponent } from "./club-join-request-management/club-join-request-management.component";
 import { ReviewComponent } from "./review/review.component";
 import { ReviewFormComponent } from "./review-form/review-form.component";
@@ -36,15 +36,15 @@ import { TourDetailsComponent } from "./tour-details/tour-details.component";
 import { FullSizeImageComponent } from "./full-size-image/full-size-image.component";
 import { TourPageComponent } from "./tour-page/tour-page.component";
 import { TourAuthoringModule } from "../tour-authoring/tour-authoring.module";
-import { TourSalesComponent } from './tour-sales/tour-sales.component';
-import { TourSaleFormComponent } from './tour-sale-form/tour-sale-form.component';
+import { TourSalesComponent } from "./tour-sales/tour-sales.component";
+import { TourSaleFormComponent } from "./tour-sale-form/tour-sale-form.component";
 import { CouponsComponent } from "./coupons/coupons.component";
 import { CouponsViewComponent } from "./coupons-view/coupons-view.component";
 import { EditCouponFormComponent } from "./edit-coupon-form/edit-coupon-form.component";
 import { CouponsModalComponent } from "./coupons-modal/coupons-modal.component";
-import { ExploreBundlesComponent } from './explore-bundles/explore-bundles.component';
-import { StarRatingModule } from 'angular-star-rating';
-import { ClubPageComponent } from './club-page/club-page.component';
+import { ExploreBundlesComponent } from "./explore-bundles/explore-bundles.component";
+import { StarRatingModule } from "angular-star-rating";
+import { ClubPageComponent } from "./club-page/club-page.component";
 
 @NgModule({
     declarations: [
