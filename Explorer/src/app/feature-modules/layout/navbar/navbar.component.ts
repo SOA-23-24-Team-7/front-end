@@ -46,7 +46,8 @@ import {
     faFlag,
     faMoneyBills,
     faBoxOpen,
-    faBarChart
+    faBarChart,
+    faCheckSquare
 } from "@fortawesome/free-solid-svg-icons";
 import { StakeholderService } from "../../stakeholder/stakeholder.service";
 import { interval, Subscription } from "rxjs";
@@ -181,4 +182,5 @@ export class NavbarComponent implements OnInit {
     faMoneyBills = faMoneyBills;
     faBoxOpen = faBoxOpen;
     faBarChart = faBarChart;
+    faCheckSquare = faCheckSquare;
 }

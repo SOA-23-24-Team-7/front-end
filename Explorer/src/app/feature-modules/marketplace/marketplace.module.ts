@@ -40,10 +40,13 @@ import { CouponsComponent } from "./coupons/coupons.component";
 import { CouponsViewComponent } from "./coupons-view/coupons-view.component";
 import { EditCouponFormComponent } from "./edit-coupon-form/edit-coupon-form.component";
 import { CouponsModalComponent } from "./coupons-modal/coupons-modal.component";
+import { ExploreBundlesComponent } from './explore-bundles/explore-bundles.component';
+import { StarRatingModule } from 'angular-star-rating';
+import { TouristsWishlistComponent } from './tourists-wishlist/tourists-wishlist.component';
+import { WishlistComponent } from './wishlist/wishlist.component';
 import { CartComponent } from "./cart/cart.component";
-import { ExploreBundlesComponent } from "./explore-bundles/explore-bundles.component";
 import { MatRadioModule } from "@angular/material/radio";
-import { StarRatingModule } from "angular-star-rating";
+import { NotifierModule } from "angular-notifier"; 
 
 @NgModule({
     declarations: [
@@ -78,6 +81,8 @@ import { StarRatingModule } from "angular-star-rating";
         EditCouponFormComponent,
         CouponsModalComponent,
         ExploreBundlesComponent,
+        TouristsWishlistComponent,
+        WishlistComponent,
         CartComponent,
     ],
     imports: [
@@ -102,6 +107,7 @@ import { StarRatingModule } from "angular-star-rating";
         TourAuthoringModule,
         MatRadioModule,
         StarRatingModule.forRoot(),
+        NotifierModule,
     ],
     exports: [
         ReviewComponent,

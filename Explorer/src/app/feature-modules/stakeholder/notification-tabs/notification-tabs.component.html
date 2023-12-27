@@ -63,6 +63,16 @@
         >
             <fa-icon [icon]="faCoins"/> Payments history
         </div>
+        <div
+            class="tab"
+            *ngIf="user.role === 'tourist'"
+            [ngClass]="{
+                'selected-tab': selectedTab === Tab.WISHLISTNOTIFICATION
+            }"
+            (click)="setActiveTab(Tab.WISHLISTNOTIFICATION, tabList)"
+        >
+            <fa-icon [icon]="faPercentage" />Wishlist notifications
+        </div>
     </div>
     <div class="tab-content">
         <xp-keypoints-notifications *ngIf="selectedTab === Tab.KEYPOINTS" />
@@ -79,5 +89,8 @@
         <xp-payment-history
             *ngIf="selectedTab === Tab.PAYMENTSHISTORY"
         />
+        <xp-wishlist-notifications 
+        *ngIf="selectedTab === Tab.WISHLISTNOTIFICATION"
+        ></xp-wishlist-notifications>
     </div>
 </div>

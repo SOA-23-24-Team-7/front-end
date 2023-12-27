@@ -20,6 +20,7 @@ import {
     faMoneyBill,
 } from "@fortawesome/free-solid-svg-icons";
 import { environment } from "src/env/environment";
+import { NotifierService } from "angular-notifier";
 
 @Component({
     selector: "xp-cart",
@@ -41,6 +42,7 @@ export class CartComponent implements OnInit {
         private authService: AuthService,
         public dialogRef: MatDialog,
         public dialogRefCoupons: MatDialog,
+        private notifier: NotifierService,
     ) {}
 
     ngOnInit(): void {
@@ -93,7 +95,10 @@ export class CartComponent implements OnInit {
                     )
                     .subscribe({
                         next: () => {
-                            alert("Item successfully removed from cart!");
+                            this.notifier.notify(
+                                "success",
+                                "Item successfully removed from cart!",
+                            );
 
                             this.shoppingCart.orderItems?.splice(
                                 this.shoppingCart.orderItems?.findIndex(
@@ -178,7 +183,8 @@ export class CartComponent implements OnInit {
                                             totalPrice =
                                                 (totalPrice as number) -
                                                 tour.price!;
-                                            alert(
+                                            this.notifier.notify(
+                                                "success",
                                                 "You have successfully bought tours!",
                                             );
                                             this.data = [];
@@ -197,7 +203,7 @@ export class CartComponent implements OnInit {
                         },
                     });
             } else {
-                alert("You don't have enough coins.");
+                this.notifier.notify("error", "You don't have enough coins.");
             }
         });
     }
