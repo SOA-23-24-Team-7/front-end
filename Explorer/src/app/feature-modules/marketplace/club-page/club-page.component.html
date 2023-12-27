@@ -16,6 +16,11 @@
                 <xp-user-card [user]="member" [ban]="isOwner()" [clubMemberId]="member.membershipId" *ngIf="!member.kicked"></xp-user-card>
             </div>
         </div>
+        <div class="separator"></div>
+        <div class="btn leave" *ngIf="isRegularMember()" (click)="leave()">
+            <fa-icon [icon]="faDoorOpen" class="door-leave"/>
+            Leave the club
+        </div>
     </div>
 
     <div class="blogs" *ngIf="isUserMember">

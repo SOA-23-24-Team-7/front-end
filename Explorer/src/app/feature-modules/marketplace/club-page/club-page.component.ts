@@ -12,6 +12,8 @@ import {
   faCheck,
   faEnvelope
 } from "@fortawesome/free-solid-svg-icons";
+import { Router } from '@angular/router';
+
 @Component({
   selector: 'xp-club-page',
   templateUrl: './club-page.component.html',
@@ -27,10 +29,12 @@ export class ClubPageComponent {
   faDoorOpen = faDoorOpen;
   faCheck = faCheck;
   faEnvelope = faEnvelope;
+
   constructor(
     private authService: AuthService,
     private route: ActivatedRoute,
     private marketplaceService: MarketplaceService,
+    private router: Router
   ) {}
 
   ngOnInit(): void {
@@ -84,8 +88,6 @@ export class ClubPageComponent {
   }
 
   isOwner(): boolean {
-    console.log('UserID:' + this.user.id)
-    console.log('OwnerID:' + this.getOwner().userId)
     return this.user.id == this.getOwner().userId;
   }
   
@@ -123,5 +125,20 @@ export class ClubPageComponent {
     if (target) {
       target.src = "https://imgs.search.brave.com/udmDGOGRJTYO6lmJ0ADA03YoW4CdO6jPKGzXWvx1XRI/rs:fit:860:0:0/g:ce/aHR0cHM6Ly90My5m/dGNkbi5uZXQvanBn/LzAyLzY4LzU1LzYw/LzM2MF9GXzI2ODU1/NjAxMl9jMVdCYUtG/TjVyalJ4UjJleVYz/M3puSzRxblllS1pq/bS5qcGc";
     }
+  }
+
+  isRegularMember(): boolean {
+    const isMember = this.members.some(member => member.userId == this.user.id);
+    return isMember && !this.isOwner();
+  }
+
+  leave(): void {
+    const membership = this.members.find(member => member.userId == this.user.id)
+    if(!membership) return
+    this.marketplaceService.kickMember(membership.membershipId).subscribe({
+      next: () => {
+        this.router.navigate(['/clubs']);
+      }
+    })
   }
 }

@@ -23,6 +23,7 @@ import { PaymentHistoryComponent } from "./payment-history/payment-history.compo
 import { ShoppingNotificationsComponent } from "./shopping-notifications/shopping-notifications.component";
 import { TransactionRecordsNotificationsComponent } from './transaction-records-notifications/transaction-records-notifications.component';
 import { UserClubsDialogComponent } from './user-clubs-dialog/user-clubs-dialog.component';
+import { ClubNotificationsComponent } from './club-notifications/club-notifications.component';
 
 @NgModule({
     declarations: [
@@ -44,6 +45,7 @@ import { UserClubsDialogComponent } from './user-clubs-dialog/user-clubs-dialog.
         ShoppingNotificationsComponent,
         TransactionRecordsNotificationsComponent,
         UserClubsDialogComponent,
+        ClubNotificationsComponent,
     ],
     imports: [
         CommonModule,
@@ -60,6 +62,7 @@ import { UserClubsDialogComponent } from './user-clubs-dialog/user-clubs-dialog.
         NotificationTabsComponent,
         MessageDialogComponent,
         EditProfileComponent,
+        ClubNotificationsComponent
     ],
 })
 export class StakeholderModule {}

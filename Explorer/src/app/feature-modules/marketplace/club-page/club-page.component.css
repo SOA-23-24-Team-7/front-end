@@ -14,7 +14,9 @@
     border: rgba(var(--border-primary), 1) 1px solid;
     border-radius: 0.3125rem;
     transition: background-color 0.15s,
-                border 0.15s;
+                border 0.15s,
+                height 0.5s;
+    padding-bottom: 1rem;
 }
 
 .club-image {
@@ -23,6 +25,8 @@
     z-index: 1;
     position: relative;
     object-fit: cover;
+    border-top-left-radius: 0.3125rem;
+    border-top-right-radius: 0.3125rem;
 }
 
 .club-title {
@@ -72,7 +76,6 @@
     overflow-x: hidden;
     max-height: 30rem;
     padding-right: 0.5rem;
-    margin-bottom: 1rem;
 }
 
 ::-webkit-scrollbar {
@@ -139,4 +142,15 @@
     color: rgba(255, 255, 255, 1);
     font-size: 1.3rem;
     margin-left: 0.5rem;
+}
+
+.leave {
+    margin-top: 1rem;
+    width: calc(100% - 2rem);
+    margin-inline: 1rem;
+    background-color: red;
+}
+
+.door-leave {
+    margin-right: 1rem;
 }
