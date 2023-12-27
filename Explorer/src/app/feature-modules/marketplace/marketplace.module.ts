@@ -45,6 +45,9 @@ import { CouponsModalComponent } from "./coupons-modal/coupons-modal.component";
 import { ExploreBundlesComponent } from "./explore-bundles/explore-bundles.component";
 import { StarRatingModule } from "angular-star-rating";
 import { ClubPageComponent } from "./club-page/club-page.component";
+import { ClubBlogPreviewComponent } from './club-blog-preview/club-blog-preview.component';
+import { BlogsComponent } from "../blog/blogs/blogs.component";
+import { BlogModule } from "../blog/blog.module";
 
 @NgModule({
     declarations: [
@@ -82,6 +85,7 @@ import { ClubPageComponent } from "./club-page/club-page.component";
         CouponsModalComponent,
         ExploreBundlesComponent,
         ClubPageComponent,
+        ClubBlogPreviewComponent,
     ],
     imports: [
         CommonModule,
@@ -103,6 +107,7 @@ import { ClubPageComponent } from "./club-page/club-page.component";
         LayoutModule,
         MatChipsModule,
         TourAuthoringModule,
+        BlogModule,
         StarRatingModule.forRoot(),
     ],
     exports: [

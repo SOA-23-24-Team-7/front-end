@@ -1,4 +1,4 @@
-import { Component, OnInit } from "@angular/core";
+import { Component, Input, OnInit } from "@angular/core";
 import { Blog } from "../model/blog.model";
 import { BlogService } from "../blog.service";
 import { PagedResults } from "src/app/shared/model/paged-results.model";
@@ -32,7 +32,7 @@ export class BlogsComponent implements OnInit {
     user: User | undefined;
     followings: Following[] = [];
     selectedStatus: number = 5;
-
+    @Input() clubId: number = -1;
     constructor(
         private service: BlogService,
         private authService: AuthService,
@@ -78,13 +78,23 @@ export class BlogsComponent implements OnInit {
     }
 
     getBlogs(): void {
-        this.service.getBlogs().subscribe({
-            next: (result: PagedResults<Blog>) => {
-                this.blogs = result.results;
-                this.removePrivates();
-            },
-            error: () => {},
-        });
+        if(this.clubId == -1){
+            this.service.getBlogs().subscribe({
+                next: (result: PagedResults<Blog>) => {
+                    this.blogs = result.results;
+                    this.removePrivates();
+                },
+                error: () => {},
+            });
+        }
+        else{
+            this.service.getClubBlogs(this.clubId).subscribe({
+                next: (result: PagedResults<Blog>) => {
+                    this.blogs = result.results;
+                },
+                error: () => {},
+            });
+        }
     }
 
     getVote(blog: Blog): Vote | undefined {

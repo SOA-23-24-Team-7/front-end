@@ -31,6 +31,7 @@ import { CouponApplication } from "./model/coupon-applicaton.model";
 import { Bundle } from "../tour-authoring/model/bundle.model";
 import { BundleOrderItem } from "./model/bundle-order-item.model";
 import { SortOption } from "./model/sort-option.model";
+import { Blog } from "../blog/model/blog.model";
 
 @Injectable({
     providedIn: "root",
@@ -238,6 +239,9 @@ export class MarketplaceService {
         const route =
             environment.apiHost + "tourist/club/invite/accept/" + invitationId;
         return this.http.patch<any>(route, { observe: "response" });
+    }
+    getClubBlogs(clubId: number): Observable<Blog[]> {
+        return this.http.get<Blog[]>(environment.apiHost + "blog/getClubBlogs?page=0&pageSize=0&clubId="+clubId);
     }
     rejectInvite(invitationId: number): Observable<any> {
         const route =

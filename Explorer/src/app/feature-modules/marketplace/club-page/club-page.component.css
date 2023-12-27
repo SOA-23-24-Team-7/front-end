@@ -109,7 +109,7 @@
 
 .blogs {
     width: 70%;
-    height: 50rem;
+    height: 100%;
     text-align: center;
     color: rgba(var(--clr-text), 1);
     transition: color 0.15s;

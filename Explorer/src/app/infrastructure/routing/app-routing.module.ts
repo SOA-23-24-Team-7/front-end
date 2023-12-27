@@ -147,6 +147,7 @@ const routes: Routes = [
     { path: "blog/:blogId", component: BlogComponent },
     { path: "my-blogs/blog-form/:blogId", component: BlogFormComponent },
     { path: "blog-form/:blogId", component: BlogFormComponent },
+    { path: "blog-form/:blogId/:clubId", component: BlogFormComponent },
     {
         path: "profile",
         component: UserProfileComponent,

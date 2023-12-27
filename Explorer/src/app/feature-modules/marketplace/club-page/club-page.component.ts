@@ -17,6 +17,7 @@ import { Router } from "@angular/router";
 import { MatDialog } from "@angular/material/dialog";
 import { ClubMembersManagementComponent } from "../club-members-management/club-members-management.component";
 import { ClubMembersInviteFormComponent } from "../club-members-invite-form/club-members-invite-form.component";
+import { Blog } from "../../blog/model/blog.model";
 
 @Component({
     selector: "xp-club-page",
@@ -25,6 +26,7 @@ import { ClubMembersInviteFormComponent } from "../club-members-invite-form/club
 })
 export class ClubPageComponent {
     user: User;
+    blogs: Blog[] = [];
     clubId: number = -1;
     club: Club;
     members: ClubMember[] = [];
@@ -119,7 +121,15 @@ export class ClubPageComponent {
         );
     }
     getBlogs() {
-        //TODO: get club blogs
+        this.marketplaceService.getClubBlogs(this.clubId).subscribe({
+            next: (result: Blog[]) => {
+                this.blogs = result;
+            },
+            error: () => {},
+        });
+    }
+    createBlog(){
+        this.router.navigate(["/blog-form", 0, this.clubId]);
     }
     getClubJoinRequests(): void {
         this.marketplaceService.getMyClubJoinRequests().subscribe({
@@ -176,4 +186,5 @@ export class ClubPageComponent {
             },
         });
     }
+    
 }

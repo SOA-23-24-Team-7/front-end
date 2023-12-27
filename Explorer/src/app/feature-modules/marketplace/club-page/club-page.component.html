@@ -40,6 +40,15 @@
 
     <div class="blogs" *ngIf="isUserMember">
         <h1>Blogs</h1>
+        <div style="width: 30%; margin: auto">
+            <br>
+            <div class="club-button" (click)="createBlog()">
+                <div class="club-button-text">Create new blog</div>
+            </div>
+        </div>
+        <div>
+            <xp-blogs [clubId]="clubId"></xp-blogs>
+        </div>
     </div>
     <div class="blogs" *ngIf="!isUserMember">
         <div *ngIf="canSendJoinRequest()">
