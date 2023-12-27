@@ -382,19 +382,6 @@
                     </div>
                     <div
                         class="navbar-submenu-item"
-                        [routerLink]="['problem']"
-                        *ngIf="user && user.role === 'tourist'"
-                    >
-                        <fa-icon
-                            class="navbar-submenu-item-icon"
-                            [icon]="faTriangleExclamation"
-                        />
-                        <div class="navbar-submenu-item-text">
-                            Report a problem
-                        </div>
-                    </div>
-                    <div
-                        class="navbar-submenu-item"
                         [routerLink]="['problems']"
                     >
                         <fa-icon

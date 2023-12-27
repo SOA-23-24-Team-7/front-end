@@ -13,7 +13,6 @@ import { UsersOverviewComponent } from "src/app/feature-modules/administration/u
 import { UserProfileComponent } from "src/app/feature-modules/stakeholder/user-profile/user-profile.component";
 import { RatingComponent } from "src/app/feature-modules/administration/rating/rating.component";
 import { ReviewComponent } from "src/app/feature-modules/marketplace/review/review.component";
-import { ProblemComponent } from "src/app/feature-modules/marketplace/problem/problem.component";
 import { TourComponent } from "src/app/feature-modules/tour-authoring/tour/tour.component";
 import { TourEquipmentFormComponent } from "src/app/feature-modules/tour-authoring/tour-equipment-form/tour-equipment-form.component";
 import { EditProfileComponent } from "../../feature-modules/stakeholder/edit-profile/edit-profile.component";
@@ -59,7 +58,6 @@ import { TourStatisticsComponent } from "src/app/feature-modules/tour-authoring/
 import { SingleTourStatisticsComponent } from "src/app/feature-modules/tour-authoring/single-tour-statistics/single-tour-statistics.component";
 import { ResetPasswordComponent } from "../auth/reset-password/reset-password.component";
 import { ResetPasswordEditComponent } from "../auth/reset-password-edit/reset-password-edit.component";
-import { EncounterListComponent } from "src/app/feature-modules/encounter/encounter-list/encounter-list.component";
 import { WishlistComponent } from "src/app/feature-modules/marketplace/wishlist/wishlist.component";
 
 const routes: Routes = [
@@ -75,16 +73,10 @@ const routes: Routes = [
     { path: "", component: HomeComponent },
     { path: "ratings", component: RatingComponent, canActivate: [AuthGuard] },
     {
-        path: "done-encounter",
-        component: EncounterListComponent,
-        canActivate: [AuthGuard],
-    },
-    {
         path: "review/:tourId",
         component: ReviewComponent,
         canActivate: [AuthGuard],
     },
-    { path: "problem", component: ProblemComponent, canActivate: [AuthGuard] },
     {
         path: "problems",
         component: ProblemsOverviewComponent,
@@ -310,11 +302,12 @@ const routes: Routes = [
     {
         path: "wishlist",
         component: WishlistComponent,
-        canActivate: [AuthGuard],
+        canActivate: [AuthGuard]
     },
     { path: "reset-password", component: ResetPasswordComponent },
     { path: "reset-password-edit", component: ResetPasswordEditComponent },
     { path: "**", pathMatch: "full", component: PageNotFoundComponent },
+    
 ];
 
 @NgModule({
