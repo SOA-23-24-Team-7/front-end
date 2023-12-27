@@ -14,7 +14,9 @@
     border: rgba(var(--border-primary), 1) 1px solid;
     border-radius: 0.3125rem;
     transition: background-color 0.15s,
-                border 0.15s;
+                border 0.15s,
+                height 0.5s;
+    padding-bottom: 1rem;
 }
 
 .club-image {
@@ -23,6 +25,8 @@
     z-index: 1;
     position: relative;
     object-fit: cover;
+    border-top-left-radius: 0.3125rem;
+    border-top-right-radius: 0.3125rem;
 }
 
 .club-title {
@@ -72,7 +76,6 @@
     overflow-x: hidden;
     max-height: 30rem;
     padding-right: 0.5rem;
-    margin-bottom: 1rem;
 }
 
 ::-webkit-scrollbar {
@@ -109,4 +112,45 @@
 .blogs {
     width: 70%;
     height: 50rem;
+    text-align: center;
+    color: rgba(var(--clr-text), 1);
+    transition: color 0.15s;
+}
+
+.club-button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding-inline: 0.5rem;
+    height: 2rem;
+    border-radius: 0.5rem;
+    background-color: rgba(var(--clr-primary-500), 1);
+    cursor: pointer;
+    transition: filter 0.15s;
+}
+
+.club-button:hover {
+    filter: brightness(1.2);
+}
+
+.club-button-icon {
+    color: rgba(255, 255, 255, 1);
+    font-size: 1.3rem;
+}
+
+.club-button-text {
+    color: rgba(255, 255, 255, 1);
+    font-size: 1.3rem;
+    margin-left: 0.5rem;
+}
+
+.leave {
+    margin-top: 1rem;
+    width: calc(100% - 2rem);
+    margin-inline: 1rem;
+    background-color: red;
+}
+
+.door-leave {
+    margin-right: 1rem;
 }

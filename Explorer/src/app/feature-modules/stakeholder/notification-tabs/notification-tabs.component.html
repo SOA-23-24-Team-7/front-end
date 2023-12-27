@@ -63,6 +63,16 @@
         >
             <fa-icon [icon]="faCoins"/> Payments history
         </div>
+        <div
+            class="tab"
+            *ngIf="user.role === 'tourist'"
+            [ngClass]="{
+                'selected-tab': selectedTab === Tab.CLUBS
+            }"
+            (click)="setActiveTab(Tab.CLUBS, tabList)"
+        >
+            <fa-icon [icon]="faUsers"/> Clubs
+        </div>
     </div>
     <div class="tab-content">
         <xp-keypoints-notifications *ngIf="selectedTab === Tab.KEYPOINTS" />
@@ -78,6 +88,9 @@
         />
         <xp-payment-history
             *ngIf="selectedTab === Tab.PAYMENTSHISTORY"
+        />
+        <xp-club-notifications
+            *ngIf="selectedTab === Tab.CLUBS"
         />
     </div>
 </div>

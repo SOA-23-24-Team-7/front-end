@@ -21,6 +21,7 @@ import { Record } from "./model/record.model";
 import { Wallet } from "./model/wallet.model";
 import { TransactionRecord } from "./model/transaction-record.model";
 import { BundleRecord } from "./model/bundle-record.model";
+import { Club } from "../marketplace/model/club.model";
 
 @Injectable({
     providedIn: "root",
@@ -264,6 +265,11 @@ export class StakeholderService {
     getBundleRecords(): Observable<BundleRecord[]> {
         return this.http.get<BundleRecord[]>(
             environment.apiHost + "tourist/bundle-records"
+        );
+    }
+    getClubs(userId: any): Observable<PagedResults<Club>> {
+        return this.http.get<PagedResults<Club>>(
+            environment.apiHost + "tourist/club/members/userclubs/"+userId,
         );
     }
 }
