@@ -115,7 +115,7 @@
                 </div>
             </div>
             <div class="tour-card-right">
-                <div class="tour-price" *ngIf="user && user.role !== 'tourist'">
+                <div class="tour-price" *ngIf="user && user.role === 'author'">
                     <div *ngIf="discount" class="tour-price-value">
                         <s>{{ tour.price }}</s>
                     </div>
@@ -124,23 +124,26 @@
                     </div>
                     <fa-icon class="tour-price-tokens" [icon]="faCoins" />
                 </div>
-                <div *ngIf="discount" class="tour-price">
+                <div *ngIf="discount && user && user.role === 'author'" class="tour-price">
                     <div class="discount">-{{ discount! * 100 }}%</div>
                     <div class="tour-price-value">{{ discountedPrice! }}</div>
                     <fa-icon class="tour-price-tokens" [icon]="faCoins" />
                 </div>
 
                 <div class="tour-price-tourist" *ngIf="user && user.role === 'tourist'">
-                    <div *ngIf="discount" class="tour-price-value">
-                        <s>{{ tour.price }}</s>
-                    </div>
                     <div *ngIf="!discount" class="tour-price-value">
                         {{ tour.price }}
                     </div>
-                    <fa-icon class="tour-price-tokens" [icon]="faCoins" />
+                    <fa-icon *ngIf="!discount" class="tour-price-tokens" [icon]="faCoins" />
+                    <div> &nbsp; </div>
                 </div>
-                <div *ngIf="discount" class="tour-price-tourist">
-                    <div class="discount">-{{ discount! * 100 }}%</div>
+
+                <div *ngIf="discount && user && user.role === 'tourist'" class="tour-price-tourist">
+                    <div *ngIf="discount" class="tour-price-value">
+                        <s>{{ tour.price }}</s>
+                    </div>
+                    <fa-icon *ngIf="discount" class="tour-price-tokens" [icon]="faCoins" />
+                    <div class="discount">&nbsp;&nbsp;-{{ discount! * 100 }}%</div>
                     <div class="tour-price-value">{{ discountedPrice! }}</div>
                     <fa-icon class="tour-price-tokens" [icon]="faCoins" />
                 </div>

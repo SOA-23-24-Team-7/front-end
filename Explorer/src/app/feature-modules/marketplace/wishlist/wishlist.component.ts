@@ -33,7 +33,5 @@ export class WishlistComponent {
             console.log(err);
         },
     });
-}
-
- 
+ }
 }

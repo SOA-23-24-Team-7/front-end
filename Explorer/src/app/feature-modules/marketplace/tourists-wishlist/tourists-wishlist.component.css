@@ -289,7 +289,7 @@
 }
 
 .view {
-    margin-top: auto;
+    margin-top: 0.5rem;
     max-width: 60%;
     min-width: 15rem;
     margin-left: auto;

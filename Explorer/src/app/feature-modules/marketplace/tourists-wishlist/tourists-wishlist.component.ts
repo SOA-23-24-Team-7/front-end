@@ -22,8 +22,8 @@ import {
   faBoxArchive,
   faPen,
   faMoneyBills,
-  faBarChart
-
+  faBarChart,
+  faMap
 } from "@fortawesome/free-solid-svg-icons";
 
 import { User } from "src/app/infrastructure/auth/model/user.model";
@@ -44,9 +44,7 @@ import { Location } from '@angular/common';
   styleUrls: ['./tourists-wishlist.component.css']
 })
 export class TouristsWishlistComponent {
-
-
-
+  faMap = faMap;
   faStar = faStar;
   faCoins = faCoins;
   faCartShopping = faCartShopping;
