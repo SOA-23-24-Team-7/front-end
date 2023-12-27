@@ -44,6 +44,7 @@ import { CartComponent } from "./cart/cart.component";
 import { ExploreBundlesComponent } from "./explore-bundles/explore-bundles.component";
 import { MatRadioModule } from "@angular/material/radio";
 import { StarRatingModule } from "angular-star-rating";
+import { NotifierModule } from "angular-notifier";
 
 @NgModule({
     declarations: [
@@ -102,6 +103,7 @@ import { StarRatingModule } from "angular-star-rating";
         TourAuthoringModule,
         MatRadioModule,
         StarRatingModule.forRoot(),
+        NotifierModule,
     ],
     exports: [
         ReviewComponent,

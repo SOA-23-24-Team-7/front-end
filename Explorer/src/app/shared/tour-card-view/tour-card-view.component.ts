@@ -188,11 +188,17 @@ export class TourCardViewComponent implements OnChanges {
             shoppingCartId: this.shoppingCart.id,
         };
         if (this.addedTours.find(tr => tr.id == tourId)) {
-            alert("You have already added this item to the cart.");
+            this.notifier.notify(
+                "error",
+                "You have already added this item to the cart.",
+            );
             return;
         }
         if (this.tokens.find(tok => tok.tourId == tourId)) {
-            alert("You have already purcheased this tour.");
+            this.notifier.notify(
+                "error",
+                "You have already purcheased this tour.",
+            );
             return;
         }
         this.marketplaceService.addOrderItem(orderItem).subscribe({
@@ -203,12 +209,11 @@ export class TourCardViewComponent implements OnChanges {
                         this.marketplaceService
                             .getShoppingCart(this.user.id)
                             .subscribe();
-                        alert("Item successfully added to cart!");
                     },
                 });
             },
             error: (err: any) => {
-                console.log(err);
+                this.notifier.notify("error", xpError.getErrorMessage(err));
             },
         });
     }
@@ -230,7 +235,8 @@ export class TourCardViewComponent implements OnChanges {
                             },
                         });
                     } else {
-                        alert(
+                        this.notifier.notify(
+                            "error",
                             "Tour can't be published because it does not have needed requiements!",
                         );
                     }
@@ -258,8 +264,6 @@ export class TourCardViewComponent implements OnChanges {
     }
 
     onEditClicked(): void {
-        //this.shouldEdit = false;
-        //this.shouldRenderTourForm = true;
         this.dialogRef.open(EditTourFormComponent, {
             data: this.tour,
         });
