@@ -13,6 +13,7 @@ export interface Encounter {
     pictureLongitude?: number;
     pictureLatitude?: number;
     challengeDone: boolean;
+    instances?: number[];
 }
 
 export enum EncounterType {

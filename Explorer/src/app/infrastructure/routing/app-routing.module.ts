@@ -60,6 +60,7 @@ import { TourStatisticsComponent } from "src/app/feature-modules/tour-authoring/
 import { SingleTourStatisticsComponent } from "src/app/feature-modules/tour-authoring/single-tour-statistics/single-tour-statistics.component";
 import { ResetPasswordComponent } from "../auth/reset-password/reset-password.component";
 import { ResetPasswordEditComponent } from "../auth/reset-password-edit/reset-password-edit.component";
+import { EncounterListComponent } from "src/app/feature-modules/encounter/encounter-list/encounter-list.component";
 
 const routes: Routes = [
     { path: "home", component: HomeComponent },
@@ -73,6 +74,11 @@ const routes: Routes = [
     },
     { path: "", component: HomeComponent },
     { path: "ratings", component: RatingComponent, canActivate: [AuthGuard] },
+    {
+        path: "done-encounter",
+        component: EncounterListComponent,
+        canActivate: [AuthGuard],
+    },
     {
         path: "review/:tourId",
         component: ReviewComponent,

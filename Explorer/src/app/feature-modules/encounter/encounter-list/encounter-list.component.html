@@ -1,0 +1,124 @@
+<div class="tabs">
+    <div class="tab-container">
+        <div
+            class="tab"
+            [class.tab-selected]="currentTab === 'tab0'"
+            (click)="showTab('tab0')"
+        >
+            All done
+        </div>
+    </div>
+    <div class="tab-container">
+        <div
+            class="tab"
+            [class.tab-selected]="currentTab === 'tab1'"
+            (click)="showTab('tab1')"
+        >
+            Social
+        </div>
+    </div>
+    <div class="tab-container">
+        <div
+            class="tab"
+            [class.tab-selected]="currentTab === 'tab2'"
+            (click)="showTab('tab2')"
+        >
+            Hidden
+        </div>
+    </div>
+    <div class="tab-container">
+        <div
+            class="tab"
+            [class.tab-selected]="currentTab === 'tab3'"
+            (click)="showTab('tab3')"
+        >
+            Misc
+        </div>
+    </div>
+</div>
+<div class="svi">
+    <div class="tab-content" *ngIf="currentTab === 'tab0'">
+        <div *ngFor="let encounter of encounters" class="encounter-item">
+            <div
+                class="encounter-content"
+                [ngClass]="getEncounterStatusClass(encounter.type)"
+                [ngStyle]="{
+                    border:
+                        encounter === encounterWithMaxXpReward
+                            ? '2px solid blue'
+                            : 'none'
+                }"
+            >
+                <h2>{{ encounter.title }}</h2>
+                <p>{{ encounter.description }}</p>
+                <p><b>XP:</b>{{ encounter.xpReward }}</p>
+            </div>
+        </div>
+    </div>
+
+    <div class="tab-content" *ngIf="currentTab === 'tab1'">
+        <div *ngFor="let encounter of encounters" class="encounter-item">
+            <div
+                class="encounter-content"
+                *ngIf="encounter.type == 0"
+                [ngClass]="getEncounterStatusClass(encounter.type)"
+            >
+                <h2>{{ encounter.title }}</h2>
+                <p>{{ encounter.description }}</p>
+                <p><b>XP:</b>{{ encounter.xpReward }}</p>
+            </div>
+        </div>
+    </div>
+
+    <div class="tab-content" *ngIf="currentTab === 'tab2'">
+        <div *ngFor="let encounter of encounters" class="encounter-item">
+            <div
+                class="encounter-content"
+                *ngIf="encounter.type == 1"
+                [ngClass]="getEncounterStatusClass(encounter.type)"
+            >
+                <h2>{{ encounter.title }}</h2>
+                <p>{{ encounter.description }}</p>
+                <p><b>XP:</b>{{ encounter.xpReward }}</p>
+            </div>
+        </div>
+    </div>
+    <div class="tab-content" *ngIf="currentTab === 'tab3'">
+        <div *ngFor="let encounter of encounters" class="encounter-item">
+            <div
+                class="encounter-content"
+                *ngIf="encounter.type == 2"
+                [ngClass]="getEncounterStatusClass(encounter.type)"
+            >
+                <h2>{{ encounter.title }}</h2>
+                <p>{{ encounter.description }}</p>
+                <p><b>XP:</b>{{ encounter.xpReward }}</p>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="tour-search">
+    <div class="search-input">
+        <label for="name">Name:</label>
+        <input type="text" id="name" name="name" />
+    </div>
+
+    <div class="search-input">
+        <label for="xpReward">xpReward:</label>
+        <input type="number" id="xpReward" name="xpReward" />
+    </div>
+
+    <div class="search-input">
+        <label for="sortOrder">Sort Order:</label>
+        <select id="sortOrder" name="sortOrder">
+            <option value="asc">Ascending</option>
+            <option value="desc">Descending</option>
+        </select>
+    </div>
+
+    <div class="search-button">
+        <div class="search-button-text">
+            <button>Search</button>
+        </div>
+    </div>
+</div>
