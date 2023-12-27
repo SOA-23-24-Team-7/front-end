@@ -8,21 +8,19 @@ import { PagedResults } from "src/app/shared/model/paged-results.model";
     templateUrl: "./blog-cards.component.html",
     styleUrls: ["./blog-cards.component.css"],
 })
-export class BlogCardsComponent implements OnInit{
-    currentIndex=0
-    popularBlogs:Blog[]
-    blogContainer:any;
-    constructor(private service:LayoutService){}
+export class BlogCardsComponent implements OnInit {
+    currentIndex = 0;
+    popularBlogs: Blog[];
+    blogContainer: any;
+    constructor(private service: LayoutService) {}
     ngOnInit(): void {
-        this.blogContainer = document.querySelector(
-            ".blog-container",
-        );
+        this.blogContainer = document.querySelector(".blog-container");
         this.service.getPopularBlogs().subscribe({
-            next:(result: PagedResults<Blog>)=>{
-                this.popularBlogs=result.results
+            next: (result: PagedResults<Blog>) => {
+                this.popularBlogs = result.results.slice(0, 3);
                 //console.log(this.adventureTours)
-            }
-        })
+            },
+        });
     }
     scrollToPrev() {
         this.currentIndex--;

@@ -20,8 +20,9 @@ import { RequestFacilityCardComponent } from "./request-facility-card/request-fa
 import { ReviewCardComponent } from "./review-cards/review-card.component";
 import { PublicKeypointNotificationCardComponent } from "./public-keypoint-notification-card/public-keypoint-notification-card.component";
 import { SharedModule } from "src/app/shared/shared.module";
-import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
+import { PageNotFoundComponent } from "./page-not-found/page-not-found.component";
 import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
+import { BlogModule } from "../blog/blog.module";
 
 @NgModule({
     declarations: [
@@ -50,6 +51,7 @@ import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
         MatDialogModule,
         SharedModule,
         BrowserAnimationsModule,
+        BlogModule,
     ],
     exports: [
         NavbarComponent,
@@ -60,7 +62,7 @@ import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
         TourCardComponent,
         ReviewCardComponent,
         PublicKeypointNotificationCardComponent,
-        ClubCardComponent
+        ClubCardComponent,
     ],
 })
 export class LayoutModule {}
