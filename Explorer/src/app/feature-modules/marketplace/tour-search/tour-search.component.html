@@ -434,7 +434,7 @@
             </div>
         </div>
         <div class="tour-search-results">
-            <div style="text-align: center">
+            <div class="radio-buttons" style="text-align: center">
                 <mat-radio-group
                     aria-label="Select an option"
                     [(ngModel)]="radioButtonSelected"
@@ -471,6 +471,7 @@
                     [@fadeIn]
                     *ngFor="let tour of tours"
                     [tour]="tour"
+                    [routerLink]="['/tour/', tour.id]"
                 ></xp-tour-card-view>
             </div>
             <div class="tour-search-pages" *ngIf="radioButtonSelected == 0">

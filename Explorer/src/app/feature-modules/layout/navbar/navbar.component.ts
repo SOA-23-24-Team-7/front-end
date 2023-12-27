@@ -47,7 +47,7 @@ import {
     faMoneyBills,
     faBoxOpen,
     faBarChart,
-    faCheckSquare
+    faCheckSquare,
 } from "@fortawesome/free-solid-svg-icons";
 import { StakeholderService } from "../../stakeholder/stakeholder.service";
 import { interval, Subscription } from "rxjs";
@@ -89,17 +89,17 @@ export class NavbarComponent implements OnInit {
     ngOnInit(): void {
         this.authService.user$.subscribe(user => {
             this.user = user;
-            this.getUnseenNotifications();
-            if (this.user.id !== 0) {
+            if (this.user.id !== 0 && this.user.role != "administrator") {
                 this.checkNotifications = this.source.subscribe(val =>
                     this.getUnseenNotifications(),
                 );
             }
         });
+        // this.getUnseenNotifications();
     }
 
     getUnseenNotifications() {
-        console.log("subscribe");
+        // console.log("subscribe");
         if (this.user!.id !== 0) {
             this.stakeholderService.countNotifications().subscribe({
                 next: (result: number) => {
@@ -136,7 +136,9 @@ export class NavbarComponent implements OnInit {
     }
 
     onRateApp(): void {
-        const dialogRef = this.dialogRef.open(RatingFormComponent, { autoFocus: false });
+        const dialogRef = this.dialogRef.open(RatingFormComponent, {
+            autoFocus: false,
+        });
     }
 
     ngOnDestroy() {
@@ -144,8 +146,10 @@ export class NavbarComponent implements OnInit {
     }
 
     unsubscribe() {
-        console.log("destroyed");
-        this.checkNotifications.unsubscribe();
+        if (this.user?.id !== 0 && this.user?.role != "administrator") {
+            // console.log("destroyed");
+            this.checkNotifications.unsubscribe();
+        }
     }
 
     faChevronDown = faChevronDown;
