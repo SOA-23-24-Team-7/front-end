@@ -57,6 +57,18 @@ tbody tr.active-row {
     padding-inline: 2rem;
 }
 
+.clubs-header-paragraph {
+    align-items: left;
+    width: 100%;
+    font-family: var(--fnt-body);
+    margin-top: 0.5rem;
+    font-size: 1.25rem;
+    font-weight: 400;
+    color: rgba(var(--clr-text), 1);
+    transition: color 0.15s;
+    line-height: 1.5;
+}
+
 .clubs-wrapper {
     width: 100%;
     display: flex;
@@ -76,14 +88,26 @@ tbody tr.active-row {
     border: green 1px solid;
 }
 
+.details-wrapper {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    align-items: center;
+}
+
 .clubs-header {
     display: flex;
     width: 100%;
     align-items: left;
-    flex-direction: row;
+    flex-direction: column;
     justify-content: space-between;
     align-items: center;
     margin-top: 3rem;
+}
+
+.club-join-header {
+    align-items: left;
+    width: 100%;
 }
 
 .clubs-header-title {

@@ -59,8 +59,15 @@
 
 <div class="clubs">
     <div class="clubs-header">
-        <div class="clubs-header-title">My Clubs</div>
-        <div class="btn" (click)="onAddClicked()">Add Club</div>
+        <div class="details-wrapper">
+            <div class="clubs-header-title">My Clubs</div>
+            <div class="btn" (click)="onAddClicked()">Add Club</div>
+        </div>
+        <div class="clubs-header-paragraph">
+            This page allows you to manage your clubs efficiently. You can edit,
+            delete, and view only the clubs you've created. Keep things simple
+            and organized as you customize your club portfolio.
+        </div>
     </div>
     <div class="separator"></div>
     <div class="clubs-wrapper">
@@ -72,8 +79,14 @@
             ></xp-club-card>
         </div>
     </div>
-    <div class="clubs-header">
+    <div class="club-join-header">
         <div class="clubs-header-title">My Club Join Requests</div>
+        <div class="clubs-header-paragraph">
+            Here, you can conveniently monitor the status of your club join
+            requests. Easily check whether your request has been approved or
+            not, and if needed, cancel pending requests. Stay in control of your
+            club memberships with this straightforward and efficient tool.
+        </div>
     </div>
     <div class="separator"></div>
 
