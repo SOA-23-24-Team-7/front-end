@@ -48,17 +48,15 @@ export class CartComponent implements OnInit {
     ngOnInit(): void {
         const navHeight = document.querySelector(".navbar")!.clientHeight + 1;
         const newHeight = window.innerHeight - navHeight;
-        console.log("pizdarija: ", navHeight);
 
         document.getElementById("sidebar")!.style.height = `${newHeight}px`;
 
         this.authService.user$.subscribe(user => {
             this.user = user;
-            this.getToursInCart();
-        });
-
-        this.service.cart$.subscribe(_ => {
-            this.getToursInCart();
+            this.service.cart$.subscribe(cart => {
+                if (this.user.role == "tourist" && this.user.id != 0)
+                    this.getToursInCart();
+            });
         });
     }
 
@@ -95,11 +93,6 @@ export class CartComponent implements OnInit {
                     )
                     .subscribe({
                         next: () => {
-                            this.notifier.notify(
-                                "success",
-                                "Item successfully removed from cart!",
-                            );
-
                             this.shoppingCart.orderItems?.splice(
                                 this.shoppingCart.orderItems?.findIndex(
                                     x => x.id === this.orderItem.id,

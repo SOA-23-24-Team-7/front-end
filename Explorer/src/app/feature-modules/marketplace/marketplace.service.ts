@@ -322,7 +322,6 @@ export class MarketplaceService {
 
     setCart(shoppingCart: ShoppingCart) {
         this.cart$.next(shoppingCart);
-        localStorage.setItem("shoppingCart", JSON.stringify(shoppingCart));
     }
 
     addOrderItem(orderItem: any): Observable<any> {

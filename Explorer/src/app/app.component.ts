@@ -19,7 +19,7 @@ export class AppComponent implements OnInit {
 
     ngOnInit(): void {
         this.marketPlaceService.cart$.subscribe(cart => {
-            if (!this.sideBar && cart.orderItems?.length !== 0) {
+            if (cart.id && !this.sideBar && cart.orderItems?.length !== 0) {
                 this.showCart();
             }
         });

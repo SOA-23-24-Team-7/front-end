@@ -76,7 +76,7 @@
             <div>Total price:</div>
             <div class="price">
                 <fa-icon [icon]="faCoins"></fa-icon>
-                {{ shoppingCart?.totalPrice }}
+                {{ shoppingCart ? shoppingCart.totalPrice : 0 }}
             </div>
         </div>
     </div>
