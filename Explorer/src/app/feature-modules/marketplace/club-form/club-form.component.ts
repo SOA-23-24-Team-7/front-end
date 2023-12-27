@@ -11,6 +11,8 @@ import { MarketplaceService } from "../marketplace.service";
 import { Club } from "../model/club.model";
 import { FormControl, FormGroup, Validators } from "@angular/forms";
 import { MAT_DIALOG_DATA, MatDialogRef } from "@angular/material/dialog";
+import { faImage } from "@fortawesome/free-solid-svg-icons";
+import { NotifierService } from "angular-notifier";
 
 @Component({
     selector: "xp-club-form",
@@ -23,10 +25,12 @@ export class ClubFormComponent implements OnChanges {
     @Input() shouldEdit: boolean = false;
     clubImage: File;
     imagePath: string;
+    faImage = faImage;
 
     constructor(
         private service: MarketplaceService,
         public dialogRef: MatDialogRef<ClubFormComponent>,
+        private notifier: NotifierService,
         @Inject(MAT_DIALOG_DATA) public data: any,
     ) {
         this.club = data.club;
@@ -81,15 +85,15 @@ export class ClubFormComponent implements OnChanges {
     }
     isValid(club: Club) {
         if (!club.name) {
-            alert("Name cannot be empty");
+            this.notifier.notify("error", "Name cannot be empty");
             return false;
         }
         if (!club.description) {
-            alert("Description cannot be empty");
+            this.notifier.notify("error", "Description cannot be empty");
             return false;
         }
         if (!club.image) {
-            alert("Image cannot be empty");
+            this.notifier.notify("error", "Image cannot be empty");
             return false;
         }
         return true;

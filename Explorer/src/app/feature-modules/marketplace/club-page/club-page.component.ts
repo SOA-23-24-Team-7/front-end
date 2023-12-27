@@ -12,12 +12,15 @@ import {
     faCheck,
     faEnvelope,
     faCirclePlus,
+    faXmark,
 } from "@fortawesome/free-solid-svg-icons";
 import { Router } from "@angular/router";
 import { MatDialog } from "@angular/material/dialog";
 import { ClubMembersManagementComponent } from "../club-members-management/club-members-management.component";
+import { ClubJoinRequest } from "../model/club-join-request.model copy";
 import { ClubMembersInviteFormComponent } from "../club-members-invite-form/club-members-invite-form.component";
 import { Blog } from "../../blog/model/blog.model";
+import { NotifierService } from "angular-notifier";
 
 @Component({
     selector: "xp-club-page",
@@ -32,10 +35,12 @@ export class ClubPageComponent {
     members: ClubMember[] = [];
     isUserMember: boolean = false;
     myClubJoinRequests: MyClubJoinRequest[] = [];
+    clubJoinRequests: ClubJoinRequest[] = [];
     faDoorOpen = faDoorOpen;
     faCheck = faCheck;
     faEnvelope = faEnvelope;
     faCirclePlus = faCirclePlus;
+    faXmark = faXmark;
 
     constructor(
         private authService: AuthService,
@@ -43,6 +48,7 @@ export class ClubPageComponent {
         private marketplaceService: MarketplaceService,
         private router: Router,
         private dialog: MatDialog,
+        private notifier: NotifierService
     ) {}
 
     ngOnInit(): void {
@@ -54,6 +60,7 @@ export class ClubPageComponent {
         });
         this.getClub();
         this.getMembers();
+        this.getJoinRequests();
     }
 
     getClub(): void {
@@ -62,6 +69,18 @@ export class ClubPageComponent {
                 this.club = result;
             },
         });
+    }
+
+    getJoinRequests(): void {
+        this.marketplaceService
+            .getClubJoinRequestsByClub(this.clubId)
+            .subscribe({
+                next: (result: PagedResults<ClubJoinRequest>) => {
+                    this.clubJoinRequests = result.results.filter(
+                        cjr => cjr.status == "Pending",
+                    );
+                },
+            });
     }
 
     getMembers(): void {
@@ -73,21 +92,11 @@ export class ClubPageComponent {
                 }
                 this.isUserMember = this.isMember();
                 this.getClubJoinRequests();
+                this.getJoinRequests();
             },
             error: errData => {
                 console.log(errData);
             },
-        });
-    }
-
-    openInviteDialog(): void {
-        const dialogRef = this.dialog.open(ClubMembersInviteFormComponent, {
-            data: {
-                clubId: this.clubId,
-            },
-        });
-        dialogRef.afterClosed().subscribe(result => {
-            console.log("Dialog result:", result);
         });
     }
 
@@ -166,6 +175,33 @@ export class ClubPageComponent {
             target.src =
                 "https://imgs.search.brave.com/udmDGOGRJTYO6lmJ0ADA03YoW4CdO6jPKGzXWvx1XRI/rs:fit:860:0:0/g:ce/aHR0cHM6Ly90My5m/dGNkbi5uZXQvanBn/LzAyLzY4LzU1LzYw/LzM2MF9GXzI2ODU1/NjAxMl9jMVdCYUtG/TjVyalJ4UjJleVYz/M3puSzRxblllS1pq/bS5qcGc";
         }
+    }
+
+    openInviteDialog(): void {
+        const dialogRef = this.dialog.open(ClubMembersInviteFormComponent, {
+            data: {
+                clubId: this.clubId,
+            },
+        });
+        dialogRef.afterClosed().subscribe(result => {
+            console.log("Dialog result:", result);
+        });
+    }
+
+    respondJoinRequest(id: number, response: boolean): void {
+        this.marketplaceService.respondClubJoinRequest(id, response).subscribe({
+            next: () => {
+                this.getClub();
+                this.getMembers();
+                this.getJoinRequests();
+                const notificationType = response ? 'success' : 'error';
+                const notification = response ? 'Successfuly added a new club member.' : 'Club join request rejected.';
+                this.notifier.notify(notificationType, notification);
+            },
+            error: errData => {
+                console.log(errData);
+            },
+        });
     }
 
     isRegularMember(): boolean {

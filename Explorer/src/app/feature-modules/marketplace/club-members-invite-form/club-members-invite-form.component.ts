@@ -9,6 +9,9 @@ import { FormControl, FormGroup, Validators } from "@angular/forms";
 import { MarketplaceService } from "../marketplace.service";
 import { ClubInvitationUsername } from "../model/club-invitation-username.model";
 import { MAT_DIALOG_DATA } from "@angular/material/dialog";
+import { User } from "src/app/infrastructure/auth/model/user.model";
+import { StakeholderService } from "../../stakeholder/stakeholder.service";
+import { Person } from "../../stakeholder/model/person.model";
 
 @Component({
     selector: "xp-club-members-invite-form",
@@ -17,15 +20,22 @@ import { MAT_DIALOG_DATA } from "@angular/material/dialog";
 })
 export class ClubMembersInviteFormComponent implements OnChanges {
     @Input() clubId: number;
-
+    users: Person[];
     showError: boolean = false;
     showSuccess: boolean = false;
 
     constructor(
         private service: MarketplaceService,
+        private userService: StakeholderService,
         @Inject(MAT_DIALOG_DATA) public data: any,
     ) {
         this.clubId = data.clubId;
+    }
+
+    ngOnInit() {
+        this.userService.getPeople().subscribe(result => {
+            this.users = result.results;
+        });
     }
 
     ngOnChanges(changes: SimpleChanges): void {

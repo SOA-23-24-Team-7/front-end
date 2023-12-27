@@ -163,3 +163,69 @@
 .plus {
     margin-right: 1rem;
 }
+
+.request {
+    display: flex;
+    align-items: center;
+    width: 100%;
+    height: 3rem;
+    background-color: rgba(var(--clr-background), 1);
+    border-radius: 0.3125rem;
+    cursor: pointer;
+    transition: background-color 0.15s;
+}
+
+.buttons-list {
+    display: flex;
+    margin-left: auto;
+}
+
+.accept-wrapper {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 2rem;
+    height: 2rem;
+    border-radius: 2rem;
+    background-color: rgba(0, 255, 0, 0);
+    transition: background-color 0.15s;
+    cursor: pointer;
+}
+
+.accept-wrapper:hover {
+    background-color: rgba(0, 255, 0, 0.2);
+}
+
+.accept {
+    font-size: 1.5rem;
+    color: rgba(0, 255, 0, 1);
+}
+
+.decline-wrapper {
+    margin-left: 1rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 2rem;
+    height: 2rem;
+    border-radius: 2rem;
+    background-color: rgba(255, 0, 0, 0);
+    transition: background-color 0.15s;
+    cursor: pointer;
+}
+
+.decline-wrapper:hover {
+    background-color: rgba(255, 0, 0, 0.2);
+}
+
+.decline {
+    font-size: 1.5rem;
+    color: rgba(255, 0, 0, 1);
+    cursor: pointer;
+}
+
+.username {
+    font-size: 1.5rem;
+    color: rgba(var(--clr-primary-500), 1);
+    margin-left: 0.5rem;
+}
