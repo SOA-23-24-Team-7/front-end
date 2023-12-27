@@ -6,7 +6,12 @@ import { Club } from '../model/club.model';
 import { ClubMember } from '../model/club-member.model';
 import { PagedResults } from 'src/app/shared/model/paged-results.model';
 import { User } from 'src/app/infrastructure/auth/model/user.model';
-
+import { MyClubJoinRequest } from '../model/my-club-join-request.model';
+import {
+  faDoorOpen,
+  faCheck,
+  faEnvelope
+} from "@fortawesome/free-solid-svg-icons";
 @Component({
   selector: 'xp-club-page',
   templateUrl: './club-page.component.html',
@@ -17,7 +22,11 @@ export class ClubPageComponent {
   clubId: number = -1;
   club: Club;
   members: ClubMember[] = [];
-
+  isUserMember: boolean = false
+  myClubJoinRequests: MyClubJoinRequest[] = [];
+  faDoorOpen = faDoorOpen;
+  faCheck = faCheck;
+  faEnvelope = faEnvelope;
   constructor(
     private authService: AuthService,
     private route: ActivatedRoute,
@@ -50,6 +59,8 @@ export class ClubPageComponent {
         for (let member of this.members) {
           member.kicked = false;
         }
+        this.isUserMember = this.isMember()
+        this.getClubJoinRequests()
       },
       error: (errData) => {
         console.log(errData)
@@ -77,7 +88,36 @@ export class ClubPageComponent {
     console.log('OwnerID:' + this.getOwner().userId)
     return this.user.id == this.getOwner().userId;
   }
-
+  
+  isMember(): boolean {
+    return this.members.some(member => member.userId === this.user.id) || (this.club.ownerId == this.user.id);
+  }
+  getBlogs(){
+    //TODO: get club blogs
+  }
+  getClubJoinRequests(): void {
+    this.marketplaceService.getMyClubJoinRequests().subscribe({
+      next: (result: PagedResults<MyClubJoinRequest>) => {
+        this.myClubJoinRequests = result.results;
+      },
+      error: (errData) => {
+        console.log(errData)
+      }
+    })
+  }
+  canSendJoinRequest(): boolean {
+    return !this.myClubJoinRequests.some(joinRequest => joinRequest.status === 'Pending' && joinRequest.clubId == this.club.id);
+  }
+  sendJoinRequest(): void {
+    this.marketplaceService.sendClubJoinRequest(this.user.id, this.club.id!).subscribe({
+        next: () => {
+            this.getClubJoinRequests();
+        },
+      error: (errData) => {
+        console.log(errData)
+      }
+    })
+  }
   onImageError(event: Event) {
     const target = event.target as HTMLImageElement;
     if (target) {
