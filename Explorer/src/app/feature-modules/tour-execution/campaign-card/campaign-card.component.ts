@@ -16,9 +16,8 @@ import { CampaignEquipmentComponent } from "../campaign-equipment/campaign-equip
 export class CampaignCardComponent implements OnInit {
     execution: TourExecutionStart = {tourId: 0, isCampaign: false}
     @Input() campaign: Campaign;
-    isCampaignActive: boolean = false
     @Input() hasActiveTour: boolean;
-    @Input() activeTourId: number;
+    @Input() isTourActive: boolean;
     @Input() isCampaign: boolean;
     images: string[];
     isClicked: boolean = false;
@@ -33,7 +32,6 @@ export class CampaignCardComponent implements OnInit {
                 ? kp.imagePath
                 : environment.imageHost + kp.imagePath,
         );
-        this.CheckIfCampaignIsActive()
     }
     StartCampaign(){
         this.execution.tourId = this.campaign.id
@@ -41,13 +39,6 @@ export class CampaignCardComponent implements OnInit {
         this.service.startTour(this.execution).subscribe(() => {
             this.router.navigate(["/tour-executing/" + this.campaign.id, {isCampaign: true}]);
         });
-    }
-    CheckIfCampaignIsActive() {
-        if (this.hasActiveTour) {
-            if (this.campaign.id == this.activeTourId && this.isCampaign) {
-                this.isCampaignActive = true;
-            }
-        }
     }
     ContinueCampaign(){
             this.router.navigate(["/tour-executing/" + this.campaign.id, {isCampaign: true}]);
