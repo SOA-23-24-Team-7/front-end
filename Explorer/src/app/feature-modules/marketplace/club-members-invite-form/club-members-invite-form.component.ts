@@ -12,6 +12,7 @@ import { MAT_DIALOG_DATA } from "@angular/material/dialog";
 import { User } from "src/app/infrastructure/auth/model/user.model";
 import { StakeholderService } from "../../stakeholder/stakeholder.service";
 import { Person } from "../../stakeholder/model/person.model";
+import { NotifierService } from "angular-notifier";
 
 @Component({
     selector: "xp-club-members-invite-form",
@@ -27,6 +28,7 @@ export class ClubMembersInviteFormComponent implements OnChanges {
     constructor(
         private service: MarketplaceService,
         private userService: StakeholderService,
+        private notifier: NotifierService,
         @Inject(MAT_DIALOG_DATA) public data: any,
     ) {
         this.clubId = data.clubId;
@@ -56,10 +58,12 @@ export class ClubMembersInviteFormComponent implements OnChanges {
             next: () => {
                 this.showSuccess = true;
                 if ((this.showError = true)) this.showError = false;
+                this.notifier.notify("success", "Successfully invited!");
             },
             error: () => {
                 this.showSuccess = false;
                 this.showError = true;
+                this.notifier.notify("error", "Already invited!");
             },
         });
     }
