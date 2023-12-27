@@ -686,6 +686,19 @@
                         />
                         <div class="navbar-submenu-item-text">My requests</div>
                     </div>
+                    <div
+                        class="navbar-submenu-item"
+                        [routerLink]="['wishlist']"
+                        *ngIf="user && user.role === 'tourist'"
+                    >
+                        <fa-icon
+                            class="navbar-submenu-item-icon"
+                            [icon]="faCheckSquare"
+                        />
+                        <div class="navbar-submenu-item-text">
+                            WishList
+                        </div>
+                    </div>
                     <div class="navbar-submenu-item" (click)="onLogout()">
                         <fa-icon
                             class="navbar-submenu-item-icon"

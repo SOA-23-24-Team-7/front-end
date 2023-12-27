@@ -260,15 +260,6 @@
     overflow: visible;
 }
 
-.tour-price-tourist {
-    margin-top: -1.5rem;
-    display: flex;
-    align-items: center;
-    justify-content: flex-end;
-    white-space: nowrap;
-    overflow: visible;
-}
-
 .tour-price-value {
     padding: 0;
     margin: 0;
@@ -290,7 +281,6 @@
 
 .add-to-cart {
     margin-top: 0.5rem;
-    font-weight: 700;
     background-color: rgba(var(--clr-accent-500), 1);
     max-width: 60%;
     min-width: 15rem;
@@ -298,20 +288,8 @@
     margin-bottom: 0.5rem;
 }
 
-.add-to-wishlist {
-    margin-top: 0rem;
-    max-width: 60%;
-    min-width: 15rem;
-    margin-left: auto;
-    margin-bottom: 0.5rem;
-}
-
-.add-to-cart:hover {
-    filter: brightness(1.08);
-}
-
 .view {
-    margin-top: auto;
+    margin-top: 0.5rem;
     max-width: 60%;
     min-width: 15rem;
     margin-left: auto;
@@ -342,7 +320,6 @@ strike {
     text-decoration: none;
     position: relative;
 }
-
 s::before,
 strike::before {
     top: 50%;
@@ -356,10 +333,9 @@ strike::before {
     left: -5%;
     white-space: nowrap;
     display: block;
-    z-index: 3;
+    z-index: 999;
     transform: rotate(180deg);
 }
-
 s.straight::before,
 strike.straight::before {
     transform: rotate(0deg);
