@@ -1,17 +1,24 @@
-<div class="flip-card" [ngClass]="{'flip-card-click': isClicked}" (mouseleave)="isClicked = false">
+<div class="flip-card" [class.glow]="isGlowing" [ngClass]="{'flip-card-click': isClicked}" (mouseleave)="isClicked = false">
     <div class="flip-card-inner">
-        <div class="flip-card-front tour-card image_wrapper">
-            <img [src]="tourImage" (error)="onImageError($event)" />
+        <div class="flip-card-front image_wrapper">
+            <xp-carousel *ngIf="tour && tour.keyPoints && tour.keyPoints[0]" [disableFocus]="true" [autoScroll]="true"
+                [slides]="images"></xp-carousel>
             <div class="cont overlay overlay_4">
                 <h3>{{tour.name}}</h3>
-                <div class="btn" (click)="isClicked = true">Info</div>
+                <p *ngIf="hasActiveTour && isTourActive">In progress</p>
+                <br>
+                <div class="btn" (click)="isClicked = true">Actions & Info</div>
             </div>
         </div>
-        <div class="flip-card-back">
-            <div class="btn" (click)="isClicked = true">Key points</div>
-            <div class="btn" (click)="isClicked = true">Start tour</div>
-            <div class="btn" (click)="isClicked = true">Continue tour</div>
-            <div class="btn" (click)="isClicked = true">Weather</div>
+        <div class="flip-card-back stretched-btns">
+            <div class="btn" (click)="StartTour()" *ngIf="!hasActiveTour">Start tour</div>
+            <div class="btn" (click)="ContinueTour()" *ngIf="hasActiveTour && isTourActive">
+                Continue tour</div>
+            <div class="btn"(click)="isClicked = false; ShowKeyPoints()">Key points</div>
+            <div class="btn" (click)="isClicked = false; ShowWheather()">Weather</div>
+            <div class="btn" (click)="isClicked = false; onSelectedTour(tour)" *ngIf="!selected">Add to campaign</div>
+            <div class="btn" (click)="isClicked = false; onDeselectedTour(tour)" *ngIf="selected">Remove from campaign</div>
+            <div class="btn" (click)="isClicked = false; ShowWheather()">Report a problem</div>
         </div>
     </div>
 </div>
