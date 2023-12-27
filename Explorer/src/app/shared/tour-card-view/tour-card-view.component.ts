@@ -23,7 +23,8 @@ import {
     faMoneyBills,
     faBarChart,
     faBookmark,
-    faMap
+    faMap,
+    faCheckSquare
 
 } from "@fortawesome/free-solid-svg-icons";
 import { TourLimitedView } from "../../feature-modules/marketplace/model/tour-limited-view.model";
@@ -59,6 +60,7 @@ export class TourCardViewComponent implements OnChanges {
     faBarChart = faBarChart;
     faBookmark = faBookmark;
     faMap = faMap;
+    faCheckSquare = faCheckSquare;
     user: User;
     @Input() hideIcons: boolean = false;
     @Input() tour: Tour;
