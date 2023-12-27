@@ -27,11 +27,23 @@ import {
 } from "@fortawesome/free-solid-svg-icons";
 import { AuthService } from "src/app/infrastructure/auth/auth.service";
 import { LocationCoords } from "src/app/shared/model/location-coords.model";
+import { animate, style, transition, trigger } from "@angular/animations";
 
 @Component({
     selector: "xp-tour-search",
     templateUrl: "./tour-search.component.html",
     styleUrls: ["./tour-search.component.css"],
+    animations: [
+        trigger("fadeIn", [
+            transition(":enter", [
+                style({ opacity: 0, transform: "translateX(-40px)" }),
+                animate(
+                    "0.5s ease",
+                    style({ opacity: 1, transform: "translateX(0)" }),
+                ),
+            ]),
+        ]),
+    ],
 })
 export class TourSearchComponent implements OnInit {
     faSort = faSort;
@@ -146,22 +158,20 @@ export class TourSearchComponent implements OnInit {
     }
 
     onSearch(page: number): void {
-        this.radioButtonSelected = 0
+        this.radioButtonSelected = 0;
         this.searchFilter.page = page;
         this.currentPage = page;
-        this.service
-            .searchTours(this.searchFilter, this.sortOption)
-            .subscribe({
-                next: (result: PagedResults<Tour>) => {
-                    this.tours = result.results;
-                    this.totalCount = result.totalCount;
-                    console.log(this.tours);
-                    this.setPages();
-                },
-                error: errData => {
-                    console.log(errData);
-                },
-            });
+        this.service.searchTours(this.searchFilter, this.sortOption).subscribe({
+            next: (result: PagedResults<Tour>) => {
+                this.tours = result.results;
+                this.totalCount = result.totalCount;
+                console.log(this.tours);
+                this.setPages();
+            },
+            error: errData => {
+                console.log(errData);
+            },
+        });
     }
 
     setTours(result: Tour[]) {
@@ -616,18 +626,15 @@ export class TourSearchComponent implements OnInit {
                 obj.recommended = true;
                 this.tours.push(obj);
             }
-        }
-        else if(this.radioButtonSelected == 2){
-            this.tours=[]
-           for (const obj of this.activeTours) {
-            obj.active = true
-            this.tours.push(obj);
+        } else if (this.radioButtonSelected == 2) {
+            this.tours = [];
+            for (const obj of this.activeTours) {
+                obj.active = true;
+                this.tours.push(obj);
             }
-        }
-        else{
+        } else {
             this.onSearch(1);
-         }
-    this.totalCount = this.tours.length
+        }
+        this.totalCount = this.tours.length;
     }
-      
 }

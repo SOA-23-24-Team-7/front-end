@@ -17,6 +17,8 @@ import { SecretPopupComponent } from './secret-popup/secret-popup.component';
 import { CampaignEquipmentComponent } from './campaign-equipment/campaign-equipment.component';
 import { TourWheatherComponent } from './tour-wheather/tour-wheather.component';
 import { TourCompletedPopupComponent } from './tour-completed-popup/tour-completed-popup.component';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { RouterModule } from "@angular/router";
 
 @NgModule({
     declarations: [
@@ -41,6 +43,8 @@ import { TourCompletedPopupComponent } from './tour-completed-popup/tour-complet
         TourAuthoringModule,
         ReactiveFormsModule,
         FormsModule,
+        RouterModule,
+        BrowserAnimationsModule,
     ],
 })
 export class TourExecutionModule {}

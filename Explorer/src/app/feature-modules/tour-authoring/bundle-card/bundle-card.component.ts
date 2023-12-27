@@ -27,11 +27,23 @@ import { ShoppingCart } from "../../marketplace/model/shopping-cart";
 import { TourToken } from "../../marketplace/model/tour-token.model";
 import { Tour } from "../model/tour.model";
 import { BundleOrderItem } from "../../marketplace/model/bundle-order-item.model";
+import { animate, style, transition, trigger } from "@angular/animations";
 
 @Component({
     selector: "xp-bundle-card",
     templateUrl: "./bundle-card.component.html",
     styleUrls: ["./bundle-card.component.css"],
+    animations: [
+        trigger("fadeIn", [
+            transition(":enter", [
+                style({ opacity: 0, transform: "translateX(-40px)" }),
+                animate(
+                    "0.5s ease",
+                    style({ opacity: 1, transform: "translateX(0)" }),
+                ),
+            ]),
+        ]),
+    ],
 })
 export class BundleCardComponent {
     faStar = faStar;

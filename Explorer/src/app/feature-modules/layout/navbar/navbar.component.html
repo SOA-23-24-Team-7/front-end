@@ -192,7 +192,12 @@
             </div>
 
             <!-- BLOG MENU -->
-            <div class="navbar-menu-item" *ngIf="user && user.username !== ''">
+            <div
+                class="navbar-menu-item"
+                *ngIf="
+                    user && user.username !== '' && user.role != 'administrator'
+                "
+            >
                 <div class="navbar-menu-item-content">
                     <fa-icon
                         class="navbar-menu-item-content-icon"
@@ -583,7 +588,11 @@
                     />
                 </div>
                 <div class="navbar-submenu">
-                    <div class="navbar-submenu-item" [routerLink]="['profile']">
+                    <div
+                        class="navbar-submenu-item"
+                        [routerLink]="['profile']"
+                        *ngIf="user.role != 'administrator'"
+                    >
                         <fa-icon
                             class="navbar-submenu-item-icon"
                             [icon]="faUser"

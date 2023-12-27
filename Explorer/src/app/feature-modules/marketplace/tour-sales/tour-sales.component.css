@@ -283,16 +283,16 @@ input[type="range"] {
     visibility: collapse;
 }
 
-.tour-sort-select:hover>.tour-sort-options * {
+.tour-sort-select:hover > .tour-sort-options * {
     visibility: visible;
 }
 
-.tour-sort-select:hover>.tour-sort-options {
+.tour-sort-select:hover > .tour-sort-options {
     max-height: 200px;
     border: rgba(var(--border-primary), 1) 1px solid;
 }
 
-.tour-sort-options>*:not(:last-child) {
+.tour-sort-options > *:not(:last-child) {
     border-bottom: rgba(var(--border-primary), 1) 1px solid;
 }
 
@@ -441,7 +441,6 @@ input[type="range"] {
     width: 100%;
 }
 
-
 .tour-search-map-distance-min {
     font-family: var(--fnt-body);
     font-size: 1rem;
@@ -586,17 +585,21 @@ h3 {
     width: 10px;
 }
 
-
 ::-webkit-scrollbar-track {
     background: rgb(var(--clr-background));
 }
-
 
 ::-webkit-scrollbar-thumb {
     background: rgb(var(--clr-primary-500));
 }
 
-
 ::-webkit-scrollbar-thumb:hover {
     background: rgb(var(--clr-primary-500));
+}
+
+.iconred {
+    font-size: 1.5rem;
+    color: red;
+    margin-left: 1rem;
+    cursor: pointer;
 }

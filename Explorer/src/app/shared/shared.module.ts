@@ -34,7 +34,6 @@ import { ConfettiComponent } from "./confetti/confetti.component";
         BrowserAnimationsModule,
         TooltipModule,
         MatDialogModule,
-
     ],
     exports: [
         MapComponent,

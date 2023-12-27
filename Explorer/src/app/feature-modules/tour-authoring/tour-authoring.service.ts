@@ -11,7 +11,6 @@ import { PublicKeyPointRequest } from "./model/public-key-point-request.model";
 import { PublicFacilityRequest } from "./model/public-facility-request.model";
 import { PublicKeyPoint } from "./model/public-key-point.model";
 import { Person } from "../stakeholder/model/person.model";
-import { query } from "@angular/animations";
 import { Bundle } from "./model/bundle.model";
 import { BundleCreation } from "./model/bundle-creation.model";
 

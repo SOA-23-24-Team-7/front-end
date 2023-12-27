@@ -9,8 +9,8 @@ import { MatDialog, MatDialogRef } from "@angular/material/dialog";
 import { ReviewFormComponent } from "../review-form/review-form.component";
 import {
     faStar,
-    faEdit,
-    faTrashAlt,
+    faPen,
+    faTrash,
     faXmark,
 } from "@fortawesome/free-solid-svg-icons";
 import { FullSizeImageComponent } from "../full-size-image/full-size-image.component";
@@ -29,8 +29,8 @@ export class ReviewComponent implements OnInit {
     tourId: number;
     tourIdHelper: number;
     faStar = faStar;
-    faEdit = faEdit;
-    faTrashAlt = faTrashAlt;
+    faPen = faPen;
+    faTrash = faTrash;
     faXmark = faXmark;
     @Input() reviewExists: boolean = false;
 

@@ -226,12 +226,12 @@ export class KeyPointModalComponent implements OnInit {
             imagePath: this.keyPointForm.value.imagePath || "",
             order: this.keyPoint!.order,
             haveSecret: this.keyPointForm.value.secretDescription?.length != 0,
-            secret:
-                {
-                    images: [""],
-                    description:
-                        this.keyPointForm.value.secretDescription || "",
-                } || null,
+            secret: this.keyPointForm.value.secretDescription?.length != 0 ?
+                    {
+                        images: [""],
+                        description:
+                            this.keyPointForm.value.secretDescription || "",
+                    } || null : null,
             hasEncounter: this.hasEncounter,
             isEncounterRequired: this.isEncounterRequired,
         };

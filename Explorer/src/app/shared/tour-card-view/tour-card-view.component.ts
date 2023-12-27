@@ -40,11 +40,23 @@ import { CouponsComponent } from "src/app/feature-modules/marketplace/coupons/co
 import { PagedResults } from "../model/paged-results.model";
 import { NotifierService } from "angular-notifier";
 import { xpError } from "../model/error.model";
+import { animate, style, transition, trigger } from "@angular/animations";
 
 @Component({
     selector: "xp-tour-card-view",
     templateUrl: "./tour-card-view.component.html",
     styleUrls: ["./tour-card-view.component.css"],
+    animations: [
+        trigger("fadeIn", [
+            transition(":enter", [
+                style({ opacity: 0, transform: "translateX(-40px)" }),
+                animate(
+                    "0.5s ease",
+                    style({ opacity: 1, transform: "translateX(0)" }),
+                ),
+            ]),
+        ]),
+    ],
 })
 export class TourCardViewComponent implements OnChanges {
     faStar = faStar;

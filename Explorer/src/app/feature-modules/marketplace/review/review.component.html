@@ -74,13 +74,13 @@
                         *ngIf="user.id == review.touristId"
                         (click)="onEditClicked(review)"
                         class="fa-icon-edit"
-                        [icon]="faEdit"
+                        [icon]="faPen"
                     ></fa-icon>
                     <fa-icon
                         *ngIf="user.id == review.touristId"
                         (click)="deleteReview(review)"
                         class="fa-icon-delete"
-                        [icon]="faTrashAlt"
+                        [icon]="faTrash"
                     ></fa-icon>
                 </span>
             </div>

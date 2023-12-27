@@ -4,6 +4,7 @@
         [ngClass]="{ 'card-red': !person.user.isActive }"
         *ngFor="let person of people"
         #userCard
+        [@fadeIn]
     >
         <div class="user-data">
             <div
@@ -14,7 +15,7 @@
             ></div>
             <div class="row">
                 <div class="username-color">
-                    <div>@{{ person.user.username }}</div>
+                    <div>{{ person.user.username }}</div>
                 </div>
                 <div class="credentials">
                     <div>{{ person.name }}</div>
@@ -27,6 +28,8 @@
                     class="green"
                     [icon]="faMoneyBill"
                     (click)="openWalletUpdateDialog(person)"
+                    tooltipPosition="bottom"
+                    pTooltip="wallet"
                 />
             </div>
             <div class="button" *ngIf="person.user.isActive; else notActive">
@@ -34,6 +37,8 @@
                     class="red"
                     [icon]="faUserXmark"
                     (click)="disableAccount(person, userCard)"
+                    tooltipPosition="bottom"
+                    pTooltip="block"
                 />
             </div>
             <ng-template #notActive>

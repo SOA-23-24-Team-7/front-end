@@ -16,20 +16,22 @@ import { CampaignEquipmentComponent } from "../campaign-equipment/campaign-equip
 export class CampaignCardComponent implements OnInit {
     execution: TourExecutionStart = {tourId: 0, isCampaign: false}
     @Input() campaign: Campaign;
-    isCampaignActive: boolean = false
     @Input() hasActiveTour: boolean;
-    @Input() activeTourId: number;
+    @Input() isTourActive: boolean;
     @Input() isCampaign: boolean;
-    tourImage: string;
+    images: string[];
+    isClicked: boolean = false;
     constructor(
         private router: Router,
         private service: TourExecutionService,
         public dialogRef: MatDialog
     ) {}
     ngOnInit(): void {
-        this.tourImage =
-            environment.imageHost + this.campaign.keyPoints![0].imagePath;
-        this.CheckIfCampaignIsActive()
+        this.images = this.campaign.keyPoints!.map(kp =>
+            kp.imagePath.startsWith("http")
+                ? kp.imagePath
+                : environment.imageHost + kp.imagePath,
+        );
     }
     StartCampaign(){
         this.execution.tourId = this.campaign.id
@@ -37,13 +39,6 @@ export class CampaignCardComponent implements OnInit {
         this.service.startTour(this.execution).subscribe(() => {
             this.router.navigate(["/tour-executing/" + this.campaign.id, {isCampaign: true}]);
         });
-    }
-    CheckIfCampaignIsActive() {
-        if (this.hasActiveTour) {
-            if (this.campaign.id == this.activeTourId && this.isCampaign) {
-                this.isCampaignActive = true;
-            }
-        }
     }
     ContinueCampaign(){
             this.router.navigate(["/tour-executing/" + this.campaign.id, {isCampaign: true}]);

@@ -29,11 +29,23 @@ import { PublicKeyPoint } from "../model/public-key-point.model";
 import { MarketplaceService } from "../../marketplace/marketplace.service";
 import { User } from "src/app/infrastructure/auth/model/user.model";
 import { AuthService } from "src/app/infrastructure/auth/auth.service";
+import { animate, style, transition, trigger } from "@angular/animations";
 
 @Component({
     selector: "xp-tour",
     templateUrl: "./tour.component.html",
     styleUrls: ["./tour.component.css"],
+    animations: [
+        trigger("fadeIn", [
+            transition(":enter", [
+                style({ opacity: 0, transform: "translateX(-40px)" }),
+                animate(
+                    "0.5s ease",
+                    style({ opacity: 1, transform: "translateX(0)" }),
+                ),
+            ]),
+        ]),
+    ],
 })
 export class TourComponent implements OnInit {
     user: User;
