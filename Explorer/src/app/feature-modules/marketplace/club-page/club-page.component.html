@@ -1,25 +1,40 @@
 <div class="club-page">
     <div class="club">
-        <img class="club-image" [src]="club.image" (error)="onImageError($event)"/>
-        <div class="club-title" lang="en-US">{{club.name}}</div>
-        <div class="club-text">{{club.description}}</div>
+        <img
+            class="club-image"
+            [src]="club.image"
+            (error)="onImageError($event)"
+        />
+        <div class="club-title" lang="en-US">{{ club.name }}</div>
+        <div class="club-text">{{ club.description }}</div>
         <div class="separator"></div>
         <div class="club-title" lang="en-US">Moderator</div>
         <div class="moderator">
             <xp-user-card [user]="getOwner()" [shield]="true"></xp-user-card>
         </div>
         <div class="separator"></div>
-        <div class="club-title" lang="en-US">Members ({{getMemberCount()}})</div>
+        <div class="club-title" lang="en-US">
+            Members ({{ getMemberCount() }})
+        </div>
         <div class="members">
             <xp-user-card [user]="getOwner()" [shield]="true"></xp-user-card>
             <div *ngFor="let member of getRegularMembers()">
-                <xp-user-card [user]="member" [ban]="isOwner()" [clubMemberId]="member.membershipId" *ngIf="!member.kicked"></xp-user-card>
+                <xp-user-card
+                    [user]="member"
+                    [ban]="isOwner()"
+                    [clubMemberId]="member.membershipId"
+                    *ngIf="!member.kicked"
+                ></xp-user-card>
             </div>
         </div>
         <div class="separator"></div>
         <div class="btn leave" *ngIf="isRegularMember()" (click)="leave()">
-            <fa-icon [icon]="faDoorOpen" class="door-leave"/>
+            <fa-icon [icon]="faDoorOpen" class="door-leave" />
             Leave the club
+        </div>
+        <div class="btn invite" *ngIf="isMember()" (click)="openInviteDialog()">
+            <fa-icon [icon]="faCirclePlus" class="plus" />
+            Invite people
         </div>
     </div>
 
@@ -28,17 +43,19 @@
     </div>
     <div class="blogs" *ngIf="!isUserMember">
         <div *ngIf="canSendJoinRequest()">
-            <br>
-            <h1 style="margin-bottom: 20px;">Join this club to have access to the blog</h1>
-            <div style="width: 30%; margin: auto;">
+            <br />
+            <h1 style="margin-bottom: 20px">
+                Join this club to have access to the blog
+            </h1>
+            <div style="width: 30%; margin: auto">
                 <div class="club-button" (click)="sendJoinRequest()">
-                    <fa-icon class="club-button-icon" [icon]="faDoorOpen"/>
+                    <fa-icon class="club-button-icon" [icon]="faDoorOpen" />
                     <div class="club-button-text">Join</div>
                 </div>
             </div>
         </div>
         <div *ngIf="!canSendJoinRequest()">
-            <br>
+            <br />
             <h1>Membership request sent!</h1>
         </div>
     </div>

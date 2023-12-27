@@ -13,9 +13,7 @@
     background-color: rgba(var(--clr-background-secondary), 1);
     border: rgba(var(--border-primary), 1) 1px solid;
     border-radius: 0.3125rem;
-    transition: background-color 0.15s,
-                border 0.15s,
-                height 0.5s;
+    transition: background-color 0.15s, border 0.15s, height 0.5s;
     padding-bottom: 1rem;
 }
 
@@ -41,7 +39,7 @@
     -webkit-hyphens: auto;
     -moz-hyphens: auto;
     -ms-hyphens: auto;
-    hyphens: auto;    
+    hyphens: auto;
 }
 
 .club-text {
@@ -152,5 +150,16 @@
 }
 
 .door-leave {
+    margin-right: 1rem;
+}
+
+.invite {
+    margin-top: 1rem;
+    width: calc(100% - 2rem);
+    margin-inline: 1rem;
+    background-color: rgb(0, 190, 111);
+}
+
+.plus {
     margin-right: 1rem;
 }
