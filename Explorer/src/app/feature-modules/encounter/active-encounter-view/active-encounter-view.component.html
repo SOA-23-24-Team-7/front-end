@@ -1,7 +1,12 @@
 <div class="wrapper">
     <xp-map mapName="encounter_map"></xp-map>
     <div class="simulator-btn" (click)="openSimulator()">
-        <fa-icon class="upvote" [icon]="faLocation" />
+        <fa-icon
+            class="upvote"
+            [icon]="faLocation"
+            tooltipPosition="bottom"
+            pTooltip="select location"
+        />
     </div>
     <div class="execution" *ngIf="encounter">
         <div

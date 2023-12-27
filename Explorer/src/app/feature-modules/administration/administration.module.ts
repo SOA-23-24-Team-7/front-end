@@ -11,7 +11,8 @@ import { CommentRequestFormComponent } from "./comment-request-form/comment-requ
 import { CommentKeyPointRequestFormComponent } from "./comment-keypoint-request-form/comment-keypoint-request-form.component";
 import { LayoutModule } from "../layout/layout.module";
 import { FontAwesomeModule } from "@fortawesome/angular-fontawesome";
-import { WalletUpdateDialogComponent } from './wallet-update-dialog/wallet-update-dialog.component';
+import { WalletUpdateDialogComponent } from "./wallet-update-dialog/wallet-update-dialog.component";
+import { TooltipModule } from "primeng/tooltip";
 
 @NgModule({
     declarations: [
@@ -30,6 +31,7 @@ import { WalletUpdateDialogComponent } from './wallet-update-dialog/wallet-updat
         ReactiveFormsModule,
         LayoutModule,
         FontAwesomeModule,
+        TooltipModule,
     ],
     exports: [
         EquipmentComponent,

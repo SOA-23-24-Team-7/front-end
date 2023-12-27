@@ -47,41 +47,55 @@
                     class="tour-action red"
                     *ngIf="tour.status == 2 || tour.status == 0"
                     [icon]="faTrash"
+                    tooltipPosition="bottom"
+                    pTooltip="delete"
                 />
                 <fa-icon
                     class="tour-action"
                     [icon]="faPersonHiking"
                     [routerLink]="['/tours/equipment', tour.id]"
+                    tooltipPosition="bottom"
+                    pTooltip="select equipment"
                 />
                 <fa-icon
                     class="tour-action"
                     *ngIf="tour.status == 2 || tour.status == 0"
                     [icon]="faMoneyBills"
                     (click)="onCouponClicked(tour); $event.stopPropagation()"
+                    tooltipPosition="bottom"
+                    pTooltip="select coupon"
                 />
                 <fa-icon
                     class="tour-action"
                     *ngIf="tour.status == 1"
                     [icon]="faBoxArchive"
                     (click)="onArchiveClicked(tour); $event.stopPropagation()"
+                    tooltipPosition="bottom"
+                    pTooltip="archive"
                 />
                 <fa-icon
                     class="tour-action"
                     *ngIf="tour.status == 1 || tour.status == 2"
                     [icon]="faBarChart"
                     [routerLink]="['/tour-statistics', tour.id]"
+                    tooltipPosition="bottom"
+                    pTooltip="statistics"
                 />
 
                 <fa-icon
                     class="tour-action"
                     [icon]="faMapLocation"
                     [routerLink]="['/tour', tour.id, 'key-points']"
+                    tooltipPosition="bottom"
+                    pTooltip="select keypoints"
                 />
                 <fa-icon
                     class="tour-action"
                     *ngIf="tour.status == 2 || tour.status == 0"
                     (click)="onEditClicked(); $event.stopPropagation()"
                     [icon]="faPen"
+                    tooltipPosition="bottom"
+                    pTooltip="edit"
                 />
             </div>
         </div>
@@ -127,26 +141,45 @@
                     </div>
                     <fa-icon class="tour-price-tokens" [icon]="faCoins" />
                 </div>
-                <div *ngIf="discount && user && user.role === 'author'" class="tour-price">
+                <div
+                    *ngIf="discount && user && user.role === 'author'"
+                    class="tour-price"
+                >
                     <div class="discount">-{{ discount! * 100 }}%</div>
                     <div class="tour-price-value">{{ discountedPrice! }}</div>
                     <fa-icon class="tour-price-tokens" [icon]="faCoins" />
                 </div>
 
-                <div class="tour-price-tourist" *ngIf="user && user.role === 'tourist'">
+                <div
+                    class="tour-price-tourist"
+                    *ngIf="user && user.role === 'tourist'"
+                >
                     <div *ngIf="!discount" class="tour-price-value">
                         {{ tour.price }}
                     </div>
-                    <fa-icon *ngIf="!discount" class="tour-price-tokens" [icon]="faCoins" />
-                    <div> &nbsp; </div>
+                    <fa-icon
+                        *ngIf="!discount"
+                        class="tour-price-tokens"
+                        [icon]="faCoins"
+                    />
+                    <div>&nbsp;</div>
                 </div>
 
-                <div *ngIf="discount && user && user.role === 'tourist'" class="tour-price-tourist">
+                <div
+                    *ngIf="discount && user && user.role === 'tourist'"
+                    class="tour-price-tourist"
+                >
                     <div *ngIf="discount" class="tour-price-value">
                         <s>{{ tour.price }}</s>
                     </div>
-                    <fa-icon *ngIf="discount" class="tour-price-tokens" [icon]="faCoins" />
-                    <div class="discount">&nbsp;&nbsp;-{{ discount! * 100 }}%</div>
+                    <fa-icon
+                        *ngIf="discount"
+                        class="tour-price-tokens"
+                        [icon]="faCoins"
+                    />
+                    <div class="discount">
+                        &nbsp;&nbsp;-{{ discount! * 100 }}%
+                    </div>
                     <div class="tour-price-value">{{ discountedPrice! }}</div>
                     <fa-icon class="tour-price-tokens" [icon]="faCoins" />
                 </div>
@@ -170,15 +203,19 @@
                     <fa-icon [icon]="faCartShopping" />
                     <div class="add-to-cart-text">&nbsp;Add</div>
                 </div>
-                
+
                 <div
                     class="btn add-to-wishlist"
                     *ngIf="
                         user &&
                         user.role === 'tourist' &&
                         !selectable &&
-                        !hideAddToCart"
-                    (click)="onAddToWishlistClicked(tour.id!); $event.stopPropagation()"
+                        !hideAddToCart
+                    "
+                    (click)="
+                        onAddToWishlistClicked(tour.id!);
+                        $event.stopPropagation()
+                    "
                 >
                     <fa-icon [icon]="faCheckSquare" />
                     &nbsp;Add to wishlist

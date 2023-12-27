@@ -267,6 +267,10 @@ textarea:focus {
     transform: translate(0, -50%);
 }
 
+.p-tooltip {
+    position: absolute;
+}
+
 .p-tooltip.p-tooltip-right .p-tooltip-arrow {
     border-bottom-color: transparent;
     border-right-color: rgba(var(--clr-outline-contrast));

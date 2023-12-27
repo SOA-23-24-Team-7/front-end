@@ -1,13 +1,7 @@
 <form [formGroup]="blogForm">
     <div class="form">
         <div class="input-container">
-            <input
-                formControlName="title"
-                type="text"
-                tooltipPosition="bottom"
-                pTooltip="Enter your username"
-                placeholder="Title*"
-            />
+            <input formControlName="title" type="text" placeholder="Title*" />
         </div>
         <quill-editor
             id="editor"
@@ -25,7 +19,6 @@
                 *ngIf="!blog"
                 color="primary"
                 (click)="createBlog()"
-                pTooltip="Enter your username"
             >
                 Create
             </button>
