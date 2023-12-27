@@ -10,6 +10,7 @@ import {
     faEnvelope,
     faEdit,
     faTrash,
+    faHouse,
 } from "@fortawesome/free-solid-svg-icons";
 import { ClubMember } from "../../marketplace/model/club-member.model";
 import { Club } from "../../marketplace/model/club.model";
@@ -24,6 +25,7 @@ export class ClubCardComponent {
     @Output() deleteClubClicked = new EventEmitter<Club>();
     user: User;
     @Input() club: any;
+    @Input() showButtons: boolean = true;
     myClubJoinRequests: MyClubJoinRequest[] = [];
     members: ClubMember[] = [];
     faDoorOpen = faDoorOpen;
@@ -31,6 +33,7 @@ export class ClubCardComponent {
     faEnvelope = faEnvelope;
     faEdit = faEdit;
     faTrash = faTrash;
+    faHouse = faHouse;
 
     constructor(
         private service: MarketplaceService,

@@ -15,6 +15,7 @@
 .club-card:hover {
     transform: scale(1.05); /* Uvećanje kartice kada se miš nalazi iznad nje */
 }
+
 .club-image {
     height: 11rem;
     width: 17rem;
@@ -107,6 +108,30 @@
     margin-left: 0.5rem;
 }
 
+.club-mine {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding-inline: 0.5rem;
+    height: 2rem;
+    width: 100%;
+    border-radius: 0.5rem;
+    background-color: #34be90;
+    cursor: pointer;
+    transition: background-color 0.15s;
+}
+
+.mine-icon {
+    color: rgba(255, 255, 255, 1);
+    font-size: 1.3rem;
+}
+
+.mine-text {
+    color: rgba(255, 255, 255, 1);
+    font-size: 1.3rem;
+    margin-left: 0.5rem;
+}
+
 .club-joined {
     display: flex;
     align-items: center;
@@ -187,6 +212,6 @@
 .join {
     color: white;
     font-size: 1.3rem;
-    
+
     margin-left: 0.5rem;
 }

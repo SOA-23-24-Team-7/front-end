@@ -26,11 +26,23 @@
                 <fa-icon class="joined-icon" [icon]="faCheck" />
                 <div class="joined-text">Joined</div>
             </div>
-            <div class="club-edit" *ngIf="isMine()" (click)="updateClub(club)">
+            <div class="club-mine" *ngIf="isMine() && !showButtons">
+                <fa-icon class="mine-icon" [icon]="faHouse" />
+                <div class="mine-text">My Club</div>
+            </div>
+            <div
+                class="club-edit"
+                *ngIf="isMine() && showButtons"
+                (click)="updateClub(club)"
+            >
                 <fa-icon [icon]="faEdit" class="edit-icon" />
                 <div class="edit-text">Edit</div>
             </div>
-            <div class="club-delete" *ngIf="isMine()" (click)="deleteClub(club)">
+            <div
+                class="club-delete"
+                *ngIf="isMine() && showButtons"
+                (click)="deleteClub(club)"
+            >
                 <fa-icon [icon]="faTrash" class="delete-icon" />
                 <div class="delete-text">Delete</div>
             </div>
