@@ -18,7 +18,7 @@ import { TourEquipmentFormComponent } from "src/app/feature-modules/tour-authori
 import { EditProfileComponent } from "../../feature-modules/stakeholder/edit-profile/edit-profile.component";
 import { OwnerClubsComponent } from "src/app/feature-modules/marketplace/owner-clubs/owner-clubs.component";
 import { ClubsComponent } from "src/app/feature-modules/marketplace/clubs/clubs.component";
-import { MyClubJoinRequestsComponent } from "src/app/feature-modules/marketplace/my-club-join-requests/my-club-join-my-club-join-requests.component";
+import { MyClubJoinRequestsComponent } from "src/app/feature-modules/marketplace/my-club-join-requests/my-club-join-requests.component";
 import { ClubJoinRequestManagementComponent } from "src/app/feature-modules/marketplace/club-join-request-management/club-join-request-management.component";
 import { TouristEquipmentSelectionComponent } from "src/app/feature-modules/layout/tourist-equipment-selection/tourist-equipment-selection.component";
 import { ClubMembersManagementComponent } from "src/app/feature-modules/marketplace/club-members-management/club-members-management.component";
@@ -58,6 +58,7 @@ import { TourStatisticsComponent } from "src/app/feature-modules/tour-authoring/
 import { SingleTourStatisticsComponent } from "src/app/feature-modules/tour-authoring/single-tour-statistics/single-tour-statistics.component";
 import { ResetPasswordComponent } from "../auth/reset-password/reset-password.component";
 import { ResetPasswordEditComponent } from "../auth/reset-password-edit/reset-password-edit.component";
+import { ClubPageComponent } from "src/app/feature-modules/marketplace/club-page/club-page.component";
 import { WishlistComponent } from "src/app/feature-modules/marketplace/wishlist/wishlist.component";
 import { EncounterListComponent } from "src/app/feature-modules/encounter/encounter-list/encounter-list.component";
 
@@ -145,6 +146,7 @@ const routes: Routes = [
     { path: "blog/:blogId", component: BlogComponent },
     { path: "my-blogs/blog-form/:blogId", component: BlogFormComponent },
     { path: "blog-form/:blogId", component: BlogFormComponent },
+    { path: "blog-form/:blogId/:clubId", component: BlogFormComponent },
     {
         path: "profile",
         component: UserProfileComponent,
@@ -303,6 +305,11 @@ const routes: Routes = [
     {
         path: "tour-statistics/:id",
         component: SingleTourStatisticsComponent,
+        canActivate: [AuthGuard],
+    },
+    {
+        path: "club/:clubId",
+        component: ClubPageComponent,
         canActivate: [AuthGuard],
     },
     {

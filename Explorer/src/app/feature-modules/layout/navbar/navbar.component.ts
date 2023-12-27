@@ -52,6 +52,9 @@ import {
 import { StakeholderService } from "../../stakeholder/stakeholder.service";
 import { interval, Subscription } from "rxjs";
 import { RatingFormComponent } from "../../marketplace/rating-form/rating-form.component";
+import { PagedResults } from "src/app/shared/model/paged-results.model";
+import { ClubInvitationWithClubAndOwnerName } from "../../marketplace/model/club-invitation-with-club-and-owner-name.model";
+import { MarketplaceService } from "../../marketplace/marketplace.service";
 //import { } from "@fortawesome/free-regular-svg-icons";
 
 @Component({
@@ -73,6 +76,7 @@ export class NavbarComponent implements OnInit {
         private themeService: ThemeService,
         private router: Router,
         private stakeholderService: StakeholderService,
+        private marketplaceService: MarketplaceService,
         public dialogRef: MatDialog,
     ) {
         this.router.events.subscribe(event => {
@@ -103,7 +107,15 @@ export class NavbarComponent implements OnInit {
         if (this.user!.id !== 0) {
             this.stakeholderService.countNotifications().subscribe({
                 next: (result: number) => {
-                    this.notificationNumber = result;
+                    this.marketplaceService.getInvitations().subscribe({
+                        next: (invitations: PagedResults<ClubInvitationWithClubAndOwnerName>) => {
+                            this.notificationNumber = result + invitations.totalCount;
+                            console.log(`Notification count: ${this.notificationNumber}`)
+                        },
+                        error: (errData) => {
+                          console.log(errData);
+                        }
+                      })
                 },
             });
         }

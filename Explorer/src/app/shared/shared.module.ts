@@ -14,6 +14,7 @@ import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
 import { TooltipModule } from "primeng/tooltip";
 import { MatDialogModule } from "@angular/material/dialog";
 import { ConfettiComponent } from "./confetti/confetti.component";
+import { UserCardComponent } from './user-card/user-card.component';
 
 @NgModule({
     declarations: [
@@ -25,6 +26,7 @@ import { ConfettiComponent } from "./confetti/confetti.component";
         MapModalComponent,
         CarouselComponent,
         ConfettiComponent,
+        UserCardComponent,
     ],
     imports: [
         CommonModule,
@@ -41,6 +43,7 @@ import { ConfettiComponent } from "./confetti/confetti.component";
         TagComponent,
         CarouselComponent,
         ConfettiComponent,
+        UserCardComponent
     ],
 })
 export class SharedModule {}

@@ -1,5 +1,5 @@
 <div class="blogs-container">
-    <div class="title">
+    <div class="title" *ngIf="clubId == -1">
         <select
             [(ngModel)]="selectedStatus"
             (change)="filterByStatus(selectedStatus)"

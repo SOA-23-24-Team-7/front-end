@@ -5,4 +5,5 @@ export interface CreateBlog {
     status: number;
     authorId: number;
     visibilityPolicy: number;
+    clubId?: number;
 }

@@ -28,6 +28,7 @@ import { CouponApplication } from "./model/coupon-applicaton.model";
 import { Bundle } from "../tour-authoring/model/bundle.model";
 import { BundleOrderItem } from "./model/bundle-order-item.model";
 import { SortOption } from "./model/sort-option.model";
+import { Blog } from "../blog/model/blog.model";
 import { Subscription } from "./model/subscription.model";
 import { Person } from "../stakeholder/model/person.model";
 import { Wishlist } from "./model/wishlist.model";
@@ -163,6 +164,9 @@ export class MarketplaceService {
             environment.apiHost + "tourist/problem/",
         );
     }
+    getClubById(id: number): Observable<Club> {
+        return this.http.get<Club>(environment.apiHost + "tourist/club/" + id);
+    }
     getClubs(): Observable<PagedResults<Club>> {
         return this.http.get<PagedResults<Club>>(
             environment.apiHost + "tourist/club",
@@ -255,6 +259,13 @@ export class MarketplaceService {
         const route =
             environment.apiHost + "tourist/club/invite/accept/" + invitationId;
         return this.http.patch<any>(route, { observe: "response" });
+    }
+    getClubBlogs(clubId: number): Observable<Blog[]> {
+        return this.http.get<Blog[]>(
+            environment.apiHost +
+                "blog/getClubBlogs?page=0&pageSize=0&clubId=" +
+                clubId,
+        );
     }
     rejectInvite(invitationId: number): Observable<any> {
         const route =
@@ -352,7 +363,7 @@ export class MarketplaceService {
             environment.apiHost + "market-place/tours/inCart/" + id,
         );
     }
-    
+
     getOrderItem(tourId: number, touristId: number): Observable<any> {
         return this.http.get<any>(
             environment.apiHost +
@@ -594,24 +605,26 @@ export class MarketplaceService {
         return this.http.post<any>(path, {});
     }
 
-
     getMailingListSubscribeStatus(userId: number): Observable<Subscription> {
         const path =
             environment.apiHost + "tourist/subscriber/by-user/" + userId;
         return this.http.get<Subscription>(path);
     }
-    addTourToWishlist(tourId: number): Observable<Wishlist>{
-        return this.http.post<Wishlist>(environment.apiHost + "wishlist/" + tourId, tourId);
-    } 
+    addTourToWishlist(tourId: number): Observable<Wishlist> {
+        return this.http.post<Wishlist>(
+            environment.apiHost + "wishlist/" + tourId,
+            tourId,
+        );
+    }
 
     getToursFromWishlist(): Observable<Tour[]> {
-        return this.http.get<Tour[]>(
-            environment.apiHost + "wishlist/tourist"
-        ); 
+        return this.http.get<Tour[]>(environment.apiHost + "wishlist/tourist");
     }
 
     removeTourFromWishList(tourId: number): Observable<Wishlist> {
-       return this.http.delete<Wishlist>(environment.apiHost + "wishlist/" + tourId); 
+        return this.http.delete<Wishlist>(
+            environment.apiHost + "wishlist/" + tourId,
+        );
     }
 
     getActiveTours(): Observable<PagedResults<Tour>> {
@@ -623,6 +636,6 @@ export class MarketplaceService {
     getRecommendedTours(): Observable<PagedResults<Tour>> {
         return this.http.get<PagedResults<Tour>>(
             environment.apiHost + "tourist/tourrecommenders/recommendedtours",
-        ); 
+        );
     }
 }

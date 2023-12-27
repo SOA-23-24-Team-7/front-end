@@ -1,0 +1,38 @@
+<div class="cards-list">
+    <div
+        class="notification"
+        *ngFor="let invite of invitations"
+    >
+        <div class="notification-column">
+            <div class="notification-header">
+                Club invitation
+            </div>
+        </div>
+        <div class="notification-content">
+            You have been invited to join the "{{invite.clubName}}" club.
+        </div>
+        <div class="buttons-list">
+            <div class="accept-wrapper">
+                <fa-icon class="accept" [icon]="faCheck" (click)="acceptInvite(invite)"/>
+            </div>
+            <div class="decline-wrapper">
+                <fa-icon class="decline" [icon]="faXmark" (click)="rejectInvite(invite)"/>
+            </div>
+        </div>
+    </div>
+
+    <div
+        class="notification"
+        *ngFor="let request of requests"
+        [class.seen]="true"
+    >
+        <div class="notification-column">
+            <div class="notification-header">
+                Club join request
+            </div>
+        </div>
+        <div class="notification-content">
+            Your join request for the "{{request.clubName}}" club has been <span [class.green]="request.status == 'Accepted'" [class.red]="request.status == 'Rejected'">{{request.status == 'Accepted' ? 'accepted': 'rejected'}}</span>.
+        </div>
+    </div>
+</div>
