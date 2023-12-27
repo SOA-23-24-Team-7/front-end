@@ -1,4 +1,4 @@
-<form [formGroup]="clubMemberForm">
+<!-- <form [formGroup]="clubMemberForm">
     <div>
         <div>
             <mat-form-field>
@@ -10,4 +10,30 @@
             <p *ngIf="showSuccess" style="color: green">User invited.</p>
         </div>
     </div>
-</form>
+</form> -->
+
+<div class="container">
+    <form [formGroup]="clubMemberForm">
+        <div class="form">
+            <h1>Invite People</h1>
+            <div class="column">
+                <div class="field">
+                    <select class="select" formControlName="username" required>
+                        <option
+                            *ngFor="let user of users"
+                            [value]="user.user.username"
+                        >
+                            {{ user.user.username }}
+                        </option>
+                    </select>
+                    <label>People</label>
+                </div>
+                <div class="btn" (click)="inviteMember()">Invite</div>
+                <p *ngIf="showError" style="color: red">
+                    Error: Invalid request.
+                </p>
+                <p *ngIf="showSuccess" style="color: green">User invited.</p>
+            </div>
+        </div>
+    </form>
+</div>
