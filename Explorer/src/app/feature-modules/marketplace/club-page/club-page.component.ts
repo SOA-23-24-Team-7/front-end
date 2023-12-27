@@ -19,6 +19,7 @@ import { MatDialog } from "@angular/material/dialog";
 import { ClubMembersManagementComponent } from "../club-members-management/club-members-management.component";
 import { ClubJoinRequest } from "../model/club-join-request.model copy";
 import { ClubMembersInviteFormComponent } from "../club-members-invite-form/club-members-invite-form.component";
+import { NotifierService } from "angular-notifier";
 
 @Component({
     selector: "xp-club-page",
@@ -45,6 +46,7 @@ export class ClubPageComponent {
         private marketplaceService: MarketplaceService,
         private router: Router,
         private dialog: MatDialog,
+        private notifier: NotifierService
     ) {}
 
     ngOnInit(): void {
@@ -182,6 +184,9 @@ export class ClubPageComponent {
                 this.getClub();
                 this.getMembers();
                 this.getJoinRequests();
+                const notificationType = response ? 'success' : 'error';
+                const notification = response ? 'Successfuly added a new club member.' : 'Club join request rejected.';
+                this.notifier.notify(notificationType, notification);
             },
             error: errData => {
                 console.log(errData);
