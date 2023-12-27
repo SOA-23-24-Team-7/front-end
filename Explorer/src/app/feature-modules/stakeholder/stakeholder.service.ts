@@ -21,6 +21,7 @@ import { Record } from "./model/record.model";
 import { Wallet } from "./model/wallet.model";
 import { TransactionRecord } from "./model/transaction-record.model";
 import { BundleRecord } from "./model/bundle-record.model";
+import { WishlistNotification } from "./model/wishlist-notification.model";
 
 @Injectable({
     providedIn: "root",
@@ -265,5 +266,10 @@ export class StakeholderService {
         return this.http.get<BundleRecord[]>(
             environment.apiHost + "tourist/bundle-records"
         );
+    }
+
+    getWishlistNotifications(): Observable<WishlistNotification[]>{
+        //popraviti poziv
+        return this.http.get<WishlistNotification[]>( environment.apiHost + '')
     }
 }
