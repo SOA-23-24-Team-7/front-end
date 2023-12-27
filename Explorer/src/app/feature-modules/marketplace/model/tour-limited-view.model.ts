@@ -17,11 +17,13 @@ export interface TourLimitedView {
     durations?: TourDuration[];
     keyPoint?: KeyPoint;
     reviews?: Review[];
+    discount?: number;
+    discountedPrice?: number;
 }
 
 export enum TourStatus {
     Draft = 0,
     Published = 1,
     Archived = 2,
-    Ready = 3
+    Ready = 3,
 }

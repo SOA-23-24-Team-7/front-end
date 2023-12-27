@@ -38,10 +38,10 @@ import { MatChipsModule } from "@angular/material/chips";
 import { PublishTourModalComponent } from "./publish-tour-modal/publish-tour-modal.component";
 import { KeyPointModalComponent } from "./key-point-modal/key-point-modal.component";
 import { TooltipModule } from "primeng/tooltip";
-import { FacilityModalComponent } from './facility-modal/facility-modal.component';
-import { TourStatisticsComponent } from './tour-statistics/tour-statistics.component';
-import { SingleTourStatisticsComponent } from './single-tour-statistics/single-tour-statistics.component';
-import { KeyPointStatisticsCardComponent } from './key-point-statistics-card/key-point-statistics-card.component';
+import { FacilityModalComponent } from "./facility-modal/facility-modal.component";
+import { TourStatisticsComponent } from "./tour-statistics/tour-statistics.component";
+import { SingleTourStatisticsComponent } from "./single-tour-statistics/single-tour-statistics.component";
+import { KeyPointStatisticsCardComponent } from "./key-point-statistics-card/key-point-statistics-card.component";
 
 @NgModule({
     declarations: [

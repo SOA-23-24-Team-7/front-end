@@ -25,6 +25,20 @@
     <div class="tour-card-content">
         <div class="tour-card-top">
             <div class="tour-tags">
+                <div
+                    class="tour-tag"
+                    *ngIf="tour.recommended"
+                    style="background-color: olivedrab; color: white"
+                >
+                    Recommended
+                </div>
+                <div
+                    class="tour-tag"
+                    *ngIf="tour.active"
+                    style="background-color: orange; color: white"
+                >
+                    Active
+                </div>
                 <div class="tour-tag" *ngFor="let tag of tour.tags">
                     {{ tag }}
                 </div>
@@ -41,14 +55,6 @@
                     [icon]="faTrash"
                     tooltipPosition="bottom"
                     pTooltip="delete"
-                />
-                <fa-icon
-                    class="tour-action"
-                    *ngIf="tour.status == 2 || tour.status == 0"
-                    (click)="onEditClicked(); $event.stopPropagation()"
-                    [icon]="faPen"
-                    tooltipPosition="bottom"
-                    pTooltip="edit"
                 />
                 <fa-icon
                     class="tour-action"

@@ -69,6 +69,9 @@
                     [matChipInputFor]="chipGrid"
                     [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
                     (matChipInputTokenEnd)="add($event)"
+                    tooltipPosition="right"
+                    pTooltip="enter to submit"
+                    tooltipEvent="focus"
                 />
             </div>
             <button class="add-submit" type="submit" (click)="submit()">

@@ -200,7 +200,7 @@ export class BundleCardComponent {
     }
 
     getShoppingCart(): void {
-        this.marketplaceService.getShoppingCart(this.user.id).subscribe({
+        this.marketplaceService.cart$.subscribe({
             next: (result: ShoppingCart) => {
                 this.shoppingCart = result;
                 console.log(result);

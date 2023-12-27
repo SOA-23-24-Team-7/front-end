@@ -215,8 +215,9 @@ export class TourComponent implements OnInit {
     onAddClicked(): void {
         //this.shouldEdit = false;
         //this.shouldRenderTourForm = true;
-        this.dialogRef.open(AddTourFormComponent, {
-            data: this.tour,
+        const addDialog = this.dialogRef.open(AddTourFormComponent);
+        addDialog.componentInstance.toursUpdated.subscribe(tour => {
+            this.tours.push(tour);
         });
     }
 

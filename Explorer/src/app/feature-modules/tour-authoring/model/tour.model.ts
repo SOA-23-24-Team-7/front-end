@@ -16,6 +16,8 @@ export interface Tour {
     durations?: TourDuration[];
     keyPoints?: KeyPoint[];
     averageRating?: number;
+    recommended?: boolean;
+    active?: boolean;
     category?: TourCategory;
 }
 

@@ -2,8 +2,8 @@
     <div class="tour-search-header">
         <div class="tour-search-header-title">My Tour Sales</div>
     </div>
-    <div class="tour-search-body" [@fadeIn]>
-        <div class="tour-sales-container">
+    <div class="tour-search-body">
+        <div class="tour-sales-container" [@fadeIn]>
             <div
                 *ngFor="let sale of tourSales"
                 class="tour-sale-card"
@@ -26,7 +26,7 @@
                             <fa-icon
                                 [ngClass]="
                                     isStartDateAfterToday(sale)
-                                        ? 'icon'
+                                        ? 'iconred'
                                         : 'icon-disabled'
                                 "
                                 [icon]="faTrash"

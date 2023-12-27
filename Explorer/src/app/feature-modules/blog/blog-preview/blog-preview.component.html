@@ -85,7 +85,7 @@
                 class="publish bottom-bar-button"
                 (click)="publishBlog($event)"
             >
-                <fa-icon [icon]="faCheckCircle" />
+                <fa-icon [icon]="faShareNodes" />
                 Publish
             </div>
             <div
@@ -93,7 +93,7 @@
                 class="edit bottom-bar-button"
                 [routerLink]="['blog-form/' + blog.id]"
             >
-                <fa-icon [icon]="faPenToSquare" />
+                <fa-icon [icon]="faPen" />
                 Edit
             </div>
             <div
@@ -101,7 +101,7 @@
                 class="delete bottom-bar-button"
                 (click)="deleteBlog($event)"
             >
-                <fa-icon [icon]="faTrashCan" />
+                <fa-icon [icon]="faTrash" />
                 Delete
             </div>
         </div>
