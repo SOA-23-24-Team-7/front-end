@@ -28,7 +28,7 @@
         <h1 class="title title-margin">Campaigns</h1>
         <div class="cont">
             <div class="tour-card-grid">
-                <xp-campaign-card *ngFor="let campaign of campaigns" [campaign]="campaign"></xp-campaign-card>
+                <xp-campaign-card *ngFor="let campaign of campaigns" [campaign]="campaign" [hasActiveTour]="hasTourActive" [isTourActive]="activeTourId == campaign.id"></xp-campaign-card>
             </div>
         </div>
     </div>

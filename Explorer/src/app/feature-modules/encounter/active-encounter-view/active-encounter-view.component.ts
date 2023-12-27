@@ -215,8 +215,12 @@ export class ActiveEncounterViewComponent implements AfterViewInit {
         this.service.getEncountersInRangeOf(userPosition).subscribe(result => {
             this.filteredEncounters = result.results;
             this.filteredEncounters.forEach((enc, i) => {
-                this.filteredEncounters[i].picture =
-                    environment.imageHost + enc.picture;
+                this.filteredEncounters[i].picture = enc.picture.startsWith(
+                    "http",
+                )
+                    ? enc.picture
+                    : environment.imageHost + enc.picture;
+
                 this.service.getEncounterInstance(enc.id).subscribe(result => {
                     this.loadEncounterInstance = result;
                 });

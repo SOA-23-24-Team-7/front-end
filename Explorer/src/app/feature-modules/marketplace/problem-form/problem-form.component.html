@@ -1,27 +1,13 @@
-<form [formGroup]="problemForm">
-    <div>
-        <mat-form-field>
-            <mat-label>Category</mat-label>
-            <input matInput formControlName="category" type="text"/>
-        </mat-form-field>
-        <mat-form-field>
-            <mat-label>Priority</mat-label>
-            <input matInput formControlName="priority" type="text"/>
-        </mat-form-field>
-        <mat-form-field>
-          <mat-label>Description</mat-label>
-          <textarea matInput
-          cdkTextareaAutosize
-          cdkAutosizeMinRows="1"
-          formControlName="description"
-          cdkAutosizeMaxRows="5"></textarea>
-        </mat-form-field>
-        
-        <mat-form-field>
-            <mat-label>Tour Id</mat-label>
-            <input matInput formControlName="tourId" type="number"/>
-        </mat-form-field>
-        <button *ngIf="!shouldEdit" color="primary" type="submit" (click)="addProblem()" mat-raised-button>Done</button>
-        <button *ngIf="shouldEdit" color="primary" type="submit" (click)="updateProblem()" mat-raised-button>Done</button>
-    </div>
-</form>
+<div class="rating-form-container">
+    <form class="rating-form" [formGroup]="problemForm">
+        <div class="center-text bold-text">
+            <h2>Problem report</h2>
+            <fa-icon class="form-x" [icon]="faXmark" (click)="closeForm()" />
+        </div>
+        <input class="input-spacing" formControlName="category" type="text" tooltipPosition="bottom" pTooltip="Category" placeholder="Category*" />
+        <input class="input-spacing" formControlName="priority" type="text" tooltipPosition="bottom" pTooltip="Priority" placeholder="Priority*" />
+        <textarea cols="35" rows="5" formControlName="description" placeholder="Description*" pTooltip="Description" resize="none"></textarea>
+        <div class="btn" *ngIf="!shouldEdit" [ngClass]="{'disabled-btn': !problemForm.valid}" (click)="addProblem()">Add</div>
+        <div class="btn" *ngIf="shouldEdit" [ngClass]="{'disabled-btn': !problemForm.valid}" (click)="updateProblem()">Change</div>
+    </form>
+</div>

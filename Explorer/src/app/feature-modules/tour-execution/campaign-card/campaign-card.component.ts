@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from "@angular/core";
+import { Component, Input, OnInit, ViewChild } from "@angular/core";
 import { Tour } from "../../tour-authoring/model/tour.model";
 import { Router } from "@angular/router";
 import { TourExecutionService } from "../tour-execution.service";
@@ -7,6 +7,7 @@ import { Campaign } from "../model/campaign-info.model";
 import { TourExecutionStart } from "../model/tour-execution-start-model";
 import { MatDialog } from "@angular/material/dialog";
 import { CampaignEquipmentComponent } from "../campaign-equipment/campaign-equipment.component";
+import { CarouselComponent } from "src/app/shared/carousel/carousel.component";
 
 @Component({
     selector: "xp-campaign-card",
@@ -16,10 +17,10 @@ import { CampaignEquipmentComponent } from "../campaign-equipment/campaign-equip
 export class CampaignCardComponent implements OnInit {
     execution: TourExecutionStart = {tourId: 0, isCampaign: false}
     @Input() campaign: Campaign;
-    isCampaignActive: boolean = false
     @Input() hasActiveTour: boolean;
-    @Input() activeTourId: number;
+    @Input() isTourActive: boolean;
     @Input() isCampaign: boolean;
+    @ViewChild(CarouselComponent) carousel: CarouselComponent;
     images: string[];
     isClicked: boolean = false;
     constructor(
@@ -33,7 +34,10 @@ export class CampaignCardComponent implements OnInit {
                 ? kp.imagePath
                 : environment.imageHost + kp.imagePath,
         );
-        this.CheckIfCampaignIsActive()
+
+        setInterval(() => {
+            if (Math.random() < 0.2) { this.carousel.onNextClick(); }
+        }, 1000);
     }
     StartCampaign(){
         this.execution.tourId = this.campaign.id
@@ -41,13 +45,6 @@ export class CampaignCardComponent implements OnInit {
         this.service.startTour(this.execution).subscribe(() => {
             this.router.navigate(["/tour-executing/" + this.campaign.id, {isCampaign: true}]);
         });
-    }
-    CheckIfCampaignIsActive() {
-        if (this.hasActiveTour) {
-            if (this.campaign.id == this.activeTourId && this.isCampaign) {
-                this.isCampaignActive = true;
-            }
-        }
     }
     ContinueCampaign(){
             this.router.navigate(["/tour-executing/" + this.campaign.id, {isCampaign: true}]);

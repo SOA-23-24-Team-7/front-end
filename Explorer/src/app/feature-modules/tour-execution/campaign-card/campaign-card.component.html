@@ -7,14 +7,14 @@
                 <h3>{{campaign.name}}</h3>
                 <h4>"{{campaign.description}}"</h4>
                 <div class="stars-landing" style="--rating: {{campaign.averageDifficulty}}; --star-size: 2.5em;"></div>
-                <p *ngIf="hasActiveTour && isCampaignActive">In progress</p>
+                <p *ngIf="hasActiveTour && isTourActive">In progress</p>
                 <br>
                 <div class="btn" (click)="isClicked = true">Actions & Info</div>
             </div>
         </div>
         <div class="flip-card-back stretched-btns">
             <div class="btn" (click)="StartCampaign()" *ngIf="!hasActiveTour">Start campaign</div>
-            <div class="btn" (click)="ContinueCampaign()" *ngIf="hasActiveTour && isCampaignActive">
+            <div class="btn" (click)="ContinueCampaign()" *ngIf="isTourActive">
                 Continue campaign</div>
             <div class="btn"(click)="isClicked = false; ShowEquipment()">Equipment</div>
         </div>

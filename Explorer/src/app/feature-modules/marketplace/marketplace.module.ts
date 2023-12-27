@@ -13,7 +13,6 @@ import { MyClubJoinRequestsComponent } from "./my-club-join-requests/my-club-joi
 import { ClubJoinRequestManagementComponent } from "./club-join-request-management/club-join-request-management.component";
 import { ReviewComponent } from "./review/review.component";
 import { ReviewFormComponent } from "./review-form/review-form.component";
-import { ProblemComponent } from "./problem/problem.component";
 import { ProblemFormComponent } from "./problem-form/problem-form.component";
 import { ClubMembersInviteFormComponent } from "./club-members-invite-form/club-members-invite-form.component";
 import { ClubMembersManagementComponent } from "./club-members-management/club-members-management.component";
@@ -57,7 +56,6 @@ import { NotifierModule } from "angular-notifier";
         ClubJoinRequestManagementComponent,
         ReviewComponent,
         ReviewFormComponent,
-        ProblemComponent,
         ProblemFormComponent,
         RatingFormComponent,
         ClubFormComponent,
@@ -113,7 +111,6 @@ import { NotifierModule } from "angular-notifier";
         ReviewComponent,
         ReactiveFormsModule,
         RatingFormComponent,
-        ProblemComponent,
         TourPreferencesComponent,
         TourPreferenceFormComponent,
         KeypointsNotificationsComponent,
