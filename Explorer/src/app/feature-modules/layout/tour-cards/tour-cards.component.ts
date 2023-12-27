@@ -55,7 +55,7 @@ export class TourCardsComponent implements OnInit {
                                     next:(result: PagedResults<Tour>)=>{
                                         this.familyTours=result.results
                                         this.familyTours=this.familyTours.filter(a=>a.averageRating as number>4)
-                                        this.service.getAdventureTours().subscribe({
+                                        this.service.getRecommendedTours().subscribe({
                                             next:(result: PagedResults<Tour>)=>{
                                                 this.recommendedTours=result.results
                                                 

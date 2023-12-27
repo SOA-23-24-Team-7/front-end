@@ -225,7 +225,7 @@
             <div class="tour-search-result-tours">
                 <xp-tour-card-view *ngFor="let tour of tours" [tour]="tour"></xp-tour-card-view>
             </div>
-            <div class="tour-search-pages">
+            <div class="tour-search-pages" *ngIf="radioButtonSelected == 0">
                 <div class="tour-search-page"
                     [class.tour-search-page-highlighted]="page === currentPage || page === '&lt;' || page === '>'"
                     [class.no-border]="page === '...'" *ngFor="let page of pages" (click)="switchPage(page)">
