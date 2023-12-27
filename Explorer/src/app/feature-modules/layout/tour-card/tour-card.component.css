@@ -14,7 +14,7 @@ p{
     padding: 0.625rem;
     width: 18rem;
     margin: 1.3rem;
-    height:26.4rem;
+    height:27rem;
     box-shadow: 0 0 1rem rgba(var(--clr-outline-contrast), 0.8);
     color: rgb(var(--clr-text));
     transition: transform 0.2s;
@@ -56,6 +56,8 @@ p{
     font-size: 1.3rem;
     font-weight: bold;
     cursor: pointer;
+    height:35px;
+    overflow: auto;
 }
 
 .tour-name:hover {
@@ -202,4 +204,13 @@ s::before, strike::before {
     transform: rotate(180deg);  
 }
 s.straight::before, strike.straight::before{transform: rotate(0deg);left:-1%;width:102%;}
+.tour-name::-webkit-scrollbar {
+    width: 0.5em;
+    visibility: hidden;
+}
 
+.tour-name::-webkit-scrollbar-thumb {
+    background-color: rgba(var(--clr-background-secondary));
+    border-radius: None;
+    visibility: hidden;
+}

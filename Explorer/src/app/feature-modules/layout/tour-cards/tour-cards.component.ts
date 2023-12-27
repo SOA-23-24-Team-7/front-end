@@ -151,18 +151,18 @@ export class TourCardsComponent implements OnInit {
     scrollToPrevRecommendedTours() {
         this.currentIndex5--;
         if (this.currentIndex5 < 0) {
-            this.currentIndex5 = this.adventureContainer!.children.length - 1;
+            this.currentIndex5 = this.recommendedContainer!.children.length - 1;
         }
-        this.adventureContainer!.scrollLeft -=
-            this.adventureContainer.children[this.currentIndex5].clientWidth;
+        this.recommendedContainer!.scrollLeft -=
+            this.recommendedContainer.children[this.currentIndex5].clientWidth;
     }
     scrollToNextRecommendedTours() {
         this.currentIndex5++;
-        if (this.currentIndex5 >= this.adventureContainer.children.length) {
+        if (this.currentIndex5 >= this.recommendedContainer.children.length) {
             this.currentIndex5 = 0;
         }
-        this.adventureContainer.scrollLeft +=
-            this.adventureContainer.children[this.currentIndex5].clientWidth;
+        this.recommendedContainer.scrollLeft +=
+            this.recommendedContainer.children[this.currentIndex5].clientWidth;
     }
     toursList = [
         {

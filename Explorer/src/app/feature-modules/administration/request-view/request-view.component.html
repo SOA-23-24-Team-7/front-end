@@ -24,20 +24,22 @@
                 <xp-request-key-point-card
                     [request]="request"
                 ></xp-request-key-point-card>
-                <div class="buttons-container">
+                <div class="accept">
                     <fa-icon
                         class="fa-accept"
-                        [icon]="faCheck"
+                        [icon]="faSquareCheck"
                         *ngIf="request.status == 0"
                         (click)="acceptPublicKeyPointRequest(request)"
                     ></fa-icon>
+                    </div>
+                    <div class="reject">
                     <fa-icon
                         class="fa-reject"
-                        [icon]="faTimes"
+                        [icon]="faSquareXmark"
                         *ngIf="request.status == 0"
                         (click)="rejectPublicKeyPointRequest(request)"
                     ></fa-icon>
-                </div>
+                    </div>
             </div>
         </div>
         <div *ngIf="selectedTab === Tab.FACILITIES">
