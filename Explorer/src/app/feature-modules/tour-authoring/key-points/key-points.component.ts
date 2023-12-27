@@ -219,6 +219,7 @@ export class KeyPointsComponent implements OnInit {
 
         dialogRef.componentInstance.keyPointCreated.subscribe(keyPoint => {
             this.keyPoints.push(keyPoint);
+            this.keyPoints = this.keyPoints.slice();
             this.tour?.keyPoints?.push(keyPoint);
         });
     }

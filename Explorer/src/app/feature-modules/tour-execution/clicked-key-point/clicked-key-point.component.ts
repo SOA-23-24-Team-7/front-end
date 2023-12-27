@@ -33,8 +33,11 @@ export class ClickedKeyPointComponent implements OnInit {
     ngOnInit(): void {
         this.keyPoint = this.data;
         this.nextKeyPointId = this.keyPoint.nextKeyPointId;
-        this.keyPointImage =
-            environment.imageHost + this.keyPoint.dataKey.imagePath;
+        this.keyPointImage = this.keyPoint.dataKey.imagePath.startsWith("http")
+            ? this.keyPoint.dataKey.imagePath
+            : environment.imageHost + this.keyPoint.dataKey.imagePath;
+
+        console.log(this.keyPoint);
         if (this.keyPoint.dataKey.id < this.nextKeyPointId) {
             if (this.keyPoint.dataKey.secret.description != "") {
                 this.secret = this.keyPoint.dataKey.secret.description;

@@ -5,4 +5,5 @@
     display: flex;
     position: relative;
     flex-direction: column;
+    /* overflow-x: hidden; */
 }

@@ -4,6 +4,8 @@ import { Tour } from "../../tour-authoring/model/tour.model";
 import { PagedResults } from "src/app/shared/model/paged-results.model";
 import { Blog } from "../../blog/model/blog.model";
 import { faCoins } from "@fortawesome/free-solid-svg-icons";
+import { AuthService } from "src/app/infrastructure/auth/auth.service";
+import { User } from "src/app/infrastructure/auth/model/user.model";
 @Component({
     selector: "xp-tour-cards",
     templateUrl: "./tour-cards.component.html",
@@ -21,8 +23,20 @@ export class TourCardsComponent implements OnInit {
     familyContainer:any
     culturalContainer:any
     recommendedContainer:any
-    constructor(private service: LayoutService){}
+    user: User
+    constructor(private service: LayoutService, private authService: AuthService){}
     ngOnInit(): void {
+        this.authService.user$.subscribe(user => {
+            this.user = user;
+            if(this.user.username != '' && this.user.role == 'tourist'){
+            this.service.getRecommendedTours().subscribe({
+                next:(result: PagedResults<Tour>)=>{
+                    this.recommendedTours=result.results
+                    
+                }
+            })
+            }
+        });
         this.adventureContainer = document.querySelector(
             ".adventure-card-container",
         );
@@ -55,12 +69,6 @@ export class TourCardsComponent implements OnInit {
                                     next:(result: PagedResults<Tour>)=>{
                                         this.familyTours=result.results
                                         this.familyTours=this.familyTours.filter(a=>a.averageRating as number>4)
-                                        this.service.getAdventureTours().subscribe({
-                                            next:(result: PagedResults<Tour>)=>{
-                                                this.recommendedTours=result.results
-                                                
-                                            }
-                                        })
                                     }
                                 })
                             }
@@ -143,18 +151,18 @@ export class TourCardsComponent implements OnInit {
     scrollToPrevRecommendedTours() {
         this.currentIndex5--;
         if (this.currentIndex5 < 0) {
-            this.currentIndex5 = this.adventureContainer!.children.length - 1;
+            this.currentIndex5 = this.recommendedContainer!.children.length - 1;
         }
-        this.adventureContainer!.scrollLeft -=
-            this.adventureContainer.children[this.currentIndex5].clientWidth;
+        this.recommendedContainer!.scrollLeft -=
+            this.recommendedContainer.children[this.currentIndex5].clientWidth;
     }
     scrollToNextRecommendedTours() {
         this.currentIndex5++;
-        if (this.currentIndex5 >= this.adventureContainer.children.length) {
+        if (this.currentIndex5 >= this.recommendedContainer.children.length) {
             this.currentIndex5 = 0;
         }
-        this.adventureContainer.scrollLeft +=
-            this.adventureContainer.children[this.currentIndex5].clientWidth;
+        this.recommendedContainer.scrollLeft +=
+            this.recommendedContainer.children[this.currentIndex5].clientWidth;
     }
     toursList = [
         {

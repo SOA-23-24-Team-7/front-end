@@ -21,8 +21,10 @@ import {
     faBoxArchive,
     faPen,
     faMoneyBills,
-    faBarChart
-
+    faBarChart,
+    faBookmark,
+    faMap,
+    faCheckSquare,
 } from "@fortawesome/free-solid-svg-icons";
 import { TourLimitedView } from "../../feature-modules/marketplace/model/tour-limited-view.model";
 import { Tour } from "../../feature-modules/tour-authoring/model/tour.model";
@@ -35,6 +37,7 @@ import { KeyPoint } from "../../feature-modules/tour-authoring/model/key-point.m
 import { MatDialog } from "@angular/material/dialog";
 import { EditTourFormComponent } from "src/app/feature-modules/tour-authoring/edit-tour-form/edit-tour-form.component";
 import { CouponsComponent } from "src/app/feature-modules/marketplace/coupons/coupons.component";
+import { PagedResults } from "../model/paged-results.model";
 import { NotifierService } from "angular-notifier";
 import { xpError } from "../model/error.model";
 
@@ -55,6 +58,9 @@ export class TourCardViewComponent implements OnChanges {
     faBoxArchive = faBoxArchive;
     faMoneyBills = faMoneyBills;
     faBarChart = faBarChart;
+    faBookmark = faBookmark;
+    faMap = faMap;
+    faCheckSquare = faCheckSquare;
     user: User;
     @Input() hideIcons: boolean = false;
     @Input() tour: Tour;
@@ -69,6 +75,7 @@ export class TourCardViewComponent implements OnChanges {
     shoppingCart: ShoppingCart = {};
     imageHost: string = environment.imageHost;
     images: string[] = [];
+    toursFromWishlist: Tour[] = [];
     @Output() notifyParent: EventEmitter<any> = new EventEmitter<any>();
 
     constructor(
@@ -101,10 +108,22 @@ export class TourCardViewComponent implements OnChanges {
 
         this.authService.user$.subscribe(user => {
             this.user = user;
-            if (user.role.toLocaleLowerCase() === "tourist") {
+            if (this.user.role === "tourist" && this.user.id !== 0) {
                 this.getShoppingCart();
             }
         });
+
+        if (this.user.role === "tourist" && this.user.id !== 0) {
+            this.marketplaceService.cart$.subscribe(cart => {
+                this.marketplaceService.getToursInCart(this.user.id).subscribe({
+                    next: (result: PagedResults<TourLimitedView>) => {
+                        this.addedTours = result.results;
+                        this.getShoppingCart(); // update the price
+                        this.getDiscount();
+                    },
+                });
+            });
+        }
     }
 
     getDiscount() {
@@ -131,10 +150,9 @@ export class TourCardViewComponent implements OnChanges {
     }
 
     getShoppingCart(): void {
-        this.marketplaceService.getShoppingCart(this.user.id).subscribe({
+        this.marketplaceService.cart$.subscribe({
             next: (result: ShoppingCart) => {
                 this.shoppingCart = result;
-                console.log(result);
                 this.getTokens();
                 if (result == null) {
                     this.shoppingCart = {};
@@ -178,13 +196,18 @@ export class TourCardViewComponent implements OnChanges {
             price: price,
             shoppingCartId: this.shoppingCart.id,
         };
-        console.log(orderItem);
         if (this.addedTours.find(tr => tr.id == tourId)) {
-            alert("You have already added this item to the cart.");
+            this.notifier.notify(
+                "error",
+                "You have already added this item to the cart.",
+            );
             return;
         }
         if (this.tokens.find(tok => tok.tourId == tourId)) {
-            alert("You have already purcheased this tour.");
+            this.notifier.notify(
+                "error",
+                "You have already purcheased this tour.",
+            );
             return;
         }
         this.marketplaceService.addOrderItem(orderItem).subscribe({
@@ -192,12 +215,14 @@ export class TourCardViewComponent implements OnChanges {
                 this.marketplaceService.getToursInCart(this.user.id).subscribe({
                     next: result => {
                         this.addedTours = result.results;
-                        alert("Item successfully added to cart!");
+                        this.marketplaceService
+                            .getShoppingCart(this.user.id)
+                            .subscribe();
                     },
                 });
             },
             error: (err: any) => {
-                console.log(err);
+                this.notifier.notify("error", xpError.getErrorMessage(err));
             },
         });
     }
@@ -219,7 +244,8 @@ export class TourCardViewComponent implements OnChanges {
                             },
                         });
                     } else {
-                        alert(
+                        this.notifier.notify(
+                            "error",
                             "Tour can't be published because it does not have needed requiements!",
                         );
                     }
@@ -246,27 +272,65 @@ export class TourCardViewComponent implements OnChanges {
         });
     }
 
-  onEditClicked(): void {
-    //this.shouldEdit = false;
-    //this.shouldRenderTourForm = true;
-    this.dialogRef.open(EditTourFormComponent, {
-      data: this.tour,
-      
-    });
-  }
-  
-  onCouponClicked(tour: Tour): void{
-    this.dialogRef.open(CouponsComponent, {
-      data: tour,
-      
-    });
-  }
-
-  onImageError(event: Event) {
-    const target = event.target as HTMLImageElement;
-    if (target) {
-      target.src = "https://imgs.search.brave.com/udmDGOGRJTYO6lmJ0ADA03YoW4CdO6jPKGzXWvx1XRI/rs:fit:860:0:0/g:ce/aHR0cHM6Ly90My5m/dGNkbi5uZXQvanBn/LzAyLzY4LzU1LzYw/LzM2MF9GXzI2ODU1/NjAxMl9jMVdCYUtG/TjVyalJ4UjJleVYz/M3puSzRxblllS1pq/bS5qcGc";
+    onEditClicked(): void {
+        this.dialogRef.open(EditTourFormComponent, {
+            data: this.tour,
+        });
     }
-}
+    onCouponClicked(tour: Tour): void {
+        this.dialogRef.open(CouponsComponent, {
+            data: tour,
+        });
+    }
 
+    onImageError(event: Event) {
+        const target = event.target as HTMLImageElement;
+        if (target) {
+            target.src =
+                "https://imgs.search.brave.com/udmDGOGRJTYO6lmJ0ADA03YoW4CdO6jPKGzXWvx1XRI/rs:fit:860:0:0/g:ce/aHR0cHM6Ly90My5m/dGNkbi5uZXQvanBn/LzAyLzY4LzU1LzYw/LzM2MF9GXzI2ODU1/NjAxMl9jMVdCYUtG/TjVyalJ4UjJleVYz/M3puSzRxblllS1pq/bS5qcGc";
+        }
+    }
+
+    onAddToWishlistClicked(tourId: number) {
+        this.marketplaceService.getToursFromWishlist().subscribe({
+            next: (result: Tour[]) => {
+                this.toursFromWishlist = result;
+
+                let alreadyAdded = false;
+                for (let tour of this.toursFromWishlist) {
+                    if (tour.id === tourId) {
+                        alreadyAdded = true;
+                    }
+                }
+
+                if (!alreadyAdded) {
+                    this.marketplaceService
+                        .addTourToWishlist(tourId)
+                        .subscribe({
+                            next: () => {
+                                this.notifier.notify(
+                                    "success",
+                                    "Added to wishlist.",
+                                );
+                            },
+                            error: err => {
+                                this.notifier.notify(
+                                    "error",
+                                    "Failed to add tour to wishlist. " +
+                                        xpError.getErrorMessage(err),
+                                );
+                            },
+                        });
+                } else {
+                    this.notifier.notify(
+                        "error",
+                        "Selected tour is already in your wishlist. ",
+                    );
+                }
+            },
+            error: (err: any) => {
+                console.log(err);
+            },
+        });
+    }
 }

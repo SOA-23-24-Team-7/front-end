@@ -11,6 +11,7 @@ import { User } from "./model/user.model";
 import { Registration } from "./model/registration.model";
 import { LocationCoords } from "src/app/shared/model/location-coords.model";
 import { TouristProgress } from "./model/tourist-progress.model";
+import { MarketplaceService } from "src/app/feature-modules/marketplace/marketplace.service";
 import { ResetPassword } from "./model/reset-password.model";
 import { RegistrationResponse } from "./model/registration-response.model";
 
@@ -33,6 +34,7 @@ export class AuthService {
         private http: HttpClient,
         private tokenStorage: TokenStorage,
         private router: Router,
+        private marketPlaceService: MarketplaceService,
     ) {}
 
     login(login: Login): Observable<AuthenticationResponse> {
@@ -73,6 +75,7 @@ export class AuthService {
         this.userLocation$.next({ latitude: 45.2, longitude: 19.8 });
         localStorage.setItem("userLat", "45.2");
         localStorage.setItem("userLong", "19.8");
+        this.marketPlaceService.cart$.next({ id: 0 });
     }
 
     checkIfUserExists(): void {
@@ -109,6 +112,7 @@ export class AuthService {
                     },
                     error: () => {},
                 });
+            this.marketPlaceService.getShoppingCart(user.id).subscribe();
         }
     }
 
@@ -151,8 +155,11 @@ export class AuthService {
                 });
         }
     }
-    getPosition(){
-        return { "longitude": this.userLocation$.value.longitude, "latitude": this.userLocation$.value.latitude, }
+    getPosition() {
+        return {
+            longitude: this.userLocation$.value.longitude,
+            latitude: this.userLocation$.value.latitude,
+        };
     }
     generateResetPasswordToken(email: string): Observable<any> {
         // TODO: generate reset password token

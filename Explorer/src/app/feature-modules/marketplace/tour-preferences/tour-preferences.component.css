@@ -1,36 +1,94 @@
 #tourPreference {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    color: rgb(var(--clr-text));
 }
 #tourPreference-details {
-  margin: 20px;
+    margin: 20px;
 }
 
 .card-container {
-  display: flex;
-  flex-direction: row;
-  gap: 20px;
+    display: flex;
+    flex-direction: row;
+    gap: 20px;
 }
 
 .card {
-  width: 250px;
-  background-color: rgb(var(--clr-background-secondary));
-  color: rgb(var(--clr-text));
-  border-radius: 8px;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-  padding: 10px;
+    width: 250px;
+    background-color: rgb(var(--clr-background-secondary));
+    color: rgb(var(--clr-text));
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    padding: 10px;
 }
 
 .card-content {
-  margin: 10px 0;
+    margin: 10px 0;
 }
 
 .card-content div {
-  margin-bottom: 5px;
+    margin-bottom: 5px;
 }
 
 .card-content div strong {
-  font-weight: bold;
+    font-weight: bold;
+}
+
+select {
+    --darkgray: rgb(var(--clr-background-secondary));
+    /* Reset Select */
+    appearance: none;
+    outline: 10px red;
+    border: 0;
+    box-shadow: none;
+    /* Personalize */
+    flex: 1;
+    padding: 0 1em;
+    color: rgb(var(--clr-text));
+    background-color: var(--darkgray);
+    background-image: none;
+    cursor: pointer;
+}
+/* Remove IE arrow */
+select::-ms-expand {
+    display: none;
+}
+/* Custom Select wrapper */
+.select {
+    display: none;
+    /* Reset Select */
+    appearance: none;
+    outline: 10px red;
+    border: 0;
+    box-shadow: none;
+    /* Personalize */
+    flex: 1;
+    padding: 0 1em;
+    color: #fff;
+    background-color: var(--darkgray);
+    background-image: none;
+    cursor: pointer;
+    position: relative;
+    display: flex;
+    width: 20em;
+    height: 3em;
+    border-radius: 0.25em;
+    overflow: hidden;
+}
+/* Arrow */
+.select::after {
+    content: "\25BC";
+    position: absolute;
+    top: 0;
+    right: 0;
+    padding: 1em;
+    background-color: #34495e;
+    transition: 0.25s all ease;
+    pointer-events: none;
+}
+/* Transition */
+.select:hover::after {
+    color: #f39c12;
 }
