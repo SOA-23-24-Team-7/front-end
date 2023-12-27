@@ -36,6 +36,22 @@
             <fa-icon [icon]="faCirclePlus" class="plus" />
             Invite people
         </div>
+        <div class="club-title" lang="en-US">Join requests ({{clubJoinRequests.length}})</div>
+        <div class="members">
+            <div *ngFor="let request of clubJoinRequests">
+                <div class="request">
+                    <div class="username">@{{request.touristName}}</div>
+                    <div class="buttons-list">
+                        <div class="accept-wrapper">
+                            <fa-icon class="accept" [icon]="faCheck" (click)="respondJoinRequest(request.id, true)"/>
+                        </div>
+                        <div class="decline-wrapper">
+                            <fa-icon class="decline" [icon]="faXmark" (click)="respondJoinRequest(request.id, false)"/>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
 
     <div class="blogs" *ngIf="isUserMember">
