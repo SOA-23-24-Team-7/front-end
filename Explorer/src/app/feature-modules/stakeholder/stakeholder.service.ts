@@ -270,6 +270,6 @@ export class StakeholderService {
 
     getWishlistNotifications(): Observable<WishlistNotification[]>{
         //popraviti poziv
-        return this.http.get<WishlistNotification[]>( environment.apiHost + '')
+        return this.http.get<WishlistNotification[]>( environment.apiHost + 'tourist/wishlist-notification')
     }
 }

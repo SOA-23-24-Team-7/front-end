@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { KeyPointNotification } from '../../marketplace/model/keypoint-notification';
 import { WishlistNotification } from '../model/wishlist-notification.model';
 import { StakeholderService } from '../stakeholder.service';
+import { faPercentage } from '@fortawesome/free-solid-svg-icons';
 
 @Component({
   selector: 'xp-wishlist-notifications',
@@ -18,4 +19,6 @@ export class WishlistNotificationsComponent {
         this.notification= result;
       })
   }
+
+  faPercentage = faPercentage;
 }

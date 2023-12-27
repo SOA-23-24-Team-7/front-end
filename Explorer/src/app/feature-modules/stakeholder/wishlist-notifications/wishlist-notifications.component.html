@@ -1,15 +1,13 @@
 <div class="cards-list">
-    <!-- <div
+    <div
         class="payment"
-        *ngFor="let payment of records"
+        *ngFor="let payment of notification"
     >
     <div class="payment-column">
         <div class="payment-header">
-            Successful payment for {{ payment.tourName +":"}}&nbsp;&nbsp;{{payment.price}}<fa-icon class="fa-coins-icon" [icon]="faCoins"/>
-        </div>
-        <div class="payment-row">
-            <div>Transaction occured on: {{ datePipe.transform(payment.purchasedDate, 'dd/MM/yyyy HH:mm:ss') }}</div>
+            {{payment.description}}<fa-icon class="fa-coins-icon" [icon]="faPercentage"/>
         </div>
         
-    </div> -->
+        
+    </div>
 </div>
