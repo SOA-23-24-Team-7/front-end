@@ -558,7 +558,15 @@ export class MarketplaceService {
 
     addTourToWishlist(tourId: number): Observable<Wishlist>{
         return this.http.post<Wishlist>(environment.apiHost + "wishlist/" + tourId, tourId);
+    } 
+
+    getToursFromWishlist(): Observable<Tour[]> {
+        return this.http.get<Tour[]>(
+            environment.apiHost + "wishlist/tourist"
+        ); 
     }
 
-    
+    removeTourFromWishList(tourId: number): Observable<Wishlist> {
+       return this.http.delete<Wishlist>(environment.apiHost + "wishlist/" + tourId); 
+    }
 }
