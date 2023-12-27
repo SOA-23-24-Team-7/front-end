@@ -117,11 +117,24 @@
     border-radius: 0.5rem;
     font-size: 0.8rem;
     position: relative;
+    overflow: hidden;
 }
 
 .tags {
     display: flex;
+    width: 6.5rem;
     gap: 0.3rem;
+    overflow-x: auto;
+}
+
+.tags::-webkit-scrollbar {
+    height: 0.5rem;
+}
+
+.tags::-webkit-scrollbar-thumb {
+    background-color: rgba(var(--clr-background-secondary));
+    border-radius: 0.3rem;
+    border: 1px solid rgb(var(--clr-background));
 }
 
 .tag {
