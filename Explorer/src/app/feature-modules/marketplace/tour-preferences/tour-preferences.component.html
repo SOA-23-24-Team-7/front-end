@@ -1,36 +1,93 @@
-<div id="tourPreference">
-    <hr>
-    <div *ngIf="preference.id!=-1"  id="tourPreference-details">
-        <div class="card-container">
-            <div class="card">
-                <div class="card-content">
-                    <div><strong>Difficulty rating:</strong>{{preference.difficultyLevel}}</div>
-                    
-                    <div><strong>Walking rating:</strong> {{preference.walkingRating}}</div>
-                    
-                    <div><strong>Cycling rating:</strong> {{preference.cyclingRating}}</div>
-                    
-                    <div><strong>Car rating:</strong> {{preference.carRating}}</div>
-                    
-                    <div><strong>Boat rating:</strong> {{preference.boatRating}}</div>
-                    
-                    <div><strong>Selected tags:</strong> {{preference.selectedTags}}</div>
+<div>
+    <div id="tourPreference">
+        <hr />
+        <div *ngIf="preference.id != -1" id="tourPreference-details">
+            <div class="card-container">
+                <div class="card">
+                    <div class="card-content">
+                        <div>
+                            <strong>Difficulty rating:</strong
+                            >{{ preference.difficultyLevel }}
+                        </div>
+
+                        <div>
+                            <strong>Walking rating:</strong>
+                            {{ preference.walkingRating }}
+                        </div>
+
+                        <div>
+                            <strong>Cycling rating:</strong>
+                            {{ preference.cyclingRating }}
+                        </div>
+
+                        <div>
+                            <strong>Car rating:</strong>
+                            {{ preference.carRating }}
+                        </div>
+
+                        <div>
+                            <strong>Boat rating:</strong>
+                            {{ preference.boatRating }}
+                        </div>
+
+                        <div>
+                            <strong>Selected tags:</strong>
+                            {{ preference.selectedTags }}
+                        </div>
+                    </div>
+                    <button
+                        color="accent"
+                        *ngIf="isEditing == false"
+                        (click)="deleteEquipment(preference.id || 0)"
+                        mat-icon-button
+                    >
+                        <mat-icon>delete</mat-icon>
+                    </button>
+                    <button
+                        color="primary"
+                        *ngIf="isEditing == false"
+                        mat-icon-button
+                        (click)="isEditing = true"
+                    >
+                        <mat-icon>update</mat-icon>
+                    </button>
                 </div>
-                <button color="accent" *ngIf="isEditing==false" (click)="deleteEquipment(preference.id || 0)" mat-icon-button>
-                    <mat-icon>delete</mat-icon>
-                </button>
-                <button color="primary" *ngIf="isEditing==false" mat-icon-button (click)="isEditing=true">
-                    <mat-icon>update</mat-icon>
-                </button>
             </div>
         </div>
+        <tr>
+            <button
+                *ngIf="preference.id == -1"
+                color="primary"
+                mat-raised-button
+                [routerLink]="['tour-preference-form']"
+            >
+                New
+            </button>
+        </tr>
+        <div>
+            <xp-tour-preference-form
+                *ngIf="isEditing == true"
+                [preference]="preference"
+                [shouldEdit]="true"
+                (shouldEditChange)="onEditChange($event)"
+                (preferenceUpdated)="getPreference()"
+            ></xp-tour-preference-form>
+        </div>
     </div>
-    <tr>
-        <button *ngIf="preference.id==-1" color="primary" mat-raised-button [routerLink]="['tour-preference-form']">
-            New
-        </button>
-    </tr>
-    <div>
-        <xp-tour-preference-form *ngIf="isEditing==true" [preference]="preference" [shouldEdit]="true" (shouldEditChange)="onEditChange($event)" (preferenceUpdated)="getPreference()"></xp-tour-preference-form>
+    <div id="tourPreference">
+        <div class="card-content">
+            <h2>Subscribe to our recommended tours!</h2>
+            <div>
+                <label>I want to recieve recommendations via email: </label>
+                <select [(ngModel)]="selectedFrequency">
+                    <option value="1">Every day</option>
+                    <option value="3">Every three days</option>
+                    <option value="7">Once a week</option>
+                    <option value="0">Never</option>
+                </select>
+                <button mat-raised-button (click)="addSub()">Confirm</button>
+            </div>
+            <button mat-icon-button>Unsubscribe</button>
+        </div>
     </div>
 </div>

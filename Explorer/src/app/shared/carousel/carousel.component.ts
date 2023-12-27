@@ -1,5 +1,5 @@
 import { animate, style, transition, trigger } from '@angular/animations';
-import { Component, Input } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 
 @Component({
   selector: 'xp-carousel',
@@ -19,11 +19,12 @@ import { Component, Input } from '@angular/core';
 })
 export class CarouselComponent {
   @Input() slides: string[];
+  @Input() disableFocus: boolean = false;
+  @Input() autoScroll: boolean = false;
 
   currentSlide = 0;
 
-  constructor() {
-  }
+  constructor() {}
 
   onPreviousClick() {
     const previous = this.currentSlide - 1;

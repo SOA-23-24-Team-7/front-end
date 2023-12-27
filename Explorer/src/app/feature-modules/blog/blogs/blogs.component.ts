@@ -20,7 +20,7 @@ import { trigger, transition, style, animate } from "@angular/animations";
             transition(":enter", [
                 style({ opacity: 0, transform: "translateX(-40px)" }),
                 animate(
-                    "0.6s ease",
+                    "0.5s ease",
                     style({ opacity: 1, transform: "translateX(0)" }),
                 ),
             ]),

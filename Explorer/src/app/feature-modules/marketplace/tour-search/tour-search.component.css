@@ -1,4 +1,4 @@
-.tour-search{
+.tour-search {
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -18,8 +18,8 @@ select {
 }
 
 select:focus {
-  outline: none !important;
-  box-shadow: none !important;
+    outline: none !important;
+    box-shadow: none !important;
 }
 
 .tour-search-header {
@@ -52,7 +52,7 @@ select:focus {
     line-height: 1.5;
 }
 
-.tour-search-body{
+.tour-search-body {
     display: flex;
     width: 100%;
     min-height: 500px;
@@ -211,7 +211,7 @@ select:focus {
     height: 1.5rem;
     color: rgba(var(--clr-text), 1);
     font-size: 1rem;
-    border:rgba(var(--border-primary), 1) 1px solid;
+    border: rgba(var(--border-primary), 1) 1px solid;
     border-radius: 0.3125rem;
     font-weight: 500;
 }
@@ -230,7 +230,7 @@ input[type="checkbox"] {
     padding: 0;
 }
 
-.tour-filter-margin{
+.tour-filter-margin {
     margin-bottom: 1rem;
 }
 
@@ -333,7 +333,7 @@ input[type="checkbox"] {
     margin-bottom: 0.5rem;
     width: 6rem;
     background-color: rgba(var(--clr-primary-500), 1);
-    border: rgba(var(--border-primary), 1) 1px solid; 
+    border: rgba(var(--border-primary), 1) 1px solid;
     color: rgba(var(--clr-text), 1);
     font-size: 1.5rem;
     border-radius: 0.3125rem;
@@ -395,7 +395,7 @@ input[type="checkbox"] {
 }
 
 .tour-sort-options > *:not(:last-child) {
-    border-bottom: rgba(var(--border-primary), 1) 1px solid;  
+    border-bottom: rgba(var(--border-primary), 1) 1px solid;
 }
 
 .tour-sort-option {
@@ -524,7 +524,7 @@ input[type="checkbox"] {
 }
 
 .star {
-    color: rgba(255,255,0, 1);
+    color: rgba(255, 255, 0, 1);
 }
 
 .tour-image {
@@ -541,7 +541,6 @@ input[type="checkbox"] {
     position: relative;
     width: 100%;
 }
-
 
 .tour-search-map-distance-min {
     font-family: var(--fnt-body);

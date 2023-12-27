@@ -1,14 +1,21 @@
-import { Component, OnInit } from "@angular/core";
+import { Component, Inject, OnInit, ViewChild } from "@angular/core";
 import { FormControl, FormGroup, Validators } from "@angular/forms";
 import { EncounterService } from "../encounter.service";
 import { Encounter } from "../model/encounter.model";
-import { MatDialog, MatDialogRef } from "@angular/material/dialog";
+import {
+    MAT_DIALOG_DATA,
+    MatDialog,
+    MatDialogRef,
+} from "@angular/material/dialog";
 import { MapModalComponent } from "src/app/shared/map-modal/map-modal.component";
 import { LocationCoords } from "src/app/shared/model/location-coords.model";
 import { User } from "src/app/infrastructure/auth/model/user.model";
 import { AuthService } from "src/app/infrastructure/auth/auth.service";
 import { NotifierService } from "angular-notifier";
 import { xpError } from "src/app/shared/model/error.model";
+import { MapComponent } from "src/app/shared/map/map.component";
+import { Equipment } from "../../administration/model/equipment.model";
+import { faImage, faMapMarker } from "@fortawesome/free-solid-svg-icons";
 
 @Component({
     selector: "xp-encounter-form",
@@ -31,17 +38,22 @@ export class EncounterFormComponent implements OnInit {
             latitude: 0,
         };
     }
+
     dialogRef: MatDialogRef<MapModalComponent, any> | undefined;
     imageCoords: LocationCoords;
     encounterCoords: LocationCoords;
     selectedEncounter: string;
     selectedImage: string;
-
+    encounterImage: File;
+    picturePath: string;
     user: User;
+    faImage = faImage;
+    faMapMarker = faMapMarker;
 
     encounterForm = new FormGroup({
         title: new FormControl(undefined, [Validators.required]),
         description: new FormControl(undefined, [Validators.required]),
+        image: new FormControl(undefined, [Validators.required]),
         radius: new FormControl(undefined, [
             Validators.required,
             Validators.min(1),
@@ -75,83 +87,150 @@ export class EncounterFormComponent implements OnInit {
             id: 0,
             title: this.encounterForm.value.title || "",
             description: this.encounterForm.value.description || "",
+            picture: this.picturePath || "",
             longitude: this.encounterCoords.longitude || 0,
             latitude: this.encounterCoords.latitude || 0,
-            radius: this.encounterForm.value.radius || 10,
-            xpReward: this.encounterForm.value.xp || 1,
+            radius: this.encounterForm.value.radius || 0,
+            xpReward: this.encounterForm.value.xp || 0,
             status: 0,
             type: this.encounterForm.value.selectedStatus,
-            peopleNumber: this.encounterForm.value.peopleNumber || 1,
-            picture: this.encounterForm.value.pictureURL || "",
+            peopleNumber: this.encounterForm.value.peopleNumber || 0,
             pictureLongitude: this.imageCoords.longitude || 0,
             pictureLatitude: this.imageCoords.latitude || 0,
             challengeDone: false,
         };
 
         if (this.encounterType == 1) {
-            this.service
-                .createSocialEncounter(encounter, this.user.role == "tourist")
-                .subscribe({
-                    next: () => {
-                        this.notifier.notify(
-                            "success",
-                            "Successfully created encounter!",
-                        );
-                    },
-                    error: err => {
-                        this.notifier.notify(
-                            "error",
-                            xpError.getErrorMessage(err),
-                        );
-                    },
-                });
-        }
-
-        if (this.encounterType == 2) {
-            if (this.checkIfPictureInEncounterRange()) {
-                this.service
-                    .createHiddenEncounter(
-                        encounter,
-                        this.user.role == "tourist",
-                    )
-                    .subscribe({
-                        next: () => {
-                            this.notifier.notify(
-                                "success",
-                                "Successfully created encounter!",
-                            );
-                        },
-                        error: err => {
-                            this.notifier.notify(
-                                "error",
-                                xpError.getErrorMessage(err),
-                            );
+            if (
+                this.encounterCoords.longitude > 0 &&
+                this.encounterCoords.latitude > 0
+            ) {
+                if (this.encounterImage) {
+                    this.service.uploadImage(this.encounterImage).subscribe({
+                        next: result => {
+                            encounter.picture = result;
+                            this.service
+                                .createSocialEncounter(
+                                    encounter,
+                                    this.user.role == "tourist",
+                                )
+                                .subscribe({
+                                    next: () => {
+                                        this.notifier.notify(
+                                            "success",
+                                            "Successfully created encounter!",
+                                        );
+                                    },
+                                    error: err => {
+                                        this.notifier.notify(
+                                            "error",
+                                            xpError.getErrorMessage(err),
+                                        );
+                                    },
+                                });
                         },
                     });
+                }
             } else {
                 this.notifier.notify(
                     "error",
-                    "Picture is not in encounter range!",
+                    "Encounter location not selected!",
+                );
+            }
+        }
+
+        if (this.encounterType == 2) {
+            if (
+                this.checkIfPictureInEncounterRange() &&
+                this.imageCoords.longitude > 0 &&
+                this.imageCoords.latitude > 0 &&
+                this.encounterCoords.longitude > 0 &&
+                this.encounterCoords.latitude > 0
+            ) {
+                if (this.encounterImage) {
+                    this.service.uploadImage(this.encounterImage).subscribe({
+                        next: result => {
+                            encounter.picture = result;
+                            this.service
+                                .createHiddenEncounter(
+                                    encounter,
+                                    this.user.role == "tourist",
+                                )
+                                .subscribe({
+                                    next: () => {
+                                        this.notifier.notify(
+                                            "success",
+                                            "Successfully created encounter!",
+                                        );
+                                    },
+                                    error: err => {
+                                        this.notifier.notify(
+                                            "error",
+                                            xpError.getErrorMessage(err),
+                                        );
+                                    },
+                                });
+                        },
+                    });
+                }
+            } else {
+                this.notifier.notify(
+                    "error",
+                    "Picture is not in encounter range or location not selected!",
                 );
             }
         }
         if (this.encounterType == 3) {
-            this.service
-                .createMiscEncounter(encounter, this.user.role == "tourist")
-                .subscribe({
-                    next: () => {
-                        this.notifier.notify(
-                            "success",
-                            "Successfully created encounter!",
-                        );
-                    },
-                    error: err => {
-                        this.notifier.notify(
-                            "error",
-                            xpError.getErrorMessage(err),
-                        );
-                    },
-                });
+            if (
+                this.encounterCoords.longitude > 0 &&
+                this.encounterCoords.latitude > 0
+            ) {
+                if (this.encounterImage) {
+                    this.service.uploadImage(this.encounterImage).subscribe({
+                        next: result => {
+                            encounter.picture = result;
+                            this.service
+                                .createMiscEncounter(
+                                    encounter,
+                                    this.user.role == "tourist",
+                                )
+                                .subscribe({
+                                    next: () => {
+                                        this.notifier.notify(
+                                            "success",
+                                            "Successfully created encounter!",
+                                        );
+                                    },
+                                    error: err => {
+                                        this.notifier.notify(
+                                            "error",
+                                            xpError.getErrorMessage(err),
+                                        );
+                                    },
+                                });
+                        },
+                    });
+                }
+            } else {
+                this.notifier.notify(
+                    "error",
+                    "Encounter location not selected!",
+                );
+            }
+        }
+    }
+
+    onSelectImage(event: Event) {
+        const element = event.currentTarget as HTMLInputElement;
+        if (element.files && element.files[0]) {
+            this.encounterImage = element.files[0];
+
+            const reader = new FileReader();
+
+            reader.readAsDataURL(this.encounterImage);
+            reader.onload = (e: ProgressEvent<FileReader>) => {
+                this.picturePath = reader.result as string;
+            };
         }
     }
 
@@ -160,7 +239,11 @@ export class EncounterFormComponent implements OnInit {
             this.dialogRef.close();
             return;
         }
-        this.dialogRef = this.dialog.open(MapModalComponent);
+        this.dialogRef = this.dialog.open(MapModalComponent, {
+            data: {
+                encounterCoords: this.encounterCoords,
+            },
+        });
         this.dialogRef.componentInstance.positionChanged.subscribe(
             (result: LocationCoords) => {
                 this.imageCoords = result;
@@ -209,7 +292,13 @@ export class EncounterFormComponent implements OnInit {
             this.dialogRef.close();
             return;
         }
-        this.dialogRef = this.dialog.open(MapModalComponent);
+
+        this.dialogRef = this.dialog.open(MapModalComponent, {
+            data: {
+                closeOnClick: false,
+                encounterCoords: this.encounterCoords,
+            },
+        });
         this.dialogRef.componentInstance.positionChanged.subscribe(
             (result: LocationCoords) => {
                 this.encounterCoords = result;

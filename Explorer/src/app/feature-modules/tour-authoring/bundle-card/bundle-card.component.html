@@ -1,4 +1,4 @@
-<div class="tour-card">
+<div class="tour-card" [@fadeIn]>
     <div class="tour-card-left">
         <div class="tour-image-container">
             <fa-icon class="tour-image" [icon]="faBoxOpen" />
@@ -18,6 +18,8 @@
                             user.role === 'author')
                     "
                     (click)="delete()"
+                    tooltipPosition="bottom"
+                    pTooltip="delete"
                 />
                 <fa-icon
                     class="tour-action"
@@ -30,6 +32,8 @@
                             user.role === 'author')
                     "
                     (click)="onEditClicked()"
+                    tooltipPosition="bottom"
+                    pTooltip="edit"
                 />
                 <fa-icon
                     class="tour-action green"
@@ -42,6 +46,8 @@
                             user.role === 'author')
                     "
                     (click)="publish()"
+                    tooltipPosition="bottom"
+                    pTooltip="publish"
                 />
                 <fa-icon
                     class="tour-action"
@@ -53,6 +59,8 @@
                         user.role === 'author'
                     "
                     (click)="archive()"
+                    tooltipPosition="bottom"
+                    pTooltip="archive"
                 />
                 <fa-icon
                     class="tour-action red"

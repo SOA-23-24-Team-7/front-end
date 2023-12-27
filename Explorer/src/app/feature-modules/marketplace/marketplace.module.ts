@@ -13,7 +13,6 @@ import { MyClubJoinRequestsComponent } from "./my-club-join-requests/my-club-joi
 import { ClubJoinRequestManagementComponent } from "./club-join-request-management/club-join-request-management.component";
 import { ReviewComponent } from "./review/review.component";
 import { ReviewFormComponent } from "./review-form/review-form.component";
-import { ProblemComponent } from "./problem/problem.component";
 import { ProblemFormComponent } from "./problem-form/problem-form.component";
 import { ClubMembersInviteFormComponent } from "./club-members-invite-form/club-members-invite-form.component";
 import { ClubMembersManagementComponent } from "./club-members-management/club-members-management.component";
@@ -23,7 +22,6 @@ import { FontAwesomeModule } from "@fortawesome/angular-fontawesome";
 import { LayoutModule } from "src/app/feature-modules/layout/layout.module";
 import { KeypointsNotificationsComponent } from "./keypoints-notifications/keypoints-notifications.component";
 import { FacilitiesNotificationsComponent } from "./facilities-notifications/facilities-notifications.component";
-import { ShoppingCartComponent } from "./shopping-cart/shopping-cart.component";
 import { MyClubInvitationsComponent } from "./my-club-invitations/my-club-invitations.component";
 import { TourPreferencesComponent } from "./tour-preferences/tour-preferences.component";
 import { TourPreferenceFormComponent } from "./tour-preference-form/tour-preference-form.component";
@@ -31,7 +29,6 @@ import { BrowserModule } from "@angular/platform-browser";
 import { TagInputModule } from "ngx-chips";
 import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
 import { FormsModule } from "@angular/forms";
-import { PublishedToursComponent } from "./tours/published-tours.component";
 import { TourDetailsComponent } from "./tour-details/tour-details.component";
 import { FullSizeImageComponent } from "./full-size-image/full-size-image.component";
 import { TourPageComponent } from "./tour-page/tour-page.component";
@@ -45,9 +42,14 @@ import { CouponsModalComponent } from "./coupons-modal/coupons-modal.component";
 import { ExploreBundlesComponent } from "./explore-bundles/explore-bundles.component";
 import { StarRatingModule } from "angular-star-rating";
 import { ClubPageComponent } from "./club-page/club-page.component";
-import { ClubBlogPreviewComponent } from './club-blog-preview/club-blog-preview.component';
+import { ClubBlogPreviewComponent } from "./club-blog-preview/club-blog-preview.component";
 import { BlogsComponent } from "../blog/blogs/blogs.component";
 import { BlogModule } from "../blog/blog.module";
+import { TouristsWishlistComponent } from "./tourists-wishlist/tourists-wishlist.component";
+import { WishlistComponent } from "./wishlist/wishlist.component";
+import { CartComponent } from "./cart/cart.component";
+import { MatRadioModule } from "@angular/material/radio";
+import { NotifierModule } from "angular-notifier";
 
 @NgModule({
     declarations: [
@@ -58,7 +60,6 @@ import { BlogModule } from "../blog/blog.module";
         ClubJoinRequestManagementComponent,
         ReviewComponent,
         ReviewFormComponent,
-        ProblemComponent,
         ProblemFormComponent,
         RatingFormComponent,
         ClubFormComponent,
@@ -69,11 +70,9 @@ import { BlogModule } from "../blog/blog.module";
         MyClubInvitationsComponent,
         TourPreferencesComponent,
         TourPreferenceFormComponent,
-        PublishedToursComponent,
         TourSearchComponent,
         KeypointsNotificationsComponent,
         FacilitiesNotificationsComponent,
-        ShoppingCartComponent,
         TourDetailsComponent,
         FullSizeImageComponent,
         TourPageComponent,
@@ -86,6 +85,9 @@ import { BlogModule } from "../blog/blog.module";
         ExploreBundlesComponent,
         ClubPageComponent,
         ClubBlogPreviewComponent,
+        TouristsWishlistComponent,
+        WishlistComponent,
+        CartComponent,
     ],
     imports: [
         CommonModule,
@@ -108,18 +110,20 @@ import { BlogModule } from "../blog/blog.module";
         MatChipsModule,
         TourAuthoringModule,
         BlogModule,
+        MatRadioModule,
         StarRatingModule.forRoot(),
+        NotifierModule,
     ],
     exports: [
         ReviewComponent,
         ReactiveFormsModule,
         RatingFormComponent,
-        ProblemComponent,
         TourPreferencesComponent,
         TourPreferenceFormComponent,
         KeypointsNotificationsComponent,
         FacilitiesNotificationsComponent,
         CouponsModalComponent,
+        CartComponent,
     ],
 })
 export class MarketplaceModule {}

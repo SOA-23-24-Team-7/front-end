@@ -1,37 +1,22 @@
-<div class="tour-card">
-    <img class="tour-image" [src]="tourImage" />
-    <div class="tour-card-details">
-        <div class="tour-name">{{ campaign.name }}</div>
-        <div>
-            Difficulty: <b>{{ campaign.averageDifficulty }}</b>
-            <br />
-            Distance: <b>{{ campaign.distance }}</b>
+<div class="flip-card" [ngClass]="{'flip-card-click': isClicked}" (mouseleave)="isClicked = false">
+    <div class="flip-card-inner">
+        <div class="flip-card-front image_wrapper">
+            <xp-carousel *ngIf="campaign && campaign.keyPoints && campaign.keyPoints[0]" [disableFocus]="true" [autoScroll]="true"
+                [slides]="images"></xp-carousel>
+            <div class="cont overlay overlay_4">
+                <h3>{{campaign.name}}</h3>
+                <h4>"{{campaign.description}}"</h4>
+                <div class="stars-landing" style="--rating: {{campaign.averageDifficulty}}; --star-size: 2.5em;"></div>
+                <p *ngIf="hasActiveTour && isTourActive">In progress</p>
+                <br>
+                <div class="btn" (click)="isClicked = true">Actions & Info</div>
+            </div>
         </div>
-        <button
-            class="btn search-button"
-        (click)="ShowEquipment()">
-            Show equipment
-        </button>
-        <button
-            class="btn search-button"
-            (click)="StartCampaign()"
-            *ngIf="!hasActiveTour"
-        >
-            Start Campaign
-        </button>
-        <button
-            class="btn search-button"
-            (click)="ContinueCampaign()"
-            *ngIf="hasActiveTour && isCampaignActive"
-        >
-            Continue campaign
-        </button>
-        <button
-            class="btn search-button"
-            *ngIf="hasActiveTour && !isCampaignActive"
-            disabled
-        >
-            Start campaign
-        </button>
+        <div class="flip-card-back stretched-btns">
+            <div class="btn" (click)="StartCampaign()" *ngIf="!hasActiveTour">Start campaign</div>
+            <div class="btn" (click)="ContinueCampaign()" *ngIf="isTourActive">
+                Continue campaign</div>
+            <div class="btn"(click)="isClicked = false; ShowEquipment()">Equipment</div>
+        </div>
     </div>
 </div>

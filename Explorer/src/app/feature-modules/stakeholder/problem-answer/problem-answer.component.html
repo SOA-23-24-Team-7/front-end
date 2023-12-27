@@ -1,5 +1,5 @@
 <div class="problem-answer-modal">
-    <div class="problem-answer">
+    <div class="problem-answer" (click)="$event.stopPropagation()">
         <div
             class="header"
             [ngClass]="{ red: !problem.isResolved, green: problem.isResolved }"

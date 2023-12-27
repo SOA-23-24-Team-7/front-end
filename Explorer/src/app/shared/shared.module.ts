@@ -36,7 +36,6 @@ import { UserCardComponent } from './user-card/user-card.component';
         BrowserAnimationsModule,
         TooltipModule,
         MatDialogModule,
-
     ],
     exports: [
         MapComponent,

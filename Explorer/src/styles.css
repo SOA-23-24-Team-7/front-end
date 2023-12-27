@@ -222,6 +222,20 @@ textarea:focus {
     margin-right: 8px;
 }
 
+.mdc-label {
+    color: rgb(var(--clr-text));
+}
+
+input[type="radio"] {
+    border-color: rgb(var(--clr-text)) !important;
+}
+.mdc-radio__outer-circle {
+    border-color: rgb(var(--clr-text)) !important;
+}
+input[type="radio"]:checked + .mdc-radio__background .mdc-radio__outer-circle {
+    border-color: rgb(var(--clr-primary-500)) !important;
+}
+
 /* Remove all animations, transitions and smooth scroll for people that prefer not to see them */
 @media (prefers-reduced-motion: reduce) {
     html:focus-within {
@@ -242,10 +256,12 @@ textarea:focus {
 
 ::-webkit-scrollbar {
     width: 0.5em;
+    background-color: rgba(var(--clr-background));
 }
 
 ::-webkit-scrollbar-thumb {
     background-color: rgba(var(--clr-background));
+    border: 1px solid rgba(0, 0, 0, 0.5);
     border-radius: 0.3rem;
 }
 
@@ -263,6 +279,10 @@ textarea:focus {
     border-top-color: transparent;
     background-color: transparent;
     transform: translate(0, -50%);
+}
+
+.p-tooltip {
+    position: absolute;
 }
 
 .p-tooltip.p-tooltip-right .p-tooltip-arrow {

@@ -22,6 +22,7 @@ import { Wallet } from "./model/wallet.model";
 import { TransactionRecord } from "./model/transaction-record.model";
 import { BundleRecord } from "./model/bundle-record.model";
 import { Club } from "../marketplace/model/club.model";
+import { WishlistNotification } from "./model/wishlist-notification.model";
 
 @Injectable({
     providedIn: "root",
@@ -251,12 +252,12 @@ export class StakeholderService {
     }
 
     getTouristWallet(): Observable<Wallet> {
-        return this.http.get<Wallet>(
-            environment.apiHost + "wallet"
-        );
+        return this.http.get<Wallet>(environment.apiHost + "wallet");
     }
 
-    getTouristTransactionRecords(): Observable<PagedResults<TransactionRecord>> {
+    getTouristTransactionRecords(): Observable<
+        PagedResults<TransactionRecord>
+    > {
         return this.http.get<PagedResults<TransactionRecord>>(
             environment.apiHost + "tourist/record/transactions",
         );
@@ -264,12 +265,19 @@ export class StakeholderService {
 
     getBundleRecords(): Observable<BundleRecord[]> {
         return this.http.get<BundleRecord[]>(
-            environment.apiHost + "tourist/bundle-records"
+            environment.apiHost + "tourist/bundle-records",
         );
     }
     getClubs(userId: any): Observable<PagedResults<Club>> {
         return this.http.get<PagedResults<Club>>(
-            environment.apiHost + "tourist/club/members/userclubs/"+userId,
+            environment.apiHost + "tourist/club/members/userclubs/" + userId,
+        );
+    }
+
+    getWishlistNotifications(): Observable<WishlistNotification[]> {
+        //popraviti poziv
+        return this.http.get<WishlistNotification[]>(
+            environment.apiHost + "tourist/wishlist-notification",
         );
     }
 }

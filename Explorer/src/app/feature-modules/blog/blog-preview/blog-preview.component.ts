@@ -5,10 +5,9 @@ import {
     faCircleDown,
     faComment,
     faShareFromSquare,
-    faCheckCircle,
-    faTrashCan,
-    faPenToSquare,
 } from "@fortawesome/free-regular-svg-icons";
+import { faShareNodes, faTrash } from "@fortawesome/free-solid-svg-icons";
+import { faPen } from "@fortawesome/free-solid-svg-icons";
 import { Vote, VoteType } from "../model/vote.model";
 import { User } from "src/app/infrastructure/auth/model/user.model";
 import { marked } from "marked";
@@ -41,9 +40,9 @@ export class BlogPreviewComponent implements OnInit {
     faCircleDown = faCircleDown;
     faComment = faComment;
     faShareFromSquare = faShareFromSquare;
-    faCheckCircle = faCheckCircle;
-    faTrashCan = faTrashCan;
-    faPenToSquare = faPenToSquare;
+    faShareNodes = faShareNodes;
+    faTrash = faTrash;
+    faPen = faPen;
 
     ngOnInit(): void {
         const md = marked.setOptions({});

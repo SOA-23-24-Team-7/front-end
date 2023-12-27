@@ -13,7 +13,6 @@ import { UsersOverviewComponent } from "src/app/feature-modules/administration/u
 import { UserProfileComponent } from "src/app/feature-modules/stakeholder/user-profile/user-profile.component";
 import { RatingComponent } from "src/app/feature-modules/administration/rating/rating.component";
 import { ReviewComponent } from "src/app/feature-modules/marketplace/review/review.component";
-import { ProblemComponent } from "src/app/feature-modules/marketplace/problem/problem.component";
 import { TourComponent } from "src/app/feature-modules/tour-authoring/tour/tour.component";
 import { TourEquipmentFormComponent } from "src/app/feature-modules/tour-authoring/tour-equipment-form/tour-equipment-form.component";
 import { EditProfileComponent } from "../../feature-modules/stakeholder/edit-profile/edit-profile.component";
@@ -31,7 +30,6 @@ import { ProblemAnswerComponent } from "src/app/feature-modules/stakeholder/prob
 import { TouristPositionSimulatorComponent } from "src/app/feature-modules/tour-execution/tourist-position-simulator/tourist-position-simulator.component";
 import { RequestViewComponent } from "src/app/feature-modules/administration/request-view/request-view.component";
 import { PurchasedToursComponent } from "src/app/feature-modules/tour-execution/purchased-tour-cards/purchased-tour-cards.component";
-import { PublishedToursComponent } from "src/app/feature-modules/marketplace/tours/published-tours.component";
 import { TourExecutingComponent } from "src/app/feature-modules/tour-execution/tour-executing/tour-executing.component";
 import { BlogFormComponent } from "src/app/feature-modules/blog/blog-form/blog-form.component";
 import { MyBlogsComponent } from "src/app/feature-modules/blog/my-blogs/my-blogs.component";
@@ -61,6 +59,8 @@ import { SingleTourStatisticsComponent } from "src/app/feature-modules/tour-auth
 import { ResetPasswordComponent } from "../auth/reset-password/reset-password.component";
 import { ResetPasswordEditComponent } from "../auth/reset-password-edit/reset-password-edit.component";
 import { ClubPageComponent } from "src/app/feature-modules/marketplace/club-page/club-page.component";
+import { WishlistComponent } from "src/app/feature-modules/marketplace/wishlist/wishlist.component";
+import { EncounterListComponent } from "src/app/feature-modules/encounter/encounter-list/encounter-list.component";
 
 const routes: Routes = [
     { path: "home", component: HomeComponent },
@@ -75,11 +75,15 @@ const routes: Routes = [
     { path: "", component: HomeComponent },
     { path: "ratings", component: RatingComponent, canActivate: [AuthGuard] },
     {
+        path: "done-encounter",
+        component: EncounterListComponent,
+        canActivate: [AuthGuard],
+    },
+    {
         path: "review/:tourId",
         component: ReviewComponent,
         canActivate: [AuthGuard],
     },
-    { path: "problem", component: ProblemComponent, canActivate: [AuthGuard] },
     {
         path: "problems",
         component: ProblemsOverviewComponent,
@@ -89,11 +93,6 @@ const routes: Routes = [
     {
         path: "purchasedtours",
         component: PurchasedToursComponent,
-        canActivate: [AuthGuard],
-    },
-    {
-        path: "published-tours",
-        component: PublishedToursComponent,
         canActivate: [AuthGuard],
     },
     {
@@ -311,6 +310,11 @@ const routes: Routes = [
     {
         path: "club/:clubId",
         component: ClubPageComponent,
+        canActivate: [AuthGuard],
+    },
+    {
+        path: "wishlist",
+        component: WishlistComponent,
         canActivate: [AuthGuard],
     },
     { path: "reset-password", component: ResetPasswordComponent },

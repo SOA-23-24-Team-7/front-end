@@ -1,44 +1,25 @@
-<div class="tour-card">
-    <img class="tour-image" [src]="tourImage" />
-    <div class="tour-card-details">
-        <div class="tour-name">{{ tour.name }}</div>
-        <div class="tour-tags">
-            <div class="tour-tag" *ngFor="let tag of tour.tags">{{ tag }}</div>
+<div class="flip-card" [class.glow]="isGlowing" [ngClass]="{'flip-card-click': isClicked}" (mouseleave)="isClicked = false">
+    <div class="flip-card-inner">
+        <div class="flip-card-front image_wrapper">
+            <xp-carousel *ngIf="tour && tour.keyPoints && tour.keyPoints[0]" [disableFocus]="true" [autoScroll]="true"
+                [slides]="images"></xp-carousel>
+            <div class="cont overlay overlay_4">
+                <h3>{{tour.name}}</h3>
+                <p *ngIf="hasActiveTour && isTourActive">In progress</p>
+                <div class="stars-landing" style="--rating: {{tour.averageRating}}; --star-size: 2.5em;"></div>
+                <br>
+                <div class="btn" (click)="isClicked = true">Actions & Info</div>
+            </div>
         </div>
-        <div>
-            Difficulty: <b>{{ tour.difficulty }}</b>
-            <br />
-            Distance: <b>{{ tour.distance }}</b>
+        <div class="flip-card-back stretched-btns">
+            <div class="btn" (click)="StartTour()" *ngIf="!hasActiveTour">Start tour</div>
+            <div class="btn" (click)="ContinueTour()" *ngIf="hasActiveTour && isTourActive">
+                Continue tour</div>
+            <div class="btn"(click)="isClicked = false; ShowKeyPoints()">Key points</div>
+            <div class="btn" (click)="isClicked = false; ShowWheather()">Weather</div>
+            <div class="btn" (click)="isClicked = false; onSelectedTour(tour)" *ngIf="!selected">Add to campaign</div>
+            <div class="btn" (click)="isClicked = false; onDeselectedTour(tour)" *ngIf="selected">Remove from campaign</div>
+            <div class="btn" (click)="isClicked = false; ShowProblemForm()">Report a problem</div>
         </div>
-        <button class="btn key-point-button" (click)="ShowKeyPoints()">
-            Key points
-        </button>
-        <button class="btn key-points-button" (click)="ShowWheather()">
-            Current weather
-        </button>
-        <button
-            class="btn search-button"
-            (click)="StartTour()"
-            *ngIf="!hasActiveTour"
-        >
-            Start tour
-        </button>
-        <button class="btn search-button" (click)="onSelectedTour(tour)">
-            Add to campaign
-        </button>
-        <button
-            class="btn search-button"
-            (click)="ContinueTour()"
-            *ngIf="hasActiveTour && isTourActive"
-        >
-            Continue tour
-        </button>
-        <button
-            class="btn search-button"
-            *ngIf="hasActiveTour && !isTourActive"
-            disabled
-        >
-            Start tour
-        </button>
     </div>
 </div>
