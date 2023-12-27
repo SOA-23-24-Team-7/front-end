@@ -75,6 +75,7 @@ export class TourCardViewComponent implements OnChanges {
     shoppingCart: ShoppingCart = {};
     imageHost: string = environment.imageHost;
     images: string[] = [];
+    toursFromWishlist: Tour[] = [];
     @Output() notifyParent: EventEmitter<any> = new EventEmitter<any>();
 
     constructor(
@@ -276,17 +277,40 @@ export class TourCardViewComponent implements OnChanges {
   }
 
   onAddToWishlistClicked(tourId: number){
-    this.marketplaceService.addTourToWishlist(tourId).subscribe({
-        next: () => {
-            this.notifier.notify("success", "Added to wishlist.");
+    this.marketplaceService.getToursFromWishlist().subscribe({
+        next: (result: Tour[]) => {
+            this.toursFromWishlist = result;
+
+            let alreadyAdded = false;
+            for(let tour of this.toursFromWishlist){
+                if(tour.id === tourId){
+                    alreadyAdded = true;
+                }
+            }
+
+            if(!alreadyAdded){
+                this.marketplaceService.addTourToWishlist(tourId).subscribe({
+                    next: () => {
+                        this.notifier.notify("success", "Added to wishlist.");
+                    },
+                    error: err => {
+                        this.notifier.notify(
+                            "error",
+                            "Failed to add tour to wishlist. " + xpError.getErrorMessage(err),
+                        );
+                    },
+                });
+            }
+            else{
+                this.notifier.notify(
+                    "error",
+                    "Selected tour is already in your wishlist. "
+                );
+            }
         },
-        error: err => {
-            this.notifier.notify(
-                "error",
-                "Failed to add tour to wishlist. " + xpError.getErrorMessage(err),
-            );
+        error: (err: any) => {
+            console.log(err);
         },
     });
   }
-
 }
