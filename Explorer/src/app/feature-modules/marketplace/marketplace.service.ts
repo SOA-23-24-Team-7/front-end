@@ -28,6 +28,8 @@ import { CouponApplication } from "./model/coupon-applicaton.model";
 import { Bundle } from "../tour-authoring/model/bundle.model";
 import { BundleOrderItem } from "./model/bundle-order-item.model";
 import { SortOption } from "./model/sort-option.model";
+import { Subscription } from "./model/subscription.model";
+import { Person } from "../stakeholder/model/person.model";
 import { Wishlist } from "./model/wishlist.model";
 
 @Injectable({
@@ -55,6 +57,19 @@ export class MarketplaceService {
         return this.http.post<TourPreference>(
             environment.apiHost + "tourist/preferences/create",
             tourPreference,
+        );
+    }
+
+    addSub(sub: Subscription): Observable<Subscription> {
+        return this.http.post<Subscription>(
+            environment.apiHost + "tourist/subscriber",
+            sub,
+        );
+    }
+
+    getByUserId(userId: number): Observable<Person> {
+        return this.http.get<Person>(
+            environment.apiHost + "people/person/" + userId,
         );
     }
 
@@ -580,6 +595,12 @@ export class MarketplaceService {
         return this.http.post<any>(path, {});
     }
 
+
+    getMailingListSubscribeStatus(userId: number): Observable<Subscription> {
+        const path =
+            environment.apiHost + "tourist/subscriber/by-user/" + userId;
+        return this.http.get<Subscription>(path);
+    }
     addTourToWishlist(tourId: number): Observable<Wishlist>{
         return this.http.post<Wishlist>(environment.apiHost + "wishlist/" + tourId, tourId);
     } 
