@@ -146,66 +146,22 @@ export class TourSearchComponent implements OnInit {
     }
 
     onSearch(page: number): void {
-        /*this.radioButtonSelected = 0
-        if(this.countFilters() == 0){
+        this.radioButtonSelected = 0
         this.searchFilter.page = page;
         this.currentPage = page;
         this.service
             .searchTours(this.searchFilter, this.sortOption)
             .subscribe({
                 next: (result: PagedResults<Tour>) => {
-                    //this.setRecommendedTours()
-                    //this.setActiveTours()
-                    //this.setTours(result.results)
+                    this.tours = result.results;
                     this.totalCount = result.totalCount;
+                    console.log(this.tours);
                     this.setPages();
-                    this.toursBackup = []
-                    for (const obj of this.tours) {
-                        this.toursBackup.push(obj);
-                    }
-                },
-                error: errData => {
-                    console.log(errData);
-                },
-            });    
-        }
-        else{
-        this.searchFilter.page = page;
-        this.currentPage = page;
-        this.service
-            .searchTours(this.searchFilter, this.sortOption)
-            .subscribe({
-                next: (result: PagedResults<Tour>) => {
-                    this.tours = result.results
-                    this.totalCount = result.totalCount;
-                    this.setPages();
-                    this.setActiveTag();
-                    this.setRecommendedTag();
-                    this.toursBackup = []
-                    for (const obj of this.tours) {
-                        this.toursBackup.push(obj);
-                    }
                 },
                 error: errData => {
                     console.log(errData);
                 },
             });
-        }*/
-        this.searchFilter.page = page;
-        this.currentPage = page;
-        this.service.searchTours(this.searchFilter, this.sortOption).subscribe({
-            next: (result: PagedResults<Tour>) => {
-                this.tours = result.results;
-                this.totalCount = result.totalCount;
-                console.log(this.tours);
-                this.setPages();
-                this.setRecommendedTag();
-                this.setActiveTag();
-            },
-            error: errData => {
-                console.log(errData);
-            },
-        });
     }
 
     setTours(result: Tour[]) {
@@ -660,32 +616,18 @@ export class TourSearchComponent implements OnInit {
                 obj.recommended = true;
                 this.tours.push(obj);
             }
-        } else if (this.radioButtonSelected == 2) {
-            /*if(this.countFilters() != 0){
-                //this.tours = this.toursBackup.filter((tour) => tour.active);
-            }
-            else{
-                this.tours = []
-                for (const obj of this.activeTours) {
-                    obj.active = true
-                    this.tours.push(obj);
-                }
-                this.setRecommendedTag()
-            }*/
-            this.tours = [];
-            for (const obj of this.activeTours) {
-                obj.active = true;
-                this.tours.push(obj);
-            }
-        } else {
-            /*this.tours = []
-            for (const obj of this.toursBackup) {
-                this.tours.push(obj);
+        }
+        else if(this.radioButtonSelected == 2){
+            this.tours=[]
+           for (const obj of this.activeTours) {
+            obj.active = true
+            this.tours.push(obj);
             }
         }
-        this.totalCount = this.tours.length*/
+        else{
             this.onSearch(1);
-        }
-        this.totalCount = this.tours.length;
+         }
+    this.totalCount = this.tours.length
     }
+      
 }
