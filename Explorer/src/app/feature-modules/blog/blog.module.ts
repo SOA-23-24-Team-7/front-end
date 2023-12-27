@@ -41,9 +41,7 @@ import { TooltipModule } from "primeng/tooltip";
         QuillModule.forRoot(),
         TooltipModule,
     ],
-    exports:[
-        BlogsComponent
-    ]
+    exports: [BlogsComponent, BlogPreviewComponent],
 })
 export class BlogModule implements OnInit {
     constructor(private service: BlogService) {}

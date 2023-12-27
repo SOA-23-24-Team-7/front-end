@@ -8,7 +8,7 @@ import {
     faDoorOpen,
     faCheck,
     faEnvelope,
-    faEdit,
+    faPen,
     faTrash,
     faHouse,
 } from "@fortawesome/free-solid-svg-icons";
@@ -31,7 +31,7 @@ export class ClubCardComponent {
     faDoorOpen = faDoorOpen;
     faCheck = faCheck;
     faEnvelope = faEnvelope;
-    faEdit = faEdit;
+    faPen = faPen;
     faTrash = faTrash;
     faHouse = faHouse;
 
