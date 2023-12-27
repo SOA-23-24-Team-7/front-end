@@ -90,6 +90,9 @@ export class AddTourFormComponent {
                 : [],
             price: parseInt(this.addTourForm.value.price || "0"),
             category: categ,
+            keyPoints: [],
+            authorId: this.data.userId,
+            status: 0,
         };
         if (!this.isValidForm()) {
             this.notifier.notify("error", "Please enter valid data.");
