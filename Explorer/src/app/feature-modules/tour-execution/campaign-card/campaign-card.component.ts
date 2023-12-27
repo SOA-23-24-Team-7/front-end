@@ -20,15 +20,19 @@ export class CampaignCardComponent implements OnInit {
     @Input() hasActiveTour: boolean;
     @Input() activeTourId: number;
     @Input() isCampaign: boolean;
-    tourImage: string;
+    images: string[];
+    isClicked: boolean = false;
     constructor(
         private router: Router,
         private service: TourExecutionService,
         public dialogRef: MatDialog
     ) {}
     ngOnInit(): void {
-        this.tourImage =
-            environment.imageHost + this.campaign.keyPoints![0].imagePath;
+        this.images = this.campaign.keyPoints!.map(kp =>
+            kp.imagePath.startsWith("http")
+                ? kp.imagePath
+                : environment.imageHost + kp.imagePath,
+        );
         this.CheckIfCampaignIsActive()
     }
     StartCampaign(){

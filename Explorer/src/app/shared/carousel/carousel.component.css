@@ -21,7 +21,7 @@
     border-radius: 0.5em;
 }
 
-.slide:hover {
+.slide-focus:hover {
     transform: scale(1.2);
 }
 
