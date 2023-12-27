@@ -20,6 +20,10 @@
     box-shadow: 0 0 0.5rem rgba(var(--clr-outline-contrast), 0.8);
 }
 
+input[type="file"] {
+    display: none !important;
+}
+
 .column {
     display: flex;
     flex-direction: column;

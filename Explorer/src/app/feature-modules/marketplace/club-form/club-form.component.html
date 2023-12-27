@@ -35,7 +35,7 @@
                     <input formControlName="description" type="text" required />
                     <label>Description</label>
                 </div>
-                <div class="field">
+                <!-- <div class="field">
                     <input
                         id="file-upload"
                         accept="image/*"
@@ -45,7 +45,19 @@
                         (change)="onSelectImage($event)"
                     />
                     <label>Picture</label>
-                </div>
+                </div> -->
+                <label class="custom-file-upload btn">
+                    <fa-icon [icon]="faImage" />
+                    Upload image
+                    <input
+                        id="file-upload"
+                        accept="image/*"
+                        type="file"
+                        [(ngModel)]="imagePath"
+                        class="upload-input"
+                        (change)="onSelectImage($event)"
+                    />
+                </label>
             </div>
             <div class="btn" *ngIf="!shouldEdit" (click)="addClub()">Add</div>
             <div class="btn" *ngIf="shouldEdit" (click)="updateClub()">

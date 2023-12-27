@@ -11,6 +11,7 @@ import { MarketplaceService } from "../marketplace.service";
 import { Club } from "../model/club.model";
 import { FormControl, FormGroup, Validators } from "@angular/forms";
 import { MAT_DIALOG_DATA, MatDialogRef } from "@angular/material/dialog";
+import { faImage } from "@fortawesome/free-solid-svg-icons";
 
 @Component({
     selector: "xp-club-form",
@@ -23,6 +24,7 @@ export class ClubFormComponent implements OnChanges {
     @Input() shouldEdit: boolean = false;
     clubImage: File;
     imagePath: string;
+    faImage = faImage;
 
     constructor(
         private service: MarketplaceService,
