@@ -22,6 +22,10 @@ import {
     faPen,
     faMoneyBills,
     faBarChart,
+    faBookmark,
+    faMap, 
+    faCheckSquare
+
 } from "@fortawesome/free-solid-svg-icons";
 import { TourLimitedView } from "../../feature-modules/marketplace/model/tour-limited-view.model";
 import { Tour } from "../../feature-modules/tour-authoring/model/tour.model";
@@ -55,6 +59,9 @@ export class TourCardViewComponent implements OnChanges {
     faBoxArchive = faBoxArchive;
     faMoneyBills = faMoneyBills;
     faBarChart = faBarChart;
+    faBookmark = faBookmark;
+    faMap = faMap;
+    faCheckSquare = faCheckSquare;
     user: User;
     @Input() hideIcons: boolean = false;
     @Input() tour: Tour;
@@ -69,6 +76,7 @@ export class TourCardViewComponent implements OnChanges {
     shoppingCart: ShoppingCart = {};
     imageHost: string = environment.imageHost;
     images: string[] = [];
+    toursFromWishlist: Tour[] = [];
     @Output() notifyParent: EventEmitter<any> = new EventEmitter<any>();
 
     constructor(
@@ -279,6 +287,44 @@ export class TourCardViewComponent implements OnChanges {
         if (target) {
             target.src =
                 "https://imgs.search.brave.com/udmDGOGRJTYO6lmJ0ADA03YoW4CdO6jPKGzXWvx1XRI/rs:fit:860:0:0/g:ce/aHR0cHM6Ly90My5m/dGNkbi5uZXQvanBn/LzAyLzY4LzU1LzYw/LzM2MF9GXzI2ODU1/NjAxMl9jMVdCYUtG/TjVyalJ4UjJleVYz/M3puSzRxblllS1pq/bS5qcGc";
-        }
+        } 
     }
+
+  onAddToWishlistClicked(tourId: number){ 
+    this.marketplaceService.getToursFromWishlist().subscribe({
+        next: (result: Tour[]) => {
+            this.toursFromWishlist = result;
+
+            let alreadyAdded = false;
+            for(let tour of this.toursFromWishlist){
+                if(tour.id === tourId){
+                    alreadyAdded = true;
+                }
+            }
+
+            if(!alreadyAdded){
+                this.marketplaceService.addTourToWishlist(tourId).subscribe({
+                    next: () => {
+                        this.notifier.notify("success", "Added to wishlist.");
+                    },
+                    error: err => {
+                        this.notifier.notify(
+                            "error",
+                            "Failed to add tour to wishlist. " + xpError.getErrorMessage(err),
+                        );
+                    },
+                });
+            }
+            else{
+                this.notifier.notify(
+                    "error",
+                    "Selected tour is already in your wishlist. "
+                );
+            }
+        },
+        error: (err: any) => {
+            console.log(err);
+        },
+    });
+  } 
 }

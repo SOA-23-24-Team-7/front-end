@@ -28,6 +28,7 @@ import { CouponApplication } from "./model/coupon-applicaton.model";
 import { Bundle } from "../tour-authoring/model/bundle.model";
 import { BundleOrderItem } from "./model/bundle-order-item.model";
 import { SortOption } from "./model/sort-option.model";
+import { Wishlist } from "./model/wishlist.model";
 
 @Injectable({
     providedIn: "root",
@@ -337,6 +338,7 @@ export class MarketplaceService {
             environment.apiHost + "market-place/tours/inCart/" + id,
         );
     }
+    
     getOrderItem(tourId: number, touristId: number): Observable<any> {
         return this.http.get<any>(
             environment.apiHost +
@@ -527,14 +529,17 @@ export class MarketplaceService {
     addCoupon(coupon: Coupon): Observable<Coupon> {
         return this.http.post<Coupon>(environment.apiHost + "coupon/", coupon);
     }
+
     getCouponsById(authorId: number): Observable<PagedResults<Coupon>> {
         return this.http.get<PagedResults<Coupon>>(
             environment.apiHost + "coupon/" + authorId,
         );
     }
+
     deleteCoupon(id: number): Observable<Coupon> {
         return this.http.delete<Coupon>(environment.apiHost + "coupon/" + id);
     }
+
     updateCoupon(coupon: Coupon): Observable<Coupon> {
         return this.http.put<Coupon>(
             environment.apiHost + "coupon/" + coupon.id,
@@ -574,14 +579,30 @@ export class MarketplaceService {
         let path = environment.apiHost + "token/bundle/" + bundleId;
         return this.http.post<any>(path, {});
     }
+
+    addTourToWishlist(tourId: number): Observable<Wishlist>{
+        return this.http.post<Wishlist>(environment.apiHost + "wishlist/" + tourId, tourId);
+    } 
+
+    getToursFromWishlist(): Observable<Tour[]> {
+        return this.http.get<Tour[]>(
+            environment.apiHost + "wishlist/tourist"
+        ); 
+    }
+
+    removeTourFromWishList(tourId: number): Observable<Wishlist> {
+       return this.http.delete<Wishlist>(environment.apiHost + "wishlist/" + tourId); 
+    }
+
     getActiveTours(): Observable<PagedResults<Tour>> {
         return this.http.get<PagedResults<Tour>>(
             environment.apiHost + "tourist/tourrecommenders/activetours",
         );
     }
+
     getRecommendedTours(): Observable<PagedResults<Tour>> {
         return this.http.get<PagedResults<Tour>>(
             environment.apiHost + "tourist/tourrecommenders/recommendedtours",
-        );
+        ); 
     }
 }
