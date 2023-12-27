@@ -21,8 +21,7 @@ import {
     faBoxArchive,
     faPen,
     faMoneyBills,
-    faBarChart
-
+    faBarChart,
 } from "@fortawesome/free-solid-svg-icons";
 import { TourLimitedView } from "../../feature-modules/marketplace/model/tour-limited-view.model";
 import { Tour } from "../../feature-modules/tour-authoring/model/tour.model";
@@ -35,6 +34,7 @@ import { KeyPoint } from "../../feature-modules/tour-authoring/model/key-point.m
 import { MatDialog } from "@angular/material/dialog";
 import { EditTourFormComponent } from "src/app/feature-modules/tour-authoring/edit-tour-form/edit-tour-form.component";
 import { CouponsComponent } from "src/app/feature-modules/marketplace/coupons/coupons.component";
+import { PagedResults } from "../model/paged-results.model";
 import { NotifierService } from "angular-notifier";
 import { xpError } from "../model/error.model";
 
@@ -105,6 +105,16 @@ export class TourCardViewComponent implements OnChanges {
                 this.getShoppingCart();
             }
         });
+
+        this.marketplaceService.cart$.subscribe(cart => {
+            this.marketplaceService.getToursInCart(this.user.id).subscribe({
+                next: (result: PagedResults<TourLimitedView>) => {
+                    this.addedTours = result.results;
+                    this.getShoppingCart(); // update the price
+                    this.getDiscount();
+                },
+            });
+        });
     }
 
     getDiscount() {
@@ -131,10 +141,9 @@ export class TourCardViewComponent implements OnChanges {
     }
 
     getShoppingCart(): void {
-        this.marketplaceService.getShoppingCart(this.user.id).subscribe({
+        this.marketplaceService.cart$.subscribe({
             next: (result: ShoppingCart) => {
                 this.shoppingCart = result;
-                console.log(result);
                 this.getTokens();
                 if (result == null) {
                     this.shoppingCart = {};
@@ -178,7 +187,6 @@ export class TourCardViewComponent implements OnChanges {
             price: price,
             shoppingCartId: this.shoppingCart.id,
         };
-        console.log(orderItem);
         if (this.addedTours.find(tr => tr.id == tourId)) {
             alert("You have already added this item to the cart.");
             return;
@@ -192,6 +200,9 @@ export class TourCardViewComponent implements OnChanges {
                 this.marketplaceService.getToursInCart(this.user.id).subscribe({
                     next: result => {
                         this.addedTours = result.results;
+                        this.marketplaceService
+                            .getShoppingCart(this.user.id)
+                            .subscribe();
                         alert("Item successfully added to cart!");
                     },
                 });
@@ -246,27 +257,24 @@ export class TourCardViewComponent implements OnChanges {
         });
     }
 
-  onEditClicked(): void {
-    //this.shouldEdit = false;
-    //this.shouldRenderTourForm = true;
-    this.dialogRef.open(EditTourFormComponent, {
-      data: this.tour,
-      
-    });
-  }
-  
-  onCouponClicked(tour: Tour): void{
-    this.dialogRef.open(CouponsComponent, {
-      data: tour,
-      
-    });
-  }
-
-  onImageError(event: Event) {
-    const target = event.target as HTMLImageElement;
-    if (target) {
-      target.src = "https://imgs.search.brave.com/udmDGOGRJTYO6lmJ0ADA03YoW4CdO6jPKGzXWvx1XRI/rs:fit:860:0:0/g:ce/aHR0cHM6Ly90My5m/dGNkbi5uZXQvanBn/LzAyLzY4LzU1LzYw/LzM2MF9GXzI2ODU1/NjAxMl9jMVdCYUtG/TjVyalJ4UjJleVYz/M3puSzRxblllS1pq/bS5qcGc";
+    onEditClicked(): void {
+        //this.shouldEdit = false;
+        //this.shouldRenderTourForm = true;
+        this.dialogRef.open(EditTourFormComponent, {
+            data: this.tour,
+        });
     }
-}
+    onCouponClicked(tour: Tour): void {
+        this.dialogRef.open(CouponsComponent, {
+            data: tour,
+        });
+    }
 
+    onImageError(event: Event) {
+        const target = event.target as HTMLImageElement;
+        if (target) {
+            target.src =
+                "https://imgs.search.brave.com/udmDGOGRJTYO6lmJ0ADA03YoW4CdO6jPKGzXWvx1XRI/rs:fit:860:0:0/g:ce/aHR0cHM6Ly90My5m/dGNkbi5uZXQvanBn/LzAyLzY4LzU1LzYw/LzM2MF9GXzI2ODU1/NjAxMl9jMVdCYUtG/TjVyalJ4UjJleVYz/M3puSzRxblllS1pq/bS5qcGc";
+        }
+    }
 }

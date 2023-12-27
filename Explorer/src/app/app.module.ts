@@ -19,10 +19,7 @@ import { BlogModule } from "./feature-modules/blog/blog.module";
 import { MatSnackBarModule } from "@angular/material/snack-bar";
 import { FontAwesomeModule } from "@fortawesome/angular-fontawesome";
 import { NgxGoogleAnalyticsModule } from "ngx-google-analytics";
-import { MessageDialogComponent } from "./feature-modules/stakeholder/message-dialog/message-dialog/message-dialog.component";
-import { UserProfileComponent } from "./feature-modules/stakeholder/user-profile/user-profile.component";
 import { StakeholderModule } from "./feature-modules/stakeholder/stakeholder.module";
-import { SharedModule } from "./shared/shared.module";
 import { MatCardModule } from "@angular/material/card";
 import { EncounterModule } from "./feature-modules/encounter/encounter.module";
 import { NotifierModule, NotifierOptions } from "angular-notifier";
@@ -98,6 +95,7 @@ const notifierConfig: NotifierOptions = {
         MatCardModule,
         EncounterModule,
         NotifierModule.withConfig(notifierConfig),
+        MarketplaceModule,
         QuillModule,
         StarRatingModule.forRoot(),
         TooltipModule,
