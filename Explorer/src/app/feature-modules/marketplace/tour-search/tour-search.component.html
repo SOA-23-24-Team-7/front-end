@@ -281,15 +281,15 @@
                     </div>
                     <fa-icon
                         class="tour-seach-filter-section-title-arrow"
-                        [class.spin-arrow]="!dropped['priceDropped']"
+                        [class.spin-arrow]="!dropped['discountDropped']"
                         [icon]="faChevronDown"
-                        (click)="toggle('priceDropped')"
+                        (click)="toggle('discountDropped')"
                     />
                 </div>
                 <div
                     class="tour-seach-filter-section-body"
                     [class.tour-seach-filter-section-body-dropped]="
-                        dropped['priceDropped']
+                        dropped['discountDropped']
                     "
                 >
                     <div class="tour-search-labels">
