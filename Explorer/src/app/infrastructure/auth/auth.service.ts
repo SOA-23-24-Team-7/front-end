@@ -1,6 +1,6 @@
 import { Injectable } from "@angular/core";
 import { BehaviorSubject, Observable, tap } from "rxjs";
-import { HttpClient } from "@angular/common/http";
+import { HttpClient, HttpHeaders } from "@angular/common/http";
 import { Router } from "@angular/router";
 import { TokenStorage } from "./jwt/token.service";
 import { environment } from "src/env/environment";
@@ -11,6 +11,9 @@ import { User } from "./model/user.model";
 import { Registration } from "./model/registration.model";
 import { LocationCoords } from "src/app/shared/model/location-coords.model";
 import { TouristProgress } from "./model/tourist-progress.model";
+import { MarketplaceService } from "src/app/feature-modules/marketplace/marketplace.service";
+import { ResetPassword } from "./model/reset-password.model";
+import { RegistrationResponse } from "./model/registration-response.model";
 
 @Injectable({
     providedIn: "root",
@@ -31,6 +34,7 @@ export class AuthService {
         private http: HttpClient,
         private tokenStorage: TokenStorage,
         private router: Router,
+        private marketPlaceService: MarketplaceService,
     ) {}
 
     login(login: Login): Observable<AuthenticationResponse> {
@@ -49,20 +53,19 @@ export class AuthService {
             );
     }
 
-    register(registration: Registration): Observable<AuthenticationResponse> {
-        return this.http
-            .post<AuthenticationResponse>(
-                environment.apiHost + "users",
-                registration,
-            )
-            .pipe(
+    register(registration: Registration): Observable<RegistrationResponse> {
+        return this.http.post<RegistrationResponse>(
+            environment.apiHost + "users",
+            registration,
+        );
+        /*.pipe(
                 tap(authenticationResponse => {
                     this.tokenStorage.saveAccessToken(
-                        authenticationResponse.accessToken,
+                        authenticationResponse.registrationConfirmationToken,
                     );
                     this.setUser();
                 }),
-            );
+            );*/
     }
 
     logout(): void {
@@ -72,6 +75,7 @@ export class AuthService {
         this.userLocation$.next({ latitude: 45.2, longitude: 19.8 });
         localStorage.setItem("userLat", "45.2");
         localStorage.setItem("userLong", "19.8");
+        this.marketPlaceService.cart$.next({ id: 0 });
     }
 
     checkIfUserExists(): void {
@@ -108,6 +112,7 @@ export class AuthService {
                     },
                     error: () => {},
                 });
+            this.marketPlaceService.getShoppingCart(user.id).subscribe();
         }
     }
 
@@ -149,5 +154,35 @@ export class AuthService {
                     error: () => {},
                 });
         }
+    }
+    getPosition() {
+        return {
+            longitude: this.userLocation$.value.longitude,
+            latitude: this.userLocation$.value.latitude,
+        };
+    }
+    generateResetPasswordToken(email: string): Observable<any> {
+        // TODO: generate reset password token
+        // throw new Error('Method not implemented.');
+        const body = {
+            email: email,
+        };
+        const path = environment.apiHost + "users/reset-password";
+        return this.http.post<any>(path, body);
+    }
+
+    checkResetPasswordToken(): Observable<any> {
+        // TODO: check if token is valid
+        throw new Error("Method not implemented.");
+    }
+
+    resetPassword(token: string, password: string): Observable<any> {
+        // TODO: reset password
+        const body: ResetPassword = {
+            newPassword: password,
+            token: token,
+        };
+        const path = environment.apiHost + "users/reset-password/new";
+        return this.http.patch<any>(path, body);
     }
 }

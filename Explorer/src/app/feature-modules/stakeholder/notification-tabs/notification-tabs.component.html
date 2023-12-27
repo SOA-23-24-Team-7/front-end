@@ -51,7 +51,27 @@
             }"
             (click)="setActiveTab(Tab.TRANSACTIONRECORDSNOTIFICATIONS, tabList)"
         >
-            <fa-icon [icon]="faMoneyBill" [spin]="true"/> Transaction notifications
+            <fa-icon [icon]="faMoneyBill"/> Transaction notifications
+        </div>
+        <div
+            class="tab"
+            *ngIf="user.role === 'tourist'"
+            [ngClass]="{
+                'selected-tab': selectedTab === Tab.PAYMENTSHISTORY
+            }"
+            (click)="setActiveTab(Tab.PAYMENTSHISTORY, tabList)"
+        >
+            <fa-icon [icon]="faCoins"/> Payments history
+        </div>
+        <div
+            class="tab"
+            *ngIf="user.role === 'tourist'"
+            [ngClass]="{
+                'selected-tab': selectedTab === Tab.WISHLISTNOTIFICATION
+            }"
+            (click)="setActiveTab(Tab.WISHLISTNOTIFICATION, tabList)"
+        >
+            <fa-icon [icon]="faPercentage" />Wishlist notifications
         </div>
     </div>
     <div class="tab-content">
@@ -66,5 +86,11 @@
         <xp-transaction-records-notifications
             *ngIf="selectedTab === Tab.TRANSACTIONRECORDSNOTIFICATIONS"
         />
+        <xp-payment-history
+            *ngIf="selectedTab === Tab.PAYMENTSHISTORY"
+        />
+        <xp-wishlist-notifications 
+        *ngIf="selectedTab === Tab.WISHLISTNOTIFICATION"
+        ></xp-wishlist-notifications>
     </div>
 </div>

@@ -16,6 +16,7 @@ import { CampaignCardComponent } from './campaign-card/campaign-card.component';
 import { SecretPopupComponent } from './secret-popup/secret-popup.component';
 import { CampaignEquipmentComponent } from './campaign-equipment/campaign-equipment.component';
 import { TourWheatherComponent } from './tour-wheather/tour-wheather.component';
+import { TourCompletedPopupComponent } from './tour-completed-popup/tour-completed-popup.component';
 
 @NgModule({
     declarations: [
@@ -31,6 +32,7 @@ import { TourWheatherComponent } from './tour-wheather/tour-wheather.component';
         SecretPopupComponent,
         CampaignEquipmentComponent,
         TourWheatherComponent,
+        TourCompletedPopupComponent,
     ],
     imports: [
         CommonModule,

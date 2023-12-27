@@ -1,0 +1,139 @@
+.tabs {
+    display: flex;
+    justify-content: space-between;
+    background-color: #f0f0f0;
+    padding: 10px;
+    border: 5px;
+    border-color: gray;
+}
+.svi {
+    display: inline;
+}
+.tab-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 5px solid rgb(89, 150, 219);
+    border-radius: 70%;
+    color: rgb(157, 157, 224);
+}
+.tab-content {
+    display: flex;
+    justify-content: center; /* Horizontalno centriranje */
+    align-items: center; /* Vertikalno centriranje */
+    flex-wrap: wrap; /* Da biste omogućili prelazak na novi red ako je potrebno */
+    gap: 10px; /* Razmak između encountera */
+    margin-top: 40px; /* Dodajte razmak iznad celog sadržaja */
+    margin-bottom: 80px; /* Dodajte razmak ispod celog sadržaja */
+}
+
+.tab {
+    cursor: pointer;
+    padding: 8px;
+    border: 1px solid #7270db;
+    border-radius: 70%;
+    margin-right: auto;
+}
+
+.tab:hover {
+    background-color: #ddd;
+}
+
+.tab-selected {
+    background-color: #ccc;
+}
+
+.encounter-list {
+    display: flex;
+    overflow-x: auto;
+}
+
+.encounter-item {
+    margin-right: 10px;
+}
+.encounter-content {
+    width: 350px;
+    height: 130px;
+    border: 5px solid rgb(199, 136, 136);
+    border-radius: 5px;
+    padding: 10px;
+    transition: background-color 0.3s ease;
+    box-sizing: border-box;
+    text-align: center;
+    justify-content: center;
+}
+
+.encounter-content:hover {
+    background-color: #f0f0f0;
+}
+
+.hidden {
+    background-color: #ffd700;
+}
+
+.social {
+    background-color: #87ceeb;
+}
+
+.misc {
+    background-color: #90ee90;
+}
+
+.key-point {
+    background-color: #ffa07a;
+}
+
+.tour-search {
+    display: flex;
+    flex-direction: row-reverse;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px;
+    background-color: #f0f0f0;
+}
+
+.search-input {
+    margin-right: 10px;
+}
+
+.search-input label {
+    margin-right: 5px;
+}
+
+.search-button {
+    cursor: pointer;
+    background-color: #4caf50;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    transition: background-color 0.3s ease;
+}
+
+.search-button:hover {
+    background-color: #45a049;
+}
+
+.search-button-text {
+    text-align: center;
+}
+
+.search-input select {
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+.search-input button {
+    cursor: pointer;
+    background-color: #4caf50;
+    color: white;
+    border: none;
+    padding: 8px 15px;
+    border-radius: 5px;
+    transition: background-color 0.3s ease;
+}
+
+.search-input button:hover {
+    background-color: #45a049;
+}

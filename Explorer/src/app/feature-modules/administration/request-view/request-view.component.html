@@ -1,7 +1,22 @@
-<div class="container">
-    <div class="column">
-        <h2>Public keypoint requests</h2>
-        <div class="cards-list">
+<div class="wrapper">
+    <div class="tab-list" #tabList>
+        <div
+            class="tab"
+            [ngClass]="{ 'selected-tab': selectedTab === Tab.KEYPOINTS }"
+            (click)="setActiveTab(Tab.KEYPOINTS, tabList)"
+        >
+            <fa-icon [icon]="faMapMarker" /> Public keypoints requests
+        </div>
+        <div
+            class="tab"
+            [ngClass]="{ 'selected-tab': selectedTab === Tab.FACILITIES }"
+            (click)="setActiveTab(Tab.FACILITIES, tabList)"
+        >
+            <fa-icon [icon]="faBuilding" /> Public facilities requests
+        </div>
+    </div>
+    <div class="tab-content">
+        <div *ngIf="selectedTab === Tab.KEYPOINTS">
             <div
                 *ngFor="let request of requests"
                 class="cards-buttons-container"
@@ -9,26 +24,25 @@
                 <xp-request-key-point-card
                     [request]="request"
                 ></xp-request-key-point-card>
-                <div class="buttons-container">
+                <div class="accept">
                     <fa-icon
                         class="fa-accept"
-                        [icon]="faCheck"
+                        [icon]="faSquareCheck"
                         *ngIf="request.status == 0"
                         (click)="acceptPublicKeyPointRequest(request)"
                     ></fa-icon>
+                    </div>
+                    <div class="reject">
                     <fa-icon
                         class="fa-reject"
-                        [icon]="faTimes"
+                        [icon]="faSquareXmark"
                         *ngIf="request.status == 0"
                         (click)="rejectPublicKeyPointRequest(request)"
                     ></fa-icon>
-                </div>
+                    </div>
             </div>
         </div>
-    </div>
-    <div class="column">
-        <h2>Public facility requests</h2>
-        <div class="cards-list">
+        <div *ngIf="selectedTab === Tab.FACILITIES">
             <div
                 *ngFor="let request of facilityRequests"
                 class="cards-buttons-container"
@@ -36,16 +50,18 @@
                 <xp-request-facility-card
                     [request]="request"
                 ></xp-request-facility-card>
-                <div class="buttons-container">
+                <div class="accept">
                     <fa-icon
                         class="fa-accept"
-                        [icon]="faCheck"
+                        [icon]="faSquareCheck"
                         *ngIf="request.status == 0"
                         (click)="acceptPublicFacilityRequest(request)"
                     ></fa-icon>
+                    </div>
+                    <div class="reject">
                     <fa-icon
                         class="fa-reject"
-                        [icon]="faTimes"
+                        [icon]="faSquareXmark"
                         *ngIf="request.status == 0"
                         (click)="rejectPublicFacilityRequest(request)"
                     ></fa-icon>

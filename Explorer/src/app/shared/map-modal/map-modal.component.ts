@@ -5,10 +5,19 @@ import {
     Output,
     ViewChild,
 } from "@angular/core";
-import { MAT_DIALOG_DATA, MatDialog } from "@angular/material/dialog";
+import {
+    MAT_DIALOG_DATA,
+    MatDialog,
+    MatDialogRef,
+} from "@angular/material/dialog";
 import { LocationCoords } from "../model/location-coords.model";
 import { Equipment } from "src/app/feature-modules/administration/model/equipment.model";
 import { MapComponent } from "../map/map.component";
+
+interface MapModalData {
+    closeOnClick: boolean;
+    encounterCoords: LocationCoords;
+}
 
 @Component({
     selector: "xp-map-modal",
@@ -17,12 +26,15 @@ import { MapComponent } from "../map/map.component";
 })
 export class MapModalComponent {
     @Output() positionChanged = new EventEmitter<LocationCoords>();
+    closeOnClick: boolean = false;
 
     constructor(
         public dialog: MatDialog,
-        @Inject(MAT_DIALOG_DATA)
-        public data: { encounterCoords: any },
-    ) {}
+        private dialogRef: MatDialogRef<MapModalComponent>,
+        @Inject(MAT_DIALOG_DATA) public data: MapModalData,
+    ) {
+        this.closeOnClick = data.closeOnClick;
+    }
 
     @ViewChild(MapComponent, { static: false }) mapComponent: MapComponent;
 
@@ -40,5 +52,10 @@ export class MapModalComponent {
             longitude: longLat[0],
             latitude: longLat[1],
         });
+        if (this.closeOnClick) {
+            setTimeout(() => {
+                this.dialogRef.close();
+            }, 300);
+        }
     }
 }

@@ -39,6 +39,23 @@ export class EncounterService {
         );
     }
 
+    getAllEncounters(
+        currentUserId: number,
+        page: number,
+        pageSize: number,
+    ): Observable<PagedResults<Encounter>> {
+        const params = {
+            currentUserId: currentUserId.toString(),
+            page: page.toString(),
+            pageSize: pageSize.toString(),
+        };
+
+        return this.http.get<PagedResults<Encounter>>(
+            environment.apiHost + "tourist/encounter/done-encounters",
+            { params: params },
+        );
+    }
+
     getEncounterInstance(encounterId: number): Observable<EncounterInstance> {
         return this.http.get<EncounterInstance>(
             environment.apiHost + `tourist/encounter/${encounterId}/instance`,

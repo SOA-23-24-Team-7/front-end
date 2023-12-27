@@ -1,19 +1,18 @@
+:host {
+    border-radius: 1rem !important;
+}
+
 * {
     margin: 0;
     padding: 0;
 }
 .modal {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100vw;
-    height: 100vh;
-    z-index: 9999;
     display: flex;
     align-items: center;
     justify-content: center;
     background-color: rgba(0, 0, 0, 0.7);
-    animation: fadeIn 0.5s ease-in-out;
+    pointer-events: none;
+    border-radius: 1rem;
 }
 
 .public-key-points {
@@ -24,6 +23,8 @@
     padding-block: 1.5rem;
     background-color: rgba(var(--clr-background, 1));
     border-radius: 1rem;
+    pointer-events: all;
+    max-width: 80rem;
 }
 
 .modal-head {
@@ -54,25 +55,20 @@
     font-weight: 600;
     font-size: 2rem;
 }
-.cards {
+.keypoints {
+    width: 100%;
+    min-height: 22rem;
+    /* outline: 2px solid purple; */
     display: flex;
-    flex-direction: row;
-    justify-content: center;
     align-items: center;
+    padding-inline: 1rem;
 }
 
-.modal-plus {
-    color: rgba(var(--clr-primary-500), 1);
-    cursor: pointer;
-    font-size: 2rem;
-    transition: color 0.15s;
-}
-
-.public-key-point-cards-container {
+.key-point-cards-container {
     display: flex;
     flex-direction: row;
     align-items: center;
-    width: 70rem;
+    width: 100%;
     overflow-x: hidden;
     scroll-behavior: smooth;
 }
@@ -91,7 +87,6 @@
     align-items: center;
     justify-content: center;
     cursor: pointer;
-    margin: 1.5rem;
 }
 
 .triangle-left,
@@ -112,20 +107,12 @@
     border-color: transparent transparent transparent
         rgba(var(--clr-primary-500), 1);
 }
+
 .cards-buttons-container {
     display: flex;
     align-items: center;
 }
-.buttons-container {
-    display: flex;
-    flex-direction: column;
-}
 
-@keyframes fadeIn {
-    from {
-        opacity: 0;
-    }
-    to {
-        opacity: 1;
-    }
+#next-button {
+    margin-left: auto;
 }

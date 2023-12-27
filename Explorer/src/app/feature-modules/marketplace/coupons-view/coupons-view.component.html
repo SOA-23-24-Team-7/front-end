@@ -1,49 +1,57 @@
-<div class="problems">
-    <div
-        class="card card-hover"
-        *ngFor="let coupon of coupons"
-        #problemCard
-    >
+<div class="main-design">
+    <div class="header">
+        <div class="header-title">Coupons</div>
+        <div class="header-paragraph">
+            Welcome to your coupon hub, where your creations take center stage!
+            Here, you'll find all the coupons you've crafted, designed to enrich
+            the travel experience. Whether it's adventurous expeditions,
+            cultural tours, or relaxing getaways, your coupons are here to
+            inspire travelers for unforgettable experiences. Some of these
+            coupons are labeled to apply across all the tours you offer,
+            providing travelers with a wide array of possibilities and perks.
+            Seize the opportunity to fuel wanderlust with your special offers,
+            allowing travelers to explore new worlds with your authored coupons.
+        </div>
+    </div>
+    <div class="problems">
+        <div
+            class="card card-hover"
+            *ngFor="let coupon of coupons"
+            #problemCard
+        >
+            <div class="coupon">
+                <div class="coupon-header">
+                    <h2>Tour: {{ coupon.tourName }}</h2>
+                    <div class="coupon-info">
+                        <span class="discount">{{ coupon.discount }}% OFF</span>
+                        <div class="all" [hidden]="!coupon.allFromAuthor">
+                            Valid across all tours
+                        </div>
+                    </div>
+                </div>
+                <div class="coupon-details">
+                    <p>
+                        Code: <span>{{ coupon.code }}</span>
+                    </p>
+                    <p>
+                        Expiration Date:
+                        <span>{{
+                            coupon.expirationDate | date : "MMM d, y"
+                        }}</span>
+                    </p>
 
-        <div class="data">
-            <div class="problem-data">
-                <div class="report-data">
-                    <div class="label">Expiration date:</div>
-                    <div>
-                        {{ coupon.expirationDate| date: "dd / MM / yyyy" }}
+                    <div class="icons">
+                        <fa-icon
+                            class="fa-icon-edit"
+                            [icon]="faPen"
+                            (click)="onEdit(coupon)"
+                        />
+                        <fa-icon
+                            class="fa-icon-delete"
+                            [icon]="faTrash"
+                            (click)="Delete(coupon)"
+                        />
                     </div>
-                </div>
-                <div class="report-data">
-                    <div class="label">Tour:</div>
-                    <div>{{ coupon.tourId }}</div>
-                </div>
-            </div>
-            <div class="problem-description">
-                <div class="row">
-                    <div class="column">
-                        <div class="placeholder">
-                            <div class="label">Discount:</div>
-                            <div>{{ coupon.discount }}%</div>
-                        </div>
-                    </div>
-                    <div class="column">
-                        <div class="placeholder">
-                            <div class="label">Code:</div>
-                            <div>{{ coupon.code }}</div>
-                        </div>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="column">
-                        <div class="placeholder">
-                            <div class="label">For all tours:</div>
-                            <div class="description">
-                                <div>{{ coupon.allFromAuthor }}</div>
-                            </div>
-                        </div>
-                    </div>
-                    <fa-icon class="tour-action" [icon]="faPen" (click)="onEdit(coupon)"/>
-                    <fa-icon class="tour-action" [icon]="faTrash" (click)="Delete(coupon)"/>
                 </div>
             </div>
         </div>

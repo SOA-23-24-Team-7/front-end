@@ -25,10 +25,20 @@
             *ngIf="user.id == comment.authorId && blog.status != 2"
             class="comment-control"
         >
-            <button mat-icon-button (click)="toggleEditMode()">
+            <button
+                mat-icon-button
+                (click)="toggleEditMode()"
+                tooltipPosition="bottom"
+                pTooltip="Edit"
+            >
                 <mat-icon class="edit-icon">edit</mat-icon>
             </button>
-            <button mat-icon-button (click)="onDeleteComment()">
+            <button
+                mat-icon-button
+                (click)="onDeleteComment()"
+                tooltipPosition="bottom"
+                pTooltip="Delete"
+            >
                 <mat-icon class="delete-icon">delete</mat-icon>
             </button>
         </div>

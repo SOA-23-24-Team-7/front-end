@@ -19,7 +19,9 @@
                 <div class="notification-row">
                     <div *ngIf="notification.isAccepted">Approved by</div>
                     <div *ngIf="!notification.isAccepted">Declined by</div>
-                    <div class="sender">@{{ notification.senderName }}</div>
+                    <div class="sender">
+                        {{ "@" + notification.senderName }}
+                    </div>
                     <div>at</div>
                     <div
                         [class.acceptedDate]="notification.isAccepted"

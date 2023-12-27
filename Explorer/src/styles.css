@@ -41,6 +41,8 @@
 
     --fnt-header: "Playfair Display", serif;
 
+    --star-background: rgb(var(--clr-primary-300));
+
     font-family: var(--fnt-body);
     background-color: rgb(var(--clr-background));
     color: var(--clr-text);
@@ -234,4 +236,57 @@ textarea:focus {
         transition-duration: 0.01ms !important;
         scroll-behavior: auto !important;
     }
+}
+
+@import "~css-star-rating/css/star-rating.min.css";
+
+::-webkit-scrollbar {
+    width: 0.5em;
+    background-color: rgba(var(--clr-background));
+}
+
+::-webkit-scrollbar-thumb {
+    background-color: rgba(var(--clr-background));
+    border: 1px solid rgba(0, 0, 0, 0.5);
+    border-radius: 0.3rem;
+}
+
+.p-tooltip .p-tooltip-text {
+    font-family: var(--fnt-body);
+    font-size: 0.8rem;
+    padding: 0.3rem;
+    background-color: rgba(var(--clr-outline-contrast));
+    color: rgba(var(--clr-background));
+}
+
+.p-tooltip.p-tooltip-left .p-tooltip-arrow {
+    border-bottom-color: transparent;
+    border-left-color: rgba(var(--clr-outline-contrast));
+    border-top-color: transparent;
+    background-color: transparent;
+    transform: translate(0, -50%);
+}
+
+.p-tooltip.p-tooltip-right .p-tooltip-arrow {
+    border-bottom-color: transparent;
+    border-right-color: rgba(var(--clr-outline-contrast));
+    border-top-color: transparent;
+    background-color: transparent;
+    transform: translate(0, -50%);
+}
+
+.p-tooltip.p-tooltip-top .p-tooltip-arrow {
+    border-left-color: transparent;
+    border-top-color: rgba(var(--clr-outline-contrast));
+    border-right-color: transparent;
+    background-color: transparent;
+    transform: translate(-50%, 0);
+}
+
+.p-tooltip.p-tooltip-bottom .p-tooltip-arrow {
+    border-left-color: transparent;
+    border-bottom-color: rgba(var(--clr-outline-contrast));
+    border-right-color: transparent;
+    background-color: transparent;
+    transform: translate(-50%, 0);
 }

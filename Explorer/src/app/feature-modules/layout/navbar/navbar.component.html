@@ -1,4 +1,8 @@
-<div class="navbar" [ngClass]="{ 'navbar-not-home': isHome === false }">
+<div
+    class="navbar"
+    [ngClass]="{ 'navbar-not-home': isHome === false }"
+    id="nav"
+>
     <link
         href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600;700;800;900&family=Inter:wght@400;500;700&family=Montserrat:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Roboto:wght@400;500;700&display=swap"
         rel="stylesheet"
@@ -127,7 +131,14 @@
             </div>
 
             <!-- Encounters MENU -->
-            <div class="navbar-menu-item" *ngIf="user && user.username !== ''">
+            <div
+                class="navbar-menu-item"
+                *ngIf="
+                    user &&
+                    user.username !== '' &&
+                    user.role !== 'administrator'
+                "
+            >
                 <div class="navbar-menu-item-content">
                     <fa-icon
                         class="navbar-menu-item-content-icon"
@@ -293,7 +304,9 @@
                             class="navbar-submenu-item-icon"
                             [icon]="faBoxOpen"
                         />
-                        <div class="navbar-submenu-item-text">My Tour Bundles</div>
+                        <div class="navbar-submenu-item-text">
+                            My Tour Bundles
+                        </div>
                     </div>
                     <div
                         class="navbar-submenu-item"
@@ -332,20 +345,6 @@
                         />
                         <div class="navbar-submenu-item-text">
                             Manage facilities
-                        </div>
-                    </div>
-
-                    <div
-                        class="navbar-submenu-item"
-                        [routerLink]="['published-tours']"
-                        *ngIf="user && user.role === 'tourist'"
-                    >
-                        <fa-icon
-                            class="navbar-submenu-item-icon"
-                            [icon]="faShoppingCart"
-                        />
-                        <div class="navbar-submenu-item-text">
-                            Start shopping
                         </div>
                     </div>
 
@@ -411,6 +410,18 @@
                             [icon]="faMoneyBills"
                         />
                         <div class="navbar-submenu-item-text">Coupons</div>
+                    </div>
+
+                    <div
+                        class="navbar-submenu-item"
+                        [routerLink]="['tour-statistics']"
+                        *ngIf="user && user.role === 'author'"
+                    >
+                        <fa-icon
+                            class="navbar-submenu-item-icon"
+                            [icon]="faBarChart"
+                        />
+                        <div class="navbar-submenu-item-text">Statistics</div>
                     </div>
                 </div>
                 <div
@@ -592,6 +603,21 @@
                             Tour preference
                         </div>
                     </div>
+
+                    <div
+                        class="navbar-submenu-item"
+                        [routerLink]="['done-encounter']"
+                        *ngIf="user && user.role === 'tourist'"
+                    >
+                        <fa-icon
+                            class="navbar-submenu-item-icon"
+                            [icon]="faMountainCity"
+                        />
+                        <div class="navbar-submenu-item-text">
+                            Done encouter
+                        </div>
+                    </div>
+
                     <div
                         class="navbar-submenu-item"
                         [routerLink]="['tourist-equipment-selection']"
@@ -605,7 +631,7 @@
                     </div>
                     <div
                         class="navbar-submenu-item"
-                        [routerLink]="['rating-form']"
+                        (click)="onRateApp()"
                         *ngIf="
                             user &&
                             (user.role === 'tourist' || user.role === 'author')
@@ -632,16 +658,15 @@
                     </div>
                     <div
                         class="navbar-submenu-item"
-                        [routerLink]="['payment-history']"
-                        *ngIf="user && user.role == 'tourist'"
+                        (click)="showCart()"
+                        *ngIf="user && user.role === 'tourist'"
+                        id="cart"
                     >
                         <fa-icon
                             class="navbar-submenu-item-icon"
-                            [icon]="faCoins"
+                            [icon]="faShoppingCart"
                         />
-                        <div class="navbar-submenu-item-text">
-                            Payments history
-                        </div>
+                        <div class="navbar-submenu-item-text">Cart</div>
                     </div>
                     <div
                         class="navbar-submenu-item"
@@ -653,6 +678,19 @@
                             [icon]="faUser"
                         />
                         <div class="navbar-submenu-item-text">My requests</div>
+                    </div>
+                    <div
+                        class="navbar-submenu-item"
+                        [routerLink]="['wishlist']"
+                        *ngIf="user && user.role === 'tourist'"
+                    >
+                        <fa-icon
+                            class="navbar-submenu-item-icon"
+                            [icon]="faCheckSquare"
+                        />
+                        <div class="navbar-submenu-item-text">
+                            WishList
+                        </div>
                     </div>
                     <div class="navbar-submenu-item" (click)="onLogout()">
                         <fa-icon

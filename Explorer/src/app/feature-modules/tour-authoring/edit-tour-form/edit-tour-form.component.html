@@ -1,35 +1,68 @@
-<div class="edit-modal" [formGroup]="editTourForm" (click)="onClose()">
+<div class="edit-modal" [formGroup]="editTourForm">
     <div class="edit" (click)="$event.stopPropagation()">
         <div class="edit-head">
-            <fa-icon class="edit-x" [icon]="faXmark" (click)="onClose()"/>
+            <fa-icon class="edit-x" [icon]="faXmark" (click)="onClose()" />
             <div class="edit-title">Edit tour</div>
         </div>
         <form class="edit-form" [formGroup]="editTourForm">
             <div class="edit-label">Name:</div>
-            <input class="edit-input" type="text" placeholder="Name" formControlName="name"/>
+            <input
+                class="edit-input"
+                type="text"
+                placeholder="Name"
+                formControlName="name"
+            />
             <div class="edit-label">Description:</div>
-            <input class="edit-input" type="text" placeholder="Description" formControlName="description"/>
+            <input
+                class="edit-input"
+                type="text"
+                placeholder="Description"
+                formControlName="description"
+            />
             <div class="edit-label">Difficulty</div>
-            <input class="edit-input" min="1" max="5"  type="number" placeholder="Difficulty" formControlName="difficulty">
-            <div class="add-label">Price</div>
-            <input class="add-input" type="number" placeholder="Price" formControlName="price">
+            <input
+                class="edit-input"
+                min="1"
+                max="5"
+                type="number"
+                placeholder="Difficulty"
+                formControlName="difficulty"
+            />
+            <div class="edit-label">Price</div>
+            <input
+                class="edit-input"
+                type="number"
+                placeholder="Price"
+                formControlName="price"
+            />
             <div class="edit-label">Tags:</div>
             <div class="edit-tags">
-                <div *ngFor="let tag of editTourForm.get('tags')?.value; let i = index">
-                    <button class="remove-submit" (click)="removeTag(i)">Remove</button>&nbsp;
-                  <span>{{ tag }}</span><br><br>
-                  
-                </div>
-              </div>
-              <input class="edit-input" placeholder="Tags" #tagInput type="text"/>
-              <button class="edit-submit" (click)="addTag(tagInput.value); tagInput.value=''">
-                <div class="edit-submit-text">Add tag</div>
-            </button><br>
+                <mat-chip-grid #chipGrid>
+                    <mat-chip-row
+                        *ngFor="let tag of editTourForm.get('tags')?.value"
+                        (removed)="remove(tag)"
+                    >
+                        {{ tag }}
+                        <button
+                            matChipRemove
+                            [attr.aria-label]="'remove ' + tag"
+                        >
+                            <mat-icon>cancel</mat-icon>
+                        </button>
+                    </mat-chip-row>
+                </mat-chip-grid>
+                <input
+                    class="edit-input"
+                    placeholder="Culture, Architecture, Nature..."
+                    #fruitInput
+                    [matChipInputFor]="chipGrid"
+                    [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
+                    (matChipInputTokenEnd)="add($event)"
+                />
+            </div>
             <button class="edit-submit" type="submit" (click)="submit()">
                 <div class="edit-submit-text">Edit</div>
             </button>
-           
         </form>
     </div>
 </div>
-

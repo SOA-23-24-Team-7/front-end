@@ -5,14 +5,13 @@ import { LoginComponent } from "../auth/login/login.component";
 import { EquipmentComponent } from "src/app/feature-modules/administration/equipment/equipment.component";
 import { TourPreferencesComponent } from "src/app/feature-modules/marketplace/tour-preferences/tour-preferences.component";
 import { TourPreferenceFormComponent } from "src/app/feature-modules/marketplace/tour-preference-form/tour-preference-form.component";
-import { AuthGuard } from "../auth/auth.guard";
+import { AdminGuard, AuthGuard } from "../auth/auth.guard";
 import { RegistrationComponent } from "../auth/registration/registration.component";
 import { BlogsComponent } from "src/app/feature-modules/blog/blogs/blogs.component";
 import { BlogComponent } from "src/app/feature-modules/blog/blog/blog.component";
 import { UsersOverviewComponent } from "src/app/feature-modules/administration/users-overview/users-overview.component";
 import { UserProfileComponent } from "src/app/feature-modules/stakeholder/user-profile/user-profile.component";
 import { RatingComponent } from "src/app/feature-modules/administration/rating/rating.component";
-import { RatingFormComponent } from "src/app/feature-modules/marketplace/rating-form/rating-form.component";
 import { ReviewComponent } from "src/app/feature-modules/marketplace/review/review.component";
 import { ProblemComponent } from "src/app/feature-modules/marketplace/problem/problem.component";
 import { TourComponent } from "src/app/feature-modules/tour-authoring/tour/tour.component";
@@ -32,7 +31,6 @@ import { ProblemAnswerComponent } from "src/app/feature-modules/stakeholder/prob
 import { TouristPositionSimulatorComponent } from "src/app/feature-modules/tour-execution/tourist-position-simulator/tourist-position-simulator.component";
 import { RequestViewComponent } from "src/app/feature-modules/administration/request-view/request-view.component";
 import { PurchasedToursComponent } from "src/app/feature-modules/tour-execution/purchased-tour-cards/purchased-tour-cards.component";
-import { PublishedToursComponent } from "src/app/feature-modules/marketplace/tours/published-tours.component";
 import { TourExecutingComponent } from "src/app/feature-modules/tour-execution/tour-executing/tour-executing.component";
 import { BlogFormComponent } from "src/app/feature-modules/blog/blog-form/blog-form.component";
 import { MyBlogsComponent } from "src/app/feature-modules/blog/my-blogs/my-blogs.component";
@@ -56,6 +54,13 @@ import { EncounterFormComponent } from "src/app/feature-modules/encounter/encoun
 import { BundleCardComponent } from "src/app/feature-modules/tour-authoring/bundle-card/bundle-card.component";
 import { BundlesComponent } from "src/app/feature-modules/tour-authoring/bundles/bundles.component";
 import { ExploreBundlesComponent } from "src/app/feature-modules/marketplace/explore-bundles/explore-bundles.component";
+import { PageNotFoundComponent } from "src/app/feature-modules/layout/page-not-found/page-not-found.component";
+import { TourStatisticsComponent } from "src/app/feature-modules/tour-authoring/tour-statistics/tour-statistics.component";
+import { SingleTourStatisticsComponent } from "src/app/feature-modules/tour-authoring/single-tour-statistics/single-tour-statistics.component";
+import { ResetPasswordComponent } from "../auth/reset-password/reset-password.component";
+import { ResetPasswordEditComponent } from "../auth/reset-password-edit/reset-password-edit.component";
+import { EncounterListComponent } from "src/app/feature-modules/encounter/encounter-list/encounter-list.component";
+import { WishlistComponent } from "src/app/feature-modules/marketplace/wishlist/wishlist.component";
 
 const routes: Routes = [
     { path: "home", component: HomeComponent },
@@ -65,13 +70,13 @@ const routes: Routes = [
     {
         path: "equipment",
         component: EquipmentComponent,
-        canActivate: [AuthGuard],
+        canActivate: [AdminGuard],
     },
     { path: "", component: HomeComponent },
     { path: "ratings", component: RatingComponent, canActivate: [AuthGuard] },
     {
-        path: "rating-form",
-        component: RatingFormComponent,
+        path: "done-encounter",
+        component: EncounterListComponent,
         canActivate: [AuthGuard],
     },
     {
@@ -92,14 +97,8 @@ const routes: Routes = [
         canActivate: [AuthGuard],
     },
     {
-        path: "published-tours",
-        component: PublishedToursComponent,
-        canActivate: [AuthGuard],
-    },
-    {
         path: "tour-sales",
         component: TourSalesComponent,
-        canActivate: [AuthGuard],
     },
     {
         path: "tour-sale-form/:id",
@@ -262,7 +261,6 @@ const routes: Routes = [
     {
         path: "tour/:tourId",
         component: TourPageComponent,
-        canActivate: [AuthGuard],
     },
     {
         path: "tourists-blog/:tourId",
@@ -299,10 +297,30 @@ const routes: Routes = [
         component: ExploreBundlesComponent,
         canActivate: [AuthGuard],
     },
+    {
+        path: "tour-statistics",
+        component: TourStatisticsComponent,
+        canActivate: [AuthGuard],
+    },
+    {
+        path: "tour-statistics/:id",
+        component: SingleTourStatisticsComponent,
+        canActivate: [AuthGuard],
+    },
+    {
+        path: "wishlist",
+        component: WishlistComponent,
+        canActivate: [AuthGuard],
+    },
+    { path: "reset-password", component: ResetPasswordComponent },
+    { path: "reset-password-edit", component: ResetPasswordEditComponent },
+    { path: "**", pathMatch: "full", component: PageNotFoundComponent },
 ];
 
 @NgModule({
-    imports: [RouterModule.forRoot(routes)],
+    imports: [
+        RouterModule.forRoot(routes, { scrollPositionRestoration: "enabled" }),
+    ],
     exports: [RouterModule],
 })
 export class AppRoutingModule {}

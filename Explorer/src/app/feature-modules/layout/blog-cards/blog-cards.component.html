@@ -1,11 +1,18 @@
 <div class="blog-cards-container">
-    <div class="list-cards-button">
+    <div class="list-cards-button" (click)="scrollToPrev()">
         <div class="triangle-left"></div>
     </div>
+    <div class="wrapper">
+        <h1>Discover Top Stories Here</h1>
+        <div class="blog-container">
+            <xp-blog-card
+                *ngFor="let blog of popularBlogs"
+                [blog]="blog"
+            ></xp-blog-card>
+        </div>
+    </div>
 
-    <xp-blog-card *ngFor="let blog of blogsList" [blog]="blog"></xp-blog-card>
-
-    <div class="list-cards-button" id="next-button">
+    <div class="list-cards-button" id="next-button" (click)="scrollToNext()">
         <div class="triangle-right"></div>
     </div>
 </div>

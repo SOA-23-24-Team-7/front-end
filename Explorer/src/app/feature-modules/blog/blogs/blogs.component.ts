@@ -9,11 +9,23 @@ import { Pipe, PipeTransform } from "@angular/core";
 import { UpdateBlog } from "../model/blog-update.model";
 import { Following } from "../../stakeholder/model/following.model";
 import { StakeholderService } from "../../stakeholder/stakeholder.service";
+import { trigger, transition, style, animate } from "@angular/animations";
 
 @Component({
     selector: "xp-blogs",
     templateUrl: "./blogs.component.html",
     styleUrls: ["./blogs.component.css"],
+    animations: [
+        trigger("fadeIn", [
+            transition(":enter", [
+                style({ opacity: 0, transform: "translateX(-40px)" }),
+                animate(
+                    "0.6s ease",
+                    style({ opacity: 1, transform: "translateX(0)" }),
+                ),
+            ]),
+        ]),
+    ],
 })
 export class BlogsComponent implements OnInit {
     blogs: Blog[] = [];
