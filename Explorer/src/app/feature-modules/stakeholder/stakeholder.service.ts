@@ -22,6 +22,7 @@ import { Wallet } from "./model/wallet.model";
 import { TransactionRecord } from "./model/transaction-record.model";
 import { BundleRecord } from "./model/bundle-record.model";
 import { WishlistNotification } from "./model/wishlist-notification.model";
+import { Problem } from "../marketplace/model/problem.model";
 
 @Injectable({
     providedIn: "root",
@@ -32,6 +33,13 @@ export class StakeholderService {
             environment.apiHost + "notifications/count",
         );
     }
+
+    deleteProblem(id: number): Observable<Problem> {
+        return this.http.delete<Problem>(
+            environment.apiHost + "tourist/problem/" + id,
+        );
+    }
+
     getProblem(problemId: number, userRole: string): Observable<ProblemUser> {
         return this.http.get<ProblemUser>(
             environment.apiHost + userRole + "/problem/" + problemId,
@@ -251,12 +259,12 @@ export class StakeholderService {
     }
 
     getTouristWallet(): Observable<Wallet> {
-        return this.http.get<Wallet>(
-            environment.apiHost + "wallet"
-        );
+        return this.http.get<Wallet>(environment.apiHost + "wallet");
     }
 
-    getTouristTransactionRecords(): Observable<PagedResults<TransactionRecord>> {
+    getTouristTransactionRecords(): Observable<
+        PagedResults<TransactionRecord>
+    > {
         return this.http.get<PagedResults<TransactionRecord>>(
             environment.apiHost + "tourist/record/transactions",
         );
@@ -264,12 +272,14 @@ export class StakeholderService {
 
     getBundleRecords(): Observable<BundleRecord[]> {
         return this.http.get<BundleRecord[]>(
-            environment.apiHost + "tourist/bundle-records"
+            environment.apiHost + "tourist/bundle-records",
         );
     }
 
-    getWishlistNotifications(): Observable<WishlistNotification[]>{
+    getWishlistNotifications(): Observable<WishlistNotification[]> {
         //popraviti poziv
-        return this.http.get<WishlistNotification[]>( environment.apiHost + 'tourist/wishlist-notification')
+        return this.http.get<WishlistNotification[]>(
+            environment.apiHost + "tourist/wishlist-notification",
+        );
     }
 }
