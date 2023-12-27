@@ -51,6 +51,10 @@
     outline: none;
 }
 
+input[type="file"] {
+    display: none !important;
+}
+
 .field input {
     width: 22rem;
     height: 4rem;
