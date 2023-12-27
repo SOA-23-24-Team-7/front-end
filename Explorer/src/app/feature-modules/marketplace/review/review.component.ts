@@ -53,7 +53,7 @@ export class ReviewComponent implements OnInit {
     }
 
     getReviews(): void {
-        if (this.tourId > 0) {
+        //if (this.tourId > 0) {
             this.tourIdHelper = this.tourId;
             this.service.getReviews(this.tourIdHelper).subscribe({
                 next: (result: PagedResults<Review>) => {
@@ -84,7 +84,7 @@ export class ReviewComponent implements OnInit {
                     console.log(err);
                 },
             });
-        }
+        //}
     }
 
     getReviewsByTourId(): void {

@@ -395,6 +395,11 @@
                 <xp-tour-card-view
                     *ngFor="let tour of tours"
                     [tour]="tour"
+                    [routerLink]="
+                        tour.status == 0 || tour.status == 2
+                            ? ['/tour/', tour.id, 'key-points']
+                            : ['/tour/', tour.id]
+                    "
                 ></xp-tour-card-view>
             </div>
         </div>

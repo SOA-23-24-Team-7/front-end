@@ -75,6 +75,7 @@ export class AuthService {
         this.userLocation$.next({ latitude: 45.2, longitude: 19.8 });
         localStorage.setItem("userLat", "45.2");
         localStorage.setItem("userLong", "19.8");
+        this.marketPlaceService.cart$.next({ id: 0 });
     }
 
     checkIfUserExists(): void {
@@ -154,8 +155,11 @@ export class AuthService {
                 });
         }
     }
-    getPosition(){
-        return { "longitude": this.userLocation$.value.longitude, "latitude": this.userLocation$.value.latitude, }
+    getPosition() {
+        return {
+            longitude: this.userLocation$.value.longitude,
+            latitude: this.userLocation$.value.latitude,
+        };
     }
     generateResetPasswordToken(email: string): Observable<any> {
         // TODO: generate reset password token

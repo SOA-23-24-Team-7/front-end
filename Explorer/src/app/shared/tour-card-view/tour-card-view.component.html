@@ -2,12 +2,6 @@
     class="tour-card"
     [class.selectable]="selectable"
     [class.selected]="selected && selectable"
-    [routerLink]="
-        tour.status == 0 || tour.status == 2
-            ? ['/tour/', tour.id, 'key-points']
-            : ['/tour/', tour.id]
-    "
-    [@fadeIn]
 >
     <div class="tour-card-left">
         <div class="tour-image-container">
