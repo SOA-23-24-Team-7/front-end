@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from "@angular/core";
+import { Component, Input, OnInit, ViewChild } from "@angular/core";
 import { Tour } from "../../tour-authoring/model/tour.model";
 import { Router } from "@angular/router";
 import { TourExecutionService } from "../tour-execution.service";
@@ -7,6 +7,7 @@ import { Campaign } from "../model/campaign-info.model";
 import { TourExecutionStart } from "../model/tour-execution-start-model";
 import { MatDialog } from "@angular/material/dialog";
 import { CampaignEquipmentComponent } from "../campaign-equipment/campaign-equipment.component";
+import { CarouselComponent } from "src/app/shared/carousel/carousel.component";
 
 @Component({
     selector: "xp-campaign-card",
@@ -19,6 +20,7 @@ export class CampaignCardComponent implements OnInit {
     @Input() hasActiveTour: boolean;
     @Input() isTourActive: boolean;
     @Input() isCampaign: boolean;
+    @ViewChild(CarouselComponent) carousel: CarouselComponent;
     images: string[];
     isClicked: boolean = false;
     constructor(
@@ -32,6 +34,10 @@ export class CampaignCardComponent implements OnInit {
                 ? kp.imagePath
                 : environment.imageHost + kp.imagePath,
         );
+
+        setInterval(() => {
+            if (Math.random() < 0.2) { this.carousel.onNextClick(); }
+        }, 1000);
     }
     StartCampaign(){
         this.execution.tourId = this.campaign.id
