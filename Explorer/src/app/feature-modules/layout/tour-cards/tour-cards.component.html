@@ -1,4 +1,4 @@
-<div class="tour-cards-container" *ngIf="user.username != ''">
+<div class="tour-cards-container" *ngIf="user.username != '' && this.user.role == 'tourist' ">
     <div
         class="list-cards-button"
         id="prev-button"

@@ -28,7 +28,7 @@ export class TourCardsComponent implements OnInit {
     ngOnInit(): void {
         this.authService.user$.subscribe(user => {
             this.user = user;
-            if(this.user.username != ''){
+            if(this.user.username != '' && this.user.role == 'tourist'){
             this.service.getRecommendedTours().subscribe({
                 next:(result: PagedResults<Tour>)=>{
                     this.recommendedTours=result.results
