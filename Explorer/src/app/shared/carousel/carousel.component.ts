@@ -17,17 +17,14 @@ import { Component, Input, OnInit } from '@angular/core';
     ])
   ]
 })
-export class CarouselComponent implements OnInit {
+export class CarouselComponent {
   @Input() slides: string[];
+  @Input() disableFocus: boolean = false;
+  @Input() autoScroll: boolean = false;
 
   currentSlide = 0;
 
-  constructor() {
-  }
-
-  ngOnInit(): void {
-    setInterval(() => this.onNextClick(), 3000)
-  }
+  constructor() {}
 
   onPreviousClick() {
     const previous = this.currentSlide - 1;
