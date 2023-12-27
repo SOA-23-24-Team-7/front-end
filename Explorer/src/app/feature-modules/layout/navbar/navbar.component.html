@@ -655,19 +655,6 @@
                     </div>
                     <div
                         class="navbar-submenu-item"
-                        [routerLink]="['payment-history']"
-                        *ngIf="user && user.role == 'tourist'"
-                    >
-                        <fa-icon
-                            class="navbar-submenu-item-icon"
-                            [icon]="faCoins"
-                        />
-                        <div class="navbar-submenu-item-text">
-                            Payments history
-                        </div>
-                    </div>
-                    <div
-                        class="navbar-submenu-item"
                         *ngIf="user && user.role === 'administrator'"
                         [routerLink]="['public-requests']"
                     >
