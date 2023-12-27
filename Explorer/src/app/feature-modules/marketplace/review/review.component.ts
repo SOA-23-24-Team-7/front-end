@@ -45,45 +45,43 @@ export class ReviewComponent implements OnInit {
     ngOnInit(): void {
         this.authService.user$.subscribe(user => {
             this.user = user;
-            this.route.params.subscribe(params => {
-                this.tourId = params["tourId"];
-                this.getReviews();
-            });
+            if (this.user.id != 0)
+                this.route.params.subscribe(params => {
+                    this.tourId = params["tourId"];
+                    this.getReviews();
+                });
         });
     }
 
     getReviews(): void {
         //if (this.tourId > 0) {
-            this.tourIdHelper = this.tourId;
-            this.service.getReviews(this.tourIdHelper).subscribe({
-                next: (result: PagedResults<Review>) => {
-                    this.reviews = result.results;
-                    this.service.canTourBeRated(this.tourIdHelper).subscribe({
-                        next: (result: boolean) => {
-                            this.reviewExists = result;
+        this.tourIdHelper = this.tourId;
+        this.service.getReviews(this.tourIdHelper).subscribe({
+            next: (result: PagedResults<Review>) => {
+                this.reviews = result.results;
+                this.service.canTourBeRated(this.tourIdHelper).subscribe({
+                    next: (result: boolean) => {
+                        this.reviewExists = result;
 
-                            //dodajem provjeru dal ocjena od tog turiste vec postoji jer kad se ucita stranica, dugme je uvijek enable
-                            if (this.reviewExists)
-                                this.service
-                                    .reviewExists(
-                                        this.user.id,
-                                        this.tourIdHelper,
-                                    )
-                                    .subscribe({
-                                        next: (result: boolean) => {
-                                            this.reviewExists = !result;
-                                        },
-                                    });
-                        },
-                        error: errData => {
-                            console.log(errData);
-                        },
-                    });
-                },
-                error: (err: any) => {
-                    console.log(err);
-                },
-            });
+                        //dodajem provjeru dal ocjena od tog turiste vec postoji jer kad se ucita stranica, dugme je uvijek enable
+                        if (this.reviewExists)
+                            this.service
+                                .reviewExists(this.user.id, this.tourIdHelper)
+                                .subscribe({
+                                    next: (result: boolean) => {
+                                        this.reviewExists = !result;
+                                    },
+                                });
+                    },
+                    error: errData => {
+                        console.log(errData);
+                    },
+                });
+            },
+            error: (err: any) => {
+                console.log(err);
+            },
+        });
         //}
     }
 

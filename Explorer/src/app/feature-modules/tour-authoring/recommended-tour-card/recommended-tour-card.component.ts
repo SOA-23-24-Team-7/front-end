@@ -29,8 +29,9 @@ export class RecommendedTourCardComponent {
     ) {}
 
     ngOnInit(): void {
-        this.tourImage =
-            environment.imageHost + this.tour.keyPoints![0].imagePath;
+        this.tourImage = this.tour.keyPoints![0].imagePath.startsWith("http")
+            ? this.tour.keyPoints![0].imagePath
+            : environment.imageHost + this.tour.keyPoints![0].imagePath;
         this.authService.user$.subscribe(user => {
             this.user = user;
         });
