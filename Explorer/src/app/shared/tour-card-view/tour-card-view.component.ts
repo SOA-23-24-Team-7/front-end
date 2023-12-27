@@ -23,9 +23,8 @@ import {
     faMoneyBills,
     faBarChart,
     faBookmark,
-    faMap, 
-    faCheckSquare
-
+    faMap,
+    faCheckSquare,
 } from "@fortawesome/free-solid-svg-icons";
 import { TourLimitedView } from "../../feature-modules/marketplace/model/tour-limited-view.model";
 import { Tour } from "../../feature-modules/tour-authoring/model/tour.model";
@@ -121,20 +120,22 @@ export class TourCardViewComponent implements OnChanges {
 
         this.authService.user$.subscribe(user => {
             this.user = user;
-            if (user.role.toLocaleLowerCase() === "tourist") {
+            if (this.user.role === "tourist" && this.user.id !== 0) {
                 this.getShoppingCart();
             }
         });
 
-        this.marketplaceService.cart$.subscribe(cart => {
-            this.marketplaceService.getToursInCart(this.user.id).subscribe({
-                next: (result: PagedResults<TourLimitedView>) => {
-                    this.addedTours = result.results;
-                    this.getShoppingCart(); // update the price
-                    this.getDiscount();
-                },
+        if (this.user.role === "tourist" && this.user.id !== 0) {
+            this.marketplaceService.cart$.subscribe(cart => {
+                this.marketplaceService.getToursInCart(this.user.id).subscribe({
+                    next: (result: PagedResults<TourLimitedView>) => {
+                        this.addedTours = result.results;
+                        this.getShoppingCart(); // update the price
+                        this.getDiscount();
+                    },
+                });
             });
-        });
+        }
     }
 
     getDiscount() {
@@ -299,44 +300,49 @@ export class TourCardViewComponent implements OnChanges {
         if (target) {
             target.src =
                 "https://imgs.search.brave.com/udmDGOGRJTYO6lmJ0ADA03YoW4CdO6jPKGzXWvx1XRI/rs:fit:860:0:0/g:ce/aHR0cHM6Ly90My5m/dGNkbi5uZXQvanBn/LzAyLzY4LzU1LzYw/LzM2MF9GXzI2ODU1/NjAxMl9jMVdCYUtG/TjVyalJ4UjJleVYz/M3puSzRxblllS1pq/bS5qcGc";
-        } 
+        }
     }
 
-  onAddToWishlistClicked(tourId: number){ 
-    this.marketplaceService.getToursFromWishlist().subscribe({
-        next: (result: Tour[]) => {
-            this.toursFromWishlist = result;
+    onAddToWishlistClicked(tourId: number) {
+        this.marketplaceService.getToursFromWishlist().subscribe({
+            next: (result: Tour[]) => {
+                this.toursFromWishlist = result;
 
-            let alreadyAdded = false;
-            for(let tour of this.toursFromWishlist){
-                if(tour.id === tourId){
-                    alreadyAdded = true;
+                let alreadyAdded = false;
+                for (let tour of this.toursFromWishlist) {
+                    if (tour.id === tourId) {
+                        alreadyAdded = true;
+                    }
                 }
-            }
 
-            if(!alreadyAdded){
-                this.marketplaceService.addTourToWishlist(tourId).subscribe({
-                    next: () => {
-                        this.notifier.notify("success", "Added to wishlist.");
-                    },
-                    error: err => {
-                        this.notifier.notify(
-                            "error",
-                            "Failed to add tour to wishlist. " + xpError.getErrorMessage(err),
-                        );
-                    },
-                });
-            }
-            else{
-                this.notifier.notify(
-                    "error",
-                    "Selected tour is already in your wishlist. "
-                );
-            }
-        },
-        error: (err: any) => {
-            console.log(err);
-        },
-    });
-  } 
+                if (!alreadyAdded) {
+                    this.marketplaceService
+                        .addTourToWishlist(tourId)
+                        .subscribe({
+                            next: () => {
+                                this.notifier.notify(
+                                    "success",
+                                    "Added to wishlist.",
+                                );
+                            },
+                            error: err => {
+                                this.notifier.notify(
+                                    "error",
+                                    "Failed to add tour to wishlist. " +
+                                        xpError.getErrorMessage(err),
+                                );
+                            },
+                        });
+                } else {
+                    this.notifier.notify(
+                        "error",
+                        "Selected tour is already in your wishlist. ",
+                    );
+                }
+            },
+            error: (err: any) => {
+                console.log(err);
+            },
+        });
+    }
 }

@@ -59,6 +59,7 @@ import { TourStatisticsComponent } from "src/app/feature-modules/tour-authoring/
 import { SingleTourStatisticsComponent } from "src/app/feature-modules/tour-authoring/single-tour-statistics/single-tour-statistics.component";
 import { ResetPasswordComponent } from "../auth/reset-password/reset-password.component";
 import { ResetPasswordEditComponent } from "../auth/reset-password-edit/reset-password-edit.component";
+import { EncounterListComponent } from "src/app/feature-modules/encounter/encounter-list/encounter-list.component";
 import { WishlistComponent } from "src/app/feature-modules/marketplace/wishlist/wishlist.component";
 
 const routes: Routes = [
@@ -73,6 +74,11 @@ const routes: Routes = [
     },
     { path: "", component: HomeComponent },
     { path: "ratings", component: RatingComponent, canActivate: [AuthGuard] },
+    {
+        path: "done-encounter",
+        component: EncounterListComponent,
+        canActivate: [AuthGuard],
+    },
     {
         path: "review/:tourId",
         component: ReviewComponent,
@@ -304,12 +310,11 @@ const routes: Routes = [
     {
         path: "wishlist",
         component: WishlistComponent,
-        canActivate: [AuthGuard]
+        canActivate: [AuthGuard],
     },
     { path: "reset-password", component: ResetPasswordComponent },
     { path: "reset-password-edit", component: ResetPasswordEditComponent },
     { path: "**", pathMatch: "full", component: PageNotFoundComponent },
-    
 ];
 
 @NgModule({

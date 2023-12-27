@@ -385,7 +385,7 @@
                 </div>
             </div>
         </div>
-        <div class="tour-search-results" [@fadeIn]>
+        <div class="tour-search-results">
             <div class="tour-search-results-header">
                 <div class="tour-search-results-count">
                     Tours ({{ totalCount }})
@@ -393,6 +393,7 @@
             </div>
             <div class="tour-search-result-tours">
                 <xp-tour-card-view
+                    [@fadeIn]
                     *ngFor="let tour of tours"
                     [tour]="tour"
                     [routerLink]="

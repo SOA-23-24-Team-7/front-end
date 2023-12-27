@@ -434,12 +434,32 @@
             </div>
         </div>
         <div class="tour-search-results">
-            <div style="text-align: center;">
-            <mat-radio-group aria-label="Select an option" [(ngModel)]="radioButtonSelected">
-                <mat-radio-button [value]="0" color="primary"  (change)="onRadioBoxClicked()">All</mat-radio-button>
-                <mat-radio-button [value]="1" color="primary"  (change)="onRadioBoxClicked()" style="margin-left: 20px;">Recommended</mat-radio-button>
-                <mat-radio-button [value]="2" color="primary" (change)="onRadioBoxClicked()" style="margin-left: 20px;">Active</mat-radio-button>
-              </mat-radio-group>
+            <div style="text-align: center">
+                <mat-radio-group
+                    aria-label="Select an option"
+                    [(ngModel)]="radioButtonSelected"
+                >
+                    <mat-radio-button
+                        [value]="0"
+                        color="primary"
+                        (change)="onRadioBoxClicked()"
+                        >All</mat-radio-button
+                    >
+                    <mat-radio-button
+                        [value]="1"
+                        color="primary"
+                        (change)="onRadioBoxClicked()"
+                        style="margin-left: 20px"
+                        >Recommended</mat-radio-button
+                    >
+                    <mat-radio-button
+                        [value]="2"
+                        color="primary"
+                        (change)="onRadioBoxClicked()"
+                        style="margin-left: 20px"
+                        >Active</mat-radio-button
+                    >
+                </mat-radio-group>
             </div>
             <div class="tour-search-results-header">
                 <div class="tour-search-results-count">
@@ -448,6 +468,7 @@
             </div>
             <div class="tour-search-result-tours">
                 <xp-tour-card-view
+                    [@fadeIn]
                     *ngFor="let tour of tours"
                     [tour]="tour"
                 ></xp-tour-card-view>

@@ -612,6 +612,21 @@
                             Tour preference
                         </div>
                     </div>
+
+                    <div
+                        class="navbar-submenu-item"
+                        [routerLink]="['done-encounter']"
+                        *ngIf="user && user.role === 'tourist'"
+                    >
+                        <fa-icon
+                            class="navbar-submenu-item-icon"
+                            [icon]="faMountainCity"
+                        />
+                        <div class="navbar-submenu-item-text">
+                            Done encouter
+                        </div>
+                    </div>
+
                     <div
                         class="navbar-submenu-item"
                         [routerLink]="['tourist-equipment-selection']"

@@ -208,8 +208,10 @@ export class TourExecutingComponent implements OnInit {
                 next: (result: Tour) => {
                     this.tour = result;
                     this.tourImage =
-                        environment.imageHost +
-                        this.tour.keyPoints![0].imagePath;
+                        this.tour.keyPoints![0].imagePath.startsWith("http")
+                            ? this.tour.keyPoints![0].imagePath
+                            : environment.imageHost +
+                              this.tour.keyPoints![0].imagePath;
                     this.getWeather();
                 },
             });

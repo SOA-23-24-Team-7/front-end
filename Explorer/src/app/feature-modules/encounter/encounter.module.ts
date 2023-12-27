@@ -9,12 +9,14 @@ import { FormsModule, ReactiveFormsModule } from "@angular/forms";
 import { MaterialModule } from "src/app/infrastructure/material/material.module";
 import { EncounterFormComponent } from "./encounter-form/encounter-form.component";
 import { TooltipModule } from "primeng/tooltip";
+import { EncounterListComponent } from "./encounter-list/encounter-list.component";
 
 @NgModule({
     declarations: [
         ActiveEncounterViewComponent,
         KeyPointEncounterFormComponent,
         EncounterFormComponent,
+        EncounterListComponent,
     ],
     imports: [
         CommonModule,

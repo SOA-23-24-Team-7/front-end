@@ -2,6 +2,7 @@ import { Component, OnInit } from "@angular/core";
 import { AuthService } from "./infrastructure/auth/auth.service";
 import "leaflet-routing-machine";
 import { MarketplaceService } from "./feature-modules/marketplace/marketplace.service";
+import { User } from "./infrastructure/auth/model/user.model";
 
 @Component({
     selector: "app-root",
@@ -11,6 +12,7 @@ import { MarketplaceService } from "./feature-modules/marketplace/marketplace.se
 export class AppComponent implements OnInit {
     title = "Explorer";
     sideBar: boolean = false;
+    user: User;
 
     constructor(
         private authService: AuthService,
@@ -18,10 +20,19 @@ export class AppComponent implements OnInit {
     ) {}
 
     ngOnInit(): void {
-        this.marketPlaceService.cart$.subscribe(cart => {
-            if (cart.id && !this.sideBar && cart.orderItems?.length !== 0) {
-                this.showCart();
-            }
+        this.authService.user$.subscribe(user => {
+            this.user = user;
+            this.marketPlaceService.cart$.subscribe(cart => {
+                if (
+                    cart.id &&
+                    !this.sideBar &&
+                    cart.orderItems?.length !== 0 &&
+                    this.user.role == "tourist" &&
+                    this.user.id != 0
+                ) {
+                    this.showCart();
+                }
+            });
         });
 
         this.checkCloseCart();

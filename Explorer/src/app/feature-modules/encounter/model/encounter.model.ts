@@ -2,6 +2,7 @@ export interface Encounter {
     id: number;
     title: string;
     description: string;
+    picture: string;
     longitude: number;
     latitude: number;
     radius: number;
@@ -9,10 +10,10 @@ export interface Encounter {
     status: EncounterStatus;
     type: EncounterType;
     peopleNumber?: number;
-    picture?: string;
     pictureLongitude?: number;
     pictureLatitude?: number;
     challengeDone: boolean;
+    instances?: number[];
 }
 
 export enum EncounterType {
