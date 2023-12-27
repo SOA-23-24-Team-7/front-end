@@ -1,0 +1,9 @@
+<div class="user-card" *ngIf="!user.kicked">
+    <img class="pfp" [src]="user.profilePicture" (error)="onImageError($event)"/>
+    <div class="user-info">
+        <div class="name-surname">{{user.firstName}} {{user.lastName}}</div>
+        <div class="username">@{{user.username}} </div>
+    </div>
+    <fa-icon class="shield" [icon]="faShield" *ngIf="shield"/>
+    <fa-icon class="ban" [icon]="faBan" *ngIf="ban" (click)="kickClubMember()"/>
+</div>

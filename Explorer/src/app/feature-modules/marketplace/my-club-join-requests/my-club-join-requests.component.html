@@ -1,4 +1,4 @@
-<div id="my-club-join-requests">
+<!-- <div id="my-club-join-requests">
     <p>My club join requests</p>
     <hr>
     <div id="my-club-join-requests-list">
@@ -27,5 +27,31 @@
         </table>
     </div>
     </div>
+</div> -->
+<div class="container">
+    <div class="card" *ngFor="let request of requests">
+        <div class="details">
+            <div class="row">
+                Club:
+                {{ request.clubName }}
+            </div>
+            <div class="row">
+                Requested at:
+                {{ request.requestedAt | date : "yyyy-MM-dd HH:mm" }}
+            </div>
+            <div class="row">
+                Status:
+                {{ request.status }}
+            </div>
+        </div>
+        <div
+            class="btn"
+            *ngIf="request.status == 'Pending'"
+            color="primary"
+            mat-button
+            (click)="cancelClubJoinRequest(request)"
+        >
+            Cancel
+        </div>
+    </div>
 </div>
-

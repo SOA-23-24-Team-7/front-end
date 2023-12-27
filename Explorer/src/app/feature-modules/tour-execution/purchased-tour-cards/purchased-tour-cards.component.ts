@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from "@angular/core";
+import { Component, Input, OnInit, QueryList, ViewChildren } from "@angular/core";
 import { Tour } from "../../tour-authoring/model/tour.model";
 import { TourAuthoringService } from "../../tour-authoring/tour-authoring.service";
 import { PagedResults } from "src/app/shared/model/paged-results.model";
@@ -8,13 +8,30 @@ import { CampaignCreate } from "../model/campaign-create.model";
 import { AuthService } from "src/app/infrastructure/auth/auth.service";
 import { FormControl, FormGroup, Validators } from "@angular/forms";
 import { Campaign } from "../model/campaign-info.model";
+import { animate, state, style, transition, trigger } from "@angular/animations";
+import { faXmark } from '@fortawesome/free-solid-svg-icons';
+import { PurchasedTourCardComponent } from "../purchased-tour-card/purchased-tour-card.component";
+import { NotifierService } from "angular-notifier";
 
 @Component({
     selector: "xp-purchased-tour-cards",
     templateUrl: "./purchased-tour-cards.component.html",
     styleUrls: ["./purchased-tour-cards.component.css"],
+    animations: [
+        trigger('slideInOut', [
+            state('in', style({ transform: 'translateX(0)' })),
+            transition('void => *', [
+                style({ transform: 'translateX(-100%)' }),
+                animate('300ms ease-out')
+            ]),
+            transition('* => void', [
+                animate('300ms ease-in', style({ transform: 'translateX(100%)' }))
+            ])
+        ])
+    ]
 })
 export class PurchasedToursComponent implements OnInit {
+    @ViewChildren(PurchasedTourCardComponent) tourCards!: QueryList<PurchasedTourCardComponent>;
     currentIndex: number = 0;
     currentIndexCampaign: number = 0;
     ToursContainer: any;
@@ -27,6 +44,7 @@ export class PurchasedToursComponent implements OnInit {
     selectedTours: Tour[] = [];
     selectedTourIds: number[] = [];
     userId: number;
+    selectedTourId: number = 0;
     campaignForm = new FormGroup({
         campaignName: new FormControl("", []),
         campaignDescription: new FormControl("", []),
@@ -34,7 +52,8 @@ export class PurchasedToursComponent implements OnInit {
     constructor(
         private tourExecutionService: TourExecutionService,
         private authService: AuthService,
-    ) {}
+        private notifier: NotifierService,
+    ) { }
     ngOnInit(): void {
         this.getTours();
         this.getLiveTour();
@@ -72,7 +91,7 @@ export class PurchasedToursComponent implements OnInit {
             next: (result: TourExecutionSession) => {
                 if (result == null) {
                     this.hasTourActive = false;
-                    this.activeTourId = -1;
+                    this.activeTourId = 0;
                 } else {
                     this.hasTourActive = true;
                     this.activeTourId = result.tourId;
@@ -87,6 +106,10 @@ export class PurchasedToursComponent implements OnInit {
         if (tour.id) this.selectedTourIds.push(tour.id);
         console.log(tour.name);
     }
+    onDeselectedTour(tour: Tour) {
+        this.selectedTours = this.selectedTours.filter(item => item !== tour);
+        console.log(tour.name);
+    }
     CancelCampaignCreating() {
         this.campaignForm.reset({
             campaignDescription: "",
@@ -94,17 +117,23 @@ export class PurchasedToursComponent implements OnInit {
         });
         this.selectedTourIds.length = 0;
         this.selectedTours.length = 0;
+        this.tourCards.forEach(card => card.selected = false);
+    }
+    removeSelectedChild(tourId: number) {
+        this.tourCards.forEach(card => { if (card.tour.id == tourId) card.selected = false });
+        this.selectedTours = this.selectedTours.filter(item => item.id !== tourId);
+        this.selectedTourId = 0;
     }
     createCampaign() {
         if (
             this.campaignForm.value.campaignDescription == "" ||
             this.campaignForm.value.campaignName == ""
         ) {
-            alert("You must fill all fields");
+            this.notifier.notify("error", "You must fill all fields");
             return;
         }
         if (this.selectedTourIds.length < 2) {
-            alert("There must be at least two tours");
+            this.notifier.notify("error", "There must be at least two tours");
             return;
         }
         const campaign: CampaignCreate = {
@@ -122,6 +151,7 @@ export class PurchasedToursComponent implements OnInit {
                 });
                 this.selectedTourIds = [];
                 this.selectedTours = [];
+                this.tourCards.forEach(card => card.selected = false);
                 this.getCampaigns();
             },
         });
@@ -161,4 +191,6 @@ export class PurchasedToursComponent implements OnInit {
         this.CampaignsContainer!.scrollLeft -=
             this.CampaignsContainer.children[this.currentIndex].clientWidth;
     }
+
+    faXmark = faXmark;
 }

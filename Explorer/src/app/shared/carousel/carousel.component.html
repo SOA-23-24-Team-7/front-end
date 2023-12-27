@@ -4,20 +4,20 @@
             *ngIf="i === currentSlide"
             [src]="slide"
             class="slide"
+            [ngClass]="{'slide-focus': disableFocus == false}"
             (error)="onImageError($event)"
             @carouselAnimation
         />
     </ng-container>
-
     <button
-        *ngIf="slides.length > 1"
+        *ngIf="!autoScroll && slides.length > 1"
         class="control prev"
         (click)="onPreviousClick(); $event.stopPropagation()"
     >
         <span class="arrow left"></span>
     </button>
     <button
-        *ngIf="slides.length > 1"
+        *ngIf="!autoScroll && slides.length > 1"
         class="control next"
         (click)="onNextClick(); $event.stopPropagation()"
     >

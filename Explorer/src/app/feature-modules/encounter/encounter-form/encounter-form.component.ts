@@ -15,6 +15,7 @@ import { NotifierService } from "angular-notifier";
 import { xpError } from "src/app/shared/model/error.model";
 import { MapComponent } from "src/app/shared/map/map.component";
 import { Equipment } from "../../administration/model/equipment.model";
+import { faImage, faMapMarker } from "@fortawesome/free-solid-svg-icons";
 
 @Component({
     selector: "xp-encounter-form",
@@ -46,6 +47,8 @@ export class EncounterFormComponent implements OnInit {
     encounterImage: File;
     picturePath: string;
     user: User;
+    faImage = faImage;
+    faMapMarker = faMapMarker;
 
     encounterForm = new FormGroup({
         title: new FormControl(undefined, [Validators.required]),
@@ -290,7 +293,12 @@ export class EncounterFormComponent implements OnInit {
             return;
         }
 
-        this.dialogRef = this.dialog.open(MapModalComponent);
+        this.dialogRef = this.dialog.open(MapModalComponent, {
+            data: {
+                closeOnClick: false,
+                encounterCoords: this.encounterCoords,
+            },
+        });
         this.dialogRef.componentInstance.positionChanged.subscribe(
             (result: LocationCoords) => {
                 this.encounterCoords = result;

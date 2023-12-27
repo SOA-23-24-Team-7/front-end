@@ -9,6 +9,7 @@
     background-color: rgba(var(--clr-background-secondary), 1);
     color: rgb(var(--clr-text));
     width: 100%;
+    bottom: 0;
 }
 
 .footer-container {

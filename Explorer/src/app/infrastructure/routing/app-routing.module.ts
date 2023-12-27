@@ -13,13 +13,12 @@ import { UsersOverviewComponent } from "src/app/feature-modules/administration/u
 import { UserProfileComponent } from "src/app/feature-modules/stakeholder/user-profile/user-profile.component";
 import { RatingComponent } from "src/app/feature-modules/administration/rating/rating.component";
 import { ReviewComponent } from "src/app/feature-modules/marketplace/review/review.component";
-import { ProblemComponent } from "src/app/feature-modules/marketplace/problem/problem.component";
 import { TourComponent } from "src/app/feature-modules/tour-authoring/tour/tour.component";
 import { TourEquipmentFormComponent } from "src/app/feature-modules/tour-authoring/tour-equipment-form/tour-equipment-form.component";
 import { EditProfileComponent } from "../../feature-modules/stakeholder/edit-profile/edit-profile.component";
 import { OwnerClubsComponent } from "src/app/feature-modules/marketplace/owner-clubs/owner-clubs.component";
 import { ClubsComponent } from "src/app/feature-modules/marketplace/clubs/clubs.component";
-import { MyClubJoinRequestsComponent } from "src/app/feature-modules/marketplace/my-club-join-requests/my-club-join-my-club-join-requests.component";
+import { MyClubJoinRequestsComponent } from "src/app/feature-modules/marketplace/my-club-join-requests/my-club-join-requests.component";
 import { ClubJoinRequestManagementComponent } from "src/app/feature-modules/marketplace/club-join-request-management/club-join-request-management.component";
 import { TouristEquipmentSelectionComponent } from "src/app/feature-modules/layout/tourist-equipment-selection/tourist-equipment-selection.component";
 import { ClubMembersManagementComponent } from "src/app/feature-modules/marketplace/club-members-management/club-members-management.component";
@@ -59,8 +58,9 @@ import { TourStatisticsComponent } from "src/app/feature-modules/tour-authoring/
 import { SingleTourStatisticsComponent } from "src/app/feature-modules/tour-authoring/single-tour-statistics/single-tour-statistics.component";
 import { ResetPasswordComponent } from "../auth/reset-password/reset-password.component";
 import { ResetPasswordEditComponent } from "../auth/reset-password-edit/reset-password-edit.component";
-import { EncounterListComponent } from "src/app/feature-modules/encounter/encounter-list/encounter-list.component";
+import { ClubPageComponent } from "src/app/feature-modules/marketplace/club-page/club-page.component";
 import { WishlistComponent } from "src/app/feature-modules/marketplace/wishlist/wishlist.component";
+import { EncounterListComponent } from "src/app/feature-modules/encounter/encounter-list/encounter-list.component";
 
 const routes: Routes = [
     { path: "home", component: HomeComponent },
@@ -84,7 +84,6 @@ const routes: Routes = [
         component: ReviewComponent,
         canActivate: [AuthGuard],
     },
-    { path: "problem", component: ProblemComponent, canActivate: [AuthGuard] },
     {
         path: "problems",
         component: ProblemsOverviewComponent,
@@ -147,6 +146,7 @@ const routes: Routes = [
     { path: "blog/:blogId", component: BlogComponent },
     { path: "my-blogs/blog-form/:blogId", component: BlogFormComponent },
     { path: "blog-form/:blogId", component: BlogFormComponent },
+    { path: "blog-form/:blogId/:clubId", component: BlogFormComponent },
     {
         path: "profile",
         component: UserProfileComponent,
@@ -305,6 +305,11 @@ const routes: Routes = [
     {
         path: "tour-statistics/:id",
         component: SingleTourStatisticsComponent,
+        canActivate: [AuthGuard],
+    },
+    {
+        path: "club/:clubId",
+        component: ClubPageComponent,
         canActivate: [AuthGuard],
     },
     {
