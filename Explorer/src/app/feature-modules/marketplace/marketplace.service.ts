@@ -327,7 +327,7 @@ export class MarketplaceService {
 
     addOrderItem(orderItem: any): Observable<any> {
         return this.http.post<any>(
-            environment.apiHost + "tourist/shoppingCart/addItem/",
+            environment.apiHost + "tourist/shoppingCart/addItem",
             orderItem,
         );
     }
