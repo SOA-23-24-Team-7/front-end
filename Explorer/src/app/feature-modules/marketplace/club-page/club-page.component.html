@@ -27,21 +27,31 @@
                 ></xp-user-card>
             </div>
         </div>
-        <div class="btn invite" *ngIf="isMember()" (click)="openInviteDialog()">
+        <div class="btn invite" *ngIf="isOwner()" (click)="openInviteDialog()">
             <fa-icon [icon]="faCirclePlus" class="plus" />
             Invite people
         </div>
-        <div class="club-title" lang="en-US" *ngIf="isOwner()">Join requests ({{clubJoinRequests.length}})</div>
+        <div class="club-title" lang="en-US" *ngIf="isOwner()">
+            Join requests ({{ clubJoinRequests.length }})
+        </div>
         <div class="members" *ngIf="isOwner()">
             <div *ngFor="let request of clubJoinRequests">
                 <div class="request">
-                    <div class="username">@{{request.touristName}}</div>
+                    <div class="username">@{{ request.touristName }}</div>
                     <div class="buttons-list">
                         <div class="accept-wrapper">
-                            <fa-icon class="accept" [icon]="faCheck" (click)="respondJoinRequest(request.id, true)"/>
+                            <fa-icon
+                                class="accept"
+                                [icon]="faCheck"
+                                (click)="respondJoinRequest(request.id, true)"
+                            />
                         </div>
                         <div class="decline-wrapper">
-                            <fa-icon class="decline" [icon]="faXmark" (click)="respondJoinRequest(request.id, false)"/>
+                            <fa-icon
+                                class="decline"
+                                [icon]="faXmark"
+                                (click)="respondJoinRequest(request.id, false)"
+                            />
                         </div>
                     </div>
                 </div>
@@ -57,7 +67,7 @@
     <div class="blogs" *ngIf="isUserMember">
         <h1>Blogs</h1>
         <div style="width: 30%; margin: auto">
-            <br>
+            <br />
             <div class="club-button" (click)="createBlog()">
                 <div class="club-button-text">Create new blog</div>
             </div>
