@@ -22,6 +22,7 @@ import { UserRowComponent } from "./user-row/user-row.component";
 import { PaymentHistoryComponent } from "./payment-history/payment-history.component";
 import { ShoppingNotificationsComponent } from "./shopping-notifications/shopping-notifications.component";
 import { TransactionRecordsNotificationsComponent } from './transaction-records-notifications/transaction-records-notifications.component';
+import { UserClubsDialogComponent } from './user-clubs-dialog/user-clubs-dialog.component';
 
 @NgModule({
     declarations: [
@@ -42,6 +43,7 @@ import { TransactionRecordsNotificationsComponent } from './transaction-records-
         PaymentHistoryComponent,
         ShoppingNotificationsComponent,
         TransactionRecordsNotificationsComponent,
+        UserClubsDialogComponent,
     ],
     imports: [
         CommonModule,
