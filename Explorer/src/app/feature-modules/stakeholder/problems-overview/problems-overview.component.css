@@ -57,6 +57,32 @@
     height: 1.8rem;
 }
 
+.controls {
+    display: flex;
+    gap: 0.8rem;
+    margin-left: auto;
+}
+
+.delete {
+    color: rgba(var(--clr-error-700));
+    transition: 0.5s;
+}
+
+.delete:hover {
+    cursor: pointer;
+    filter: brightness(1.2);
+}
+
+.edit {
+    color: rgba(var(--clr-primary-300));
+    transition: 0.5s;
+}
+
+.edit:hover {
+    cursor: pointer;
+    filter: brightness(1.2);
+}
+
 .warning-icon {
     display: flex;
     align-items: center;
@@ -76,11 +102,13 @@
     border-bottom-right-radius: 0;
     border-top-right-radius: 0;
     width: 9.6rem;
+    font-size: 1rem;
+    transition: 0.5s;
 }
 
 .deadline-hover:hover {
     cursor: pointer;
-    opacity: 0.8;
+    filter: brightness(1.2);
 }
 
 .data {
@@ -110,9 +138,20 @@
     flex-direction: column;
     align-items: center;
     margin-inline: 1rem;
+    height: 7rem;
+    overflow-y: auto;
     padding: 0.2rem;
     background-color: rgb(var(--clr-background));
     border-radius: 5px;
+}
+
+.report-data::-webkit-scrollbar {
+    width: 0.5em;
+}
+
+.report-data::-webkit-scrollbar-thumb {
+    background-color: rgba(var(--clr-background-secondary));
+    border-radius: 0.3rem;
 }
 
 .user-avatar {

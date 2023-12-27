@@ -6,7 +6,11 @@ import { User } from "src/app/infrastructure/auth/model/user.model";
 import { MatDialog } from "@angular/material/dialog";
 import { ProblemAnswerComponent } from "../problem-answer/problem-answer.component";
 import { ProblemUser } from "../../marketplace/model/problem-with-user.model";
-import { faCircleExclamation } from "@fortawesome/free-solid-svg-icons";
+import {
+    faCircleExclamation,
+    faTrash,
+    faPen,
+} from "@fortawesome/free-solid-svg-icons";
 import { ProblemDeadlineComponent } from "../problem-deadline/problem-deadline.component";
 
 @Component({
@@ -116,5 +120,18 @@ export class ProblemsOverviewComponent implements OnInit {
         }
     }
 
+    deleteProblem(id: number): void {
+        this.service.deleteProblem(id).subscribe({
+            next: () => {
+                this.problems.splice(
+                    this.problems.findIndex(x => x.id === id),
+                    1,
+                );
+            },
+        });
+    }
+
     faCircleExclamation = faCircleExclamation;
+    faPen = faPen;
+    faTrash = faTrash;
 }

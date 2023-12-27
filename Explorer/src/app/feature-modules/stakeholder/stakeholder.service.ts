@@ -23,6 +23,7 @@ import { TransactionRecord } from "./model/transaction-record.model";
 import { BundleRecord } from "./model/bundle-record.model";
 import { Club } from "../marketplace/model/club.model";
 import { WishlistNotification } from "./model/wishlist-notification.model";
+import { Problem } from "../marketplace/model/problem.model";
 
 @Injectable({
     providedIn: "root",
@@ -33,6 +34,13 @@ export class StakeholderService {
             environment.apiHost + "notifications/count",
         );
     }
+
+    deleteProblem(id: number): Observable<Problem> {
+        return this.http.delete<Problem>(
+            environment.apiHost + "tourist/problem/" + id,
+        );
+    }
+
     getProblem(problemId: number, userRole: string): Observable<ProblemUser> {
         return this.http.get<ProblemUser>(
             environment.apiHost + userRole + "/problem/" + problemId,
