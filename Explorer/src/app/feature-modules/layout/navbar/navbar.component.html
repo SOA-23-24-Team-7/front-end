@@ -655,19 +655,6 @@
                     </div>
                     <div
                         class="navbar-submenu-item"
-                        [routerLink]="['payment-history']"
-                        *ngIf="user && user.role == 'tourist'"
-                    >
-                        <fa-icon
-                            class="navbar-submenu-item-icon"
-                            [icon]="faCoins"
-                        />
-                        <div class="navbar-submenu-item-text">
-                            Payments history
-                        </div>
-                    </div>
-                    <div
-                        class="navbar-submenu-item"
                         *ngIf="user && user.role === 'administrator'"
                         [routerLink]="['public-requests']"
                     >
@@ -676,6 +663,19 @@
                             [icon]="faUser"
                         />
                         <div class="navbar-submenu-item-text">My requests</div>
+                    </div>
+                    <div
+                        class="navbar-submenu-item"
+                        [routerLink]="['wishlist']"
+                        *ngIf="user && user.role === 'tourist'"
+                    >
+                        <fa-icon
+                            class="navbar-submenu-item-icon"
+                            [icon]="faCheckSquare"
+                        />
+                        <div class="navbar-submenu-item-text">
+                            WishList
+                        </div>
                     </div>
                     <div class="navbar-submenu-item" (click)="onLogout()">
                         <fa-icon
