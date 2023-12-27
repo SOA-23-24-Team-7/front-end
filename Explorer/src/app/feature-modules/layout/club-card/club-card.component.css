@@ -29,7 +29,7 @@
 
 .club-card-details {
     display: flex;
-    align-items: center;
+    flex-direction: column;
     width: 100%;
     justify-content: space-between;
     margin-top: 0.625rem;
@@ -40,11 +40,12 @@
     font-weight: bold;
     cursor: pointer;
     transition: color 0.15s;
-    max-width: 50%;
+    max-width: 100%;
     overflow: hidden;
     text-overflow: ellipsis;
     max-lines: 1;
     white-space: nowrap;
+    margin-bottom: 0.5rem;
 }
 
 .club-name:hover {
@@ -58,6 +59,7 @@
     justify-content: center;
     padding-inline: 0.5rem;
     height: 2rem;
+    width: 100%;
     border-radius: 0.5rem;
     background-color: rgba(var(--clr-primary-500), 1);
     cursor: pointer;
@@ -85,6 +87,7 @@
     justify-content: center;
     padding-inline: 0.5rem;
     height: 2rem;
+    width: 100%;
     border-radius: 0.5rem;
     background-color: rgba(var(--clr-background), 1);
     cursor: pointer;
@@ -110,6 +113,7 @@
     justify-content: center;
     padding-inline: 0.5rem;
     height: 2rem;
+    width: 100%;
     border-radius: 0.5rem;
     background-color: #4caf50;
     cursor: pointer;
@@ -144,6 +148,7 @@
     justify-content: center;
     padding-inline: 0.5rem;
     height: 2rem;
+    width: calc(50% - 0.5rem);
     border-radius: 0.5rem;
     background-color: #0090d3;
     cursor: pointer;
@@ -167,8 +172,21 @@
     justify-content: center;
     padding-inline: 0.5rem;
     height: 2rem;
+    width: calc(50% - 0.5rem);
+    margin-left: 1rem;
     border-radius: 0.5rem;
     background-color: rgb(var(--clr-error-300));
     cursor: pointer;
     transition: background-color 0.15s;
+}
+
+.button-row {
+    display: flex;
+}
+
+.join {
+    color: white;
+    font-size: 1.3rem;
+    
+    margin-left: 0.5rem;
 }

@@ -9,28 +9,31 @@
         <div class="club-name" [routerLink]="['/club/', club.id]">
             {{ club.name }}
         </div>
-        <div
-            class="club-button"
-            (click)="sendJoinRequest()"
-            *ngIf="canSendJoinRequest() && !isMember() && !isMine()"
-        >
-            <fa-icon class="club-button-icon" [icon]="faDoorOpen" />
-        </div>
-        <div class="club-sent" *ngIf="!canSendJoinRequest() && !isMember()">
-            <fa-icon class="sent-icon" [icon]="faEnvelope" />
-            <div class="sent-text">Sent</div>
-        </div>
-        <div class="club-joined" *ngIf="isMember()">
-            <fa-icon class="joined-icon" [icon]="faCheck" />
-            <div class="joined-text">Joined</div>
-        </div>
-        <div class="club-edit" *ngIf="isMine()" (click)="updateClub(club)">
-            <fa-icon [icon]="faEdit" class="edit-icon" />
-            <div class="edit-text">Edit</div>
-        </div>
-        <div class="club-delete" *ngIf="isMine()" (click)="deleteClub(club)">
-            <fa-icon [icon]="faTrash" class="delete-icon" />
-            <div class="delete-text">Delete</div>
+        <div class="button-row">
+            <div
+                class="club-button"
+                (click)="sendJoinRequest()"
+                *ngIf="canSendJoinRequest() && !isMember() && !isMine()"
+            >
+                <fa-icon class="club-button-icon" [icon]="faDoorOpen" />
+                <div class="join">Join</div>
+            </div>
+            <div class="club-sent" *ngIf="!canSendJoinRequest() && !isMember()">
+                <fa-icon class="sent-icon" [icon]="faEnvelope" />
+                <div class="sent-text">Sent</div>
+            </div>
+            <div class="club-joined" *ngIf="isMember()">
+                <fa-icon class="joined-icon" [icon]="faCheck" />
+                <div class="joined-text">Joined</div>
+            </div>
+            <div class="club-edit" *ngIf="isMine()" (click)="updateClub(club)">
+                <fa-icon [icon]="faEdit" class="edit-icon" />
+                <div class="edit-text">Edit</div>
+            </div>
+            <div class="club-delete" *ngIf="isMine()" (click)="deleteClub(club)">
+                <fa-icon [icon]="faTrash" class="delete-icon" />
+                <div class="delete-text">Delete</div>
+            </div>
         </div>
     </div>
 </div>

@@ -27,17 +27,12 @@
                 ></xp-user-card>
             </div>
         </div>
-        <div class="separator"></div>
-        <div class="btn leave" *ngIf="isRegularMember()" (click)="leave()">
-            <fa-icon [icon]="faDoorOpen" class="door-leave" />
-            Leave the club
-        </div>
         <div class="btn invite" *ngIf="isMember()" (click)="openInviteDialog()">
             <fa-icon [icon]="faCirclePlus" class="plus" />
             Invite people
         </div>
-        <div class="club-title" lang="en-US">Join requests ({{clubJoinRequests.length}})</div>
-        <div class="members">
+        <div class="club-title" lang="en-US" *ngIf="isOwner()">Join requests ({{clubJoinRequests.length}})</div>
+        <div class="members" *ngIf="isOwner()">
             <div *ngFor="let request of clubJoinRequests">
                 <div class="request">
                     <div class="username">@{{request.touristName}}</div>
@@ -51,6 +46,11 @@
                     </div>
                 </div>
             </div>
+        </div>
+        <div class="separator"></div>
+        <div class="btn leave" *ngIf="isRegularMember()" (click)="leave()">
+            <fa-icon [icon]="faDoorOpen" class="door-leave" />
+            Leave the club
         </div>
     </div>
 
