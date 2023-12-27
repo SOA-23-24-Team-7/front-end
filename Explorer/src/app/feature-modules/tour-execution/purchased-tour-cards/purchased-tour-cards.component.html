@@ -10,7 +10,8 @@
         [(ngModel)]="campaignForm.value.campaignDescription" placeholder="Description"></textarea>
         <div class="selected-tours bottom">
             <div class="selected-tour-card" *ngFor="let tour of selectedTours" (mouseenter)="selectedTourId = tour.id!" (mouseleave)="selectedTourId = 0">
-                {{tour.name}}
+                <div class="margin-selected">{{tour.name}}</div>
+                <fa-icon class="form-selected-x" [icon]="faXmark" (click)="removeSelectedChild(tour.id!)" />
             </div>
         </div>
         <button class="btn stretch" (click)="createCampaign()">Add campaign</button>
@@ -24,6 +25,11 @@
                     [isTourActive]="activeTourId == tour.id" [isCampaign]="isCampaign"></xp-purchased-tour-card>
             </div>
         </div>
-        <h1 class="title">Campaigns</h1>
+        <h1 class="title title-margin">Campaigns</h1>
+        <div class="cont">
+            <div class="tour-card-grid">
+                <xp-campaign-card *ngFor="let campaign of campaigns" [campaign]="campaign"></xp-campaign-card>
+            </div>
+        </div>
     </div>
 </div>

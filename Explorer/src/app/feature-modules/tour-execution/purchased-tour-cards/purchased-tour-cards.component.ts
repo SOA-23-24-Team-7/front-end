@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from "@angular/core";
+import { Component, Input, OnInit, QueryList, ViewChildren } from "@angular/core";
 import { Tour } from "../../tour-authoring/model/tour.model";
 import { TourAuthoringService } from "../../tour-authoring/tour-authoring.service";
 import { PagedResults } from "src/app/shared/model/paged-results.model";
@@ -10,6 +10,8 @@ import { FormControl, FormGroup, Validators } from "@angular/forms";
 import { Campaign } from "../model/campaign-info.model";
 import { animate, state, style, transition, trigger } from "@angular/animations";
 import { faXmark } from '@fortawesome/free-solid-svg-icons';
+import { PurchasedTourCardComponent } from "../purchased-tour-card/purchased-tour-card.component";
+import { NotifierService } from "angular-notifier";
 
 @Component({
     selector: "xp-purchased-tour-cards",
@@ -29,6 +31,7 @@ import { faXmark } from '@fortawesome/free-solid-svg-icons';
     ]
 })
 export class PurchasedToursComponent implements OnInit {
+    @ViewChildren(PurchasedTourCardComponent) tourCards!: QueryList<PurchasedTourCardComponent>;
     currentIndex: number = 0;
     currentIndexCampaign: number = 0;
     ToursContainer: any;
@@ -49,6 +52,7 @@ export class PurchasedToursComponent implements OnInit {
     constructor(
         private tourExecutionService: TourExecutionService,
         private authService: AuthService,
+        private notifier: NotifierService,
     ) { }
     ngOnInit(): void {
         this.getTours();
@@ -65,7 +69,7 @@ export class PurchasedToursComponent implements OnInit {
     getTours() {
         this.tourExecutionService.getTours().subscribe({
             next: (result: Tour[]) => {
-                this.purchasedTours = result.concat(result).concat(result).concat(result).concat(result).concat(result);
+                this.purchasedTours = result;
             },
             error: (err: any) => {
                 console.log(err);
@@ -87,7 +91,7 @@ export class PurchasedToursComponent implements OnInit {
             next: (result: TourExecutionSession) => {
                 if (result == null) {
                     this.hasTourActive = false;
-                    this.activeTourId = -1;
+                    this.activeTourId = 0;
                 } else {
                     this.hasTourActive = true;
                     this.activeTourId = result.tourId;
@@ -113,18 +117,23 @@ export class PurchasedToursComponent implements OnInit {
         });
         this.selectedTourIds.length = 0;
         this.selectedTours.length = 0;
+        this.tourCards.forEach(card => card.selected = false);
+    }
+    removeSelectedChild(tourId: number) {
+        this.tourCards.forEach(card => { if (card.tour.id == tourId) card.selected = false });
+        this.selectedTours = this.selectedTours.filter(item => item.id !== tourId);
+        this.selectedTourId = 0;
     }
     createCampaign() {
-        alert(JSON.stringify(this.campaignForm.value))
         if (
             this.campaignForm.value.campaignDescription == "" ||
             this.campaignForm.value.campaignName == ""
         ) {
-            alert("You must fill all fields");
+            this.notifier.notify("error", "You must fill all fields");
             return;
         }
         if (this.selectedTourIds.length < 2) {
-            alert("There must be at least two tours");
+            this.notifier.notify("error", "There must be at least two tours");
             return;
         }
         const campaign: CampaignCreate = {
@@ -142,6 +151,7 @@ export class PurchasedToursComponent implements OnInit {
                 });
                 this.selectedTourIds = [];
                 this.selectedTours = [];
+                this.tourCards.forEach(card => card.selected = false);
                 this.getCampaigns();
             },
         });

@@ -21,13 +21,13 @@ export class PurchasedTourCardComponent implements OnInit {
     @Input() isTourActive: boolean;
     @Input() isGlowing: boolean;
     @Input() isCampaign: boolean;
+    @Input() selected: boolean = false;
     @Output() onSelected = new EventEmitter<any>();
     @Output() onDeselected = new EventEmitter<any>();
     @ViewChild(CarouselComponent) carousel: CarouselComponent;
     images: string[];
     execution: TourExecutionStart = { tourId: 0, isCampaign: false };
     isClicked: boolean = false;
-    selected: boolean = false;
 
     constructor(
         private router: Router,
