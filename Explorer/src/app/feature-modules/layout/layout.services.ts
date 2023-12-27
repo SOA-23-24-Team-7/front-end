@@ -49,4 +49,7 @@ export class LayoutService {
   getPopularBlogs(): Observable<PagedResults<Blog>> {
     return this.http.get<PagedResults<Blog>>(environment.apiHost + 'blog');
   }
+  getRecommendedTours(): Observable<PagedResults<Tour>> {
+    return this.http.get<PagedResults<Tour>>(environment.apiHost+'tourist/tourrecommenders/recommendedtours');
+  }
 }

@@ -1,16 +1,14 @@
 import { HttpClient, HttpResponse } from "@angular/common/http";
 import { Injectable } from "@angular/core";
 import { Rating } from "../administration/model/rating.model";
-import { Observable } from "rxjs";
+import { BehaviorSubject, Observable, tap } from "rxjs";
 import { environment } from "src/env/environment";
-import { Router } from "@angular/router";
 import { PagedResults } from "src/app/shared/model/paged-results.model";
 import { Club } from "./model/club.model";
 import { MyClubJoinRequest } from "./model/my-club-join-request.model";
 import { ClubJoinRequest } from "./model/club-join-request.model copy";
 import { ClubMember } from "./model/club-member.model";
 import { ClubInvitationUsername } from "./model/club-invitation-username.model";
-import { ClubInvitation } from "./model/club-invitation.model";
 import { ClubInvitationWithClubAndOwnerName } from "./model/club-invitation-with-club-and-owner-name.model";
 import { Review } from "./model/review.model";
 import { Problem } from "./model/problem.model";
@@ -22,7 +20,6 @@ import { PublicKeyPoint } from "./model/public-key-point.model";
 import { PublicFacilities } from "./model/public-facilities.model";
 import { KeyPoint } from "../tour-authoring/model/key-point.model";
 import { ShoppingCart } from "./model/shopping-cart";
-import { OrderItem as any } from "./model/order-item";
 import { TourLimitedView } from "./model/tour-limited-view.model";
 import { TourToken } from "./model/tour-token.model";
 import { TourSale } from "./model/tour-sale.model";
@@ -36,6 +33,15 @@ import { SortOption } from "./model/sort-option.model";
     providedIn: "root",
 })
 export class MarketplaceService {
+    cart$ = new BehaviorSubject<ShoppingCart>({
+        id: 0,
+        touristId: 0,
+        totalPrice: 0,
+        isPurchased: false,
+        orderItems: [],
+        bundleOrderItems: [],
+    });
+
     constructor(private http: HttpClient) {}
 
     getTourPreference(): Observable<TourPreference> {
@@ -287,18 +293,6 @@ export class MarketplaceService {
                 "/first-key-point",
         );
     }
-    addShoppingCart(shoppingCart: ShoppingCart): Observable<ShoppingCart> {
-        return this.http.post<ShoppingCart>(
-            environment.apiHost + "tourist/shoppingCart/",
-            shoppingCart,
-        );
-    }
-    addOrderItem(orderItem: any): Observable<any> {
-        return this.http.post<any>(
-            environment.apiHost + "tourist/shoppingCart/addItem/",
-            orderItem,
-        );
-    }
 
     addBundleOrderItem(bundleOrderItem: BundleOrderItem): Observable<any> {
         return this.http.post<any>(
@@ -307,9 +301,34 @@ export class MarketplaceService {
         );
     }
 
+    addShoppingCart(shoppingCart: ShoppingCart): Observable<ShoppingCart> {
+        return this.http.post<ShoppingCart>(
+            environment.apiHost + "tourist/shoppingCart/",
+            shoppingCart,
+        );
+    }
+
     getShoppingCart(id: number): Observable<ShoppingCart> {
-        return this.http.get<ShoppingCart>(
-            environment.apiHost + "tourist/shoppingCart/" + id,
+        return this.http
+            .get<ShoppingCart>(
+                environment.apiHost + "tourist/shoppingCart/" + id,
+            )
+            .pipe(
+                tap(shoppingCart => {
+                    this.setCart(shoppingCart);
+                }),
+            );
+    }
+
+    setCart(shoppingCart: ShoppingCart) {
+        this.cart$.next(shoppingCart);
+        localStorage.setItem("shoppingCart", JSON.stringify(shoppingCart));
+    }
+
+    addOrderItem(orderItem: any): Observable<any> {
+        return this.http.post<any>(
+            environment.apiHost + "tourist/shoppingCart/addItem",
+            orderItem,
         );
     }
 
@@ -331,6 +350,11 @@ export class MarketplaceService {
         id: number | undefined,
         shoppingCartId: number | undefined,
     ): any {
+        this.cart$.value.orderItems?.splice(
+            this.cart$.value.orderItems?.findIndex(x => x.id === id),
+            1,
+        );
+        this.setCart(this.cart$.value);
         return this.http.delete<any>(
             environment.apiHost +
                 "tourist/shoppingCart/removeItem/" +
@@ -505,7 +529,7 @@ export class MarketplaceService {
     }
     getCouponsById(authorId: number): Observable<PagedResults<Coupon>> {
         return this.http.get<PagedResults<Coupon>>(
-            environment.apiHost + "coupon/"+authorId,
+            environment.apiHost + "coupon/" + authorId,
         );
     }
     deleteCoupon(id: number): Observable<Coupon> {
@@ -551,9 +575,13 @@ export class MarketplaceService {
         return this.http.post<any>(path, {});
     }
     getActiveTours(): Observable<PagedResults<Tour>> {
-        return this.http.get<PagedResults<Tour>>(environment.apiHost+'tourist/tourrecommenders/activetours');
+        return this.http.get<PagedResults<Tour>>(
+            environment.apiHost + "tourist/tourrecommenders/activetours",
+        );
     }
     getRecommendedTours(): Observable<PagedResults<Tour>> {
-        return this.http.get<PagedResults<Tour>>(environment.apiHost+'tourist/tourrecommenders/recommendedtours');
+        return this.http.get<PagedResults<Tour>>(
+            environment.apiHost + "tourist/tourrecommenders/recommendedtours",
+        );
     }
 }

@@ -16,6 +16,7 @@ import { MarketplaceService } from "../marketplace.service";
 import { ShoppingCart } from "../model/shopping-cart";
 import { TourLimitedView } from "../model/tour-limited-view.model";
 import { TourToken } from "../model/tour-token.model";
+import { PagedResults } from "src/app/shared/model/paged-results.model";
 
 @Component({
     selector: "xp-tour-page",
@@ -70,6 +71,15 @@ export class TourPageComponent {
         this.keyPointContainer = document.querySelector(
             ".key-point-cards-container",
         );
+
+        this.marketplaceService.cart$.subscribe(cart => {
+            this.marketplaceService.getToursInCart(this.user.id).subscribe({
+                next: (result: PagedResults<TourLimitedView>) => {
+                    this.addedTours = result.results;
+                    this.getShoppingCart(); // update the price
+                },
+            });
+        });
     }
 
     formatDate(date: Date | undefined): string | null {
@@ -121,6 +131,9 @@ export class TourPageComponent {
                 this.marketplaceService.getToursInCart(this.user.id).subscribe({
                     next: result => {
                         this.addedTours = result.results;
+                        this.marketplaceService
+                            .getShoppingCart(this.user.id)
+                            .subscribe();
                         alert("Item successfully added to cart!");
                     },
                 });
@@ -132,7 +145,7 @@ export class TourPageComponent {
     }
 
     getShoppingCart(): void {
-        this.marketplaceService.getShoppingCart(this.user.id).subscribe({
+        this.marketplaceService.cart$.subscribe({
             next: (result: ShoppingCart) => {
                 this.shoppingCart = result;
                 console.log(result);
