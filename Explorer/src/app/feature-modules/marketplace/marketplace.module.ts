@@ -9,11 +9,10 @@ import { RouterModule } from "@angular/router";
 import { OwnerClubsComponent } from "./owner-clubs/owner-clubs.component";
 import { ClubFormComponent } from "./club-form/club-form.component";
 import { ClubsComponent } from "./clubs/clubs.component";
-import { MyClubJoinRequestsComponent } from "./my-club-join-requests/my-club-join-my-club-join-requests.component";
+import { MyClubJoinRequestsComponent } from "./my-club-join-requests/my-club-join-requests.component";
 import { ClubJoinRequestManagementComponent } from "./club-join-request-management/club-join-request-management.component";
 import { ReviewComponent } from "./review/review.component";
 import { ReviewFormComponent } from "./review-form/review-form.component";
-import { ProblemComponent } from "./problem/problem.component";
 import { ProblemFormComponent } from "./problem-form/problem-form.component";
 import { ClubMembersInviteFormComponent } from "./club-members-invite-form/club-members-invite-form.component";
 import { ClubMembersManagementComponent } from "./club-members-management/club-members-management.component";
@@ -40,13 +39,17 @@ import { CouponsComponent } from "./coupons/coupons.component";
 import { CouponsViewComponent } from "./coupons-view/coupons-view.component";
 import { EditCouponFormComponent } from "./edit-coupon-form/edit-coupon-form.component";
 import { CouponsModalComponent } from "./coupons-modal/coupons-modal.component";
-import { ExploreBundlesComponent } from './explore-bundles/explore-bundles.component';
-import { StarRatingModule } from 'angular-star-rating';
-import { TouristsWishlistComponent } from './tourists-wishlist/tourists-wishlist.component';
-import { WishlistComponent } from './wishlist/wishlist.component';
+import { ExploreBundlesComponent } from "./explore-bundles/explore-bundles.component";
+import { StarRatingModule } from "angular-star-rating";
+import { ClubPageComponent } from "./club-page/club-page.component";
+import { ClubBlogPreviewComponent } from "./club-blog-preview/club-blog-preview.component";
+import { BlogsComponent } from "../blog/blogs/blogs.component";
+import { BlogModule } from "../blog/blog.module";
+import { TouristsWishlistComponent } from "./tourists-wishlist/tourists-wishlist.component";
+import { WishlistComponent } from "./wishlist/wishlist.component";
 import { CartComponent } from "./cart/cart.component";
 import { MatRadioModule } from "@angular/material/radio";
-import { NotifierModule } from "angular-notifier"; 
+import { NotifierModule } from "angular-notifier";
 
 @NgModule({
     declarations: [
@@ -57,7 +60,6 @@ import { NotifierModule } from "angular-notifier";
         ClubJoinRequestManagementComponent,
         ReviewComponent,
         ReviewFormComponent,
-        ProblemComponent,
         ProblemFormComponent,
         RatingFormComponent,
         ClubFormComponent,
@@ -81,6 +83,8 @@ import { NotifierModule } from "angular-notifier";
         EditCouponFormComponent,
         CouponsModalComponent,
         ExploreBundlesComponent,
+        ClubPageComponent,
+        ClubBlogPreviewComponent,
         TouristsWishlistComponent,
         WishlistComponent,
         CartComponent,
@@ -105,6 +109,7 @@ import { NotifierModule } from "angular-notifier";
         LayoutModule,
         MatChipsModule,
         TourAuthoringModule,
+        BlogModule,
         MatRadioModule,
         StarRatingModule.forRoot(),
         NotifierModule,
@@ -113,7 +118,6 @@ import { NotifierModule } from "angular-notifier";
         ReviewComponent,
         ReactiveFormsModule,
         RatingFormComponent,
-        ProblemComponent,
         TourPreferencesComponent,
         TourPreferenceFormComponent,
         KeypointsNotificationsComponent,

@@ -47,11 +47,14 @@ import {
     faMoneyBills,
     faBoxOpen,
     faBarChart,
-    faCheckSquare
+    faCheckSquare,
 } from "@fortawesome/free-solid-svg-icons";
 import { StakeholderService } from "../../stakeholder/stakeholder.service";
 import { interval, Subscription } from "rxjs";
 import { RatingFormComponent } from "../../marketplace/rating-form/rating-form.component";
+import { PagedResults } from "src/app/shared/model/paged-results.model";
+import { ClubInvitationWithClubAndOwnerName } from "../../marketplace/model/club-invitation-with-club-and-owner-name.model";
+import { MarketplaceService } from "../../marketplace/marketplace.service";
 //import { } from "@fortawesome/free-regular-svg-icons";
 
 @Component({
@@ -73,6 +76,7 @@ export class NavbarComponent implements OnInit {
         private themeService: ThemeService,
         private router: Router,
         private stakeholderService: StakeholderService,
+        private marketplaceService: MarketplaceService,
         public dialogRef: MatDialog,
     ) {
         this.router.events.subscribe(event => {
@@ -89,21 +93,29 @@ export class NavbarComponent implements OnInit {
     ngOnInit(): void {
         this.authService.user$.subscribe(user => {
             this.user = user;
-            this.getUnseenNotifications();
-            if (this.user.id !== 0) {
+            if (this.user.id !== 0 && this.user.role != "administrator") {
                 this.checkNotifications = this.source.subscribe(val =>
                     this.getUnseenNotifications(),
                 );
             }
         });
+        // this.getUnseenNotifications();
     }
 
     getUnseenNotifications() {
-        console.log("subscribe");
+        // console.log("subscribe");
         if (this.user!.id !== 0) {
             this.stakeholderService.countNotifications().subscribe({
                 next: (result: number) => {
-                    this.notificationNumber = result;
+                    this.marketplaceService.getInvitations().subscribe({
+                        next: (invitations: PagedResults<ClubInvitationWithClubAndOwnerName>) => {
+                            this.notificationNumber = result + invitations.totalCount;
+                            console.log(`Notification count: ${this.notificationNumber}`)
+                        },
+                        error: (errData) => {
+                          console.log(errData);
+                        }
+                      })
                 },
             });
         }
@@ -136,7 +148,9 @@ export class NavbarComponent implements OnInit {
     }
 
     onRateApp(): void {
-        const dialogRef = this.dialogRef.open(RatingFormComponent, { autoFocus: false });
+        const dialogRef = this.dialogRef.open(RatingFormComponent, {
+            autoFocus: false,
+        });
     }
 
     ngOnDestroy() {
@@ -144,8 +158,10 @@ export class NavbarComponent implements OnInit {
     }
 
     unsubscribe() {
-        console.log("destroyed");
-        this.checkNotifications.unsubscribe();
+        if (this.user?.id !== 0 && this.user?.role != "administrator") {
+            // console.log("destroyed");
+            this.checkNotifications.unsubscribe();
+        }
     }
 
     faChevronDown = faChevronDown;

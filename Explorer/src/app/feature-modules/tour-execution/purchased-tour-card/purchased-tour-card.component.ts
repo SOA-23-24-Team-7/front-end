@@ -9,6 +9,7 @@ import { TourExecutionStart } from "../model/tour-execution-start-model";
 import { faL } from "@fortawesome/free-solid-svg-icons";
 import { TourWheatherComponent } from "../tour-wheather/tour-wheather.component";
 import { CarouselComponent } from "src/app/shared/carousel/carousel.component";
+import { ProblemFormComponent } from "../../marketplace/problem-form/problem-form.component";
 
 @Component({
     selector: "xp-purchased-tour-card",
@@ -68,6 +69,14 @@ export class PurchasedTourCardComponent implements OnInit {
         const dialogRef = this.dialogRef.open(KeyPointsViewComponent, {
             data: {
                 keyPoints: this.tour.keyPoints,
+            },
+        });
+    }
+
+    ShowProblemForm() {
+        const dialogRef = this.dialogRef.open(ProblemFormComponent, {
+            data: {
+                tourId: this.tour.id!,
             },
         });
     }

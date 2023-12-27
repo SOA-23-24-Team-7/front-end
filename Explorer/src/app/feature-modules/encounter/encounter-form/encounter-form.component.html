@@ -53,7 +53,8 @@
                         <label>People number</label>
                     </div>
                 </div>
-                <div class="field">
+
+                <!-- <div class="field">
                     <input
                         id="file-upload"
                         accept="image/*"
@@ -63,9 +64,24 @@
                         (change)="onSelectImage($event)"
                     />
                     <label>Picture</label>
-                </div>
+                </div> -->
+
+                <label class="custom-file-upload btn">
+                    <fa-icon [icon]="faImage" />
+                    Upload image
+                    <input
+                        id="file-upload"
+                        accept="image/*"
+                        type="file"
+                        [(ngModel)]="picturePath"
+                        class="upload-input"
+                        (change)="onSelectImage($event)"
+                    />
+                </label>
+
                 <!-- <img [src]="picturePath" /> -->
                 <div class="btn" (click)="selectEncounterOnMap()">
+                    <fa-icon [icon]="faMapMarker" />
                     Select encounter
                 </div>
                 <div

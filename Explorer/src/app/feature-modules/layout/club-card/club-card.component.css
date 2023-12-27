@@ -8,23 +8,31 @@
     box-shadow: 0 0 1rem rgba(var(--clr-outline-contrast), 0.8);
     position: relative;
     color: rgb(var(--clr-text));
-    transition: transform 0.2s;
+    transition: transform 0.2s, background-color 0.15s, box-shadow 0.15s,
+        border 0.15s;
 }
 
 .club-card:hover {
     transform: scale(1.05); /* Uvećanje kartice kada se miš nalazi iznad nje */
 }
+
 .club-image {
     height: 11rem;
     width: 17rem;
+    overflow: hidden;
     border-radius: 1rem;
     margin: 0 auto;
     z-index: 1;
     position: relative;
     cursor: pointer;
+    object-fit: cover;
 }
 
 .club-card-details {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    justify-content: space-between;
     margin-top: 0.625rem;
 }
 
@@ -32,10 +40,178 @@
     font-size: 1.3rem;
     font-weight: bold;
     cursor: pointer;
+    transition: color 0.15s;
+    max-width: 100%;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    max-lines: 1;
+    white-space: nowrap;
+    margin-bottom: 0.5rem;
 }
 
 .club-name:hover {
     color: rgba(var(--clr-primary-500), 1);
-    text-decoration: underline;
     cursor: pointer;
+}
+
+.club-button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding-inline: 0.5rem;
+    height: 2rem;
+    width: 100%;
+    border-radius: 0.5rem;
+    background-color: rgba(var(--clr-primary-500), 1);
+    cursor: pointer;
+    transition: filter 0.15s;
+}
+
+.club-button:hover {
+    filter: brightness(1.2);
+}
+
+.club-button-icon {
+    color: rgba(255, 255, 255, 1);
+    font-size: 1.3rem;
+}
+
+.club-button-text {
+    color: rgba(255, 255, 255, 1);
+    font-size: 1.3rem;
+    margin-left: 0.5rem;
+}
+
+.club-sent {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding-inline: 0.5rem;
+    height: 2rem;
+    width: 100%;
+    border-radius: 0.5rem;
+    background-color: rgba(var(--clr-background), 1);
+    cursor: pointer;
+    transition: background-color 0.15s;
+}
+
+.sent-icon {
+    color: rgba(var(--clr-text), 1);
+    font-size: 1.3rem;
+    transition: color 0.15s;
+}
+
+.sent-text {
+    color: rgba(var(--clr-text), 1);
+    font-size: 1.3rem;
+    transition: color 0.15s;
+    margin-left: 0.5rem;
+}
+
+.club-mine {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding-inline: 0.5rem;
+    height: 2rem;
+    width: 100%;
+    border-radius: 0.5rem;
+    background-color: #34be90;
+    cursor: pointer;
+    transition: background-color 0.15s;
+}
+
+.mine-icon {
+    color: rgba(255, 255, 255, 1);
+    font-size: 1.3rem;
+}
+
+.mine-text {
+    color: rgba(255, 255, 255, 1);
+    font-size: 1.3rem;
+    margin-left: 0.5rem;
+}
+
+.club-joined {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding-inline: 0.5rem;
+    height: 2rem;
+    width: 100%;
+    border-radius: 0.5rem;
+    background-color: #4caf50;
+    cursor: pointer;
+    transition: background-color 0.15s;
+}
+
+.joined-icon {
+    color: rgba(255, 255, 255, 1);
+    font-size: 1.3rem;
+}
+
+.joined-text {
+    color: rgba(255, 255, 255, 1);
+    font-size: 1.3rem;
+    margin-left: 0.5rem;
+}
+
+.edit-icon {
+    color: rgba(255, 255, 255, 1);
+    font-size: 1.3rem;
+}
+
+.edit-text {
+    color: rgba(255, 255, 255, 1);
+    font-size: 1.3rem;
+    margin-left: 0.5rem;
+}
+
+.club-edit {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding-inline: 0.5rem;
+    height: 2rem;
+    width: calc(50% - 0.5rem);
+    border-radius: 0.5rem;
+    background-color: #0090d3;
+    cursor: pointer;
+    transition: background-color 0.15s;
+}
+
+.delete-icon {
+    color: rgba(255, 255, 255, 1);
+    font-size: 1.3rem;
+}
+
+.delete-text {
+    color: rgba(255, 255, 255, 1);
+    font-size: 1.3rem;
+    margin-left: 0.5rem;
+}
+
+.club-delete {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding-inline: 0.5rem;
+    height: 2rem;
+    width: calc(50% - 0.5rem);
+    margin-left: 1rem;
+    border-radius: 0.5rem;
+    background-color: rgb(var(--clr-error-300));
+    cursor: pointer;
+    transition: background-color 0.15s;
+}
+
+.button-row {
+    display: flex;
+}
+
+.join {
+    color: white;
+    font-size: 1.3rem;
+
+    margin-left: 0.5rem;
 }

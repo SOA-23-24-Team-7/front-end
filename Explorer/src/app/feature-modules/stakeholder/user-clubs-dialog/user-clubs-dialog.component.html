@@ -1,0 +1,24 @@
+<div class="dialog">
+    <div class="title">
+        <h1>Clubs</h1>
+    </div>
+    <div class="club-container">
+        <div class="club-row" *ngFor="let club of clubs">
+            <div class="club-info">
+                <div class="column">
+                    <div class="clubname">
+                        {{club.name}}
+                    </div>
+                </div>
+            </div>
+            <div class="buttons" (click)="showClub(club.id)">
+                <button mat-raised-button color="primary">Show</button>
+            </div>
+        </div>
+        <div *ngIf="clubs.length == 0" style="text-align: center;"> You are not a member of any club
+            <div class="buttons" (click)="showClubs()">
+                <button mat-raised-button color="primary">Explore clubs</button>
+            </div>
+        </div>
+    </div>
+</div>

@@ -18,7 +18,7 @@ import { xpError } from "src/app/shared/model/error.model";
 export class BlogFormComponent implements OnInit {
     blog: Blog;
     blogId: number;
-
+    clubId: number = -1;
     @ViewChild("editor") editorElement: ElementRef;
 
     constructor(
@@ -29,9 +29,13 @@ export class BlogFormComponent implements OnInit {
     ) {}
     ngOnInit(): void {
         const param = this.route.snapshot.paramMap.get("blogId");
+        const clubParam = this.route.snapshot.paramMap.get("clubId");
         if (Number(param)) {
             this.blogId = Number(param);
             this.getBlog();
+        }
+        if (Number(clubParam)) {
+            this.clubId = Number(clubParam);
         }
     }
 
@@ -110,15 +114,30 @@ export class BlogFormComponent implements OnInit {
             this.notifier.notify("error", "Description must not be empty.");
             return;
         }
-        this.service.saveBlog(blog).subscribe({
-            next: _ => {
-                this.notifier.notify("success", "Successfully created blog!");
-                this.router.navigate(["/my-blogs"]);
-            },
-            error: err => {
-                this.notifier.notify("error", xpError.getErrorMessage(err));
-            },
-        });
+        if(this.clubId == -1){
+            this.service.saveBlog(blog).subscribe({
+                next: _ => {
+                    this.notifier.notify("success", "Successfully created blog!");
+                    this.router.navigate(["/my-blogs"]);
+                },
+                error: err => {
+                    this.notifier.notify("error", xpError.getErrorMessage(err));
+                },
+            });
+        }
+        else{
+            blog.clubId = this.clubId
+            blog.status = 1
+            this.service.saveClubBlog(blog).subscribe({
+                next: _ => {
+                    this.notifier.notify("success", "Successfully created blog!");
+                    this.router.navigate(["/club", this.clubId]);
+                },
+                error: err => {
+                    this.notifier.notify("error", xpError.getErrorMessage(err));
+                },
+            });
+        }
     }
 
     updateBlog(): void {

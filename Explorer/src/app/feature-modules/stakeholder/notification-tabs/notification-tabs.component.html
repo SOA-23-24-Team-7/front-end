@@ -47,11 +47,12 @@
             class="tab"
             *ngIf="user.role === 'tourist'"
             [ngClass]="{
-                'selected-tab': selectedTab === Tab.TRANSACTIONRECORDSNOTIFICATIONS
+                'selected-tab':
+                    selectedTab === Tab.TRANSACTIONRECORDSNOTIFICATIONS
             }"
             (click)="setActiveTab(Tab.TRANSACTIONRECORDSNOTIFICATIONS, tabList)"
         >
-            <fa-icon [icon]="faMoneyBill"/> Transaction notifications
+            <fa-icon [icon]="faMoneyBill" /> Transaction notifications
         </div>
         <div
             class="tab"
@@ -61,7 +62,17 @@
             }"
             (click)="setActiveTab(Tab.PAYMENTSHISTORY, tabList)"
         >
-            <fa-icon [icon]="faCoins"/> Payments history
+            <fa-icon [icon]="faCoins" /> Payments history
+        </div>
+        <div
+            class="tab"
+            *ngIf="user.role === 'tourist'"
+            [ngClass]="{
+                'selected-tab': selectedTab === Tab.CLUBS
+            }"
+            (click)="setActiveTab(Tab.CLUBS, tabList)"
+        >
+            <fa-icon [icon]="faUsers" /> Clubs
         </div>
         <div
             class="tab"
@@ -86,11 +97,10 @@
         <xp-transaction-records-notifications
             *ngIf="selectedTab === Tab.TRANSACTIONRECORDSNOTIFICATIONS"
         />
-        <xp-payment-history
-            *ngIf="selectedTab === Tab.PAYMENTSHISTORY"
-        />
-        <xp-wishlist-notifications 
-        *ngIf="selectedTab === Tab.WISHLISTNOTIFICATION"
+        <xp-payment-history *ngIf="selectedTab === Tab.PAYMENTSHISTORY" />
+        <xp-club-notifications *ngIf="selectedTab === Tab.CLUBS" />
+        <xp-wishlist-notifications
+            *ngIf="selectedTab === Tab.WISHLISTNOTIFICATION"
         ></xp-wishlist-notifications>
     </div>
 </div>
