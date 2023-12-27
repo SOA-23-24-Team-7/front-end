@@ -150,7 +150,8 @@
                             tour.id,
                             tour.name,
                             discount ? discountedPrice! : tour.price
-                        )
+                        );
+                        $event.stopPropagation()
                     "
                 >
                     <fa-icon [icon]="faCartShopping" />
