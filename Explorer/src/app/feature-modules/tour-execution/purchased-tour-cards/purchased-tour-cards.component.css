@@ -1,9 +1,104 @@
+.container {
+    display: flex;
+    flex-direction: row;
+    align-items: flex-start;
+}
 
+.title {
+    color: rgba(var(--clr-text), 1);
+}
+
+.center {
+    text-align: center;
+}
+
+.title-margin {
+    margin-left: 2rem;
+}
 
 .tour-card-grid {
     display: flex;
     flex-direction: row;
-    justify-content: flex-start;
     gap: 1rem;
     flex-wrap: wrap;
+    justify-content: center;
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+}
+
+.cont {
+    margin-left: auto;
+    margin-right: auto;
+    max-width: 90%;
+}
+
+.base {
+    scroll-behavior: smooth;
+}
+
+.campaign-form {
+    width: 30%;
+    height: auto;
+    background-color: rgb(var(--clr-background-secondary));
+    display: flex;
+    flex-direction: column;
+    justify-items: center;
+    padding: 1rem;
+    margin: 1rem;
+    border-radius: 1rem;
+}
+
+.slide-in {
+    transform: translateX(0);
+    opacity: 1;
+    transition: transform 300ms ease-out, opacity 300ms ease-out;
+}
+
+.slide-out {
+    transform: translateX(-100%);
+    opacity: 0;
+    width: 0;
+    transition: transform 300ms ease-in, opacity 300ms ease-in;
+}
+
+.bottom {
+    margin-bottom: 1rem;
+}
+
+textarea {
+    resize: none;
+}
+
+.stretch {
+    width: 100%;
+}
+
+.selected-tours {
+    background-color: rgb(var(--clr-background));
+    width: 100%;
+    height: 20rem;
+    border-radius: 1rem;
+}
+
+.selected-tour-card {
+    color: white;
+    background-color: rgb(var(--clr-primary-500));
+    text-align: center;
+    padding-top: 0.5rem;
+    padding-bottom: 0.5rem;
+    margin: 0.5rem;
+    border-radius: 1rem;
+}
+
+.selected-tour-card:hover {
+    filter: brightness(1.2);
+}
+
+.form-x {
+    position: absolute;
+    top: 1rem;
+    right: 1.5rem;
+    color: rgb(var(--clr-primary-500));
+    font-size: 2.5rem;
+    cursor: pointer;
 }
