@@ -121,6 +121,9 @@ export class TourPageComponent {
                 this.marketplaceService.getToursInCart(this.user.id).subscribe({
                     next: result => {
                         this.addedTours = result.results;
+                        this.marketplaceService
+                            .getShoppingCart(this.user.id)
+                            .subscribe();
                         alert("Item successfully added to cart!");
                     },
                 });
@@ -132,7 +135,7 @@ export class TourPageComponent {
     }
 
     getShoppingCart(): void {
-        this.marketplaceService.getShoppingCart(this.user.id).subscribe({
+        this.marketplaceService.cart$.subscribe({
             next: (result: ShoppingCart) => {
                 this.shoppingCart = result;
                 console.log(result);

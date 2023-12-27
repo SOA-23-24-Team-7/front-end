@@ -647,6 +647,7 @@ export class MapComponent implements AfterViewInit, OnChanges {
     }
 
     showKeyPointsOnTourAuthoringMap(): void {
+        console.log("showKeyPointsOnTourAuthoringMap");
         this.waypointMap.clear();
 
         for (const kp of this.keyPoints!) {

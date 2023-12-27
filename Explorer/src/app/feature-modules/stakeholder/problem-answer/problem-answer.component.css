@@ -20,6 +20,7 @@
     height: 70%;
     background-color: rgb(var(--clr-background-secondary));
     border-radius: 1rem;
+    pointer-events: all;
 }
 
 .header {
