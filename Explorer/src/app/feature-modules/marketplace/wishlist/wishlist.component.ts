@@ -13,10 +13,27 @@ export class WishlistComponent {
 
   constructor(private service: MarketplaceService) {}
 
+  toursFromWishlist: Tour[] = [];
 
   ngOnInit(): void {
-    //OVDE TREBA POZIV SERVISA DA UCITA TURE U WISHLISTU OD ULOGOVANOG TURISTE
- }
+    this.getTours();
+  }
+
+
+  ngOnChanges(): void{
+    this.getTours();
+  }
+
+  getTours() {
+    this.service.getToursFromWishlist().subscribe({
+        next: (result: Tour[]) => {
+            this.toursFromWishlist = result;
+        },
+        error: (err: any) => {
+            console.log(err);
+        },
+    });
+}
 
  
 }

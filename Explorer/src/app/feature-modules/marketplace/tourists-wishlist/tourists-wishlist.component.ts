@@ -37,7 +37,7 @@ import { TourLimitedView } from "../model/tour-limited-view.model";
 import { TourToken } from "../model/tour-token.model";
 import { MarketplaceService } from "../marketplace.service";
 import { TourAuthoringService } from "../../tour-authoring/tour-authoring.service";
-
+import { Location } from '@angular/common';
 @Component({
   selector: 'xp-tourists-wishlist',
   templateUrl: './tourists-wishlist.component.html',
@@ -73,13 +73,14 @@ export class TouristsWishlistComponent {
   imageHost: string = environment.imageHost;
   images: string[] = [];
   @Output() notifyParent: EventEmitter<any> = new EventEmitter<any>();
-
+  @Output() deleteClicked = new EventEmitter<number>();
   constructor(
       private authService: AuthService,
       private marketplaceService: MarketplaceService,
       private tourAuthoringService: TourAuthoringService,
       public dialogRef: MatDialog,
       private notifier: NotifierService,
+      private location: Location
   ) {}
 
   ngOnChanges(): void {
@@ -143,4 +144,17 @@ onImageError(event: Event) {
     target.src = "https://imgs.search.brave.com/udmDGOGRJTYO6lmJ0ADA03YoW4CdO6jPKGzXWvx1XRI/rs:fit:860:0:0/g:ce/aHR0cHM6Ly90My5m/dGNkbi5uZXQvanBn/LzAyLzY4LzU1LzYw/LzM2MF9GXzI2ODU1/NjAxMl9jMVdCYUtG/TjVyalJ4UjJleVYz/M3puSzRxblllS1pq/bS5qcGc";
   }
 }
+
+  
+remove(){
+  this.marketplaceService.removeTourFromWishList(this.tour.id!).subscribe({
+      next:() =>{
+        location.reload();
+      },
+      error:(err:any) => {
+        console.log(err);
+      }
+  });
+}
+
 }

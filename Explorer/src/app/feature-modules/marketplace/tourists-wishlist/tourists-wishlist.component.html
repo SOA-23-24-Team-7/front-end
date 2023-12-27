@@ -117,8 +117,8 @@
                 >
                     View tour
                 </div>
-                <div class="btn view" (click)="BuyTour()">
-                    Buy Tour
+                <div class="btn view" (click)="remove(); $event.stopPropagation()" >
+                    Remove from wishlist
                 </div>
             </div>
         </div>
