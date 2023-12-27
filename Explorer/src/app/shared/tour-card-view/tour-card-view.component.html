@@ -24,6 +24,20 @@
     <div class="tour-card-content">
         <div class="tour-card-top">
             <div class="tour-tags">
+                <div
+                    class="tour-tag"
+                    *ngIf="tour.recommended"
+                    style="background-color: olivedrab; color: white"
+                >
+                    Recommended
+                </div>
+                <div
+                    class="tour-tag"
+                    *ngIf="tour.active"
+                    style="background-color: orange; color: white"
+                >
+                    Active
+                </div>
                 <div class="tour-tag" *ngFor="let tag of tour.tags">
                     {{ tag }}
                 </div>
@@ -38,12 +52,6 @@
                     class="tour-action red"
                     *ngIf="tour.status == 2 || tour.status == 0"
                     [icon]="faTrash"
-                />
-                <fa-icon
-                    class="tour-action"
-                    *ngIf="tour.status == 2 || tour.status == 0"
-                    (click)="onEditClicked(); $event.stopPropagation()"
-                    [icon]="faPen"
                 />
                 <fa-icon
                     class="tour-action"
@@ -160,7 +168,8 @@
                             tour.id,
                             tour.name,
                             discount ? discountedPrice! : tour.price
-                        )
+                        );
+                        $event.stopPropagation()
                     "
                 >
                     <fa-icon [icon]="faCartShopping" />

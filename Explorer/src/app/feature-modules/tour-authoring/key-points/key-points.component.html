@@ -13,12 +13,15 @@
             <xp-tag *ngFor="let tag of tour?.tags" tagText="{{ tag }}" />
         </div>
         <div class="tour-description">{{ tour?.description }}</div>
-        <div
-            class="btn btn-done"
-            (click)="openPublishModal()"
-            *ngIf="tour?.status == 2 || tour?.status == 0"
-        >
-            Done
+        <div class="buttons">
+            <div class="btn btn-done" [routerLink]="['/tours']">Back</div>
+            <div
+                class="btn btn-done"
+                (click)="openPublishModal()"
+                *ngIf="tour?.status == 2 || tour?.status == 0"
+            >
+                Done
+            </div>
         </div>
     </div>
     <div class="map">

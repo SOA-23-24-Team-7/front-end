@@ -242,10 +242,12 @@ textarea:focus {
 
 ::-webkit-scrollbar {
     width: 0.5em;
+    background-color: rgba(var(--clr-background));
 }
 
 ::-webkit-scrollbar-thumb {
     background-color: rgba(var(--clr-background));
+    border: 1px solid rgba(0, 0, 0, 0.5);
     border-radius: 0.3rem;
 }
 

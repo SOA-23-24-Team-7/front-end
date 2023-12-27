@@ -1,4 +1,10 @@
-import { Component, OnInit, ViewEncapsulation } from "@angular/core";
+import {
+    Component,
+    EventEmitter,
+    OnInit,
+    Output,
+    ViewEncapsulation,
+} from "@angular/core";
 import { MatDialog } from "@angular/material/dialog";
 import { AuthService } from "src/app/infrastructure/auth/auth.service";
 import { User } from "src/app/infrastructure/auth/model/user.model";
@@ -60,6 +66,8 @@ export class NavbarComponent implements OnInit {
     checkNotifications: Subscription;
     source = interval(2 * 60 * 1000);
 
+    @Output() show: EventEmitter<any> = new EventEmitter();
+
     constructor(
         private authService: AuthService,
         private themeService: ThemeService,
@@ -99,6 +107,10 @@ export class NavbarComponent implements OnInit {
                 },
             });
         }
+    }
+
+    showCart() {
+        this.show.emit();
     }
 
     onLogin(): void {
