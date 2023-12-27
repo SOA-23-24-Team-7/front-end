@@ -1,6 +1,6 @@
 export interface WishlistNotification{
-    id: number,
+    id?: number,
     touristId: number,
     tourId: number,
-    message: string,
+    description: string,
 }
