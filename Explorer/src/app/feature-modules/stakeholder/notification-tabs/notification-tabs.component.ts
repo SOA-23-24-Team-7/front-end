@@ -6,6 +6,9 @@ import {
     faSearch,
     faShoppingCart,
     faMoneyBill,
+    faCoins,
+    faUsers,
+    faPercentage,
 } from "@fortawesome/free-solid-svg-icons";
 import { AuthService } from "src/app/infrastructure/auth/auth.service";
 import { User } from "src/app/infrastructure/auth/model/user.model";
@@ -16,6 +19,9 @@ enum Tab {
     PROBLEMRESOLVINGS,
     SHOPPINGNOTIFICATIONS,
     TRANSACTIONRECORDSNOTIFICATIONS,
+    PAYMENTSHISTORY,
+    CLUBS,
+    WISHLISTNOTIFICATION,
 }
 @Component({
     selector: "xp-notification-tabs",
@@ -51,4 +57,7 @@ export class NotificationTabsComponent implements OnInit {
     faSearch = faSearch;
     faShoppingCart = faShoppingCart;
     faMoneyBill = faMoneyBill;
+    faCoins = faCoins;
+    faUsers = faUsers;
+    faPercentage = faPercentage;
 }

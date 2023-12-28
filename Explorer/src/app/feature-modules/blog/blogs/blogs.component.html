@@ -1,5 +1,5 @@
 <div class="blogs-container">
-    <div class="title">
+    <div class="title" *ngIf="clubId == -1">
         <select
             [(ngModel)]="selectedStatus"
             (change)="filterByStatus(selectedStatus)"
@@ -21,6 +21,7 @@
         [routerLink]="['/blog/' + blog.id]"
         (upvote)="upVoteBlog($event)"
         (downvote)="downVoteBlog($event)"
+        [@fadeIn]
         [style.display]="
             (selectedStatus == 5 && blog.status != 0) ||
             blog.status == selectedStatus

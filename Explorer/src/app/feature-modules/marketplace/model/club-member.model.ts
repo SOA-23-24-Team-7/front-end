@@ -1,7 +1,9 @@
 export interface ClubMember {
-    id: number,
+    userId: number,
     firstName: string,
     lastName: string,
     username: string,
     membershipId: number
+    profilePicture: string
+    kicked: boolean
 }

@@ -1,5 +1,22 @@
 <div class="blog-card">
-    <div class="blog-date">{{ blog.date }}</div>
-    <div class="blog-name">{{ blog.name }}</div>
-    <div class="blog-author">{{ blog.author }}</div>
+    <div class="blog-date">{{ blog.date | date:"MMM d, y"}}</div>
+    <div class="blog-name" [routerLink]="blog.status == 0 ? '/blog-form/' + blog.id : '/blog/ '+ blog.id">{{ blog.title }}</div>
+    <div class="blog-description"> 
+        <div [routerLink]="blog.status == 0 ? '/blog-form/' + blog.id : '/blog/ '+ blog.id">
+            {{
+                blog.showMore
+                    ? blog.description
+                    : blog.description.length > 280
+                    ? blog.description.slice(0, 280) + " ..."
+                    : blog.description
+            }}
+        </div>
+        <button
+            *ngIf="blog.description.length > 280"
+            class="show-more-button"
+            (click)="toggleShowMore(blog)"
+        >
+            {{ blog.showMore ? "Hide" : "Show more" }}
+        </button></div>
+    <div class="blog-author">{{"@"+ blog.author.username }}</div>
 </div>

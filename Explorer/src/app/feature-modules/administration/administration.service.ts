@@ -6,8 +6,7 @@ import { Observable } from "rxjs";
 import { PagedResults } from "src/app/shared/model/paged-results.model";
 import { Person } from "../stakeholder/model/person.model";
 import { User } from "src/app/infrastructure/auth/model/user.model";
-import { Rating } from "./model/rating.model";
-import { RatingUsername } from "./model/ratingWithUsername";
+import { UserRating } from "./model/user-rating.model";
 import { Problem } from "../marketplace/model/problem.model";
 import { PublicKeyPointRequest } from "../tour-authoring/model/public-key-point-request.model";
 import { PublicFacilityRequest } from "../tour-authoring/model/public-facility-request.model";
@@ -38,8 +37,8 @@ export class AdministrationService {
         );
     }
 
-    getRatings(): Observable<PagedResults<RatingUsername>> {
-        return this.http.get<PagedResults<RatingUsername>>(
+    getRatings(): Observable<PagedResults<UserRating>> {
+        return this.http.get<PagedResults<UserRating>>(
             environment.apiHost + "rating/ratings",
         );
     }

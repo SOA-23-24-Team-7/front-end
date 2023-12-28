@@ -11,7 +11,6 @@
 }
 
 .border {
-    border-top: rgba(var(--clr-outline-contrast), 0.5) 0.5px solid;
     border-bottom: rgba(var(--clr-outline-contrast), 0.5) 0.5px solid;
     padding: 10px;
 }
@@ -145,14 +144,6 @@
     display: flex;
     gap: 10px;
     overflow-x: auto;
-}
-.gallery-design::-webkit-scrollbar {
-    height: 0.5em;
-}
-
-.gallery-design::-webkit-scrollbar-thumb {
-    background-color: rgba(var(--clr-background-secondary));
-    border-radius: 0.3rem;
 }
 
 .gallery-design button {

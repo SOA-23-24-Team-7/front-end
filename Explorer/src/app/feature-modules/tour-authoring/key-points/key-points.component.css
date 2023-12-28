@@ -1,75 +1,105 @@
-mat-card img {
-    object-fit: contain;
-    width: 100%;
-    height: 100%;
-    width: 45rem;
-    height: 45rem;
-    background-color: #4054b4;
-    align-self: center;
+.tour-info {
+    display: flex;
+    /* outline: 2px solid red; */
+    max-height: 30rem;
+    color: rgb(var(--clr-text));
+    padding-inline: 1rem;
+    margin-top: 1rem;
 }
 
-.cards-buttons-container {
+.information {
+    display: flex;
+    flex-direction: column;
+    /* outline: 2px solid blue; */
+    padding: 2rem;
+    min-width: 20rem;
+    width: 25%;
+    max-width: 30rem;
+    background-color: rgb(var(--clr-background-secondary));
+    border-top-left-radius: 1rem;
+    border-bottom-left-radius: 1rem;
+}
+
+.tour-name {
+    display: flex;
+    font-size: 2rem;
+    font-weight: 800;
+    align-items: center;
+    justify-content: space-between;
+    line-height: 1.1;
+}
+
+.name {
+    word-wrap: break-word;
+    max-width: 100%;
+    max-height: 6rem;
+    overflow: hidden;
+}
+
+.tour-price {
+    font-size: 1.5rem;
+    color: rgb(var(--clr-accent-500));
+    font-weight: 500;
+    min-width: max-content;
+}
+
+.tour-tags {
+    display: flex;
+    gap: 0.2rem;
+}
+
+.tour-description {
+    display: flex;
+    flex-direction: column;
+    max-height: 12rem;
+    max-width: 100%;
+    background: rgb(var(--clr-background));
+    padding: 0.6rem;
+    border-radius: 5px;
+    height: 100%;
+    /* flex-grow: 1; */
+    margin-block: 1rem;
+    word-wrap: break-word;
+    margin-bottom: 2rem;
+    overflow-y: scroll;
+}
+
+::ng-deep .tag {
+    margin-left: 0 !important;
+    padding-right: 0.3rem !important;
+}
+
+.btn-done {
+    margin-inline: auto;
+}
+
+.map {
+    position: relative;
+    width: 100%;
+    flex-grow: 1;
+    border-top-right-radius: 1rem;
+    border-bottom-right-radius: 1rem;
+    overflow: hidden;
+}
+
+::ng-deep #keypointMap {
+    height: 30rem !important;
+}
+
+.keypoints {
+    width: 100%;
+    min-height: 22rem;
+    /* outline: 2px solid purple; */
     display: flex;
     align-items: center;
-}
-.buttons-container {
-    display: flex;
-    flex-direction: column;
-}
-
-.key-point-form {
-    width: 100%;
-    display: flex;
-}
-
-.map-container {
-    width: 100%;
-    margin-top: 3.1rem;
-}
-
-.container {
-    display: flex;
-    flex-direction: column;
-}
-.cards {
-    margin-top: 3rem;
-}
-.row-1 {
-    display: flex;
-    justify-content: center;
-    border: rgba(var(--clr-outline-contrast), 0.5) 1px solid;
-    border-radius: 1rem;
-    box-shadow: 0 0 1rem rgba(var(--clr-outline-contrast), 0.2);
-}
-.row-2 {
-    display: flex;
-    justify-content: center;
-}
-
-.column {
-    flex: 1;
-    padding: 10px;
-}
-
-.column-separated {
-    flex: 0.5;
-    padding: 10px;
-    margin-right: 4rem;
-    margin-left: 4rem;
-    margin-bottom: 2.5rem;
-    margin-top: 4rem;
-    padding-left: 1.6rem;
-    padding-top: 1.5rem;
-    border: rgba(var(--clr-outline), 0.5) 1px solid;
-    border-radius: 1rem;
-    background-color: rgba(var(--clr-background-secondary));
+    padding-inline: 1rem;
 }
 
 .key-point-cards-container {
     display: flex;
     flex-direction: row;
     align-items: center;
-    width: 70rem;
+    width: 100%;
     overflow-x: hidden;
     scroll-behavior: smooth;
 }
@@ -88,7 +118,6 @@ mat-card img {
     align-items: center;
     justify-content: center;
     cursor: pointer;
-    margin: 1.5rem;
 }
 
 .triangle-left,
@@ -110,64 +139,15 @@ mat-card img {
         rgba(var(--clr-primary-500), 1);
 }
 
-.add-enable {
-    padding-bottom: 0;
-    border: rgba(var(--clr-outline-contrast, 1)) 1px solid;
-    border-radius: 0.5rem;
-    cursor: pointer;
-}
-
-.done-submit {
+.cards-buttons-container {
     display: flex;
     align-items: center;
-    justify-content: center;
-    width: 14rem;
-    height: 2rem;
-    background-color: rgba(var(--clr-primary-500), 1);
-    border: rgba(var(--clr-primary-500, 1)) 1px solid;
-    border-radius: 0.5rem;
-    cursor: pointer;
-    transition: background-color 0.15s;
-    margin-top: 1.5rem;
 }
 
-.done-submit:hover {
-    background-color: rgba(var(--clr-primary-500), 0.9);
+#next-button {
+    margin-left: auto;
 }
 
-.done-submit-text {
-    color: rgba(255, 255, 255, 1);
-    font-family: var(--fnt-body);
-    font-weight: 500;
-    font-size: 1.25rem;
-}
-.enable-text {
-    color: rgb(var(--clr-text));
-    font-family: var(--fnt-body);
-    font-weight: 500;
-}
-.checkbox-group div {
+.buttons {
     display: flex;
-    align-items: center;
-    margin-bottom: 10px;
-}
-
-.checkbox-group input[type="checkbox"] {
-    margin-left: 50px;
-}
-
-.text {
-    font-size: 20px;
-}
-
-h2 {
-    color: rgb(var(--clr-text));
-    font-family: var(--fnt-header);
-}
-
-.chechboxes {
-    font-size: 20px;
-    color: rgb(var(--clr-text));
-    flex-direction: column;
-    justify-content: space-between;
 }

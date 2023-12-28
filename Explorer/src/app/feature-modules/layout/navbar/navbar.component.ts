@@ -1,4 +1,10 @@
-import { Component, OnInit, ViewEncapsulation } from "@angular/core";
+import {
+    Component,
+    EventEmitter,
+    OnInit,
+    Output,
+    ViewEncapsulation,
+} from "@angular/core";
 import { MatDialog } from "@angular/material/dialog";
 import { AuthService } from "src/app/infrastructure/auth/auth.service";
 import { User } from "src/app/infrastructure/auth/model/user.model";
@@ -40,9 +46,15 @@ import {
     faFlag,
     faMoneyBills,
     faBoxOpen,
+    faBarChart,
+    faCheckSquare,
 } from "@fortawesome/free-solid-svg-icons";
 import { StakeholderService } from "../../stakeholder/stakeholder.service";
 import { interval, Subscription } from "rxjs";
+import { RatingFormComponent } from "../../marketplace/rating-form/rating-form.component";
+import { PagedResults } from "src/app/shared/model/paged-results.model";
+import { ClubInvitationWithClubAndOwnerName } from "../../marketplace/model/club-invitation-with-club-and-owner-name.model";
+import { MarketplaceService } from "../../marketplace/marketplace.service";
 //import { } from "@fortawesome/free-regular-svg-icons";
 
 @Component({
@@ -57,11 +69,14 @@ export class NavbarComponent implements OnInit {
     checkNotifications: Subscription;
     source = interval(2 * 60 * 1000);
 
+    @Output() show: EventEmitter<any> = new EventEmitter();
+
     constructor(
         private authService: AuthService,
         private themeService: ThemeService,
         private router: Router,
         private stakeholderService: StakeholderService,
+        private marketplaceService: MarketplaceService,
         public dialogRef: MatDialog,
     ) {
         this.router.events.subscribe(event => {
@@ -78,24 +93,36 @@ export class NavbarComponent implements OnInit {
     ngOnInit(): void {
         this.authService.user$.subscribe(user => {
             this.user = user;
-            this.getUnseenNotifications();
-            if (this.user.id !== 0) {
+            if (this.user.id !== 0 && this.user.role != "administrator") {
                 this.checkNotifications = this.source.subscribe(val =>
                     this.getUnseenNotifications(),
                 );
             }
         });
+        // this.getUnseenNotifications();
     }
 
     getUnseenNotifications() {
-        console.log("subscribe");
+        // console.log("subscribe");
         if (this.user!.id !== 0) {
             this.stakeholderService.countNotifications().subscribe({
                 next: (result: number) => {
-                    this.notificationNumber = result;
+                    this.marketplaceService.getInvitations().subscribe({
+                        next: (invitations: PagedResults<ClubInvitationWithClubAndOwnerName>) => {
+                            this.notificationNumber = result + invitations.totalCount;
+                            console.log(`Notification count: ${this.notificationNumber}`)
+                        },
+                        error: (errData) => {
+                          console.log(errData);
+                        }
+                      })
                 },
             });
         }
+    }
+
+    showCart() {
+        this.show.emit();
     }
 
     onLogin(): void {
@@ -120,13 +147,21 @@ export class NavbarComponent implements OnInit {
         return this.themeService.getTheme();
     }
 
+    onRateApp(): void {
+        const dialogRef = this.dialogRef.open(RatingFormComponent, {
+            autoFocus: false,
+        });
+    }
+
     ngOnDestroy() {
         this.unsubscribe();
     }
 
     unsubscribe() {
-        console.log("destroyed");
-        this.checkNotifications.unsubscribe();
+        if (this.user?.id !== 0 && this.user?.role != "administrator") {
+            // console.log("destroyed");
+            this.checkNotifications.unsubscribe();
+        }
     }
 
     faChevronDown = faChevronDown;
@@ -162,4 +197,6 @@ export class NavbarComponent implements OnInit {
     faFlag = faFlag;
     faMoneyBills = faMoneyBills;
     faBoxOpen = faBoxOpen;
+    faBarChart = faBarChart;
+    faCheckSquare = faCheckSquare;
 }

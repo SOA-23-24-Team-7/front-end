@@ -21,7 +21,10 @@ import { SharedModule } from "src/app/shared/shared.module";
 import { UserRowComponent } from "./user-row/user-row.component";
 import { PaymentHistoryComponent } from "./payment-history/payment-history.component";
 import { ShoppingNotificationsComponent } from "./shopping-notifications/shopping-notifications.component";
-import { TransactionRecordsNotificationsComponent } from './transaction-records-notifications/transaction-records-notifications.component';
+import { TransactionRecordsNotificationsComponent } from "./transaction-records-notifications/transaction-records-notifications.component";
+import { UserClubsDialogComponent } from "./user-clubs-dialog/user-clubs-dialog.component";
+import { ClubNotificationsComponent } from "./club-notifications/club-notifications.component";
+import { WishlistNotificationsComponent } from "./wishlist-notifications/wishlist-notifications.component";
 
 @NgModule({
     declarations: [
@@ -42,6 +45,9 @@ import { TransactionRecordsNotificationsComponent } from './transaction-records-
         PaymentHistoryComponent,
         ShoppingNotificationsComponent,
         TransactionRecordsNotificationsComponent,
+        UserClubsDialogComponent,
+        ClubNotificationsComponent,
+        WishlistNotificationsComponent,
     ],
     imports: [
         CommonModule,
@@ -58,6 +64,7 @@ import { TransactionRecordsNotificationsComponent } from './transaction-records-
         NotificationTabsComponent,
         MessageDialogComponent,
         EditProfileComponent,
+        ClubNotificationsComponent,
     ],
 })
 export class StakeholderModule {}

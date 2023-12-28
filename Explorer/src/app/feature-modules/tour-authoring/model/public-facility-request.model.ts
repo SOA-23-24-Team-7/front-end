@@ -1,3 +1,4 @@
+import { User } from "src/app/infrastructure/auth/model/user.model";
 import { Facilities } from "./facilities.model";
 
 export interface PublicFacilityRequest {
@@ -9,6 +10,7 @@ export interface PublicFacilityRequest {
     created?: Date;
     authorName: string;
     facilityName?: string;
+    author?: User;
 }
 
 export enum PublicStatus {

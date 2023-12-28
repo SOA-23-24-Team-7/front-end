@@ -12,6 +12,21 @@
     >
         <div class="warning-tab">
             <div
+                class="controls"
+                *ngIf="user.role === 'tourist' && !problem.isResolved"
+            >
+                <fa-icon
+                    [icon]="faPen"
+                    class="edit"
+                    (click)="showProblemForm(problem)"
+                ></fa-icon>
+                <fa-icon
+                    [icon]="faTrash"
+                    (click)="deleteProblem(problem.id)"
+                    class="delete"
+                ></fa-icon>
+            </div>
+            <div
                 class="deadline"
                 *ngIf="
                     shouldShowDeadline(problem.deadline) &&
@@ -19,7 +34,7 @@
                     (user.role == 'author' || user.role == 'administrator')
                 "
             >
-                {{ problem.deadline | date: "dd / MM / yyyy" }}
+                {{ problem.deadline | date : "dd / MM / yyyy" }}
             </div>
             <div
                 class="deadline deadline-hover"
@@ -58,7 +73,7 @@
                 <div class="report-data">
                     <div class="label">Reported at:</div>
                     <div>
-                        {{ problem.reportedTime | date: "dd / MM / yyyy" }}
+                        {{ problem.reportedTime | date : "dd / MM / yyyy" }}
                     </div>
                     <div class="label">Tour:</div>
                     <div>{{ problem.tourName }}</div>

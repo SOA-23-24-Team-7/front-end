@@ -1,0 +1,97 @@
+<div class="club-page">
+    <div class="club">
+        <img
+            class="club-image"
+            [src]="club.image"
+            (error)="onImageError($event)"
+        />
+        <div class="club-title" lang="en-US">{{ club.name }}</div>
+        <div class="club-text">{{ club.description }}</div>
+        <div class="separator"></div>
+        <div class="club-title" lang="en-US">Moderator</div>
+        <div class="moderator">
+            <xp-user-card [user]="getOwner()" [shield]="true"></xp-user-card>
+        </div>
+        <div class="separator"></div>
+        <div class="club-title" lang="en-US">
+            Members ({{ getMemberCount() }})
+        </div>
+        <div class="members">
+            <xp-user-card [user]="getOwner()" [shield]="true"></xp-user-card>
+            <div *ngFor="let member of getRegularMembers()">
+                <xp-user-card
+                    [user]="member"
+                    [ban]="isOwner()"
+                    [clubMemberId]="member.membershipId"
+                    *ngIf="!member.kicked"
+                ></xp-user-card>
+            </div>
+        </div>
+        <div class="btn invite" *ngIf="isOwner()" (click)="openInviteDialog()">
+            <fa-icon [icon]="faCirclePlus" class="plus" />
+            Invite people
+        </div>
+        <div class="club-title" lang="en-US" *ngIf="isOwner()">
+            Join requests ({{ clubJoinRequests.length }})
+        </div>
+        <div class="members" *ngIf="isOwner()">
+            <div *ngFor="let request of clubJoinRequests">
+                <div class="request">
+                    <div class="username">@{{ request.touristName }}</div>
+                    <div class="buttons-list">
+                        <div class="accept-wrapper">
+                            <fa-icon
+                                class="accept"
+                                [icon]="faCheck"
+                                (click)="respondJoinRequest(request.id, true)"
+                            />
+                        </div>
+                        <div class="decline-wrapper">
+                            <fa-icon
+                                class="decline"
+                                [icon]="faXmark"
+                                (click)="respondJoinRequest(request.id, false)"
+                            />
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="separator"></div>
+        <div class="btn leave" *ngIf="isRegularMember()" (click)="leave()">
+            <fa-icon [icon]="faDoorOpen" class="door-leave" />
+            Leave the club
+        </div>
+    </div>
+
+    <div class="blogs" *ngIf="isUserMember">
+        <h1>Blogs</h1>
+        <div style="width: 30%; margin: auto">
+            <br />
+            <div class="club-button" (click)="createBlog()">
+                <div class="club-button-text">Create new blog</div>
+            </div>
+        </div>
+        <div>
+            <xp-blogs [clubId]="clubId"></xp-blogs>
+        </div>
+    </div>
+    <div class="blogs" *ngIf="!isUserMember">
+        <div *ngIf="canSendJoinRequest()">
+            <br />
+            <h1 style="margin-bottom: 20px">
+                Join this club to have access to the blog
+            </h1>
+            <div style="width: 30%; margin: auto">
+                <div class="club-button" (click)="sendJoinRequest()">
+                    <fa-icon class="club-button-icon" [icon]="faDoorOpen" />
+                    <div class="club-button-text">Join</div>
+                </div>
+            </div>
+        </div>
+        <div *ngIf="!canSendJoinRequest()">
+            <br />
+            <h1>Membership request sent!</h1>
+        </div>
+    </div>
+</div>

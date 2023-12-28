@@ -1,4 +1,4 @@
-import { Component, OnInit } from "@angular/core";
+import { Component, Input, OnInit } from "@angular/core";
 import { Blog } from "../model/blog.model";
 import { BlogService } from "../blog.service";
 import { PagedResults } from "src/app/shared/model/paged-results.model";
@@ -9,18 +9,30 @@ import { Pipe, PipeTransform } from "@angular/core";
 import { UpdateBlog } from "../model/blog-update.model";
 import { Following } from "../../stakeholder/model/following.model";
 import { StakeholderService } from "../../stakeholder/stakeholder.service";
+import { trigger, transition, style, animate } from "@angular/animations";
 
 @Component({
     selector: "xp-blogs",
     templateUrl: "./blogs.component.html",
     styleUrls: ["./blogs.component.css"],
+    animations: [
+        trigger("fadeIn", [
+            transition(":enter", [
+                style({ opacity: 0, transform: "translateX(-40px)" }),
+                animate(
+                    "0.5s ease",
+                    style({ opacity: 1, transform: "translateX(0)" }),
+                ),
+            ]),
+        ]),
+    ],
 })
 export class BlogsComponent implements OnInit {
     blogs: Blog[] = [];
     user: User | undefined;
     followings: Following[] = [];
     selectedStatus: number = 5;
-
+    @Input() clubId: number = -1;
     constructor(
         private service: BlogService,
         private authService: AuthService,
@@ -66,13 +78,23 @@ export class BlogsComponent implements OnInit {
     }
 
     getBlogs(): void {
-        this.service.getBlogs().subscribe({
-            next: (result: PagedResults<Blog>) => {
-                this.blogs = result.results;
-                this.removePrivates();
-            },
-            error: () => {},
-        });
+        if(this.clubId == -1){
+            this.service.getBlogs().subscribe({
+                next: (result: PagedResults<Blog>) => {
+                    this.blogs = result.results;
+                    this.removePrivates();
+                },
+                error: () => {},
+            });
+        }
+        else{
+            this.service.getClubBlogs(this.clubId).subscribe({
+                next: (result: PagedResults<Blog>) => {
+                    this.blogs = result.results;
+                },
+                error: () => {},
+            });
+        }
     }
 
     getVote(blog: Blog): Vote | undefined {

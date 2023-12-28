@@ -1,0 +1,17 @@
+.container {
+    color: rgb(var(--clr-text));
+    display: flex;
+    flex-direction: column;
+    padding: 2rem;
+    align-items: center;
+    align-content: center;
+}
+
+.frame {
+    flex-grow: 1;
+    border: none; 
+    margin: 0; 
+    padding: 0;
+    width: 90%;
+    height: 1000px;
+}

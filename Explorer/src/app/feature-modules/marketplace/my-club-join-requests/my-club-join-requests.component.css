@@ -1,4 +1,4 @@
-#club {
+/* #club {
     margin-top: 20px;
     margin-left: 20px;
 }
@@ -47,4 +47,49 @@ tbody tr:last-of-type {
 tbody tr.active-row {
     font-weight: bold;
     color: #3f51b5;
+} */
+
+.card {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    gap: 0.5rem;
+    background-color: rgb(var(--clr-background-secondary));
+    /* width: 100%; */
+    padding: 1.5rem;
+    margin: 1rem;
+    border-radius: 0.5rem;
+    border: rgba(var(--clr-outline-contrast), 1) 1px solid;
+    /* box-shadow: 0 0 0.5rem rgba(var(--clr-outline-contrast), 0.8); */
+    color: rgb(var(--clr-text));
+}
+
+.row {
+    margin-bottom: 0.5rem;
+}
+
+.details {
+    gap: 0.5rem;
+    background-color: rgb(var(--clr-background));
+    padding: 1rem;
+    border-radius: 0.5rem;
+}
+
+.card:hover {
+    filter: brightness(1.2);
+}
+
+.btn {
+    background-color: rgb(var(--clr-error-300));
+    height: 4rem;
+    max-height: 4rem;
+}
+
+.container {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 1rem;
 }

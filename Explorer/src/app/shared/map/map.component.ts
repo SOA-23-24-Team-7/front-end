@@ -30,6 +30,7 @@ export class MapComponent implements AfterViewInit, OnChanges {
     private routeControl: L.Routing.Control;
     private refreshEventsSubscription: Subscription;
     private previousCommitted = false;
+    private showKeyPointsDuringTourAuthoring: boolean = false;
 
     private positionMarker: L.Marker;
     private markerGroup = L.layerGroup();
@@ -43,6 +44,7 @@ export class MapComponent implements AfterViewInit, OnChanges {
 
     public encounterPoint: [number, number];
 
+    @Input() keyPoints?: KeyPoint[];
     @Input() refreshEvents: Observable<number>;
     @Input() showLegend: boolean = true;
     @Input() selectedKeyPoint: KeyPoint | null;
@@ -66,10 +68,6 @@ export class MapComponent implements AfterViewInit, OnChanges {
 
         if (!this.isTourExecutionMap) return;
         setTimeout(() => {
-            this.positionMarker = L.marker(this.touristPosition, {
-                icon: this.positionIcon,
-            }).addTo(this.map);
-            if (!this.isTourExecutionMap) return;
             let waypoints = [
                 { lng: this.touristPosition[1], lat: this.touristPosition[0] },
                 ...this.waypointMap.values(),
@@ -113,6 +111,8 @@ export class MapComponent implements AfterViewInit, OnChanges {
     @Output() keyPointClickEvent = new EventEmitter<any>();
     @Output() newLongLatEvent = new EventEmitter<[number, number]>();
     @Output() newPositionEvent = new EventEmitter<void>();
+
+    @Output() tourDistanceChangedEvent = new EventEmitter<number>();
 
     constructor(private mapService: MapService) {}
 
@@ -162,10 +162,21 @@ export class MapComponent implements AfterViewInit, OnChanges {
     });
 
     private defaultIcon = L.icon({
-        iconUrl:
-            "https://icon-library.com/images/map-marker-icon/map-marker-icon-18.jpg",
-        iconSize: [46, 46],
-        iconAnchor: [26, 46],
+        iconUrl: "../assets/icons/keyPointIcon.png",
+        iconSize: [64, 64],
+        iconAnchor: [26, 60],
+    });
+
+    private finalKeyPoint = L.icon({
+        iconUrl: "../assets/icons/finalKeyPoint.png",
+        iconSize: [64, 64],
+        iconAnchor: [26, 60],
+    });
+
+    private currentKeyPoint = L.icon({
+        iconUrl: "../assets/icons/nextKeyPointIcon.png",
+        iconSize: [64, 64],
+        iconAnchor: [26, 60],
     });
 
     ngOnInit() {
@@ -178,14 +189,14 @@ export class MapComponent implements AfterViewInit, OnChanges {
             return;
         }
         if (!this.isKeyPointMap) return;
-        this.refreshEventsSubscription = this.refreshEvents.subscribe(tourId =>
+        this.refreshEventsSubscription = this.refreshEvents?.subscribe(tourId =>
             this.getTourKeyPoints(tourId),
         );
     }
 
     ngOnDestroy() {
         if (!this.isKeyPointMap) return;
-        this.refreshEventsSubscription.unsubscribe();
+        this.refreshEventsSubscription?.unsubscribe();
     }
 
     ngAfterViewInit(): void {
@@ -196,6 +207,10 @@ export class MapComponent implements AfterViewInit, OnChanges {
 
     ngOnChanges(changes: SimpleChanges): void {
         if (!this.isKeyPointMap) return;
+
+        if (this.showKeyPointsDuringTourAuthoring && changes["keyPoints"]) {
+            this.showKeyPointsOnTourAuthoringMap();
+        }
 
         if (this.waypointMap.delete(Number.POSITIVE_INFINITY)) {
             let waypoints = [...this.waypointMap.values()];
@@ -309,6 +324,8 @@ export class MapComponent implements AfterViewInit, OnChanges {
                 },
                 error: () => {},
             });
+            this.showKeyPointsDuringTourAuthoring = true;
+            if (this.keyPoints) this.showKeyPointsOnTourAuthoringMap();
         }
     }
 
@@ -327,7 +344,6 @@ export class MapComponent implements AfterViewInit, OnChanges {
 
     setCheckedPointsMarkers(): void {
         this.checkedPointMarkerGroup.clearLayers();
-
         [...this.checkedPointsMap.values()].forEach(element => {
             const marker = new L.Marker([element.lat, element.lng], {
                 icon: this.completedKeyPointIcon,
@@ -342,15 +358,11 @@ export class MapComponent implements AfterViewInit, OnChanges {
     }
 
     setRoute(waypoints: any[]): void {
-        let keyPointIcon = L.icon({
-            iconUrl:
-                "https://icon-library.com/images/map-marker-icon/map-marker-icon-18.jpg",
-            iconSize: [46, 46],
-            iconAnchor: [26, 46],
-        });
+        let keyPointIcon = this.defaultIcon;
         const planOptions: Record<string, any> = {
             addWaypoints: false,
             draggableWaypoints: false,
+            segment: {},
         };
 
         if (this.isTourExecutionMap) {
@@ -362,18 +374,33 @@ export class MapComponent implements AfterViewInit, OnChanges {
                 if (waypoints.length == this.waypointMap.size + 1 && i == 0)
                     return null;
                 if (i == 1) {
-                    keyPointIcon = L.icon({
-                        iconUrl: "../assets/icons/nextKeyPointIcon.png",
-                        iconSize: [46, 46],
-                        iconAnchor: [26, 46],
-                    });
+                    keyPointIcon = this.currentKeyPoint;
                 } else {
-                    keyPointIcon = L.icon({
-                        iconUrl:
-                            "https://icon-library.com/images/map-marker-icon/map-marker-icon-18.jpg",
-                        iconSize: [46, 46],
-                        iconAnchor: [26, 46],
-                    });
+                    keyPointIcon = this.defaultIcon;
+                }
+                if (i == n - 1 && n > 1) {
+                    keyPointIcon = this.finalKeyPoint;
+                }
+                const marker = L.marker(waypoint.latLng, {
+                    icon: keyPointIcon,
+                });
+                marker.addEventListener("click", () => {
+                    this.keyPointClickEvent.emit(waypoint.latLng);
+                });
+                return marker;
+            };
+        } else {
+            planOptions["createMarker"] = (
+                i: number,
+                waypoint: any,
+                n: number,
+            ): any => {
+                keyPointIcon = this.defaultIcon;
+                if (i === 0) {
+                    keyPointIcon = this.currentKeyPoint;
+                }
+                if (i === waypoints.length - 1 && waypoints.length > 1) {
+                    keyPointIcon = this.finalKeyPoint;
                 }
                 const marker = L.marker(waypoint.latLng, {
                     icon: keyPointIcon,
@@ -395,6 +422,17 @@ export class MapComponent implements AfterViewInit, OnChanges {
                 "pk.eyJ1IjoiY2Vrc29uIiwiYSI6ImNsbnl2YTAwdzAxNnoya2xxcG8wMm56ZjAifQ.23pAV3nrCN0BBo-1F8j8gg",
                 { profile: "mapbox/walking" },
             ),
+            lineOptions: {
+                styles: [
+                    {
+                        color: "#7C9DF0",
+                        weight: 4,
+                    },
+                ],
+                addWaypoints: false,
+                extendToWaypoints: false,
+                missingRouteTolerance: 0,
+            },
         }).addTo(this.map);
 
         this.routeControl.on("routesfound", e => {
@@ -402,6 +440,7 @@ export class MapComponent implements AfterViewInit, OnChanges {
             if (routes.length > 0) {
                 const summary = routes[0].summary;
                 this.tourDistance = summary.totalDistance / 1000; // Total distance is in meters, tourDistance in km
+                this.tourDistanceChangedEvent.emit(this.tourDistance);
             }
         });
     }
@@ -605,5 +644,32 @@ export class MapComponent implements AfterViewInit, OnChanges {
                 );
             },
         });
+    }
+
+    showKeyPointsOnTourAuthoringMap(): void {
+        console.log("showKeyPointsOnTourAuthoringMap");
+        this.waypointMap.clear();
+
+        for (const kp of this.keyPoints!) {
+            let lng = kp.longitude;
+            let lat = kp.latitude;
+            let order = kp.order;
+
+            this.waypointMap.set(kp.id!, { lng, lat, order });
+        }
+
+        this.createWaypoints(this.keyPoints);
+        if (!this.touristPosition && !this.isTourExecutionMap) {
+            let waypoints = [...this.waypointMap.values()];
+
+            this.setRoute(waypoints);
+
+            if (this.keyPoints!.length > 0) {
+                this.panMapTo(
+                    this.keyPoints![0].latitude,
+                    this.keyPoints![0].longitude,
+                );
+            }
+        }
     }
 }

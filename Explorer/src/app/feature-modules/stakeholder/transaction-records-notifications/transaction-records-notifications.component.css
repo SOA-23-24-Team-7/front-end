@@ -57,3 +57,8 @@
     gap: 0.3rem;
     font-weight: 300;
 }
+.fa-coins-icon {
+    bottom: 0.65rem;
+    color: rgba(var(--clr-accent-500), 1);
+    opacity: 1;
+}

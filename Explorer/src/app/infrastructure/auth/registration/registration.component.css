@@ -1,20 +1,19 @@
+:host {
+    border-radius: 1rem !important;
+}
+
 * {
     margin: 0;
     padding: 0;
 }
 
 .register-modal {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100vw;
-    height: 100vh;
-    z-index: 9999;
     display: flex;
     align-items: center;
     justify-content: center;
     background-color: rgba(0, 0, 0, 0.7);
-    animation: fadeIn 0.5s ease-in-out;
+    pointer-events: none;
+    border-radius: 1rem;
 }
 
 .register {
@@ -26,6 +25,7 @@
     background-color: rgba(var(--clr-background, 1));
     border-radius: 1rem;
     width: 32rem;
+    pointer-events: all;
 }
 
 .register-head {
@@ -158,13 +158,4 @@
 .register-login:hover {
     color: rgba(var(--clr-primary-500), 0.9);
     text-decoration: underline;
-}
-
-@keyframes fadeIn {
-    from {
-        opacity: 0;
-    }
-    to {
-        opacity: 1;
-    }
 }

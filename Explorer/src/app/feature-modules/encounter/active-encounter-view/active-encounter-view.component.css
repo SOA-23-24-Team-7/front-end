@@ -22,6 +22,17 @@
     z-index: 999;
 }
 
+img {
+    max-height: 300px; /* Set your desired maximum height */
+    max-width: 300px; /* Set your desired maximum height */
+    width: auto;
+    height: auto;
+    margin: 0.5rem;
+    border-radius: 0.5rem;
+    border: rgba(var(--clr-outline-contrast), 1) 1px solid;
+    box-shadow: 0 0 0.5rem rgba(var(--clr-outline-contrast), 0.8);
+}
+
 .execution {
     display: flex;
     margin-block: 0.5rem;
@@ -32,6 +43,7 @@
     width: 25rem;
     z-index: 998;
     background-color: rgb(var(--clr-background-secondary));
+    border-radius: 0.5rem;
     display: flex;
     flex-direction: column;
     color: rgb(var(--clr-text));

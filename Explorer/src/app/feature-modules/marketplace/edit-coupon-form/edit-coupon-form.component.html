@@ -1,4 +1,4 @@
-<div class="edit-modal" (click)="onClose()">
+<div class="edit-modal">
     <div class="edit" (click)="$event.stopPropagation()">
         <div class="edit-head">
             <fa-icon class="edit-x" [icon]="faXmark" (click)="onClose()" />
@@ -12,7 +12,7 @@
                 placeholder="Discount"
                 formControlName="discount"
             />
-            <div class="edit-label">Expiration date</div>
+            <div class="edit-label">Expiration date:</div>
             <input
                 class="edit-input"
                 type="date"
@@ -20,13 +20,17 @@
                 min="{{ currentDate | date : 'yyyy-MM-dd' }}"
                 formControlName="expirationDate"
             />
-            <label for="checkbox" class="edit-label">All</label>
-            <input
-                id="checkbox"
-                class="checkbox"
-                formControlName="allFromAuthor"
-                type="checkbox"
-            />
+            <div class="checkbox">
+                <input
+                    id="is-public-checkbox"
+                    class="is-public-checkbox"
+                    formControlName="allFromAuthor"
+                    type="checkbox"
+                />
+                <label for="is-public-checkbox" class="is-public-label"
+                    >Author-wide validity</label
+                >
+            </div>
             <button class="edit-submit" type="submit" (click)="submit()">
                 <div class="edit-submit-text">Edit</div>
             </button>

@@ -1,11 +1,35 @@
+h1 {
+    color: rgba(var(--clr-text), 1);
+    font-family: var(--fnt-header);
+    font-weight: 900;
+    font-size: 2rem;
+    margin-left: 1.3rem;
+}
 .blog-cards-container {
     display: flex;
-    flex-direction: row;
+    flex-direction: column;
     justify-content: center;
     align-items: center;
     width: 100%;
+    height: 100%;
+    gap: 1rem;
+    margin-bottom: 3rem;
 }
 
+.wrapper {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+}
+
+.blog-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 82rem;
+    overflow-x: hidden;
+    scroll-behavior: smooth;
+}
 .list-cards-button:hover .triangle-left {
     border-color: transparent rgba(var(--clr-primary-500), 0.95) transparent
         transparent;
@@ -40,4 +64,8 @@
     border-width: 2rem 0 2rem 2.2rem;
     border-color: transparent transparent transparent
         rgba(var(--clr-primary-500), 1);
+}
+
+xp-blog-preview {
+    margin-bottom: 2rem;
 }

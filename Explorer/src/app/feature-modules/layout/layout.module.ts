@@ -20,6 +20,9 @@ import { RequestFacilityCardComponent } from "./request-facility-card/request-fa
 import { ReviewCardComponent } from "./review-cards/review-card.component";
 import { PublicKeypointNotificationCardComponent } from "./public-keypoint-notification-card/public-keypoint-notification-card.component";
 import { SharedModule } from "src/app/shared/shared.module";
+import { PageNotFoundComponent } from "./page-not-found/page-not-found.component";
+import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
+import { BlogModule } from "../blog/blog.module";
 
 @NgModule({
     declarations: [
@@ -38,6 +41,7 @@ import { SharedModule } from "src/app/shared/shared.module";
         RequestFacilityCardComponent,
         ReviewCardComponent,
         PublicKeypointNotificationCardComponent,
+        PageNotFoundComponent,
     ],
     imports: [
         CommonModule,
@@ -46,6 +50,8 @@ import { SharedModule } from "src/app/shared/shared.module";
         FontAwesomeModule,
         MatDialogModule,
         SharedModule,
+        BrowserAnimationsModule,
+        BlogModule,
     ],
     exports: [
         NavbarComponent,
@@ -56,6 +62,7 @@ import { SharedModule } from "src/app/shared/shared.module";
         TourCardComponent,
         ReviewCardComponent,
         PublicKeypointNotificationCardComponent,
+        ClubCardComponent,
     ],
 })
 export class LayoutModule {}

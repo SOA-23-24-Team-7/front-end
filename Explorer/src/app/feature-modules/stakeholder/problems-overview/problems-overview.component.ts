@@ -3,11 +3,16 @@ import { StakeholderService } from "../stakeholder.service";
 import { PagedResults } from "src/app/shared/model/paged-results.model";
 import { AuthService } from "src/app/infrastructure/auth/auth.service";
 import { User } from "src/app/infrastructure/auth/model/user.model";
-import { MatDialog } from "@angular/material/dialog";
+import { MatDialog, MatDialogRef } from "@angular/material/dialog";
 import { ProblemAnswerComponent } from "../problem-answer/problem-answer.component";
 import { ProblemUser } from "../../marketplace/model/problem-with-user.model";
-import { faCircleExclamation } from "@fortawesome/free-solid-svg-icons";
+import {
+    faCircleExclamation,
+    faTrash,
+    faPen,
+} from "@fortawesome/free-solid-svg-icons";
 import { ProblemDeadlineComponent } from "../problem-deadline/problem-deadline.component";
+import { ProblemFormComponent } from "../../marketplace/problem-form/problem-form.component";
 
 @Component({
     selector: "xp-problems-overview",
@@ -25,6 +30,27 @@ export class ProblemsOverviewComponent implements OnInit {
 
     ngOnInit(): void {
         this.getProblems();
+    }
+
+    showProblemForm(problem: ProblemUser) {
+        const dialogRef = this.dialogRef.open(ProblemFormComponent, {
+            data: {
+                tourId: problem.tourId,
+                problem: problem,
+                shouldEdit: true,
+            },
+        });
+
+        dialogRef.afterClosed().subscribe(result => {
+            if (!result) return;
+            console.log(result);
+            const editedProblemIndex = this.problems.findIndex(
+                x => x.id === result.id,
+            );
+            this.problems[editedProblemIndex].category = result.category;
+            this.problems[editedProblemIndex].description = result.description;
+            this.problems[editedProblemIndex].priority = result.priority;
+        });
     }
 
     getProblems(): void {
@@ -116,5 +142,18 @@ export class ProblemsOverviewComponent implements OnInit {
         }
     }
 
+    deleteProblem(id: number): void {
+        this.service.deleteProblem(id).subscribe({
+            next: () => {
+                this.problems.splice(
+                    this.problems.findIndex(x => x.id === id),
+                    1,
+                );
+            },
+        });
+    }
+
     faCircleExclamation = faCircleExclamation;
+    faPen = faPen;
+    faTrash = faTrash;
 }
