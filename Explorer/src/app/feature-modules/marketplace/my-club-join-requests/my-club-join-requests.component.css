@@ -56,7 +56,7 @@ tbody tr.active-row {
     justify-content: space-between;
     gap: 0.5rem;
     background-color: rgb(var(--clr-background-secondary));
-    width: 28rem;
+    /* width: 100%; */
     padding: 1.5rem;
     margin: 1rem;
     border-radius: 0.5rem;

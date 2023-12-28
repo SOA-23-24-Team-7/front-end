@@ -1,4 +1,11 @@
-import { Component, EventEmitter, Input, OnInit, Output, ViewChild } from "@angular/core";
+import {
+    Component,
+    EventEmitter,
+    Input,
+    OnInit,
+    Output,
+    ViewChild,
+} from "@angular/core";
 import { Tour } from "../../tour-authoring/model/tour.model";
 import { Router } from "@angular/router";
 import { TourExecutionService } from "../tour-execution.service";
@@ -6,7 +13,6 @@ import { environment } from "src/env/environment";
 import { MatDialog } from "@angular/material/dialog";
 import { KeyPointsViewComponent } from "../key-points-view/key-points-view.component";
 import { TourExecutionStart } from "../model/tour-execution-start-model";
-import { faL } from "@fortawesome/free-solid-svg-icons";
 import { TourWheatherComponent } from "../tour-wheather/tour-wheather.component";
 import { CarouselComponent } from "src/app/shared/carousel/carousel.component";
 import { ProblemFormComponent } from "../../marketplace/problem-form/problem-form.component";
@@ -34,7 +40,7 @@ export class PurchasedTourCardComponent implements OnInit {
         private router: Router,
         private service: TourExecutionService,
         public dialogRef: MatDialog,
-    ) { }
+    ) {}
 
     ngOnInit(): void {
         this.images = this.tour.keyPoints!.map(kp =>
@@ -44,7 +50,9 @@ export class PurchasedTourCardComponent implements OnInit {
         );
 
         setInterval(() => {
-            if (Math.random() < 0.2) { this.carousel.onNextClick(); }
+            if (Math.random() < 0.2) {
+                this.carousel.onNextClick();
+            }
         }, 1000);
     }
     StartTour() {

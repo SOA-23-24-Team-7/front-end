@@ -311,3 +311,7 @@ option {
     background-color: transparent;
     transform: translate(-50%, 0);
 }
+
+option {
+    background-color: rgba(var(--clr-background-secondary));
+}
