@@ -127,7 +127,7 @@ export class TourSaleFormComponent implements OnInit {
         return (
             date.getFullYear() +
             "-" +
-            (date.getMonth() + 1) +
+            ((date.getMonth() + 1 > 9 ? "" : "0") + (date.getMonth() + 1)) +
             "-" +
             String(date.getDate()).padStart(2, "0")
         );

@@ -236,6 +236,9 @@ input[type="radio"]:checked + .mdc-radio__background .mdc-radio__outer-circle {
     border-color: rgb(var(--clr-primary-500)) !important;
 }
 
+option {
+    background-color: rgba(var(--clr-background-secondary));
+}
 /* Remove all animations, transitions and smooth scroll for people that prefer not to see them */
 @media (prefers-reduced-motion: reduce) {
     html:focus-within {

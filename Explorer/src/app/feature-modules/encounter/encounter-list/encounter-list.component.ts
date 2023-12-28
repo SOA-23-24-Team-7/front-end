@@ -18,7 +18,7 @@ export class EncounterListComponent {
         private encounterService: EncounterService,
     ) {}
     encounterWithMaxXpReward: Encounter | undefined;
-    currentTab: string = "tab1";
+    currentTab: string = "tab0";
 
     showTab(tabName: string): void {
         this.currentTab = tabName;
