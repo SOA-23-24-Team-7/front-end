@@ -11,6 +11,7 @@ import { EncounterInstance } from "../model/encounter-instance.model";
 import { NotifierService } from "angular-notifier";
 import { xpError } from "src/app/shared/model/error.model";
 import { environment } from "src/env/environment";
+import { EncounterCompletedPopupComponent } from "../encounter-completed-popup/encounter-completed-popup.component";
 
 @Component({
     selector: "xp-active-encounter-view",
@@ -25,6 +26,9 @@ export class ActiveEncounterViewComponent implements AfterViewInit {
     encounterInstance?: EncounterInstance;
     loadEncounterInstance?: EncounterInstance;
     dialogRef: MatDialogRef<PositionSimulatorComponent, any> | undefined;
+    matDialogRef:
+        | MatDialogRef<EncounterCompletedPopupComponent, any>
+        | undefined;
     hiddenEncounterCheck: boolean = false;
 
     private readonly notifier: NotifierService;
@@ -147,6 +151,9 @@ export class ActiveEncounterViewComponent implements AfterViewInit {
                         );
                         this.authService.updateXp();
                         this.getEncounterInstance(this.encounter!.id);
+                        this.matDialogRef = this.dialog.open(
+                            EncounterCompletedPopupComponent,
+                        );
                     },
                     error: err => {
                         // console.log(err);
@@ -169,6 +176,9 @@ export class ActiveEncounterViewComponent implements AfterViewInit {
                         );
                         this.authService.updateXp();
                         this.getEncounterInstance(this.encounter!.id);
+                        this.matDialogRef = this.dialog.open(
+                            EncounterCompletedPopupComponent,
+                        );
                     },
                     error: err => {
                         // console.log(err);

@@ -1,0 +1,20 @@
+<div class="keypoint-modal delayed-fade-in">
+    <div class="kp">
+        <div class="keypoint-head">
+            <fa-icon class="x" [icon]="faXmark" (click)="onClose()" />
+            <div class="title">Congratulations!</div>
+        </div>
+        <div class="explanation">You have completed the encounter!</div>
+        <div class="content">
+            <div class="percentage" [class.opacity0]="isPercentage100">
+                {{ percentage }}%
+            </div>
+            <fa-icon
+                class="check"
+                [class.opacity100]="isPercentage100"
+                [icon]="faCheck"
+            />
+        </div>
+    </div>
+    <xp-confetti></xp-confetti>
+</div>

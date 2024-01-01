@@ -10,6 +10,7 @@ import { MaterialModule } from "src/app/infrastructure/material/material.module"
 import { EncounterFormComponent } from "./encounter-form/encounter-form.component";
 import { TooltipModule } from "primeng/tooltip";
 import { EncounterListComponent } from "./encounter-list/encounter-list.component";
+import { EncounterCompletedPopupComponent } from './encounter-completed-popup/encounter-completed-popup.component';
 
 @NgModule({
     declarations: [
@@ -17,6 +18,7 @@ import { EncounterListComponent } from "./encounter-list/encounter-list.componen
         KeyPointEncounterFormComponent,
         EncounterFormComponent,
         EncounterListComponent,
+        EncounterCompletedPopupComponent,
     ],
     imports: [
         CommonModule,
