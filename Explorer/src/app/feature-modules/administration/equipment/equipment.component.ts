@@ -20,6 +20,7 @@ export class EquipmentComponent implements OnInit {
 
   ngOnInit(): void {
     this.getEquipment();
+    console.log('test')
   }
   
   deleteEquipment(id: number): void {
