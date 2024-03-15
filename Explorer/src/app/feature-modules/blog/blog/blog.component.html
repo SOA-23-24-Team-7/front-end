@@ -9,7 +9,7 @@
             famous: blog.status == 4
         }"
     >
-        <div
+        <!-- <div
             class="vote"
             [ngClass]="{
                 active: vote ? vote.voteType == VoteType.UPVOTE : false
@@ -22,9 +22,9 @@
                 tooltipPosition="left"
                 pTooltip="Upwote"
             />
-        </div>
+        </div> -->
         <div class="vote-count">{{ blog.voteCount }}</div>
-        <div
+        <!-- <div
             class="vote"
             [ngClass]="{
                 active: vote ? vote.voteType == VoteType.DOWNVOTE : false
@@ -37,7 +37,7 @@
                 tooltipPosition="left"
                 pTooltip="Downvote"
             />
-        </div>
+        </div> -->
     </div>
     <div class="blog-content">
         <h1 class="blog-title">{{ blog.title }}</h1>

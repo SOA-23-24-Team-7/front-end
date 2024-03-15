@@ -21,8 +21,8 @@ export class BlogService {
         );
     }
 
-    getBlogs(): Observable<PagedResults<Blog>> {
-        return this.http.get<PagedResults<Blog>>(environment.apiHost + "blog");
+    getBlogs(): Observable<Blog[]> {
+        return this.http.get<Blog[]>(environment.apiHost + "blog");
     }
     getClubBlogs(clubId: number): Observable<PagedResults<Blog>> {
         return this.http.get<PagedResults<Blog>>(environment.apiHost + "blog/getClubBlogs?page=0&pageSize=0&clubId="+clubId);
@@ -64,7 +64,6 @@ export class BlogService {
     }
 
     saveBlog(blog: CreateBlog): Observable<CreateBlog> {
-        blog.status = 0;
         return this.http.post<CreateBlog>(
             environment.apiHost + "blog/create",
             blog,
@@ -72,7 +71,6 @@ export class BlogService {
     }
 
     saveClubBlog(blog: CreateBlog): Observable<CreateBlog> {
-        blog.status = 1;
         return this.http.post<CreateBlog>(
             environment.apiHost + "blog/createClubBlog",
             blog,

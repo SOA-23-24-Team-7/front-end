@@ -66,10 +66,11 @@ export class BlogsComponent implements OnInit {
     removePrivates(): void {
         this.blogs = this.blogs.filter(
             b =>
-                b.visibilityPolicy == 0 ||
+                b.visibility == 'public' ||
                 b.authorId == this.user?.id ||
                 this.checkIfFollowing(b.authorId),
         );
+        console.log(this.blogs)
     }
 
     filterByStatus(status: number) {
@@ -80,8 +81,9 @@ export class BlogsComponent implements OnInit {
     getBlogs(): void {
         if(this.clubId == -1){
             this.service.getBlogs().subscribe({
-                next: (result: PagedResults<Blog>) => {
-                    this.blogs = result.results;
+                next: (result: Blog[]) => {
+                    this.blogs = result;
+                    console.log(this.blogs)
                     this.removePrivates();
                 },
                 error: () => {},

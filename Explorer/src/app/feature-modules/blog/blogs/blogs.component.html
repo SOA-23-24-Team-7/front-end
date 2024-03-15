@@ -16,7 +16,6 @@
     <xp-blog-preview
         *ngFor="let blog of blogs"
         [blog]="blog"
-        [vote]="getVote(blog)"
         [user]="user"
         [routerLink]="['/blog/' + blog.id]"
         (upvote)="upVoteBlog($event)"

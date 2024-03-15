@@ -59,7 +59,7 @@ export class BlogComponent implements OnInit {
                 this.blogMarkdown = DOMPurify.sanitize(
                     md.parse(this.blog.description),
                 );
-                this.vote = this.getVote();
+                //this.vote = this.getVote();
             },
         });
     }

@@ -136,10 +136,7 @@ export class TouristsTourBlogFormComponent {
                     "<br>" +
                     "Final thoughts: " +
                     this.blogForm.value.description || "",
-            date: new Date().toISOString(),
-            status: 0,
             authorId: 0,
-            visibilityPolicy: 1,
         };
 
         if (blog.title != "" && blog.title != null)

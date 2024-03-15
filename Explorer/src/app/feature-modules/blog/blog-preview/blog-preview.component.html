@@ -9,7 +9,7 @@
             famous: blog.status == 4
         }"
     >
-        <div
+        <!-- <div
             class="vote"
             [ngClass]="{
                 active: vote ? vote.voteType == VoteType.UPVOTE : false
@@ -23,11 +23,11 @@
                 tooltipPosition="left"
                 pTooltip="Upvote"
             />
-        </div>
+        </div> -->
         <div class="vote-count" *ngIf="blog.status != 0">
             {{ blog.voteCount }}
         </div>
-        <div
+        <!-- <div
             class="vote"
             [ngClass]="{
                 active: vote ? vote.voteType == VoteType.DOWNVOTE : false
@@ -41,7 +41,7 @@
                 tooltipPosition="left"
                 pTooltip="Downvote"
             />
-        </div>
+        </div> -->
     </div>
     <div class="blog-content">
         <div class="blog-header">
@@ -68,10 +68,6 @@
             ></quill-view-html>
         </div>
         <div class="bottom-bar">
-            <div class="comments bottom-bar-button" *ngIf="blog.status != 0">
-                <fa-icon [icon]="faComment" />{{ blog.comments.length }}
-                Comments
-            </div>
             <div
                 class="share bottom-bar-button"
                 (click)="shareBlog($event)"

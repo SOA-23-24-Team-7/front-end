@@ -102,10 +102,7 @@ export class BlogFormComponent implements OnInit {
         const blog: CreateBlog = {
             title: this.blogForm.value.title || "",
             description: this.blogForm.value.description || "",
-            date: new Date().toISOString(),
-            status: 0,
             authorId: 0,
-            visibilityPolicy: 0,
         };
         if (
             this.blogForm.value.description == "" ||
@@ -118,7 +115,7 @@ export class BlogFormComponent implements OnInit {
             this.service.saveBlog(blog).subscribe({
                 next: _ => {
                     this.notifier.notify("success", "Successfully created blog!");
-                    this.router.navigate(["/my-blogs"]);
+                    this.router.navigate(["/blogs"]);
                 },
                 error: err => {
                     this.notifier.notify("error", xpError.getErrorMessage(err));
@@ -126,8 +123,6 @@ export class BlogFormComponent implements OnInit {
             });
         }
         else{
-            blog.clubId = this.clubId
-            blog.status = 1
             this.service.saveClubBlog(blog).subscribe({
                 next: _ => {
                     this.notifier.notify("success", "Successfully created blog!");
@@ -171,7 +166,7 @@ export class BlogFormComponent implements OnInit {
                         "success",
                         "Successfully updated blog!",
                     );
-                    this.router.navigate(["/my-blogs"]);
+                    this.router.navigate(["/blogs"]);
                 },
                 error: err => {
                     this.notifier.notify("error", xpError.getErrorMessage(err));

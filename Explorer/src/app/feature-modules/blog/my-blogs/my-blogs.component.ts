@@ -53,9 +53,9 @@ export class MyBlogsComponent implements OnInit {
         }
 
         this.service.getBlogs().subscribe({
-            next: (result: PagedResults<Blog>) => {
-                if (this.user && result.results) {
-                    this.blogs = result.results.filter(
+            next: (result: Blog[]) => {
+                if (this.user && result) {
+                    this.blogs = result.filter(
                         blog => blog.authorId === this.user?.id,
                     );
                 }
