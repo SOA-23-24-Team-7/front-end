@@ -37,29 +37,29 @@ export class BlogService {
         );
     }
 
-    getComments(blogId: number): Observable<PagedResults<Comment>> {
-        return this.http.get<PagedResults<Comment>>(
-            environment.apiHost + "tourist/comment/" + blogId,
+    getComments(blogId: number): Observable<Comment[]> {
+        return this.http.get<Comment[]>(
+            environment.apiHost + "tourist/comment/comments/blogComments/" + blogId,
         );
     }
 
     addComment(comment: CreateComment): Observable<Comment> {
         return this.http.post<Comment>(
-            environment.apiHost + "tourist/comment",
+            environment.apiHost + "tourist/comment/comments/new",
             comment,
         );
     }
 
     updateComment(comment: Comment): Observable<Comment> {
         return this.http.put<Comment>(
-            environment.apiHost + "tourist/comment/" + comment.id,
+            environment.apiHost + "tourist/comment/comments/update" + comment.id,
             comment,
         );
     }
 
     deleteComment(id: Number): Observable<Comment> {
         return this.http.delete<Comment>(
-            environment.apiHost + "tourist/comment/" + id,
+            environment.apiHost + "tourist/comment/comments/delete" + id,
         );
     }
 
