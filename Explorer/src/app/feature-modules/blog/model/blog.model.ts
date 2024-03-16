@@ -16,4 +16,5 @@ export interface Blog {
     visibilityPolicy: number;
     visibility: string;
     showMore?: boolean;
+    blogTopic: string;
 }

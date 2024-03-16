@@ -1,14 +1,10 @@
 <div class="comment">
     <div class="comment-header">
         <div class="author">
-            <div
-                class="author-avatar"
-                [style.background-image]="
-                    'url(' + comment.author.profilePicture + ')'
-                "
-            ></div>
+            <img class = "author-avatar" [src]="user.profilePicture" alt="User Profile Picture">
+
             <div class="author-username">
-                {{ comment.author.username }}
+                {{ user.username }}
             </div>
             <div class="comment-date">
                 {{ comment.createdAt | date : "mediumDate" }}

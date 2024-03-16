@@ -118,6 +118,7 @@ export class BlogComponent implements OnInit {
                     );
                 },
                 error: error => {
+                    console.log("COMMENT NOT DELETED")
                     console.error("Error deleting comment:", error);
                     // Handle error, e.g., display an error message
                 },

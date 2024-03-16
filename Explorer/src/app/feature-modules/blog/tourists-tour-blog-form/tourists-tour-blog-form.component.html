@@ -8,13 +8,28 @@
               [readonly]="true"
               [value]="tour.name"
           />
-
+        
           <textarea
               formControlName="description"
               rows="8"
               placeholder="Description"
           ></textarea>
       </div>
+      <div class="input-container">
+        <select formControlName="topic" class="topic-select">
+            <option value="" disabled selected>Select a topic</option>
+            <option value="biking">Biking</option>
+            <option value="food">Food</option>
+            <option value="museums">Museums</option>
+            <option value="nature">Nature</option>
+            <option value="culture">Culture</option>
+            <option value="history">History</option>
+            <option value="backpacking">Backpacking</option>
+            <option value="soloTravel">Solo Travel</option>
+            <option value="adventure">Adventure</option>
+            <option value="art">Art</option>
+        </select>
+    </div>
       <div class="markup-preview">
           <h1>Markup Preview</h1>
           <div [innerHTML]="getMarkupPreview()" class="preview"></div>

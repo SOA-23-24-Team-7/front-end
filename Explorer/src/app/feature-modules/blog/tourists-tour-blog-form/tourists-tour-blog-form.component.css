@@ -4,7 +4,12 @@
   height: 20rem;
   display: flex;
 }
-
+.topic-select {
+  width: 17rem;
+  padding: 0.5rem;
+  border-radius: 0.5rem;
+  border: 1px solid rgba(0, 0, 0, 0.2);
+}
 .form {
   float: left;
   align-items: center;

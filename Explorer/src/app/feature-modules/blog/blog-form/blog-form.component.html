@@ -3,6 +3,21 @@
         <div class="input-container">
             <input formControlName="title" type="text" placeholder="Title*" />
         </div>
+        <div class="input-container">
+            <select formControlName="topic" class="topic-select">
+                <option value="" disabled selected>Select a topic</option>
+                <option value="biking">Biking</option>
+                <option value="food">Food</option>
+                <option value="museums">Museums</option>
+                <option value="nature">Nature</option>
+                <option value="culture">Culture</option>
+                <option value="history">History</option>
+                <option value="backpacking">Backpacking</option>
+                <option value="soloTravel">Solo Travel</option>
+                <option value="adventure">Adventure</option>
+                <option value="art">Art</option>
+            </select>
+        </div>
         <quill-editor
             id="editor"
             class="quill-area"

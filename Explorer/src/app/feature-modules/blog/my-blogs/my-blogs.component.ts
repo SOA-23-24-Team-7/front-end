@@ -58,6 +58,8 @@ export class MyBlogsComponent implements OnInit {
                     this.blogs = result.filter(
                         blog => blog.authorId === this.user?.id,
                     );
+                    console.log("ALL THE BLOGS USER CREATED: ")
+                    console.log(this.blogs)
                 }
             },
             error: () => {},
@@ -73,6 +75,7 @@ export class MyBlogsComponent implements OnInit {
             status: 1,
             authorId: 0,
             visibilityPolicy: blog.visibilityPolicy,
+            blogTopic: blog.blogTopic
         };
         this.service.publishBlog(updateBlog).subscribe({
             next: _ => {

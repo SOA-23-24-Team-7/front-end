@@ -6,4 +6,5 @@ export interface UpdateBlog {
     status: number;
     authorId: number;
     visibilityPolicy: number;
+    blogTopic: string;
 }

@@ -11,6 +11,12 @@
     margin-bottom: 1rem;
 }
 
+.topic-select {
+    width: 17rem;
+    padding: 0.5rem;
+    border-radius: 0.5rem;
+    border: 1px solid rgba(0, 0, 0, 0.2);
+}
 .quill-area {
     display: flex;
     flex-direction: column;

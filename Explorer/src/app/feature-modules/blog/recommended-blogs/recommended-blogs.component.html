@@ -1,0 +1,18 @@
+<div class="blogs-container">
+    
+    <xp-blog-preview
+        *ngFor="let blog of blogs"
+        [blog]="blog"
+        [user]="user"
+        [routerLink]="['/blog/' + blog.id]"
+        (upvote)="upVoteBlog($event)"
+        (downvote)="downVoteBlog($event)"
+        [@fadeIn]
+        [style.display]="
+            (selectedStatus == 5 && blog.status != 0) ||
+            blog.status == selectedStatus
+                ? 'block'
+                : 'none'
+        "
+    ></xp-blog-preview>
+</div>

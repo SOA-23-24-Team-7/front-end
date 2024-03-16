@@ -45,6 +45,8 @@ export class BlogPreviewComponent implements OnInit {
     faPen = faPen;
 
     ngOnInit(): void {
+        console.log("BLOG KOJI SE PREDSTAVLJA")
+        console.log(this.blog)
         const md = marked.setOptions({});
         this.setTag();
         this.blogMarkdown = DOMPurify.sanitize(md.parse(this.blog.description));

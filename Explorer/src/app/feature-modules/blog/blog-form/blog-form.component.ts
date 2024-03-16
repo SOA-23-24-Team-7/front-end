@@ -84,6 +84,7 @@ export class BlogFormComponent implements OnInit {
     blogForm = new FormGroup({
         title: new FormControl("", [Validators.required]),
         description: new FormControl("", [Validators.required]),
+        topic: new FormControl("", [Validators.required])
     });
 
     getBlog(): void {
@@ -93,6 +94,7 @@ export class BlogFormComponent implements OnInit {
                 this.blogForm.patchValue({
                     title: result.title,
                     description: result.description,
+                    topic: result.blogTopic
                 });
             },
         });
@@ -103,6 +105,7 @@ export class BlogFormComponent implements OnInit {
             title: this.blogForm.value.title || "",
             description: this.blogForm.value.description || "",
             authorId: 0,
+            blogTopic: this.blogForm.value.topic || ""
         };
         if (
             this.blogForm.value.description == "" ||
@@ -157,6 +160,7 @@ export class BlogFormComponent implements OnInit {
             id: this.blog.id,
             authorId: 0,
             visibilityPolicy: this.blog.visibilityPolicy,
+            blogTopic: this.blog.blogTopic
         };
 
         if (blog.title != "" && blog.title != null)

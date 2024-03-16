@@ -24,6 +24,11 @@ export class BlogService {
     getBlogs(): Observable<Blog[]> {
         return this.http.get<Blog[]>(environment.apiHost + "blog");
     }
+
+    getRecommendedBlogs(): Observable<Blog[]> {
+        return this.http.get<Blog[]>(environment.apiHost + "blog");
+    }
+
     getClubBlogs(clubId: number): Observable<PagedResults<Blog>> {
         return this.http.get<PagedResults<Blog>>(environment.apiHost + "blog/getClubBlogs?page=0&pageSize=0&clubId="+clubId);
     }
@@ -52,14 +57,14 @@ export class BlogService {
 
     updateComment(comment: Comment): Observable<Comment> {
         return this.http.put<Comment>(
-            environment.apiHost + "tourist/comment/comments/update" + comment.id,
+            environment.apiHost + "tourist/comment/comments/update/" + comment.id,
             comment,
         );
     }
 
     deleteComment(id: Number): Observable<Comment> {
         return this.http.delete<Comment>(
-            environment.apiHost + "tourist/comment/comments/delete" + id,
+            environment.apiHost + "tourist/comment/comments/delete/" + id,
         );
     }
 

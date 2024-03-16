@@ -17,6 +17,7 @@ import { MyBlogsComponent } from "./my-blogs/my-blogs.component";
 import { TouristsTourBlogFormComponent } from "./tourists-tour-blog-form/tourists-tour-blog-form.component";
 import { QuillModule } from "ngx-quill";
 import { TooltipModule } from "primeng/tooltip";
+import { RecommendedBlogsComponent } from './recommended-blogs/recommended-blogs.component';
 
 @NgModule({
     declarations: [
@@ -28,6 +29,7 @@ import { TooltipModule } from "primeng/tooltip";
         BlogFormComponent,
         MyBlogsComponent,
         TouristsTourBlogFormComponent,
+        RecommendedBlogsComponent,
     ],
     imports: [
         CommonModule,

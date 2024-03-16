@@ -101,6 +101,7 @@ export class TouristsTourBlogFormComponent {
     blogForm = new FormGroup({
         title: new FormControl(this.tour.name, [Validators.required]),
         description: new FormControl("", [Validators.required]),
+        topic:  new FormControl("", [Validators.required]),
     });
 
     getMarkupPreview() {
@@ -123,6 +124,7 @@ export class TouristsTourBlogFormComponent {
                 this.blogForm.patchValue({
                     title: result.title,
                     description: result.description,
+                    topic: result.blogTopic
                 });
             },
         });
@@ -137,6 +139,7 @@ export class TouristsTourBlogFormComponent {
                     "Final thoughts: " +
                     this.blogForm.value.description || "",
             authorId: 0,
+            blogTopic: this.blogForm.value.topic || ""
         };
 
         if (blog.title != "" && blog.title != null)
@@ -157,6 +160,7 @@ export class TouristsTourBlogFormComponent {
             id: this.blog.id,
             authorId: 0,
             visibilityPolicy: this.blog.visibilityPolicy,
+            blogTopic: this.blog.blogTopic
         };
 
         if (blog.title != "" && blog.title != null)
