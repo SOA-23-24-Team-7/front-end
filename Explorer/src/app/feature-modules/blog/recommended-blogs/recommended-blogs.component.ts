@@ -11,6 +11,8 @@ import { Following } from "../../stakeholder/model/following.model";
 import { StakeholderService } from "../../stakeholder/stakeholder.service";
 import { trigger, transition, style, animate } from "@angular/animations";
 import { ActivatedRoute } from "@angular/router";
+import { marked } from "marked";
+import * as DOMPurify from "dompurify";
 
 @Component({
   selector: 'xp-recommended-blogs',
@@ -34,6 +36,8 @@ export class RecommendedBlogsComponent  implements OnInit {
   followings: Following[] = [];
   selectedStatus: number = 5;
   blogId: number = -1
+  blog: Blog;
+  blogMarkdown: string;
   @Input() clubId: number = -1;
   constructor(
       private service: BlogService,
@@ -50,12 +54,23 @@ export class RecommendedBlogsComponent  implements OnInit {
       const param = this.route.snapshot.paramMap.get("blogId");
       if (param) {
         this.blogId = Number(param);
-        if(this.blogId!=-1){
-            this.getBlogs();
-        }        
+        this.getBlog();       
     }
   }
 
+  getBlog(): void {
+    const md = marked.setOptions({});
+    this.service.getBlog(this.blogId).subscribe({
+        next: (result: Blog) => {
+            this.blog = result;
+            this.blogMarkdown = DOMPurify.sanitize(
+                md.parse(this.blog.description),
+            );
+            //this.vote = this.getVote();
+            this.getBlogs();
+        },
+    });
+}
   loadFollowings(): void {
       this.serviceUsers
           .getFollowings(this.user?.id || 0)
@@ -89,15 +104,18 @@ export class RecommendedBlogsComponent  implements OnInit {
 
   getBlogs(): void {
       if(this.clubId == -1){
-          this.service.getRecommendedBlogs().subscribe({
+          this.service.getRecommendedBlogs(this.blog.blogTopic).subscribe({
               next: (result: Blog[]) => {
                 if (result.length > 3) {
                     this.blogs = result.filter(blog => blog.id !== this.blogId).slice(0, 3); 
                 } else {
                     this.blogs = result.filter(blog => blog.id !== this.blogId);
                 }
+                
+                  console.log("RECOMMENDED:")
                   console.log(this.blogs)
                   this.removePrivates();
+
               },
               error: () => {},
           });

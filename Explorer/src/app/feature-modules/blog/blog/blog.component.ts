@@ -65,11 +65,10 @@ export class BlogComponent implements OnInit {
     }
 
     getComments(): void {
-        console.log("GETTING COMMENTS" + this.blogId)
         this.service.getComments(this.blogId).subscribe({
             next: (result: Comment[]) => {
                 this.comments = result;
-                console.log(this.comments)
+                
             },
             error: () => {console.log("Error while getting comments")},
              

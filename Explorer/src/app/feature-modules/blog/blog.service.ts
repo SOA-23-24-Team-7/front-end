@@ -25,8 +25,8 @@ export class BlogService {
         return this.http.get<Blog[]>(environment.apiHost + "blog");
     }
 
-    getRecommendedBlogs(): Observable<Blog[]> {
-        return this.http.get<Blog[]>(environment.apiHost + "blog");
+    getRecommendedBlogs(topic: string): Observable<Blog[]> {
+       return this.http.get<Blog[]>(environment.apiHost + "blog/type/"+topic);
     }
 
     getClubBlogs(clubId: number): Observable<PagedResults<Blog>> {
