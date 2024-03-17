@@ -2,13 +2,11 @@
     <div class="title" *ngIf="clubId == -1">
         <select
             [(ngModel)]="selectedStatus"
-            (change)="filterByStatus(selectedStatus)"
+            (change)="getPopular()"
         >
-            <option value="1">Published</option>
-            <option value="2">Closed</option>
-            <option value="3">Active</option>
-            <option value="4">Famous</option>
-            <option value="5">All</option>
+            <option value="popular" (click)="getPopular()">Popular</option>
+            <option value="controversial" (click)="getControversial()">Controversial</option>
+            <option value="all" (click)="getAll()">All</option>
         </select>
         <h1 class="blogs-title">Blogs</h1>
     </div>
@@ -22,8 +20,7 @@
         (downvote)="downVoteBlog($event)"
         [@fadeIn]
         [style.display]="
-            (selectedStatus == 5 && blog.status != 0) ||
-            blog.status == selectedStatus
+            (blog.status != 0)
                 ? 'block'
                 : 'none'
         "

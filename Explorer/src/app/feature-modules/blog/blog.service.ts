@@ -108,4 +108,29 @@ export class BlogService {
             environment.apiHost + "blog/downvote/" + blogId,
         );
     }
+
+    reportBlog(blogId: number, reason: string): Observable<any> {
+        const body = {
+            blogId: blogId,
+            reason: reason
+        };
+      
+        console.log(body)
+        return this.http.post<any>(
+            environment.apiHost + "reports",
+            body
+        );
+    }
+
+    getReports(blogId: number): Observable<any[]> {
+        return this.http.get<any>(
+            environment.apiHost + "reports/" + blogId,
+        );
+    }
+
+    block(blogId: number): Observable<any[]> {
+        return this.http.patch<any>(
+            environment.apiHost + "blog/block/" + blogId, {}
+        );
+    }
 }

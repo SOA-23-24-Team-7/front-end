@@ -31,7 +31,7 @@ export class BlogsComponent implements OnInit {
     blogs: Blog[] = [];
     user: User | undefined;
     followings: Following[] = [];
-    selectedStatus: number = 5;
+    selectedStatus: string = "all";
     @Input() clubId: number = -1;
     constructor(
         private service: BlogService,
@@ -44,7 +44,7 @@ export class BlogsComponent implements OnInit {
             this.user = user;
         });
         this.loadFollowings();
-        this.getBlogs();
+        this.getBlogs(this.selectedStatus);
     }
 
     loadFollowings(): void {
@@ -73,17 +73,32 @@ export class BlogsComponent implements OnInit {
         console.log(this.blogs)
     }
 
-    filterByStatus(status: number) {
-        this.getBlogs();
-        this.selectedStatus = status;
+    getPopular() {
+        this.getBlogs(this.selectedStatus)
     }
 
-    getBlogs(): void {
+    getControversial() {
+        this.getBlogs(this.selectedStatus)
+    }
+
+    getAll() {
+        this.getBlogs(this.selectedStatus)
+    }
+
+    getBlogs(status: string): void {
         if(this.clubId == -1){
             this.service.getBlogs().subscribe({
                 next: (result: Blog[]) => {
                     this.blogs = result;
                     console.log(this.blogs)
+                    if(status == "popular") {
+                        
+                        this.blogs = this.blogs.filter(b => b.voteCount >= 3)
+                    }
+                    if(status == "controversial") {
+                        
+                        this.blogs = this.blogs.filter(b => b.voteCount <= -3)
+                    }
                     this.removePrivates();
                 },
                 error: () => {},

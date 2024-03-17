@@ -12,6 +12,9 @@ import { marked } from "marked";
 import * as DOMPurify from "dompurify";
 import { Vote, VoteType } from "../model/vote.model";
 import { faCircleUp, faCircleDown } from "@fortawesome/free-regular-svg-icons";
+import { faFlag } from "@fortawesome/free-solid-svg-icons";
+import { faTriangleExclamation } from "@fortawesome/free-solid-svg-icons";
+import { NotifierService } from "angular-notifier";
 
 @Component({
     selector: "xp-blog",
@@ -27,15 +30,22 @@ export class BlogComponent implements OnInit {
     user: User | undefined;
     blogMarkdown: string;
 
+    isReportVisible = false;
+    reason: string = "";
+    reports: any[] = [];
+
     VoteType = VoteType;
     faCircleUp = faCircleUp;
     faCircleDown = faCircleDown;
+    faFlag = faFlag;
+    faTriangleExclamation = faTriangleExclamation;
 
     constructor(
         private authService: AuthService,
         private service: BlogService,
         private route: ActivatedRoute,
         public dialog: MatDialog,
+        private notifier: NotifierService
     ) {}
 
     ngOnInit(): void {
@@ -60,6 +70,7 @@ export class BlogComponent implements OnInit {
                     md.parse(this.blog.description),
                 );
                 //this.vote = this.getVote();
+                this.getReports();
             },
         });
     }
@@ -71,6 +82,17 @@ export class BlogComponent implements OnInit {
                 
             },
             error: () => {console.log("Error while getting comments")},
+             
+        });
+    }
+
+    getReports() {
+        this.service.getReports(this.blogId).subscribe({
+            next: (result: any[]) => {
+                this.reports = result;
+                
+            },
+            error: () => {console.log("Error while getting reports")},
              
         });
     }
@@ -188,4 +210,48 @@ export class BlogComponent implements OnInit {
             this.vote.voteType = voteType;
         }
     }
+
+    showReport() {
+        this.isReportVisible = !this.isReportVisible;
+        if(!this.isReportVisible) {
+            this.reason = "";
+        }
+    }
+
+    report() {
+        if(this.reason == "") {
+            this.notifier.notify("error", "Reason must not be empty.");
+        }
+        else {
+            this.isReportVisible = false;
+            this.service.reportBlog(this.blogId, this.reason).subscribe({
+                next: () => {
+                    this.reason = "";
+                    console.log(this.isReportVisible);
+                    this.notifier.notify("success", "Successfully reported the blog.");
+                },
+                error: error => {
+                    console.log("Error")
+                    console.error("Error reporting:", error);
+                },
+            });
+        }
+    }
+
+    block() {
+        this.service.block(this.blogId).subscribe({
+            next: () => {
+                this.notifier.notify("success", "Successfully blocked the blog.");
+            },
+            error: error => {
+                console.log("Error")
+                console.error("Error blocking:", error);
+            },
+        });
+    }
+
+    childClick(event: Event) {
+        event.stopPropagation(); // Prevent event from bubbling up to parent
+        console.log('Child Element Clicked');
+      }
 }

@@ -38,6 +38,30 @@
                 pTooltip="Downvote"
             />
         </div>
+        <div class="report" (click)="showReport()">
+            <fa-icon
+                class="flag"
+                [icon]="faFlag"
+                tooltipPosition="left"
+                pTooltip="Report"
+            />
+            <div class="write-report" *ngIf="isReportVisible && user && user.role !== 'administrator'" (click)="childClick($event)">
+                <input type="text" class="reason" placeholder="Reason" [(ngModel)]="reason">
+                <div class="btn report-button" (click)="report()">Report</div>
+            </div>
+            <div class="write-report" *ngIf="isReportVisible && user && user.role === 'administrator'" (click)="childClick($event)">
+                <div class="reports">
+                    <div class="report-card" *ngFor="let report of reports">
+                        <fa-icon
+                            class="report-icon"
+                            [icon]="faTriangleExclamation"
+                        />
+                        <div class="report-reason">{{report.reason}}</div>
+                    </div>
+                </div>
+                <div class="btn report-button" (click)="block()">Block</div>
+            </div>
+        </div>
     </div>
     <div class="blog-content">
         <h1 class="blog-title">{{ blog.title }}</h1>
