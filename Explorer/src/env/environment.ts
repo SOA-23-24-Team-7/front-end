@@ -1,7 +1,7 @@
 export const environment = {
     production: false,
-    host: "https://localhost:44333/",
-    apiHost: "https://localhost:44333/api/",
-    imageHost: "https://localhost:44333/images/",
+    host: "http://localhost:8080/",
+    apiHost: "http://localhost:8080/api/",
+    imageHost: "http://localhost:8080/images/",
     translateHost: "https://libretranslate.de/",
 };
