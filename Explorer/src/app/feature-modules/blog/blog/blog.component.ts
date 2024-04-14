@@ -98,7 +98,6 @@ export class BlogComponent implements OnInit {
     }
 
     onCommentCreated(newComment: Comment): void {
-        this.comments.push(newComment);
         this.getComments();
     }
 
