@@ -44,9 +44,13 @@ export class FollowDialogComponent implements OnInit {
     unfollowOrFollow(id: number): void {
         console.log(id);
         var clicked = this.followings.find(f => f.id == id);
+        const followCreate: FollowerCreate = {
+            followedById: this.userId,
+            userId: id,
+        };
         if (clicked != undefined) {
             if (clicked.followingStatus) {
-                this.service.deleteFollowing(id).subscribe({
+                this.service.deleteFollowing(followCreate).subscribe({
                     next: () => {
                         if (clicked != undefined) {
                             clicked.followingStatus = false;
@@ -75,9 +79,13 @@ export class FollowDialogComponent implements OnInit {
     }
     removeOrFollow(id: number): void {
         var clicked = this.followers.find(f => f.id == id);
+        const followCreate: FollowerCreate = {
+            followedById: this.userId,
+            userId: id,
+        };
         if (clicked != undefined) {
             if (clicked.followingStatus) {
-                this.service.deleteFollowing(id).subscribe({
+                this.service.deleteFollowing(followCreate).subscribe({
                     next: () => {
                         if (clicked != undefined) {
                             clicked.followingStatus = false;

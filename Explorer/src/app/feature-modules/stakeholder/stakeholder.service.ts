@@ -80,17 +80,17 @@ export class StakeholderService {
             environment.apiHost + "follower/search/" + searchUsername,
         );
     }
-    deleteFollowing(id: number): Observable<Following> {
-        return this.http.delete<Following>(
-            environment.apiHost + "follower/" + id,
+    deleteFollowing(follow: FollowerCreate): Observable<Following> {
+        return this.http.post<Following>(
+            environment.apiHost + "follower/unfollow",follow,
         );
     }
-    addFollowing(follow: FollowerCreate): Observable<FollowerCreate> {
-        return this.http.post<FollowerCreate>(
-            environment.apiHost + "follower",
-            follow,
+    addFollowing(follow: FollowerCreate): Observable<any> {
+        return this.http.post<any>(
+            environment.apiHost + "follower/follow", follow,
         );
     }
+
     getByUserId(userId: number): Observable<Person> {
         return this.http.get<Person>(
             environment.apiHost + "people/person/" + userId,
