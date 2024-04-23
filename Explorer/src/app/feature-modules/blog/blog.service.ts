@@ -22,7 +22,7 @@ export class BlogService {
     }
 
     getBlogs(): Observable<Blog[]> {
-        return this.http.get<Blog[]>(environment.apiHost + "blog");
+        return this.http.get<Blog[]>(environment.apiHost + "blog/following");
     }
 
     getRecommendedBlogs(topic: string): Observable<Blog[]> {

@@ -86,6 +86,7 @@ export class BlogsComponent implements OnInit {
     }
 
     getBlogs(status: string): void {
+        console.log(this.clubId)
         if(this.clubId == -1){
             this.service.getBlogs().subscribe({
                 next: (result: Blog[]) => {
