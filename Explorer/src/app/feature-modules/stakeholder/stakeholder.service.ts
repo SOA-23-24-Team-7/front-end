@@ -65,13 +65,13 @@ export class StakeholderService {
             environment.apiHost + "people",
         );
     }
-    getFollowers(id: number): Observable<PagedResults<Follower>> {
-        return this.http.get<PagedResults<Follower>>(
+    getFollowers(id: number): Observable<any> {
+        return this.http.get<Follower[]>(
             environment.apiHost + "follower/followers/" + id,
         );
     }
-    getFollowings(id: number): Observable<PagedResults<Following>> {
-        return this.http.get<PagedResults<Following>>(
+    getFollowings(id: number): Observable<any> {
+        return this.http.get<Follower[]>(
             environment.apiHost + "follower/followings/" + id,
         );
     }
@@ -80,17 +80,18 @@ export class StakeholderService {
             environment.apiHost + "follower/search/" + searchUsername,
         );
     }
-    deleteFollowing(id: number): Observable<Following> {
-        return this.http.delete<Following>(
-            environment.apiHost + "follower/" + id,
+    deleteFollowing(follow: FollowerCreate): Observable<any> {
+        return this.http.post<any>(
+            environment.apiHost + "follower/unfollow",follow,
         );
     }
     addFollowing(follow: FollowerCreate): Observable<FollowerCreate> {
         return this.http.post<FollowerCreate>(
-            environment.apiHost + "follower",
+            environment.apiHost + "follower/follow",
             follow,
         );
     }
+
     getByUserId(userId: number): Observable<Person> {
         return this.http.get<Person>(
             environment.apiHost + "people/person/" + userId,
