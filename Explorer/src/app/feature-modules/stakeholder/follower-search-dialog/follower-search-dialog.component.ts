@@ -30,7 +30,7 @@ export class FollowerSearchDialogComponent implements OnInit {
     }
     loadFollowings() {
         this.service.getFollowings(this.userId).subscribe(result => {
-            this.followings = result.results;
+            this.followings = result;
         });
     }
     follow(id: number) {

@@ -51,7 +51,7 @@ export class BlogsComponent implements OnInit {
         this.serviceUsers
             .getFollowings(this.user?.id || 0)
             .subscribe(result => {
-                this.followings = result.results;
+                this.followings = result;
             });
     }
 

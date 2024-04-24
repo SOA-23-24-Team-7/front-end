@@ -45,11 +45,12 @@ export class FollowDialogComponent implements OnInit {
         console.log(id);
         var clicked = this.followings.find(f => f.id == id);
         const followCreate: FollowerCreate = {
-            followedById: this.userId,
-            userId: id,
+            followedById: id,
+            userId: this.userId,
         };
         if (clicked != undefined) {
             if (clicked.followingStatus) {
+                console.log("UNFOLLOWING USWER")
                 this.service.deleteFollowing(followCreate).subscribe({
                     next: () => {
                         if (clicked != undefined) {

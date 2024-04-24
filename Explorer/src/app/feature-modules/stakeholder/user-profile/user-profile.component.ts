@@ -64,7 +64,7 @@ export class UserProfileComponent implements OnInit {
     }
     loadFollowings() {
         this.service.getFollowings(this.user.id).subscribe(result => {
-            this.followings = result.results;
+            this.followings = result;
             this.followingsCount = this.followings.length;
             this.followings.forEach(item => {
                 item.followingStatus = true;
@@ -73,7 +73,9 @@ export class UserProfileComponent implements OnInit {
     }
     loadFollowers() {
         this.service.getFollowers(this.user.id).subscribe(result => {
-            this.followers = result.results;
+            this.followers = result;
+            console.log("FOLLOWERS")
+            console.log(this.followers )
             this.followersCount = this.followers.length;
             this.followers.forEach(item => {
                 item.followingStatus = true;

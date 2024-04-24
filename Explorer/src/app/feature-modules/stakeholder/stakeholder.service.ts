@@ -65,14 +65,14 @@ export class StakeholderService {
             environment.apiHost + "people",
         );
     }
-    getFollowers(id: number): Observable<any> {
-        return this.http.get<Follower[]>(
-            environment.apiHost + "follower/followers/" + id,
+    getFollowers(id: number): Observable<Follower[]> {
+        return this.http.get<any[]>(
+            environment.apiHost + "follower/getFollowers/" + id,
         );
     }
-    getFollowings(id: number): Observable<any> {
-        return this.http.get<Follower[]>(
-            environment.apiHost + "follower/followings/" + id,
+    getFollowings(id: number): Observable<Following[]> {
+        return this.http.get<Following[]>(
+            environment.apiHost + "follower/getFollowings/" + id,
         );
     }
     getSearched(searchUsername: string): Observable<PagedResults<UserFollow>> {
