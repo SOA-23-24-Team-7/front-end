@@ -2,6 +2,7 @@
     background-color: rgb(var(--clr-neutral-300));
     height: 100%;
     width: 100%;
+    padding: 1rem;
 }
 .search-bar {
     border-radius: 4rem;
@@ -66,4 +67,10 @@ tbody tr:last-of-type {
 
 tbody tr.active-row {
     font-weight: bold;
+}
+
+.scroll {
+    display: block;
+    overflow-y: scroll;
+    height: 5rem;
 }

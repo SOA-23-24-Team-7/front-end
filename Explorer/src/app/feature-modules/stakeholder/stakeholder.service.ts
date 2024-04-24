@@ -75,6 +75,9 @@ export class StakeholderService {
             environment.apiHost + "follower/getFollowings/" + id,
         );
     }
+    getFollowerSuggestions(userId: number): Observable<UserFollow[]> {
+        return this.http.get<UserFollow[]>(environment.apiHost + "follower/suggestions/" + userId);
+    }
     getSearched(searchUsername: string): Observable<PagedResults<UserFollow>> {
         return this.http.get<PagedResults<UserFollow>>(
             environment.apiHost + "follower/search/" + searchUsername,

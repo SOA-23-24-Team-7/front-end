@@ -16,6 +16,21 @@ export interface ModalData {
 export class FollowerSearchDialogComponent implements OnInit {
     userId: number;
     faSearch = faSearch;
+    usersYouMightKnow: UserFollow[] = [{
+        id: -1,
+        username: "placeholder1",
+        followingStatus: false
+    },
+    {
+        id: -2,
+        username: "placeholder2",
+        followingStatus: false
+    },
+    {
+        id: -3,
+        username: "placeholder2",
+        followingStatus: false
+    }];
     users: UserFollow[] = [];
     followings: Following[] = [];
     searchUsername: string;
@@ -26,15 +41,24 @@ export class FollowerSearchDialogComponent implements OnInit {
 
     ngOnInit(): void {
         this.userId = this.data.userId;
+        this.loadSuggestions();
         this.loadFollowings();
     }
+
+    loadSuggestions(): void {
+        this.service.getFollowerSuggestions(this.userId).subscribe(result => {
+            this.usersYouMightKnow = result;
+        });
+    }
+
     loadFollowings() {
         this.service.getFollowings(this.userId).subscribe(result => {
             this.followings = result;
         });
     }
-    follow(id: number) {
-        var clicked = this.users.find(u => u.id == id);
+
+    follow(id: number, users: UserFollow[], otherUsers?: UserFollow[]) {
+        var clicked = users.find(u => u.id == id);
         if (clicked != undefined) {
             const followCreate: FollowerCreate = {
                 userId: clicked.id,
@@ -44,12 +68,18 @@ export class FollowerSearchDialogComponent implements OnInit {
                 next: (result: FollowerCreate) => {
                     if (clicked != undefined) {
                         clicked.followingStatus = true;
+                        if (otherUsers) {
+                            alert("a")
+                            alert(id);
+                            this.usersYouMightKnow = this.usersYouMightKnow.filter(usr => usr.id != id);
+                        }
                         this.loadFollowings();
                     }
                 },
             });
         }
     }
+
     search() {
         this.service.getSearched(this.searchUsername).subscribe(result => {
             this.users = result.results;
