@@ -19,7 +19,7 @@
             [person]="f.followingPerson"
             [followId]="f.id"
             [followStatus]="f.followingStatus"
-            (unfollowOrFollowEvent)="unfollowOrFollow($event)"
+            (unfollowOrFollowEvent)="unfollowOrFollow(f.id)"
             [enableFollow]="true"
         />
     </div>

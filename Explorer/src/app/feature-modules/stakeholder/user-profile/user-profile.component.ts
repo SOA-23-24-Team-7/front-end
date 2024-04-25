@@ -26,9 +26,9 @@ export class UserProfileComponent implements OnInit {
     user: User;
     person: Person;
     followers: Follower[] = [];
-    followersCount: number;
+    followersCount: number = 0;
     followings: Following[] = [];
-    followingsCount: number;
+    followingsCount: number = 0;
     showFollowers: boolean = false;
     showFollowings: boolean = false;
     bioMarkdown: string;

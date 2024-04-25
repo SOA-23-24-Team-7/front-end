@@ -16,21 +16,7 @@ export interface ModalData {
 export class FollowerSearchDialogComponent implements OnInit {
     userId: number;
     faSearch = faSearch;
-    usersYouMightKnow: UserFollow[] = [{
-        id: -1,
-        username: "placeholder1",
-        followingStatus: false
-    },
-    {
-        id: -2,
-        username: "placeholder2",
-        followingStatus: false
-    },
-    {
-        id: -3,
-        username: "placeholder2",
-        followingStatus: false
-    }];
+    usersYouMightKnow: UserFollow[] = [];
     users: UserFollow[] = [];
     followings: Following[] = [];
     searchUsername: string;
@@ -48,6 +34,9 @@ export class FollowerSearchDialogComponent implements OnInit {
     loadSuggestions(): void {
         this.service.getFollowerSuggestions(this.userId).subscribe(result => {
             this.usersYouMightKnow = result;
+            this.usersYouMightKnow.forEach(user => {
+                user.followingStatus = false;
+            });
         });
     }
 
@@ -57,7 +46,7 @@ export class FollowerSearchDialogComponent implements OnInit {
         });
     }
 
-    follow(id: number, users: UserFollow[], otherUsers?: UserFollow[]) {
+    follow(id: number, users: UserFollow[]) {
         var clicked = users.find(u => u.id == id);
         if (clicked != undefined) {
             const followCreate: FollowerCreate = {
@@ -68,11 +57,7 @@ export class FollowerSearchDialogComponent implements OnInit {
                 next: (result: FollowerCreate) => {
                     if (clicked != undefined) {
                         clicked.followingStatus = true;
-                        if (otherUsers) {
-                            alert("a")
-                            alert(id);
-                            this.usersYouMightKnow = this.usersYouMightKnow.filter(usr => usr.id != id);
-                        }
+                        this.usersYouMightKnow = this.usersYouMightKnow.filter(usr => usr.id != id);
                         this.loadFollowings();
                     }
                 },
