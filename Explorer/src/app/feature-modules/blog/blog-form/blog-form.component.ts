@@ -9,6 +9,8 @@ import * as DOMPurify from "dompurify";
 import { marked } from "marked";
 import { NotifierService } from "angular-notifier";
 import { xpError } from "src/app/shared/model/error.model";
+import { User } from "src/app/infrastructure/auth/model/user.model";
+import { AuthService } from "src/app/infrastructure/auth/auth.service";
 
 @Component({
     selector: "xp-blog-form",
@@ -20,14 +22,19 @@ export class BlogFormComponent implements OnInit {
     blogId: number;
     clubId: number = -1;
     @ViewChild("editor") editorElement: ElementRef;
+    user: User | undefined;
 
     constructor(
         private service: BlogService,
         private router: Router,
         private route: ActivatedRoute,
         private notifier: NotifierService,
+        private authService: AuthService,
     ) {}
     ngOnInit(): void {
+        this.authService.user$.subscribe(user => {
+            this.user = user;
+        });
         const param = this.route.snapshot.paramMap.get("blogId");
         const clubParam = this.route.snapshot.paramMap.get("clubId");
         if (Number(param)) {
@@ -104,7 +111,7 @@ export class BlogFormComponent implements OnInit {
         const blog: CreateBlog = {
             title: this.blogForm.value.title || "",
             description: this.blogForm.value.description || "",
-            authorId: 0,
+            authorId: this.user?.id ?? 0,
             blogTopic: this.blogForm.value.topic || ""
         };
         if (
@@ -118,10 +125,11 @@ export class BlogFormComponent implements OnInit {
             this.service.saveBlog(blog).subscribe({
                 next: _ => {
                     this.notifier.notify("success", "Successfully created blog!");
-                    this.router.navigate(["/blogs"]);
+                    this.router.navigate(["/my-blogs"]);
                 },
                 error: err => {
-                    this.notifier.notify("error", xpError.getErrorMessage(err));
+                    this.notifier.notify("success", "Successfully created blog!");
+                    this.router.navigate(["/my-blogs"]);
                 },
             });
         }

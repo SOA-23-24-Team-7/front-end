@@ -123,6 +123,14 @@ export class AuthService {
         return decodedToken.id;
     }
 
+    getCurrentUserRole(): string {
+        const jwtHelperService = new JwtHelperService();
+        const accessToken = this.tokenStorage.getAccessToken() || "";
+        const decodedToken = jwtHelperService.decodeToken(accessToken);
+
+        return decodedToken["http://schemas.microsoft.com/ws/2008/06/identity/claims/role"];
+    }
+
     setUserLocation(pos: LocationCoords) {
         this.userLocation$.next(pos);
         localStorage.setItem("userLong", pos.longitude.toString());

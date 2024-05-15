@@ -6,7 +6,10 @@ export interface Blog {
     id: number;
     title: string;
     description: string;
-    date: string;
+    date: {
+        seconds: number,
+        nanos: number
+    };
     status: number | string;
     comments: Comment[];
     voteCount: number;

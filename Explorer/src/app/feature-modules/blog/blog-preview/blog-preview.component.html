@@ -58,7 +58,7 @@
             >
                 {{ statusTag }}
             </div>
-            <span class="blog-date">{{ blog.date | date : "mediumDate" }}</span>
+            <span class="blog-date">{{getDate()}}</span>
         </div>
         <div class="blog-description">
             <quill-view-html

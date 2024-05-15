@@ -25,6 +25,10 @@ export class BlogService {
         return this.http.get<Blog[]>(environment.apiHost + "blog/following");
     }
 
+    getAllBlogs(): Observable<Blog[]> {
+        return this.http.get<Blog[]>(environment.apiHost + "blog");
+    }
+
     getRecommendedBlogs(topic: string): Observable<Blog[]> {
        return this.http.get<Blog[]>(environment.apiHost + "blog/type/"+topic);
     }
@@ -37,7 +41,7 @@ export class BlogService {
     }
 
     deleteBlog(id: number) {
-        return this.http.delete<Blog>(
+        return this.http.delete<String>(
             environment.apiHost + "blog/delete/" + id,
         );
     }
@@ -75,8 +79,8 @@ export class BlogService {
         );
     }
 
-    saveClubBlog(blog: CreateBlog): Observable<CreateBlog> {
-        return this.http.post<CreateBlog>(
+    saveClubBlog(blog: CreateBlog): Observable<String> {
+        return this.http.post<String>(
             environment.apiHost + "blog/createClubBlog",
             blog,
         );

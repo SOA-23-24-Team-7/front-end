@@ -52,11 +52,11 @@ export class MyBlogsComponent implements OnInit {
             return;
         }
 
-        this.service.getBlogs().subscribe({
+        this.service.getAllBlogs().subscribe({
             next: (result: Blog[]) => {
                 if (this.user && result) {
                     this.blogs = result.filter(
-                        blog => blog.authorId === this.user?.id,
+                        blog => blog.authorId == this.user?.id,
                     );
                     console.log("ALL THE BLOGS USER CREATED: ")
                     console.log(this.blogs)
@@ -87,6 +87,9 @@ export class MyBlogsComponent implements OnInit {
     deleteBlogAndRefresh(id: number) {
         this.service.deleteBlog(id).subscribe({
             next: _ => {
+                this.getBlogs();
+            },
+            error: _ => {
                 this.getBlogs();
             },
         });

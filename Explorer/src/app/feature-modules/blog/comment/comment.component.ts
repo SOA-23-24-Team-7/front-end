@@ -34,4 +34,13 @@ export class CommentComponent {
     onDeleteComment(): void {
         this.deleteComment.emit(this.comment);
     }
+
+    getDate(): string {
+        const milliseconds = this.comment.createdAt.seconds * 1000;
+        const date = new Date(milliseconds);
+
+        const dateString = date.toDateString();
+        console.log(dateString)
+        return dateString;
+    }
 }

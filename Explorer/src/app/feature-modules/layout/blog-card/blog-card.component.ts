@@ -13,4 +13,13 @@ export class BlogCardComponent {
     toggleShowMore(blog: Blog) {
         blog.showMore = !blog.showMore;
     }
+
+    getDate(): string {
+        const milliseconds = this.blog.date.seconds * 1000;
+        const date = new Date(milliseconds);
+
+        const dateString = date.toDateString();
+        console.log(dateString)
+        return dateString;
+    }
 }

@@ -7,7 +7,7 @@
                 {{ user.username }}
             </div>
             <div class="comment-date">
-                {{ comment.createdAt | date : "mediumDate" }}
+                {{getDate()}}
             </div>
         </div>
         <div *ngIf="isEditMode" class="edit-mode">

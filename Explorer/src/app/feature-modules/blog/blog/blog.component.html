@@ -45,12 +45,12 @@
                 tooltipPosition="left"
                 pTooltip="Reports"
             />
-            <div class="report-count" *ngIf="user && user.role == 'administrator'">{{reports.length}}</div>
-            <div class="write-report" *ngIf="isReportVisible && user && user.role !== 'administrator'" (click)="childClick($event)">
+            <div class="report-count" *ngIf="getRole() == 'administrator'">{{reports.length}}</div>
+            <div class="write-report" *ngIf="isReportVisible && getRole() !== 'administrator'" (click)="childClick($event)">
                 <input type="text" class="reason" placeholder="Reason" [(ngModel)]="reason">
                 <div class="btn report-button" (click)="report()">Report</div>
             </div>
-            <div class="write-report" *ngIf="isReportVisible && user && user.role === 'administrator'" (click)="childClick($event)">
+            <div class="write-report" *ngIf="isReportVisible && getRole() === 'administrator'" (click)="childClick($event)">
                 <div class="reports">
                     <div class="report-card" *ngFor="let report of reports">
                         <fa-icon

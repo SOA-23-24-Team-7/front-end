@@ -4,7 +4,10 @@ export interface Comment {
     id?: number;
     authorId: number;
     blogId: number;
-    createdAt: string;
+    createdAt: {
+        seconds: number,
+        nanos: number
+    };
     updatedAt?: string;
     text: string;
     author: User;

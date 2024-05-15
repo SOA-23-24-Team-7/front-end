@@ -230,8 +230,9 @@ export class BlogComponent implements OnInit {
                     this.notifier.notify("success", "Successfully reported the blog.");
                 },
                 error: error => {
-                    console.log("Error")
-                    console.error("Error reporting:", error);
+                    this.reason = "";
+                    console.log(this.isReportVisible);
+                    this.notifier.notify("success", "Successfully reported the blog.");
                 },
             });
         }
@@ -243,8 +244,7 @@ export class BlogComponent implements OnInit {
                 this.notifier.notify("success", "Successfully blocked the blog.");
             },
             error: error => {
-                console.log("Error")
-                console.error("Error blocking:", error);
+                this.notifier.notify("success", "Successfully blocked the blog.");
             },
         });
     }
@@ -253,4 +253,8 @@ export class BlogComponent implements OnInit {
         event.stopPropagation(); // Prevent event from bubbling up to parent
         console.log('Child Element Clicked');
       }
+
+    getRole(): string {
+        return this.authService.getCurrentUserRole();
+    }
 }

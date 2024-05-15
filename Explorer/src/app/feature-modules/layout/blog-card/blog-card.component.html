@@ -1,5 +1,5 @@
 <div class="blog-card">
-    <div class="blog-date">{{ blog.date | date:"MMM d, y"}}</div>
+    <div class="blog-date">{{getDate()}}</div>
     <div class="blog-name" [routerLink]="blog.status == 0 ? '/blog-form/' + blog.id : '/blog/ '+ blog.id">{{ blog.title }}</div>
     <div class="blog-description"> 
         <div [routerLink]="blog.status == 0 ? '/blog-form/' + blog.id : '/blog/ '+ blog.id">

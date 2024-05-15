@@ -88,22 +88,43 @@ export class BlogsComponent implements OnInit {
     getBlogs(status: string): void {
         console.log(this.clubId)
         if(this.clubId == -1){
-            this.service.getBlogs().subscribe({
-                next: (result: Blog[]) => {
-                    this.blogs = result;
-                    console.log(this.blogs)
-                    if(status == "popular") {
-                        
-                        this.blogs = this.blogs.filter(b => b.voteCount >= 3)
-                    }
-                    if(status == "controversial") {
-                        
-                        this.blogs = this.blogs.filter(b => b.voteCount <= -3)
-                    }
-                    this.removePrivates();
-                },
-                error: () => {},
-            });
+            console.log("ROLE: \t" + this.authService.getCurrentUserRole())
+            if(this.authService.getCurrentUserRole() == "administrator") {
+                this.service.getAllBlogs().subscribe({
+                    next: (result: Blog[]) => {
+                        this.blogs = result;
+                        console.log(this.blogs)
+                        if(status == "popular") {
+                            
+                            this.blogs = this.blogs.filter(b => b.voteCount >= 3)
+                        }
+                        if(status == "controversial") {
+                            
+                            this.blogs = this.blogs.filter(b => b.voteCount <= -3)
+                        }
+                        this.removePrivates();
+                    },
+                    error: () => {},
+                });
+            }
+            else {
+                this.service.getBlogs().subscribe({
+                    next: (result: Blog[]) => {
+                        this.blogs = result;
+                        console.log(this.blogs)
+                        if(status == "popular") {
+                            
+                            this.blogs = this.blogs.filter(b => b.voteCount >= 3)
+                        }
+                        if(status == "controversial") {
+                            
+                            this.blogs = this.blogs.filter(b => b.voteCount <= -3)
+                        }
+                        this.removePrivates();
+                    },
+                    error: () => {},
+                });
+            }
         }
         else{
             this.service.getClubBlogs(this.clubId).subscribe({
