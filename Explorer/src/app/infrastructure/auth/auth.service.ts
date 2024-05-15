@@ -93,7 +93,7 @@ export class AuthService {
         const user: User = {
             id: +jwtHelperService.decodeToken(accessToken).id,
             username: jwtHelperService.decodeToken(accessToken).username,
-            role: jwtHelperService.decodeToken(accessToken).role,
+            role: jwtHelperService.decodeToken(accessToken)["http://schemas.microsoft.com/ws/2008/06/identity/claims/role"],
             profilePicture:
                 jwtHelperService.decodeToken(accessToken).profilePicture,
         };
