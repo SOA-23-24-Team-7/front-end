@@ -93,7 +93,7 @@ export class AuthService {
         const user: User = {
             id: +jwtHelperService.decodeToken(accessToken).id,
             username: jwtHelperService.decodeToken(accessToken).username,
-            role: jwtHelperService.decodeToken(accessToken)["http://schemas.microsoft.com/ws/2008/06/identity/claims/role"],
+            role: jwtHelperService.decodeToken(accessToken).role,
             profilePicture:
                 jwtHelperService.decodeToken(accessToken).profilePicture,
         };
@@ -128,7 +128,7 @@ export class AuthService {
         const accessToken = this.tokenStorage.getAccessToken() || "";
         const decodedToken = jwtHelperService.decodeToken(accessToken);
 
-        return decodedToken["http://schemas.microsoft.com/ws/2008/06/identity/claims/role"];
+        return decodedToken.role;
     }
 
     setUserLocation(pos: LocationCoords) {
